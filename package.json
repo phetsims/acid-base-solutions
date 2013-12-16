@@ -14,5 +14,5 @@
     "escodegen": "~0.0.27"
   },
   "requirejsNamespace": "ACID_BASE_SOLUTIONS",
-  "simTitleStringKey": "ACID_BASE_SOLUTIONS/xxx"
+  "simTitleStringKey": "ACID_BASE_SOLUTIONS/acid-base-solutions.name"
 }
