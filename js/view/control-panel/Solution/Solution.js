@@ -25,6 +25,7 @@ define( function( require ) {
     var vBox = new VBox( {spacing: 5} );
     Node.call( this, options );
 
+    // add type radio buttons menu
     vBox.addChild( new HBox( {spacing: 5, children: [
       new AquaRadioButton( model.property( 'isTypeAcid' ), true, new Text( acidString, {font: FONT} ), {radius: 7} ),
       new AquaRadioButton( model.property( 'isTypeAcid' ), false, new Text( baseString, {font: FONT} ), {radius: 7} )

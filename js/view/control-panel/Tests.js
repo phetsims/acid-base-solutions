@@ -16,16 +16,22 @@ define( function( require ) {
     FONT = new PhetFont( 12 ),
     VBox = require( 'SCENERY/nodes/VBox' ),
     HBox = require( 'SCENERY/nodes/HBox' ),
+    Image = require( 'SCENERY/nodes/Image' ),
 
   // strings
     pHMeterString = require( 'string!ACID_BASE_SOLUTIONS/pHMeter' ),
     pHPaperString = require( 'string!ACID_BASE_SOLUTIONS/pHPaper' ),
-    conductivityString = require( 'string!ACID_BASE_SOLUTIONS/conductivity' );
+    conductivityString = require( 'string!ACID_BASE_SOLUTIONS/conductivity' ),
+
+  // images
+    pHMeterImage = require( 'image!ACID_BASE_SOLUTIONS/pH-meter.png' ),
+    pHPaperImage = require( 'image!ACID_BASE_SOLUTIONS/pH-paper.png' ),
+    lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb.png' );
 
   var menuOptions = [
-    {text: pHMeterString},
-    {text: pHPaperString},
-    {text: conductivityString}
+    {text: pHMeterString, icon: new Image( pHMeterImage, {scale: 0.75} )},
+    {text: pHPaperString, icon: new Image( pHPaperImage, {scale: 0.75} )},
+    {text: conductivityString, icon: new Image( lightBulbImage, {scale: 0.6} )}
   ];
 
   function Tests( model, options ) {
@@ -35,7 +41,8 @@ define( function( require ) {
     // add options to menu
     for ( var i = 0; i < menuOptions.length; i++ ) {
       vBox.addChild( new AquaRadioButton( model.property( 'testMode' ), i, new HBox( {spacing: 5, children: [
-        new Text( menuOptions[i].text, {font: FONT} )
+        new Text( menuOptions[i].text, {font: FONT} ),
+        menuOptions[i].icon
       ]} ), {radius: 7} ) );
     }
 

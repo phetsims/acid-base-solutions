@@ -14,22 +14,26 @@ define( function( require ) {
     CheckBox = require( 'SUN/CheckBox' ),
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     FONT = new PhetFont( 12 ),
     VBox = require( 'SCENERY/nodes/VBox' ),
     HBox = require( 'SCENERY/nodes/HBox' ),
+    Image = require( 'SCENERY/nodes/Image' ),
 
   // strings
     moleculesString = require( 'string!ACID_BASE_SOLUTIONS/molecules' ),
     showSolventString = require( 'string!ACID_BASE_SOLUTIONS/showSolvent' ),
     equilibriumConcentrationString = require( 'string!ACID_BASE_SOLUTIONS/equilibriumConcentration' ),
-    liquidString = require( 'string!ACID_BASE_SOLUTIONS/liquid' );
+    liquidString = require( 'string!ACID_BASE_SOLUTIONS/liquid' ),
+
+  // images
+    magnifyingGlassImage = require( 'image!ACID_BASE_SOLUTIONS/magnifying-glass.png' ),
+    beakerImage = require( 'image!ACID_BASE_SOLUTIONS/beaker.png' );
 
   var menuOptions = [
-    {isRadio: true, text: moleculesString},
-    {isRadio: false, text: showSolventString},
-    {isRadio: true, text: equilibriumConcentrationString},
-    {isRadio: true, text: liquidString}
+    {isRadio: true, text: moleculesString, icon: new Image( magnifyingGlassImage, {scale: 0.75} )},
+    {isRadio: false, text: showSolventString, icon: new Node()},
+    {isRadio: true, text: equilibriumConcentrationString, icon: new Node()},
+    {isRadio: true, text: liquidString, icon: new Image( beakerImage, {scale: 0.75} )}
   ];
 
   function Views( model, options ) {
@@ -38,14 +42,14 @@ define( function( require ) {
 
     // add options to menu
     for ( var i = 0; i < menuOptions.length; i++ ) {
-      hBox = new HBox( {spacing: 5} );
+      hBox = new HBox( {spacing: 5, children: [new Text( menuOptions[i].text, {font: FONT} ), menuOptions[i].icon]} );
       if ( menuOptions[i].isRadio ) {
-        hBox.addChild( new AquaRadioButton( model.property( 'viewMode' ), i, new Text( menuOptions[i].text, {font: FONT} ), {radius: 7} ) );
+        vBox.addChild( new AquaRadioButton( model.property( 'viewMode' ), i, hBox, {radius: 7} ) );
       }
       else {
-        hBox.addChild( new CheckBox( new Node( {children: [new Text( menuOptions[i].text, {font: FONT} )]} ), model.property( 'solvent' ) ) );
+        vBox.addChild( new CheckBox( hBox, model.property( 'solvent' ), {boxWidth: 15} ) );
       }
-      vBox.addChild( hBox );
+
       hBox.updateLayout();
     }
 
