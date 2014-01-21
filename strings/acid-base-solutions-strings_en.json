@@ -2,7 +2,7 @@
   "acid": "Acid",
   "weaker": "weaker",
   "concentrationGraph.yAxis": "Equilibrium Concentration (mol/L)",
-  "acid-base-solutions.name": "Acid-Base Solutions",
+  "acidBaseSolutionsTitle": "Acid-Base Solutions",
   "views": "Views",
   "solution": "Solution",
   "viewParticles": "View Particles",
@@ -15,7 +15,7 @@
   "weak": "weak",
   "molesPerLiter": "mol/L",
   "base": "Base",
-  "testSolution": "Introduction ",
+  "introductionTitle": "Introduction ",
   "liters": "L",
   "liquid": "Liquid",
   "strong": "strong",
@@ -34,7 +34,7 @@
   "pattern.0label.1value": "{0}: {1}",
   "magnifying-glass-prototype.name": "Magnifying Glass Prototype",
   "initialConcentration": "Initial\nConcentration:",
-  "customSolution": "Custom Solution",
+  "customSolutionTitle": "Custom Solution",
   "conductivity": "Conductivity",
   "strongAcid": "Strong Acid"
 }
