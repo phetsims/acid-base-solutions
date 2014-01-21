@@ -12,10 +12,20 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     PropertySet = require( 'AXON/PropertySet' );
 
-  function AcidBaseSolutionsModel( width, height ) {
+  function AcidBaseSolutionsModel( width, height, mode ) {
     // dimensions of the model's space
     this.width = width;
     this.height = height;
+
+    this.mode = mode;
+
+    PropertySet.call( this, {
+      solution: 0, // solution's number
+      testMode: 0,
+      viewMode: 0,
+      isTypeAcid: true, // type of solution. true - acid, false - base
+      solvent: false // solvent visibility
+    } );
   }
 
   inherit( PropertySet, AcidBaseSolutionsModel, {
