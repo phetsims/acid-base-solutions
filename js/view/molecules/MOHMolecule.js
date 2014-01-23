@@ -20,7 +20,7 @@ define( function( require ) {
     var NEUTRAL_COLOR = new Color( 120, 120, 120 ); // gray
     Node.call( this, coords );
 
-    // add M atom
+    // add M ion
     this.addChild( new Atom( {x: 0, y: 0}, 6, NEUTRAL_COLOR ) );
     this.addChild( new Text( '+', {centerX: 0, centerY: 8.5, font: FONT} ) );
 
