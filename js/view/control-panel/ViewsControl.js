@@ -18,6 +18,7 @@ define( function( require ) {
     VBox = require( 'SCENERY/nodes/VBox' ),
     HBox = require( 'SCENERY/nodes/HBox' ),
     Image = require( 'SCENERY/nodes/Image' ),
+    H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' ),
 
   // strings
     moleculesString = require( 'string!ACID_BASE_SOLUTIONS/molecules' ),
@@ -31,7 +32,7 @@ define( function( require ) {
 
   var menuOptions = [
     {isRadio: true, text: moleculesString, icon: new Image( magnifyingGlassImage, {scale: 0.75} )},
-    {isRadio: false, text: showSolventString, icon: new Node()},
+    {isRadio: false, text: showSolventString, icon: new H2OMolecule()},
     {isRadio: true, text: equilibriumConcentrationString, icon: new Node()},
     {isRadio: true, text: liquidString, icon: new Image( beakerImage, {scale: 0.75} )}
   ];
