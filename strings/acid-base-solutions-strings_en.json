@@ -19,7 +19,7 @@
   "liters": "L",
   "liquid": "Liquid",
   "strong": "strong",
-  "equilibriumConcentration": "Equilibrium\nConcentration",
+  "equilibriumConcentration": "Equilibrium Concentration",
   "weakBase": "Weak Base ",
   "negligible": "negligible",
   "water": "Water",
@@ -33,7 +33,7 @@
   "stronger": "stronger ",
   "pattern.0label.1value": "{0}: {1}",
   "magnifying-glass-prototype.name": "Magnifying Glass Prototype",
-  "initialConcentration": "Initial\nConcentration:",
+  "initialConcentration": "Initial Concentration:",
   "customSolutionTitle": "Custom Solution",
   "conductivity": "Conductivity",
   "strongAcid": "Strong Acid"
