@@ -23,8 +23,10 @@ define( function( require ) {
       solution: 0, // solution's number
       testMode: 0,
       viewMode: 0,
-      isTypeAcid: true, // type of solution. true - acid, false - base
-      solvent: false // solvent visibility
+      isAcid: true, // type of solution. true - acid, false - base
+      isWeak: true, // type of strength. true - weak, false - strong
+      solvent: false, // solvent visibility
+      concentration: -2
     } );
   }
 
