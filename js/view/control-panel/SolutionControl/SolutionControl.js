@@ -18,6 +18,7 @@ define( function( require ) {
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     FONT = new PhetFont( 12 ),
     Line = require( 'SCENERY/nodes/Line' ),
+    StrenghtSlider = require( 'ACID_BASE_SOLUTIONS/view/control-panel/SolutionControl/StrenghtSlider' ),
     ConcentrationSlider = require( 'ACID_BASE_SOLUTIONS/view/control-panel/SolutionControl/ConcentrationSlider' ),
 
   // strings
@@ -29,7 +30,8 @@ define( function( require ) {
     strongString = require( 'string!ACID_BASE_SOLUTIONS/strong' );
 
   function Solution( model, options ) {
-    var vBox = new VBox( {spacing: 5} );
+    var vBox = new VBox( {spacing: 5} ),
+      strenghtSlider;
     Node.call( this, options );
 
     // add type radio buttons menu
@@ -44,8 +46,6 @@ define( function( require ) {
     // add input
     vBox.addChild( new Text( initialConcentrationString, {font: FONT} ) );
     // TODO: add input
-
-    // add slider
     vBox.addChild( new ConcentrationSlider( model ) );
 
     // add black line
@@ -58,8 +58,15 @@ define( function( require ) {
       new AquaRadioButton( model.property( 'isWeak' ), false, new Text( strongString, {font: FONT} ), {radius: 7} )
     ]} ) );
 
+    // add strength slider
+    vBox.addChild( strenghtSlider = new StrenghtSlider( model.property( 'strength' ) ) );
+
     this.addChild( vBox );
     vBox.updateLayout();
+
+    model.property( 'isWeak' ).link( function( isWeak ) {
+      strenghtSlider.setVisible( isWeak );
+    } );
   }
 
   return inherit( Node, Solution );
