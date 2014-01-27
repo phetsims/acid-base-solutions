@@ -14,7 +14,7 @@ define( function( require ) {
     ScreenView = require( 'JOIST/ScreenView' ),
     ControlPanel = require( 'view/control-panel/ControlPanel' ),
     ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' ),
-    BeakerNode = require( 'ACID_BASE_SOLUTIONS/view/workspace/BeakerNode' );
+    Workspace = require( 'ACID_BASE_SOLUTIONS/view/workspace/Workspace' );
 
   function AcidBaseSolutionsView( model ) {
     ScreenView.call( this, { renderer: 'svg' } );
@@ -23,7 +23,7 @@ define( function( require ) {
     this.addChild( new ControlPanel( model ).mutate( {right: this.layoutBounds.maxX, top: 0} ) );
 
     // add beaker
-    this.addChild( new BeakerNode( model, {x: model.width / 3, y: model.height / 2} ) );
+    this.addChild( new Workspace( model ) );
 
     // add reset button
     this.addChild( new ResetAllButton( function() { model.reset(); }, { x: 0.9 * model.width, y: 0.9 * model.height, scale: 0.75} ) );
