@@ -22,14 +22,15 @@ define( function( require ) {
     HSlider = require( 'SUN/HSlider' ),
 
   // Constants
-    READOUT_FONT = new PhetFont( 16 ),
+    READOUT_FONT = new PhetFont( 12 ),
     ARROW_HEIGHT = 15,
-    MAX_MASS = 100,
-    TICK_MARK_FONT = new PhetFont( 10 );
+    CONCENTRATION_MIN = -3,
+    CONCENTRATION_MAX = 0,
+    CONCENTRATION_STEP = 0.1;
 
   function ConcentrationSlider( targetProperty, options ) {
     var self = this,
-      sliderValue = new Property( 0 );
+      sliderValue = new Property( Math.log( targetProperty.value ) / Math.LN10 );
     Node.call( this );
 
     // Create and add the readout, including the background.
@@ -41,26 +42,21 @@ define( function( require ) {
     panelContent.addChild( readoutText );
 
     // Create and add the slider.
-    var slider = new HSlider( sliderValue, { min: 0, max: MAX_MASS }, {
+    var slider = new HSlider( sliderValue, { min: CONCENTRATION_MIN, max: CONCENTRATION_MAX }, {
       thumbSize: new Dimension2( 15, 25 ),
       majorTickLength: 15,
       tickLabelSpacing: 2
     } );
     panelContent.addChild( slider );
-    for ( var i = 0; i <= MAX_MASS; i += 10 ) {
-      if ( i % 50 === 0 ) {
-        slider.addMajorTick( i, new Text( i, { font: TICK_MARK_FONT } ) );
-      }
-      else {
-        slider.addMinorTick( i, null );
-      }
+    for ( var i = CONCENTRATION_MIN; i <= CONCENTRATION_MAX; i += (CONCENTRATION_MAX - CONCENTRATION_MIN) / 3 ) {
+      slider.addMinorTick( i, null );
     }
 
     // Create and add the arrow buttons.
     var arrowButtonOptions = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
-    var leftArrowButton = new ArrowButton( 'left', function() { sliderValue.value--; }, arrowButtonOptions );
+    var leftArrowButton = new ArrowButton( 'left', function() { sliderValue.value -= CONCENTRATION_STEP; }, arrowButtonOptions );
     panelContent.addChild( leftArrowButton );
-    var rightArrowButton = new ArrowButton( 'right', function() { sliderValue.value++; }, arrowButtonOptions );
+    var rightArrowButton = new ArrowButton( 'right', function() { sliderValue.value += CONCENTRATION_STEP; }, arrowButtonOptions );
     panelContent.addChild( rightArrowButton );
 
     // layout
@@ -81,6 +77,10 @@ define( function( require ) {
     targetProperty.link( function( value ) {
       readoutText.text = value + ' ' + molesPerLiterString;
       readoutText.centerX = readoutBackground.centerX;
+    } );
+
+    sliderValue.link( function( value ) {
+      targetProperty.value = parseFloat( Math.pow( 10, value ).toPrecision( 2 ) );
     } );
 
     self.mutate( options );
