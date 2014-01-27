@@ -26,7 +26,7 @@ define( function( require ) {
       isAcid: true, // type of solution. true - acid, false - base
       isWeak: true, // type of strength. true - weak, false - strong
       solvent: false, // solvent visibility
-      concentration: -2,
+      concentration: 0.01,
       strength: 0.5
     } );
   }

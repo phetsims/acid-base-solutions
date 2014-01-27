@@ -27,10 +27,10 @@ define( function( require ) {
     MAX_MASS = 100,
     TICK_MARK_FONT = new PhetFont( 10 );
 
-  function ConcentrationSlider( model, options ) {
-    var self = this;
+  function ConcentrationSlider( targetProperty, options ) {
+    var self = this,
+      sliderValue = new Property( 0 );
     Node.call( this );
-    self.massValue = new Property( 0 );
 
     // Create and add the readout, including the background.
     var readoutText = new Text( '0' + ' ' + molesPerLiterString, { font: READOUT_FONT } );
@@ -41,9 +41,8 @@ define( function( require ) {
     panelContent.addChild( readoutText );
 
     // Create and add the slider.
-    this.sliderValue = new Property( 0 );
-    var slider = new HSlider( self.sliderValue, { min: 0, max: MAX_MASS }, {
-      thumbSize: new Dimension2( 15, 30 ),
+    var slider = new HSlider( sliderValue, { min: 0, max: MAX_MASS }, {
+      thumbSize: new Dimension2( 15, 25 ),
       majorTickLength: 15,
       tickLabelSpacing: 2
     } );
@@ -57,20 +56,14 @@ define( function( require ) {
       }
     }
 
-    // Hook up the slider property to the mass value so that mass only contains integer values.
-    self.sliderValue.link( function( value ) {
-      self.massValue.value = Math.round( value );
-    } );
-
     // Create and add the arrow buttons.
     var arrowButtonOptions = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
-    var leftArrowButton = new ArrowButton( 'left', function() { self.massValue.value--; }, arrowButtonOptions );
+    var leftArrowButton = new ArrowButton( 'left', function() { sliderValue.value--; }, arrowButtonOptions );
     panelContent.addChild( leftArrowButton );
-    var rightArrowButton = new ArrowButton( 'right', function() { self.massValue.value++; }, arrowButtonOptions );
+    var rightArrowButton = new ArrowButton( 'right', function() { sliderValue.value++; }, arrowButtonOptions );
     panelContent.addChild( rightArrowButton );
 
     // layout
-    self.massValue.value = MAX_MASS / 2; // Make sure slider is in the middle during layout.
     readoutBackground.centerX = slider.bounds.width / 2;
     readoutBackground.top = 0;
     slider.left = 0;
@@ -79,14 +72,13 @@ define( function( require ) {
     leftArrowButton.centerY = slider.centerY;
     rightArrowButton.left = slider.right + 12;
     rightArrowButton.centerY = slider.centerY;
-    self.massValue.reset(); // Put slider back to original position.
 
     // Put the contents into a panel.
     var panel = new Panel( panelContent, {fill: 'rgba(0,0,0,0)', stroke: 'rgba(0,0,0,0)'} );
     self.addChild( panel );
 
     // Update the readout text whenever the value changes.
-    self.massValue.link( function( value ) {
+    targetProperty.link( function( value ) {
       readoutText.text = value + ' ' + molesPerLiterString;
       readoutText.centerX = readoutBackground.centerX;
     } );
@@ -94,12 +86,5 @@ define( function( require ) {
     self.mutate( options );
   }
 
-  return inherit( Node, ConcentrationSlider, {
-    clear: function() {
-      this.sliderValue.reset();
-    },
-    showAnswer: function( massValue ) {
-      this.sliderValue.value = massValue;
-    }
-  } );
+  return inherit( Node, ConcentrationSlider );
 } );

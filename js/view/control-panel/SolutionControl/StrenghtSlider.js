@@ -11,8 +11,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     HSlider = require( 'SUN/HSlider' ),
-    Path = require( 'SCENERY/nodes/Path' ),
-    Shape = require( 'KITE/Shape' ),
     Range = require( 'DOT/Range' ),
     Dimension2 = require( 'DOT/Dimension2' ),
     Text = require( 'SCENERY/nodes/Text' ),
@@ -27,26 +25,23 @@ define( function( require ) {
     var range = new Range( 0, 2, property.get() ),
       width = 150,
       tickLength = 10,
-      tickOffset = 5;
+      tickOffset = 5, slider;
     Node.call( this, coords );
 
+    // add horizontal part
+    this.addChild( slider = new HSlider( property, range, {
+      trackSize: new Dimension2( width, 5 ),
+      thumbSize: new Dimension2( 15, 25 ),
+      majorTickLength: -15
+    } ) );
+
     // add ticks
-    for ( var i = 0, del = range.max - range.min; i <= del; i += del ) {
-      this.addChild( new Path( Shape.lineSegment(
-        width * i / del, tickOffset,
-        width * i / del, tickOffset + tickLength
-      ), {stroke: 'black', lineWidth: 1} ) );
-    }
+    slider.addMajorTick( range.min, null );
+    slider.addMajorTick( range.max, null );
 
     // add text
     this.addChild( new Text( weakString, {font: FONT, centerX: 0, centerY: 2 * tickOffset + tickLength} ) );
     this.addChild( new Text( strongString, {font: FONT, centerX: width, centerY: 2 * tickOffset + tickLength} ) );
-
-    // add horizontal part
-    this.addChild( new HSlider( property, range, {
-      trackSize: new Dimension2( width, 2 ),
-      thumbSize: new Dimension2( 15, 25 )
-    } ) );
   }
 
   return inherit( Node, StrenghtSlider );

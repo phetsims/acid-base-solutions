@@ -46,7 +46,7 @@ define( function( require ) {
     // add input
     vBox.addChild( new Text( initialConcentrationString, {font: FONT} ) );
     // TODO: add input
-    vBox.addChild( new ConcentrationSlider( model ) );
+    vBox.addChild( new ConcentrationSlider( model.property( 'concentration' ) ) );
 
     // add black line
     vBox.addChild( new Line( 0, 0, 200, 0, {stroke: 'black', lineWidth: 0.75} ) );
