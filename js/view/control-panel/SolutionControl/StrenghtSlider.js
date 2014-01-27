@@ -18,11 +18,11 @@ define( function( require ) {
     FONT = new PhetFont( 12 ),
 
   // strings
-    weakString = require( 'string!ACID_BASE_SOLUTIONS/weak' ),
-    strongString = require( 'string!ACID_BASE_SOLUTIONS/strong' );
+    weakerString = require( 'string!ACID_BASE_SOLUTIONS/weaker' ),
+    strongerString = require( 'string!ACID_BASE_SOLUTIONS/stronger' );
 
   function StrenghtSlider( property, coords ) {
-    var range = new Range( 0, 2, property.get() ),
+    var range = new Range( 0, 1, property.get() ),
       width = 150,
       tickLength = 10,
       tickOffset = 5, slider;
@@ -40,8 +40,8 @@ define( function( require ) {
     slider.addMajorTick( range.max, null );
 
     // add text
-    this.addChild( new Text( weakString, {font: FONT, centerX: 0, centerY: 2 * tickOffset + tickLength} ) );
-    this.addChild( new Text( strongString, {font: FONT, centerX: width, centerY: 2 * tickOffset + tickLength} ) );
+    this.addChild( new Text( weakerString, {font: FONT, centerX: 0, centerY: 2 * tickOffset + tickLength} ) );
+    this.addChild( new Text( strongerString, {font: FONT, centerX: width, centerY: 2 * tickOffset + tickLength} ) );
   }
 
   return inherit( Node, StrenghtSlider );

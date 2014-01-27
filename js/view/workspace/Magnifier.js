@@ -16,7 +16,8 @@ define( function( require ) {
     Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   function Magnifier( model, options ) {
-    var radius = model.height / 4.3,
+    var self = this,
+      radius = model.height / 4.3,
       rectangle;
     Node.call( this, options );
 
@@ -27,6 +28,11 @@ define( function( require ) {
 
     // add lens
     this.addChild( new Circle( radius, {stroke: 'black', lineWidth: 8} ) );
+
+    model.property( 'viewMode' ).link( function( mode ) {
+      // TODO: make mode as parameter
+      self.setVisible( mode === 'MOLECULES' );
+    } );
   }
 
   return inherit( Node, Magnifier );

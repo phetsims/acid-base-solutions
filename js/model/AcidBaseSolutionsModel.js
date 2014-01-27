@@ -13,21 +13,26 @@ define( function( require ) {
     PropertySet = require( 'AXON/PropertySet' );
 
   function AcidBaseSolutionsModel( width, height, mode ) {
+    var self = this;
+
     // dimensions of the model's space
     this.width = width;
     this.height = height;
 
     this.mode = mode;
 
+    // possible view modes
+    this.VIEW_MODES = ['MOLECULES', 'EQUILIBRIUM', 'LIQUID'];
+
     PropertySet.call( this, {
       solution: 0, // solution's number
       testMode: 0,
-      viewMode: 0,
+      viewMode: self.VIEW_MODES[0],
       isAcid: true, // type of solution. true - acid, false - base
       isWeak: true, // type of strength. true - weak, false - strong
       solvent: false, // solvent visibility
       concentration: 0.01,
-      strength: 0.5
+      strength: 0.25
     } );
   }
 
