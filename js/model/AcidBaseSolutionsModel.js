@@ -24,15 +24,19 @@ define( function( require ) {
     // possible view modes
     this.VIEW_MODES = ['MOLECULES', 'EQUILIBRIUM', 'LIQUID'];
 
+    // possible test modes
+    this.TEST_MODES = ['PH_METER', 'PH_PAPER', 'CONDUCTIVITY'];
+
     PropertySet.call( this, {
       solution: 0, // solution's number
-      testMode: 0,
+      testMode: self.TEST_MODES[0],
       viewMode: self.VIEW_MODES[0],
       isAcid: true, // type of solution. true - acid, false - base
       isWeak: true, // type of strength. true - weak, false - strong
       solvent: false, // solvent visibility
       concentration: 0.01,
-      strength: 0.25
+      strength: 0.25,
+      ph: 4.5
     } );
   }
 

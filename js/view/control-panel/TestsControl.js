@@ -29,9 +29,9 @@ define( function( require ) {
     lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb.png' );
 
   var menuOptions = [
-    {text: pHMeterString, icon: new Image( pHMeterImage, {scale: 0.75} )},
-    {text: pHPaperString, icon: new Image( pHPaperImage, {scale: 0.75} )},
-    {text: conductivityString, icon: new Image( lightBulbImage, {scale: 0.6} )}
+    {text: pHMeterString, value: 'PH_METER', icon: new Image( pHMeterImage, {scale: 0.75} )},
+    {text: pHPaperString, value: 'PH_PAPER', icon: new Image( pHPaperImage, {scale: 0.75} )},
+    {text: conductivityString, value: 'CONDUCTIVITY', icon: new Image( lightBulbImage, {scale: 0.6} )}
   ];
 
   function Tests( model, options ) {
@@ -40,7 +40,7 @@ define( function( require ) {
 
     // add options to menu
     for ( var i = 0; i < menuOptions.length; i++ ) {
-      vBox.addChild( new AquaRadioButton( model.property( 'testMode' ), i, new HBox( {spacing: 5, children: [
+      vBox.addChild( new AquaRadioButton( model.property( 'testMode' ), menuOptions[i].value, new HBox( {spacing: 5, children: [
         new Text( menuOptions[i].text, {font: FONT} ),
         menuOptions[i].icon
       ]} ), {radius: 7} ) );
