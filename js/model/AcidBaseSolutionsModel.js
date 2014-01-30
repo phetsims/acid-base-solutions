@@ -47,12 +47,15 @@ define( function( require ) {
     // possible test modes
     this.TEST_MODES = ['PH_METER', 'PH_PAPER', 'CONDUCTIVITY'];
 
+    // possible test modes
+    this.SOLUTIONS = ['WATER', 'STRONG_ACID', 'WEAK_ACID', 'STRONG_BASE', 'WEAK_BASE'];
+
     // pH color keys
     this.PH_COOLORS = PH_COOLORS;
 
     PropertySet.call( this, {
-      solution: 0, // solution's number
-      testMode: self.TEST_MODES[1],
+      solution: self.SOLUTIONS[0], // solution's type
+      testMode: self.TEST_MODES[0],
       viewMode: self.VIEW_MODES[0],
       isAcid: true, // type of solution. true - acid, false - base
       isWeak: true, // type of strength. true - weak, false - strong

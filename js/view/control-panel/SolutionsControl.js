@@ -29,11 +29,11 @@ define( function( require ) {
     weakBaseString = require( 'string!ACID_BASE_SOLUTIONS/weakBase' );
 
   var menuOptions = [
-    {text: waterString + ' (H20)', icon: H2OMolecule},
-    {text: strongAcidString + ' (HA)', icon: HAMolecule},
-    {text: weakAcidString + ' (HA)', icon: HAMolecule},
-    {text: strongBaseString + ' (MOH)', icon: MOHMolecule},
-    {text: weakBaseString + ' (B)', icon: BMolecule}
+    {text: waterString + ' (H20)', value: 'WATER', icon: H2OMolecule},
+    {text: strongAcidString + ' (HA)', value: 'STRONG_ACID', icon: HAMolecule},
+    {text: weakAcidString + ' (HA)', value: 'WEAK_ACID', icon: HAMolecule},
+    {text: strongBaseString + ' (MOH)', value: 'STRONG_BASE', icon: MOHMolecule},
+    {text: weakBaseString + ' (B)', value: 'WEAK_BASE', icon: BMolecule}
   ];
 
   function Solutions( model, options ) {
@@ -42,7 +42,7 @@ define( function( require ) {
 
     // add options to menu
     for ( var i = 0; i < menuOptions.length; i++ ) {
-      vBox.addChild( new AquaRadioButton( model.property( 'solution' ), i, new HBox( {spacing: 5, children: [
+      vBox.addChild( new AquaRadioButton( model.property( 'solution' ), menuOptions[i].value, new HBox( {spacing: 5, children: [
         new Text( menuOptions[i].text, {font: FONT} ),
         new menuOptions[i].icon()
       ]

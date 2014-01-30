@@ -11,10 +11,20 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    Node = require( 'SCENERY/nodes/Node' );
+    Node = require( 'SCENERY/nodes/Node' ),
+    Image = require( 'SCENERY/nodes/Image' ),
+
+    lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb.png' );
 
   function ConductivityTest( model, options ) {
+    var self = this;
     Node.call( this, options );
+
+    this.addChild( new Image( lightBulbImage, {scale: 1.25} ) );
+
+    model.property( 'testMode' ).link( function( mode ) {
+      self.setVisible( mode === 'CONDUCTIVITY' );
+    } );
   }
 
   return inherit( Node, ConductivityTest );

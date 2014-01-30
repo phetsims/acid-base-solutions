@@ -12,8 +12,10 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
+    VBox = require( 'SCENERY/nodes/VBox' ),
     Beaker = require( './Beaker' ),
     Magnifier = require( './Magnifier' ),
+    Formula = require( './formulas/Formula' ),
 
   // tests
     pHMeterTest = require( './tests/pHMeterTest' ),
@@ -23,8 +25,11 @@ define( function( require ) {
   function Workspace( model, options ) {
     Node.call( this, options );
 
-    // add beaker
-    this.addChild( new Beaker( model, {x: model.width / 3, y: model.height / 1.65} ) );
+    // add beaker and formulas
+    this.addChild( new VBox( {spacing: 5, x: model.width / 3, y: model.height * 0.333, children: [
+      new Beaker( model, {} ),
+      new Formula( model )
+    ]} ) );
 
     // add magnifier
     this.addChild( new Magnifier( model, {x: model.width / 3, y: model.height / 1.65 + 10} ) );
@@ -36,7 +41,7 @@ define( function( require ) {
     this.addChild( new pHPaperTest( model, {x: model.width / 8, y: model.height / 20} ) );
 
     // add conductivity test
-    this.addChild( new ConductivityTest( model ) );
+    this.addChild( new ConductivityTest( model, {x: model.width / 3.25, y: model.height / 10} ) );
   }
 
   return inherit( Node, Workspace );
