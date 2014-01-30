@@ -29,7 +29,7 @@ define( function( require ) {
     weakBaseString = require( 'string!ACID_BASE_SOLUTIONS/weakBase' );
 
   var menuOptions = [
-    {text: waterString + ' (H20)', value: 'WATER', icon: H2OMolecule},
+    {text: waterString + ' (H2O)', value: 'WATER', icon: H2OMolecule},
     {text: strongAcidString + ' (HA)', value: 'STRONG_ACID', icon: HAMolecule},
     {text: weakAcidString + ' (HA)', value: 'WEAK_ACID', icon: HAMolecule},
     {text: strongBaseString + ' (MOH)', value: 'STRONG_BASE', icon: MOHMolecule},
