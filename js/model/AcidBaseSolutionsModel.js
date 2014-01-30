@@ -10,7 +10,9 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    PropertySet = require( 'AXON/PropertySet' );
+    PropertySet = require( 'AXON/PropertySet' ),
+
+    customSolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/customSolutionTitle' );
 
   var PH_COOLORS = [
     'rgb(182,70,72)',
@@ -55,15 +57,31 @@ define( function( require ) {
 
     PropertySet.call( this, {
       solution: self.SOLUTIONS[0], // solution's type
-      testMode: self.TEST_MODES[0],
-      viewMode: self.VIEW_MODES[0],
-      isAcid: true, // type of solution. true - acid, false - base
-      isWeak: true, // type of strength. true - weak, false - strong
-      solvent: false, // solvent visibility
-      concentration: 0.01,
-      strength: 0.25,
-      ph: 4.5
+      testMode: self.TEST_MODES[0], // test mode
+      viewMode: self.VIEW_MODES[0]  // view mode
     } );
+
+    if ( customSolutionTitleString ) {
+      PropertySet.call( this, {
+        isAcid: true, // type of solution. true - acid, false - base
+        isWeak: true, // type of strength. true - weak, false - strong
+        solvent: false, // solvent visibility
+        concentration: 0.01,
+        strength: 0.25,
+        ph: 4.5
+      } );
+
+      var setSolution = function() {
+        var map = [
+          [self.SOLUTIONS[3], self.SOLUTIONS[4]],
+          [self.SOLUTIONS[1], self.SOLUTIONS[2]]
+        ];
+
+        self.solution = map[+self.isAcid][+self.isWeak];
+      };
+      this.property( 'isAcid' ).link( setSolution );
+      this.property( 'isWeak' ).link( setSolution );
+    }
   }
 
   inherit( PropertySet, AcidBaseSolutionsModel, {
