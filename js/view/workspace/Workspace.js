@@ -16,7 +16,6 @@ define( function( require ) {
     Magnifier = require( './Magnifier' ),
 
   // tests
-
     pHMeterTest = require( './tests/pHMeterTest' ),
     pHPaperTest = require( './tests/pHPaperTest' ),
     ConductivityTest = require( './tests/ConductivityTest' );
@@ -34,7 +33,7 @@ define( function( require ) {
     this.addChild( new pHMeterTest( model, {x: model.width / 2.2, y: model.height / 20} ) );
 
     // add pH paper
-    this.addChild( new pHPaperTest( model ) );
+    this.addChild( new pHPaperTest( model, {x: model.width / 8, y: model.height / 20} ) );
 
     // add conductivity test
     this.addChild( new ConductivityTest( model ) );

@@ -68,6 +68,10 @@ define( function( require ) {
     model.property( 'ph' ).link( function( ph ) {
       pHText.setText( ph.toFixed( 2 ).replace( '.', ',' ) );
     } );
+
+    model.property( 'testMode' ).link( function( mode ) {
+      self.setVisible( mode === 'PH_METER' );
+    } );
   }
 
   return inherit( Node, pHMeterTest );
