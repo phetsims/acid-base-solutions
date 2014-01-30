@@ -26,23 +26,14 @@ define( function( require ) {
     new WeakBaseFormula()
   ];
 
-  function Formula( model, options ) {
-    var self = this;
+  function Formula( options ) {
     Node.call( this, options );
 
-    // add all formulas
-    formulas.forEach( function( formula ) {
-      self.addChild( formula );
-    } );
-
-    // add observer for formulas
-    model.property( 'solution' ).link( function( solution ) {
-      var index = model.SOLUTIONS.indexOf( solution );
-      formulas.forEach( function( formula, i ) {
-        formula.setVisible( i === index );
-      } );
-    } );
+    this.addChild( formulas[0] );
   }
 
-  return inherit( Node, Formula );
+  return inherit( Node, Formula, {showFormula: function( index ) {
+    this.removeAllChildren();
+    this.addChild( formulas[index] );
+  }} );
 } );

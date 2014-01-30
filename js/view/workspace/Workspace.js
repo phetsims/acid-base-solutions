@@ -23,12 +23,13 @@ define( function( require ) {
     ConductivityTest = require( './tests/ConductivityTest' );
 
   function Workspace( model, options ) {
+    var vbox, formulas;
     Node.call( this, options );
 
     // add beaker and formulas
-    this.addChild( new VBox( {spacing: 5, x: model.width / 3, y: model.height * 0.333, children: [
+    this.addChild( vbox = new VBox( {spacing: 5, x: model.width / 3, y: model.height * 0.333, children: [
       new Beaker( model, {} ),
-      new Formula( model )
+      formulas = new Formula()
     ]} ) );
 
     // add magnifier
@@ -42,6 +43,12 @@ define( function( require ) {
 
     // add conductivity test
     this.addChild( new ConductivityTest( model, {x: model.width / 3.25, y: model.height / 10} ) );
+
+    // add observer for formulas
+    model.property( 'solution' ).link( function( solution ) {
+      formulas.showFormula( model.SOLUTIONS.indexOf( solution ) );
+      vbox.updateLayout();
+    } );
   }
 
   return inherit( Node, Workspace );
