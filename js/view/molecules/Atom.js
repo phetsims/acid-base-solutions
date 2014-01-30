@@ -17,15 +17,26 @@ define( function( require ) {
   function Atom( coords, radius, color ) {
     Node.call( this, coords );
 
-    this.view = new Circle( radius, {
-      fill: new RadialGradient( -radius * 0.2, -radius * 0.3, 0.25, -radius * 0.2, -radius * 0.3, radius * 2 )
-        .addColorStop( 0, new Color( 'white' ) )
-        .addColorStop( 0.33, color )
-        .addColorStop( 1, new Color( 'black' ) )
-    } );
+    this.gradientDefault = new RadialGradient( -radius * 0.2, -radius * 0.3, 0.25, -radius * 0.2, -radius * 0.3, radius * 2 )
+      .addColorStop( 0, new Color( 'white' ) )
+      .addColorStop( 0.33, color )
+      .addColorStop( 1, new Color( 'black' ) );
 
+    this.gradientGray = new RadialGradient( -radius * 0.2, -radius * 0.3, 0.25, -radius * 0.2, -radius * 0.3, radius * 2 )
+      .addColorStop( 0, new Color( 'rgb(169,169,169)' ) )
+      .addColorStop( 0.33, 'rgb(150,150,150)' )
+      .addColorStop( 1, new Color( 'rgb(150,150,150)' ) );
+
+    this.view = new Circle( radius, {fill: this.gradientDefault} );
     this.addChild( this.view );
   }
 
-  return inherit( Node, Atom );
+  return inherit( Node, Atom, {
+    fillDefault: function() {
+      this.view.setFill( this.gradientDefault );
+    },
+    fillGray: function() {
+      this.view.setFill( this.gradientGray );
+    }
+  } );
 } );

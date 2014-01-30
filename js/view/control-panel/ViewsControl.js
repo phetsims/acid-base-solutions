@@ -39,17 +39,22 @@ define( function( require ) {
   ];
 
   function ViewsControl( model, options ) {
-    var vBox = new VBox( {spacing: 5, align: 'left'} ), hBox;
+    var self = this,
+      vBox = new VBox( {spacing: 5, align: 'left'} ),
+      hBox;
     Node.call( this, options );
+
+    this.checkbox = {};
 
     // add options to menu
     for ( var i = 0; i < menuOptions.length; i++ ) {
-      hBox = new HBox( {spacing: 5, children: [new Text( menuOptions[i].text, {font: FONT} ), menuOptions[i].icon]} );
       if ( menuOptions[i].isRadio ) {
+        hBox = new HBox( {spacing: 5, children: [new Text( menuOptions[i].text, {font: FONT} ), menuOptions[i].icon]} );
         vBox.addChild( new AquaRadioButton( model.property( 'viewMode' ), menuOptions[i].value, hBox, {radius: 7} ) );
       }
       else {
-        vBox.addChild( new CheckBox( hBox, model.property( 'solvent' ), {boxWidth: 15} ) );
+        hBox = new HBox( {spacing: 5, children: [this.checkbox.text = new Text( menuOptions[i].text, {font: FONT} ), this.checkbox.icon = menuOptions[i].icon]} );
+        vBox.addChild( this.checkbox.button = new CheckBox( hBox, model.property( 'solvent' ), {boxWidth: 15} ) );
       }
 
       hBox.updateLayout();
@@ -57,7 +62,18 @@ define( function( require ) {
 
     this.addChild( vBox );
     vBox.updateLayout();
+
+    model.property( 'viewMode' ).link( function( mode ) {
+      self.enableCheckbox( mode === 'MOLECULES' );
+    } );
   }
 
-  return inherit( Node, ViewsControl );
+  return inherit( Node, ViewsControl, {
+    enableCheckbox: function( value ) {
+      this.checkbox.button.enabled = value;
+      this.checkbox.text.setFill( (value ? 'black' : 'gray') );
+      this.checkbox.icon.getChildren().forEach( function( atom ) {
+        atom['fill' + (value ? 'Default' : 'Gray')]();
+      } );
+    }} );
 } );

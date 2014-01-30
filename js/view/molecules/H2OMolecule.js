@@ -24,5 +24,12 @@ define( function( require ) {
     this.addChild( new Atom( {x: -6, y: 5}, 4, H2O_COLOR ) );
   }
 
-  return inherit( Node, H2OMolecule );
+  return inherit( Node, H2OMolecule, {
+    setDefault: function() {
+      var children = this.getChildren();
+    },
+    setGray: function() {
+      var children = this.getChildren();
+    }
+  } );
 } );
