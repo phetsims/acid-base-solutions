@@ -38,7 +38,7 @@ define( function( require ) {
     {isRadio: true, value: 'LIQUID', text: liquidString, icon: new Image( beakerImage, {scale: 0.75} )}
   ];
 
-  function Views( model, options ) {
+  function ViewsControl( model, options ) {
     var vBox = new VBox( {spacing: 5, align: 'left'} ), hBox;
     Node.call( this, options );
 
@@ -59,5 +59,5 @@ define( function( require ) {
     vBox.updateLayout();
   }
 
-  return inherit( Node, Views );
+  return inherit( Node, ViewsControl );
 } );
