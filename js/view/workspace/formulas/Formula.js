@@ -32,8 +32,10 @@ define( function( require ) {
     this.addChild( formulas[0] );
   }
 
-  return inherit( Node, Formula, {showFormula: function( index ) {
-    this.removeAllChildren();
-    this.addChild( formulas[index] );
-  }} );
+  return inherit( Node, Formula, {
+    showFormula: function( index ) {
+      this.removeAllChildren();
+      this.addChild( formulas[index] );
+    }
+  } );
 } );

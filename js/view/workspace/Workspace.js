@@ -46,7 +46,11 @@ define( function( require ) {
 
     // add observer for formulas
     model.property( 'solution' ).link( function( solution ) {
-      formulas.showFormula( model.SOLUTIONS.indexOf( solution ) );
+      model.SOLUTIONS.forEach( function( sol, index ) {
+        if ( sol.type === solution ) {
+          formulas.showFormula( index );
+        }
+      } );
       vbox.updateLayout();
     } );
   }

@@ -11,7 +11,13 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     PropertySet = require( 'AXON/PropertySet' ),
+    WaterSolution = require( './WaterSolution' ),
+    StrongAcidSolution = require( './StrongAcidSolution' ),
+    WeakAcidSollution = require( './WeakAcidSollution' ),
+    StrongBaseSolution = require( './StrongBaseSolution' ),
+    WeakBaseSolution = require( './WeakBaseSolution' ),
 
+    introductionTitleString = require( 'string!ACID_BASE_SOLUTIONS/introductionTitle' ),
     customSolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/customSolutionTitle' );
 
   var PH_COOLORS = [
@@ -50,25 +56,32 @@ define( function( require ) {
     this.TEST_MODES = ['PH_METER', 'PH_PAPER', 'CONDUCTIVITY'];
 
     // possible test modes
-    this.SOLUTIONS = ['WATER', 'STRONG_ACID', 'WEAK_ACID', 'STRONG_BASE', 'WEAK_BASE'];
+    this.SOLUTIONS = [
+      {type: 'WATER', constructor: WaterSolution},
+      {type: 'STRONG_ACID', constructor: StrongAcidSolution},
+      {type: 'WEAK_ACID', constructor: WeakAcidSollution},
+      {type: 'STRONG_BASE', constructor: StrongBaseSolution},
+      {type: 'WEAK_BASE', constructor: WeakBaseSolution}
+    ];
 
     // pH color keys
     this.PH_COOLORS = PH_COOLORS;
 
     PropertySet.call( this, {
-      solution: self.SOLUTIONS[0], // solution's type
+      solution: self.SOLUTIONS[0].type, // solution's type
       testMode: self.TEST_MODES[0], // test mode
-      viewMode: self.VIEW_MODES[0]  // view mode
+      viewMode: self.VIEW_MODES[0], // view mode
+      solvent: false, // solvent visibility
+      ph: 4.5
     } );
 
-    if ( customSolutionTitleString ) {
+    // add properties for custom tab
+    if ( customSolutionTitleString === mode ) {
       PropertySet.call( this, {
         isAcid: true, // type of solution. true - acid, false - base
         isWeak: true, // type of strength. true - weak, false - strong
-        solvent: false, // solvent visibility
         concentration: 0.01,
-        strength: 0.25,
-        ph: 4.5
+        strength: 0.25
       } );
 
       var setSolution = function() {
@@ -81,6 +94,13 @@ define( function( require ) {
       };
       this.property( 'isAcid' ).link( setSolution );
       this.property( 'isWeak' ).link( setSolution );
+    }
+
+    if ( introductionTitleString === mode ) {
+      this.components = {};
+      for ( var i = 0; i < this.SOLUTIONS.length; i++ ) {
+        this.components[this.SOLUTIONS[i].type] = new this.SOLUTIONS[i].constructor();
+      }
     }
   }
 
