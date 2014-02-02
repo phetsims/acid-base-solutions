@@ -98,9 +98,16 @@ define( function( require ) {
 
     if ( introductionTitleString === mode ) {
       this.components = {};
-      for ( var i = 0; i < this.SOLUTIONS.length; i++ ) {
-        this.components[this.SOLUTIONS[i].type] = new this.SOLUTIONS[i].constructor();
+      for ( var i = 0, solution; i < this.SOLUTIONS.length; i++ ) {
+        solution = new this.SOLUTIONS[i].constructor();
+        solution.test();
+        this.components[this.SOLUTIONS[i].type] = solution;
       }
+
+      // set appropriate ph
+      this.property( 'solution' ).link( function( solution ) {
+        self.ph = self.components[solution].ph;
+      } );
     }
   }
 

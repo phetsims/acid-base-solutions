@@ -33,5 +33,10 @@ define( function( require ) {
     } );
   }
 
-  return inherit( AqueousSolution, StrongAcidSolution );
+  return inherit( AqueousSolution, StrongAcidSolution, {
+    test: function() {
+      this.strength = this.CONSTANTS.STRONG_STRENGTH;
+      this.concentration = this.CONSTANTS.CONCENTRATION_RANGE.defaultValue;
+    }
+  } );
 } );

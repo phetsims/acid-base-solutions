@@ -17,11 +17,10 @@ define( function( require ) {
     this.solute = this.concentration - this.product; // [B] = c - [BH+]
   };
 
-  // [BH+] = ( -Kb + sqrt( Kb*Kb + 4*Kb*c ) ) / 2
   var setProductConcentration = function() {
     var Kb = this.strength,
       c = this.concentration;
-    this.product = (-Kb + Math.sqrt( ( Kb * Kb ) + ( 4 * Kb * c ) ) ) / 2;
+    this.product = (-Kb + Math.sqrt( ( Kb * Kb ) + ( 4 * Kb * c ) ) ) / 2;   // [BH+] = ( -Kb + sqrt( Kb*Kb + 4*Kb*c ) ) / 2
   };
 
   function WeakBaseSolution( strength, concentration ) {
@@ -53,5 +52,10 @@ define( function( require ) {
     } );
   }
 
-  return inherit( AqueousSolution, WeakBaseSolution );
+  return inherit( AqueousSolution, WeakBaseSolution, {
+    test: function() {
+      this.strength = this.CONSTANTS.WEAK_STRENGTH_RANGE.defaultValue;
+      this.concentration = this.CONSTANTS.CONCENTRATION_RANGE.defaultValue;
+    }
+  } );
 } );

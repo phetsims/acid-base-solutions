@@ -17,16 +17,23 @@ define( function( require ) {
     PropertySet = require( 'AXON/PropertySet' ),
     Range = require( 'DOT/Range' );
 
-  function AqueousSolution( strength, concentration ) {
+  function AqueousSolution() {
+    var self = this;
+
     PropertySet.call( this, {
-      strength: strength,
-      concentration: concentration,
+      strength: 0,
+      concentration: 0,
       solute: 0, // solute concentration
       product: 0, // product concentration
       H3O: 0, // H3O concentration
-      OH: 0, // H3O concentration
+      OH: 0, // OH concentration
       H2O: 0, // H2O concentration
+      ph: 0, // pH of the solution at equilibrium
       isValidStrength: false
+    } );
+
+    this.property( 'H3O' ).link( function( value ) {
+      self.ph = -Math.round( 2 * Math.log( value ) / Math.LN10 ) / 2;
     } );
 
     this.CONSTANTS = {
@@ -35,7 +42,12 @@ define( function( require ) {
       CONCENTRATION_RANGE: new Range( 1E-3, 1, 1E-2 ),
       WEAK_STRENGTH_RANGE: new Range( 1E-10, 1E2, 1E-7 )
     };
+
+    // arbitrary, but needs to be greater than weak range
+    this.CONSTANTS.STRONG_STRENGTH = this.CONSTANTS.WEAK_STRENGTH_RANGE.max + 1;
   }
 
-  return inherit( PropertySet, AqueousSolution );
+  return inherit( PropertySet, AqueousSolution, {
+    test: function() {}
+  } );
 } );

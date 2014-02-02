@@ -21,6 +21,10 @@ define( function( require ) {
     this.property( 'H3O' ).link( function( value ) {
       self.OH = value; // [OH]=[H3O]
     } );
+
+    // default values
+    this.H3O = Math.sqrt( this.CONSTANTS.WATER_EQUILIBRIUM_CONSTANT );
+    this.H2O = this.CONSTANTS.WATER_CONCENTRATION;
   }
 
   return inherit( AqueousSolution, WaterSolution );

@@ -49,5 +49,10 @@ define( function( require ) {
     } );
   }
 
-  return inherit( AqueousSolution, WeakAcidSolution );
+  return inherit( AqueousSolution, WeakAcidSolution, {
+    test: function() {
+      this.strength = this.CONSTANTS.WEAK_STRENGTH_RANGE.defaultValue;
+      this.concentration = this.CONSTANTS.CONCENTRATION_RANGE.defaultValue;
+    }
+  } );
 } );
