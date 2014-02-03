@@ -23,7 +23,8 @@ define( function( require ) {
   // strings
     moleculesString = require( 'string!ACID_BASE_SOLUTIONS/molecules' ),
     showSolventString = require( 'string!ACID_BASE_SOLUTIONS/showSolvent' ),
-    equilibriumConcentrationString = require( 'string!ACID_BASE_SOLUTIONS/equilibriumConcentration' ),
+    equilibriumString = require( 'string!ACID_BASE_SOLUTIONS/equilibrium' ),
+    concentrationString = require( 'string!ACID_BASE_SOLUTIONS/concentration' ),
     liquidString = require( 'string!ACID_BASE_SOLUTIONS/liquid' ),
 
   // images
@@ -32,10 +33,13 @@ define( function( require ) {
 
   // settings for menu options
   var menuOptions = [
-    {isRadio: true, value: 'MOLECULES', text: moleculesString, icon: new Image( magnifyingGlassImage, {scale: 0.75} )},
+    {isRadio: true, value: 'MOLECULES', text: new Text( moleculesString, {font: FONT} ), icon: new Image( magnifyingGlassImage, {scale: 0.75} )},
     {isRadio: false, text: showSolventString, icon: new H2OMolecule()},
-    {isRadio: true, value: 'EQUILIBRIUM', text: equilibriumConcentrationString, icon: new Node()},
-    {isRadio: true, value: 'LIQUID', text: liquidString, icon: new Image( beakerImage, {scale: 0.75} )}
+    {isRadio: true, value: 'EQUILIBRIUM', text: new Node( {children: [
+      new Text( equilibriumString, {font: FONT, centerX: 0} ),
+      new Text( concentrationString, {font: FONT, centerX: 0, centerY: 8} )
+    ]} ), icon: new Node()},
+    {isRadio: true, value: 'LIQUID', text: new Text( liquidString, {font: FONT} ), icon: new Image( beakerImage, {scale: 0.75} )}
   ];
 
   function ViewsControl( model, options ) {
@@ -49,7 +53,7 @@ define( function( require ) {
     // add options to menu
     for ( var i = 0; i < menuOptions.length; i++ ) {
       if ( menuOptions[i].isRadio ) {
-        hBox = new HBox( {spacing: 5, children: [new Text( menuOptions[i].text, {font: FONT} ), menuOptions[i].icon]} );
+        hBox = new HBox( {spacing: 5, children: [menuOptions[i].text, menuOptions[i].icon]} );
         vBox.addChild( new AquaRadioButton( model.property( 'viewMode' ), menuOptions[i].value, hBox, {radius: 7} ) );
       }
       else {
