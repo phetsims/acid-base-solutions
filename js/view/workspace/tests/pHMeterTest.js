@@ -26,9 +26,11 @@ define( function( require ) {
   function pHMeterTest( model, options ) {
     var self = this,
       backlash = 150,
+      waterSurface = 80,
       bufferY = 0,
       pHText,
-      initY;
+      initY,
+      checkVisibility;
     Node.call( this, _.extend( {cursor: 'pointer'}, options ) );
 
     // add sensor
@@ -43,15 +45,19 @@ define( function( require ) {
 
     // add text
     this.addChild( new Text( pHString + ':', {font: FONT, centerX: 18, centerY: 0} ) );
-    this.addChild( pHText = new Text( '', {font: FONT, centerX: 36, centerY: 0} ) );
+    this.addChild( pHText = new Text( '', {font: FONT, centerX: 34, centerY: 0} ) );
 
     // init drag
     initY = this.y;
+    checkVisibility = function( y ) {
+      pHText.setVisible( y > waterSurface );
+    };
     this.addInputListener( new SimpleDragHandler( {
       translate: function( e ) {
         var deltaY = e.delta.y;
         if ( e.position.y > initY && e.position.y < backlash && bufferY <= 0 ) {
           self.y += deltaY;
+          checkVisibility( self.y );
         }
         else if ( e.position.y <= initY || e.position.y >= backlash ) {
           bufferY += Math.abs( deltaY );
@@ -72,6 +78,8 @@ define( function( require ) {
     model.property( 'testMode' ).link( function( mode ) {
       self.setVisible( mode === 'PH_METER' );
     } );
+
+    checkVisibility();
   }
 
   return inherit( Node, pHMeterTest );
