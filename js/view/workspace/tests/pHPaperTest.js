@@ -12,6 +12,7 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
+    Vector2 = require( 'DOT/Vector2' ),
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     FONT_BIG = new PhetFont( 12 ),
@@ -31,7 +32,8 @@ define( function( require ) {
 
   function pHPaperTest( model, options ) {
     var self = this,
-      paperColor = model.PH_COOLORS[model.PH_COOLORS.length - 1];
+      paperColor = model.PH_COOLORS[model.PH_COOLORS.length - 1],
+      paper;
     Node.call( this, options );
 
     this.addChild( new Text( pHColorKeyString, {font: FONT_BIG, centerY: 0} ) );
@@ -43,9 +45,22 @@ define( function( require ) {
     }
 
     // add pH paper
-    this.addChild( self.paper = new Rectangle( (model.PH_COOLORS.length + 2) * (rectWidth + space), 0, rectWidth, rectHeight * 4, {cursor: 'pointer', fill: paperColor, stroke: 'rgb(217,200,154)'} ) );
-    this.paper.addInputListener( new SimpleDragHandler( {
-      translate: self.move.bind( this )
+    this.addChild( paper = new Rectangle( (model.PH_COOLORS.length + 2) * (rectWidth + space), 0, rectWidth, rectHeight * 4, {cursor: 'pointer', fill: paperColor, stroke: 'rgb(217,200,154)'} ) );
+    var clickOffset, currentTarget = new Vector2( 0, 0 );
+    paper.addInputListener( new SimpleDragHandler( {
+      start: function( e ) {
+        // get offset
+        clickOffset = paper.globalToParentPoint( e.pointer.point ).subtract( currentTarget.setXY( e.currentTarget.x, e.currentTarget.y ) );
+      },
+      drag: function( e ) {
+        // get new position
+        var v = paper.globalToParentPoint( e.pointer.point ).subtract( clickOffset );
+        // check limitation
+        v.setX( Math.min( Math.max( dragArea.left, v.x ), dragArea.right ) );
+        v.setY( Math.min( Math.max( dragArea.top, v.y ), dragArea.bottom ) );
+        // move to new position
+        paper.setTranslation( v );
+      }
     } ) );
 
     model.property( 'testMode' ).link( function( mode ) {
@@ -53,13 +68,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, pHPaperTest, {
-    move: function( e ) {
-      var position = e.position;
-      if ( dragArea.left < position.x && position.x < dragArea.right &&
-           dragArea.top < position.y && position.y < dragArea.bottom ) {
-        this.paper.setTranslation( e.position );
-      }
-    }
-  } );
+  return inherit( Node, pHPaperTest );
 } );
