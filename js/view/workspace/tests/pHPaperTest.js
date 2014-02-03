@@ -32,21 +32,46 @@ define( function( require ) {
 
   function pHPaperTest( model, options ) {
     var self = this,
-      paperColor = model.PH_COOLORS[model.PH_COOLORS.length - 1],
+      paperDefaultColor = model.PH_COOLORS[model.PH_COOLORS.length - 1],
+      waterSurface = 44.5,
+      indicatorPaper,
       paper;
     Node.call( this, options );
 
     this.addChild( new Text( pHColorKeyString, {font: FONT_BIG, centerY: 0} ) );
 
     // add color key table
-    for ( var i = 0, rectWidth = 14, rectHeight = 30, space = 1; i < model.PH_COOLORS.length - 1; i++ ) {
-      this.addChild( new Rectangle( (rectWidth + space) * i, 10, rectWidth, rectHeight, {fill: model.PH_COOLORS[i]} ) );
-      this.addChild( new Text( i, {font: FONT_SMALL, centerX: (rectWidth + space) * (i + 0.5), centerY: 46} ) );
+    for ( var i = 0, tableRectWidth = 14, tableRectHeight = 30, space = 1; i < model.PH_COOLORS.length - 1; i++ ) {
+      this.addChild( new Rectangle( (tableRectWidth + space) * i, 10, tableRectWidth, tableRectHeight, {fill: model.PH_COOLORS[i]} ) );
+      this.addChild( new Text( i, {font: FONT_SMALL, centerX: (tableRectWidth + space) * (i + 0.5), centerY: 46} ) );
     }
 
     // add pH paper
-    this.addChild( paper = new Rectangle( (model.PH_COOLORS.length + 2) * (rectWidth + space), 0, rectWidth, rectHeight * 4, {cursor: 'pointer', fill: paperColor, stroke: 'rgb(217,200,154)'} ) );
-    var clickOffset, currentTarget = new Vector2( 0, 0 );
+    this.addChild( paper = new Node( {children: [
+      new Rectangle( (model.PH_COOLORS.length + 2) * (tableRectWidth + space), 0, tableRectWidth, tableRectHeight * 4, {cursor: 'pointer', fill: paperDefaultColor, stroke: 'rgb(150, 150, 150)', lineWidth: 0.5} ),
+      indicatorPaper = new Rectangle( 0, 0, tableRectWidth, 0, {cursor: 'pointer', fill: 'red', stroke: 'rgb(150, 150, 150)', lineWidth: 0.5} )
+    ]} ) );
+    indicatorPaper.rotate( Math.PI );
+    indicatorPaper.setX( (model.PH_COOLORS.length + 2) * (tableRectWidth + space) + tableRectWidth );
+    indicatorPaper.setY( tableRectHeight * 4 );
+
+    // add drag and drop for paper
+    var clickOffset,
+      isContact = false, // water contact
+      currentTarget = new Vector2( 0, 0 ),
+      checkIndicator = function() {
+        var diff = paper.y - waterSurface,
+          newHeight;
+
+        isContact = (diff > 0);
+
+        if ( isContact ) {
+          newHeight = Math.min( Math.max( diff + 5 ), tableRectHeight * 4 );
+          if ( newHeight > indicatorPaper.getHeight() ) {
+            indicatorPaper.setRectHeight( newHeight );
+          }
+        }
+      };
     paper.addInputListener( new SimpleDragHandler( {
       start: function( e ) {
         // get offset
@@ -60,11 +85,18 @@ define( function( require ) {
         v.setY( Math.min( Math.max( dragArea.top, v.y ), dragArea.bottom ) );
         // move to new position
         paper.setTranslation( v );
+        checkIndicator();
       }
     } ) );
 
     model.property( 'testMode' ).link( function( mode ) {
       self.setVisible( mode === 'PH_PAPER' );
+    } );
+
+    model.property( 'ph' ).link( function( pHValue ) {
+      indicatorPaper.setFill( model.PH_COOLORS[Math.round( pHValue )] );
+      indicatorPaper.setRectHeight( 0 );
+      checkIndicator();
     } );
   }
 
