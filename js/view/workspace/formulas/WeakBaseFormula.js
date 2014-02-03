@@ -43,7 +43,7 @@ define( function( require ) {
     this.addChild( new H2OMolecule( {x: 40} ) );
     this.addChild( new Node( {x: 32, children: [
       new Text( 'H', {font: FONT, centerX: 0, centerY: textOffset} ),
-      new Text( '2', {font: FONT_SMALL, centerX: 7, centerY: subOffset} ),
+      new Text( '2', {font: FONT_SMALL, centerX: 7.5, centerY: subOffset} ),
       new Text( 'O', {font: FONT, centerX: 15, centerY: textOffset} )
     ]} ) );
 
