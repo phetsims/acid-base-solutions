@@ -13,6 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Circle = require( 'SCENERY/nodes/Circle' ),
+    Shape = require( 'KITE/Shape' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   function Magnifier( model, options ) {
@@ -30,9 +31,12 @@ define( function( require ) {
     this.addChild( new Circle( radius, {stroke: 'black', lineWidth: 8} ) );
 
     model.property( 'viewMode' ).link( function( mode ) {
-      // TODO: make mode as parameter
       self.setVisible( mode === 'MOLECULES' );
     } );
+
+    // add container for molecules
+    this.addChild( this.container = new Node() );
+    this.container.setClipArea( new Shape().circle( 0, 0, radius - 4 ) );
   }
 
   return inherit( Node, Magnifier );
