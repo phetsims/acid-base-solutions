@@ -18,7 +18,7 @@ define( function( require ) {
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     FONT = new PhetFont( 12 ),
     Line = require( 'SCENERY/nodes/Line' ),
-    StrenghtSlider = require( 'ACID_BASE_SOLUTIONS/view/control-panel/SolutionControl/StrenghtSlider' ),
+    StrengthSlider = require( 'ACID_BASE_SOLUTIONS/view/control-panel/SolutionControl/StrengthSlider' ),
     ConcentrationSlider = require( 'ACID_BASE_SOLUTIONS/view/control-panel/SolutionControl/ConcentrationSlider' ),
 
   // strings
@@ -31,7 +31,7 @@ define( function( require ) {
 
   function Solution( model, options ) {
     var vBox = new VBox( {spacing: 5} ),
-      strenghtSlider;
+      strengthSlider;
     Node.call( this, options );
 
     // add type radio buttons menu
@@ -43,10 +43,9 @@ define( function( require ) {
     // add black line
     vBox.addChild( new Line( 0, 0, 200, 0, {stroke: 'black', lineWidth: 0.75} ) );
 
-    // add input
+    // add concentration slider
     vBox.addChild( new Text( initialConcentrationString, {font: FONT} ) );
-    // TODO: add input
-    vBox.addChild( new ConcentrationSlider( model.property( 'concentration' ) ) );
+    vBox.addChild( new ConcentrationSlider( model.property( 'concentration' ), model.components.WEAK_ACID.CONSTANTS.CONCENTRATION_RANGE ) );
 
     // add black line
     vBox.addChild( new Line( 0, 0, 200, 0, {stroke: 'black', lineWidth: 0.75} ) );
@@ -59,13 +58,13 @@ define( function( require ) {
     ]} ) );
 
     // add strength slider
-    vBox.addChild( strenghtSlider = new StrenghtSlider( model.property( 'strength' ) ) );
+    vBox.addChild( strengthSlider = new StrengthSlider( model.property( 'strength' ), model.components.WEAK_ACID.CONSTANTS.WEAK_STRENGTH_RANGE ) );
 
     this.addChild( vBox );
     vBox.updateLayout();
 
     model.property( 'isWeak' ).link( function( isWeak ) {
-      strenghtSlider.setVisible( isWeak );
+      strengthSlider.setVisible( isWeak );
     } );
   }
 

@@ -20,17 +20,18 @@ define( function( require ) {
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     Text = require( 'SCENERY/nodes/Text' ),
     HSlider = require( 'SUN/HSlider' ),
+    LN10 = Math.LN10,
 
   // Constants
     READOUT_FONT = new PhetFont( 12 ),
-    ARROW_HEIGHT = 15,
-    CONCENTRATION_MIN = -3,
-    CONCENTRATION_MAX = 0,
-    CONCENTRATION_STEP = 0.1;
+    ARROW_HEIGHT = 15;
 
-  function ConcentrationSlider( targetProperty, options ) {
+  function ConcentrationSlider( targetProperty, range, options ) {
     var self = this,
-      sliderValue = new Property( Math.log( targetProperty.value ) / Math.LN10 );
+      CONCENTRATION_MIN = Math.log( range.min ) / LN10,
+      CONCENTRATION_MAX = Math.log( range.max ) / LN10,
+      CONCENTRATION_STEP = 0.1,
+      sliderValue = new Property( Math.log( range.defaultValue ) / LN10 );
     Node.call( this );
 
     // Create and add the readout, including the background.

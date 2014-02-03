@@ -33,7 +33,7 @@ define( function( require ) {
     } );
 
     this.property( 'H3O' ).link( function( value ) {
-      self.ph = -Math.round( 2 * Math.log( value ) / Math.LN10 ) / 2;
+      self.ph = -Math.round( 100 * Math.log( value ) / Math.LN10 ) / 100;
     } );
 
     this.CONSTANTS = {
@@ -48,6 +48,6 @@ define( function( require ) {
   }
 
   return inherit( PropertySet, AqueousSolution, {
-    test: function() {}
+    intro: function() {}
   } );
 } );

@@ -50,7 +50,7 @@ define( function( require ) {
   }
 
   return inherit( AqueousSolution, WeakAcidSolution, {
-    test: function() {
+    intro: function() {
       this.strength = this.CONSTANTS.WEAK_STRENGTH_RANGE.defaultValue;
       this.concentration = this.CONSTANTS.CONCENTRATION_RANGE.defaultValue;
     }

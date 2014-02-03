@@ -68,11 +68,29 @@ define( function( require ) {
     this.PH_COOLORS = PH_COOLORS;
 
     PropertySet.call( this, {
-      solution: self.SOLUTIONS[0].type, // solution's type
+      solution: (customSolutionTitleString === mode ? self.SOLUTIONS[2].type : self.SOLUTIONS[0].type), // solution's type
       testMode: self.TEST_MODES[0], // test mode
       viewMode: self.VIEW_MODES[0], // view mode
       solvent: false, // solvent visibility
       ph: 4.5
+    } );
+
+    // add model for
+    this.components = {};
+    var setPh = function( value ) {
+      self.ph = value;
+    };
+
+    for ( var i = (customSolutionTitleString === mode ? 1 : 0), solution; i < this.SOLUTIONS.length; i++ ) {
+      solution = new this.SOLUTIONS[i].constructor();
+      solution.intro();
+      this.components[this.SOLUTIONS[i].type] = solution;
+      solution.property( 'ph' ).link( setPh );
+    }
+
+    // set appropriate ph
+    this.property( 'solution' ).link( function( solution ) {
+      self.ph = self.components[solution].ph;
     } );
 
     // add properties for custom tab
@@ -80,33 +98,29 @@ define( function( require ) {
       PropertySet.call( this, {
         isAcid: true, // type of solution. true - acid, false - base
         isWeak: true, // type of strength. true - weak, false - strong
-        concentration: 0.01,
-        strength: 0.25
+        concentration: 0,
+        strength: 0
       } );
 
       var setSolution = function() {
         var map = [
-          [self.SOLUTIONS[3], self.SOLUTIONS[4]],
-          [self.SOLUTIONS[1], self.SOLUTIONS[2]]
+          [self.SOLUTIONS[3].type, self.SOLUTIONS[4].type],
+          [self.SOLUTIONS[1].type, self.SOLUTIONS[2].type]
         ];
 
         self.solution = map[+self.isAcid][+self.isWeak];
+        self.property( 'concentration' ).notifyObserversUnsafe();
+        self.property( 'strength' ).notifyObserversUnsafe();
       };
       this.property( 'isAcid' ).link( setSolution );
       this.property( 'isWeak' ).link( setSolution );
-    }
 
-    if ( introductionTitleString === mode ) {
-      this.components = {};
-      for ( var i = 0, solution; i < this.SOLUTIONS.length; i++ ) {
-        solution = new this.SOLUTIONS[i].constructor();
-        solution.test();
-        this.components[this.SOLUTIONS[i].type] = solution;
-      }
+      this.property( 'concentration' ).link( function( concentration ) {
+        self.components[self.solution].concentration = concentration;
+      } );
 
-      // set appropriate ph
-      this.property( 'solution' ).link( function( solution ) {
-        self.ph = self.components[solution].ph;
+      this.property( 'strength' ).link( function( strength ) {
+        self.components[self.solution].strength = strength;
       } );
     }
   }
