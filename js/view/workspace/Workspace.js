@@ -35,7 +35,6 @@ define( function( require ) {
     // add conductivity test
     this.addChild( new ConductivityTest( model, {x: model.width / 3.25, y: model.height / 10} ) );
 
-
     // add beaker and formulas
     this.addChild( vbox = new VBox( {spacing: 5, x: model.width / 3, y: model.height * 0.333, children: [
       new Beaker( model, {} ),

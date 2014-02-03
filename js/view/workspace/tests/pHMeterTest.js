@@ -27,9 +27,7 @@ define( function( require ) {
     var self = this,
       backlash = 150,
       waterSurface = 80,
-      bufferY = 0,
       pHText,
-      initY,
       checkVisibility;
     Node.call( this, _.extend( {cursor: 'pointer'}, options ) );
 
@@ -48,26 +46,22 @@ define( function( require ) {
     this.addChild( pHText = new Text( '', {font: FONT, centerX: 34, centerY: 0} ) );
 
     // init drag
-    initY = this.y;
-    checkVisibility = function( y ) {
-      pHText.setVisible( y > waterSurface );
+    checkVisibility = function() {
+      pHText.setVisible( self.y > waterSurface );
     };
+    var clickYOffset;
     this.addInputListener( new SimpleDragHandler( {
-      translate: function( e ) {
-        var deltaY = e.delta.y;
-        if ( e.position.y > initY && e.position.y < backlash && bufferY <= 0 ) {
-          self.y += deltaY;
-          checkVisibility( self.y );
-        }
-        else if ( e.position.y <= initY || e.position.y >= backlash ) {
-          bufferY += Math.abs( deltaY );
-        }
-        else {
-          bufferY -= Math.abs( deltaY );
-        }
+      start: function( e ) {
+        clickYOffset = self.globalToParentPoint( e.pointer.point ).y - e.currentTarget.y;
       },
-      end: function() {
-        bufferY = 0;
+      drag: function( e ) {
+        // new y-coordinate
+        var y = self.globalToParentPoint( e.pointer.point ).y - clickYOffset;
+        // check limitation
+        y = Math.min( Math.max( 25.2, y ), backlash );
+        // move to new position
+        self.setY( y );
+        checkVisibility();
       }
     } ) );
 
