@@ -54,7 +54,7 @@ define( function( require ) {
 
     // add water
     this.addChild( new Path( fillShape, {
-      fill: 'rgba(193,222,227,180)'
+      fill: 'rgba(193,222,227,0.7)'
     } ) );
 
     // add beaker

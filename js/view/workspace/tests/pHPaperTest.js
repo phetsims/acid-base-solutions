@@ -22,10 +22,16 @@ define( function( require ) {
   // strings
     pHColorKeyString = require( 'string!ACID_BASE_SOLUTIONS/pHColorKey' );
 
+  var dragArea = {
+    left: -290,
+    right: 60,
+    top: 0,
+    bottom: 290
+  };
+
   function pHPaperTest( model, options ) {
     var self = this,
-      paperColor = model.PH_COOLORS[model.PH_COOLORS.length - 1],
-      paper;
+      paperColor = model.PH_COOLORS[model.PH_COOLORS.length - 1];
     Node.call( this, options );
 
     this.addChild( new Text( pHColorKeyString, {font: FONT_BIG, centerY: 0} ) );
@@ -37,11 +43,9 @@ define( function( require ) {
     }
 
     // add pH paper
-    this.addChild( paper = new Rectangle( (model.PH_COOLORS.length + 2) * (rectWidth + space), 0, rectWidth, rectHeight * 4, {cursor: 'pointer', fill: paperColor, stroke: 'rgb(217,200,154)'} ) );
-    paper.addInputListener( new SimpleDragHandler( {
-      translate: function( e ) {
-        paper.setTranslation( e.position );
-      }
+    this.addChild( self.paper = new Rectangle( (model.PH_COOLORS.length + 2) * (rectWidth + space), 0, rectWidth, rectHeight * 4, {cursor: 'pointer', fill: paperColor, stroke: 'rgb(217,200,154)'} ) );
+    this.paper.addInputListener( new SimpleDragHandler( {
+      translate: self.move.bind( this )
     } ) );
 
     model.property( 'testMode' ).link( function( mode ) {
@@ -49,5 +53,13 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, pHPaperTest );
+  return inherit( Node, pHPaperTest, {
+    move: function( e ) {
+      var position = e.position;
+      if ( dragArea.left < position.x && position.x < dragArea.right &&
+           dragArea.top < position.y && position.y < dragArea.bottom ) {
+        this.paper.setTranslation( e.position );
+      }
+    }
+  } );
 } );
