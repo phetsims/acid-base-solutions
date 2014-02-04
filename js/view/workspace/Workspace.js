@@ -43,7 +43,7 @@ define( function( require ) {
     ]} ) );
 
     // add magnifier
-    this.addChild( new Magnifier( model, {x: model.width / 3, y: model.height / 1.65 + 10} ) );
+    this.addChild( new Magnifier( model, {x: model.width / 3, y: model.height / 1.75} ) );
 
     // add concentration bar chart
     this.addChild( new EquilibriumConcentrationBarChart( model, {x: model.width / 5, y: model.height * 0.3} ) );

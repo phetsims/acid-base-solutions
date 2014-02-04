@@ -18,13 +18,13 @@ define( function( require ) {
 
   function Magnifier( model, options ) {
     var self = this,
-      radius = model.height / 4.3,
+      radius = model.height / 3.6,
       rectangle;
     Node.call( this, options );
 
     // add holder
-    rectangle = new Rectangle( radius + 2, -radius / 7, radius, radius / 3.5, 5, 5, {fill: 'rgb(85,55,33)', stroke: 'black', lineWidth: 1} );
-    rectangle.rotate( Math.PI / 7 );
+    rectangle = new Rectangle( radius + 2, -radius / 7, radius * 0.9, radius / 4, 5, 5, {fill: 'rgb(85,55,33)', stroke: 'black', lineWidth: 1} );
+    rectangle.rotate( Math.PI / 6 );
     this.addChild( rectangle );
 
     // add lens
