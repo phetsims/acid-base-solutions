@@ -11,13 +11,13 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     PropertySet = require( 'AXON/PropertySet' ),
+    Color = require( 'SCENERY/util/Color' ),
     WaterSolution = require( './WaterSolution' ),
     StrongAcidSolution = require( './StrongAcidSolution' ),
     WeakAcidSollution = require( './WeakAcidSollution' ),
     StrongBaseSolution = require( './StrongBaseSolution' ),
     WeakBaseSolution = require( './WeakBaseSolution' ),
 
-    introductionTitleString = require( 'string!ACID_BASE_SOLUTIONS/introductionTitle' ),
     customSolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/customSolutionTitle' );
 
   var PH_COOLORS = [
@@ -40,6 +40,21 @@ define( function( require ) {
     'rgb(217,215,154)' // cream
   ];
 
+  var AQUEOUS_SOLUTION = new Color( 193, 222, 227, 180 ), // transparent light blue
+    GRAY = new Color( 120, 120, 120 ),
+    H2O_FACTOR = 0.85,
+    MOLECULES_COLORS = {
+      A: new Color( 0, 170, 255 ),
+      B: GRAY,
+      BH: new Color( 255, 170, 0 ),
+      H2O: new Color( AQUEOUS_SOLUTION.getRed() * H2O_FACTOR, AQUEOUS_SOLUTION.getGreen() * H2O_FACTOR, AQUEOUS_SOLUTION.getBlue() * H2O_FACTOR ),
+      H3O: new Color( 255, 85, 0 ),
+      HA: GRAY,
+      M: new Color( 255, 170, 0 ),
+      MOH: GRAY,
+      OH: new Color( 0, 0, 255 )
+    };
+
   function AcidBaseSolutionsModel( width, height, mode ) {
     var self = this;
 
@@ -54,6 +69,9 @@ define( function( require ) {
 
     // possible test modes
     this.TEST_MODES = ['PH_METER', 'PH_PAPER', 'CONDUCTIVITY'];
+
+    // colors for molecules
+    this.MOLECULES_COLORS = MOLECULES_COLORS;
 
     // possible test modes
     this.SOLUTIONS = [
@@ -72,7 +90,7 @@ define( function( require ) {
       testMode: self.TEST_MODES[0], // test mode
       viewMode: self.VIEW_MODES[0], // view mode
       solvent: false, // solvent visibility
-      ph: 4.5
+      ph: 0
     } );
 
     // add model for
@@ -128,7 +146,13 @@ define( function( require ) {
   inherit( PropertySet, AcidBaseSolutionsModel, {
     step: function() {},
     reset: function() {
-      PropertySet.prototype.reset.call( this );
+      /*PropertySet.prototype.reset.call( this );
+       for ( var component in this.components ) {
+       if ( this.components.hasOwnProperty( component ) ) {
+       PropertySet.prototype.reset.call( this.components[component] );
+       this.components[component].intro();
+       }
+       }*/
     }
   } );
 
