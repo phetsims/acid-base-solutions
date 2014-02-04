@@ -27,7 +27,7 @@ define( function( require ) {
     var rectangle, text, textPow, height = options.height;
     Node.call( this );
 
-    this.addChild( rectangle = new Rectangle( 0, 0, 25, 50, {fill: options.fill} ) );
+    this.addChild( rectangle = new Rectangle( 0, 0, 25, 0, {fill: options.fill} ) );
     rectangle.rotate( Math.PI );
 
     this.addChild( text = new Text( '123', {font: FONT_NORMAL, centerX: 2, centerY: -10} ) );
@@ -36,6 +36,11 @@ define( function( require ) {
     textPow.rotate( -Math.PI / 2 );
 
     property.link( function( value ) {
+      var barHeight = Math.abs( Math.log( value ) / Math.LN10 + 8 ) * height / 10;
+      if ( isFinite( barHeight ) ) {
+        rectangle.setRectHeight( barHeight );
+      }
+
       if ( value < 1e-13 ) {
         text.setText( negligibleString );
         textPow.setVisible( false );
@@ -46,7 +51,7 @@ define( function( require ) {
 
         // set value
         value = (value * Math.pow( 10, -pow ));
-        if ( Math.abs(value - 10) < 1e-2 ) {
+        if ( Math.abs( value - 10 ) < 1e-2 ) { // replace 10.00 to 1.00 x 10
           pow++;
           value = 1;
         }
