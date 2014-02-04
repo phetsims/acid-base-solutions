@@ -12,9 +12,6 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    Text = require( 'SCENERY/nodes/Text' ),
-    PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    FONT = new PhetFont( 13 ),
 
     EquilibriumConcentrationSingleBar = require( './EquilibriumConcentrationSingleBar' ),
     EquilibriumConcentrationBarChartBackground = require( './EquilibriumConcentrationBarChartBackground' );
@@ -26,11 +23,34 @@ define( function( require ) {
     Node.call( this, options );
 
     var barsOptions = {
-      WATER: ['H2O', 'H3O', 'OH'],
-      STRONG_ACID: ['HA', 'H2O', 'A', 'H3O'],
-      WEAK_ACID: [ 'HA', 'H2O', 'A', 'H3O'],
-      STRONG_BASE: ['MOH', 'M', 'OH'],
-      WEAK_BASE: ['B', 'H2O', 'BH', 'OH']
+      WATER: [
+        {type: 'H2O', property: 'H2O'},
+        {type: 'H3O', property: 'H3O'},
+        {type: 'OH', property: 'OH'}
+      ],
+      STRONG_ACID: [
+        {type: 'HA', property: 'solute'},
+        {type: 'H2O', property: 'H2O'},
+        {type: 'A', property: 'product'},
+        {type: 'H3O', property: 'H3O'}
+      ],
+      WEAK_ACID: [
+        {type: 'HA', property: 'solute'},
+        {type: 'H2O', property: 'H2O'},
+        {type: 'A', property: 'product'},
+        {type: 'H3O', property: 'H3O'}
+      ],
+      STRONG_BASE: [
+        {type: 'MOH', property: 'solute'},
+        {type: 'M', property: 'product'},
+        {type: 'OH', property: 'OH'}
+      ],
+      WEAK_BASE: [
+        {type: 'B', property: 'solute'},
+        {type: 'H2O', property: 'H2O'},
+        {type: 'BH', property: 'product'},
+        {type: 'OH', property: 'OH'}
+      ]
     };
 
     // add background
@@ -41,8 +61,10 @@ define( function( require ) {
       var type = solution.type, bar;
       bars[type] = new Node( {visible: false} );
       barsOptions[type].forEach( function( molecule, i ) {
-        bars[type].addChild( bar = new EquilibriumConcentrationSingleBar( model, {fill: colors[molecule] } ) );
-        bar.setTranslation( (i + 0.75 + (4 - barsOptions[type].length) / 2) * width / 4, height );
+        if ( type in model.components ) {
+          bars[type].addChild( bar = new EquilibriumConcentrationSingleBar( model.components[type].property( molecule.property ), {fill: colors[molecule.type] } ) );
+          bar.setTranslation( (i + 0.75 + (4 - barsOptions[type].length) / 2) * width / 4, height );
+        }
       } );
       self.addChild( bars[type] );
     } );
