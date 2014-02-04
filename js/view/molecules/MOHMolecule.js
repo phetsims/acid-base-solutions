@@ -11,13 +11,12 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' ),
-    Color = require( 'SCENERY/util/Color' ),
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     FONT = new PhetFont( 8 );
 
-  function MOHMolecule( coords ) {
-    var NEUTRAL_COLOR = new Color( 120, 120, 120 ); // gray
+  function MOHMolecule( model, coords ) {
+    var NEUTRAL_COLOR = model.MOLECULES_COLORS.MOH; // gray
     Node.call( this, coords );
 
     // add M ion

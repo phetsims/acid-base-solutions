@@ -18,24 +18,24 @@ define( function( require ) {
     StrongBaseFormula = require( './StrongBaseFormula' ),
     WeakBaseFormula = require( './WeakBaseFormula' );
 
-  var formulas = [
-    new WaterFormula(),
-    new AcidFormula( {}, false ),
-    new AcidFormula( {}, true ),
-    new StrongBaseFormula(),
-    new WeakBaseFormula()
-  ];
-
-  function Formula( options ) {
+  function Formula( model, options ) {
     Node.call( this, options );
 
-    this.addChild( formulas[0] );
+    this.formulas = [
+      new WaterFormula( model ),
+      new AcidFormula( model, {}, false ),
+      new AcidFormula( model, {}, true ),
+      new StrongBaseFormula( model ),
+      new WeakBaseFormula( model )
+    ];
+
+    this.addChild( this.formulas[0] );
   }
 
   return inherit( Node, Formula, {
     showFormula: function( index ) {
       this.removeAllChildren();
-      this.addChild( formulas[index] );
+      this.addChild( this.formulas[index] );
     }
   } );
 } );

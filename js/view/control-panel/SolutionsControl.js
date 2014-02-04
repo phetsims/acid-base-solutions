@@ -48,7 +48,7 @@ define( function( require ) {
     for ( var i = 0; i < menuOptions.length; i++ ) {
       vBox.addChild( new AquaRadioButton( model.property( 'solution' ), menuOptions[i].value, new HBox( {spacing: 5, children: [
         menuOptions[i].text,
-        new menuOptions[i].icon()
+        new menuOptions[i].icon( model )
       ]
       } ), {radius: 7} ) );
     }

@@ -31,22 +31,22 @@ define( function( require ) {
     magnifyingGlassImage = require( 'image!ACID_BASE_SOLUTIONS/magnifying-glass.png' ),
     beakerImage = require( 'image!ACID_BASE_SOLUTIONS/beaker.png' );
 
-  // settings for menu options
-  var menuOptions = [
-    {isRadio: true, value: 'MOLECULES', text: new Text( moleculesString, {font: FONT} ), icon: new Image( magnifyingGlassImage, {scale: 0.75} )},
-    {isRadio: false, text: showSolventString, icon: new H2OMolecule()},
-    {isRadio: true, value: 'EQUILIBRIUM', text: new Node( {children: [
-      new Text( equilibriumString, {font: FONT, centerX: 0} ),
-      new Text( concentrationString, {font: FONT, centerX: 0, centerY: 8} )
-    ]} ), icon: new Node()},
-    {isRadio: true, value: 'LIQUID', text: new Text( liquidString, {font: FONT} ), icon: new Image( beakerImage, {scale: 0.75} )}
-  ];
-
   function ViewsControl( model, options ) {
     var self = this,
       vBox = new VBox( {spacing: 5, align: 'left'} ),
       hBox;
     Node.call( this, options );
+
+    // settings for menu options
+    var menuOptions = [
+      {isRadio: true, value: 'MOLECULES', text: new Text( moleculesString, {font: FONT} ), icon: new Image( magnifyingGlassImage, {scale: 0.75} )},
+      {isRadio: false, text: showSolventString, icon: new H2OMolecule( model )},
+      {isRadio: true, value: 'EQUILIBRIUM', text: new Node( {children: [
+        new Text( equilibriumString, {font: FONT, centerX: 0} ),
+        new Text( concentrationString, {font: FONT, centerX: 0, centerY: 8} )
+      ]} ), icon: new Node()},
+      {isRadio: true, value: 'LIQUID', text: new Text( liquidString, {font: FONT} ), icon: new Image( beakerImage, {scale: 0.75} )}
+    ];
 
     this.checkbox = {};
 

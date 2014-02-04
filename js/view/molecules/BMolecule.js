@@ -10,14 +10,11 @@ define( function( require ) {
   'use strict';
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' ),
-    Color = require( 'SCENERY/util/Color' );
+    Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' );
 
-  function BMolecule( coords ) {
-    var NEUTRAL_COLOR = new Color( 120, 120, 120 ); // gray
+  function BMolecule( model, coords ) {
     Node.call( this, coords );
-
-    this.addChild( new Atom( {x: 0, y: 0}, 7, NEUTRAL_COLOR ) );
+    this.addChild( new Atom( {x: 0, y: 0}, 7, model.MOLECULES_COLORS.B ) );
   }
 
   return inherit( Node, BMolecule );

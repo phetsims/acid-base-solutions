@@ -26,14 +26,14 @@ define( function( require ) {
   // images
     arrowDoubleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_double.png' );
 
-  function WaterFormula( options ) {
+  function WaterFormula( model, options ) {
     var textOffset = 23, subOffset = textOffset + 5, supOffset = textOffset - 8;
     Node.call( this, options );
 
     // left expression
     // left expression: H2O molecule
-    this.addChild( new H2OMolecule() );
-    this.addChild( new H2OMolecule( {x: 18} ) );
+    this.addChild( new H2OMolecule( model ) );
+    this.addChild( new H2OMolecule( model, {x: 18} ) );
     this.addChild( new Node( {children: [
       new Text( '2H', {font: FONT, centerX: 0, centerY: textOffset} ),
       new Text( '2', {font: FONT_SMALL, centerX: 10, centerY: subOffset} ),
@@ -45,7 +45,7 @@ define( function( require ) {
 
     // right expression
     // right expression: H3O molecule
-    this.addChild( new H3OMolecule( {x: 85} ) );
+    this.addChild( new H3OMolecule( model, {x: 85} ) );
     this.addChild( new Node( {x: 75, children: [
       new Text( 'H', {font: FONT, centerX: 0, centerY: textOffset} ),
       new Text( '3', {font: FONT_SMALL, centerX: 7, centerY: subOffset} ),
@@ -57,7 +57,7 @@ define( function( require ) {
     this.addChild( new Text( '+', {font: FONT, centerX: 110, centerY: textOffset} ) );
 
     // right expression: OH molecule
-    this.addChild( new OHMolecule( {x: 130} ) );
+    this.addChild( new OHMolecule( model, {x: 130} ) );
     this.addChild( new Node( {x: 130, children: [
       new Text( 'OH', {font: FONT, centerX: 0, centerY: textOffset} ),
       new Text( '-', {font: FONT_SMALL, centerX: 14, centerY: supOffset} )
