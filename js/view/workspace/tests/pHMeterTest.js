@@ -25,17 +25,17 @@ define( function( require ) {
 
   function pHMeterTest( model, options ) {
     var self = this,
-      backlash = 150,
-      waterSurface = 80,
+      backlash = 100,
+      waterSurface = 38,
       pHText,
       checkVisibility;
     Node.call( this, _.extend( {cursor: 'pointer'}, options ) );
 
     // add sensor
     this.addChild( new Node( {children: [
-      new Rectangle( 15, 16, 8, 60, {fill: 'rgb(192,192,192)', stroke: 'rgb(160,160,160)', lineWidth: 0.5} ),
-      new Rectangle( 10, 72, 18, 25, 3, 3, {fill: 'black'} ),
-      new Path( new Shape().moveTo( 10, 95 ).lineTo( 28, 95 ).lineTo( 19, 110 ).lineTo( 10, 95 ), {fill: 'black'} )
+      new Rectangle( 12, 16, 5, 52, {fill: 'rgb(192,192,192)', stroke: 'rgb(160,160,160)', lineWidth: 0.5} ),
+      new Rectangle( 7.5, 65, 14, 22, 3, 3, {fill: 'black'} ),
+      new Path( new Shape().moveTo( 7.5, 85 ).lineTo( 21.5, 85 ).lineTo( 14.5, 100 ).lineTo( 7.5, 85 ), {fill: 'black'} )
     ]} ) );
 
     // add background view

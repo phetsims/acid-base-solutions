@@ -23,19 +23,19 @@ define( function( require ) {
     units_litersString = require( 'string!ACID_BASE_SOLUTIONS/liters' ),
 
   // constants
-    RIM_OFFSET = 20,
+    RIM_OFFSET = 10,
     MINOR_TICK_SPACING = 0.1, // L
     MINOR_TICKS_PER_MAJOR_TICK = 5,
     MAJOR_TICK_LENGTH = 25,
-    MINOR_TICK_LENGTH = 15,
-    TICK_LABEL_X_SPACING = 25;
+    MINOR_TICK_LENGTH = 10,
+    TICK_LABEL_X_SPACING = 20;
 
   function BeakerNode( model, location ) {
     Node.call( this, {pickable: false} );
 
     // outline of the beaker, starting from upper left
-    var width = model.width / 2,
-      height = model.height / 2,
+    var width = model.width / 1.95,
+      height = model.height / 1.66,
       outlineShape = new Shape()
         .moveTo( -width / 2 - RIM_OFFSET, -height - RIM_OFFSET )
         .lineTo( -width / 2, -height )
@@ -79,8 +79,8 @@ define( function( require ) {
       tickShape = new Shape().moveTo( leftX, y ).lineTo( rightX, y );
       tickPath = new Path( tickShape, {
         stroke: 'black',
-        lineWidth: 2,
-        lineCap: 'butt',
+        lineWidth: 1.5,
+        lineCap: 'round',
         lineJoin: 'bevel'
       } );
 
@@ -90,7 +90,7 @@ define( function( require ) {
     // major tick label
     var label = StringUtils.format( pattern_0value_1units, '1', units_litersString );
     ticksParent.addChild( new Text( label, {
-      font: new PhetFont( 24 ),
+      font: new PhetFont( 18 ),
       fill: 'black',
       x: width / 2 - MAJOR_TICK_LENGTH - TICK_LABEL_X_SPACING,
       centerY: -deltaY * numberOfTicks

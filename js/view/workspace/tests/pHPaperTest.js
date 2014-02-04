@@ -15,8 +15,8 @@ define( function( require ) {
     Vector2 = require( 'DOT/Vector2' ),
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    FONT_BIG = new PhetFont( 12 ),
-    FONT_SMALL = new PhetFont( 9 ),
+    FONT_BIG = new PhetFont( 10 ),
+    FONT_SMALL = new PhetFont( 8 ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' ),
 
@@ -24,16 +24,16 @@ define( function( require ) {
     pHColorKeyString = require( 'string!ACID_BASE_SOLUTIONS/pHColorKey' );
 
   var dragArea = {
-    left: -290,
+    left: -295,
     right: 60,
     top: 0,
-    bottom: 290
+    bottom: 310
   };
 
   function pHPaperTest( model, options ) {
     var self = this,
       paperDefaultColor = model.PH_COOLORS[model.PH_COOLORS.length - 1],
-      waterSurface = 44.5,
+      waterSurface = 14.5,
       indicatorPaper,
       paper;
     Node.call( this, options );
@@ -41,7 +41,7 @@ define( function( require ) {
     this.addChild( new Text( pHColorKeyString, {font: FONT_BIG, centerY: 0} ) );
 
     // add color key table
-    for ( var i = 0, tableRectWidth = 14, tableRectHeight = 30, space = 1; i < model.PH_COOLORS.length - 1; i++ ) {
+    for ( var i = 0, tableRectWidth = 14, tableRectHeight = 28, space = 1; i < model.PH_COOLORS.length - 1; i++ ) {
       this.addChild( new Rectangle( (tableRectWidth + space) * i, 10, tableRectWidth, tableRectHeight, {fill: model.PH_COOLORS[i]} ) );
       this.addChild( new Text( i, {font: FONT_SMALL, centerX: (tableRectWidth + space) * (i + 0.5), centerY: 46} ) );
     }
