@@ -12,6 +12,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     PropertySet = require( 'AXON/PropertySet' ),
     Color = require( 'SCENERY/util/Color' ),
+    Range = require( 'DOT/Range' ),
     WaterSolution = require( './WaterSolution' ),
     StrongAcidSolution = require( './StrongAcidSolution' ),
     WeakAcidSollution = require( './WeakAcidSollution' ),
@@ -55,6 +56,13 @@ define( function( require ) {
       OH: new Color( 0, 0, 255 )
     };
 
+  var CONSTANTS = {
+    WATER_EQUILIBRIUM_CONSTANT: 1E-14,
+    WATER_CONCENTRATION: 55.6, // water concentration when it's used as a solvent, mol/L
+    CONCENTRATION_RANGE: new Range( 1E-3, 1, 1E-2 ),
+    WEAK_STRENGTH_RANGE: new Range( 1E-10, 1E2, 1E-7 )
+  };
+
   function AcidBaseSolutionsModel( width, height, mode ) {
     var self = this;
 
@@ -72,6 +80,9 @@ define( function( require ) {
 
     // colors for molecules
     this.MOLECULES_COLORS = MOLECULES_COLORS;
+
+    // simulation constants
+    this.CONSTANTS = CONSTANTS;
 
     // possible test modes
     this.SOLUTIONS = [
@@ -98,7 +109,7 @@ define( function( require ) {
     var setPh = function( value ) { self.ph = value; }; // observer for ph property
 
     for ( var i = (customSolutionTitleString === mode ? 1 : 0), solution; i < this.SOLUTIONS.length; i++ ) {
-      solution = new this.SOLUTIONS[i].constructor();
+      solution = new this.SOLUTIONS[i].constructor( CONSTANTS );
       solution.intro();
       this.components[this.SOLUTIONS[i].type] = solution;
       solution.property( 'ph' ).link( setPh );

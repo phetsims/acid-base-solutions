@@ -45,7 +45,7 @@ define( function( require ) {
 
     // add concentration slider
     vBox.addChild( new Text( initialConcentrationString, {font: FONT} ) );
-    vBox.addChild( new ConcentrationSlider( model.property( 'concentration' ), model.components.WEAK_ACID.CONSTANTS.CONCENTRATION_RANGE ) );
+    vBox.addChild( new ConcentrationSlider( model.property( 'concentration' ), model.CONSTANTS.CONCENTRATION_RANGE ) );
 
     // add black line
     vBox.addChild( new Line( 0, 0, 200, 0, {stroke: 'black', lineWidth: 0.75} ) );
@@ -58,7 +58,7 @@ define( function( require ) {
     ]} ) );
 
     // add strength slider
-    vBox.addChild( strengthSlider = new StrengthSlider( model.property( 'strength' ), model.components.WEAK_ACID.CONSTANTS.WEAK_STRENGTH_RANGE ) );
+    vBox.addChild( strengthSlider = new StrengthSlider( model.property( 'strength' ), model.CONSTANTS.WEAK_STRENGTH_RANGE ) );
 
     this.addChild( vBox );
     vBox.updateLayout();

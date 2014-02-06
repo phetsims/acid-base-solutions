@@ -14,11 +14,11 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    PropertySet = require( 'AXON/PropertySet' ),
-    Range = require( 'DOT/Range' );
+    PropertySet = require( 'AXON/PropertySet' );
 
-  function AqueousSolution() {
+  function AqueousSolution( CONSTANTS ) {
     var self = this;
+    this.CONSTANTS = CONSTANTS;
 
     PropertySet.call( this, {
       strength: 0,
@@ -35,13 +35,6 @@ define( function( require ) {
     this.property( 'H3O' ).link( function( value ) {
       self.ph = -Math.round( 100 * Math.log( value ) / Math.LN10 ) / 100;
     } );
-
-    this.CONSTANTS = {
-      WATER_EQUILIBRIUM_CONSTANT: 1E-14,
-      WATER_CONCENTRATION: 55.6, // water concentration when it's used as a solvent, mol/L
-      CONCENTRATION_RANGE: new Range( 1E-3, 1, 1E-2 ),
-      WEAK_STRENGTH_RANGE: new Range( 1E-10, 1E2, 1E-7 )
-    };
 
     // arbitrary, but needs to be greater than weak range
     this.CONSTANTS.STRONG_STRENGTH = this.CONSTANTS.WEAK_STRENGTH_RANGE.max + 1;
