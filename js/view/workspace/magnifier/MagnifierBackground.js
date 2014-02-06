@@ -1,7 +1,8 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Visual representation for magnifier in the 'Acid Base Solutions' sim.
+ * Visual representation for magnifier's background
+ * in the 'Acid Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
  */

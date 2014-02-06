@@ -22,7 +22,7 @@ define( function( require ) {
     // add control panel
     this.addChild( new ControlPanel( model ).mutate( {right: this.layoutBounds.maxX, top: 0} ) );
 
-    // add beaker
+    // add workspace
     this.addChild( new Workspace( model ) );
 
     // add reset button
