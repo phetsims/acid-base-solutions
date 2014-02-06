@@ -86,11 +86,34 @@ define( function( require ) {
 
     // possible test modes
     this.SOLUTIONS = [
-      {type: 'WATER', constructor: WaterSolution},
-      {type: 'STRONG_ACID', constructor: StrongAcidSolution},
-      {type: 'WEAK_ACID', constructor: WeakAcidSollution},
-      {type: 'STRONG_BASE', constructor: StrongBaseSolution},
-      {type: 'WEAK_BASE', constructor: WeakBaseSolution}
+      {type: 'WATER', constructor: WaterSolution, relations: [
+        {type: 'H2O', property: 'H2O'},
+        {type: 'H3O', property: 'H3O'},
+        {type: 'OH', property: 'OH'}
+      ]},
+      {type: 'STRONG_ACID', constructor: StrongAcidSolution, relations: [
+        {type: 'HA', property: 'solute'},
+        {type: 'H2O', property: 'H2O'},
+        {type: 'A', property: 'product'},
+        {type: 'H3O', property: 'H3O'}
+      ]},
+      {type: 'WEAK_ACID', constructor: WeakAcidSollution, relations: [
+        {type: 'HA', property: 'solute'},
+        {type: 'H2O', property: 'H2O'},
+        {type: 'A', property: 'product'},
+        {type: 'H3O', property: 'H3O'}
+      ]},
+      {type: 'STRONG_BASE', constructor: StrongBaseSolution, relations: [
+        {type: 'MOH', property: 'solute'},
+        {type: 'M', property: 'product'},
+        {type: 'OH', property: 'OH'}
+      ]},
+      {type: 'WEAK_BASE', constructor: WeakBaseSolution, relations: [
+        {type: 'B', property: 'solute'},
+        {type: 'H2O', property: 'H2O'},
+        {type: 'BH', property: 'product'},
+        {type: 'OH', property: 'OH'}
+      ]}
     ];
 
     // pH color keys

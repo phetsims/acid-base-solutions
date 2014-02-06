@@ -22,37 +22,6 @@ define( function( require ) {
       bars = {};
     Node.call( this, options );
 
-    var barsOptions = {
-      WATER: [
-        {type: 'H2O', property: 'H2O'},
-        {type: 'H3O', property: 'H3O'},
-        {type: 'OH', property: 'OH'}
-      ],
-      STRONG_ACID: [
-        {type: 'HA', property: 'solute'},
-        {type: 'H2O', property: 'H2O'},
-        {type: 'A', property: 'product'},
-        {type: 'H3O', property: 'H3O'}
-      ],
-      WEAK_ACID: [
-        {type: 'HA', property: 'solute'},
-        {type: 'H2O', property: 'H2O'},
-        {type: 'A', property: 'product'},
-        {type: 'H3O', property: 'H3O'}
-      ],
-      STRONG_BASE: [
-        {type: 'MOH', property: 'solute'},
-        {type: 'M', property: 'product'},
-        {type: 'OH', property: 'OH'}
-      ],
-      WEAK_BASE: [
-        {type: 'B', property: 'solute'},
-        {type: 'H2O', property: 'H2O'},
-        {type: 'BH', property: 'product'},
-        {type: 'OH', property: 'OH'}
-      ]
-    };
-
     // add background
     this.addChild( new EquilibriumConcentrationBarChartBackground( width, height ) );
 
@@ -60,10 +29,10 @@ define( function( require ) {
     model.SOLUTIONS.forEach( function( solution ) {
       var type = solution.type, bar;
       bars[type] = new Node( {visible: false} );
-      barsOptions[type].forEach( function( molecule, i ) {
+      solution.relations.forEach( function( molecule, i ) {
         if ( type in model.components ) {
           bars[type].addChild( bar = new EquilibriumConcentrationSingleBar( model.components[type].property( molecule.property ), {fill: colors[molecule.type], height: height - 10 } ) );
-          bar.setTranslation( (i + 0.75 + (4 - barsOptions[type].length) / 2) * width / 4, height );
+          bar.setTranslation( (i + 0.75 + (4 - solution.relations.length) / 2) * width / 4, height );
         }
       } );
       self.addChild( bars[type] );
