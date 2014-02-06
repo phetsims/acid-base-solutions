@@ -51,6 +51,7 @@ define( function( require ) {
 
     property.link( function( value ) {
       var numberOfMolecules = getNumberOfMolecules( value ), i, visibility;
+      // show appropriate number of molecules
       if ( numberOfMolecules !== pointer ) {
         for ( i = Math.min( pointer, numberOfMolecules ), visibility = (numberOfMolecules > pointer); i < Math.max( pointer, numberOfMolecules ); i++ ) {
           self.molecules[i].setVisible( visibility );
