@@ -30,7 +30,7 @@ define( function( require ) {
     MINOR_TICK_LENGTH = 10,
     TICK_LABEL_X_SPACING = 20;
 
-  function BeakerNode( model, location ) {
+  function Beaker( model, location ) {
     Node.call( this, {pickable: false} );
 
     // outline of the beaker, starting from upper left
@@ -96,9 +96,9 @@ define( function( require ) {
       centerY: -deltaY * numberOfTicks
     } ) );
 
-    this.centerX = location.x;
-    this.centerY = location.y;
+    this.centerX = location.x || 0;
+    this.centerY = location.y || 0;
   }
 
-  return inherit( Node, BeakerNode );
+  return inherit( Node, Beaker );
 } );
