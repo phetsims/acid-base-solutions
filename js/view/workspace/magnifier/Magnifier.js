@@ -30,7 +30,7 @@ define( function( require ) {
     this.container.setClipArea( new Shape().circle( 0, 0, radius - 4 ) );
 
     // add background
-    this.addChild( new MagnifierBackground( model, radius ) );
+    this.addChild( new MagnifierBackground( model, this.container, radius ) );
 
     model.property( 'viewMode' ).link( function( mode ) {
       self.setVisible( mode === 'MOLECULES' );
