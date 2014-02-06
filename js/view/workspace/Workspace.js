@@ -14,7 +14,7 @@ define( function( require ) {
     Node = require( 'SCENERY/nodes/Node' ),
     VBox = require( 'SCENERY/nodes/VBox' ),
     Beaker = require( './Beaker' ),
-    Magnifier = require( './Magnifier' ),
+    Magnifier = require( './magnifier/Magnifier' ),
     Formula = require( './formulas/Formula' ),
     EquilibriumConcentrationBarChart = require( './equilibrium-concentration-graph/EquilibriumConcentrationBarChart' ),
 
