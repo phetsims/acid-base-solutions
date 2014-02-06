@@ -12,12 +12,19 @@ define( function( require ) {
     Node = require( 'SCENERY/nodes/Node' ),
     Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' );
 
-  function BHMolecule( model, coords ) {
+  var atomCache, getMolecule = function( color ) {
+    return new Node( {children: [
+      new Atom( {x: -6, y: -6}, 4, color ),
+      new Atom( {x: 0, y: 0}, 7, color )
+    ]} );
+  };
+
+  function BHMolecule( model, coords, fromCache ) {
     var BH_PLUS_COLOR = model.MOLECULES_COLORS.BH;
     Node.call( this, coords );
 
-    this.addChild( new Atom( {x: -6, y: -6}, 4, BH_PLUS_COLOR ) );
-    this.addChild( new Atom( {x: 0, y: 0}, 7, BH_PLUS_COLOR ) );
+    // cache values for next execution
+    this.addChild( fromCache ? (atomCache ? atomCache : atomCache = getMolecule( BH_PLUS_COLOR )) : getMolecule( BH_PLUS_COLOR ) );
   }
 
   return inherit( Node, BHMolecule );

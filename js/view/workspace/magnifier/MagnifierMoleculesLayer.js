@@ -27,7 +27,7 @@ define( function( require ) {
       OH: require( 'ACID_BASE_SOLUTIONS/view/molecules/OHMolecule' )
     };
 
-  var MAX_MOLECULES = 20, // TODO: should be 200, but sim can't start with this value
+  var MAX_MOLECULES = 50, // TODO: should be 200, but sim can't start with this value
     BASE_DOTS = 2,
     BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules;
 
@@ -38,22 +38,25 @@ define( function( require ) {
   };
 
   function MagnifierMoleculesLayer( model, property, type, radius ) {
-    var self = this;
+    var self = this,
+      pointer = 0; // last shown molecule's index
     Node.call( this );
     this.molecules = [];
     this.radius = radius;
 
     // add molecules
     for ( var i = 0; i < MAX_MOLECULES; i++ ) {
-      this.addChild( this.molecules[i] = new MoleculesConstructors[type]( model, {visible: false} ) );
+      this.addChild( this.molecules[i] = new MoleculesConstructors[type]( model, {visible: false}, true ) );
     }
-    this.update();
 
     property.link( function( value ) {
-      var numberOfMolecules = getNumberOfMolecules( value );
-      self.molecules.forEach( function( molecule, i ) {
-        molecule.setVisible( i < numberOfMolecules );
-      } );
+      var numberOfMolecules = getNumberOfMolecules( value ), i, visibility;
+      if ( numberOfMolecules !== pointer ) {
+        for ( i = Math.min( pointer, numberOfMolecules ), visibility = (numberOfMolecules > pointer); i < Math.max( pointer, numberOfMolecules ); i++ ) {
+          self.molecules[i].setVisible( visibility );
+        }
+        pointer = numberOfMolecules;
+      }
     } );
   }
 

@@ -76,8 +76,8 @@ define( function( require ) {
     enableCheckbox: function( value ) {
       this.checkbox.button.enabled = value;
       this.checkbox.text.setFill( (value ? 'black' : 'gray') );
-      this.checkbox.icon.getChildren().forEach( function( atom ) {
+      /*this.checkbox.icon.getChildren().forEach( function( atom ) {
         atom['fill' + (value ? 'Default' : 'Gray')]();
-      } );
+      } );*/
     }} );
 } );

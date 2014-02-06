@@ -32,12 +32,13 @@ define( function( require ) {
 
     // add molecules layers for each solution
     model.SOLUTIONS.forEach( function( solution ) {
-      var type = solution.type;
+      var type = solution.type, property;
       if ( type in model.components ) {
         layers[type] = {node: new Node( {visible: false} ), layer: []};
         solution.relations.forEach( function( molecule, i ) {
-          if ( molecule.type !== 'H2O' ) {
-            layers[type].layer[i] = new MagnifierMoleculesLayer( model, model.components[type].property( molecule.property ), molecule.type, radius );
+          property = model.components[type].property( molecule.property );
+          if ( molecule.type !== 'H2O' && property.get() ) {
+            layers[type].layer[i] = new MagnifierMoleculesLayer( model, property, molecule.type, radius );
             layers[type].node.addChild( layers[type].layer[i] );
           }
         } );

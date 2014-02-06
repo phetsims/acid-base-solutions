@@ -12,13 +12,20 @@ define( function( require ) {
     Node = require( 'SCENERY/nodes/Node' ),
     Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' );
 
-  function H2OMolecule( model, coords ) {
+  var atomCache, getMolecule = function( color ) {
+    return new Node( {children: [
+      new Atom( {x: 0, y: -9}, 4, color ),
+      new Atom( {x: 0, y: 0}, 7, color ),
+      new Atom( {x: -6, y: 5}, 4, color )
+    ]} );
+  };
+
+  function H2OMolecule( model, coords, fromCache ) {
     var H2O_COLOR = model.MOLECULES_COLORS.H2O;
     Node.call( this, coords );
 
-    this.addChild( new Atom( {x: 0, y: -9}, 4, H2O_COLOR ) );
-    this.addChild( new Atom( {x: 0, y: 0}, 7, H2O_COLOR ) );
-    this.addChild( new Atom( {x: -6, y: 5}, 4, H2O_COLOR ) );
+    // cache values for next execution
+    this.addChild( fromCache ? (atomCache ? atomCache : atomCache = getMolecule( H2O_COLOR )) : getMolecule( H2O_COLOR ) );
   }
 
   return inherit( Node, H2OMolecule );

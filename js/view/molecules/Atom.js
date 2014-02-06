@@ -11,21 +11,33 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     RadialGradient = require( 'SCENERY/util/RadialGradient' ),
-    Circle = require( 'SCENERY/nodes/Circle' ),
-    Color = require( 'SCENERY/util/Color' );
+    Circle = require( 'SCENERY/nodes/Circle' );
+
+  var gradients = {};
 
   function Atom( coords, radius, color ) {
     Node.call( this, coords );
 
-    this.gradientDefault = new RadialGradient( -radius * 0.2, -radius * 0.3, 0.25, -radius * 0.2, -radius * 0.3, radius * 2 )
-      .addColorStop( 0, new Color( 'white' ) )
-      .addColorStop( 0.33, color )
-      .addColorStop( 1, new Color( 'black' ) );
+    if ( !(radius in gradients) ) {
+      gradients[radius] = {};
+    }
 
-    this.gradientGray = new RadialGradient( -radius * 0.2, -radius * 0.3, 0.25, -radius * 0.2, -radius * 0.3, radius * 2 )
-      .addColorStop( 0, new Color( 'rgb(169,169,169)' ) )
-      .addColorStop( 0.33, 'rgb(150,150,150)' )
-      .addColorStop( 1, new Color( 'rgb(150,150,150)' ) );
+    // cache gradients for next executions
+    if ( !(color in gradients[radius]) ) {
+      gradients[radius][color] = {
+        gradientDefault: new RadialGradient( -radius * 0.2, -radius * 0.3, 0.25, -radius * 0.2, -radius * 0.3, radius * 2 )
+          .addColorStop( 0, 'white' )
+          .addColorStop( 0.33, color )
+          .addColorStop( 1, 'black' ),
+        gradientGray: new RadialGradient( -radius * 0.2, -radius * 0.3, 0.25, -radius * 0.2, -radius * 0.3, radius * 2 )
+          .addColorStop( 0, 'rgb(169,169,169)' )
+          .addColorStop( 0.33, 'rgb(150,150,150)' )
+          .addColorStop( 1, 'rgb(150,150,150)' )
+      };
+    }
+
+    this.gradientDefault = gradients[radius][color].gradientDefault;
+    this.gradientGray = gradients[radius][color].gradientGray;
 
     this.view = new Circle( radius, {fill: this.gradientDefault} );
     this.addChild( this.view );

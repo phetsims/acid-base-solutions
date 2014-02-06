@@ -15,18 +15,24 @@ define( function( require ) {
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     FONT = new PhetFont( 8 );
 
-  function MOHMolecule( model, coords ) {
+  var getMolecule = function( color ) {
+    return new Node( {children: [
+      // add M ion
+      new Atom( {x: 0, y: 0}, 6, color ),
+      new Text( '+', {centerX: 0, centerY: 8.5, font: FONT} ),
+      // add OH ion
+      new Atom( {x: 15, y: 0}, 7, color ),
+      new Atom( {x: 22, y: -4}, 4, color ),
+      new Text( '-', {centerX: 15, centerY: 8.5, font: FONT} )
+    ]} );
+  }, atomCache;
+
+  function MOHMolecule( model, coords, fromCache ) {
     var NEUTRAL_COLOR = model.MOLECULES_COLORS.MOH; // gray
     Node.call( this, coords );
 
-    // add M ion
-    this.addChild( new Atom( {x: 0, y: 0}, 6, NEUTRAL_COLOR ) );
-    this.addChild( new Text( '+', {centerX: 0, centerY: 8.5, font: FONT} ) );
-
-    // add OH ion
-    this.addChild( new Atom( {x: 15, y: 0}, 7, NEUTRAL_COLOR ) );
-    this.addChild( new Atom( {x: 22, y: -4}, 4, NEUTRAL_COLOR ) );
-    this.addChild( new Text( '-', {centerX: 15, centerY: 8.5, font: FONT} ) );
+    // cache values for next execution
+    this.addChild( fromCache ? (atomCache ? atomCache : atomCache = getMolecule( NEUTRAL_COLOR )) : getMolecule( NEUTRAL_COLOR ) );
   }
 
   return inherit( Node, MOHMolecule );
