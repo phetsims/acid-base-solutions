@@ -14,10 +14,16 @@ define( function( require ) {
     Node = require( 'SCENERY/nodes/Node' ),
     Circle = require( 'SCENERY/nodes/Circle' ),
     Shape = require( 'KITE/Shape' ),
-    Rectangle = require( 'SCENERY/nodes/Rectangle' );
+    Rectangle = require( 'SCENERY/nodes/Rectangle' ),
+
+    Image = require( 'SCENERY/nodes/Image' ),
+    solventBackgroundImage = require( 'image!ACID_BASE_SOLUTIONS/../images/solvent-background.jpg' );
+
+  var MAX_MOLECULES = 200;
 
   function Magnifier( model, options ) {
     var self = this,
+      solventBackground,
       radius = model.height / 3.6,
       rectangle;
     Node.call( this, options );
@@ -37,6 +43,12 @@ define( function( require ) {
     // add container for molecules
     this.addChild( this.container = new Node() );
     this.container.setClipArea( new Shape().circle( 0, 0, radius - 4 ) );
+
+    this.container.addChild( solventBackground = new Image( solventBackgroundImage, {x: -radius * Math.SQRT2, y: -radius * Math.SQRT2} ) );
+
+    model.property( 'solvent' ).link( function( visibility ) {
+      solventBackground.setVisible( visibility );
+    } );
   }
 
   return inherit( Node, Magnifier );
