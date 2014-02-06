@@ -90,14 +90,12 @@ define( function( require ) {
       testMode: self.TEST_MODES[0], // test mode
       viewMode: self.VIEW_MODES[0], // view mode
       solvent: false, // solvent visibility
-      ph: 0
+      ph: 0 // ph level of product
     } );
 
-    // add model for
+    // add model for each type of reaction
     this.components = {};
-    var setPh = function( value ) {
-      self.ph = value;
-    };
+    var setPh = function( value ) { self.ph = value; }; // observer for ph property
 
     for ( var i = (customSolutionTitleString === mode ? 1 : 0), solution; i < this.SOLUTIONS.length; i++ ) {
       solution = new this.SOLUTIONS[i].constructor();
@@ -116,10 +114,11 @@ define( function( require ) {
       PropertySet.call( this, {
         isAcid: true, // type of solution. true - acid, false - base
         isWeak: true, // type of strength. true - weak, false - strong
-        concentration: 0,
-        strength: 0
+        concentration: 0, // concentration of solution
+        strength: 0  // strength of solution
       } );
 
+      // update solution type if it was changed by radio buttons
       var setSolution = function() {
         var map = [
           [self.SOLUTIONS[3].type, self.SOLUTIONS[4].type],

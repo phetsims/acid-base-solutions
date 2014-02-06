@@ -27,9 +27,11 @@ define( function( require ) {
     var rectangle, text, textPow, height = options.height;
     Node.call( this );
 
+    // add rectangle to represent concentration
     this.addChild( rectangle = new Rectangle( 0, 0, 25, 0, {fill: options.fill} ) );
     rectangle.rotate( Math.PI );
 
+    // add vertical text for concentration (normal text + exponent text)
     this.addChild( text = new Text( '123', {font: FONT_NORMAL, centerX: 2, centerY: -10} ) );
     this.addChild( textPow = new Text( '123', {font: FONT_SMALL, centerX: -10, centerY: -10} ) );
     text.rotate( -Math.PI / 2 );
@@ -37,10 +39,13 @@ define( function( require ) {
 
     property.link( function( value ) {
       var barHeight = Math.abs( Math.log( value ) / Math.LN10 + 8 ) * height / 10;
+
+      // set bar height
       if ( isFinite( barHeight ) ) {
         rectangle.setRectHeight( barHeight );
       }
 
+      // set concentration text
       if ( value < 1e-13 ) {
         text.setText( negligibleString );
         textPow.setVisible( false );
