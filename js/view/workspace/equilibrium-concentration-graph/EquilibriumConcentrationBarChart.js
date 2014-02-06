@@ -28,14 +28,15 @@ define( function( require ) {
     // add bars for each solution
     model.SOLUTIONS.forEach( function( solution ) {
       var type = solution.type, bar;
-      bars[type] = new Node( {visible: false} );
-      solution.relations.forEach( function( molecule, i ) {
-        if ( type in model.components ) {
+      if ( type in model.components ) {
+        bars[type] = new Node( {visible: false} );
+        solution.relations.forEach( function( molecule, i ) {
           bars[type].addChild( bar = new EquilibriumConcentrationSingleBar( model.components[type].property( molecule.property ), {fill: colors[molecule.type], height: height - 10 } ) );
           bar.setTranslation( (i + 0.75 + (4 - solution.relations.length) / 2) * width / 4, height );
-        }
-      } );
-      self.addChild( bars[type] );
+
+        } );
+        self.addChild( bars[type] );
+      }
     } );
 
     model.property( 'viewMode' ).link( function( viewMode ) {

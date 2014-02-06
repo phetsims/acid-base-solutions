@@ -50,7 +50,7 @@ define( function( require ) {
         text.setText( negligibleString );
         textPow.setVisible( false );
       }
-      else if ( value < 1 ) {
+      else if ( value <= 1 ) {
         // find pow
         var pow = Math.floor( Math.log( value ) / Math.LN10 );
 
