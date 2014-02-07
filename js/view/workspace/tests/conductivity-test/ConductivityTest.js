@@ -20,6 +20,7 @@ define( function( require ) {
 
     ConductivityTestWire = require( './ConductivityTestWire' ),
     ConductivityTestProbe = require( './ConductivityTestProbe' ),
+    ConductivityTestLightRays = require( './ConductivityTestLightRays' ),
 
     batteryImage = require( 'image!ACID_BASE_SOLUTIONS/battery.png' ),
     lightBulbBaseImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-base.png' ),
@@ -27,26 +28,28 @@ define( function( require ) {
     lightBulbGlassMaskImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-glass-mask.png' );
 
   var BULB_TO_BATTERY_WIRE_LENGTH = 40,
-    BRIGHTNESS_TO_ALPHA_FUNCTION_AGAINST_DARK_BACKGROUND = new LinearFunction( 0, 1, 0.3, 2 ),
-    BRIGHTNESS_TO_INTENSITY_FUNCTION = new LinearFunction( 0, 1, 0, 1 ); // intensity of the light rays
+    OPACITY_MAX = 0.15,
+  // alpha of the bulb when used against a dark background.  This is clamped after evaluation to keep it within the range [0,1]
+    BRIGHTNESS_TO_ALPHA_FUNCTION_AGAINST_DARK_BACKGROUND = new LinearFunction( 0, 1, OPACITY_MAX, 0 );
 
   var initYLevel = 60,
     wireOptions = {
-    positive: {
-      start: {x: 125, y: 84},
-      end: {x: 163, y: initYLevel}
-    },
-    negative: {
-      start: {x: 16, y: 75},
-      end: {x: -22, y: initYLevel}
-    }
-  };
+      positive: {
+        start: {x: 125, y: 84},
+        end: {x: 163, y: initYLevel}
+      },
+      negative: {
+        start: {x: 16, y: 75},
+        end: {x: -22, y: initYLevel}
+      }
+    };
 
   function ConductivityTest( model, options ) {
     var self = this,
+      lightBulbDarkMask,
       positiveProbeY = new Property( wireOptions.positive.end.y ),
       negativeProbeY = new Property( wireOptions.negative.end.y ),
-      isContact = new Property( false ),
+      isClose = new Property( false ),
       bulbEndX = 23,
       bulbEndY = 84,
       waterSurface = 75,
@@ -54,12 +57,14 @@ define( function( require ) {
       positiveWire;
     Node.call( this, options );
 
+    this.addChild( new ConductivityTestLightRays( model, options ) );
+
     this.addChild( new Node( {children: [
       // add light bulb image
       new Node( {children: [
         new Image( lightBulbBaseImage, {scale: 0.33, x: 15.5, y: 66} ),
         new Image( lightBulbGlassImage, {scale: 0.33} ),
-        new Node( {opacity: 0.15, children: [new Image( lightBulbGlassMaskImage, {scale: 0.33} )]} )
+        lightBulbDarkMask = new Node( {opacity: OPACITY_MAX, children: [new Image( lightBulbGlassMaskImage, {scale: 0.33} )]} )
       ]} ),
       // add wire from battery to light bulb
       new Path( new Shape().moveTo( bulbEndX, bulbEndY ).lineTo( bulbEndX + BULB_TO_BATTERY_WIRE_LENGTH, bulbEndY ), {stroke: 'black', lineWidth: 1.5} ),
@@ -77,19 +82,27 @@ define( function( require ) {
 
     // if both probes in water: isContact === true
     var checkContact = function() {
-      isContact = ( positiveProbeY.value > waterSurface && negativeProbeY.value > waterSurface );
+      isClose.value = ( positiveProbeY.value > waterSurface && negativeProbeY.value > waterSurface );
     };
     positiveProbeY.link( checkContact );
     negativeProbeY.link( checkContact );
 
+    // update wires if end point was changed
     positiveProbeY.link( function( y ) {
       positiveWire.setEndPoint( wireOptions.positive.end.x, y );
     } );
-
     negativeProbeY.link( function( y ) {
       negativeWire.setEndPoint( wireOptions.negative.end.x, y );
     } );
 
+    // set brightness of light bulb
+    var setBrightness = function() {
+      lightBulbDarkMask.setOpacity( (isClose.value ? BRIGHTNESS_TO_ALPHA_FUNCTION_AGAINST_DARK_BACKGROUND( model.brightness ) : OPACITY_MAX) );
+    };
+    model.property( 'brightness' ).link( setBrightness );
+    isClose.link( setBrightness );
+
+    // visibility observer
     model.property( 'testMode' ).link( function( mode ) {
       self.setVisible( mode === 'CONDUCTIVITY' );
     } );

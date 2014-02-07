@@ -60,7 +60,11 @@ define( function( require ) {
     WATER_EQUILIBRIUM_CONSTANT: 1E-14,
     WATER_CONCENTRATION: 55.6, // water concentration when it's used as a solvent, mol/L
     CONCENTRATION_RANGE: new Range( 1E-3, 1, 1E-2 ),
-    WEAK_STRENGTH_RANGE: new Range( 1E-10, 1E2, 1E-7 )
+    WEAK_STRENGTH_RANGE: new Range( 1E-10, 1E2, 1E-7 ),
+    NEUTRAL_PH: 7,
+    NEUTRAL_BRIGHTNESS: 0.05, // brightness when pH == NEUTRAL_PH
+    MIN_PH: 0,
+    MAX_PH: 14
   };
 
   function AcidBaseSolutionsModel( width, height, mode ) {
@@ -124,7 +128,8 @@ define( function( require ) {
       testMode: self.TEST_MODES[0], // test mode
       viewMode: self.VIEW_MODES[0], // view mode
       solvent: false, // solvent visibility
-      ph: 0 // ph level of product
+      ph: 0, // ph level of product
+      brightness: 0 // brightness value
     } );
 
     // add model for each type of reaction
@@ -141,6 +146,11 @@ define( function( require ) {
     // set appropriate ph
     this.property( 'solution' ).link( function( solution ) {
       self.ph = self.components[solution].ph;
+    } );
+
+    // set brightness of light rays depend on ph value
+    this.property( 'ph' ).link( function( pHValue ) {
+      self.brightness = self.pHToBrightness( pHValue );
     } );
 
     // add properties for custom tab
@@ -186,6 +196,12 @@ define( function( require ) {
        this.components[component].intro();
        }
        }*/
+    },
+    pHToBrightness: function( pH ) {
+      var NEUTRAL_PH = CONSTANTS.NEUTRAL_PH,
+        NEUTRAL_BRIGHTNESS = CONSTANTS.NEUTRAL_BRIGHTNESS;
+
+      return NEUTRAL_BRIGHTNESS + ( 1 - NEUTRAL_BRIGHTNESS ) * (pH < NEUTRAL_PH ? ( NEUTRAL_PH - pH ) / ( NEUTRAL_PH - CONSTANTS.MIN_PH ) : ( pH - NEUTRAL_PH ) / ( CONSTANTS.MAX_PH - NEUTRAL_PH ) );
     }
   } );
 
