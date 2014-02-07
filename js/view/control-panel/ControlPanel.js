@@ -12,7 +12,6 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' ),
     inherit = require( 'PHET_CORE/inherit' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
-    Color = require( 'SCENERY/util/Color' ),
     SolutionControl = require( 'ACID_BASE_SOLUTIONS/view/control-panel/SolutionControl/SolutionControl' ),
     SolutionsControl = require( 'ACID_BASE_SOLUTIONS/view/control-panel/SolutionsControl' ),
     ViewsControl = require( 'ACID_BASE_SOLUTIONS/view/control-panel/ViewsControl' ),
@@ -28,7 +27,7 @@ define( function( require ) {
     Node.call( this );
 
     // add background
-    this.addChild( background = new Rectangle( -20, -2, 0, 0, {fill: new Color( 204, 204, 255 ), stroke: new Color( 'black' ), lineWidth: 1} ) );
+    this.addChild( background = new Rectangle( -20, -2, 0, 0, {fill: 'rgb(204,204,255)', stroke: 'black', lineWidth: 1} ) );
 
     // for 'introduction' tab add solutions menu
     if ( model.mode === introductionTitleString ) {

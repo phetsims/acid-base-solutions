@@ -21,7 +21,7 @@ define( function( require ) {
   // tests
     pHMeterTest = require( './tests/pHMeterTest' ),
     pHPaperTest = require( './tests/pHPaperTest' ),
-    ConductivityTest = require( './tests/ConductivityTest' );
+    ConductivityTest = require( './tests/conductivity-test/ConductivityTest' );
 
   function Workspace( model, options ) {
     var vbox, formulas;
@@ -34,7 +34,7 @@ define( function( require ) {
     this.addChild( new pHPaperTest( model, {x: model.width / 8, y: model.height / 45} ) );
 
     // add conductivity test
-    this.addChild( new ConductivityTest( model, {x: model.width / 3.25, y: model.height / 10} ) );
+    this.addChild( new ConductivityTest( model, {x: model.width / 4, y: model.height / 75} ) );
 
     // add beaker and formulas
     this.addChild( vbox = new VBox( {spacing: 5, x: model.width / 3, y: model.height * 0.25, children: [

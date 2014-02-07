@@ -25,7 +25,8 @@ define( function( require ) {
 
   function pHMeterTest( model, options ) {
     var self = this,
-      backlash = 100,
+      maxY = 100,
+      minY = 25.2,
       waterSurface = 38,
       pHText,
       checkVisibility;
@@ -58,7 +59,7 @@ define( function( require ) {
         // new y-coordinate
         var y = self.globalToParentPoint( e.pointer.point ).y - clickYOffset;
         // check limitation
-        y = Math.min( Math.max( 25.2, y ), backlash );
+        y = Math.min( Math.max( minY, y ), maxY );
         // move to new position
         self.setY( y );
         checkVisibility();
