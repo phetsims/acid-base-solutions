@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
   var Node = require( 'SCENERY/nodes/Node' ),
     inherit = require( 'PHET_CORE/inherit' ),
+    Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     AquaRadioButton = require( 'SUN/AquaRadioButton' ),
     CheckBox = require( 'SUN/CheckBox' ),
     Text = require( 'SCENERY/nodes/Text' ),
@@ -44,7 +45,13 @@ define( function( require ) {
       {isRadio: true, value: 'EQUILIBRIUM', text: new Node( {children: [
         new Text( equilibriumString, {font: FONT, centerX: 0} ),
         new Text( concentrationString, {font: FONT, centerX: 0, centerY: 8} )
-      ]} ), icon: new Node()},
+      ]} ), icon: new Node( {children: [
+        new Rectangle( 0, 0, 24.5, 18, {fill: 'white', stroke: 'black', lineWidth: 0.5} ),
+        new Rectangle( 2, 6, 3, 12, {fill: model.MOLECULES_COLORS.B} ),
+        new Rectangle( 7.5, 3, 3, 15, {fill: model.MOLECULES_COLORS.H2O} ),
+        new Rectangle( 13, 9, 3, 9, {fill: model.MOLECULES_COLORS.A} ),
+        new Rectangle( 18.5, 9, 3, 9, {fill: model.MOLECULES_COLORS.H3O} )
+      ]} )},
       {isRadio: true, value: 'LIQUID', text: new Text( liquidString, {font: FONT} ), icon: new Image( beakerImage, {scale: 0.75} )}
     ];
 
@@ -77,7 +84,7 @@ define( function( require ) {
       this.checkbox.button.enabled = value;
       this.checkbox.text.setFill( (value ? 'black' : 'gray') );
       /*this.checkbox.icon.getChildren().forEach( function( atom ) {
-        atom['fill' + (value ? 'Default' : 'Gray')]();
-      } );*/
+       atom['fill' + (value ? 'Default' : 'Gray')]();
+       } );*/
     }} );
 } );
