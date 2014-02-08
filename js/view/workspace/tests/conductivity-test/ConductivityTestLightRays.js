@@ -31,7 +31,7 @@ define( function( require ) {
     var self = this;
     Node.call( this, options );
 
-    //this.createCacheLines( MAX_RAYS );
+    this.createCacheLines( MAX_RAYS );
 
     model.property( 'brightness' ).link( function( brightnessValue ) {
       var intensity = BRIGHTNESS_TO_INTENSITY_FUNCTION( brightnessValue ),
@@ -40,8 +40,6 @@ define( function( require ) {
         deltaAngle = RAYS_ARC_ANGLE / ( numberOfRays - 1 ),
         lineWidth,
         rayLength; // ray length is a function of intensity
-
-      self.removeAllChildren();
 
       // if intensity is zero, we're done
       if ( !intensity ) {
@@ -60,19 +58,26 @@ define( function( require ) {
       }
 
       // rays fill part of a circle, incrementing clockwise
-      for ( var i = 0, x1, x2, y1, y2; i < numberOfRays; i++ ) {
+      for ( var i = 0, x1, x2, y1, y2; i < MAX_RAYS; i++ ) {
+        if ( i < numberOfRays ) {
+          // determine the end points of the ray
+          x1 = Math.cos( angle ) * bulbRadius;
+          y1 = Math.sin( angle ) * bulbRadius;
+          x2 = Math.cos( angle ) * ( bulbRadius + rayLength );
+          y2 = Math.sin( angle ) * ( bulbRadius + rayLength );
 
-        // determine the end points of the ray
-        x1 = Math.cos( angle ) * bulbRadius;
-        y1 = Math.sin( angle ) * bulbRadius;
-        x2 = Math.cos( angle ) * ( bulbRadius + rayLength );
-        y2 = Math.sin( angle ) * ( bulbRadius + rayLength );
+          // set properties of line from the cache
+          self.cachedLines[i].setVisible( true );
+          self.cachedLines[i].setLine( x1, y1, x2, y2 );
+          self.cachedLines[i].setLineWidth( lineWidth );
 
-        // get a line from the cache
-        self.addChild( new Line(x1, y1, x2, y2, {stroke: 'yellow', lineWidth: lineWidth}) );
-
-        // increment the angle
-        angle += deltaAngle;
+          // increment the angle
+          angle += deltaAngle;
+        }
+        else {
+          // hide unusable lined
+          self.cachedLines[i].setVisible( false );
+        }
       }
     } );
   }
@@ -82,7 +87,8 @@ define( function( require ) {
     createCacheLines: function( numberOfLines ) {
       this.cachedLines = [];
       for ( var i = numberOfLines; i--; ) {
-        //this.cachedLines[i] = new Line( 0, 0, 0, 0, {stroke: 'yellow', lineWidth: 1} );
+        this.cachedLines[i] = new Line( 0, 0, 0, 0, {stroke: 'yellow', lineWidth: 1} );
+        this.addChild( this.cachedLines[i] );
       }
     }
   } );
