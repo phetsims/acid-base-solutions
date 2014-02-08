@@ -27,22 +27,48 @@ define( function( require ) {
     RAY_STROKE_SMALL = 0.5,
     BRIGHTNESS_TO_INTENSITY_FUNCTION = new LinearFunction( 0, 1, 0, 1 ); // intensity of the light rays;
 
-  function ConductivityTestLightRays( model, bulbRadius, options ) {
-    var self = this;
+  function ConductivityTestLightRays( brightnessProperty, isCloseProperty, bulbRadius, options ) {
     Node.call( this, options );
+    this.bulbRadius = bulbRadius;
+    this.isCloseProperty = isCloseProperty;
+    this.brightnessProperty = brightnessProperty;
 
+    // pre-calculate reusable objects
     this.createCacheLines( MAX_RAYS );
 
-    model.property( 'brightness' ).link( function( brightnessValue ) {
-      var intensity = BRIGHTNESS_TO_INTENSITY_FUNCTION( brightnessValue ),
+    // add observers
+    isCloseProperty.link( this.setBrightness.bind( this ) );
+    brightnessProperty.link( this.setBrightness.bind( this ) );
+  }
+
+  return inherit( Node, ConductivityTestLightRays, {
+    createCacheLines: function( numberOfLines ) {
+      this.cachedLines = [];
+      for ( var i = numberOfLines; i--; ) {
+        this.cachedLines[i] = new Line( 0, 0, 0, 0, {stroke: 'yellow', lineWidth: 1} );
+        this.addChild( this.cachedLines[i] );
+      }
+    },
+    // hide all rays
+    hideAll: function() {
+      this.cachedLines.forEach( function( line ) {
+        line.setVisible( false );
+      } );
+    },
+    setBrightness: function() {
+      var brightnessValue = this.brightnessProperty.value,
+        isClose = this.isCloseProperty.value,
+        intensity = BRIGHTNESS_TO_INTENSITY_FUNCTION( brightnessValue ),
         numberOfRays = MIN_RAYS + Math.round( intensity * ( MAX_RAYS - MIN_RAYS ) ), // number of rays is a function of intensity
         angle = RAYS_START_ANGLE,
         deltaAngle = RAYS_ARC_ANGLE / ( numberOfRays - 1 ),
+        bulbRadius = this.bulbRadius,
         lineWidth,
         rayLength; // ray length is a function of intensity
 
-      // if intensity is zero, we're done
-      if ( !intensity ) {
+      // if intensity is zero or circuit isn't closed, we're done
+      if ( !intensity || !isClose ) {
+        this.hideAll();
         return;
       }
 
@@ -67,28 +93,17 @@ define( function( require ) {
           y2 = Math.sin( angle ) * ( bulbRadius + rayLength );
 
           // set properties of line from the cache
-          self.cachedLines[i].setVisible( true );
-          self.cachedLines[i].setLine( x1, y1, x2, y2 );
-          self.cachedLines[i].setLineWidth( lineWidth );
+          this.cachedLines[i].setVisible( true );
+          this.cachedLines[i].setLine( x1, y1, x2, y2 );
+          this.cachedLines[i].setLineWidth( lineWidth );
 
           // increment the angle
           angle += deltaAngle;
         }
         else {
           // hide unusable lined
-          self.cachedLines[i].setVisible( false );
+          this.cachedLines[i].setVisible( false );
         }
-      }
-    } );
-  }
-
-  return inherit( Node, ConductivityTestLightRays, {
-    // pre-populate reusable lists of reusable objects
-    createCacheLines: function( numberOfLines ) {
-      this.cachedLines = [];
-      for ( var i = numberOfLines; i--; ) {
-        this.cachedLines[i] = new Line( 0, 0, 0, 0, {stroke: 'yellow', lineWidth: 1} );
-        this.addChild( this.cachedLines[i] );
       }
     }
   } );
