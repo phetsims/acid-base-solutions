@@ -17,7 +17,7 @@ define( function( require ) {
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
 
     Image = require( 'SCENERY/nodes/Image' ),
-    solventBackgroundImage = require( 'image!ACID_BASE_SOLUTIONS/../images/solvent-background.jpg' );
+    solventBackgroundImage = require( 'image!ACID_BASE_SOLUTIONS/../images/solvent.png' );
 
   function MagnifierBackground( model, container, radius ) {
     var rectangle, solventBackground;
@@ -32,7 +32,7 @@ define( function( require ) {
     this.addChild( new Circle( radius, {stroke: 'black', lineWidth: 8} ) );
 
     // add solvent background
-    container.addChild( solventBackground = new Image( solventBackgroundImage, {x: -radius * Math.SQRT2, y: -radius * Math.SQRT2} ) );
+    container.addChild( solventBackground = new Image( solventBackgroundImage, {scale: 0.5, x: -radius * Math.SQRT2, y: -radius * Math.SQRT2} ) );
 
     model.property( 'solvent' ).link( function( visibility ) {
       solventBackground.setVisible( visibility );
