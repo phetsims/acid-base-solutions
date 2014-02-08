@@ -46,7 +46,7 @@ define( function( require ) {
 
   function ConductivityTest( model, options ) {
     var self = this,
-      lightBulbDarkMask,
+      lightBulbDarkMask = new Node( {opacity: OPACITY_MAX, children: [new Image( lightBulbGlassMaskImage, {scale: 0.33} )]} ),
       positiveProbeY = new Property( wireOptions.positive.end.y ),
       negativeProbeY = new Property( wireOptions.negative.end.y ),
       isClose = new Property( false ),
@@ -57,14 +57,15 @@ define( function( require ) {
       positiveWire;
     Node.call( this, options );
 
-    this.addChild( new ConductivityTestLightRays( model, options ) );
+    // add light rays
+    this.addChild( new ConductivityTestLightRays( model, lightBulbDarkMask.getGlobalBounds().width / 2, {x: lightBulbDarkMask.getGlobalBounds().width / 2, y: lightBulbDarkMask.getGlobalBounds().height / 2.75} ) );
 
     this.addChild( new Node( {children: [
       // add light bulb image
       new Node( {children: [
         new Image( lightBulbBaseImage, {scale: 0.33, x: 15.5, y: 66} ),
         new Image( lightBulbGlassImage, {scale: 0.33} ),
-        lightBulbDarkMask = new Node( {opacity: OPACITY_MAX, children: [new Image( lightBulbGlassMaskImage, {scale: 0.33} )]} )
+        lightBulbDarkMask
       ]} ),
       // add wire from battery to light bulb
       new Path( new Shape().moveTo( bulbEndX, bulbEndY ).lineTo( bulbEndX + BULB_TO_BATTERY_WIRE_LENGTH, bulbEndY ), {stroke: 'black', lineWidth: 1.5} ),
