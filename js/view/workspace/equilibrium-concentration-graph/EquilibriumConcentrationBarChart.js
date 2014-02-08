@@ -21,6 +21,7 @@ define( function( require ) {
       colors = model.MOLECULES_COLORS,
       bars = {};
     Node.call( this, options );
+    this.model = model;
 
     // add background
     this.addChild( new EquilibriumConcentrationBarChartBackground( width, height ) );
@@ -39,9 +40,8 @@ define( function( require ) {
       }
     } );
 
-    model.property( 'viewMode' ).link( function( viewMode ) {
-      self.setVisible( viewMode === 'EQUILIBRIUM' );
-    } );
+    model.property( 'viewMode' ).link( this.checkVisibility.bind( this ) );
+    model.property( 'testMode' ).link( this.checkVisibility.bind( this ) );
 
     model.property( 'solution' ).link( function( newSolution, prevSolution ) {
       bars[newSolution].setVisible( true );
@@ -51,5 +51,9 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, EquilibriumConcentrationBarChart );
+  return inherit( Node, EquilibriumConcentrationBarChart, {
+    checkVisibility: function() {
+      this.setVisible( this.model.viewMode === 'EQUILIBRIUM' && this.model.testMode !== 'CONDUCTIVITY' );
+    }
+  } );
 } );

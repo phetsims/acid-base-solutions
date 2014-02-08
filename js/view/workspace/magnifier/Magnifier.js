@@ -22,6 +22,7 @@ define( function( require ) {
       radius = model.height / 3.6,
       layers = {};
     Node.call( this, options );
+    this.model = model;
 
     // add container for molecules
     this.addChild( this.container = new Node() );
@@ -59,10 +60,13 @@ define( function( require ) {
       }
     } );
 
-    model.property( 'viewMode' ).link( function( mode ) {
-      self.setVisible( mode === 'MOLECULES' );
-    } );
+    model.property( 'viewMode' ).link( this.checkVisibility.bind( this ) );
+    model.property( 'testMode' ).link( this.checkVisibility.bind( this ) );
   }
 
-  return inherit( Node, Magnifier );
+  return inherit( Node, Magnifier, {
+    checkVisibility: function() {
+      this.setVisible( this.model.viewMode === 'MOLECULES' && this.model.testMode !== 'CONDUCTIVITY' );
+    }
+  } );
 } );
