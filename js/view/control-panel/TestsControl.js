@@ -35,7 +35,7 @@ define( function( require ) {
   ];
 
   function Tests( model, options ) {
-    var vBox = new VBox( {spacing: 5, align: 'left'} );
+    var vBox = new VBox( {spacing: 4, align: 'left'} );
     Node.call( this, options );
 
     // add options to menu

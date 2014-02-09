@@ -15,7 +15,7 @@ define( function( require ) {
     Dimension2 = require( 'DOT/Dimension2' ),
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    FONT = new PhetFont( 12 ),
+    FONT = new PhetFont( 14 ),
     LN10 = Math.LN10,
 
   // strings
@@ -31,6 +31,7 @@ define( function( require ) {
       tickOffset = 5,
       slider;
     Node.call( this, coords );
+    this.scale( 0.83 );
     this.property = sliderProperty;
 
     // add horizontal part

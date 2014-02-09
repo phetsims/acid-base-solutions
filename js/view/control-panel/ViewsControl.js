@@ -34,7 +34,7 @@ define( function( require ) {
 
   function ViewsControl( model, options ) {
     var self = this,
-      vBox = new VBox( {spacing: 5, align: 'left'} ),
+      vBox = new VBox( {spacing: 4, align: 'left'} ),
       hBox;
     Node.call( this, options );
     this.model = model;

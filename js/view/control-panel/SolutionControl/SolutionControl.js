@@ -30,7 +30,7 @@ define( function( require ) {
     strongString = require( 'string!ACID_BASE_SOLUTIONS/strong' );
 
   function Solution( model, options ) {
-    var vBox = new VBox( {spacing: 5} ),
+    var vBox = new VBox( {spacing: 4} ),
       strengthSlider,
       concentrationSlider;
     Node.call( this, options );
@@ -42,14 +42,14 @@ define( function( require ) {
     ]} ) );
 
     // add black line
-    vBox.addChild( new Line( 0, 0, 200, 0, {stroke: 'black', lineWidth: 0.75} ) );
+    vBox.addChild( new Line( 15, 0, 170, 0, {stroke: 'black', lineWidth: 0.75} ) );
 
     // add concentration slider
     vBox.addChild( new Text( initialConcentrationString, {font: FONT} ) );
     vBox.addChild( concentrationSlider = new ConcentrationSlider( model.property( 'concentration' ), model.CONSTANTS.CONCENTRATION_RANGE ) );
 
     // add black line
-    vBox.addChild( new Line( 0, 0, 200, 0, {stroke: 'black', lineWidth: 0.75} ) );
+    vBox.addChild( new Line( 15, 0, 170, 0, {stroke: 'black', lineWidth: 0.75} ) );
 
     // add strength radio button
     vBox.addChild( new Text( strengthString, {font: FONT} ) );

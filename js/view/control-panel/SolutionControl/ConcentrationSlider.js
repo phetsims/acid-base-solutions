@@ -23,7 +23,7 @@ define( function( require ) {
     LN10 = Math.LN10,
 
   // Constants
-    READOUT_FONT = new PhetFont( 12 ),
+    READOUT_FONT = new PhetFont( 14 ),
     ARROW_HEIGHT = 15;
 
   function ConcentrationSlider( concentrationProperty, range, options ) {
@@ -32,7 +32,7 @@ define( function( require ) {
       CONCENTRATION_MAX = Math.log( range.max ) / LN10,
       CONCENTRATION_STEP = 0.1,
       sliderProperty = new Property( Math.log( range.defaultValue ) / LN10 );
-    Node.call( this );
+    Node.call( this, {scale: 0.85} );
     this.property = sliderProperty;
 
     // Create and add the readout, including the background.
@@ -40,7 +40,7 @@ define( function( require ) {
       readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.5 ),
       panelContent = new Node();
     panelContent.addChild( readoutBackground );
-    readoutText.centerY = readoutBackground.centerY;
+    readoutText.centerY = readoutBackground.centerY - 2;
     panelContent.addChild( readoutText );
 
     // Create and add the slider.
@@ -65,7 +65,7 @@ define( function( require ) {
     readoutBackground.centerX = slider.bounds.width / 2;
     readoutBackground.top = 0;
     slider.left = 0;
-    slider.top = readoutBackground.bottom + 5;
+    slider.top = readoutBackground.bottom;
     leftArrowButton.right = slider.left - 12;
     leftArrowButton.centerY = slider.centerY;
     rightArrowButton.left = slider.right + 12;
@@ -84,8 +84,6 @@ define( function( require ) {
     sliderProperty.link( function( value ) {
       concentrationProperty.value = parseFloat( Math.pow( 10, value ).toPrecision( 2 ) );
     } );
-
-    self.mutate( options );
   }
 
   return inherit( Node, ConcentrationSlider, {

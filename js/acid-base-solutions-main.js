@@ -33,12 +33,12 @@ define( function( require ) {
         function() { return new AcidBaseSolutionsModel( ScreenView.DEFAULT_LAYOUT_BOUNDS.width, ScreenView.DEFAULT_LAYOUT_BOUNDS.height, introductionTitleString ); },
         function( model ) { return new AcidBaseSolutionsView( model ); },
         {backgroundColor: 'rgb(230,230,230)'}
-      )/*,
+      ),
       new Screen( customSolutionTitleString, new Image( customSolutionIcon ),
         function() { return new AcidBaseSolutionsModel( ScreenView.DEFAULT_LAYOUT_BOUNDS.width, ScreenView.DEFAULT_LAYOUT_BOUNDS.height, customSolutionTitleString ); },
         function( model ) { return new AcidBaseSolutionsView( model ); },
         {backgroundColor: 'rgb(230,230,230)'}
-      )*/
+      )
     ], simOptions ).start();
   } );
 } );
