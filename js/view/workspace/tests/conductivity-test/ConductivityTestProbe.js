@@ -48,6 +48,10 @@ define( function( require ) {
         property.value = y;
       }
     } ) );
+
+    property.link( function( y ) {
+      self.setY( y );
+    } );
   }
 
   return inherit( Node, ConductivityTestProbe );

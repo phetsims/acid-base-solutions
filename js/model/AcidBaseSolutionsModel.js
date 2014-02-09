@@ -129,7 +129,8 @@ define( function( require ) {
       viewMode: self.VIEW_MODES[0], // view mode
       solvent: false, // solvent visibility
       ph: 0, // ph level of product
-      brightness: 0 // brightness value
+      brightness: 0, // brightness value
+      resetTrigger: false // reset trigger
     } );
 
     // add model for each type of reaction
@@ -138,7 +139,7 @@ define( function( require ) {
 
     for ( var i = (customSolutionTitleString === mode ? 1 : 0), solution; i < this.SOLUTIONS.length; i++ ) {
       solution = new this.SOLUTIONS[i].constructor( CONSTANTS );
-      solution.intro();
+      solution.init();
       this.components[this.SOLUTIONS[i].type] = solution;
       solution.property( 'ph' ).link( setPh );
     }
@@ -189,13 +190,27 @@ define( function( require ) {
   inherit( PropertySet, AcidBaseSolutionsModel, {
     step: function() {},
     reset: function() {
-      /*PropertySet.prototype.reset.call( this );
-       for ( var component in this.components ) {
-       if ( this.components.hasOwnProperty( component ) ) {
-       PropertySet.prototype.reset.call( this.components[component] );
-       this.components[component].intro();
-       }
-       }*/
+      // reset main properties
+      this.property( 'solution' ).reset();
+      this.property( 'testMode' ).reset();
+      this.property( 'viewMode' ).reset();
+      this.property( 'solvent' ).reset();
+
+      // reset properties for custom tab
+      if ( this.mode === customSolutionTitleString ) {
+        // reset components properties
+        for ( var solution in this.components ) {
+          if ( this.components.hasOwnProperty( solution ) ) {
+            this.components[solution].init();
+          }
+        }
+
+        this.property( 'isAcid' ).reset();
+        this.property( 'isWeak' ).reset();
+      }
+
+      // send signal to views for resetting
+      this.resetTrigger = !this.resetTrigger;
     },
     pHToBrightness: function( pH ) {
       var NEUTRAL_PH = CONSTANTS.NEUTRAL_PH,

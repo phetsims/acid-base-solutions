@@ -35,7 +35,9 @@ define( function( require ) {
       paperDefaultColor = model.PH_COOLORS[model.PH_COOLORS.length - 1],
       waterSurface = 14.5,
       indicatorPaper,
-      paper;
+      paper,
+      paperInitX,
+      paperInitY;
     Node.call( this, options );
 
     this.addChild( new Text( pHColorKeyString, {font: FONT_BIG, centerY: 0} ) );
@@ -52,8 +54,7 @@ define( function( require ) {
       indicatorPaper = new Rectangle( 0, 0, tableRectWidth, 0, {cursor: 'pointer', fill: 'red', stroke: 'rgb(150, 150, 150)', lineWidth: 0.5} )
     ]} ) );
     indicatorPaper.rotate( Math.PI );
-    indicatorPaper.setX( (model.PH_COOLORS.length + 2) * (tableRectWidth + space) + tableRectWidth );
-    indicatorPaper.setY( tableRectHeight * 4 );
+    indicatorPaper.setTranslation( (model.PH_COOLORS.length + 2) * (tableRectWidth + space) + tableRectWidth, tableRectHeight * 4 );
 
     // add drag and drop for paper
     var clickOffset,
@@ -88,6 +89,8 @@ define( function( require ) {
         checkIndicator();
       }
     } ) );
+    paperInitX = paper.x;
+    paperInitY = paper.y;
 
     model.property( 'testMode' ).link( function( mode ) {
       self.setVisible( mode === 'PH_PAPER' );
@@ -95,6 +98,12 @@ define( function( require ) {
 
     model.property( 'ph' ).link( function( pHValue ) {
       indicatorPaper.setFill( model.PH_COOLORS[Math.round( pHValue )] );
+      indicatorPaper.setRectHeight( 0 );
+      checkIndicator();
+    } );
+
+    model.property( 'resetTrigger' ).link( function() {
+      paper.setTranslation( paperInitX, paperInitY );
       indicatorPaper.setRectHeight( 0 );
       checkIndicator();
     } );

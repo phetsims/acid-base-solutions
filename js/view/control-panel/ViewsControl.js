@@ -37,6 +37,7 @@ define( function( require ) {
       vBox = new VBox( {spacing: 5, align: 'left'} ),
       hBox;
     Node.call( this, options );
+    this.model = model;
 
     // settings for menu options
     var menuOptions = [
@@ -56,12 +57,14 @@ define( function( require ) {
     ];
 
     this.checkbox = {};
+    this.radioButtons = [];
 
     // add options to menu
     for ( var i = 0; i < menuOptions.length; i++ ) {
       if ( menuOptions[i].isRadio ) {
         hBox = new HBox( {spacing: 5, children: [menuOptions[i].text, menuOptions[i].icon]} );
-        vBox.addChild( new AquaRadioButton( model.property( 'viewMode' ), menuOptions[i].value, hBox, {radius: 7} ) );
+        this.radioButtons.push( new AquaRadioButton( model.property( 'viewMode' ), menuOptions[i].value, hBox, {radius: 7} ) );
+        vBox.addChild( this.radioButtons[this.radioButtons.length - 1] );
       }
       else {
         hBox = new HBox( {spacing: 5, children: [this.checkbox.text = new Text( menuOptions[i].text, {font: FONT} ), this.checkbox.icon = menuOptions[i].icon]} );
@@ -74,17 +77,24 @@ define( function( require ) {
     this.addChild( vBox );
     vBox.updateLayout();
 
-    model.property( 'viewMode' ).link( function( mode ) {
-      self.enableCheckbox( mode === 'MOLECULES' );
-    } );
+    model.property( 'testMode' ).link( this.enableRadioButtons.bind( this ) );
+    model.property( 'viewMode' ).link( this.setCheckboxAvailability.bind( this ) );
   }
 
   return inherit( Node, ViewsControl, {
-    enableCheckbox: function( value ) {
-      this.checkbox.button.enabled = value;
-      this.checkbox.text.setFill( (value ? 'black' : 'gray') );
-      /*this.checkbox.icon.getChildren().forEach( function( atom ) {
+    setCheckboxAvailability: function() {
+      this.checkbox.button.enabled = (this.model.viewMode === 'MOLECULES' && this.model.testMode !== 'CONDUCTIVITY');
+      /*this.checkbox.text.setFill( (value ? 'black' : 'gray') );
+       this.checkbox.icon.getChildren().forEach( function( atom ) {
        atom['fill' + (value ? 'Default' : 'Gray')]();
        } );*/
-    }} );
+    },
+    enableRadioButtons: function( isEnable ) {
+      this.radioButtons.forEach( function( radioButton ) {
+        //radioButton.enabled = isEnable;
+        //console.log(radioButton);
+      } );
+      this.setCheckboxAvailability();
+    }
+  } );
 } );

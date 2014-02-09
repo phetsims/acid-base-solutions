@@ -34,7 +34,7 @@ define( function( require ) {
   }
 
   return inherit( AqueousSolution, StrongAcidSolution, {
-    intro: function() {
+    init: function() {
       this.strength = this.CONSTANTS.STRONG_STRENGTH;
       this.concentration = this.CONSTANTS.CONCENTRATION_RANGE.defaultValue;
     }

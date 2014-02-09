@@ -41,6 +41,6 @@ define( function( require ) {
   }
 
   return inherit( PropertySet, AqueousSolution, {
-    intro: function() {}
+    init: function() {}
   } );
 } );

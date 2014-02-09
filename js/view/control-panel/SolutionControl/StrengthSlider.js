@@ -22,18 +22,19 @@ define( function( require ) {
     weakerString = require( 'string!ACID_BASE_SOLUTIONS/weaker' ),
     strongerString = require( 'string!ACID_BASE_SOLUTIONS/stronger' );
 
-  function StrengthSlider( property, range, coords ) {
+  function StrengthSlider( strengthProperty, range, coords ) {
     var width = 150,
       tickLength = 10,
-      sliderValue = new Property( Math.log( range.defaultValue ) / LN10 ),
+      sliderProperty = new Property( Math.log( range.defaultValue ) / LN10 ),
       STRENGTH_MIN = Math.log( range.min ) / LN10,
       STRENGTH_MAX = Math.log( range.max ) / LN10,
       tickOffset = 5,
       slider;
     Node.call( this, coords );
+    this.property = sliderProperty;
 
     // add horizontal part
-    this.addChild( slider = new HSlider( sliderValue, {min: STRENGTH_MIN, max: STRENGTH_MAX}, {
+    this.addChild( slider = new HSlider( sliderProperty, {min: STRENGTH_MIN, max: STRENGTH_MAX}, {
       trackSize: new Dimension2( width, 5 ),
       thumbSize: new Dimension2( 15, 25 ),
       majorTickLength: -15
@@ -43,14 +44,18 @@ define( function( require ) {
     slider.addMajorTick( STRENGTH_MIN, null );
     slider.addMajorTick( STRENGTH_MAX, null );
 
-    sliderValue.link( function( value ) {
-      property.value = parseFloat( Math.pow( 10, value ) );
-    } );
-
     // add text
     this.addChild( new Text( weakerString, {font: FONT, centerX: 0, centerY: 2 * tickOffset + tickLength} ) );
     this.addChild( new Text( strongerString, {font: FONT, centerX: width, centerY: 2 * tickOffset + tickLength} ) );
+
+    sliderProperty.link( function( value ) {
+      strengthProperty.value = parseFloat( Math.pow( 10, value ) );
+    } );
   }
 
-  return inherit( Node, StrengthSlider );
+  return inherit( Node, StrengthSlider, {
+    reset: function() {
+      this.property.reset();
+    }
+  } );
 } );

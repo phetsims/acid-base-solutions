@@ -7,7 +7,7 @@
  */
 
 define( function( require ) {
-  "use strict";
+  'use strict';
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
@@ -26,11 +26,9 @@ define( function( require ) {
   function pHMeterTest( model, options ) {
     var self = this,
       maxY = 100,
-      minY = 25.2,
-      waterSurface = 38,
-      pHText,
-      checkVisibility;
+      minY = 25.2;
     Node.call( this, _.extend( {cursor: 'pointer'}, options ) );
+    this.waterSurface = 38;
 
     // add sensor
     this.addChild( new Node( {children: [
@@ -44,12 +42,9 @@ define( function( require ) {
 
     // add text
     this.addChild( new Text( pHString + ':', {font: FONT, centerX: 18, centerY: 0} ) );
-    this.addChild( pHText = new Text( '', {font: FONT, centerX: 34, centerY: 0} ) );
+    this.addChild( this.pHText = new Text( '', {font: FONT, centerX: 34, centerY: 0} ) );
 
     // init drag
-    checkVisibility = function() {
-      pHText.setVisible( self.y > waterSurface );
-    };
     var clickYOffset;
     this.addInputListener( new SimpleDragHandler( {
       start: function( e ) {
@@ -61,21 +56,27 @@ define( function( require ) {
         // check limitation
         y = Math.min( Math.max( minY, y ), maxY );
         // move to new position
-        self.setY( y );
-        checkVisibility();
+        self.setYValue( y );
       }
     } ) );
 
     model.property( 'ph' ).link( function( ph ) {
-      pHText.setText( ph.toFixed( 2 ).replace( '.', ',' ) );
+      self.pHText.setText( ph.toFixed( 2 ).replace( '.', ',' ) );
     } );
 
     model.property( 'testMode' ).link( function( mode ) {
       self.setVisible( mode === 'PH_METER' );
     } );
 
-    checkVisibility();
+    model.property( 'resetTrigger' ).link( function() {
+      self.setYValue( options.y || 0 );
+    } );
   }
 
-  return inherit( Node, pHMeterTest );
+  return inherit( Node, pHMeterTest, {
+    setYValue: function( y ) {
+      this.y = y;
+      this.pHText.setVisible( this.y > this.waterSurface );
+    }
+  } );
 } );

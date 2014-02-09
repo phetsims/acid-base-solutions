@@ -31,7 +31,8 @@ define( function( require ) {
 
   function Solution( model, options ) {
     var vBox = new VBox( {spacing: 5} ),
-      strengthSlider;
+      strengthSlider,
+      concentrationSlider;
     Node.call( this, options );
 
     // add type radio buttons menu
@@ -45,7 +46,7 @@ define( function( require ) {
 
     // add concentration slider
     vBox.addChild( new Text( initialConcentrationString, {font: FONT} ) );
-    vBox.addChild( new ConcentrationSlider( model.property( 'concentration' ), model.CONSTANTS.CONCENTRATION_RANGE ) );
+    vBox.addChild( concentrationSlider = new ConcentrationSlider( model.property( 'concentration' ), model.CONSTANTS.CONCENTRATION_RANGE ) );
 
     // add black line
     vBox.addChild( new Line( 0, 0, 200, 0, {stroke: 'black', lineWidth: 0.75} ) );
@@ -65,6 +66,11 @@ define( function( require ) {
 
     model.property( 'isWeak' ).link( function( isWeak ) {
       strengthSlider.setVisible( isWeak );
+    } );
+
+    model.property( 'resetTrigger' ).link( function() {
+      strengthSlider.reset();
+      concentrationSlider.reset();
     } );
   }
 

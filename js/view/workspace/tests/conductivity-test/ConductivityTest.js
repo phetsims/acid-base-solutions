@@ -107,6 +107,11 @@ define( function( require ) {
     model.property( 'testMode' ).link( function( mode ) {
       self.setVisible( mode === 'CONDUCTIVITY' );
     } );
+
+    model.property( 'resetTrigger' ).link( function() {
+      positiveProbeY.reset();
+      negativeProbeY.reset();
+    } );
   }
 
   return inherit( Node, ConductivityTest );
