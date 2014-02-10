@@ -44,7 +44,7 @@ define( function( require ) {
       {isRadio: true, value: 'MOLECULES', text: new Text( moleculesString, {font: FONT} ), icon: new Image( magnifyingGlassImage, {scale: 0.75} )},
       {isRadio: false, text: showSolventString, icon: new H2OMolecule( model )},
       {isRadio: true, value: 'EQUILIBRIUM', text: new Node( {children: [
-        new Text( equilibriumString, {font: FONT, centerX: 0} ),
+        new Text( equilibriumString, {font: FONT, centerX: -6} ),
         new Text( concentrationString, {font: FONT, centerX: 0, centerY: 8} )
       ]} ), icon: new Node( {children: [
         new Rectangle( 0, 0, 24.5, 18, {fill: 'white', stroke: 'black', lineWidth: 0.5} ),
