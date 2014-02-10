@@ -27,7 +27,7 @@ define( function( require ) {
       OH: require( 'ACID_BASE_SOLUTIONS/view/molecules/OHMolecule' )
     };
 
-  var MAX_MOLECULES = 100, // TODO: should be 200, but sim will load approximately 30 second
+  var MAX_MOLECULES = 50, // TODO: should be 200, but sim will load approximately 30 second
     BASE_DOTS = 2,
     BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules;
 
