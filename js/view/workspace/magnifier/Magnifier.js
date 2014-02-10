@@ -22,6 +22,7 @@ define( function( require ) {
       radius = model.height / 3.6,
       layers = {};
     Node.call( this, options );
+    this.setPickable( false );
     this.model = model;
 
     // add container for molecules

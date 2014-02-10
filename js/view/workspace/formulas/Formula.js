@@ -20,6 +20,7 @@ define( function( require ) {
 
   function Formula( model, options ) {
     Node.call( this, options );
+    this.setPickable( false );
 
     this.formulas = [
       new WaterFormula( model ),

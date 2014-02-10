@@ -21,6 +21,7 @@ define( function( require ) {
       colors = model.MOLECULES_COLORS,
       bars = {};
     Node.call( this, options );
+    this.setPickable( false );
     this.model = model;
 
     // add background
