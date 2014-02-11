@@ -19,11 +19,16 @@ define( function( require ) {
     FONT_SMALL = new PhetFont( 8 ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
 
+  // strings
     negligibleString = require( 'string!ACID_BASE_SOLUTIONS/negligible' );
 
-  // TODO doc
+  /**
+   * @param {property} property of model (concentration of single molecule type) for observing
+   * @param {object} options for new node
+   * @constructor
+   */
 
-  function EquilibriumConcentrationBarChart( property, options ) {
+  function EquilibriumConcentrationSingleBar( property, options ) {
     var rectangle, text, textPow, height = options.height;
     Node.call( this );
 
@@ -73,5 +78,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, EquilibriumConcentrationBarChart );
+  return inherit( Node, EquilibriumConcentrationSingleBar );
 } );
