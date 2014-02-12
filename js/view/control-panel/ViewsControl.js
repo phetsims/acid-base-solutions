@@ -20,6 +20,7 @@ define( function( require ) {
     HBox = require( 'SCENERY/nodes/HBox' ),
     Image = require( 'SCENERY/nodes/Image' ),
     H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' ),
+    HStrut = require( 'SUN/HStrut' ),
 
   // strings
     moleculesString = require( 'string!ACID_BASE_SOLUTIONS/molecules' ),
@@ -67,11 +68,10 @@ define( function( require ) {
         vBox.addChild( this.radioButtons[this.radioButtons.length - 1] );
       }
       else {
-        hBox = new HBox( {spacing: 5, children: [this.checkbox.text = new Text( menuOptions[i].text, {font: FONT} ), this.checkbox.icon = menuOptions[i].icon]} );
-        vBox.addChild( this.checkbox.button = new CheckBox( hBox, model.property( 'solvent' ), {boxWidth: 15} ) );
+        this.checkbox.button = new CheckBox( new Text( menuOptions[i].text, {font: FONT} ), model.property( 'solvent' ), { boxWidth: 15 } );
+        hBox = new HBox( { spacing: 5, children: [ new HStrut( 20 ), this.checkbox.button, this.checkbox.icon = menuOptions[i].icon ] } );
+        vBox.addChild( hBox );
       }
-
-      hBox.updateLayout();
     }
 
     this.addChild( vBox );
