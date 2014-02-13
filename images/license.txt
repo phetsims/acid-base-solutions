@@ -1,0 +1,14 @@
+arrow_double.png source=PhET
+arrow_single.png source=PhET
+battery.png source=PhET
+beaker.png source=PhET
+custom-solution-icon.png source=PhET
+introduction-icon.png source=PhET
+light-bulb.png source=PhET
+light-bulb-base.png source=PhET
+light-bulb-glass.png source=PhET
+light-bulb-glass-mask.png source=PhET
+magnifying-glass.png source=PhET
+pH-meter.png source=PhET
+pH-paper.png source=PhET
+solvent.png source=PhET

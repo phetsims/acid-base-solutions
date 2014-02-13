@@ -15,8 +15,8 @@ define( function( require ) {
     ScreenView = require( 'JOIST/ScreenView' ),
     AcidBaseSolutionsModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsModel' ),
     AcidBaseSolutionsView = require( 'ACID_BASE_SOLUTIONS/view/AcidBaseSolutionsView' ),
-    introductionIcon = require( 'image!ACID_BASE_SOLUTIONS/../images/introduction-icon.jpg' ),
-    customSolutionIcon = require( 'image!ACID_BASE_SOLUTIONS/../images/custom-solution-icon.jpg' ),
+    introductionIcon = require( 'image!ACID_BASE_SOLUTIONS/../images/introduction-icon.png' ),
+    customSolutionIcon = require( 'image!ACID_BASE_SOLUTIONS/../images/custom-solution-icon.png' ),
     introductionTitleString = require( 'string!ACID_BASE_SOLUTIONS/introductionTitle' ),
     customSolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/customSolutionTitle' ),
     simTitleString = require( 'string!ACID_BASE_SOLUTIONS/acidBaseSolutionsTitle' );
