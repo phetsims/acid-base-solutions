@@ -61,7 +61,7 @@ define( function( require ) {
     } ) );
 
     model.property( 'ph' ).link( function( ph ) {
-      self.pHText.setText( ph.toFixed( 2 ).replace( '.', ',' ) );
+      self.pHText.setText( ph.toFixed( 2 ) );
     } );
 
     model.property( 'testMode' ).link( function( mode ) {
