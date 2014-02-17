@@ -18,11 +18,13 @@ define( function( require ) {
     FONT_NORMAL = new PhetFont( 12 ),
     FONT_SMALL = new PhetFont( 8 ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
+    Util = require( 'DOT/Util' ),
 
   // strings
     negligibleString = require( 'string!ACID_BASE_SOLUTIONS/negligible' );
 
   /**
+   * Constructor for single bar in equilibrium concentration chart.
    * @param {property} property of model (concentration of single molecule type) for observing
    * @param {object} options for new node
    * @constructor
@@ -65,14 +67,14 @@ define( function( require ) {
           pow++;
           value = 1;
         }
-        text.setText( value.toFixed( 2 ) + ' x ' + '10' );
+        text.setText( Util.toFixed( value, 2 ) + ' x ' + '10' );
 
         // set pow
         textPow.setText( pow );
         textPow.centerY = -text.getHeight() - 10;
       }
       else {
-        text.setText( value.toFixed( 1 ) );
+        text.setText( Util.toFixed( value, 1 ) );
         textPow.setVisible( false );
       }
     } );
