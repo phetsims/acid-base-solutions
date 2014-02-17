@@ -16,6 +16,7 @@ define( function( require ) {
     FONT = new PhetFont( 12 ),
     VBox = require( 'SCENERY/nodes/VBox' ),
     HBox = require( 'SCENERY/nodes/HBox' ),
+    VStrut = require( 'SUN/VStrut' ),
     Image = require( 'SCENERY/nodes/Image' ),
 
   // strings
@@ -30,8 +31,8 @@ define( function( require ) {
 
   var menuOptions = [
     {text: pHMeterString, value: 'PH_METER', icon: new Image( pHMeterImage, {scale: 0.75} )},
-    {text: pHPaperString, value: 'PH_PAPER', icon: new Image( pHPaperImage, {scale: 0.75} )},
-    {text: conductivityString, value: 'CONDUCTIVITY', icon: new Image( lightBulbImage, {scale: 0.6} )}
+    {text: pHPaperString, value: 'PH_PAPER', icon: new Node( {children: [new VStrut( 10 ), new Image( pHPaperImage, {scale: 0.75, y: 6} )]} )},
+    {text: conductivityString, value: 'CONDUCTIVITY', icon: new Node( {children: [new VStrut( 25 ), new Image( lightBulbImage, {scale: 0.6, y: 4} )]} )}
   ];
 
   function Tests( model, options ) {

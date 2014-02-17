@@ -17,6 +17,7 @@ define( function( require ) {
     FONT_SMALL = new PhetFont( 8 ),
     VBox = require( 'SCENERY/nodes/VBox' ),
     HBox = require( 'SCENERY/nodes/HBox' ),
+    VStrut = require( 'SUN/VStrut' ),
     H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' ),
     HAMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/HAMolecule' ),
     MOHMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/MOHMolecule' ),
@@ -41,20 +42,31 @@ define( function( require ) {
   ];
 
   function Solutions( model, options ) {
-    var vBox = new VBox( {spacing: 5, align: 'left'} );
+    var vBox = new VBox( {align: 'left'} ),
+      radioButtons = [],
+      maxHeight = 0;
     Node.call( this, options );
 
-    // add options to menu
+    // define radio buttons and find max height of single button
     for ( var i = 0; i < menuOptions.length; i++ ) {
-      vBox.addChild( new AquaRadioButton( model.property( 'solution' ), menuOptions[i].value, new HBox( {spacing: 5, children: [
+      radioButtons[i] = new AquaRadioButton( model.property( 'solution' ), menuOptions[i].value, new HBox( {spacing: 5, children: [
         menuOptions[i].text,
         new menuOptions[i].icon( model )
       ]
-      } ), {radius: 7} ) );
+      } ), {radius: 7} );
+      maxHeight = Math.max( radioButtons[i].getHeight(), maxHeight );
+    }
+
+    // add options to menu
+    for ( i = 0; i < radioButtons.length; i++ ) {
+      vBox.addChild( new HBox( {align: 'left', children: [new VStrut( maxHeight ), radioButtons[i]]} ) );
     }
 
     this.addChild( vBox );
     vBox.updateLayout();
+
+    // adjust node position
+    this.setX( this.getX() - 5 );
   }
 
   return inherit( Node, Solutions );
