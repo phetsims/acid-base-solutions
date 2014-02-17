@@ -44,7 +44,8 @@ define( function( require ) {
   function Solutions( model, options ) {
     var vBox = new VBox( {align: 'left'} ),
       radioButtons = [],
-      maxHeight = 0;
+      maxHeight = 0,
+      radius = 7;
     Node.call( this, options );
 
     // define radio buttons and find max height of single button
@@ -53,7 +54,7 @@ define( function( require ) {
         menuOptions[i].text,
         new menuOptions[i].icon( model )
       ]
-      } ), {radius: 7} );
+      } ), {radius: radius} );
       maxHeight = Math.max( radioButtons[i].getHeight(), maxHeight );
     }
 
@@ -66,7 +67,7 @@ define( function( require ) {
     vBox.updateLayout();
 
     // adjust node position
-    this.setX( this.getX() - 5 );
+    this.setX( this.getX() - radius );
   }
 
   return inherit( Node, Solutions );
