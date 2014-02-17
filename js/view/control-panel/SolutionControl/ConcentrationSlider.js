@@ -20,6 +20,7 @@ define( function( require ) {
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     Text = require( 'SCENERY/nodes/Text' ),
     HSlider = require( 'SUN/HSlider' ),
+    Util = require( 'DOT/Util' ),
     LN10 = Math.LN10,
 
   // Constants
@@ -81,7 +82,7 @@ define( function( require ) {
 
     // Update the readout text whenever the value changes.
     concentrationProperty.link( function( value ) {
-      readoutText.text = value + ' ' + molesPerLiterString;
+      readoutText.text = Util.toFixed( value, 3 ) + ' ' + molesPerLiterString;
       readoutText.centerX = readoutBackground.centerX;
     } );
 
