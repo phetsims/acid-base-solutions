@@ -38,27 +38,21 @@ define( function( require ) {
   };
 
   function MagnifierMoleculesLayer( model, property, type, radius ) {
-    var self = this,
-      pointer = 0; // last shown molecule's index
     Node.call( this );
-    this.molecules = [];
+    this.model = model;
+    this.property = property;
     this.radius = radius;
+    this.molecules = [];
+    this.pointer = 0; // last shown molecule's index
 
     // add molecules
     for ( var i = 0; i < MAX_MOLECULES; i++ ) {
       this.addChild( this.molecules[i] = new MoleculesConstructors[type]( model, {visible: false}, true ) );
     }
 
-    property.link( function( value ) {
-      var numberOfMolecules = getNumberOfMolecules( value ), i, visibility;
-      // show appropriate number of molecules
-      if ( numberOfMolecules !== pointer ) {
-        for ( i = Math.min( pointer, numberOfMolecules ), visibility = (numberOfMolecules > pointer); i < Math.max( pointer, numberOfMolecules ); i++ ) {
-          self.molecules[i].setVisible( visibility );
-        }
-        pointer = numberOfMolecules;
-      }
-    } );
+    // update layer only when it visible
+    property.link( this.setMolecules.bind( this ) );
+    model.property( 'viewMode' ).link( this.setMolecules.bind( this ) );
   }
 
   return inherit( Node, MagnifierMoleculesLayer, {
@@ -70,6 +64,20 @@ define( function( require ) {
         fi = 2 * Math.PI * Math.random();
         molecule.setTranslation( r * Math.sin( fi ), r * Math.cos( fi ) );
       } );
+    },
+    setMolecules: function() {
+      var numberOfMolecules = getNumberOfMolecules( this.property.get() ),
+        pointer = this.pointer,
+        visibility,
+        i;
+
+      // show appropriate number of molecules
+      if ( numberOfMolecules !== pointer && this.model.viewMode === this.model.VIEW_MODES[0] ) {
+        for ( i = Math.min( pointer, numberOfMolecules ), visibility = (numberOfMolecules > pointer); i < Math.max( pointer, numberOfMolecules ); i++ ) {
+          this.molecules[i].setVisible( visibility );
+        }
+        this.pointer = numberOfMolecules;
+      }
     }
   } );
 } );
