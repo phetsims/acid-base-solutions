@@ -34,8 +34,7 @@ define( function( require ) {
     beakerImage = require( 'image!ACID_BASE_SOLUTIONS/beaker.png' );
 
   function ViewsControl( model, options ) {
-    var self = this,
-      vBox = new VBox( {spacing: 4, align: 'left'} ),
+    var vBox = new VBox( {spacing: 4, align: 'left'} ),
       hBox;
     Node.call( this, options );
     this.model = model;
