@@ -43,19 +43,19 @@ define( function( require ) {
             layers[type].addChild( new MagnifierMoleculesLayer( model, type, property, molecule.type, radius ) );
           }
         } );
-        self.container.addChild( layers[type] );
+        //self.container.addChild( layers[type] );
       }
     } );
 
     model.property( 'viewMode' ).link( this.checkVisibility.bind( this ) );
     model.property( 'testMode' ).link( this.checkVisibility.bind( this ) );
 
-    /*model.property( 'solution' ).link( function( newSolution, prevSolution ) {
+    model.property( 'solution' ).link( function( newSolution, prevSolution ) {
       if ( prevSolution ) {
         self.container.removeChild( layers[prevSolution] );
       }
       self.container.addChild( layers[newSolution] );
-    } );*/
+    } );
   }
 
   return inherit( Node, Magnifier, {
