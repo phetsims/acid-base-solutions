@@ -35,7 +35,7 @@ define( function( require ) {
     {text: conductivityString, value: 'CONDUCTIVITY', icon: new Node( {children: [new VStrut( 25 ), new Image( lightBulbImage, {scale: 0.6, y: 4} )]} )}
   ];
 
-  function Tests( model, options ) {
+  function TestsControl( model, options ) {
     var vBox = new VBox( {spacing: 4, align: 'left'} );
     Node.call( this, options );
 
@@ -51,5 +51,5 @@ define( function( require ) {
     vBox.updateLayout();
   }
 
-  return inherit( Node, Tests );
+  return inherit( Node, TestsControl );
 } );

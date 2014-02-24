@@ -41,7 +41,7 @@ define( function( require ) {
     {text: new Text( weakBaseString + ' (B)', {font: FONT} ), value: 'WEAK_BASE', icon: BMolecule}
   ];
 
-  function Solutions( model, options ) {
+  function SolutionsControl( model, options ) {
     var vBox = new VBox( {align: 'left'} ),
       radioButtons = [],
       maxHeight = 0,
@@ -70,5 +70,5 @@ define( function( require ) {
     this.setX( this.getX() - radius );
   }
 
-  return inherit( Node, Solutions );
+  return inherit( Node, SolutionsControl );
 } );

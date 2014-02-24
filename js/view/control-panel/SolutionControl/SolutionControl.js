@@ -29,7 +29,7 @@ define( function( require ) {
     weakString = require( 'string!ACID_BASE_SOLUTIONS/weak' ),
     strongString = require( 'string!ACID_BASE_SOLUTIONS/strong' );
 
-  function Solution( model, options ) {
+  function SolutionsControl( model, options ) {
     var vBox = new VBox( {spacing: 4} ),
       strengthSlider,
       concentrationSlider;
@@ -74,5 +74,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, Solution );
+  return inherit( Node, SolutionsControl );
 } );
