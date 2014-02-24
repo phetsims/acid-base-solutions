@@ -37,7 +37,8 @@ define( function( require ) {
     return Math.round( BASE_DOTS * Math.pow( baseFactor, raiseFactor ) );
   };
 
-  function MagnifierMoleculesLayer( model, property, type, radius ) {
+  function MagnifierMoleculesLayer( model, boundedSolution, property, type, radius ) {
+    var self = this;
     Node.call( this );
     this.model = model;
     this.property = property;
@@ -53,6 +54,13 @@ define( function( require ) {
     // update layer only when it visible
     property.link( this.setMolecules.bind( this ) );
     model.property( 'viewMode' ).link( this.setMolecules.bind( this ) );
+
+    model.property( 'solution' ).link( function( newSolution ) {
+      self.setVisible( boundedSolution === newSolution );
+      if ( boundedSolution === newSolution ) {
+        self.update();
+      }
+    } );
   }
 
   return inherit( Node, MagnifierMoleculesLayer, {

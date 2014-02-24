@@ -7,7 +7,7 @@
  */
 
 define( function( require ) {
-  "use strict";
+  'use strict';
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
@@ -36,33 +36,26 @@ define( function( require ) {
     model.SOLUTIONS.forEach( function( solution ) {
       var type = solution.type, property;
       if ( type in model.components ) {
-        layers[type] = {node: new Node( {visible: false} ), layer: []};
-        solution.relations.forEach( function( molecule, i ) {
+        layers[type] = new Node();
+        solution.relations.forEach( function( molecule ) {
           property = model.components[type].property( molecule.property );
           if ( molecule.type !== 'H2O' && property.get() ) {
-            layers[type].layer[i] = new MagnifierMoleculesLayer( model, property, molecule.type, radius );
-            layers[type].node.addChild( layers[type].layer[i] );
+            layers[type].addChild( new MagnifierMoleculesLayer( model, type, property, molecule.type, radius ) );
           }
         } );
-        self.container.addChild( layers[type].node );
-      }
-    } );
-
-    model.property( 'solution' ).link( function( newSolution, prevSolution ) {
-      // show new layers
-      layers[newSolution].node.setVisible( true );
-      layers[newSolution].layer.forEach( function( layer ) {
-        layer.update();
-      } );
-
-      // hide previous layers
-      if ( prevSolution ) {
-        layers[prevSolution].node.setVisible( false );
+        self.container.addChild( layers[type] );
       }
     } );
 
     model.property( 'viewMode' ).link( this.checkVisibility.bind( this ) );
     model.property( 'testMode' ).link( this.checkVisibility.bind( this ) );
+
+    /*model.property( 'solution' ).link( function( newSolution, prevSolution ) {
+      if ( prevSolution ) {
+        self.container.removeChild( layers[prevSolution] );
+      }
+      self.container.addChild( layers[newSolution] );
+    } );*/
   }
 
   return inherit( Node, Magnifier, {
