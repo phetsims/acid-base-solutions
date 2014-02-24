@@ -9,15 +9,12 @@
 define( function( require ) {
   'use strict';
   var inherit = require( 'PHET_CORE/inherit' ),
-    Node = require( 'SCENERY/nodes/Node' ),
     RadialGradient = require( 'SCENERY/util/RadialGradient' ),
     Circle = require( 'SCENERY/nodes/Circle' );
 
   var gradients = {};
 
   function Atom( coords, radius, color ) {
-    Node.call( this, coords );
-
     if ( !(radius in gradients) ) {
       gradients[radius] = {};
     }
@@ -30,8 +27,8 @@ define( function( require ) {
         .addColorStop( 1, 'black' );
     }
 
-    this.addChild( new Circle( radius, {fill: gradients[radius][color]} ) );
+    Circle.call( this, radius, {x: coords.x, y: coords.y, fill: gradients[radius][color]} );
   }
 
-  return inherit( Node, Atom );
+  return inherit( Circle, Atom );
 } );
