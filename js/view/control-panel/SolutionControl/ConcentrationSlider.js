@@ -1,7 +1,8 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * This class presents a dialog to the user that allows them to enter a initial concentration value.
+ * This class presents a slider for the user
+ * that allows them to change a initial concentration value.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
@@ -21,31 +22,35 @@ define( function( require ) {
     Text = require( 'SCENERY/nodes/Text' ),
     HSlider = require( 'SUN/HSlider' ),
     Util = require( 'DOT/Util' ),
+
+  // constants
+    READOUT_FONT = new PhetFont( 14 ),
+    ARROW_HEIGHT = 15,
     LN10 = Math.LN10,
 
-  // Constants
-    READOUT_FONT = new PhetFont( 14 ),
-    ARROW_HEIGHT = 15;
+    arrowButtonOptions = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
 
-  function ConcentrationSlider( concentrationProperty, range, options ) {
-    var self = this,
-      CONCENTRATION_MIN = Math.log( range.min ) / LN10,
+  function ConcentrationSlider( concentrationProperty, range ) {
+    var CONCENTRATION_MIN = Math.log( range.min ) / LN10,
       CONCENTRATION_MAX = Math.log( range.max ) / LN10,
       CONCENTRATION_STEP = 0.1,
-      sliderProperty = new Property( Math.log( range.defaultValue ) / LN10 );
+      sliderProperty = new Property( Math.log( range.defaultValue ) / LN10 ),
+      readoutText = new Text( '0' + ' ' + molesPerLiterString, { font: READOUT_FONT } ),
+      readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.5 ),
+      panelContent = new Node(),
+      slider,
+      leftArrowButton,
+      rightArrowButton;
     Node.call( this, {scale: 0.85} );
     this.property = sliderProperty;
 
-    // Create and add the readout, including the background.
-    var readoutText = new Text( '0' + ' ' + molesPerLiterString, { font: READOUT_FONT } ),
-      readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.5 ),
-      panelContent = new Node();
+    // add the readout, including the background
     panelContent.addChild( readoutBackground );
     readoutText.centerY = readoutBackground.centerY - 2;
     panelContent.addChild( readoutText );
 
-    // Create and add the slider.
-    var slider = new HSlider( sliderProperty, { min: CONCENTRATION_MIN, max: CONCENTRATION_MAX }, {
+    // create and add the slider
+    slider = new HSlider( sliderProperty, { min: CONCENTRATION_MIN, max: CONCENTRATION_MAX }, {
       thumbSize: new Dimension2( 15, 25 ),
       majorTickLength: 15,
       tickLabelSpacing: 2
@@ -55,13 +60,12 @@ define( function( require ) {
       slider.addMinorTick( i, null );
     }
 
-    // Create and add the arrow buttons.
-    var arrowButtonOptions = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
-    var leftArrowButton = new ArrowButton( 'left', function() {
+    // create and add the arrow buttons
+    leftArrowButton = new ArrowButton( 'left', function() {
       sliderProperty.value = Math.max( sliderProperty.value - CONCENTRATION_STEP, CONCENTRATION_MIN );
     }, arrowButtonOptions );
     panelContent.addChild( leftArrowButton );
-    var rightArrowButton = new ArrowButton( 'right', function() {
+    rightArrowButton = new ArrowButton( 'right', function() {
       sliderProperty.value = Math.min( sliderProperty.value + CONCENTRATION_STEP, CONCENTRATION_MAX );
     }, arrowButtonOptions );
     panelContent.addChild( rightArrowButton );
@@ -76,11 +80,10 @@ define( function( require ) {
     rightArrowButton.left = slider.right + 12;
     rightArrowButton.centerY = slider.centerY;
 
-    // Put the contents into a panel.
-    var panel = new Panel( panelContent, {fill: 'rgba(0,0,0,0)', stroke: 'rgba(0,0,0,0)'} );
-    self.addChild( panel );
+    // put the contents into a panel
+    this.addChild( new Panel( panelContent, {fill: 'rgba(0,0,0,0)', stroke: 'rgba(0,0,0,0)'} ) );
 
-    // Update the readout text whenever the value changes.
+    // update the readout text whenever the value changes
     concentrationProperty.link( function( value ) {
       readoutText.text = Util.toFixed( value, 3 ) + ' ' + molesPerLiterString;
       readoutText.centerX = readoutBackground.centerX;
