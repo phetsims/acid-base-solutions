@@ -32,7 +32,7 @@ define( function( require ) {
 
   function pHPaperTest( model, options ) {
     var self = this,
-      paperDefaultColor = model.PH_COOLORS[model.PH_COOLORS.length - 1],
+      paperDefaultColor = model.PH_COLORS[model.PH_COLORS.length - 1],
       waterSurface = 14.5,
       indicatorPaper,
       paper,
@@ -43,18 +43,18 @@ define( function( require ) {
     this.addChild( new Text( pHColorKeyString, {font: FONT_BIG, centerY: 0} ) );
 
     // add color key table
-    for ( var i = 0, tableRectWidth = 14, tableRectHeight = 28, space = 1; i < model.PH_COOLORS.length - 1; i++ ) {
-      this.addChild( new Rectangle( (tableRectWidth + space) * i, 10, tableRectWidth, tableRectHeight, {fill: model.PH_COOLORS[i]} ) );
+    for ( var i = 0, tableRectWidth = 14, tableRectHeight = 28, space = 1; i < model.PH_COLORS.length - 1; i++ ) {
+      this.addChild( new Rectangle( (tableRectWidth + space) * i, 10, tableRectWidth, tableRectHeight, {fill: model.PH_COLORS[i]} ) );
       this.addChild( new Text( i, {font: FONT_SMALL, centerX: (tableRectWidth + space) * (i + 0.5), centerY: 46} ) );
     }
 
     // add pH paper
     this.addChild( paper = new Node( {children: [
-      new Rectangle( (model.PH_COOLORS.length + 2) * (tableRectWidth + space), 0, tableRectWidth, tableRectHeight * 4, {cursor: 'pointer', fill: paperDefaultColor, stroke: 'rgb(150, 150, 150)', lineWidth: 0.5} ),
+      new Rectangle( (model.PH_COLORS.length + 2) * (tableRectWidth + space), 0, tableRectWidth, tableRectHeight * 4, {cursor: 'pointer', fill: paperDefaultColor, stroke: 'rgb(150, 150, 150)', lineWidth: 0.5} ),
       indicatorPaper = new Rectangle( 0, 0, tableRectWidth, 0, {cursor: 'pointer', fill: 'red', stroke: 'rgb(150, 150, 150)', lineWidth: 0.5} )
     ]} ) );
     indicatorPaper.rotate( Math.PI );
-    indicatorPaper.setTranslation( (model.PH_COOLORS.length + 2) * (tableRectWidth + space) + tableRectWidth, tableRectHeight * 4 );
+    indicatorPaper.setTranslation( (model.PH_COLORS.length + 2) * (tableRectWidth + space) + tableRectWidth, tableRectHeight * 4 );
 
     // add drag and drop for paper
     var clickOffset,
@@ -97,7 +97,7 @@ define( function( require ) {
     } );
 
     model.property( 'ph' ).link( function( pHValue ) {
-      indicatorPaper.setFill( model.PH_COOLORS[Math.round( pHValue )] );
+      indicatorPaper.setFill( model.PH_COLORS[Math.round( pHValue )] );
       indicatorPaper.setRectHeight( 0 );
       checkIndicator();
     } );

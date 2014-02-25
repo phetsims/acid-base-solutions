@@ -21,7 +21,7 @@ define( function( require ) {
 
     customSolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/customSolutionTitle' );
 
-  var PH_COOLORS = [
+  var PH_COLORS = [
     'rgb(182,70,72)',
     'rgb(196,80,86)',
     'rgb(213,83,71)',
@@ -121,7 +121,7 @@ define( function( require ) {
     ];
 
     // pH color keys
-    this.PH_COOLORS = PH_COOLORS;
+    this.PH_COLORS = PH_COLORS;
 
     PropertySet.call( this, {
       solution: (customSolutionTitleString === mode ? self.SOLUTIONS[2].type : self.SOLUTIONS[0].type), // solution's type
