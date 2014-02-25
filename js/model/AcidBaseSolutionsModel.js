@@ -15,7 +15,7 @@ define( function( require ) {
     Range = require( 'DOT/Range' ),
     WaterSolution = require( './WaterSolution' ),
     StrongAcidSolution = require( './StrongAcidSolution' ),
-    WeakAcidSollution = require( './WeakAcidSollution' ),
+    WeakAcidSolution = require( './WeakAcidSolution' ),
     StrongBaseSolution = require( './StrongBaseSolution' ),
     WeakBaseSolution = require( './WeakBaseSolution' ),
 
@@ -101,7 +101,7 @@ define( function( require ) {
         {type: 'A', property: 'product'},
         {type: 'H3O', property: 'H3O'}
       ]},
-      {type: 'WEAK_ACID', constructor: WeakAcidSollution, relations: [
+      {type: 'WEAK_ACID', constructor: WeakAcidSolution, relations: [
         {type: 'HA', property: 'solute'},
         {type: 'H2O', property: 'H2O'},
         {type: 'A', property: 'product'},
