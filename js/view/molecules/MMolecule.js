@@ -8,20 +8,11 @@
 
 define( function( require ) {
   'use strict';
-  var inherit = require( 'PHET_CORE/inherit' ),
-    Node = require( 'SCENERY/nodes/Node' ),
-    Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' );
+  var Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' );
 
-  var atomCache, getMolecule = function( color ) {
-    return new Atom( {x: 0, y: 0}, 7, color );
-  };
-
-  function MMolecule( model, coords, fromCache ) {
-    Node.call( this, coords );
-
-    // cache values for next execution
-    this.addChild( fromCache ? (atomCache ? atomCache : atomCache = getMolecule( model.MOLECULES_COLORS.M )) : getMolecule( model.MOLECULES_COLORS.M ) );
+  function MMolecule( model, coords ) {
+    return new Atom( coords, 7, model.MOLECULES_COLORS.M );
   }
 
-  return inherit( Node, MMolecule );
+  return MMolecule;
 } );
