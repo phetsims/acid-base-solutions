@@ -156,12 +156,10 @@ define( function( require ) {
 
     // add properties for custom tab
     if ( customSolutionTitleString === mode ) {
-      PropertySet.call( this, {
-        isAcid: true, // type of solution. true - acid, false - base
-        isWeak: true, // type of strength. true - weak, false - strong
-        concentration: 0, // concentration of solution
-        strength: 0  // strength of solution
-      } );
+      this.addProperty( 'isAcid', true ); // type of solution. true - acid, false - base
+      this.addProperty( 'isWeak', true ); // type of strength. true - weak, false - strong
+      this.addProperty( 'concentration', 0 ); // concentration of solution
+      this.addProperty( 'strength', 0 ); // strength of solution
 
       // update solution type if it was changed by radio buttons
       var setSolution = function() {
