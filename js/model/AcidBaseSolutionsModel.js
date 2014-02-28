@@ -151,7 +151,7 @@ define( function( require ) {
 
     // set brightness of light rays depend on ph value
     this.property( 'ph' ).link( function( pHValue ) {
-      self.brightness = self.pHToBrightness( pHValue );
+      self.brightness = pHToBrightness( pHValue );
     } );
 
     // add properties for custom tab
@@ -187,6 +187,14 @@ define( function( require ) {
     }
   }
 
+  // private methods
+  var pHToBrightness = function( pH ) {
+    var NEUTRAL_PH = CONSTANTS.NEUTRAL_PH,
+      NEUTRAL_BRIGHTNESS = CONSTANTS.NEUTRAL_BRIGHTNESS;
+
+    return NEUTRAL_BRIGHTNESS + ( 1 - NEUTRAL_BRIGHTNESS ) * (pH < NEUTRAL_PH ? ( NEUTRAL_PH - pH ) / ( NEUTRAL_PH - CONSTANTS.MIN_PH ) : ( pH - NEUTRAL_PH ) / ( CONSTANTS.MAX_PH - NEUTRAL_PH ) );
+  };
+
   inherit( PropertySet, AcidBaseSolutionsModel, {
     step: function() {},
     reset: function() {
@@ -211,12 +219,6 @@ define( function( require ) {
 
       // send signal to views for resetting
       this.resetTrigger = !this.resetTrigger;
-    },
-    pHToBrightness: function( pH ) {
-      var NEUTRAL_PH = CONSTANTS.NEUTRAL_PH,
-        NEUTRAL_BRIGHTNESS = CONSTANTS.NEUTRAL_BRIGHTNESS;
-
-      return NEUTRAL_BRIGHTNESS + ( 1 - NEUTRAL_BRIGHTNESS ) * (pH < NEUTRAL_PH ? ( NEUTRAL_PH - pH ) / ( NEUTRAL_PH - CONSTANTS.MIN_PH ) : ( pH - NEUTRAL_PH ) / ( CONSTANTS.MAX_PH - NEUTRAL_PH ) );
     }
   } );
 
