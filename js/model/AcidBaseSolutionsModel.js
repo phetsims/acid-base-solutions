@@ -41,7 +41,7 @@ define( function( require ) {
     'rgb(217,215,154)' // cream
   ];
 
-  var AQUEOUS_SOLUTION = new Color( 193, 222, 227, 180 ), // transparent light blue
+  var AQUEOUS_SOLUTION = new Color( 193, 222, 227, 0.7 ), // transparent light blue
     GRAY = 'rgb(120,120,120)',
     H2O_FACTOR = 0.85,
     MOLECULES_COLORS = {
