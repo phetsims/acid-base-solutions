@@ -19,8 +19,8 @@ define( function( require ) {
     EquilibriumConcentrationBarChart = require( './equilibrium-concentration-graph/EquilibriumConcentrationBarChart' ),
 
   // tests
-    pHMeterTest = require( './tests/pHMeterTest' ),
-    pHPaperTest = require( './tests/pHPaperTest' ),
+    PHMeterTest = require( './tests/PHMeterTest' ),
+    PHPaperTest = require( './tests/PHPaperTest' ),
     ConductivityTest = require( './tests/conductivity-test/ConductivityTest' );
 
   function Workspace( model, options ) {
@@ -28,10 +28,10 @@ define( function( require ) {
     Node.call( this, options );
 
     // add pH meter
-    this.addChild( new pHMeterTest( model, {x: model.width / 2.2, y: model.height / 20} ) );
+    this.addChild( new PHMeterTest( model, {x: model.width / 2.2, y: model.height / 20} ) );
 
     // add pH paper
-    this.addChild( new pHPaperTest( model, {x: model.width / 8, y: model.height / 45} ) );
+    this.addChild( new PHPaperTest( model, {x: model.width / 8, y: model.height / 45} ) );
 
     // add conductivity test
     this.addChild( new ConductivityTest( model, {x: model.width / 4, y: model.height / 75} ) );

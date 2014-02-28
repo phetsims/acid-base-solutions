@@ -24,7 +24,7 @@ define( function( require ) {
   // string
     pHString = require( 'string!ACID_BASE_SOLUTIONS/pH' );
 
-  function pHMeterTest( model, options ) {
+  function PHMeterTest( model, options ) {
     var self = this,
       maxY = 100,
       minY = 25.2;
@@ -74,7 +74,7 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, pHMeterTest, {
+  return inherit( Node, PHMeterTest, {
     setYValue: function( y ) {
       this.y = y;
       this.pHText.setVisible( this.y > this.waterSurface );

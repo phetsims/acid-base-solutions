@@ -30,7 +30,7 @@ define( function( require ) {
     bottom: 310
   };
 
-  function pHPaperTest( model, options ) {
+  function PHPaperTest( model, options ) {
     var self = this,
       paperDefaultColor = model.PH_COLORS[model.PH_COLORS.length - 1],
       waterSurface = 14.5,
@@ -109,5 +109,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, pHPaperTest );
+  return inherit( Node, PHPaperTest );
 } );
