@@ -27,20 +27,20 @@ define( function( require ) {
   // images
     arrowDoubleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_double.png' );
 
-  function WeakBaseFormula( model, options ) {
+  function WeakBaseFormula( options ) {
     var textOffset = 23, subOffset = textOffset + 5, supOffset = textOffset - 8;
     Node.call( this, options );
 
     // left expression
     // left expression: B molecule
-    this.addChild( new BMolecule( model ) );
+    this.addChild( new BMolecule() );
     this.addChild( new Text( 'B', {font: FONT, centerX: 0, centerY: textOffset} ) );
 
     // left expression: plus sign
     this.addChild( new Text( '+', {font: FONT, centerX: 16, centerY: textOffset} ) );
 
     // left expression: H2O molecule
-    this.addChild( new H2OMolecule( model, {x: 40} ) );
+    this.addChild( new H2OMolecule( {x: 40} ) );
     this.addChild( new Node( {x: 32, children: [
       new Text( 'H', {font: FONT, centerX: 0, centerY: textOffset} ),
       new Text( '2', {font: FONT_SMALL, centerX: 7, centerY: subOffset} ),
@@ -52,7 +52,7 @@ define( function( require ) {
 
     // right expression
     // right expression: BH molecule
-    this.addChild( new BHMolecule( model, {x: 105} ) );
+    this.addChild( new BHMolecule( {x: 105} ) );
     this.addChild( new Node( {x: 105, children: [
       new Text( 'BH', {font: FONT, centerX: 0, centerY: textOffset} ),
       new Text( '+', {font: FONT_SMALL, centerX: 12, centerY: supOffset} )
@@ -62,7 +62,7 @@ define( function( require ) {
     this.addChild( new Text( '+', {font: FONT, centerX: 130, centerY: textOffset} ) );
 
     // right expression: OH molecule
-    this.addChild( new OHMolecule( model, {x: 150} ) );
+    this.addChild( new OHMolecule( {x: 150} ) );
     this.addChild( new Node( {x: 150, children: [
       new Text( 'OH', {font: FONT, centerX: 0, centerY: textOffset} ),
       new Text( '-', {font: FONT_SMALL, centerX: 12, centerY: supOffset} )

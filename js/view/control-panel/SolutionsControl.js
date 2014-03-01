@@ -52,7 +52,7 @@ define( function( require ) {
     for ( var i = 0; i < menuOptions.length; i++ ) {
       radioButtons[i] = new AquaRadioButton( model.property( 'solution' ), menuOptions[i].value, new HBox( {spacing: 5, children: [
         menuOptions[i].text,
-        new menuOptions[i].icon( model )
+        new menuOptions[i].icon()
       ]
       } ), {radius: radius} );
       maxHeight = Math.max( radioButtons[i].getHeight(), maxHeight );

@@ -39,7 +39,7 @@ define( function( require ) {
     // add beaker and formulas
     this.addChild( vbox = new VBox( {spacing: 5, x: model.width / 3, y: model.height * 0.25, children: [
       new Beaker( model, {} ),
-      formulas = new Formula( model )
+      formulas = new Formula()
     ]} ) );
 
     // add magnifier

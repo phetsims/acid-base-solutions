@@ -12,13 +12,12 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-
+    MOLECULES_COLORS = require( 'model/Constants/MoleculesColors' ),
     EquilibriumConcentrationSingleBar = require( './EquilibriumConcentrationSingleBar' ),
     EquilibriumConcentrationBarChartBackground = require( './EquilibriumConcentrationBarChartBackground' );
 
   function EquilibriumConcentrationBarChart( model, options ) {
     var self = this, width = 200, height = 270,
-      colors = model.MOLECULES_COLORS,
       bars = {};
     Node.call( this, options );
     this.setPickable( false );
@@ -33,7 +32,7 @@ define( function( require ) {
       if ( type in model.components ) {
         bars[type] = new Node( {visible: false} );
         solution.relations.forEach( function( molecule, i ) {
-          bars[type].addChild( bar = new EquilibriumConcentrationSingleBar( model.components[type].property( molecule.property ), {fill: colors[molecule.type], height: height - 10 } ) );
+          bars[type].addChild( bar = new EquilibriumConcentrationSingleBar( model.components[type].property( molecule.property ), {fill: MOLECULES_COLORS[molecule.type], height: height - 10 } ) );
           bar.setTranslation( (i + 0.75 + (4 - solution.relations.length) / 2) * width / 4, height );
 
         } );

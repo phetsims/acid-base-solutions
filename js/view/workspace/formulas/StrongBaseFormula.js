@@ -26,13 +26,13 @@ define( function( require ) {
   // images
     arrowSingleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_single.png' );
 
-  function StrongBaseFormula( model, options ) {
+  function StrongBaseFormula( options ) {
     var textOffset = 23, supOffset = textOffset - 8;
     Node.call( this, options );
 
     // left expression
     // left expression: MOH molecule
-    this.addChild( new MOHMolecule( model ) );
+    this.addChild( new MOHMolecule() );
     this.addChild( new Text( 'MOH', {font: FONT, centerX: 8, centerY: textOffset} ) );
 
     // straight sign
@@ -40,7 +40,7 @@ define( function( require ) {
 
     // right expression
     // right expression: A molecule
-    this.addChild( new MMolecule( model, {x: 75} ) );
+    this.addChild( new MMolecule( {x: 75} ) );
     this.addChild( new Node( {x: 75, children: [
       new Text( 'M', {font: FONT, centerX: 0, centerY: textOffset} ),
       new Text( '+', {font: FONT_SMALL, centerX: 6, centerY: supOffset} )
@@ -50,7 +50,7 @@ define( function( require ) {
     this.addChild( new Text( '+', {font: FONT, centerX: 95, centerY: textOffset} ) );
 
     // right expression: OH molecule
-    this.addChild( new OHMolecule( model, {x: 116} ) );
+    this.addChild( new OHMolecule( {x: 116} ) );
     this.addChild( new Node( {x: 116, children: [
       new Text( 'OH', {font: FONT, centerX: 0, centerY: textOffset} ),
       new Text( '-', {font: FONT_SMALL, centerX: 14, centerY: supOffset} )

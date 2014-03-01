@@ -18,16 +18,16 @@ define( function( require ) {
     StrongBaseFormula = require( './StrongBaseFormula' ),
     WeakBaseFormula = require( './WeakBaseFormula' );
 
-  function Formula( model, options ) {
+  function Formula( options ) {
     Node.call( this, options );
     this.setPickable( false );
 
     this.formulas = [
-      new WaterFormula( model ),
-      new AcidFormula( model, {}, false ),
-      new AcidFormula( model, {}, true ),
-      new StrongBaseFormula( model ),
-      new WeakBaseFormula( model )
+      new WaterFormula(),
+      new AcidFormula( {}, false ),
+      new AcidFormula( {}, true ),
+      new StrongBaseFormula(),
+      new WeakBaseFormula()
     ];
 
     this.addChild( this.formulas[0] );

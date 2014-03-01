@@ -8,10 +8,11 @@
 
 define( function( require ) {
   'use strict';
-  var Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' );
+  var Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' ),
+    COLOR_B = require( 'model/Constants/MoleculesColors' ).B;
 
-  function BMolecule( model, coords ) {
-    return new Atom( coords, 7, model.MOLECULES_COLORS.B );
+  function BMolecule( coords ) {
+    return new Atom( coords, 7, COLOR_B );
   }
 
   return BMolecule;

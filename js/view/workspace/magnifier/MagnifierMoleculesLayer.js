@@ -48,7 +48,7 @@ define( function( require ) {
 
     // add molecules
     for ( var i = 0; i < MAX_MOLECULES; i++ ) {
-      this.addChild( this.molecules[i] = new MoleculesConstructors[type]( model, {visible: false}, true ) );
+      this.addChild( this.molecules[i] = new MoleculesConstructors[type]( {visible: false}, true ) );
     }
 
     // update layer only when it visible

@@ -28,20 +28,20 @@ define( function( require ) {
     arrowSingleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_single.png' ),
     arrowDoubleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_double.png' );
 
-  function AcidFormula( model, options, isWeak ) {
+  function AcidFormula( options, isWeak ) {
     var textOffset = 23, subOffset = textOffset + 5, supOffset = textOffset - 8;
     Node.call( this, options );
 
     // left expression
     // left expression: HA molecule
-    this.addChild( new HAMolecule( model ) );
+    this.addChild( new HAMolecule() );
     this.addChild( new Text( 'HA', {font: FONT, centerX: 0, centerY: textOffset} ) );
 
     // left expression: plus sign
     this.addChild( new Text( '+', {font: FONT, centerX: 22, centerY: textOffset} ) );
 
     // left expression: H2O molecule
-    this.addChild( new H2OMolecule( model, {x: 48} ) );
+    this.addChild( new H2OMolecule( {x: 48} ) );
     this.addChild( new Node( {x: 40, children: [
       new Text( 'H', {font: FONT, centerX: 0, centerY: textOffset} ),
       new Text( '2', {font: FONT_SMALL, centerX: 7.5, centerY: subOffset} ),
@@ -53,7 +53,7 @@ define( function( require ) {
 
     // right expression
     // right expression: A molecule
-    this.addChild( new AMolecule( model, {x: 105} ) );
+    this.addChild( new AMolecule( {x: 105} ) );
     this.addChild( new Node( {x: 105, children: [
       new Text( 'A', {font: FONT, centerX: 0, centerY: textOffset} ),
       new Text( '-', {font: FONT_SMALL, centerX: 6, centerY: supOffset} )
@@ -63,7 +63,7 @@ define( function( require ) {
     this.addChild( new Text( '+', {font: FONT, centerX: 124, centerY: textOffset} ) );
 
     // right expression: H3O molecule
-    this.addChild( new H3OMolecule( model, {x: 150} ) );
+    this.addChild( new H3OMolecule( {x: 150} ) );
     this.addChild( new Node( {x: 140, children: [
       new Text( 'H', {font: FONT, centerX: 0, centerY: textOffset} ),
       new Text( '3', {font: FONT_SMALL, centerX: 7, centerY: subOffset} ),

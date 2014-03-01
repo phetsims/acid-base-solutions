@@ -10,21 +10,21 @@ define( function( require ) {
   'use strict';
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' );
+    Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' ),
+    COLOR_BH = require( 'model/Constants/MoleculesColors' ).BH;
 
-  var atomCache, getMolecule = function( color ) {
+  var atomCache, getMolecule = function() {
     return new Node( {children: [
-      new Atom( {x: -6, y: -6}, 4, color ),
-      new Atom( {x: 0, y: 0}, 7, color )
+      new Atom( {x: -6, y: -6}, 4, COLOR_BH ),
+      new Atom( {x: 0, y: 0}, 7, COLOR_BH )
     ]} );
   };
 
-  function BHMolecule( model, coords, fromCache ) {
-    var BH_PLUS_COLOR = model.MOLECULES_COLORS.BH;
+  function BHMolecule( coords, fromCache ) {
     Node.call( this, coords );
 
     // cache values for next execution
-    this.addChild( fromCache ? (atomCache ? atomCache : atomCache = getMolecule( BH_PLUS_COLOR )) : getMolecule( BH_PLUS_COLOR ) );
+    this.addChild( fromCache ? (atomCache ? atomCache : atomCache = getMolecule()) : getMolecule() );
   }
 
   return inherit( Node, BHMolecule );

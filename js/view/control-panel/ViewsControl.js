@@ -20,6 +20,7 @@ define( function( require ) {
     HBox = require( 'SCENERY/nodes/HBox' ),
     Image = require( 'SCENERY/nodes/Image' ),
     H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' ),
+    MOLECULES_COLORS = require( 'model/Constants/MoleculesColors' ),
     HStrut = require( 'SUN/HStrut' ),
 
   // strings
@@ -42,16 +43,16 @@ define( function( require ) {
     // settings for menu options
     var menuOptions = [
       {isRadio: true, value: 'MOLECULES', text: new Text( moleculesString, {font: FONT} ), icon: new Image( magnifyingGlassImage, {scale: 0.75} )},
-      {isRadio: false, text: showSolventString, icon: new H2OMolecule( model )},
+      {isRadio: false, text: showSolventString, icon: new H2OMolecule()},
       {isRadio: true, value: 'EQUILIBRIUM', text: new Node( {children: [
         new Text( equilibriumString, {font: FONT, centerX: -6} ),
         new Text( concentrationString, {font: FONT, centerX: 0, centerY: 8} )
       ]} ), icon: new Node( {children: [
         new Rectangle( 0, 0, 24.5, 18, {fill: 'white', stroke: 'black', lineWidth: 0.5} ),
-        new Rectangle( 2, 6, 3, 12, {fill: model.MOLECULES_COLORS.B} ),
-        new Rectangle( 7.5, 3, 3, 15, {fill: model.MOLECULES_COLORS.H2O} ),
-        new Rectangle( 13, 9, 3, 9, {fill: model.MOLECULES_COLORS.A} ),
-        new Rectangle( 18.5, 9, 3, 9, {fill: model.MOLECULES_COLORS.H3O} )
+        new Rectangle( 2, 6, 3, 12, {fill: MOLECULES_COLORS.B} ),
+        new Rectangle( 7.5, 3, 3, 15, {fill: MOLECULES_COLORS.H2O} ),
+        new Rectangle( 13, 9, 3, 9, {fill: MOLECULES_COLORS.A} ),
+        new Rectangle( 18.5, 9, 3, 9, {fill: MOLECULES_COLORS.H3O} )
       ]} )},
       {isRadio: true, value: 'LIQUID', text: new Text( liquidString, {font: FONT} ), icon: new Image( beakerImage, {scale: 0.75} )}
     ];

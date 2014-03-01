@@ -11,7 +11,6 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     PropertySet = require( 'AXON/PropertySet' ),
-    Color = require( 'SCENERY/util/Color' ),
     Range = require( 'DOT/Range' ),
     WaterSolution = require( './WaterSolution' ),
     StrongAcidSolution = require( './StrongAcidSolution' ),
@@ -19,6 +18,7 @@ define( function( require ) {
     StrongBaseSolution = require( './StrongBaseSolution' ),
     WeakBaseSolution = require( './WeakBaseSolution' ),
 
+  // strings
     customSolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/customSolutionTitle' );
 
   var PH_COLORS = [
@@ -40,21 +40,6 @@ define( function( require ) {
     // pH paper color
     'rgb(217,215,154)' // cream
   ];
-
-  var AQUEOUS_SOLUTION = new Color( 193, 222, 227, 0.7 ), // transparent light blue
-    GRAY = 'rgb(120,120,120)',
-    H2O_FACTOR = 0.85,
-    MOLECULES_COLORS = {
-      A: 'rgb(0,170,255)',
-      B: GRAY,
-      BH: 'rgb(255,170,0)',
-      H2O: new Color( AQUEOUS_SOLUTION.getRed() * H2O_FACTOR, AQUEOUS_SOLUTION.getGreen() * H2O_FACTOR, AQUEOUS_SOLUTION.getBlue() * H2O_FACTOR ),
-      H3O: 'rgb(255,85,0)',
-      HA: GRAY,
-      M: 'rgb(255,170,0)',
-      MOH: GRAY,
-      OH: 'rgb(0,0,255)'
-    };
 
   var CONSTANTS = {
     WATER_EQUILIBRIUM_CONSTANT: 1E-14,
@@ -81,9 +66,6 @@ define( function( require ) {
 
     // possible test modes
     this.TEST_MODES = ['PH_METER', 'PH_PAPER', 'CONDUCTIVITY'];
-
-    // colors for molecules
-    this.MOLECULES_COLORS = MOLECULES_COLORS;
 
     // simulation constants
     this.CONSTANTS = CONSTANTS;
