@@ -176,7 +176,6 @@ define( function( require ) {
   };
 
   inherit( PropertySet, AcidBaseSolutionsModel, {
-    step: function() {},
     reset: function() {
       // reset main properties
       this.property( 'solution' ).reset();
