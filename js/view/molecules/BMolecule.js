@@ -12,7 +12,7 @@ define( function( require ) {
     COLOR_B = require( 'model/Constants/MoleculesColors' ).B;
 
   function BMolecule( coords ) {
-    return new Atom( coords, 7, COLOR_B );
+    return new Atom( 7, COLOR_B, coords );
   }
 
   return BMolecule;

@@ -15,9 +15,9 @@ define( function( require ) {
 
   var atomCache, getMolecule = function() {
     return new Node( {children: [
-      new Atom( {x: 0, y: -9}, 4, COLOR_H2O ),
-      new Atom( {x: 0, y: 0}, 7, COLOR_H2O ),
-      new Atom( {x: -6, y: 5}, 4, COLOR_H2O )
+      new Atom( 4, COLOR_H2O, {x: 0, y: -9} ),
+      new Atom( 7, COLOR_H2O, {x: 0, y: 0} ),
+      new Atom( 4, COLOR_H2O, {x: -6, y: 5} )
     ]} );
   };
 

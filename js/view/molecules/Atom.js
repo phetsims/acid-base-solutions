@@ -14,8 +14,7 @@ define( function( require ) {
 
   var gradients = {};
 
-  function Atom( options, radius, color ) {
-    options = options || {};
+  function Atom( radius, color, options ) {
     if ( !(radius in gradients) ) {
       gradients[radius] = {};
     }
@@ -28,7 +27,8 @@ define( function( require ) {
         .addColorStop( 1, 'black' );
     }
 
-    Circle.call( this, radius, {x: options.x, y: options.y, visible: options.visible, fill: gradients[radius][color]} );
+    options = _.extend( {fill: gradients[radius][color]}, options );
+    Circle.call( this, radius, options );
   }
 
   return inherit( Circle, Atom );
