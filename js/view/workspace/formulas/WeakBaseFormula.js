@@ -14,9 +14,10 @@ define( function( require ) {
     Node = require( 'SCENERY/nodes/Node' ),
     Image = require( 'SCENERY/nodes/Image' ),
     Text = require( 'SCENERY/nodes/Text' ),
+    HTMLText = require( 'SCENERY/nodes/HTMLText' ),
+    ChemUtils = require( 'NITROGLYCERIN/ChemUtils' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     FONT = new PhetFont( 13 ),
-    FONT_SMALL = new PhetFont( 9 ),
 
   // molecules
     BMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/BMolecule' ),
@@ -28,7 +29,7 @@ define( function( require ) {
     arrowDoubleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_double.png' );
 
   function WeakBaseFormula( options ) {
-    var textOffset = 23, subOffset = textOffset + 5, supOffset = textOffset - 8;
+    var textOffset = 23, supOffset = textOffset - 3;
     Node.call( this, options );
 
     // left expression
@@ -41,11 +42,7 @@ define( function( require ) {
 
     // left expression: H2O molecule
     this.addChild( new H2OMolecule( {x: 40} ) );
-    this.addChild( new Node( {x: 32, children: [
-      new Text( 'H', {font: FONT, centerX: 0, centerY: textOffset} ),
-      new Text( '2', {font: FONT_SMALL, centerX: 7, centerY: subOffset} ),
-      new Text( 'O', {font: FONT, centerX: 15, centerY: textOffset} )
-    ]} ) );
+    this.addChild( new HTMLText( ChemUtils.toSubscript( 'H2O' ), {font: FONT, centerX: 39, centerY: textOffset} ) );
 
     // straight or reverse sign (depend on flag isWeak)
     this.addChild( new Image( arrowDoubleImage, {scale: 0.75, x: 61, y: 15} ) );
@@ -53,21 +50,14 @@ define( function( require ) {
     // right expression
     // right expression: BH molecule
     this.addChild( new BHMolecule( {x: 105} ) );
-    this.addChild( new Node( {x: 105, children: [
-      new Text( 'BH', {font: FONT, centerX: 0, centerY: textOffset} ),
-      new Text( '+', {font: FONT_SMALL, centerX: 12, centerY: supOffset} )
-    ]} ) );
+    this.addChild( new HTMLText( 'BH<sup>+</sup>', {font: FONT, centerX: 107, centerY: supOffset} ) );
 
     // right expression: plus sign
     this.addChild( new Text( '+', {font: FONT, centerX: 130, centerY: textOffset} ) );
 
     // right expression: OH molecule
     this.addChild( new OHMolecule( {x: 150} ) );
-    this.addChild( new Node( {x: 150, children: [
-      new Text( 'OH', {font: FONT, centerX: 0, centerY: textOffset} ),
-      new Text( '-', {font: FONT_SMALL, centerX: 12, centerY: supOffset} )
-    ]} ) );
-
+    this.addChild( new HTMLText( 'OH<sup>-</sup>', {font: FONT, centerX: 150, centerY: supOffset} ) );
   }
 
   return inherit( Node, WeakBaseFormula );

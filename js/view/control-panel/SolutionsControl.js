@@ -12,9 +12,10 @@ define( function( require ) {
     inherit = require( 'PHET_CORE/inherit' ),
     AquaRadioButton = require( 'SUN/AquaRadioButton' ),
     Text = require( 'SCENERY/nodes/Text' ),
+    HTMLText = require( 'SCENERY/nodes/HTMLText' ),
+    ChemUtils = require( 'NITROGLYCERIN/ChemUtils' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     FONT = new PhetFont( 12 ),
-    FONT_SMALL = new PhetFont( 8 ),
     VBox = require( 'SCENERY/nodes/VBox' ),
     HBox = require( 'SCENERY/nodes/HBox' ),
     VStrut = require( 'SUN/VStrut' ),
@@ -31,10 +32,7 @@ define( function( require ) {
     weakBaseString = require( 'string!ACID_BASE_SOLUTIONS/weakBase' );
 
   var menuOptions = [
-    {text: new Node( {children: [
-      new Text( waterString + ' (H O)', {font: FONT} ),
-      new Text( '2', {font: FONT_SMALL, centerX: 49, centerY: 0} )
-    ]} ), value: 'WATER', icon: H2OMolecule},
+    {text: new HTMLText( waterString + ChemUtils.toSubscript( ' (H2O)' ), {font: FONT, centerX: 49, centerY: 0} ), value: 'WATER', icon: H2OMolecule},
     {text: new Text( strongAcidString + ' (HA)', {font: FONT} ), value: 'STRONG_ACID', icon: HAMolecule},
     {text: new Text( weakAcidString + ' (HA)', {font: FONT} ), value: 'WEAK_ACID', icon: HAMolecule},
     {text: new Text( strongBaseString + ' (MOH)', {font: FONT} ), value: 'STRONG_BASE', icon: MOHMolecule},

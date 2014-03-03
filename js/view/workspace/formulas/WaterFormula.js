@@ -14,9 +14,10 @@ define( function( require ) {
     Node = require( 'SCENERY/nodes/Node' ),
     Image = require( 'SCENERY/nodes/Image' ),
     Text = require( 'SCENERY/nodes/Text' ),
+    HTMLText = require( 'SCENERY/nodes/HTMLText' ),
+    ChemUtils = require( 'NITROGLYCERIN/ChemUtils' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     FONT = new PhetFont( 13 ),
-    FONT_SMALL = new PhetFont( 9 ),
 
   // molecules
     H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' ),
@@ -27,18 +28,15 @@ define( function( require ) {
     arrowDoubleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_double.png' );
 
   function WaterFormula( options ) {
-    var textOffset = 23, subOffset = textOffset + 5, supOffset = textOffset - 8;
+    var textOffset = 23, supOffset = textOffset - 3;
     Node.call( this, options );
 
     // left expression
     // left expression: H2O molecule
     this.addChild( new H2OMolecule() );
     this.addChild( new H2OMolecule( {x: 18} ) );
-    this.addChild( new Node( {children: [
-      new Text( '2H', {font: FONT, centerX: 0, centerY: textOffset} ),
-      new Text( '2', {font: FONT_SMALL, centerX: 10, centerY: subOffset} ),
-      new Text( 'O', {font: FONT, centerX: 17, centerY: textOffset} )
-    ]} ) );
+
+    this.addChild( new HTMLText( '2' + ChemUtils.toSubscript( 'H2O' ), {font: FONT, centerX: 7, centerY: textOffset} ) );
 
     // reverse sign
     this.addChild( new Image( arrowDoubleImage, {scale: 0.75, x: 36, y: 14} ) );
@@ -46,22 +44,14 @@ define( function( require ) {
     // right expression
     // right expression: H3O molecule
     this.addChild( new H3OMolecule( {x: 85} ) );
-    this.addChild( new Node( {x: 75, children: [
-      new Text( 'H', {font: FONT, centerX: 0, centerY: textOffset} ),
-      new Text( '3', {font: FONT_SMALL, centerX: 7, centerY: subOffset} ),
-      new Text( 'O', {font: FONT, centerX: 14, centerY: textOffset} ),
-      new Text( '+', {font: FONT_SMALL, centerX: 23, centerY: supOffset} )
-    ]} ) );
+    this.addChild( new HTMLText( ChemUtils.toSubscript( 'H3O' ) + '<sup>+</sup>', {font: FONT, centerX: 85, centerY: supOffset} ) );
 
     // right expression: plus sign
     this.addChild( new Text( '+', {font: FONT, centerX: 110, centerY: textOffset} ) );
 
     // right expression: OH molecule
     this.addChild( new OHMolecule( {x: 130} ) );
-    this.addChild( new Node( {x: 130, children: [
-      new Text( 'OH', {font: FONT, centerX: 0, centerY: textOffset} ),
-      new Text( '-', {font: FONT_SMALL, centerX: 14, centerY: supOffset} )
-    ]} ) );
+    this.addChild( new HTMLText( 'OH<sup>-</sup>', {font: FONT, centerX: 132, centerY: supOffset} ) );
   }
 
   return inherit( Node, WaterFormula );

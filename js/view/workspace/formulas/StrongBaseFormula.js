@@ -14,9 +14,9 @@ define( function( require ) {
     Node = require( 'SCENERY/nodes/Node' ),
     Image = require( 'SCENERY/nodes/Image' ),
     Text = require( 'SCENERY/nodes/Text' ),
+    HTMLText = require( 'SCENERY/nodes/HTMLText' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     FONT = new PhetFont( 13 ),
-    FONT_SMALL = new PhetFont( 9 ),
 
   // molecules
     MOHMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/MOHMolecule' ),
@@ -27,7 +27,7 @@ define( function( require ) {
     arrowSingleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_single.png' );
 
   function StrongBaseFormula( options ) {
-    var textOffset = 23, supOffset = textOffset - 8;
+    var textOffset = 23, supOffset = textOffset - 3;
     Node.call( this, options );
 
     // left expression
@@ -41,20 +41,14 @@ define( function( require ) {
     // right expression
     // right expression: A molecule
     this.addChild( new MMolecule( {x: 75} ) );
-    this.addChild( new Node( {x: 75, children: [
-      new Text( 'M', {font: FONT, centerX: 0, centerY: textOffset} ),
-      new Text( '+', {font: FONT_SMALL, centerX: 6, centerY: supOffset} )
-    ]} ) );
+    this.addChild( new HTMLText( 'M<sup>+</sup>', {font: FONT, centerX: 75, centerY: supOffset} ) );
 
     // right expression: plus sign
     this.addChild( new Text( '+', {font: FONT, centerX: 95, centerY: textOffset} ) );
 
     // right expression: OH molecule
     this.addChild( new OHMolecule( {x: 116} ) );
-    this.addChild( new Node( {x: 116, children: [
-      new Text( 'OH', {font: FONT, centerX: 0, centerY: textOffset} ),
-      new Text( '-', {font: FONT_SMALL, centerX: 14, centerY: supOffset} )
-    ]} ) );
+    this.addChild( new HTMLText( 'OH<sup>-</sup>', {font: FONT, centerX: 116, centerY: supOffset} ) );
   }
 
   return inherit( Node, StrongBaseFormula );
