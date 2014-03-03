@@ -18,25 +18,55 @@ define( function( require ) {
     StrongBaseFormula = require( './StrongBaseFormula' ),
     WeakBaseFormula = require( './WeakBaseFormula' );
 
-  function Formula( options ) {
+  var formulas = [
+    new WaterFormula( {visible: false} ),
+    new AcidFormula( {visible: false}, false ),
+    new AcidFormula( {visible: false}, true ),
+    new StrongBaseFormula( {visible: false} ),
+    new WeakBaseFormula( {visible: false} )
+  ];
+
+  function Formula( model, options ) {
+    var self = this, maxWidth = 0;
     Node.call( this, options );
     this.setPickable( false );
 
-    this.formulas = [
-      new WaterFormula(),
-      new AcidFormula( {}, false ),
-      new AcidFormula( {}, true ),
-      new StrongBaseFormula(),
-      new WeakBaseFormula()
-    ];
+    // find max width
+    formulas.forEach( function( formula ) {
+      maxWidth = Math.max( maxWidth, formula.getWidth() );
+    } );
 
-    this.addChild( this.formulas[0] );
+    // add formulas with central alignment
+    formulas.forEach( function( formula ) {
+      formula.setX( (maxWidth - formula.getWidth()) / 2 );
+      self.addChild( formula );
+    } );
+
+    // add observer for formulas
+    model.property( 'solution' ).link( function( newSolution, prevSolution ) {
+      var formulaIndex;
+
+      // hide previous formula
+      if ( prevSolution ) {
+        formulaIndex = getSolutionIndex( model, prevSolution );
+        formulas[formulaIndex].setVisible( false );
+      }
+
+      // show new formula
+      formulaIndex = getSolutionIndex( model, newSolution );
+      formulas[formulaIndex].setVisible( true );
+    } );
   }
 
-  return inherit( Node, Formula, {
-    showFormula: function( index ) {
-      this.removeAllChildren();
-      this.addChild( this.formulas[index] );
-    }
-  } );
+  var getSolutionIndex = function( model, solutionType ) {
+    var index;
+    model.SOLUTIONS.forEach( function( sol, i ) {
+      if ( sol.type === solutionType ) {
+        index = i;
+      }
+    } );
+    return index;
+  };
+
+  return inherit( Node, Formula );
 } );

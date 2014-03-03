@@ -24,7 +24,6 @@ define( function( require ) {
     ConductivityTest = require( './tests/conductivity-test/ConductivityTest' );
 
   function Workspace( model, options ) {
-    var vbox, formulas;
     Node.call( this, options );
 
     // add pH meter
@@ -37,9 +36,9 @@ define( function( require ) {
     this.addChild( new ConductivityTest( model, {x: model.width / 4, y: model.height / 75} ) );
 
     // add beaker and formulas
-    this.addChild( vbox = new VBox( {spacing: 5, x: model.width / 3, y: model.height * 0.25, children: [
+    this.addChild( new VBox( {spacing: 5, x: model.width / 3, y: model.height * 0.25, children: [
       new Beaker( model, {} ),
-      formulas = new Formula()
+      new Formula( model )
     ]} ) );
 
     // add magnifier
@@ -47,16 +46,6 @@ define( function( require ) {
 
     // add concentration bar chart
     this.addChild( new EquilibriumConcentrationBarChart( model, {x: model.width / 5, y: model.height * 0.3} ) );
-
-    // add observer for formulas
-    model.property( 'solution' ).link( function( solution ) {
-      model.SOLUTIONS.forEach( function( sol, index ) {
-        if ( sol.type === solution ) {
-          formulas.showFormula( index );
-        }
-      } );
-      vbox.updateLayout();
-    } );
   }
 
   return inherit( Node, Workspace );
