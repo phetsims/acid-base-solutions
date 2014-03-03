@@ -18,18 +18,18 @@ define( function( require ) {
     StrongBaseFormula = require( './StrongBaseFormula' ),
     WeakBaseFormula = require( './WeakBaseFormula' );
 
-  var formulas = [
-    new WaterFormula( {visible: false} ),
-    new AcidFormula( {visible: false}, false ),
-    new AcidFormula( {visible: false}, true ),
-    new StrongBaseFormula( {visible: false} ),
-    new WeakBaseFormula( {visible: false} )
-  ];
-
   function Formula( model, options ) {
     var self = this, maxWidth = 0;
     Node.call( this, options );
     this.setPickable( false );
+
+    var formulas = [
+      new WaterFormula(),
+      new AcidFormula( false ),
+      new AcidFormula( true ),
+      new StrongBaseFormula(),
+      new WeakBaseFormula()
+    ];
 
     // find max width
     formulas.forEach( function( formula ) {
@@ -39,6 +39,7 @@ define( function( require ) {
     // add formulas with central alignment
     formulas.forEach( function( formula ) {
       formula.setX( (maxWidth - formula.getWidth()) / 2 );
+      formula.setVisible( false );
       self.addChild( formula );
     } );
 
