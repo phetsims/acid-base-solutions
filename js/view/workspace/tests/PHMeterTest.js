@@ -61,8 +61,8 @@ define( function( require ) {
       }
     } ) );
 
-    model.property( 'ph' ).link( function( ph ) {
-      self.pHText.setText( Util.toFixed( ph, 2 ) );
+    model.property( 'pH' ).link( function( pH ) {
+      self.pHText.setText( Util.toFixed( pH, 2 ) );
     } );
 
     model.property( 'testMode' ).link( function( mode ) {

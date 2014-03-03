@@ -28,12 +28,12 @@ define( function( require ) {
       H3O: 0, // H3O concentration
       OH: 0, // OH concentration
       H2O: 0, // H2O concentration
-      ph: 0, // pH of the solution at equilibrium
+      pH: 0, // pH of the solution at equilibrium
       isValidStrength: false
     } );
 
     this.property( 'H3O' ).link( function( value ) {
-      self.ph = -Math.round( 100 * Math.log( value ) / Math.LN10 ) / 100;
+      self.pH = -Math.round( 100 * Math.log( value ) / Math.LN10 ) / 100;
     } );
 
     // arbitrary, but needs to be greater than weak range

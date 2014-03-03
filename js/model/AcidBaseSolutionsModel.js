@@ -110,29 +110,29 @@ define( function( require ) {
       testMode: self.TEST_MODES[0], // test mode
       viewMode: self.VIEW_MODES[0], // view mode
       solvent: false, // solvent visibility
-      ph: 0, // ph level of product
+      pH: 0, // pH level of product
       brightness: 0, // brightness value
       resetTrigger: false // reset trigger
     } );
 
     // add model for each type of reaction
     this.components = {};
-    var setPh = function( value ) { self.ph = value; }; // observer for ph property
+    var setPH = function( value ) { self.pH = value; }; // observer for pH property
 
     for ( var i = (customSolutionTitleString === mode ? 1 : 0), solution; i < this.SOLUTIONS.length; i++ ) {
       solution = new this.SOLUTIONS[i].constructor( CONSTANTS );
       solution.init();
       this.components[this.SOLUTIONS[i].type] = solution;
-      solution.property( 'ph' ).link( setPh );
+      solution.property( 'pH' ).link( setPH );
     }
 
-    // set appropriate ph
+    // set appropriate pH
     this.property( 'solution' ).link( function( solution ) {
-      self.ph = self.components[solution].ph;
+      self.pH = self.components[solution].pH;
     } );
 
-    // set brightness of light rays depend on ph value
-    this.property( 'ph' ).link( function( pHValue ) {
+    // set brightness of light rays depend on pH value
+    this.property( 'pH' ).link( function( pHValue ) {
       self.brightness = pHToBrightness( pHValue );
     } );
 

@@ -96,7 +96,7 @@ define( function( require ) {
       self.setVisible( mode === 'PH_PAPER' );
     } );
 
-    model.property( 'ph' ).link( function( pHValue ) {
+    model.property( 'pH' ).link( function( pHValue ) {
       indicatorPaper.setFill( model.PH_COLORS[Math.round( pHValue )] );
       indicatorPaper.setRectHeight( 0 );
       checkIndicator();
