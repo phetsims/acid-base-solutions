@@ -56,8 +56,8 @@ define( function( require ) {
       tickLabelSpacing: 2
     } );
     panelContent.addChild( slider );
-    for ( var i = CONCENTRATION_MIN; i <= CONCENTRATION_MAX; i += (CONCENTRATION_MAX - CONCENTRATION_MIN) / 3 ) {
-      slider.addMinorTick( i, null );
+    for ( var i = 0, step = (CONCENTRATION_MAX - CONCENTRATION_MIN) / 3; i < 4; i++ ) {
+      slider.addMinorTick( CONCENTRATION_MIN + step * i, null );
     }
 
     // create and add the arrow buttons
