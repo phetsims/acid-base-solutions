@@ -14,14 +14,14 @@ define( function( require ) {
     AqueousSolution = require( './AqueousSolution' );
 
   var setSoluteConcentration = function() {
-    this.solute = this.concentration - this.H3O; // [HA] = c - [H3O+]
+    this.soluteConcentration = this.concentration - this.H3OConcentration; // [HA] = c - [H3O+]
   };
 
   // [H3O+] = ( -Ka + sqrt( Ka*Ka + 4*Ka*c ) ) / 2
   var setH3OConcentration = function() {
     var Ka = this.strength,
       c = this.concentration;
-    this.H3O = ( -Ka + Math.sqrt( ( Ka * Ka ) + ( 4 * Ka * c ) ) ) / 2;
+    this.H3OConcentration = ( -Ka + Math.sqrt( ( Ka * Ka ) + ( 4 * Ka * c ) ) ) / 2;
   };
 
   function WeakAcidSolution( strength, concentration ) {
@@ -29,19 +29,19 @@ define( function( require ) {
     AqueousSolution.call( this, strength, concentration );
 
     // set links between concentrations
-    this.property( 'H3O' ).link( setSoluteConcentration.bind( this ) );
+    this.property( 'H3OConcentration' ).link( setSoluteConcentration.bind( this ) );
     this.property( 'concentration' ).link( setSoluteConcentration.bind( this ) );
 
     this.property( 'strength' ).link( setH3OConcentration.bind( this ) );
     this.property( 'concentration' ).link( setH3OConcentration.bind( this ) );
 
-    this.property( 'H3O' ).link( function( value ) {
-      self.product = value; // [A-] = [H3O+]
-      self.OH = self.CONSTANTS.WATER_EQUILIBRIUM_CONSTANT / value; // [OH-] = Kw / [H3O+]
+    this.property( 'H3OConcentration' ).link( function( value ) {
+      self.productConcentration = value; // [A-] = [H3O+]
+      self.OHConcentration = self.CONSTANTS.WATER_EQUILIBRIUM_CONSTANT / value; // [OH-] = Kw / [H3O+]
     } );
 
-    this.property( 'product' ).link( function( value ) {
-      self.H2O = self.CONSTANTS.WATER_CONCENTRATION - value; // [H2O] = W - [A-]
+    this.property( 'productConcentration' ).link( function( value ) {
+      self.H2OConcentration = self.CONSTANTS.WATER_CONCENTRATION - value; // [H2O] = W - [A-]
     } );
 
     this.property( 'strength' ).link( function( strength ) {

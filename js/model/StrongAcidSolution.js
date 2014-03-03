@@ -19,13 +19,13 @@ define( function( require ) {
 
     // set links between concentrations
     this.property( 'concentration' ).link( function( value ) {
-      self.product = value; // [A-] = c
-      self.H3O = value; // [H3O+] = c
-      self.H2O = self.CONSTANTS.WATER_CONCENTRATION - value; // [H2O] = W - c
+      self.productConcentration = value; // [A-] = c
+      self.H3OConcentration = value; // [H3O+] = c
+      self.H2OConcentration = self.CONSTANTS.WATER_CONCENTRATION - value; // [H2O] = W - c
     } );
 
-    this.property( 'H3O' ).link( function( value ) {
-      self.OH = self.CONSTANTS.WATER_EQUILIBRIUM_CONSTANT / value; // [OH-] = Kw / [H3O+]
+    this.property( 'H3OConcentration' ).link( function( value ) {
+      self.OHConcentration = self.CONSTANTS.WATER_EQUILIBRIUM_CONSTANT / value; // [OH-] = Kw / [H3O+]
     } );
 
     this.property( 'strength' ).link( function( strength ) {

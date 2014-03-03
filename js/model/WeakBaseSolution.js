@@ -14,13 +14,13 @@ define( function( require ) {
     AqueousSolution = require( './AqueousSolution' );
 
   var setSoluteConcentration = function() {
-    this.solute = this.concentration - this.product; // [B] = c - [BH+]
+    this.soluteConcentration = this.concentration - this.productConcentration; // [B] = c - [BH+]
   };
 
   var setProductConcentration = function() {
     var Kb = this.strength,
       c = this.concentration;
-    this.product = (-Kb + Math.sqrt( ( Kb * Kb ) + ( 4 * Kb * c ) ) ) / 2;   // [BH+] = ( -Kb + sqrt( Kb*Kb + 4*Kb*c ) ) / 2
+    this.productConcentration = (-Kb + Math.sqrt( ( Kb * Kb ) + ( 4 * Kb * c ) ) ) / 2;   // [BH+] = ( -Kb + sqrt( Kb*Kb + 4*Kb*c ) ) / 2
   };
 
   function WeakBaseSolution( strength, concentration ) {
@@ -29,19 +29,19 @@ define( function( require ) {
 
     // set links between concentrations
     this.property( 'concentration' ).link( function( value ) {
-      self.OH = value; // [OH-] = c
+      self.OHConcentration = value; // [OH-] = c
     } );
 
-    this.property( 'OH' ).link( function( value ) {
-      self.H3O = self.CONSTANTS.WATER_EQUILIBRIUM_CONSTANT / value; // [H3O+] = Kw / [OH-]
+    this.property( 'OHConcentration' ).link( function( value ) {
+      self.H3OConcentration = self.CONSTANTS.WATER_EQUILIBRIUM_CONSTANT / value; // [H3O+] = Kw / [OH-]
     } );
 
-    this.property( 'product' ).link( function( value ) {
-      self.OH = value; // [OH-] = [BH+]
-      self.H2O = self.CONSTANTS.WATER_CONCENTRATION - value; // [H2O] = W - [BH+]
+    this.property( 'productConcentration' ).link( function( value ) {
+      self.OHConcentration = value; // [OH-] = [BH+]
+      self.H2OConcentration = self.CONSTANTS.WATER_CONCENTRATION - value; // [H2O] = W - [BH+]
     } );
 
-    this.property( 'product' ).link( setSoluteConcentration.bind( this ) );
+    this.property( 'productConcentration' ).link( setSoluteConcentration.bind( this ) );
     this.property( 'concentration' ).link( setSoluteConcentration.bind( this ) );
 
     this.property( 'strength' ).link( setProductConcentration.bind( this ) );

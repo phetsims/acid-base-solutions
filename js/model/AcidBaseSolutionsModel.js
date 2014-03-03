@@ -53,32 +53,32 @@ define( function( require ) {
     // possible test modes
     this.SOLUTIONS = [
       {type: 'WATER', constructor: WaterSolution, relations: [
-        {type: 'H2O', property: 'H2O'},
-        {type: 'H3O', property: 'H3O'},
-        {type: 'OH', property: 'OH'}
+        {type: 'H2O', property: 'H2OConcentration'},
+        {type: 'H3O', property: 'H3OConcentration'},
+        {type: 'OH', property: 'OHConcentration'}
       ]},
       {type: 'STRONG_ACID', constructor: StrongAcidSolution, relations: [
-        {type: 'HA', property: 'solute'},
-        {type: 'H2O', property: 'H2O'},
-        {type: 'A', property: 'product'},
-        {type: 'H3O', property: 'H3O'}
+        {type: 'HA', property: 'soluteConcentration'},
+        {type: 'H2O', property: 'H2OConcentration'},
+        {type: 'A', property: 'productConcentration'},
+        {type: 'H3O', property: 'H3OConcentration'}
       ]},
       {type: 'WEAK_ACID', constructor: WeakAcidSolution, relations: [
-        {type: 'HA', property: 'solute'},
-        {type: 'H2O', property: 'H2O'},
-        {type: 'A', property: 'product'},
-        {type: 'H3O', property: 'H3O'}
+        {type: 'HA', property: 'soluteConcentration'},
+        {type: 'H2O', property: 'H2OConcentration'},
+        {type: 'A', property: 'productConcentration'},
+        {type: 'H3O', property: 'H3OConcentration'}
       ]},
       {type: 'STRONG_BASE', constructor: StrongBaseSolution, relations: [
-        {type: 'MOH', property: 'solute'},
-        {type: 'M', property: 'product'},
-        {type: 'OH', property: 'OH'}
+        {type: 'MOH', property: 'soluteConcentration'},
+        {type: 'M', property: 'productConcentration'},
+        {type: 'OH', property: 'OHConcentration'}
       ]},
       {type: 'WEAK_BASE', constructor: WeakBaseSolution, relations: [
-        {type: 'B', property: 'solute'},
-        {type: 'H2O', property: 'H2O'},
-        {type: 'BH', property: 'product'},
-        {type: 'OH', property: 'OH'}
+        {type: 'B', property: 'soluteConcentration'},
+        {type: 'H2O', property: 'H2OConcentration'},
+        {type: 'BH', property: 'productConcentration'},
+        {type: 'OH', property: 'OHConcentration'}
       ]}
     ];
 

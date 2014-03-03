@@ -23,16 +23,16 @@ define( function( require ) {
     PropertySet.call( this, {
       strength: 0,
       concentration: 0,
-      solute: 0, // solute concentration
-      product: 0, // product concentration
-      H3O: 0, // H3O concentration
-      OH: 0, // OH concentration
-      H2O: 0, // H2O concentration
+      soluteConcentration: 0, // solute concentration
+      productConcentration: 0, // product concentration
+      H3OConcentration: 0, // H3O concentration
+      OHConcentration: 0, // OH concentration
+      H2OConcentration: 0, // H2O concentration
       pH: 0, // pH of the solution at equilibrium
       isValidStrength: false
     } );
 
-    this.property( 'H3O' ).link( function( value ) {
+    this.property( 'H3OConcentration' ).link( function( value ) {
       self.pH = -Math.round( 100 * Math.log( value ) / Math.LN10 ) / 100;
     } );
 
