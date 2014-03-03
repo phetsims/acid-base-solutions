@@ -21,26 +21,6 @@ define( function( require ) {
   // strings
     customSolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/customSolutionTitle' );
 
-  var PH_COLORS = [
-    'rgb(182,70,72)',
-    'rgb(196,80,86)',
-    'rgb(213,83,71)',
-    'rgb(237,123,83)',
-    'rgb(246,152,86)',
-    'rgb(244,158,79)',
-    'rgb(243,160,78)',
-    'rgb(244,182,67)',
-    'rgb(231,201,75)',
-    'rgb(93,118,88)',
-    'rgb(30,92,89)',
-    'rgb(34,90,105)',
-    'rgb(39,87,111)',
-    'rgb(27,67,90)',
-    'rgb(0,34,52)',
-    // pH paper color
-    'rgb(217,215,154)' // cream
-  ];
-
   var CONSTANTS = {
     WATER_EQUILIBRIUM_CONSTANT: 1E-14,
     WATER_CONCENTRATION: 55.6, // water concentration when it's used as a solvent, mol/L
@@ -101,9 +81,6 @@ define( function( require ) {
         {type: 'OH', property: 'OH'}
       ]}
     ];
-
-    // pH color keys
-    this.PH_COLORS = PH_COLORS;
 
     PropertySet.call( this, {
       solution: (customSolutionTitleString === mode ? self.SOLUTIONS[2].type : self.SOLUTIONS[0].type), // solution's type

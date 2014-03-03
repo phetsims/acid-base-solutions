@@ -15,13 +15,16 @@ define( function( require ) {
     Vector2 = require( 'DOT/Vector2' ),
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    FONT_BIG = new PhetFont( 10 ),
-    FONT_SMALL = new PhetFont( 8 ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' ),
 
   // strings
-    pHColorKeyString = require( 'string!ACID_BASE_SOLUTIONS/pHColorKey' );
+    pHColorKeyString = require( 'string!ACID_BASE_SOLUTIONS/pHColorKey' ),
+
+  // constants
+    PH_COLORS = require( 'model/Constants/PHColors' ),
+    FONT_BIG = new PhetFont( 10 ),
+    FONT_SMALL = new PhetFont( 8 );
 
   var dragArea = {
     left: -295,
@@ -32,7 +35,7 @@ define( function( require ) {
 
   function PHPaperTest( model, options ) {
     var self = this,
-      paperDefaultColor = model.PH_COLORS[model.PH_COLORS.length - 1],
+      paperDefaultColor = PH_COLORS[PH_COLORS.length - 1],
       waterSurface = 14.5,
       indicatorPaper,
       paper,
@@ -43,18 +46,18 @@ define( function( require ) {
     this.addChild( new Text( pHColorKeyString, {font: FONT_BIG, centerY: 0} ) );
 
     // add color key table
-    for ( var i = 0, tableRectWidth = 14, tableRectHeight = 28, space = 1; i < model.PH_COLORS.length - 1; i++ ) {
-      this.addChild( new Rectangle( (tableRectWidth + space) * i, 10, tableRectWidth, tableRectHeight, {fill: model.PH_COLORS[i]} ) );
+    for ( var i = 0, tableRectWidth = 14, tableRectHeight = 28, space = 1; i < PH_COLORS.length - 1; i++ ) {
+      this.addChild( new Rectangle( (tableRectWidth + space) * i, 10, tableRectWidth, tableRectHeight, {fill: PH_COLORS[i]} ) );
       this.addChild( new Text( i, {font: FONT_SMALL, centerX: (tableRectWidth + space) * (i + 0.5), centerY: 46} ) );
     }
 
     // add pH paper
     this.addChild( paper = new Node( {children: [
-      new Rectangle( (model.PH_COLORS.length + 2) * (tableRectWidth + space), 0, tableRectWidth, tableRectHeight * 4, {cursor: 'pointer', fill: paperDefaultColor, stroke: 'rgb(150, 150, 150)', lineWidth: 0.5} ),
+      new Rectangle( (PH_COLORS.length + 2) * (tableRectWidth + space), 0, tableRectWidth, tableRectHeight * 4, {cursor: 'pointer', fill: paperDefaultColor, stroke: 'rgb(150, 150, 150)', lineWidth: 0.5} ),
       indicatorPaper = new Rectangle( 0, 0, tableRectWidth, 0, {cursor: 'pointer', fill: 'red', stroke: 'rgb(150, 150, 150)', lineWidth: 0.5} )
     ]} ) );
     indicatorPaper.rotate( Math.PI );
-    indicatorPaper.setTranslation( (model.PH_COLORS.length + 2) * (tableRectWidth + space) + tableRectWidth, tableRectHeight * 4 );
+    indicatorPaper.setTranslation( (PH_COLORS.length + 2) * (tableRectWidth + space) + tableRectWidth, tableRectHeight * 4 );
 
     // add drag and drop for paper
     var clickOffset,
@@ -97,7 +100,7 @@ define( function( require ) {
     } );
 
     model.property( 'pH' ).link( function( pHValue ) {
-      indicatorPaper.setFill( model.PH_COLORS[Math.round( pHValue )] );
+      indicatorPaper.setFill( PH_COLORS[Math.round( pHValue )] );
       indicatorPaper.setRectHeight( 0 );
       checkIndicator();
     } );
