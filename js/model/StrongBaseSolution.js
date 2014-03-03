@@ -11,7 +11,10 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    AqueousSolution = require( './AqueousSolution' );
+    AqueousSolution = require( './AqueousSolution' ),
+
+  // constants
+    CONSTANTS = require( 'model/Constants/Constants' );
 
   function StrongBaseSolution( strength, concentration ) {
     var self = this;
@@ -24,18 +27,18 @@ define( function( require ) {
     } );
 
     this.property( 'OHConcentration' ).link( function( value ) {
-      self.H3OConcentration = self.CONSTANTS.WATER_EQUILIBRIUM_CONSTANT / value; // [H3O+] = Kw / [OH-]
+      self.H3OConcentration = CONSTANTS.WATER_EQUILIBRIUM_CONSTANT / value; // [H3O+] = Kw / [OH-]
     } );
 
     this.property( 'strength' ).link( function( strength ) {
-      self.isValidStrength = strength > self.CONSTANTS.CONCENTRATION_RANGE.max;
+      self.isValidStrength = strength > CONSTANTS.CONCENTRATION_RANGE.max;
     } );
   }
 
   return inherit( AqueousSolution, StrongBaseSolution, {
     init: function() {
-      this.strength = this.CONSTANTS.STRONG_STRENGTH;
-      this.concentration = this.CONSTANTS.CONCENTRATION_RANGE.defaultValue;
+      this.strength = CONSTANTS.STRONG_STRENGTH;
+      this.concentration = CONSTANTS.CONCENTRATION_RANGE.defaultValue;
     }
   } );
 } );

@@ -11,7 +11,10 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    AqueousSolution = require( './AqueousSolution' );
+    AqueousSolution = require( './AqueousSolution' ),
+
+  // constants
+    CONSTANTS = require( 'model/Constants/Constants' );
 
   var setSoluteConcentration = function() {
     this.soluteConcentration = this.concentration - this.H3OConcentration; // [HA] = c - [H3O+]
@@ -37,22 +40,22 @@ define( function( require ) {
 
     this.property( 'H3OConcentration' ).link( function( value ) {
       self.productConcentration = value; // [A-] = [H3O+]
-      self.OHConcentration = self.CONSTANTS.WATER_EQUILIBRIUM_CONSTANT / value; // [OH-] = Kw / [H3O+]
+      self.OHConcentration = CONSTANTS.WATER_EQUILIBRIUM_CONSTANT / value; // [OH-] = Kw / [H3O+]
     } );
 
     this.property( 'productConcentration' ).link( function( value ) {
-      self.H2OConcentration = self.CONSTANTS.WATER_CONCENTRATION - value; // [H2O] = W - [A-]
+      self.H2OConcentration = CONSTANTS.WATER_CONCENTRATION - value; // [H2O] = W - [A-]
     } );
 
     this.property( 'strength' ).link( function( strength ) {
-      self.isValidStrength = self.CONSTANTS.WEAK_STRENGTH_RANGE.contains( strength );
+      self.isValidStrength = CONSTANTS.WEAK_STRENGTH_RANGE.contains( strength );
     } );
   }
 
   return inherit( AqueousSolution, WeakAcidSolution, {
     init: function() {
-      this.strength = this.CONSTANTS.WEAK_STRENGTH_RANGE.defaultValue;
-      this.concentration = this.CONSTANTS.CONCENTRATION_RANGE.defaultValue;
+      this.strength = CONSTANTS.WEAK_STRENGTH_RANGE.defaultValue;
+      this.concentration = CONSTANTS.CONCENTRATION_RANGE.defaultValue;
     }
   } );
 } );

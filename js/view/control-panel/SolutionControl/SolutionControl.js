@@ -16,7 +16,6 @@ define( function( require ) {
     HBox = require( 'SCENERY/nodes/HBox' ),
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    FONT = new PhetFont( 12 ),
     Line = require( 'SCENERY/nodes/Line' ),
     StrengthSlider = require( 'ACID_BASE_SOLUTIONS/view/control-panel/SolutionControl/StrengthSlider' ),
     ConcentrationSlider = require( 'ACID_BASE_SOLUTIONS/view/control-panel/SolutionControl/ConcentrationSlider' ),
@@ -27,7 +26,11 @@ define( function( require ) {
     initialConcentrationString = require( 'string!ACID_BASE_SOLUTIONS/initialConcentration' ),
     strengthString = require( 'string!ACID_BASE_SOLUTIONS/strength' ),
     weakString = require( 'string!ACID_BASE_SOLUTIONS/weak' ),
-    strongString = require( 'string!ACID_BASE_SOLUTIONS/strong' );
+    strongString = require( 'string!ACID_BASE_SOLUTIONS/strong' ),
+
+  // constants
+    FONT = new PhetFont( 12 ),
+    CONSTANTS = require( 'model/Constants/Constants' );
 
   function SolutionControl( model, options ) {
     var vBox = new VBox( {spacing: 4} ),
@@ -46,7 +49,7 @@ define( function( require ) {
 
     // add concentration slider
     vBox.addChild( new Text( initialConcentrationString, {font: FONT} ) );
-    vBox.addChild( concentrationSlider = new ConcentrationSlider( model.property( 'concentration' ), model.CONSTANTS.CONCENTRATION_RANGE ) );
+    vBox.addChild( concentrationSlider = new ConcentrationSlider( model.property( 'concentration' ), CONSTANTS.CONCENTRATION_RANGE ) );
 
     // add black line
     vBox.addChild( new Line( 15, 0, 170, 0, {stroke: 'black', lineWidth: 0.75} ) );
@@ -59,7 +62,7 @@ define( function( require ) {
     ]} ) );
 
     // add strength slider
-    vBox.addChild( strengthSlider = new StrengthSlider( model.property( 'strength' ), model.CONSTANTS.WEAK_STRENGTH_RANGE ) );
+    vBox.addChild( strengthSlider = new StrengthSlider( model.property( 'strength' ), CONSTANTS.WEAK_STRENGTH_RANGE ) );
 
     this.addChild( vBox );
     vBox.updateLayout();

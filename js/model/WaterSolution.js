@@ -11,7 +11,10 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    AqueousSolution = require( './AqueousSolution' );
+    AqueousSolution = require( './AqueousSolution' ),
+
+  // constants
+    CONSTANTS = require( 'model/Constants/Constants' );
 
   function WaterSolution( strength, concentration ) {
     var self = this;
@@ -23,8 +26,8 @@ define( function( require ) {
     } );
 
     // default values
-    this.H3OConcentration = Math.sqrt( this.CONSTANTS.WATER_EQUILIBRIUM_CONSTANT );
-    this.H2OConcentration = this.CONSTANTS.WATER_CONCENTRATION;
+    this.H3OConcentration = Math.sqrt( CONSTANTS.WATER_EQUILIBRIUM_CONSTANT );
+    this.H2OConcentration = CONSTANTS.WATER_CONCENTRATION;
   }
 
   return inherit( AqueousSolution, WaterSolution );

@@ -14,11 +14,13 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    PropertySet = require( 'AXON/PropertySet' );
+    PropertySet = require( 'AXON/PropertySet' ),
 
-  function AqueousSolution( CONSTANTS ) {
+  // constants
+    CONSTANTS = require( 'model/Constants/Constants' );
+
+  function AqueousSolution() {
     var self = this;
-    this.CONSTANTS = CONSTANTS;
 
     PropertySet.call( this, {
       strength: 0,
@@ -37,7 +39,7 @@ define( function( require ) {
     } );
 
     // arbitrary, but needs to be greater than weak range
-    this.CONSTANTS.STRONG_STRENGTH = this.CONSTANTS.WEAK_STRENGTH_RANGE.max + 1;
+    CONSTANTS.STRONG_STRENGTH = CONSTANTS.WEAK_STRENGTH_RANGE.max + 1;
   }
 
   return inherit( PropertySet, AqueousSolution, {
