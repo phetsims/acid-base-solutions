@@ -14,10 +14,7 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    PropertySet = require( 'AXON/PropertySet' ),
-
-  // constants
-    CONSTANTS = require( 'model/Constants/Constants' );
+    PropertySet = require( 'AXON/PropertySet' );
 
   function AqueousSolution() {
     var self = this;
@@ -37,9 +34,6 @@ define( function( require ) {
     this.property( 'H3OConcentration' ).link( function( value ) {
       self.pH = -Math.round( 100 * Math.log( value ) / Math.LN10 ) / 100;
     } );
-
-    // arbitrary, but needs to be greater than weak range
-    CONSTANTS.STRONG_STRENGTH = CONSTANTS.WEAK_STRENGTH_RANGE.max + 1;
   }
 
   return inherit( PropertySet, AqueousSolution, {
