@@ -27,9 +27,11 @@ define( function( require ) {
     this.H3OConcentration = ( -Ka + Math.sqrt( ( Ka * Ka ) + ( 4 * Ka * c ) ) ) / 2;
   };
 
-  function WeakAcidSolution( strength, concentration ) {
+  function WeakAcidSolution() {
     var self = this;
-    AqueousSolution.call( this, strength, concentration );
+
+    // set default strength and concentration
+    AqueousSolution.call( this, CONSTANTS.WEAK_STRENGTH_RANGE.defaultValue, CONSTANTS.CONCENTRATION_RANGE.defaultValue );
 
     // set links between concentrations
     this.property( 'H3OConcentration' ).link( setSoluteConcentration.bind( this ) );
@@ -52,10 +54,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( AqueousSolution, WeakAcidSolution, {
-    init: function() {
-      this.strength = CONSTANTS.WEAK_STRENGTH_RANGE.defaultValue;
-      this.concentration = CONSTANTS.CONCENTRATION_RANGE.defaultValue;
-    }
-  } );
+  return inherit( AqueousSolution, WeakAcidSolution );
 } );

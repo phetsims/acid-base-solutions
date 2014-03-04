@@ -86,7 +86,6 @@ define( function( require ) {
 
     for ( var i = (customSolutionTitleString === mode ? 1 : 0), solution; i < this.SOLUTIONS.length; i++ ) {
       solution = new this.SOLUTIONS[i].constructor();
-      solution.init();
       this.components[this.SOLUTIONS[i].type] = solution;
       solution.property( 'pH' ).link( setPH );
     }
@@ -153,7 +152,8 @@ define( function( require ) {
         // reset components properties
         for ( var solution in this.components ) {
           if ( this.components.hasOwnProperty( solution ) ) {
-            this.components[solution].init();
+            this.components[solution].property( 'strength' ).reset();
+            this.components[solution].property( 'concentration' ).reset();
           }
         }
 

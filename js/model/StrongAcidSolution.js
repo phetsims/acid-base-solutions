@@ -16,9 +16,11 @@ define( function( require ) {
   // constants
     CONSTANTS = require( 'model/Constants/Constants' );
 
-  function StrongAcidSolution( strength, concentration ) {
+  function StrongAcidSolution() {
     var self = this;
-    AqueousSolution.call( this, strength, concentration );
+
+    // set default strength and concentration
+    AqueousSolution.call( this, CONSTANTS.STRONG_STRENGTH, CONSTANTS.CONCENTRATION_RANGE.defaultValue );
 
     // set links between concentrations
     this.property( 'concentration' ).link( function( value ) {
@@ -36,10 +38,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( AqueousSolution, StrongAcidSolution, {
-    init: function() {
-      this.strength = CONSTANTS.STRONG_STRENGTH;
-      this.concentration = CONSTANTS.CONCENTRATION_RANGE.defaultValue;
-    }
-  } );
+  return inherit( AqueousSolution, StrongAcidSolution );
 } );

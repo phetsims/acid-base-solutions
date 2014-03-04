@@ -16,12 +16,12 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     PropertySet = require( 'AXON/PropertySet' );
 
-  function AqueousSolution() {
+  function AqueousSolution( strength, concentration ) {
     var self = this;
 
     PropertySet.call( this, {
-      strength: 0,
-      concentration: 0,
+      strength: strength || 0,
+      concentration: concentration || 0,
       soluteConcentration: 0, // solute concentration
       productConcentration: 0, // product concentration
       H3OConcentration: 0, // H3O concentration
@@ -36,7 +36,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( PropertySet, AqueousSolution, {
-    init: function() {}
-  } );
+  return inherit( PropertySet, AqueousSolution );
 } );

@@ -26,9 +26,11 @@ define( function( require ) {
     this.productConcentration = (-Kb + Math.sqrt( ( Kb * Kb ) + ( 4 * Kb * c ) ) ) / 2;   // [BH+] = ( -Kb + sqrt( Kb*Kb + 4*Kb*c ) ) / 2
   };
 
-  function WeakBaseSolution( strength, concentration ) {
+  function WeakBaseSolution() {
     var self = this;
-    AqueousSolution.call( this, strength, concentration );
+
+    // set default strength and concentration
+    AqueousSolution.call( this, CONSTANTS.WEAK_STRENGTH_RANGE.defaultValue, CONSTANTS.CONCENTRATION_RANGE.defaultValue );
 
     // set links between concentrations
     this.property( 'concentration' ).link( function( value ) {
@@ -55,10 +57,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( AqueousSolution, WeakBaseSolution, {
-    init: function() {
-      this.strength = CONSTANTS.WEAK_STRENGTH_RANGE.defaultValue;
-      this.concentration = CONSTANTS.CONCENTRATION_RANGE.defaultValue;
-    }
-  } );
+  return inherit( AqueousSolution, WeakBaseSolution );
 } );

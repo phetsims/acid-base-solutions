@@ -16,9 +16,11 @@ define( function( require ) {
   // constants
     CONSTANTS = require( 'model/Constants/Constants' );
 
-  function WaterSolution( strength, concentration ) {
+  function WaterSolution() {
     var self = this;
-    AqueousSolution.call( this, strength, concentration );
+
+    // set default strength and concentration
+    AqueousSolution.call( this, 0, 0 );
 
     // set links between concentrations
     this.property( 'H3OConcentration' ).link( function( value ) {
