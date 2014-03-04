@@ -14,14 +14,18 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    PropertySet = require( 'AXON/PropertySet' );
+    PropertySet = require( 'AXON/PropertySet' ),
+
+  // constants
+    CONSTANTS = require( 'model/Constants/Constants' );
 
   function AqueousSolution( strength, concentration ) {
     var self = this;
 
     PropertySet.call( this, {
       strength: strength || 0,
-      concentration: concentration || 0,
+      // for water concentration is equal to 0, so we should use typeof checking
+      concentration: ( typeof (concentration) === 'undefined' ? CONSTANTS.CONCENTRATION_RANGE.defaultValue : concentration ),
       soluteConcentration: 0, // solute concentration
       productConcentration: 0, // product concentration
       H3OConcentration: 0, // H3O concentration

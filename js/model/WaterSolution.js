@@ -19,7 +19,7 @@ define( function( require ) {
   function WaterSolution() {
     var self = this;
 
-    // set default strength and concentration
+    // set default strength and concentration and add common properties
     AqueousSolution.call( this, 0, 0 );
 
     // set links between concentrations

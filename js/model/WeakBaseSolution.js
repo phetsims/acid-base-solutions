@@ -29,8 +29,8 @@ define( function( require ) {
   function WeakBaseSolution() {
     var self = this;
 
-    // set default strength and concentration
-    AqueousSolution.call( this, CONSTANTS.WEAK_STRENGTH_RANGE.defaultValue, CONSTANTS.CONCENTRATION_RANGE.defaultValue );
+    // set default strength and concentration and add common properties
+    AqueousSolution.call( this, CONSTANTS.WEAK_STRENGTH_RANGE.defaultValue );
 
     // set links between concentrations
     this.property( 'concentration' ).link( function( value ) {

@@ -19,8 +19,8 @@ define( function( require ) {
   function StrongBaseSolution() {
     var self = this;
 
-    // set default strength and concentration
-    AqueousSolution.call( this, CONSTANTS.STRONG_STRENGTH, CONSTANTS.CONCENTRATION_RANGE.defaultValue );
+    // set default strength and concentration and add common properties
+    AqueousSolution.call( this, CONSTANTS.STRONG_STRENGTH );
 
     // set links between concentrations
     this.property( 'concentration' ).link( function( value ) {

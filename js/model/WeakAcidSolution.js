@@ -30,8 +30,8 @@ define( function( require ) {
   function WeakAcidSolution() {
     var self = this;
 
-    // set default strength and concentration
-    AqueousSolution.call( this, CONSTANTS.WEAK_STRENGTH_RANGE.defaultValue, CONSTANTS.CONCENTRATION_RANGE.defaultValue );
+    // set default strength and concentration and add common properties
+    AqueousSolution.call( this, CONSTANTS.WEAK_STRENGTH_RANGE.defaultValue );
 
     // set links between concentrations
     this.property( 'H3OConcentration' ).link( setSoluteConcentration.bind( this ) );
