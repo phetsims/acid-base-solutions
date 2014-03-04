@@ -13,7 +13,6 @@ define( function( require ) {
   var ArrowButton = require( 'SCENERY_PHET/ArrowButton' ),
     Dimension2 = require( 'DOT/Dimension2' ),
     inherit = require( 'PHET_CORE/inherit' ),
-    molesPerLiterString = require( 'string!ACID_BASE_SOLUTIONS/molesPerLiter' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Panel = require( 'SUN/Panel' ),
     Property = require( 'AXON/Property' ),
@@ -21,12 +20,17 @@ define( function( require ) {
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     Text = require( 'SCENERY/nodes/Text' ),
     HSlider = require( 'SUN/HSlider' ),
+    StringUtils = require( 'PHETCOMMON/util/StringUtils' ),
     Util = require( 'DOT/Util' ),
 
   // constants
     READOUT_FONT = new PhetFont( 14 ),
     ARROW_HEIGHT = 15,
     LN10 = Math.LN10,
+
+  // strings
+    pattern_0value_1concentration = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1concentration' ),
+    molesPerLiterString = require( 'string!ACID_BASE_SOLUTIONS/molesPerLiter' ),
 
     arrowButtonOptions = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
 
@@ -35,7 +39,7 @@ define( function( require ) {
       CONCENTRATION_MAX = Math.log( range.max ) / LN10,
       CONCENTRATION_STEP = 0.1,
       sliderProperty = new Property( Math.log( range.defaultValue ) / LN10 ),
-      readoutText = new Text( '0' + ' ' + molesPerLiterString, { font: READOUT_FONT } ),
+      readoutText = new Text( StringUtils.format( pattern_0value_1concentration, Util.toFixed( concentrationProperty.value, 3 ), molesPerLiterString ), { font: READOUT_FONT } ),
       readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.5 ),
       panelContent = new Node(),
       slider,
@@ -79,14 +83,14 @@ define( function( require ) {
     leftArrowButton.centerY = slider.centerY;
     rightArrowButton.left = slider.right + 12;
     rightArrowButton.centerY = slider.centerY;
+    readoutText.centerX = readoutBackground.centerX;
 
     // put the contents into a panel
     this.addChild( new Panel( panelContent, {fill: 'rgba(0,0,0,0)', stroke: 'rgba(0,0,0,0)'} ) );
 
     // update the readout text whenever the value changes
     concentrationProperty.link( function( value ) {
-      readoutText.text = Util.toFixed( value, 3 ) + ' ' + molesPerLiterString;
-      readoutText.centerX = readoutBackground.centerX;
+      readoutText.text = StringUtils.format( pattern_0value_1concentration, Util.toFixed( value, 3 ), molesPerLiterString );
     } );
 
     sliderProperty.link( function( value ) {

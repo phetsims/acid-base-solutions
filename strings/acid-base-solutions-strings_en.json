@@ -14,6 +14,7 @@
   "molecules": "Molecules",
   "molesPerLiter": "mol/L",
   "negligible": "negligible",
+  "pattern.0value.1concentration": "{0} {1}",
   "pattern.0value.1units": "{0}{1}",
   "pH": "pH",
   "pHColorKey": "pH Color Key",
