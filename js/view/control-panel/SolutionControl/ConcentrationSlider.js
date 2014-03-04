@@ -94,7 +94,7 @@ define( function( require ) {
     } );
 
     sliderProperty.link( function( value ) {
-      concentrationProperty.value = parseFloat( Math.pow( 10, value ).toPrecision( 2 ) );
+      concentrationProperty.value = Math.pow( 10, value );
     } );
   }
 
