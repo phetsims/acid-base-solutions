@@ -127,8 +127,6 @@ define( function( require ) {
         ];
 
         self.solution = map[+self.isAcid][+self.isWeak];
-        self.property( 'concentration' ).notifyObserversUnsafe();
-        self.property( 'strength' ).notifyObserversUnsafe();
       };
 
       var setStrength = function( value ) { self.strength = value; }; // observer for strength property
@@ -142,6 +140,13 @@ define( function( require ) {
         // subscribe to new solution strength and concentration property
         self.components[newSolution].property( 'strength' ).link( setStrength );
         self.components[newSolution].property( 'concentration' ).link( setConcentration );
+
+        // we need set concentration and strength values of new solution
+        // equal to values from previous solution
+        if ( prevSolution ) {
+          self.components[newSolution].concentration = self.components[prevSolution].concentration;
+          self.components[newSolution].strength = self.components[prevSolution].strength;
+        }
       } );
 
 
