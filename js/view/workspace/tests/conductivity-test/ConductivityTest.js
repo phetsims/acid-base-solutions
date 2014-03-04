@@ -25,22 +25,28 @@ define( function( require ) {
     batteryImage = require( 'image!ACID_BASE_SOLUTIONS/battery.png' ),
     lightBulbBaseImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-base.png' ),
     lightBulbGlassImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-glass.png' ),
-    lightBulbGlassMaskImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-glass-mask.png' );
+    lightBulbGlassMaskImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-glass-mask.png' ),
 
-  var BULB_TO_BATTERY_WIRE_LENGTH = 40,
+  // constants
+    BULB_TO_BATTERY_WIRE_LENGTH = 40,
     OPACITY_MAX = 0.15,
-  // alpha of the bulb when used against a dark background.  This is clamped after evaluation to keep it within the range [0,1]
-    BRIGHTNESS_TO_ALPHA_FUNCTION_AGAINST_DARK_BACKGROUND = new LinearFunction( 0, 1, OPACITY_MAX, 0 );
 
-  var initYLevel = 60,
+  // alpha of the bulb when used against a dark background. This is clamped after evaluation to keep it within the range [0,1]
+    BRIGHTNESS_TO_ALPHA_FUNCTION_AGAINST_DARK_BACKGROUND = new LinearFunction( 0, 1, OPACITY_MAX, 0 ),
+
+    WIRES_INITIAL_Y = 60,
+    BULB_END_X = 23,
+    BULB_END_Y = 84,
+    WATER_SURFACE = 75,
+
     wireOptions = {
       positive: {
         start: {x: 125, y: 84},
-        end: {x: 163, y: initYLevel}
+        end: {x: 163, y: WIRES_INITIAL_Y}
       },
       negative: {
         start: {x: 16, y: 75},
-        end: {x: -22, y: initYLevel}
+        end: {x: -22, y: WIRES_INITIAL_Y}
       }
     };
 
@@ -50,9 +56,6 @@ define( function( require ) {
       positiveProbeY = new Property( wireOptions.positive.end.y ),
       negativeProbeY = new Property( wireOptions.negative.end.y ),
       isClose = new Property( false ),
-      bulbEndX = 23,
-      bulbEndY = 84,
-      waterSurface = 75,
       negativeWire,
       positiveWire;
     Node.call( this, options );
@@ -68,9 +71,9 @@ define( function( require ) {
         lightBulbDarkMask
       ]} ),
       // add wire from battery to light bulb
-      new Path( new Shape().moveTo( bulbEndX, bulbEndY ).lineTo( bulbEndX + BULB_TO_BATTERY_WIRE_LENGTH, bulbEndY ), {stroke: 'black', lineWidth: 1.5} ),
+      new Path( new Shape().moveTo( BULB_END_X, BULB_END_Y ).lineTo( BULB_END_X + BULB_TO_BATTERY_WIRE_LENGTH, BULB_END_Y ), {stroke: 'black', lineWidth: 1.5} ),
       // add battery image
-      new Image( batteryImage, {scale: 0.6, x: bulbEndX + BULB_TO_BATTERY_WIRE_LENGTH, y: 67} )
+      new Image( batteryImage, {scale: 0.6, x: BULB_END_X + BULB_TO_BATTERY_WIRE_LENGTH, y: 67} )
     ]} ) );
 
     // add wires
@@ -78,12 +81,12 @@ define( function( require ) {
     this.addChild( positiveWire = new ConductivityTestWire( 'positive', wireOptions.positive.start.x, wireOptions.positive.start.y, wireOptions.positive.end.x, wireOptions.positive.end.y ) );
 
     // add probes
-    this.addChild( new ConductivityTestProbe( 'red', '+', positiveProbeY, {x: 155, y: initYLevel} ) );
-    this.addChild( new ConductivityTestProbe( 'black', '-', negativeProbeY, {x: -30, y: initYLevel} ) );
+    this.addChild( new ConductivityTestProbe( 'red', '+', positiveProbeY, {x: 155, y: WIRES_INITIAL_Y} ) );
+    this.addChild( new ConductivityTestProbe( 'black', '-', negativeProbeY, {x: -30, y: WIRES_INITIAL_Y} ) );
 
     // if both probes in water: isContact === true
     var checkContact = function() {
-      isClose.value = ( positiveProbeY.value > waterSurface && negativeProbeY.value > waterSurface );
+      isClose.value = ( positiveProbeY.value > WATER_SURFACE && negativeProbeY.value > WATER_SURFACE );
     };
     positiveProbeY.link( checkContact );
     negativeProbeY.link( checkContact );

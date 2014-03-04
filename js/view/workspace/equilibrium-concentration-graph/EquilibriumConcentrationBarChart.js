@@ -14,17 +14,21 @@ define( function( require ) {
     Node = require( 'SCENERY/nodes/Node' ),
     MOLECULES_COLORS = require( 'model/Constants/MoleculesColors' ),
     EquilibriumConcentrationSingleBar = require( './EquilibriumConcentrationSingleBar' ),
-    EquilibriumConcentrationBarChartBackground = require( './EquilibriumConcentrationBarChartBackground' );
+    EquilibriumConcentrationBarChartBackground = require( './EquilibriumConcentrationBarChartBackground' ),
+
+  // constants
+    BAR_CHART_WIDTH = 200,
+    BAR_CHART_HEIGHT = 270;
 
   function EquilibriumConcentrationBarChart( model, options ) {
-    var self = this, width = 200, height = 270,
+    var self = this,
       bars = {};
     Node.call( this, options );
     this.setPickable( false );
     this.model = model;
 
     // add background
-    this.addChild( new EquilibriumConcentrationBarChartBackground( width, height ) );
+    this.addChild( new EquilibriumConcentrationBarChartBackground( BAR_CHART_WIDTH, BAR_CHART_HEIGHT ) );
 
     // add bars for each solution
     model.SOLUTIONS.forEach( function( solution ) {
@@ -32,9 +36,8 @@ define( function( require ) {
       if ( type in model.components ) {
         bars[type] = new Node( {visible: false} );
         solution.relations.forEach( function( molecule, i ) {
-          bars[type].addChild( bar = new EquilibriumConcentrationSingleBar( model.components[type].property( molecule.property ), {fill: MOLECULES_COLORS[molecule.type], height: height - 10 } ) );
-          bar.setTranslation( (i + 0.75 + (4 - solution.relations.length) / 2) * width / 4, height );
-
+          bars[type].addChild( bar = new EquilibriumConcentrationSingleBar( model.components[type].property( molecule.property ), {fill: MOLECULES_COLORS[molecule.type], height: BAR_CHART_HEIGHT - 10 } ) );
+          bar.setTranslation( (i + 0.75 + (4 - solution.relations.length) / 2) * BAR_CHART_WIDTH / 4, BAR_CHART_HEIGHT );
         } );
         self.addChild( bars[type] );
       }

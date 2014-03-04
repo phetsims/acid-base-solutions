@@ -13,12 +13,13 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Path = require( 'SCENERY/nodes/Path' ),
-    Shape = require( 'KITE/Shape' );
+    Shape = require( 'KITE/Shape' ),
 
-  var CONTROL_POINT = {
-    positive: {x: 12.5, y: -50},
-    negative: {x: -12.5, y: -50}
-  };
+  // constants
+    CONTROL_POINT = {
+      positive: {x: 12.5, y: -50},
+      negative: {x: -12.5, y: -50}
+    };
 
   function ConductivityTestWire( type, startX, startY, endX, endY ) {
     Path.call( this );

@@ -34,23 +34,23 @@ define( function( require ) {
     Node.call( this, {pickable: false} );
 
     // outline of the beaker, starting from upper left
-    var width = model.width / 1.95,
-      height = model.height / 1.66,
+    var BEAKER_WIDTH = model.width / 1.95,
+      BEAKER_HEIGHT = model.height / 1.66,
       outlineShape = new Shape()
-        .moveTo( -width / 2 - RIM_OFFSET, -height - RIM_OFFSET )
-        .lineTo( -width / 2, -height )
-        .lineTo( -width / 2, 0 )
-        .lineTo( width / 2, 0 )
-        .lineTo( width / 2, -height )
-        .lineTo( (width / 2) + RIM_OFFSET, -height - RIM_OFFSET ),
-      fillShape = new Shape().lineTo( -width / 2, -height )
-        .lineTo( -width / 2, 0 )
-        .lineTo( width / 2, 0 )
-        .lineTo( width / 2, -height ),
+        .moveTo( -BEAKER_WIDTH / 2 - RIM_OFFSET, -BEAKER_HEIGHT - RIM_OFFSET )
+        .lineTo( -BEAKER_WIDTH / 2, -BEAKER_HEIGHT )
+        .lineTo( -BEAKER_WIDTH / 2, 0 )
+        .lineTo( BEAKER_WIDTH / 2, 0 )
+        .lineTo( BEAKER_WIDTH / 2, -BEAKER_HEIGHT )
+        .lineTo( (BEAKER_WIDTH / 2) + RIM_OFFSET, -BEAKER_HEIGHT - RIM_OFFSET ),
+      fillShape = new Shape().lineTo( -BEAKER_WIDTH / 2, -BEAKER_HEIGHT )
+        .lineTo( -BEAKER_WIDTH / 2, 0 )
+        .lineTo( BEAKER_WIDTH / 2, 0 )
+        .lineTo( BEAKER_WIDTH / 2, -BEAKER_HEIGHT ),
     // horizontal tick marks, left edge, from bottom up
       ticksParent,
-      numberOfTicks = Math.round( 1 / MINOR_TICK_SPACING ),
-      deltaY = height / numberOfTicks;
+      NUMBER_OF_TICKS = Math.round( 1 / MINOR_TICK_SPACING ),
+      deltaY = BEAKER_HEIGHT / NUMBER_OF_TICKS;
 
     // add water
     this.addChild( new Path( fillShape, {
@@ -69,12 +69,12 @@ define( function( require ) {
 
     var isMajorTick,
       y, leftX, rightX, tickShape, tickPath;
-    for ( var i = 1; i <= numberOfTicks; i++ ) {
+    for ( var i = 1; i <= NUMBER_OF_TICKS; i++ ) {
 
       // tick
       isMajorTick = ( i % MINOR_TICKS_PER_MAJOR_TICK === 0 );
       y = -( i * deltaY );
-      leftX = width / 2;
+      leftX = BEAKER_WIDTH / 2;
       rightX = leftX - ( isMajorTick ? MAJOR_TICK_LENGTH : MINOR_TICK_LENGTH );
       tickShape = new Shape().moveTo( leftX, y ).lineTo( rightX, y );
       tickPath = new Path( tickShape, {
@@ -92,8 +92,8 @@ define( function( require ) {
     ticksParent.addChild( new Text( label, {
       font: new PhetFont( 18 ),
       fill: 'black',
-      x: width / 2 - MAJOR_TICK_LENGTH - TICK_LABEL_X_SPACING,
-      centerY: -deltaY * numberOfTicks
+      x: BEAKER_WIDTH / 2 - MAJOR_TICK_LENGTH - TICK_LABEL_X_SPACING,
+      centerY: -deltaY * NUMBER_OF_TICKS
     } ) );
 
     this.centerX = location.x || 0;

@@ -19,7 +19,7 @@ define( function( require ) {
 
   function Magnifier( model, options ) {
     var self = this,
-      radius = model.height / 3.6,
+      RADIUS = model.height / 3.6,
       layers = {};
     Node.call( this, options );
     this.setPickable( false );
@@ -27,10 +27,10 @@ define( function( require ) {
 
     // add container for molecules
     this.addChild( this.container = new Node() );
-    this.container.setClipArea( new Shape().circle( 0, 0, radius - 4 ) );
+    this.container.setClipArea( new Shape().circle( 0, 0, RADIUS - 4 ) );
 
     // add background
-    this.addChild( new MagnifierBackground( model, this.container, radius ) );
+    this.addChild( new MagnifierBackground( model, this.container, RADIUS ) );
 
     // add molecules layers for each solution
     model.SOLUTIONS.forEach( function( solution ) {
@@ -40,7 +40,7 @@ define( function( require ) {
         solution.relations.forEach( function( molecule ) {
           property = model.components[type].property( molecule.property );
           if ( molecule.type !== 'H2O' && property.get() ) {
-            layers[type].addChild( new MagnifierMoleculesLayer( model, type, property, molecule.type, radius ) );
+            layers[type].addChild( new MagnifierMoleculesLayer( model, type, property, molecule.type, RADIUS ) );
           }
         } );
         self.container.addChild( layers[type] );

@@ -15,20 +15,22 @@ define( function( require ) {
     Dimension2 = require( 'DOT/Dimension2' ),
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    FONT = new PhetFont( 14 ),
-    LN10 = Math.LN10,
 
   // strings
     weakerString = require( 'string!ACID_BASE_SOLUTIONS/weaker' ),
-    strongerString = require( 'string!ACID_BASE_SOLUTIONS/stronger' );
+    strongerString = require( 'string!ACID_BASE_SOLUTIONS/stronger' ),
+
+  // constants
+    FONT = new PhetFont( 14 ),
+    LN10 = Math.LN10,
+    SLIDER_TRACK_WIDTH = 150,
+    SLIDER_TICK_OFFSET = 5,
+    SLIDER_TICK_LENGTH = 10;
 
   function StrengthSlider( strengthProperty, range, coords ) {
-    var width = 150,
-      tickLength = 10,
-      sliderProperty = new Property( Math.log( range.defaultValue ) / LN10 ),
+    var sliderProperty = new Property( Math.log( range.defaultValue ) / LN10 ),
       STRENGTH_MIN = Math.log( range.min ) / LN10,
       STRENGTH_MAX = Math.log( range.max ) / LN10,
-      tickOffset = 5,
       slider;
     Node.call( this, coords );
     this.scale( 0.83 );
@@ -36,7 +38,7 @@ define( function( require ) {
 
     // add horizontal part
     this.addChild( slider = new HSlider( sliderProperty, {min: STRENGTH_MIN, max: STRENGTH_MAX}, {
-      trackSize: new Dimension2( width, 5 ),
+      trackSize: new Dimension2( SLIDER_TRACK_WIDTH, 5 ),
       thumbSize: new Dimension2( 15, 25 ),
       majorTickLength: -15
     } ) );
@@ -46,8 +48,8 @@ define( function( require ) {
     slider.addMajorTick( STRENGTH_MAX, null );
 
     // add text
-    this.addChild( new Text( weakerString, {font: FONT, centerX: 0, centerY: 2 * tickOffset + tickLength} ) );
-    this.addChild( new Text( strongerString, {font: FONT, centerX: width, centerY: 2 * tickOffset + tickLength} ) );
+    this.addChild( new Text( weakerString, {font: FONT, centerX: 0, centerY: 2 * SLIDER_TICK_OFFSET + SLIDER_TICK_LENGTH} ) );
+    this.addChild( new Text( strongerString, {font: FONT, centerX: SLIDER_TRACK_WIDTH, centerY: 2 * SLIDER_TICK_OFFSET + SLIDER_TICK_LENGTH} ) );
 
     sliderProperty.link( function( value ) {
       strengthProperty.value = parseFloat( Math.pow( 10, value ) );

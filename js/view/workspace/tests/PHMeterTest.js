@@ -17,19 +17,21 @@ define( function( require ) {
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    FONT = new PhetFont( {size: 15, weight: 'bold'} ),
     SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' ),
     Util = require( 'DOT/Util' ),
 
   // string
-    pHString = require( 'string!ACID_BASE_SOLUTIONS/pH' );
+    pHString = require( 'string!ACID_BASE_SOLUTIONS/pH' ),
+
+  // constants
+    FONT = new PhetFont( {size: 15, weight: 'bold'} ),
+    PROBE_MIN_Y_COODINATE = 25.2,
+    PROBE_MAX_Y_COODINATE = 100,
+    WATER_SURFACE = 38;
 
   function PHMeterTest( model, options ) {
-    var self = this,
-      maxY = 100,
-      minY = 25.2;
+    var self = this;
     Node.call( this, _.extend( {cursor: 'pointer'}, options ) );
-    this.waterSurface = 38;
 
     // add sensor
     this.addChild( new Node( {children: [
@@ -55,7 +57,7 @@ define( function( require ) {
         // new y-coordinate
         var y = self.globalToParentPoint( e.pointer.point ).y - clickYOffset;
         // check limitation
-        y = Math.min( Math.max( minY, y ), maxY );
+        y = Math.min( Math.max( PROBE_MIN_Y_COODINATE, y ), PROBE_MAX_Y_COODINATE );
         // move to new position
         self.setYValue( y );
       }
@@ -77,7 +79,7 @@ define( function( require ) {
   return inherit( Node, PHMeterTest, {
     setYValue: function( y ) {
       this.y = y;
-      this.pHText.setVisible( this.y > this.waterSurface );
+      this.pHText.setVisible( this.y > WATER_SURFACE );
     }
   } );
 } );

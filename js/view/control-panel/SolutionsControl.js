@@ -15,7 +15,7 @@ define( function( require ) {
     HTMLText = require( 'SCENERY/nodes/HTMLText' ),
     ChemUtils = require( 'NITROGLYCERIN/ChemUtils' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    FONT = new PhetFont( 12 ),
+
     VBox = require( 'SCENERY/nodes/VBox' ),
     HBox = require( 'SCENERY/nodes/HBox' ),
     VStrut = require( 'SUN/VStrut' ),
@@ -29,7 +29,11 @@ define( function( require ) {
     strongAcidString = require( 'string!ACID_BASE_SOLUTIONS/strongAcid' ),
     weakAcidString = require( 'string!ACID_BASE_SOLUTIONS/weakAcid' ),
     strongBaseString = require( 'string!ACID_BASE_SOLUTIONS/strongBase' ),
-    weakBaseString = require( 'string!ACID_BASE_SOLUTIONS/weakBase' );
+    weakBaseString = require( 'string!ACID_BASE_SOLUTIONS/weakBase' ),
+
+  // constants
+    FONT = new PhetFont( 12 ),
+    RADIO_BUTTON_RADIUS = 7;
 
   var menuOptions = [
     {text: new HTMLText( waterString + ChemUtils.toSubscript( ' (H2O)' ), {font: FONT, centerX: 49, centerY: 0} ), value: 'WATER', icon: H2OMolecule},
@@ -42,8 +46,7 @@ define( function( require ) {
   function SolutionsControl( model, options ) {
     var vBox = new VBox( {align: 'left'} ),
       radioButtons = [],
-      maxHeight = 0,
-      radius = 7;
+      maxHeight = 0;
     Node.call( this, options );
 
     // define radio buttons and find max height of single button
@@ -52,7 +55,7 @@ define( function( require ) {
         menuOptions[i].text,
         new menuOptions[i].icon()
       ]
-      } ), {radius: radius} );
+      } ), {radius: RADIO_BUTTON_RADIUS} );
       maxHeight = Math.max( radioButtons[i].getHeight(), maxHeight );
     }
 
@@ -65,7 +68,7 @@ define( function( require ) {
     vBox.updateLayout();
 
     // adjust node position
-    this.setX( this.getX() - radius );
+    this.setX( this.getX() - RADIO_BUTTON_RADIUS );
   }
 
   return inherit( Node, SolutionsControl );

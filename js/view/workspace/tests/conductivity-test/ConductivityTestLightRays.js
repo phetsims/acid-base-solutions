@@ -16,6 +16,7 @@ define( function( require ) {
     LinearFunction = require( 'DOT/LinearFunction' ),
     Line = require( 'SCENERY/nodes/Line' ),
 
+  // constants
     MIN_RAYS = 8,
     MAX_RAYS = 60,
     MIN_RAY_LENGTH = 0,

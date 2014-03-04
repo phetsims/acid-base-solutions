@@ -16,7 +16,6 @@ define( function( require ) {
     Text = require( 'SCENERY/nodes/Text' ),
     HTMLText = require( 'SCENERY/nodes/HTMLText' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    FONT = new PhetFont( 13 ),
 
   // molecules
     MOHMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/MOHMolecule' ),
@@ -24,16 +23,20 @@ define( function( require ) {
     OHMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/OHMolecule' ),
 
   // images
-    arrowSingleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_single.png' );
+    arrowSingleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_single.png' ),
+
+  // constants
+    FONT = new PhetFont( 13 ),
+    TEXT_OFFSET = 23,
+    TEXT_SUP_OFFSET = TEXT_OFFSET - 3;
 
   function StrongBaseFormula( options ) {
-    var textOffset = 23, supOffset = textOffset - 3;
     Node.call( this, options );
 
     // left expression
     // left expression: MOH molecule
     this.addChild( new MOHMolecule() );
-    this.addChild( new Text( 'MOH', {font: FONT, centerX: 8, centerY: textOffset} ) );
+    this.addChild( new Text( 'MOH', {font: FONT, centerX: 8, centerY: TEXT_OFFSET} ) );
 
     // straight sign
     this.addChild( new Image( arrowSingleImage, {scale: 0.75, x: 32, y: 18} ) );
@@ -41,14 +44,14 @@ define( function( require ) {
     // right expression
     // right expression: A molecule
     this.addChild( new MMolecule( {x: 75} ) );
-    this.addChild( new HTMLText( 'M<sup>+</sup>', {font: FONT, centerX: 75, centerY: supOffset} ) );
+    this.addChild( new HTMLText( 'M<sup>+</sup>', {font: FONT, centerX: 75, centerY: TEXT_SUP_OFFSET} ) );
 
     // right expression: plus sign
-    this.addChild( new Text( '+', {font: FONT, centerX: 95, centerY: textOffset} ) );
+    this.addChild( new Text( '+', {font: FONT, centerX: 95, centerY: TEXT_OFFSET} ) );
 
     // right expression: OH molecule
     this.addChild( new OHMolecule( {x: 116} ) );
-    this.addChild( new HTMLText( 'OH<sup>-</sup>', {font: FONT, centerX: 116, centerY: supOffset} ) );
+    this.addChild( new HTMLText( 'OH<sup>-</sup>', {font: FONT, centerX: 116, centerY: TEXT_SUP_OFFSET} ) );
   }
 
   return inherit( Node, StrongBaseFormula );
