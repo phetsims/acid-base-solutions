@@ -13,6 +13,7 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
+    Util = require( 'DOT/Util' ),
 
   // molecules
     MoleculesConstructors = {
@@ -33,8 +34,8 @@ define( function( require ) {
     BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules;
 
   var getNumberOfMolecules = function( concentration ) {
-    var raiseFactor = Math.log( concentration / BASE_CONCENTRATION ) / Math.LN10,
-      baseFactor = Math.pow( ( MAX_MOLECULES / BASE_DOTS ), ( Math.LN10 / Math.log( 1 / BASE_CONCENTRATION ) ) );
+    var raiseFactor = Util.log10( concentration / BASE_CONCENTRATION ),
+      baseFactor = Math.pow( ( MAX_MOLECULES / BASE_DOTS ), ( 1 / Util.log10( 1 / BASE_CONCENTRATION ) ) );
     return Math.round( BASE_DOTS * Math.pow( baseFactor, raiseFactor ) );
   };
 

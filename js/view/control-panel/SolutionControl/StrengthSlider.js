@@ -15,6 +15,7 @@ define( function( require ) {
     Dimension2 = require( 'DOT/Dimension2' ),
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
+    Util = require( 'DOT/Util' ),
 
   // strings
     weakerString = require( 'string!ACID_BASE_SOLUTIONS/weaker' ),
@@ -22,15 +23,14 @@ define( function( require ) {
 
   // constants
     FONT = new PhetFont( 14 ),
-    LN10 = Math.LN10,
     SLIDER_TRACK_WIDTH = 150,
     SLIDER_TICK_OFFSET = 5,
     SLIDER_TICK_LENGTH = 10;
 
   function StrengthSlider( strengthProperty, range, coords ) {
-    var sliderProperty = new Property( Math.log( range.defaultValue ) / LN10 ),
-      STRENGTH_MIN = Math.log( range.min ) / LN10,
-      STRENGTH_MAX = Math.log( range.max ) / LN10,
+    var sliderProperty = new Property( Util.log10( range.defaultValue ) ),
+      STRENGTH_MIN = Util.log10( range.min ),
+      STRENGTH_MAX = Util.log10( range.max ),
       slider;
     Node.call( this, coords );
     this.scale( 0.83 );

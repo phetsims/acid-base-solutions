@@ -26,7 +26,6 @@ define( function( require ) {
   // constants
     READOUT_FONT = new PhetFont( 14 ),
     ARROW_HEIGHT = 15,
-    LN10 = Math.LN10,
 
   // strings
     pattern_0value_1concentration = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1concentration' ),
@@ -35,10 +34,10 @@ define( function( require ) {
     arrowButtonOptions = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
 
   function ConcentrationSlider( concentrationProperty, range ) {
-    var CONCENTRATION_MIN = Math.log( range.min ) / LN10,
-      CONCENTRATION_MAX = Math.log( range.max ) / LN10,
+    var CONCENTRATION_MIN = Util.log10( range.min ),
+      CONCENTRATION_MAX = Util.log10( range.max ),
       CONCENTRATION_STEP = 0.1,
-      sliderProperty = new Property( Math.log( range.defaultValue ) / LN10 ),
+      sliderProperty = new Property( Util.log10( range.defaultValue ) ),
       readoutText = new Text( StringUtils.format( pattern_0value_1concentration, Util.toFixed( concentrationProperty.value, 3 ), molesPerLiterString ), { font: READOUT_FONT } ),
       readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.5 ),
       panelContent = new Node(),

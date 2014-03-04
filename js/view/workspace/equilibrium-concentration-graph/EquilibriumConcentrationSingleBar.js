@@ -45,7 +45,7 @@ define( function( require ) {
     textPow.rotate( -Math.PI / 2 );
 
     property.link( function( value ) {
-      var barHeight = Math.abs( Math.log( value ) / Math.LN10 + 8 ) * height / 10;
+      var barHeight = Math.abs( Util.log10( value ) + 8 ) * height / 10;
 
       // set bar height
       if ( isFinite( barHeight ) ) {
@@ -59,7 +59,7 @@ define( function( require ) {
       }
       else if ( value <= 1 ) {
         // find pow
-        var pow = Math.floor( Math.log( value ) / Math.LN10 );
+        var pow = Math.floor( Util.log10( value ) );
 
         // set value
         value = (value * Math.pow( 10, -pow ));

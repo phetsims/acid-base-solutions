@@ -15,6 +15,7 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     PropertySet = require( 'AXON/PropertySet' ),
+    Util = require( 'DOT/Util' ),
 
   // constants
     CONSTANTS = require( 'model/Constants/Constants' );
@@ -36,7 +37,7 @@ define( function( require ) {
     } );
 
     this.property( 'H3OConcentration' ).link( function( value ) {
-      self.pH = -Math.round( 100 * Math.log( value ) / Math.LN10 ) / 100;
+      self.pH = -Math.round( 100 * Util.log10( value ) ) / 100;
     } );
   }
 
