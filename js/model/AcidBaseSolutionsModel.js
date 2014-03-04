@@ -90,17 +90,21 @@ define( function( require ) {
 
     // add model for each type of reaction
     this.components = {};
-    var setPH = function( value ) { self.pH = value; }; // observer for pH property
 
     for ( var i = (customSolutionTitleString === mode ? 1 : 0), solution; i < this.SOLUTIONS.length; i++ ) {
       solution = new this.SOLUTIONS[i].constructor();
       this.components[this.SOLUTIONS[i].type] = solution;
-      solution.property( 'pH' ).link( setPH );
     }
 
     // set appropriate pH
-    this.property( 'solution' ).link( function( solution ) {
-      self.pH = self.components[solution].pH;
+    var setPH = function( value ) { self.pH = value; }; // observer for pH property
+    this.property( 'solution' ).link( function( newSolution, prevSolution ) {
+      // unsubscribe from previous solution pH property
+      if ( prevSolution ) {
+        self.components[prevSolution].property( 'pH' ).unlink( setPH );
+      }
+      // subscribe to new solution pH property
+      self.components[newSolution].property( 'pH' ).link( setPH );
     } );
 
     // set brightness of light rays depend on pH value
@@ -126,6 +130,21 @@ define( function( require ) {
         self.property( 'concentration' ).notifyObserversUnsafe();
         self.property( 'strength' ).notifyObserversUnsafe();
       };
+
+      var setStrength = function( value ) { self.strength = value; }; // observer for strength property
+      var setConcentration = function( value ) { self.concentration = value; }; // observer for strength property
+      this.property( 'solution' ).link( function( newSolution, prevSolution ) {
+        // unsubscribe from previous solution strength and concentration property
+        if ( prevSolution ) {
+          self.components[prevSolution].property( 'strength' ).unlink( setStrength );
+          self.components[prevSolution].property( 'concentration' ).unlink( setConcentration );
+        }
+        // subscribe to new solution strength and concentration property
+        self.components[newSolution].property( 'strength' ).link( setStrength );
+        self.components[newSolution].property( 'concentration' ).link( setConcentration );
+      } );
+
+
       this.property( 'isAcid' ).link( setSolution );
       this.property( 'isWeak' ).link( setSolution );
 

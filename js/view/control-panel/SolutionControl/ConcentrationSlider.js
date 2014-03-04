@@ -89,18 +89,15 @@ define( function( require ) {
     this.addChild( new Panel( panelContent, {fill: 'rgba(0,0,0,0)', stroke: 'rgba(0,0,0,0)'} ) );
 
     // update the readout text whenever the value changes
-    concentrationProperty.link( function( value ) {
-      readoutText.text = StringUtils.format( pattern_0value_1concentration, Util.toFixed( value, 3 ), molesPerLiterString );
-    } );
-
     sliderProperty.link( function( value ) {
       concentrationProperty.value = Math.pow( 10, value );
     } );
+
+    concentrationProperty.link( function( value ) {
+      readoutText.text = StringUtils.format( pattern_0value_1concentration, Util.toFixed( value, 3 ), molesPerLiterString );
+      sliderProperty.value = Util.log10( value );
+    } );
   }
 
-  return inherit( Node, ConcentrationSlider, {
-    reset: function() {
-      this.property.reset();
-    }
-  } );
+  return inherit( Node, ConcentrationSlider );
 } );

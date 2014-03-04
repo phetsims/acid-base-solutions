@@ -54,11 +54,11 @@ define( function( require ) {
     sliderProperty.link( function( value ) {
       strengthProperty.value = Math.pow( 10, value );
     } );
+
+    strengthProperty.link( function( value ) {
+      sliderProperty.value = Util.log10( value );
+    } );
   }
 
-  return inherit( Node, StrengthSlider, {
-    reset: function() {
-      this.property.reset();
-    }
-  } );
+  return inherit( Node, StrengthSlider );
 } );

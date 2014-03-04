@@ -70,11 +70,6 @@ define( function( require ) {
     model.property( 'isWeak' ).link( function( isWeak ) {
       strengthSlider.setVisible( isWeak );
     } );
-
-    model.property( 'resetTrigger' ).link( function() {
-      strengthSlider.reset();
-      concentrationSlider.reset();
-    } );
   }
 
   return inherit( Node, SolutionControl );
