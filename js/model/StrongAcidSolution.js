@@ -19,7 +19,7 @@ define( function( require ) {
   function StrongAcidSolution() {
     var self = this;
 
-    // set default strength and concentration and add common properties
+    // set default strength and add common properties
     AqueousSolution.call( this, CONSTANTS.STRONG_STRENGTH );
 
     // set links between concentrations
