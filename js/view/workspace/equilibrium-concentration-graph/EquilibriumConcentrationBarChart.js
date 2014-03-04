@@ -53,7 +53,7 @@ define( function( require ) {
 
   return inherit( Node, EquilibriumConcentrationBarChart, {
     checkVisibility: function() {
-      this.setVisible( this.model.viewMode === 'EQUILIBRIUM' && this.model.testMode !== 'CONDUCTIVITY' );
+      this.setVisible( this.model.viewMode === this.model.VIEW_MODES.EQUILIBRIUM && this.model.testMode !== this.model.TEST_MODES.CONDUCTIVITY );
     }
   } );
 } );

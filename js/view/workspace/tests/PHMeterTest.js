@@ -66,7 +66,7 @@ define( function( require ) {
     } );
 
     model.property( 'testMode' ).link( function( mode ) {
-      self.setVisible( mode === 'PH_METER' );
+      self.setVisible( mode === model.TEST_MODES.PH_METER );
     } );
 
     model.property( 'resetTrigger' ).link( function() {

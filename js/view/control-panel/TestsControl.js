@@ -29,15 +29,15 @@ define( function( require ) {
     pHPaperImage = require( 'image!ACID_BASE_SOLUTIONS/pH-paper.png' ),
     lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb.png' );
 
-  var menuOptions = [
-    {text: pHMeterString, value: 'PH_METER', icon: new Image( pHMeterImage, {scale: 0.75} )},
-    {text: pHPaperString, value: 'PH_PAPER', icon: new Node( {children: [new VStrut( 10 ), new Image( pHPaperImage, {scale: 0.75, y: 6} )]} )},
-    {text: conductivityString, value: 'CONDUCTIVITY', icon: new Node( {children: [new VStrut( 25 ), new Image( lightBulbImage, {scale: 0.6, y: 4} )]} )}
-  ];
-
   function TestsControl( model, options ) {
     var vBox = new VBox( {spacing: 4, align: 'left'} );
     Node.call( this, options );
+
+    var menuOptions = [
+      {text: pHMeterString, value: model.TEST_MODES.PH_METER, icon: new Image( pHMeterImage, {scale: 0.75} )},
+      {text: pHPaperString, value: model.TEST_MODES.PH_PAPER, icon: new Node( {children: [new VStrut( 10 ), new Image( pHPaperImage, {scale: 0.75, y: 6} )]} )},
+      {text: conductivityString, value: model.TEST_MODES.CONDUCTIVITY, icon: new Node( {children: [new VStrut( 25 ), new Image( lightBulbImage, {scale: 0.6, y: 4} )]} )}
+    ];
 
     // add options to menu
     for ( var i = 0; i < menuOptions.length; i++ ) {

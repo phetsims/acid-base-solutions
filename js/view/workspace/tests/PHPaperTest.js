@@ -96,7 +96,7 @@ define( function( require ) {
     paperInitY = paper.y;
 
     model.property( 'testMode' ).link( function( mode ) {
-      self.setVisible( mode === 'PH_PAPER' );
+      self.setVisible( mode === model.TEST_MODES.PH_PAPER );
     } );
 
     model.property( 'pH' ).link( function( pHValue ) {

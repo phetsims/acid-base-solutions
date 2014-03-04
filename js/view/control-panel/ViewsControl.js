@@ -42,9 +42,9 @@ define( function( require ) {
 
     // settings for menu options
     var menuOptions = [
-      {isRadio: true, value: 'MOLECULES', text: new Text( moleculesString, {font: FONT} ), icon: new Image( magnifyingGlassImage, {scale: 0.75} )},
+      {isRadio: true, value: model.VIEW_MODES.MOLECULES, text: new Text( moleculesString, {font: FONT} ), icon: new Image( magnifyingGlassImage, {scale: 0.75} )},
       {isRadio: false, text: showSolventString, icon: new H2OMolecule()},
-      {isRadio: true, value: 'EQUILIBRIUM', text: new Node( {children: [
+      {isRadio: true, value: model.VIEW_MODES.EQUILIBRIUM, text: new Node( {children: [
         new Text( equilibriumString, {font: FONT, centerX: -6} ),
         new Text( concentrationString, {font: FONT, centerX: 0, centerY: 8} )
       ]} ), icon: new Node( {children: [
@@ -54,7 +54,7 @@ define( function( require ) {
         new Rectangle( 13, 9, 3, 9, {fill: MOLECULES_COLORS.A} ),
         new Rectangle( 18.5, 9, 3, 9, {fill: MOLECULES_COLORS.H3O} )
       ]} )},
-      {isRadio: true, value: 'LIQUID', text: new Text( liquidString, {font: FONT} ), icon: new Image( beakerImage, {scale: 0.75} )}
+      {isRadio: true, value: model.VIEW_MODES.LIQUID, text: new Text( liquidString, {font: FONT} ), icon: new Image( beakerImage, {scale: 0.75} )}
     ];
 
     this.checkbox = {};
@@ -83,7 +83,7 @@ define( function( require ) {
 
   return inherit( Node, ViewsControl, {
     setCheckboxAvailability: function() {
-      this.checkbox.button.enabled = (this.model.viewMode === 'MOLECULES' && this.model.testMode !== 'CONDUCTIVITY');
+      this.checkbox.button.enabled = (this.model.viewMode === this.model.VIEW_MODES.MOLECULES && this.model.testMode !== this.model.TEST_MODES.CONDUCTIVITY);
       /*this.checkbox.text.setFill( (value ? 'black' : 'gray') );
        this.checkbox.icon.getChildren().forEach( function( atom ) {
        atom['fill' + (value ? 'Default' : 'Gray')]();

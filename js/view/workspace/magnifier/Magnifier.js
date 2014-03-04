@@ -60,7 +60,7 @@ define( function( require ) {
 
   return inherit( Node, Magnifier, {
     checkVisibility: function() {
-      this.setVisible( this.model.viewMode === 'MOLECULES' && this.model.testMode !== 'CONDUCTIVITY' );
+      this.setVisible( this.model.viewMode === this.model.VIEW_MODES.MOLECULES && this.model.testMode !== this.model.TEST_MODES.CONDUCTIVITY );
     }
   } );
 } );

@@ -80,7 +80,7 @@ define( function( require ) {
         i;
 
       // show appropriate number of molecules
-      if ( numberOfMolecules !== pointer && this.model.viewMode === this.model.VIEW_MODES[0] ) {
+      if ( numberOfMolecules !== pointer && this.model.viewMode === this.model.VIEW_MODES.MOLECULES ) {
         for ( i = Math.min( pointer, numberOfMolecules ), visibility = (numberOfMolecules > pointer); i < Math.max( pointer, numberOfMolecules ); i++ ) {
           this.molecules[i].setVisible( visibility );
         }

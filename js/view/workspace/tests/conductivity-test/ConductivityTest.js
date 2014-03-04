@@ -105,7 +105,7 @@ define( function( require ) {
 
     // visibility observer
     model.property( 'testMode' ).link( function( mode ) {
-      self.setVisible( mode === 'CONDUCTIVITY' );
+      self.setVisible( mode === model.TEST_MODES.CONDUCTIVITY );
     } );
 
     model.property( 'resetTrigger' ).link( function() {
