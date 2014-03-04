@@ -52,7 +52,7 @@ define( function( require ) {
     this.addChild( new Text( strongerString, {font: FONT, centerX: SLIDER_TRACK_WIDTH, centerY: 2 * SLIDER_TICK_OFFSET + SLIDER_TICK_LENGTH} ) );
 
     sliderProperty.link( function( value ) {
-      strengthProperty.value = parseFloat( Math.pow( 10, value ) );
+      strengthProperty.value = Math.pow( 10, value );
     } );
   }
 
