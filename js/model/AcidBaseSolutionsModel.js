@@ -21,7 +21,7 @@ define( function( require ) {
     customSolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/customSolutionTitle' ),
 
   // constants
-    CONSTANTS = require( './Constants/Constants' );
+    CONSTANTS = require( 'model/Constants/Constants' );
 
   function AcidBaseSolutionsModel( width, height, mode ) {
     var self = this;
