@@ -1,1 +1,2 @@
-12/16/2013 Initial creation of the repository on Github.
+3/6/14 check in images and assets related to upcoming UI changes
+12/16/13 Initial creation of the repository on GitHub.

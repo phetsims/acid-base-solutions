@@ -10,5 +10,7 @@ light-bulb-glass.png source=PhET
 light-bulb-glass-mask.png source=PhET
 magnifying-glass.png source=PhET
 pH-meter.png source=PhET
+pH-meter-icon.png source=PhET
 pH-paper.png source=PhET
+pH-paper-icon.png source=PhET
 solvent.png source=PhET
