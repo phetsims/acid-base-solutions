@@ -26,7 +26,9 @@ define( function( require ) {
     CONSTANTS = require( 'model/Constants/Constants' );
 
   function AcidBaseSolutionsModel( width, height, mode ) {
-    var self = this;
+    var self = this,
+      solution,
+      solutionIterator = 0;
 
     // dimensions of the model's space
     this.width = width;
@@ -34,7 +36,7 @@ define( function( require ) {
 
     this.mode = mode;
 
-    // possible test modes
+    // possible solutions
     this.SOLUTIONS = [
       {type: 'WATER', constructor: WaterSolution, relations: [
         {type: 'H2O', property: 'H2OConcentration'},
@@ -79,9 +81,14 @@ define( function( require ) {
     // add model for each type of reaction
     this.components = {};
 
-    for ( var i = (customSolutionTitleString === mode ? 1 : 0), solution; i < this.SOLUTIONS.length; i++ ) {
-      solution = new this.SOLUTIONS[i].constructor();
-      this.components[this.SOLUTIONS[i].type] = solution;
+    // for 'custom solution' tab do not need initialize water solution
+    if ( customSolutionTitleString === mode ) {
+      solutionIterator = 1;
+    }
+
+    for ( ; solutionIterator < this.SOLUTIONS.length; solutionIterator++ ) {
+      solution = new this.SOLUTIONS[solutionIterator].constructor();
+      this.components[this.SOLUTIONS[solutionIterator].type] = solution;
     }
 
     // set appropriate pH
