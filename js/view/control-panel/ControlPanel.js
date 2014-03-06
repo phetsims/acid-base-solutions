@@ -77,10 +77,10 @@ define( function( require ) {
 
     // add "reset all" button
     this.addChild( resetButton = new ResetAllButton( function() { model.reset(); }, {scale: 0.75} ) );
-    resetButton.setTranslation( (vBox.getWidth() + resetButton.getWidth()) / 2 - 5, vBox.getHeight() + resetButton.getHeight() / 2 + 5 );
+    resetButton.setTranslation( (vBox.getWidth() + resetButton.getWidth()) / 2 - 5, vBox.getHeight() + resetButton.getHeight() / 2 + 2 );
 
     // tune background rectangle and strokes
-    background.setRectHeight( model.height + 4 );
+    background.setRectHeight( model.height );
     background.setRectWidth( vBox.getWidth() + 24 );
     strokes.forEach( function( stroke ) {
       stroke.setRectWidth( maxWidth + 20 );

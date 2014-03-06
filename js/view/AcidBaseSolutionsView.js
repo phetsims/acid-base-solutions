@@ -19,7 +19,7 @@ define( function( require ) {
     ScreenView.call( this, { renderer: 'svg' } );
 
     // add control panel
-    this.addChild( new ControlPanel( model ).mutate( {right: this.layoutBounds.maxX} ) );
+    this.addChild( new ControlPanel( model ).mutate( {right: this.layoutBounds.maxX, bottom: this.layoutBounds.maxY} ) );
 
     // add workspace
     this.addChild( new Workspace( model ) );
