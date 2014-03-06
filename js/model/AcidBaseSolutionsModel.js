@@ -27,6 +27,9 @@ define( function( require ) {
 
   function AcidBaseSolutionsModel( width, height, mode ) {
     var self = this,
+      setPH = function( value ) { self.pH = value; }, // observer for pH property
+      setStrength = function( value ) { self.strength = value; }, // observer for strength property
+      setConcentration = function( value ) { self.concentration = value; }, // observer for strength property
       solution,
       solutionIterator = 0;
 
@@ -92,7 +95,6 @@ define( function( require ) {
     }
 
     // set appropriate pH
-    var setPH = function( value ) { self.pH = value; }; // observer for pH property
     this.property( 'solution' ).link( function( newSolution, prevSolution ) {
       // unsubscribe from previous solution pH property
       if ( prevSolution ) {
@@ -124,8 +126,6 @@ define( function( require ) {
         self.solution = map[+self.isAcid][+self.isWeak];
       };
 
-      var setStrength = function( value ) { self.strength = value; }; // observer for strength property
-      var setConcentration = function( value ) { self.concentration = value; }; // observer for strength property
       this.property( 'solution' ).link( function( newSolution, prevSolution ) {
         // unsubscribe from previous solution strength and concentration property
         if ( prevSolution ) {
