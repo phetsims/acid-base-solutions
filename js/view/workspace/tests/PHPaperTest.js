@@ -17,6 +17,7 @@ define( function( require ) {
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' ),
+    TestModes = require( 'model/TestModes' ),
 
   // strings
     pHColorKeyString = require( 'string!ACID_BASE_SOLUTIONS/pHColorKey' ),
@@ -99,7 +100,7 @@ define( function( require ) {
     paperInitY = paper.y;
 
     model.property( 'testMode' ).link( function( mode ) {
-      self.setVisible( mode === model.TEST_MODES.PH_PAPER );
+      self.setVisible( mode === TestModes.PH_PAPER );
     } );
 
     model.property( 'pH' ).link( function( pHValue ) {

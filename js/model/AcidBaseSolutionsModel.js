@@ -16,6 +16,8 @@ define( function( require ) {
     WeakAcidSolution = require( './WeakAcidSolution' ),
     StrongBaseSolution = require( './StrongBaseSolution' ),
     WeakBaseSolution = require( './WeakBaseSolution' ),
+    ViewModes = require( 'model/ViewModes' ),
+    TestModes = require( 'model/TestModes' ),
 
   // strings
     customSolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/customSolutionTitle' ),
@@ -31,20 +33,6 @@ define( function( require ) {
     this.height = height;
 
     this.mode = mode;
-
-    // possible view modes
-    this.VIEW_MODES = {
-      MOLECULES: 0,
-      EQUILIBRIUM: 1,
-      LIQUID: 2
-    };
-
-    // possible test modes
-    this.TEST_MODES = {
-      PH_METER: 0,
-      PH_PAPER: 1,
-      CONDUCTIVITY: 2
-    };
 
     // possible test modes
     this.SOLUTIONS = [
@@ -80,8 +68,8 @@ define( function( require ) {
 
     PropertySet.call( this, {
       solution: (customSolutionTitleString === mode ? self.SOLUTIONS[2].type : self.SOLUTIONS[0].type), // solution's type
-      testMode: self.TEST_MODES.PH_METER, // test mode
-      viewMode: self.VIEW_MODES.MOLECULES, // view mode
+      testMode: TestModes.PH_METER, // test mode
+      viewMode: ViewModes.MOLECULES, // view mode
       solvent: false, // solvent visibility
       pH: 0, // pH level of product
       brightness: 0, // brightness value

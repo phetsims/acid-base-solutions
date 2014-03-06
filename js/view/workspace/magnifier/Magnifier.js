@@ -13,6 +13,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Shape = require( 'KITE/Shape' ),
+    ViewModes = require( 'model/ViewModes' ),
+    TestModes = require( 'model/TestModes' ),
 
     MagnifierBackground = require( './MagnifierBackground' ),
     MagnifierMoleculesLayer = require( './MagnifierMoleculesLayer' );
@@ -60,7 +62,7 @@ define( function( require ) {
 
   return inherit( Node, Magnifier, {
     checkVisibility: function() {
-      this.setVisible( this.model.viewMode === this.model.VIEW_MODES.MOLECULES && this.model.testMode !== this.model.TEST_MODES.CONDUCTIVITY );
+      this.setVisible( this.model.viewMode === ViewModes.MOLECULES && this.model.testMode !== TestModes.CONDUCTIVITY );
     }
   } );
 } );

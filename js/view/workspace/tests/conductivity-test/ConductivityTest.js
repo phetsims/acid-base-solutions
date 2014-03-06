@@ -17,6 +17,7 @@ define( function( require ) {
     Path = require( 'SCENERY/nodes/Path' ),
     Shape = require( 'KITE/Shape' ),
     LinearFunction = require( 'DOT/LinearFunction' ),
+    TestModes = require( 'model/TestModes' ),
 
     ConductivityTestWire = require( './ConductivityTestWire' ),
     ConductivityTestProbe = require( './ConductivityTestProbe' ),
@@ -108,7 +109,7 @@ define( function( require ) {
 
     // visibility observer
     model.property( 'testMode' ).link( function( mode ) {
-      self.setVisible( mode === model.TEST_MODES.CONDUCTIVITY );
+      self.setVisible( mode === TestModes.CONDUCTIVITY );
     } );
 
     model.property( 'resetTrigger' ).link( function() {

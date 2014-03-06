@@ -18,6 +18,7 @@ define( function( require ) {
     HBox = require( 'SCENERY/nodes/HBox' ),
     VStrut = require( 'SUN/VStrut' ),
     Image = require( 'SCENERY/nodes/Image' ),
+    TestModes = require( 'model/TestModes' ),
 
   // strings
     pHMeterString = require( 'string!ACID_BASE_SOLUTIONS/pHMeter' ),
@@ -34,9 +35,9 @@ define( function( require ) {
     Node.call( this, options );
 
     var menuOptions = [
-      {text: pHMeterString, value: model.TEST_MODES.PH_METER, icon: new Image( pHMeterImage, {scale: 0.75} )},
-      {text: pHPaperString, value: model.TEST_MODES.PH_PAPER, icon: new Node( {children: [new VStrut( 10 ), new Image( pHPaperImage, {scale: 0.75, y: 6} )]} )},
-      {text: conductivityString, value: model.TEST_MODES.CONDUCTIVITY, icon: new Node( {children: [new VStrut( 25 ), new Image( lightBulbImage, {scale: 0.6, y: 4} )]} )}
+      {text: pHMeterString, value: TestModes.PH_METER, icon: new Image( pHMeterImage, {scale: 0.75} )},
+      {text: pHPaperString, value: TestModes.PH_PAPER, icon: new Node( {children: [new VStrut( 10 ), new Image( pHPaperImage, {scale: 0.75, y: 6} )]} )},
+      {text: conductivityString, value: TestModes.CONDUCTIVITY, icon: new Node( {children: [new VStrut( 25 ), new Image( lightBulbImage, {scale: 0.6, y: 4} )]} )}
     ];
 
     // add options to menu

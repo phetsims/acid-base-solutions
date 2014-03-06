@@ -19,6 +19,7 @@ define( function( require ) {
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' ),
     Util = require( 'DOT/Util' ),
+    TestModes = require( 'model/TestModes' ),
 
   // string
     pHString = require( 'string!ACID_BASE_SOLUTIONS/pH' ),
@@ -68,7 +69,7 @@ define( function( require ) {
     } );
 
     model.property( 'testMode' ).link( function( mode ) {
-      self.setVisible( mode === model.TEST_MODES.PH_METER );
+      self.setVisible( mode === TestModes.PH_METER );
     } );
 
     model.property( 'resetTrigger' ).link( function() {

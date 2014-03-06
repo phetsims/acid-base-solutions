@@ -15,6 +15,8 @@ define( function( require ) {
     MOLECULES_COLORS = require( 'model/Constants/MoleculesColors' ),
     EquilibriumConcentrationSingleBar = require( './EquilibriumConcentrationSingleBar' ),
     EquilibriumConcentrationBarChartBackground = require( './EquilibriumConcentrationBarChartBackground' ),
+    ViewModes = require( 'model/ViewModes' ),
+    TestModes = require( 'model/TestModes' ),
 
   // constants
     BAR_CHART_WIDTH = 200,
@@ -56,7 +58,7 @@ define( function( require ) {
 
   return inherit( Node, EquilibriumConcentrationBarChart, {
     checkVisibility: function() {
-      this.setVisible( this.model.viewMode === this.model.VIEW_MODES.EQUILIBRIUM && this.model.testMode !== this.model.TEST_MODES.CONDUCTIVITY );
+      this.setVisible( this.model.viewMode === ViewModes.EQUILIBRIUM && this.model.testMode !== TestModes.CONDUCTIVITY );
     }
   } );
 } );
