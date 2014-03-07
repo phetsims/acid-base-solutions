@@ -131,17 +131,16 @@ define( function( require ) {
         if ( prevSolution ) {
           self.components[prevSolution].property( 'strength' ).unlink( setStrength );
           self.components[prevSolution].property( 'concentration' ).unlink( setConcentration );
+
+          // we need set concentration and strength values of new solution
+          // equal to values from previous solution
+          self.components[newSolution].strength = self.components[prevSolution].strength;
+          self.components[newSolution].concentration = self.components[prevSolution].concentration;
         }
+
         // subscribe to new solution strength and concentration property
         self.components[newSolution].property( 'strength' ).link( setStrength );
         self.components[newSolution].property( 'concentration' ).link( setConcentration );
-
-        // we need set concentration and strength values of new solution
-        // equal to values from previous solution
-        if ( prevSolution ) {
-          self.components[newSolution].concentration = self.components[prevSolution].concentration;
-          self.components[newSolution].strength = self.components[prevSolution].strength;
-        }
       } );
 
 
