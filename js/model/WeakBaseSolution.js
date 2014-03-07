@@ -33,10 +33,6 @@ define( function( require ) {
     AqueousSolution.call( this, CONSTANTS.WEAK_STRENGTH_RANGE.defaultValue );
 
     // set links between concentrations
-    this.property( 'concentration' ).link( function( value ) {
-      self.OHConcentration = value; // [OH-] = c
-    } );
-
     this.property( 'OHConcentration' ).link( function( value ) {
       self.H3OConcentration = CONSTANTS.WATER_EQUILIBRIUM_CONSTANT / value; // [H3O+] = Kw / [OH-]
     } );
