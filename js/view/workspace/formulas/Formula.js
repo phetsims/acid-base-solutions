@@ -24,11 +24,11 @@ define( function( require ) {
     this.setPickable( false );
 
     var formulas = [
-      new WaterFormula(),
-      new AcidFormula( false ),
-      new AcidFormula( true ),
-      new StrongBaseFormula(),
-      new WeakBaseFormula()
+      new WaterFormula( {} ),
+      new AcidFormula( {}, false ),
+      new AcidFormula( {}, true ),
+      new StrongBaseFormula( {} ),
+      new WeakBaseFormula( {} )
     ];
 
     // find max width
