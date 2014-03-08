@@ -62,7 +62,7 @@ define( function( require ) {
     Node.call( this, options );
 
     // add light rays
-    this.addChild( new ConductivityTestLightRays( model.property( 'brightness' ), isClose, lightBulbDarkMask.getGlobalBounds().width / 2, {x: lightBulbDarkMask.getGlobalBounds().width / 2, y: lightBulbDarkMask.getGlobalBounds().height / 2.75} ) );
+    this.addChild( new ConductivityTestLightRays( model.property( 'testMode' ), model.property( 'brightness' ), isClose, lightBulbDarkMask.getGlobalBounds().width / 2, {x: lightBulbDarkMask.getGlobalBounds().width / 2, y: lightBulbDarkMask.getGlobalBounds().height / 2.75} ) );
 
     this.addChild( new Node( {children: [
       // add light bulb image

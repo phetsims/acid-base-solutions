@@ -15,6 +15,7 @@ define( function( require ) {
     Node = require( 'SCENERY/nodes/Node' ),
     LinearFunction = require( 'DOT/LinearFunction' ),
     Line = require( 'SCENERY/nodes/Line' ),
+    TestModes = require( 'model/TestModes' ),
 
   // constants
     MIN_RAYS = 8,
@@ -28,7 +29,9 @@ define( function( require ) {
     RAY_STROKE_SMALL = 0.5,
     BRIGHTNESS_TO_INTENSITY_FUNCTION = new LinearFunction( 0, 1, 0, 1 ); // intensity of the light rays;
 
-  function ConductivityTestLightRays( brightnessProperty, isCloseProperty, bulbRadius, options ) {
+  function ConductivityTestLightRays( testModeProperty, brightnessProperty, isCloseProperty, bulbRadius, options ) {
+    var self = this,
+      setBrightnessBinded;
     Node.call( this, options );
     this.bulbRadius = bulbRadius;
     this.isCloseProperty = isCloseProperty;
@@ -38,8 +41,13 @@ define( function( require ) {
     this.createCacheLines( MAX_RAYS );
 
     // add observers
-    isCloseProperty.link( this.setBrightness.bind( this ) );
-    brightnessProperty.link( this.setBrightness.bind( this ) );
+    setBrightnessBinded = this.setBrightness.bind( this );
+    isCloseProperty.link( setBrightnessBinded );
+    brightnessProperty.link( setBrightnessBinded );
+
+    testModeProperty.link( function( testMode ) {
+      self.setVisible( testMode === TestModes.CONDUCTIVITY );
+    } );
   }
 
   return inherit( Node, ConductivityTestLightRays, {
@@ -68,7 +76,7 @@ define( function( require ) {
         rayLength; // ray length is a function of intensity
 
       // if intensity is zero or circuit isn't closed, we're done
-      if ( !intensity || !isClose ) {
+      if ( !intensity || !isClose || !this.visible ) {
         this.hideAll();
         return;
       }
