@@ -11,84 +11,36 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    HBox = require( 'SCENERY/nodes/HBox' ),
-    VBox = require( 'SCENERY/nodes/VBox' ),
-    Image = require( 'SCENERY/nodes/Image' ),
-    Text = require( 'SCENERY/nodes/Text' ),
-    HTMLText = require( 'SCENERY/nodes/HTMLText' ),
-    ChemUtils = require( 'NITROGLYCERIN/ChemUtils' ),
-    PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    VStrut = require( 'SUN/VStrut' ),
-
-  // molecules
-    HAMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/HAMolecule' ),
-    H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' ),
-    AMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/AMolecule' ),
-    H3OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H3OMolecule' ),
-
-  // images
-    arrowSingleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_single.png' ),
-    arrowDoubleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_double.png' ),
-
-  // constants
-    CONSTANTS = require( 'model/Constants/Constants' ),
-    FONT_SIZE = CONSTANTS.FORMULAS_FONT_SIZE,
-    FONT = new PhetFont( FONT_SIZE ),
-    VBOX_SPACING = CONSTANTS.FORMULAS_VBOX_SPACING;
+    FormulaAbstract = require( './FormulaAbstract' );
 
   function AcidFormula( isWeak, options ) {
-    HBox.call( this, _.extend( {spacing: CONSTANTS.FORMULAS_HBOX_SPACING, align: 'bottom'}, options ) );
+    FormulaAbstract.call( this, options );
 
     // left expression
     // left expression: HA molecule
-    this.addChild( new VBox( {spacing: VBOX_SPACING, children: [
-      new HAMolecule(),
-      new Text( 'HA', {font: FONT} )
-    ]} ) );
+    this.addChild( this.HANode() );
 
     // left expression: plus sign
-    this.addChild( new VBox( {spacing: VBOX_SPACING, children: [
-      new Text( '+', {font: FONT} )
-    ]} ) );
+    this.addChild( this.plusSignNode() );
 
     // left expression: H2O molecule
-    this.addChild( new VBox( {spacing: VBOX_SPACING, children: [
-      new H2OMolecule(),
-      new HTMLText( ChemUtils.toSubscript( 'H2O' ), {font: FONT} )
-    ]} ) );
+    this.addChild( this.H2ONode() );
 
     // straight or reverse sign (depend on flag isWeak)
-    this.addChild( (isWeak ? new VBox( {spacing: VBOX_SPACING, children: [
-      new Image( arrowDoubleImage, {scale: 0.75} ),
-      new VStrut( FONT_SIZE / 4 - 3 )
-    ]} ) : new VBox( {spacing: VBOX_SPACING, children: [
-      new Image( arrowSingleImage, {scale: 0.75} ),
-      new VStrut( FONT_SIZE / 4 - 1 )
-    ]} )) );
-
+    this.addChild( (isWeak ? this.reverseSignNode() : this.straightSignNode()) );
 
     // right expression
     // right expression: A molecule
-    this.addChild( new VBox( {spacing: VBOX_SPACING, children: [
-      new AMolecule(),
-      new HTMLText( 'A<sup>-</sup>', {font: FONT} ),
-      new VStrut( 1 )
-    ]} ) );
+    this.addChild( this.ANode() );
 
     // right expression: plus sign
-    this.addChild( new VBox( {spacing: VBOX_SPACING, children: [
-      new Text( '+', {font: FONT} )
-    ]} ) );
+    this.addChild( this.plusSignNode() );
 
     // right expression: H3O molecule
-    this.addChild( new VBox( {spacing: VBOX_SPACING, children: [
-      new H3OMolecule(),
-      new HTMLText( ChemUtils.toSubscript( 'H3O' ) + '<sup>+</sup>', {font: FONT} ),
-      new VStrut( 1 )
-    ]} ) );
+    this.addChild( this.H3ONode() );
 
     this.updateLayout();
   }
 
-  return inherit( HBox, AcidFormula );
+  return inherit( FormulaAbstract, AcidFormula );
 } );
