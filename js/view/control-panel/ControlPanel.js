@@ -27,8 +27,7 @@ define( function( require ) {
     solutionString = require( 'string!ACID_BASE_SOLUTIONS/solution' ),
     viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' ),
     testsString = require( 'string!ACID_BASE_SOLUTIONS/tests' ),
-    introductionTitleString = require( 'string!ACID_BASE_SOLUTIONS/introductionTitle' ),
-    customSolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/customSolutionTitle' );
+    GameModes = require( 'model/GameModes' );
 
   function ControlPanel( model ) {
     var vBox = new VBox( {x: 20, spacing: 8, align: 'left'} ),
@@ -40,11 +39,11 @@ define( function( require ) {
     Node.call( this );
 
     // for 'introduction' tab add solutions menu
-    if ( model.mode === introductionTitleString ) {
+    if ( model.mode === GameModes.INTRODUCTION ) {
       menus.push( {content: new SolutionsControl( model ), text: solutionsString} );
     }
     // for 'custom solution' tab add solution menu
-    else if ( model.mode === customSolutionTitleString ) {
+    else if ( model.mode === GameModes.CUSTOM_SOLUTION ) {
       menus.push( {content: new SolutionControl( model ), text: solutionString} );
     }
 

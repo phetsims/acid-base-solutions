@@ -16,11 +16,9 @@ define( function( require ) {
     WeakAcidSolution = require( './WeakAcidSolution' ),
     StrongBaseSolution = require( './StrongBaseSolution' ),
     WeakBaseSolution = require( './WeakBaseSolution' ),
+    GameModes = require( 'model/GameModes' ),
     ViewModes = require( 'model/ViewModes' ),
     TestModes = require( 'model/TestModes' ),
-
-  // strings
-    customSolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/customSolutionTitle' ),
 
   // constants
     CONSTANTS = require( 'model/Constants/Constants' );
@@ -72,7 +70,7 @@ define( function( require ) {
     ];
 
     PropertySet.call( this, {
-      solution: (customSolutionTitleString === mode ? self.SOLUTIONS[2].type : self.SOLUTIONS[0].type), // solution's type
+      solution: (mode === GameModes.CUSTOM_SOLUTION ? self.SOLUTIONS[2].type : self.SOLUTIONS[0].type), // solution's type
       testMode: TestModes.PH_METER, // test mode
       viewMode: ViewModes.MOLECULES, // view mode
       solvent: false, // solvent visibility
@@ -85,7 +83,7 @@ define( function( require ) {
     this.components = {};
 
     // for 'custom solution' tab do not need initialize water solution
-    if ( customSolutionTitleString === mode ) {
+    if ( mode ===  GameModes.CUSTOM_SOLUTION) {
       solutionIterator = 1;
     }
 
@@ -110,7 +108,7 @@ define( function( require ) {
     } );
 
     // add properties for custom tab
-    if ( customSolutionTitleString === mode ) {
+    if ( mode ===  GameModes.CUSTOM_SOLUTION ) {
       this.addProperty( 'isAcid', true ); // type of solution. true - acid, false - base
       this.addProperty( 'isWeak', true ); // type of strength. true - weak, false - strong
       this.addProperty( 'concentration', 0 ); // concentration of solution
@@ -174,7 +172,7 @@ define( function( require ) {
       this.property( 'solvent' ).reset();
 
       // reset properties for custom tab
-      if ( this.mode === customSolutionTitleString ) {
+      if ( this.mode === GameModes.CUSTOM_SOLUTION ) {
         // reset components properties
         for ( var solution in this.components ) {
           if ( this.components.hasOwnProperty( solution ) ) {
