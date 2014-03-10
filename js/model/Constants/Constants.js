@@ -17,6 +17,9 @@ define( function( require ) {
 
   return {
     CONCENTRATION_RANGE: new Range( 1E-3, 1, 1E-2 ),
+    FORMULAS_FONT_SIZE: 13,
+    FORMULAS_HBOX_SPACING: 4,
+    FORMULAS_VBOX_SPACING: 2,
     MAX_PH: 14,
     MIN_PH: 0,
     NEUTRAL_BRIGHTNESS: 0.05, // brightness when pH == NEUTRAL_PH

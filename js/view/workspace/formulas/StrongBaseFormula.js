@@ -11,11 +11,13 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    Node = require( 'SCENERY/nodes/Node' ),
     Image = require( 'SCENERY/nodes/Image' ),
     Text = require( 'SCENERY/nodes/Text' ),
     HTMLText = require( 'SCENERY/nodes/HTMLText' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
+    VBox = require( 'SCENERY/nodes/VBox' ),
+    HBox = require( 'SCENERY/nodes/HBox' ),
+    VStrut = require( 'SUN/VStrut' ),
 
   // molecules
     MOHMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/MOHMolecule' ),
@@ -26,33 +28,50 @@ define( function( require ) {
     arrowSingleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_single.png' ),
 
   // constants
-    FONT = new PhetFont( 13 ),
-    TEXT_OFFSET = 23,
-    TEXT_SUP_OFFSET = TEXT_OFFSET - 3;
+    CONSTANTS = require( 'model/Constants/Constants' ),
+    FONT_SIZE = CONSTANTS.FORMULAS_FONT_SIZE,
+    FONT = new PhetFont( FONT_SIZE ),
+    VBOX_SPACING = CONSTANTS.FORMULAS_VBOX_SPACING;
 
   function StrongBaseFormula( options ) {
-    Node.call( this, options );
+    HBox.call( this, _.extend( {spacing: CONSTANTS.FORMULAS_HBOX_SPACING, align: 'bottom'}, options ) );
 
     // left expression
     // left expression: MOH molecule
-    this.addChild( new MOHMolecule() );
-    this.addChild( new Text( 'MOH', {font: FONT, centerX: 8, centerY: TEXT_OFFSET} ) );
+    this.addChild( new VBox( {spacing: VBOX_SPACING, children: [
+      new MOHMolecule(),
+      new Text( 'MOH', {font: FONT} )
+    ]} ) );
 
     // straight sign
-    this.addChild( new Image( arrowSingleImage, {scale: 0.75, x: 32, y: 18} ) );
+    this.addChild( new VBox( {spacing: VBOX_SPACING, children: [
+      new Image( arrowSingleImage, {scale: 0.75} ),
+      new VStrut( FONT_SIZE / 4 - 1 )
+    ]} ) );
+
 
     // right expression
     // right expression: A molecule
-    this.addChild( new MMolecule( {x: 75} ) );
-    this.addChild( new HTMLText( 'M<sup>+</sup>', {font: FONT, centerX: 75, centerY: TEXT_SUP_OFFSET} ) );
+    this.addChild( new VBox( {spacing: VBOX_SPACING, children: [
+      new MMolecule(),
+      new HTMLText( 'M<sup>+</sup>', {font: FONT} ),
+      new VStrut( 1 )
+    ]} ) );
 
     // right expression: plus sign
-    this.addChild( new Text( '+', {font: FONT, centerX: 95, centerY: TEXT_OFFSET} ) );
+    this.addChild( new VBox( {spacing: VBOX_SPACING, children: [
+      new Text( '+', {font: FONT} )
+    ]} ) );
 
     // right expression: OH molecule
-    this.addChild( new OHMolecule( {x: 116} ) );
-    this.addChild( new HTMLText( 'OH<sup>-</sup>', {font: FONT, centerX: 116, centerY: TEXT_SUP_OFFSET} ) );
+    this.addChild( new VBox( {spacing: VBOX_SPACING, children: [
+      new OHMolecule(),
+      new HTMLText( 'OH<sup>-</sup>', {font: FONT} ),
+      new VStrut( 1 )
+    ]} ) );
+
+    this.updateLayout();
   }
 
-  return inherit( Node, StrongBaseFormula );
+  return inherit( HBox, StrongBaseFormula );
 } );
