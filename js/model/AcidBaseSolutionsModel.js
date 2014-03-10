@@ -83,7 +83,7 @@ define( function( require ) {
     this.components = {};
 
     // for 'custom solution' tab do not need initialize water solution
-    if ( mode ===  GameModes.CUSTOM_SOLUTION) {
+    if ( mode === GameModes.CUSTOM_SOLUTION ) {
       solutionIterator = 1;
     }
 
@@ -108,7 +108,7 @@ define( function( require ) {
     } );
 
     // add properties for custom tab
-    if ( mode ===  GameModes.CUSTOM_SOLUTION ) {
+    if ( mode === GameModes.CUSTOM_SOLUTION ) {
       this.addProperty( 'isAcid', true ); // type of solution. true - acid, false - base
       this.addProperty( 'isWeak', true ); // type of strength. true - weak, false - strong
       this.addProperty( 'concentration', 0 ); // concentration of solution
