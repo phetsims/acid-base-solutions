@@ -16,6 +16,7 @@ define( function( require ) {
     WeakAcidSolution = require( './WeakAcidSolution' ),
     StrongBaseSolution = require( './StrongBaseSolution' ),
     WeakBaseSolution = require( './WeakBaseSolution' ),
+    Solutions = require( 'model/Solutions' ),
     GameModes = require( 'model/GameModes' ),
     ViewModes = require( 'model/ViewModes' ),
     TestModes = require( 'model/TestModes' ),
@@ -39,29 +40,29 @@ define( function( require ) {
 
     // possible solutions
     this.SOLUTIONS = [
-      {type: 'WATER', constructor: WaterSolution, relations: [
+      {type: Solutions.WATER, constructor: WaterSolution, relations: [
         {type: 'H2O', property: 'H2OConcentration'},
         {type: 'H3O', property: 'H3OConcentration'},
         {type: 'OH', property: 'OHConcentration'}
       ]},
-      {type: 'STRONG_ACID', constructor: StrongAcidSolution, relations: [
+      {type: Solutions.STRONG_ACID, constructor: StrongAcidSolution, relations: [
         {type: 'HA', property: 'soluteConcentration'},
         {type: 'H2O', property: 'H2OConcentration'},
         {type: 'A', property: 'productConcentration'},
         {type: 'H3O', property: 'H3OConcentration'}
       ]},
-      {type: 'WEAK_ACID', constructor: WeakAcidSolution, relations: [
+      {type: Solutions.WEAK_ACID, constructor: WeakAcidSolution, relations: [
         {type: 'HA', property: 'soluteConcentration'},
         {type: 'H2O', property: 'H2OConcentration'},
         {type: 'A', property: 'productConcentration'},
         {type: 'H3O', property: 'H3OConcentration'}
       ]},
-      {type: 'STRONG_BASE', constructor: StrongBaseSolution, relations: [
+      {type: Solutions.STRONG_BASE, constructor: StrongBaseSolution, relations: [
         {type: 'MOH', property: 'soluteConcentration'},
         {type: 'M', property: 'productConcentration'},
         {type: 'OH', property: 'OHConcentration'}
       ]},
-      {type: 'WEAK_BASE', constructor: WeakBaseSolution, relations: [
+      {type: Solutions.WEAK_BASE, constructor: WeakBaseSolution, relations: [
         {type: 'B', property: 'soluteConcentration'},
         {type: 'H2O', property: 'H2OConcentration'},
         {type: 'BH', property: 'productConcentration'},
@@ -70,7 +71,7 @@ define( function( require ) {
     ];
 
     PropertySet.call( this, {
-      solution: (mode === GameModes.CUSTOM_SOLUTION ? self.SOLUTIONS[2].type : self.SOLUTIONS[0].type), // solution's type
+      solution: (mode === GameModes.CUSTOM_SOLUTION ? Solutions.WEAK_ACID : Solutions.WATER), // solution's type
       testMode: TestModes.PH_METER, // test mode
       viewMode: ViewModes.MOLECULES, // view mode
       solvent: false, // solvent visibility
@@ -116,12 +117,21 @@ define( function( require ) {
 
       // update solution type if it was changed by radio buttons
       var setSolution = function() {
-        var map = [
-          [self.SOLUTIONS[3].type, self.SOLUTIONS[4].type],
-          [self.SOLUTIONS[1].type, self.SOLUTIONS[2].type]
-        ];
+        var isAcid = self.isAcid,
+          isWeak = self.isWeak;
 
-        self.solution = map[+self.isAcid][+self.isWeak];
+        if ( isWeak && isAcid ) {
+          self.solution = Solutions.WEAK_ACID;
+        }
+        else if ( isWeak && !isAcid ) {
+          self.solution = Solutions.WEAK_BASE;
+        }
+        else if ( !isWeak && isAcid ) {
+          self.solution = Solutions.STRONG_ACID;
+        }
+        else if ( !isWeak && !isAcid ) {
+          self.solution = Solutions.STRONG_BASE;
+        }
       };
 
       this.property( 'solution' ).link( function( newSolution, prevSolution ) {

@@ -15,6 +15,7 @@ define( function( require ) {
     HTMLText = require( 'SCENERY/nodes/HTMLText' ),
     ChemUtils = require( 'NITROGLYCERIN/ChemUtils' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
+    Solutions = require( 'model/Solutions' ),
 
     VBox = require( 'SCENERY/nodes/VBox' ),
     HBox = require( 'SCENERY/nodes/HBox' ),
@@ -36,11 +37,11 @@ define( function( require ) {
     RADIO_BUTTON_RADIUS = 7;
 
   var menuOptions = [
-    {text: new HTMLText( waterString + ChemUtils.toSubscript( ' (H2O)' ), {font: FONT, centerX: 49, centerY: 0} ), value: 'WATER', icon: H2OMolecule},
-    {text: new Text( strongAcidString + ' (HA)', {font: FONT} ), value: 'STRONG_ACID', icon: HAMolecule},
-    {text: new Text( weakAcidString + ' (HA)', {font: FONT} ), value: 'WEAK_ACID', icon: HAMolecule},
-    {text: new Text( strongBaseString + ' (MOH)', {font: FONT} ), value: 'STRONG_BASE', icon: MOHMolecule},
-    {text: new Text( weakBaseString + ' (B)', {font: FONT} ), value: 'WEAK_BASE', icon: BMolecule}
+    {text: new HTMLText( waterString + ChemUtils.toSubscript( ' (H2O)' ), {font: FONT, centerX: 49, centerY: 0} ), value: Solutions.WATER, icon: H2OMolecule},
+    {text: new Text( strongAcidString + ' (HA)', {font: FONT} ), value: Solutions.STRONG_ACID, icon: HAMolecule},
+    {text: new Text( weakAcidString + ' (HA)', {font: FONT} ), value: Solutions.WEAK_ACID, icon: HAMolecule},
+    {text: new Text( strongBaseString + ' (MOH)', {font: FONT} ), value: Solutions.STRONG_BASE, icon: MOHMolecule},
+    {text: new Text( weakBaseString + ' (B)', {font: FONT} ), value: Solutions.WEAK_BASE, icon: BMolecule}
   ];
 
   function SolutionsControl( model, options ) {

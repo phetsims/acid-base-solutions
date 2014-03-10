@@ -12,6 +12,7 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
+    Solutions = require( 'model/Solutions' ),
 
     WaterFormula = require( './WaterFormula' ),
     AcidFormula = require( './AcidFormula' ),
@@ -26,11 +27,11 @@ define( function( require ) {
     this.setPickable( false );
 
 
-    formulas[model.SOLUTIONS[0].type] = new WaterFormula();
-    formulas[model.SOLUTIONS[1].type] = new AcidFormula( false );
-    formulas[model.SOLUTIONS[2].type] = new AcidFormula( true );
-    formulas[model.SOLUTIONS[3].type] = new StrongBaseFormula();
-    formulas[model.SOLUTIONS[4].type] = new WeakBaseFormula();
+    formulas[Solutions.WATER] = new WaterFormula();
+    formulas[Solutions.STRONG_ACID] = new AcidFormula( false );
+    formulas[Solutions.WEAK_ACID] = new AcidFormula( true );
+    formulas[Solutions.STRONG_BASE] = new StrongBaseFormula();
+    formulas[Solutions.WEAK_BASE] = new WeakBaseFormula();
 
     // find max width of formulas
     maxWidth = getMaxWidth( formulas );
