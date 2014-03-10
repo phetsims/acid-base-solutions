@@ -19,54 +19,53 @@ define( function( require ) {
     WeakBaseFormula = require( './WeakBaseFormula' );
 
   function Formula( model, options ) {
-    var self = this, maxWidth = 0;
+    var maxWidth,
+      formula,
+      formulas = {};
     Node.call( this, options );
     this.setPickable( false );
 
-    var formulas = [
-      new WaterFormula( {} ),
-      new AcidFormula( {}, false ),
-      new AcidFormula( {}, true ),
-      new StrongBaseFormula( {} ),
-      new WeakBaseFormula( {} )
-    ];
 
-    // find max width
-    formulas.forEach( function( formula ) {
-      maxWidth = Math.max( maxWidth, formula.getWidth() );
-    } );
+    formulas[model.SOLUTIONS[0].type] = new WaterFormula();
+    formulas[model.SOLUTIONS[1].type] = new AcidFormula( false );
+    formulas[model.SOLUTIONS[2].type] = new AcidFormula( true );
+    formulas[model.SOLUTIONS[3].type] = new StrongBaseFormula();
+    formulas[model.SOLUTIONS[4].type] = new WeakBaseFormula();
+
+    // find max width of formulas
+    maxWidth = getMaxWidth( formulas );
+
 
     // add formulas with central alignment
-    formulas.forEach( function( formula ) {
-      formula.setX( (maxWidth - formula.getWidth()) / 2 );
-      formula.setVisible( false );
-      self.addChild( formula );
-    } );
+    for ( formula in formulas ) {
+      if ( formulas.hasOwnProperty( formula ) ) {
+        formulas[formula].setX( (maxWidth - formulas[formula].getWidth()) / 2 );
+        formulas[formula].setVisible( false );
+        this.addChild( formulas[formula] );
+      }
+    }
 
     // add observer for formulas
     model.property( 'solution' ).link( function( newSolution, prevSolution ) {
-      var formulaIndex;
-
       // hide previous formula
       if ( prevSolution ) {
-        formulaIndex = getSolutionIndex( model, prevSolution );
-        formulas[formulaIndex].setVisible( false );
+        formulas[prevSolution].setVisible( false );
       }
 
       // show new formula
-      formulaIndex = getSolutionIndex( model, newSolution );
-      formulas[formulaIndex].setVisible( true );
+      formulas[newSolution].setVisible( true );
     } );
   }
 
-  var getSolutionIndex = function( model, solutionType ) {
-    var index;
-    model.SOLUTIONS.forEach( function( sol, i ) {
-      if ( sol.type === solutionType ) {
-        index = i;
+  var getMaxWidth = function( formulas ) {
+    var maxWidth = 0, formula;
+    for ( formula in formulas ) {
+      if ( formulas.hasOwnProperty( formula ) ) {
+        maxWidth = Math.max( maxWidth, formulas[formula].getWidth() );
       }
-    } );
-    return index;
+    }
+
+    return maxWidth;
   };
 
   return inherit( Node, Formula );
