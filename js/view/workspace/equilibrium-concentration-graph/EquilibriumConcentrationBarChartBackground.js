@@ -51,7 +51,7 @@ define( function( require ) {
       // add text
       this.addChild( new Node( {centerY: y, children: [
         new Text( '10', {font: FONT_BIG, centerX: -16, centerY: 0} ),
-        new Text( i - 8, {font: FONT_SMALL, x: -9.5} )
+        new Text( (i - 8).toString(), {font: FONT_SMALL, x: -9.5} )
       ]} ) );
     }
   }

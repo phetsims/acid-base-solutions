@@ -52,7 +52,7 @@ define( function( require ) {
     // add color key table
     for ( var i = 0; i < PH_COLORS.length - 1; i++ ) {
       this.addChild( new Rectangle( (TABLE_RECT_WIDTH + SPACE_BETWEEN_RECTS) * i, 10, TABLE_RECT_WIDTH, TABLE_RECT_HEIGHT, {fill: PH_COLORS[i]} ) );
-      this.addChild( new Text( i, {font: FONT_SMALL, centerX: (TABLE_RECT_WIDTH + SPACE_BETWEEN_RECTS) * (i + 0.5), centerY: 46} ) );
+      this.addChild( new Text( i.toString(), {font: FONT_SMALL, centerX: (TABLE_RECT_WIDTH + SPACE_BETWEEN_RECTS) * (i + 0.5), centerY: 46} ) );
     }
 
     // add pH paper
