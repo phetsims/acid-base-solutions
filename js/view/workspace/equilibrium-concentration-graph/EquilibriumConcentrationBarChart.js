@@ -38,7 +38,7 @@ define( function( require ) {
       if ( type in model.components ) {
         bars[type] = new Node( {visible: false} );
         solution.relations.forEach( function( molecule, i ) {
-          bars[type].addChild( bar = new EquilibriumConcentrationSingleBar( model.components[type].property( molecule.property ), {fill: MOLECULES_COLORS[molecule.type], height: BAR_CHART_HEIGHT - 10 } ) );
+          bars[type].addChild( bar = new EquilibriumConcentrationSingleBar( model, type, model.components[type].property( molecule.property ), {fill: MOLECULES_COLORS[molecule.type], height: BAR_CHART_HEIGHT - 10 } ) );
           bar.setTranslation( (i + 0.75 + (4 - solution.relations.length) / 2) * BAR_CHART_WIDTH / 4, BAR_CHART_HEIGHT );
         } );
         self.addChild( bars[type] );
@@ -49,10 +49,10 @@ define( function( require ) {
     model.property( 'testMode' ).link( this.checkVisibility.bind( this ) );
 
     model.property( 'solution' ).link( function( newSolution, prevSolution ) {
-      bars[newSolution].setVisible( true );
       if ( prevSolution ) {
         bars[prevSolution].setVisible( false );
       }
+      bars[newSolution].setVisible( true );
     } );
   }
 

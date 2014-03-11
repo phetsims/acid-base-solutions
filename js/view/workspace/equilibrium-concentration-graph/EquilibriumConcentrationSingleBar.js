@@ -19,19 +19,27 @@ define( function( require ) {
     FONT_SMALL = new PhetFont( 8 ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     Util = require( 'DOT/Util' ),
+    ViewModes = require( 'model/ViewModes' ),
 
   // strings
     negligibleString = require( 'string!ACID_BASE_SOLUTIONS/negligible' );
 
   /**
    * Constructor for single bar in equilibrium concentration chart.
-   * @param {property} property of model (concentration of single molecule type) for observing
+   * @param {model} model Model of simulation. Should contain properties 'viewMode' and 'solution'
+   * @param {string} solution Which corresponds to the given bar.
+   * @param {property} property Property of model for observing. Concentration of single molecule type
    * @param {object} options for new node
    * @constructor
    */
 
-  function EquilibriumConcentrationSingleBar( property, options ) {
-    var rectangle, text, textPow, height = options.height;
+  function EquilibriumConcentrationSingleBar( model, solution, property, options ) {
+    var self = this,
+      rectangle,
+      text,
+      textPow,
+      setVisibility,
+      height = options.height;
     Node.call( this );
 
     // add rectangle to represent concentration
@@ -44,41 +52,67 @@ define( function( require ) {
     text.rotate( -Math.PI / 2 );
     textPow.rotate( -Math.PI / 2 );
 
-    property.link( function( value ) {
-      var barHeight = Math.abs( Util.log10( value ) + 8 ) * height / 10;
+    // set visibility of bar
+    setVisibility = function() {
+      self.setVisible( model.viewMode === ViewModes.EQUILIBRIUM && model.solution === solution );
+    };
 
-      // set bar height
-      if ( isFinite( barHeight ) ) {
-        rectangle.setRectHeight( barHeight );
-      }
+    // set height of bar
+    var setBarHeightBinded = setBarHeight.bind( this, height, rectangle, text, textPow );
 
-      // set concentration text
-      if ( value < 1e-13 ) {
-        text.setText( negligibleString );
-        textPow.setVisible( false );
-      }
-      else if ( value <= 1 ) {
-        // find pow
-        var pow = Math.floor( Util.log10( value ) );
+    // observer for properties
+    var observer = function() {
+      setVisibility();
 
-        // set value
-        value = (value * Math.pow( 10, -pow ));
-        if ( Math.abs( value - 10 ) < 1e-2 ) { // replace 10.00 to 1.00 x 10
-          pow++;
-          value = 1;
-        }
-        text.setText( Util.toFixed( value, 2 ) + ' x ' + '10' );
+      // if bar not visible then prevent updating
+      if ( self.visible ) {
+        setBarHeightBinded( property.value );
+      }
+    };
 
-        // set pow
-        textPow.setText( pow );
-        textPow.centerY = -text.getHeight() - 10;
-      }
-      else {
-        text.setText( Util.toFixed( value, 1 ) );
-        textPow.setVisible( false );
-      }
-    } );
+    model.property( 'viewMode' ).link( observer );
+    model.property( 'solution' ).link( observer );
+    property.link( observer );
   }
+
+  // set height of bar
+  var setBarHeight = function( height, rectangle, text, textPow, value ) {
+    var barHeight,
+      pow;
+
+    barHeight = Math.abs( Util.log10( value ) + 8 ) * height / 10;
+
+    // set bar height
+    if ( isFinite( barHeight ) ) {
+      rectangle.setRectHeight( barHeight );
+    }
+
+    // set concentration text
+    if ( value < 1e-13 ) {
+      text.setText( negligibleString );
+      textPow.setVisible( false );
+    }
+    else if ( value <= 1 ) {
+      // find pow
+      pow = Math.floor( Util.log10( value ) );
+
+      // set value
+      value = (value * Math.pow( 10, -pow ));
+      if ( Math.abs( value - 10 ) < 1e-2 ) { // replace 10.00 to 1.00 x 10
+        pow++;
+        value = 1;
+      }
+      text.setText( Util.toFixed( value, 2 ) + ' x ' + '10' );
+
+      // set pow
+      textPow.setText( pow );
+      textPow.centerY = -text.getHeight() - 10;
+    }
+    else {
+      text.setText( Util.toFixed( value, 1 ) );
+      textPow.setVisible( false );
+    }
+  };
 
   return inherit( Node, EquilibriumConcentrationSingleBar );
 } );
