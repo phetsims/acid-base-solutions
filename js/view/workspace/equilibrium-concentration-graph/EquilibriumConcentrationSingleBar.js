@@ -13,15 +13,16 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    Text = require( 'SCENERY/nodes/Text' ),
+    HTMLText = require( 'SCENERY/nodes/HTMLText' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    FONT_NORMAL = new PhetFont( 12 ),
-    FONT_SMALL = new PhetFont( 8 ),
+    FONT = new PhetFont( 12 ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
+    StringUtils = require( 'PHETCOMMON/util/StringUtils' ),
     Util = require( 'DOT/Util' ),
     ViewModes = require( 'model/ViewModes' ),
 
   // strings
+    pattern_0value_1power = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1power' ),
     negligibleString = require( 'string!ACID_BASE_SOLUTIONS/negligible' );
 
   /**
@@ -37,7 +38,6 @@ define( function( require ) {
     var self = this,
       rectangle,
       text,
-      textPow,
       setVisibility,
       height = options.height;
     Node.call( this );
@@ -47,10 +47,8 @@ define( function( require ) {
     rectangle.rotate( Math.PI );
 
     // add vertical text for concentration (normal text + exponent text)
-    this.addChild( text = new Text( '123', {font: FONT_NORMAL, centerX: 2, centerY: -10} ) );
-    this.addChild( textPow = new Text( '123', {font: FONT_SMALL, centerX: -10, centerY: -10} ) );
+    this.addChild( text = new HTMLText( '123', {font: FONT, centerX: 2, centerY: -10} ) );
     text.rotate( -Math.PI / 2 );
-    textPow.rotate( -Math.PI / 2 );
 
     // set visibility of bar
     setVisibility = function() {
@@ -58,7 +56,7 @@ define( function( require ) {
     };
 
     // set height of bar
-    var setBarHeightBinded = setBarHeight.bind( this, height, rectangle, text, textPow );
+    var setBarHeightBinded = setBarHeight.bind( this, height, rectangle, text );
 
     // observer for properties
     var observer = function() {
@@ -76,7 +74,7 @@ define( function( require ) {
   }
 
   // set height of bar
-  var setBarHeight = function( height, rectangle, text, textPow, value ) {
+  var setBarHeight = function( height, rectangle, text, value ) {
     var barHeight,
       pow;
 
@@ -90,27 +88,25 @@ define( function( require ) {
     // set concentration text
     if ( value < 1e-13 ) {
       text.setText( negligibleString );
-      textPow.setVisible( false );
     }
     else if ( value <= 1 ) {
       // find pow
       pow = Math.floor( Util.log10( value ) );
 
-      // set value
+      // find value
       value = (value * Math.pow( 10, -pow ));
-      if ( Math.abs( value - 10 ) < 1e-2 ) { // replace 10.00 to 1.00 x 10
+
+      // replace 10.00 to 1.00 x 10
+      if ( Math.abs( value - 10 ) < 1e-2 ) {
         pow++;
         value = 1;
       }
-      text.setText( Util.toFixed( value, 2 ) + ' x ' + '10' );
 
-      // set pow
-      textPow.setText( pow );
-      textPow.centerY = -text.getHeight() - 10;
+      // set text
+      text.setText( StringUtils.format( pattern_0value_1power, Util.toFixed( value, 2 ), pow ) );
     }
     else {
       text.setText( Util.toFixed( value, 1 ) );
-      textPow.setVisible( false );
     }
   };
 
