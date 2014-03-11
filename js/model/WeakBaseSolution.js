@@ -33,19 +33,19 @@ define( function( require ) {
     AqueousSolution.call( this, CONSTANTS.WEAK_STRENGTH_RANGE.defaultValue );
 
     // set links between concentrations
-    this.property( 'OHConcentration' ).link( function( value ) {
+    this.property( 'OHConcentration' ).lazyLink( function( value ) {
       self.H3OConcentration = CONSTANTS.WATER_EQUILIBRIUM_CONSTANT / value; // [H3O+] = Kw / [OH-]
     } );
 
-    this.property( 'productConcentration' ).link( function( value ) {
+    this.property( 'productConcentration' ).lazyLink( function( value ) {
       self.OHConcentration = value; // [OH-] = [BH+]
       self.H2OConcentration = CONSTANTS.WATER_CONCENTRATION - value; // [H2O] = W - [BH+]
     } );
 
-    this.property( 'productConcentration' ).link( setSoluteConcentration.bind( this ) );
-    this.property( 'concentration' ).link( setSoluteConcentration.bind( this ) );
+    this.property( 'productConcentration' ).lazyLink( setSoluteConcentration.bind( this ) );
+    this.property( 'concentration' ).lazyLink( setSoluteConcentration.bind( this ) );
 
-    this.property( 'strength' ).link( setProductConcentration.bind( this ) );
+    this.property( 'strength' ).lazyLink( setProductConcentration.bind( this ) );
     this.property( 'concentration' ).link( setProductConcentration.bind( this ) );
 
     this.property( 'strength' ).link( function( strength ) {

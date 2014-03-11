@@ -39,6 +39,35 @@ define( function( require ) {
     this.property( 'H3OConcentration' ).link( function( value ) {
       self.pH = -Math.round( 100 * Util.log10( value ) ) / 100;
     } );
+
+    // default values for properties will be set after first assignment
+    this.property( 'soluteConcentration' ).once( function( soluteConcentrationInitValue ) {
+      self.property( 'soluteConcentration' ).storeInitialValue( soluteConcentrationInitValue );
+    } );
+
+    this.property( 'productConcentration' ).once( function( productConcentrationInitValue ) {
+      self.property( 'productConcentration' ).storeInitialValue( productConcentrationInitValue );
+    } );
+
+    this.property( 'H3OConcentration' ).once( function( H3OConcentrationInitValue ) {
+      self.property( 'H3OConcentration' ).storeInitialValue( H3OConcentrationInitValue );
+    } );
+
+    this.property( 'OHConcentration' ).once( function( OHConcentrationInitValue ) {
+      self.property( 'OHConcentration' ).storeInitialValue( OHConcentrationInitValue );
+    } );
+
+    this.property( 'H2OConcentration' ).once( function( H2OConcentrationInitValue ) {
+      self.property( 'H2OConcentration' ).storeInitialValue( H2OConcentrationInitValue );
+    } );
+
+    this.property( 'pH' ).once( function( pHInitValue ) {
+      self.property( 'pH' ).storeInitialValue( pHInitValue );
+    } );
+
+    this.property( 'isValidStrength' ).once( function( isValidStrengthInitValue ) {
+      self.property( 'isValidStrength' ).storeInitialValue( isValidStrengthInitValue );
+    } );
   }
 
   return inherit( PropertySet, AqueousSolution );

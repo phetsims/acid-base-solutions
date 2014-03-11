@@ -80,6 +80,15 @@ define( function( require ) {
       resetTrigger: false // reset trigger
     } );
 
+    // default values for pH and brightness will be set after first assignment
+    this.property( 'pH' ).once( function( pHInitValue ) {
+      self.property( 'pH' ).storeInitialValue( pHInitValue );
+    } );
+
+    this.property( 'brightness' ).once( function( pHInitValue ) {
+      self.property( 'brightness' ).storeInitialValue( pHInitValue );
+    } );
+
     // add model for each type of reaction
     this.components = {};
 
@@ -176,23 +185,13 @@ define( function( require ) {
   inherit( PropertySet, AcidBaseSolutionsModel, {
     reset: function() {
       // reset main properties
-      this.property( 'solution' ).reset();
-      this.property( 'testMode' ).reset();
-      this.property( 'viewMode' ).reset();
-      this.property( 'solvent' ).reset();
+      PropertySet.prototype.reset.call( this );
 
-      // reset properties for custom tab
-      if ( this.mode === GameModes.CUSTOM_SOLUTION ) {
-        // reset components properties
-        for ( var solution in this.components ) {
-          if ( this.components.hasOwnProperty( solution ) ) {
-            this.components[solution].property( 'strength' ).reset();
-            this.components[solution].property( 'concentration' ).reset();
-          }
+      // reset components properties
+      for ( var solution in this.components ) {
+        if ( this.components.hasOwnProperty( solution ) ) {
+          this.components[solution].reset();
         }
-
-        this.property( 'isAcid' ).reset();
-        this.property( 'isWeak' ).reset();
       }
 
       // send signal to views for resetting
