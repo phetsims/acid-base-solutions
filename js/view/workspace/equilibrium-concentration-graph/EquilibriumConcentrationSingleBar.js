@@ -15,100 +15,71 @@ define( function( require ) {
     Node = require( 'SCENERY/nodes/Node' ),
     HTMLText = require( 'SCENERY/nodes/HTMLText' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    FONT = new PhetFont( 12 ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     StringUtils = require( 'PHETCOMMON/util/StringUtils' ),
     Util = require( 'DOT/Util' ),
-    ViewModes = require( 'model/ViewModes' ),
 
   // strings
     pattern_0value_1power = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1power' ),
-    negligibleString = require( 'string!ACID_BASE_SOLUTIONS/negligible' );
+    negligibleString = require( 'string!ACID_BASE_SOLUTIONS/negligible' ),
 
-  /**
-   * Constructor for single bar in equilibrium concentration chart.
-   * @param {model} model Model of simulation. Should contain properties 'viewMode' and 'solution'
-   * @param {string} solution Which corresponds to the given bar.
-   * @param {property} property Property of model for observing. Concentration of single molecule type
-   * @param {object} options for new node
-   * @constructor
-   */
+  // constants
+    FONT = new PhetFont( 12 );
 
-  function EquilibriumConcentrationSingleBar( model, solution, property, options ) {
-    var self = this,
-      rectangle,
-      text,
-      setVisibility,
-      height = options.height;
+  function EquilibriumConcentrationSingleBar( maxHeight ) {
     Node.call( this );
+    this._maxHeight = maxHeight;
 
     // add rectangle to represent concentration
-    this.addChild( rectangle = new Rectangle( 0, 0, 25, 0, {fill: options.fill} ) );
-    rectangle.rotate( Math.PI );
+    this.addChild( this._rectangle = new Rectangle( 0, 0, 25, 0, {fill: 'white'} ) );
+    this._rectangle.rotate( Math.PI );
 
     // add vertical text for concentration (normal text + exponent text)
-    this.addChild( text = new HTMLText( '123', {font: FONT, centerX: 2, centerY: -10} ) );
-    text.rotate( -Math.PI / 2 );
-
-    // set visibility of bar
-    setVisibility = function() {
-      self.setVisible( model.viewMode === ViewModes.EQUILIBRIUM && model.solution === solution );
-    };
-
-    // set height of bar
-    var setBarHeightBinded = setBarHeight.bind( this, height, rectangle, text );
-
-    // observer for properties
-    var observer = function() {
-      setVisibility();
-
-      // if bar not visible then prevent updating
-      if ( self.visible ) {
-        setBarHeightBinded( property.value );
-      }
-    };
-
-    model.property( 'viewMode' ).link( observer );
-    model.property( 'solution' ).link( observer );
-    property.link( observer );
+    this.addChild( this._text = new HTMLText( '123', {font: FONT, centerX: 2, centerY: -10} ) );
+    this._text.rotate( -Math.PI / 2 );
   }
 
-  // set height of bar
-  var setBarHeight = function( height, rectangle, text, value ) {
-    var barHeight,
-      pow;
 
-    barHeight = Math.abs( Util.log10( value ) + 8 ) * height / 10;
+  return inherit( Node, EquilibriumConcentrationSingleBar, {
+    // set height and text value of bar
+    setValue: function( value ) {
+      var barHeight = Math.abs( Util.log10( value ) + 8 ) * this._maxHeight / 10,
+        pow;
 
-    // set bar height
-    if ( isFinite( barHeight ) ) {
-      rectangle.setRectHeight( barHeight );
-    }
-
-    // set concentration text
-    if ( value < 1e-13 ) {
-      text.setText( negligibleString );
-    }
-    else if ( value <= 1 ) {
-      // find pow
-      pow = Math.floor( Util.log10( value ) );
-
-      // find value
-      value = (value * Math.pow( 10, -pow ));
-
-      // replace 10.00 to 1.00 x 10
-      if ( Math.abs( value - 10 ) < 1e-2 ) {
-        pow++;
-        value = 1;
+      // set bar height
+      if ( isFinite( barHeight ) ) {
+        this._rectangle.setRectHeight( barHeight );
+      } else {
+        this._rectangle.setRectHeight( 0 );
       }
 
-      // set text
-      text.setText( StringUtils.format( pattern_0value_1power, Util.toFixed( value, 2 ), pow ) );
-    }
-    else {
-      text.setText( Util.toFixed( value, 1 ) );
-    }
-  };
+      // set concentration text
+      if ( value < 1e-13 ) {
+        this._text.setText( negligibleString );
+      }
+      else if ( value <= 1 ) {
+        // find pow
+        pow = Math.floor( Util.log10( value ) );
 
-  return inherit( Node, EquilibriumConcentrationSingleBar );
+        // find value
+        value = (value * Math.pow( 10, -pow ));
+
+        // replace 10.00 to 1.00 x 10
+        if ( Math.abs( value - 10 ) < 1e-2 ) {
+          pow++;
+          value = 1;
+        }
+
+        // set text
+        this._text.setText( StringUtils.format( pattern_0value_1power, Util.toFixed( value, 2 ), pow ) );
+      }
+      else {
+        this._text.setText( Util.toFixed( value, 1 ) );
+      }
+    },
+    // set color of rectangle
+    setFill: function( color ) {
+      this._rectangle.setFill( color );
+    }
+  } );
 } );

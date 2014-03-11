@@ -15,6 +15,7 @@ define( function( require ) {
     MOLECULES_COLORS = require( 'model/Constants/MoleculesColors' ),
     EquilibriumConcentrationSingleBar = require( './EquilibriumConcentrationSingleBar' ),
     EquilibriumConcentrationBarChartBackground = require( './EquilibriumConcentrationBarChartBackground' ),
+    GameModes = require( 'model/GameModes' ),
     ViewModes = require( 'model/ViewModes' ),
     TestModes = require( 'model/TestModes' ),
 
@@ -24,41 +25,80 @@ define( function( require ) {
 
   function EquilibriumConcentrationBarChart( model, options ) {
     var self = this,
-      bars = {};
+      relations = {},
+      maxBars = 0;
     Node.call( this, options );
     this.setPickable( false );
-    this.model = model;
+    this._bars = [];
 
     // add background
     this.addChild( new EquilibriumConcentrationBarChartBackground( BAR_CHART_WIDTH, BAR_CHART_HEIGHT ) );
 
-    // add bars for each solution
     model.SOLUTIONS.forEach( function( solution ) {
-      var type = solution.type, bar;
-      if ( type in model.components ) {
-        bars[type] = new Node( {visible: false} );
-        solution.relations.forEach( function( molecule, i ) {
-          bars[type].addChild( bar = new EquilibriumConcentrationSingleBar( model, type, model.components[type].property( molecule.property ), {fill: MOLECULES_COLORS[molecule.type], height: BAR_CHART_HEIGHT - 10 } ) );
-          bar.setTranslation( (i + 0.75 + (4 - solution.relations.length) / 2) * BAR_CHART_WIDTH / 4, BAR_CHART_HEIGHT );
-        } );
-        self.addChild( bars[type] );
+      if ( solution.type in model.components ) {
+        // find max bars value for each solution
+        maxBars = Math.max( maxBars, solution.relations.length );
+
+        // save relations for further using
+        relations[solution.type] = solution.relations;
       }
     } );
 
-    model.property( 'viewMode' ).link( this.checkVisibility.bind( this ) );
-    model.property( 'testMode' ).link( this.checkVisibility.bind( this ) );
+    for ( var i = 0; i < maxBars; i++ ) {
+      this.addChild( this._bars[i] = new EquilibriumConcentrationSingleBar( BAR_CHART_HEIGHT - 10 ) );
+    }
 
-    model.property( 'solution' ).link( function( newSolution, prevSolution ) {
-      if ( prevSolution ) {
-        bars[prevSolution].setVisible( false );
+    var setVisibilityBinded = setVisibility.bind( this, model );
+    model.property( 'viewMode' ).link( setVisibilityBinded );
+    model.property( 'testMode' ).link( setVisibilityBinded );
+
+
+    model.property( 'solution' ).link( function( newSolution ) {
+      var barNumber = relations[newSolution].length;
+
+      for ( var i = 0, bar; i < maxBars; i++ ) {
+        bar = self._bars[i];
+        if ( i < barNumber ) {
+          // set visibility, color, value and position of new bars
+          bar.setVisible( true );
+          bar.setValue( model.components[newSolution].property( relations[newSolution][i].property ).value );
+          bar.setFill( MOLECULES_COLORS[relations[newSolution][i].type] );
+          bar.setTranslation( (i + 0.75 + (4 - relations[newSolution].length) / 2) * BAR_CHART_WIDTH / 4, BAR_CHART_HEIGHT );
+        }
+        else {
+          bar.setVisible( false );
+        }
       }
-      bars[newSolution].setVisible( true );
     } );
+
+    var updateBarValuesBinded = updateBarValues.bind( this, model, relations );
+    model.property( 'viewMode' ).link( updateBarValuesBinded );
+
+    // listeners for 'custom solution' tab
+    if ( model.mode === GameModes.CUSTOM_SOLUTION ) {
+      model.property( 'strength' ).link( updateBarValuesBinded );
+      model.property( 'concentration' ).link( updateBarValuesBinded );
+    }
   }
 
-  return inherit( Node, EquilibriumConcentrationBarChart, {
-    checkVisibility: function() {
-      this.setVisible( this.model.viewMode === ViewModes.EQUILIBRIUM && this.model.testMode !== TestModes.CONDUCTIVITY );
+  // private methods
+
+  // set visibility of bar charts
+  var setVisibility = function( model ) {
+    this.setVisible( model.viewMode === ViewModes.EQUILIBRIUM && model.testMode !== TestModes.CONDUCTIVITY );
+  };
+
+  // update values of bars
+  var updateBarValues = function( model, relations ) {
+    var solution = model.solution,
+      barNumber = relations[solution].length;
+
+    if ( this.visible ) {
+      for ( var i = 0; i < barNumber; i++ ) {
+        this._bars[i].setValue( model.components[solution].property( relations[solution][i].property ).value );
+      }
     }
-  } );
+  };
+
+  return inherit( Node, EquilibriumConcentrationBarChart );
 } );
