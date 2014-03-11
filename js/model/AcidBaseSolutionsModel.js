@@ -85,8 +85,8 @@ define( function( require ) {
       self.property( 'pH' ).storeInitialValue( pHInitValue );
     } );
 
-    this.property( 'brightness' ).once( function( pHInitValue ) {
-      self.property( 'brightness' ).storeInitialValue( pHInitValue );
+    this.property( 'brightness' ).once( function( brightnessInitValue ) {
+      self.property( 'brightness' ).storeInitialValue( brightnessInitValue );
     } );
 
     // add model for each type of reaction
@@ -123,6 +123,16 @@ define( function( require ) {
       this.addProperty( 'isWeak', true ); // type of strength. true - weak, false - strong
       this.addProperty( 'concentration', 0 ); // concentration of solution
       this.addProperty( 'strength', 0 ); // strength of solution
+
+      // default values for concentration and strength will be set after first assignment
+      this.property( 'concentration' ).once( function( concentrationInitValue ) {
+        self.property( 'concentration' ).storeInitialValue( concentrationInitValue );
+      } );
+
+      this.property( 'strength' ).once( function( strengthInitValue ) {
+        self.property( 'strength' ).storeInitialValue( strengthInitValue );
+      } );
+
 
       // update solution type if it was changed by radio buttons
       var setSolution = function() {
