@@ -2,6 +2,7 @@
 
 /**
  * Possible game modes in 'Acid Base Solutions' sim.
+ * This is equivalent to which screen we are on.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
