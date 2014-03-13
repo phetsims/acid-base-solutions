@@ -40,8 +40,8 @@ define( function( require ) {
     FONT_SIZE = CONSTANTS.FORMULAS_FONT_SIZE,
     FONT = new PhetFont( FONT_SIZE ),
     HBOX_SPACING = CONSTANTS.FORMULAS_HBOX_SPACING,
-    VBOX_SPACING = CONSTANTS.FORMULAS_VBOX_SPACING,
-    TEXT_SUB_INDENT = FONT_SIZE / 8;
+    TEXT_SUB_INDENT = FONT_SIZE / 8,
+    VBOX_SPACING = CONSTANTS.FORMULAS_VBOX_SPACING;
 
   function FormulaAbstract( options ) {
     HBox.call( this, _.extend( {spacing: HBOX_SPACING, align: 'bottom'}, options ) );

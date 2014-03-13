@@ -23,11 +23,11 @@ define( function( require ) {
     units_litersString = require( 'string!ACID_BASE_SOLUTIONS/liters' ),
 
   // constants
-    RIM_OFFSET = 10,
-    MINOR_TICK_SPACING = 0.1, // L
-    MINOR_TICKS_PER_MAJOR_TICK = 5,
     MAJOR_TICK_LENGTH = 25,
     MINOR_TICK_LENGTH = 10,
+    MINOR_TICKS_PER_MAJOR_TICK = 5,
+    MINOR_TICK_SPACING = 0.1, // L
+    RIM_OFFSET = 10,
     TICK_LABEL_X_SPACING = 20;
 
   function Beaker( model, location ) {

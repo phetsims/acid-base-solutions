@@ -23,15 +23,14 @@ define( function( require ) {
     StringUtils = require( 'PHETCOMMON/util/StringUtils' ),
     Util = require( 'DOT/Util' ),
 
-  // constants
-    READOUT_FONT = new PhetFont( 14 ),
-    ARROW_HEIGHT = 15,
-
   // strings
     pattern_0value_1concentration = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1concentration' ),
     molesPerLiterString = require( 'string!ACID_BASE_SOLUTIONS/molesPerLiter' ),
 
-    arrowButtonOptions = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
+  // constants
+    ARROW_HEIGHT = 15,
+    READOUT_FONT = new PhetFont( 14 ),
+    arrowButtonOptions = {arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2};
 
   function ConcentrationSlider( concentrationProperty, range ) {
     var CONCENTRATION_MIN = Util.log10( range.min ),

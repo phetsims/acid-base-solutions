@@ -23,15 +23,15 @@ define( function( require ) {
 
   // constants
     FONT = new PhetFont( 14 ),
-    SLIDER_TRACK_WIDTH = 150,
+    SLIDER_TICK_LENGTH = 10,
     SLIDER_TICK_OFFSET = 5,
-    SLIDER_TICK_LENGTH = 10;
+    SLIDER_TRACK_WIDTH = 150;
 
   function StrengthSlider( strengthProperty, range, coords ) {
     var sliderProperty = new Property( Util.log10( range.defaultValue ) ),
+      slider,
       STRENGTH_MIN = Util.log10( range.min ),
-      STRENGTH_MAX = Util.log10( range.max ),
-      slider;
+      STRENGTH_MAX = Util.log10( range.max );
     Node.call( this, coords );
     this.scale( 0.83 );
     this.property = sliderProperty;

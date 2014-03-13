@@ -11,6 +11,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' ),
+
+  // constants
     COLOR_OH = require( 'model/Constants/MoleculesColors' ).OH;
 
   var atomCache, getMolecule = function() {

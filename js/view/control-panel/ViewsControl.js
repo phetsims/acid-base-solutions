@@ -15,12 +15,10 @@ define( function( require ) {
     CheckBox = require( 'SUN/CheckBox' ),
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    FONT = new PhetFont( 12 ),
     VBox = require( 'SCENERY/nodes/VBox' ),
     HBox = require( 'SCENERY/nodes/HBox' ),
     Image = require( 'SCENERY/nodes/Image' ),
     H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' ),
-    MOLECULES_COLORS = require( 'model/Constants/MoleculesColors' ),
     HStrut = require( 'SUN/HStrut' ),
     ViewModes = require( 'model/ViewModes' ),
     TestModes = require( 'model/TestModes' ),
@@ -34,7 +32,11 @@ define( function( require ) {
 
   // images
     magnifyingGlassImage = require( 'image!ACID_BASE_SOLUTIONS/magnifying-glass.png' ),
-    beakerImage = require( 'image!ACID_BASE_SOLUTIONS/beaker.png' );
+    beakerImage = require( 'image!ACID_BASE_SOLUTIONS/beaker.png' ),
+
+  // constants
+    FONT = new PhetFont( 12 ),
+    MOLECULES_COLORS = require( 'model/Constants/MoleculesColors' );
 
   function ViewsControl( model, options ) {
     var vBox = new VBox( {spacing: 4, align: 'left'} ),

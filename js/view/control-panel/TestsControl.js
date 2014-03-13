@@ -13,7 +13,6 @@ define( function( require ) {
     AquaRadioButton = require( 'SUN/AquaRadioButton' ),
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    FONT = new PhetFont( 12 ),
     VBox = require( 'SCENERY/nodes/VBox' ),
     HBox = require( 'SCENERY/nodes/HBox' ),
     VStrut = require( 'SUN/VStrut' ),
@@ -28,7 +27,10 @@ define( function( require ) {
   // images
     pHMeterImage = require( 'image!ACID_BASE_SOLUTIONS/pH-meter.png' ),
     pHPaperImage = require( 'image!ACID_BASE_SOLUTIONS/pH-paper.png' ),
-    lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb.png' );
+    lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb.png' ),
+
+  // constants
+    FONT = new PhetFont( 12 );
 
   function TestsControl( model, options ) {
     var vBox = new VBox( {spacing: 4, align: 'left'} );

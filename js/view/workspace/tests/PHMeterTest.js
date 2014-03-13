@@ -26,8 +26,8 @@ define( function( require ) {
 
   // constants
     FONT = new PhetFont( {size: 15, weight: 'bold'} ),
-    PROBE_MIN_Y_COODINATE = 25.2,
     PROBE_MAX_Y_COODINATE = 100,
+    PROBE_MIN_Y_COODINATE = 25.2,
     WATER_SURFACE = 38;
 
   function PHMeterTest( model, options ) {

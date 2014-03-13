@@ -18,6 +18,7 @@ define( function( require ) {
     TestModes = require( 'model/TestModes' ),
 
   // constants
+    BRIGHTNESS_TO_INTENSITY_FUNCTION = new LinearFunction( 0, 1, 0, 1 ), // intensity of the light rays
     MIN_RAYS = 8,
     MAX_RAYS = 60,
     MIN_RAY_LENGTH = 0,
@@ -26,8 +27,7 @@ define( function( require ) {
     RAYS_ARC_ANGLE = 3 * Math.PI / 2,
     RAY_STROKE_BIG = 1.5,
     RAY_STROKE_MEDIUM = 1,
-    RAY_STROKE_SMALL = 0.5,
-    BRIGHTNESS_TO_INTENSITY_FUNCTION = new LinearFunction( 0, 1, 0, 1 ); // intensity of the light rays;
+    RAY_STROKE_SMALL = 0.5;
 
   function ConductivityTestLightRays( testModeProperty, brightnessProperty, isCloseProperty, bulbRadius, options ) {
     var self = this,

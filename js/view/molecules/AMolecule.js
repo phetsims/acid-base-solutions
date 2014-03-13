@@ -9,6 +9,8 @@
 define( function( require ) {
   'use strict';
   var Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' ),
+
+  // constants
     COLOR_A = require( 'model/Constants/MoleculesColors' ).A;
 
   function AMolecule( coords ) {

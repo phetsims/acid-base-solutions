@@ -17,8 +17,8 @@ define( function( require ) {
     SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' ),
 
   // constants
-    PROBE_MIN_Y_COODINATE = 40,
-    PROBE_MAX_Y_COODINATE = 370;
+    PROBE_MAX_Y_COODINATE = 370,
+    PROBE_MIN_Y_COODINATE = 40;
 
   function ConductivityTestProbe( fill, type, property, options ) {
     var self = this;

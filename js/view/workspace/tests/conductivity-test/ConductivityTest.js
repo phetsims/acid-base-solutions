@@ -29,16 +29,16 @@ define( function( require ) {
     lightBulbGlassMaskImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-glass-mask.png' ),
 
   // constants
+    BULB_END_X = 23,
+    BULB_END_Y = 84,
     BULB_TO_BATTERY_WIRE_LENGTH = 40,
     OPACITY_MAX = 0.15,
 
   // alpha of the bulb when used against a dark background. This is clamped after evaluation to keep it within the range [0,1]
     BRIGHTNESS_TO_ALPHA_FUNCTION_AGAINST_DARK_BACKGROUND = new LinearFunction( 0, 1, OPACITY_MAX, 0 ),
 
-    WIRES_INITIAL_Y = 60,
-    BULB_END_X = 23,
-    BULB_END_Y = 84,
     WATER_SURFACE = 75,
+    WIRES_INITIAL_Y = 60,
 
     wireOptions = {
       positive: {

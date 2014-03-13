@@ -15,8 +15,9 @@ define( function( require ) {
     Node = require( 'SCENERY/nodes/Node' ),
     Circle = require( 'SCENERY/nodes/Circle' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
-
     Image = require( 'SCENERY/nodes/Image' ),
+
+  // images
     solventBackgroundImage = require( 'image!ACID_BASE_SOLUTIONS/../images/solvent.png' );
 
   function MagnifierBackground( model, container, radius ) {

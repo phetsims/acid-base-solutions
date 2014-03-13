@@ -13,8 +13,10 @@ define( function( require ) {
     Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' ),
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    FONT = new PhetFont( 8 ),
-    COLOR_MOH = require( 'model/Constants/MoleculesColors' ).MOH; // gray
+
+  // constants
+    COLOR_MOH = require( 'model/Constants/MoleculesColors' ).MOH, // gray
+    FONT = new PhetFont( 8 );
 
   var getMolecule = function() {
     return new Node( {children: [

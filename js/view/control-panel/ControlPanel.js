@@ -19,7 +19,6 @@ define( function( require ) {
     VBox = require( 'SCENERY/nodes/VBox' ),
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    FONT = new PhetFont( {size: 14, weight: 'bold'} ),
     ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' ),
 
   // strings
@@ -27,7 +26,10 @@ define( function( require ) {
     solutionString = require( 'string!ACID_BASE_SOLUTIONS/solution' ),
     viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' ),
     testsString = require( 'string!ACID_BASE_SOLUTIONS/tests' ),
-    GameModes = require( 'model/GameModes' );
+    GameModes = require( 'model/GameModes' ),
+
+  // constants
+    FONT = new PhetFont( {size: 14, weight: 'bold'} );
 
   function ControlPanel( model ) {
     var vBox = new VBox( {x: 20, spacing: 8, align: 'left'} ),

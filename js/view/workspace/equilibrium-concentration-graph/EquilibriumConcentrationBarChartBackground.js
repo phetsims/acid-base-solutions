@@ -17,11 +17,13 @@ define( function( require ) {
     Line = require( 'SCENERY/nodes/Line' ),
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    FONT_BIG = new PhetFont( 11 ),
-    FONT_SMALL = new PhetFont( 7 ),
 
   // strings
-    yAxisString = require( 'string!ACID_BASE_SOLUTIONS/concentrationGraph.yAxis' );
+    yAxisString = require( 'string!ACID_BASE_SOLUTIONS/concentrationGraph.yAxis' ),
+
+  // constants
+    FONT_BIG = new PhetFont( 11 ),
+    FONT_SMALL = new PhetFont( 7 );
 
   function EquilibriumConcentrationBarChartBackground( width, height ) {
     var yLabel, dh = height / 10 - 1;

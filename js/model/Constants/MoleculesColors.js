@@ -8,9 +8,12 @@
 
 define( function( require ) {
   'use strict';
-  var Color = require( 'SCENERY/util/Color' );
 
-  var AQUEOUS_SOLUTION = new Color( 193, 222, 227, 0.7 ), // transparent light blue
+  // imports
+  var Color = require( 'SCENERY/util/Color' ),
+
+  // constants
+    AQUEOUS_SOLUTION = new Color( 193, 222, 227, 0.7 ), // transparent light blue
     GRAY = 'rgb(120,120,120)',
     H2O_FACTOR = 0.85;
 

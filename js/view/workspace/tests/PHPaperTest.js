@@ -23,20 +23,19 @@ define( function( require ) {
     pHColorKeyString = require( 'string!ACID_BASE_SOLUTIONS/pHColorKey' ),
 
   // constants
-    PH_COLORS = require( 'model/Constants/PHColors' ),
-    FONT_BIG = new PhetFont( 10 ),
-    FONT_SMALL = new PhetFont( 8 ),
-    WATER_SURFACE = 14.5,
-    TABLE_RECT_WIDTH = 14,
-    TABLE_RECT_HEIGHT = 28, 
-    SPACE_BETWEEN_RECTS = 1,
-    
     DRAG_AREA = {
       left: -295,
       right: 60,
       top: 0,
       bottom: 310
-    };
+    },
+    FONT_BIG = new PhetFont( 10 ),
+    FONT_SMALL = new PhetFont( 8 ),
+    PH_COLORS = require( 'model/Constants/PHColors' ),
+    SPACE_BETWEEN_RECTS = 1,
+    TABLE_RECT_HEIGHT = 28,
+    TABLE_RECT_WIDTH = 14,
+    WATER_SURFACE = 14.5;
 
   function PHPaperTest( model, options ) {
     var self = this,

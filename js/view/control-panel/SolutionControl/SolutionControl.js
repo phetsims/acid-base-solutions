@@ -29,8 +29,8 @@ define( function( require ) {
     strongString = require( 'string!ACID_BASE_SOLUTIONS/strong' ),
 
   // constants
-    FONT = new PhetFont( 12 ),
-    CONSTANTS = require( 'model/Constants/Constants' );
+    CONSTANTS = require( 'model/Constants/Constants' ),
+    FONT = new PhetFont( 12 );
 
   function SolutionControl( model, options ) {
     var vBox = new VBox( {spacing: 4} ),

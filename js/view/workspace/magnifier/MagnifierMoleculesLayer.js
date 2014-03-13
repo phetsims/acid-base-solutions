@@ -30,9 +30,9 @@ define( function( require ) {
     },
 
   // constants
-    MAX_MOLECULES = 50, // TODO: should be 200, but sim will load approximately 30 second
+    BASE_CONCENTRATION = 1E-7, // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules
     BASE_DOTS = 2,
-    BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules
+    MAX_MOLECULES = 50; // TODO: should be 200, but sim will load approximately 30 second
 
   function MagnifierMoleculesLayer( model, boundedSolution, property, type, radius ) {
     var molecules = [],
