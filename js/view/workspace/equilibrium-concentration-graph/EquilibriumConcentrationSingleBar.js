@@ -13,7 +13,7 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    HTMLText = require( 'SCENERY/nodes/HTMLText' ),
+    SubSupText  = require( 'SCENERY_PHET/SubSupText' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     StringUtils = require( 'PHETCOMMON/util/StringUtils' ),
@@ -35,7 +35,7 @@ define( function( require ) {
     this._rectangle.rotate( Math.PI );
 
     // add vertical text for concentration (normal text + exponent text)
-    this.addChild( this._text = new HTMLText( '123', {font: FONT, centerX: 2, centerY: -10} ) );
+    this.addChild( this._text = new SubSupText( '123', {font: FONT, centerX: 2, centerY: -10} ) );
     this._text.rotate( -Math.PI / 2 );
   }
 

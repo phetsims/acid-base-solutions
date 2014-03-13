@@ -15,7 +15,7 @@ define( function( require ) {
     VBox = require( 'SCENERY/nodes/VBox' ),
     Image = require( 'SCENERY/nodes/Image' ),
     Text = require( 'SCENERY/nodes/Text' ),
-    HTMLText = require( 'SCENERY/nodes/HTMLText' ),
+    SubSupText = require( 'SCENERY_PHET/SubSupText' ),
     ChemUtils = require( 'NITROGLYCERIN/ChemUtils' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     VStrut = require( 'SUN/VStrut' ),
@@ -40,7 +40,8 @@ define( function( require ) {
     FONT_SIZE = CONSTANTS.FORMULAS_FONT_SIZE,
     FONT = new PhetFont( FONT_SIZE ),
     HBOX_SPACING = CONSTANTS.FORMULAS_HBOX_SPACING,
-    VBOX_SPACING = CONSTANTS.FORMULAS_VBOX_SPACING;
+    VBOX_SPACING = CONSTANTS.FORMULAS_VBOX_SPACING,
+    TEXT_SUB_INDENT = FONT_SIZE / 8;
 
   function FormulaAbstract( options ) {
     HBox.call( this, _.extend( {spacing: HBOX_SPACING, align: 'bottom'}, options ) );
@@ -51,30 +52,31 @@ define( function( require ) {
     ANode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
         new AMolecule(),
-        new HTMLText( 'A<sup>-</sup>', {font: FONT} ),
-        new VStrut( 1 )
+        new SubSupText( 'A<sup>-</sup>', {font: FONT} ),
+        new VStrut( TEXT_SUB_INDENT )
       ]} );
     },
     // B node
     BNode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
         new BMolecule(),
-        new Text( 'B', {font: FONT} )
+        new Text( 'B', {font: FONT} ),
+        new VStrut( TEXT_SUB_INDENT )
       ]} );
     },
     // BH+ node
     BHNode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
         new BHMolecule(),
-        new HTMLText( 'BH<sup>+</sup>', {font: FONT} ),
-        new VStrut( 1 )
+        new SubSupText( 'BH<sup>+</sup>', {font: FONT} ),
+        new VStrut( TEXT_SUB_INDENT )
       ]} );
     },
     // H2O node
     H2ONode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
         new H2OMolecule(),
-        new HTMLText( ChemUtils.toSubscript( 'H2O' ), {font: FONT} )
+        new SubSupText( ChemUtils.toSubscript( 'H2O' ), {font: FONT} )
       ]} );
     },
     // 2H2O node
@@ -84,62 +86,67 @@ define( function( require ) {
           new H2OMolecule(),
           new H2OMolecule()
         ]} ),
-        new HTMLText( '2' + ChemUtils.toSubscript( 'H2O' ), {font: FONT} )
+        new SubSupText( '2' + ChemUtils.toSubscript( 'H2O' ), {font: FONT} )
       ]} );
     },
     // H3O+ node
     H3ONode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
         new H3OMolecule(),
-        new HTMLText( ChemUtils.toSubscript( 'H3O' ) + '<sup>+</sup>', {font: FONT} ),
-        new VStrut( 1 )
+        new SubSupText( ChemUtils.toSubscript( 'H3O' ) + '<sup>+</sup>', {font: FONT} )
       ]} );
     },
     // HA node
     HANode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
         new HAMolecule(),
-        new Text( 'HA', {font: FONT} )
+        new Text( 'HA', {font: FONT} ),
+        new VStrut( TEXT_SUB_INDENT )
       ]} );
     },
     // M+ node
     MNode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
         new MMolecule(),
-        new HTMLText( 'M<sup>+</sup>', {font: FONT} ),
-        new VStrut( 1 )
+        new SubSupText( 'M<sup>+</sup>', {font: FONT} ),
+        new VStrut( TEXT_SUB_INDENT )
       ]} );
     },
     // MOH node
     MOHNode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
         new MOHMolecule(),
-        new Text( 'MOH', {font: FONT} )
+        new Text( 'MOH', {font: FONT} ),
+        new VStrut( TEXT_SUB_INDENT )
       ]} );
     },
     // OH- node
     OHNode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
         new OHMolecule(),
-        new HTMLText( 'OH<sup>-</sup>', {font: FONT} ),
-        new VStrut( 1 )
+        new SubSupText( 'OH<sup>-</sup>', {font: FONT} ),
+        new VStrut( TEXT_SUB_INDENT )
       ]} );
     },
     // plus sign node
     plusSignNode: function() {
-      return new Text( '+', {font: FONT} );
+      return new VBox( {children: [
+        new Text( '+', {font: FONT} ),
+        new VStrut( TEXT_SUB_INDENT + VBOX_SPACING )
+      ]} );
     },
     // reverse sign node
     reverseSignNode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
         new Image( arrowDoubleImage, {scale: 0.75} ),
-        new VStrut( FONT_SIZE / 4 - 3 )
+        new VStrut( TEXT_SUB_INDENT + FONT_SIZE / 4 - 2 )
       ]} );
     },
+    // straight sign node
     straightSignNode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
         new Image( arrowSingleImage, {scale: 0.75} ),
-        new VStrut( FONT_SIZE / 4 - 1 )
+        new VStrut( TEXT_SUB_INDENT + FONT_SIZE / 4 )
       ]} );
     }
   } );
