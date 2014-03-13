@@ -33,15 +33,12 @@ define( function( require ) {
     var self = this,
       setBrightnessBinded;
     Node.call( this, options );
-    this.bulbRadius = bulbRadius;
-    this.isCloseProperty = isCloseProperty;
-    this.brightnessProperty = brightnessProperty;
 
     // pre-calculate reusable objects
     this.createCacheLines( MAX_RAYS );
 
     // add observers
-    setBrightnessBinded = this.setBrightness.bind( this );
+    setBrightnessBinded = this.setBrightness.bind( this, brightnessProperty, isCloseProperty, bulbRadius );
     isCloseProperty.link( setBrightnessBinded );
     brightnessProperty.link( setBrightnessBinded );
 
@@ -58,26 +55,20 @@ define( function( require ) {
         this.addChild( this.cachedLines[i] );
       }
     },
-    // hide all rays
-    hideAll: function() {
-      this.cachedLines.forEach( function( line ) {
-        line.setVisible( false );
-      } );
-    },
-    setBrightness: function() {
-      var brightnessValue = this.brightnessProperty.value,
-        isClose = this.isCloseProperty.value,
-        intensity = BRIGHTNESS_TO_INTENSITY_FUNCTION( brightnessValue ),
+    setBrightness: function( brightnessProperty, isCloseProperty, bulbRadius ) {
+      var isClose = isCloseProperty.value,
+        intensity = BRIGHTNESS_TO_INTENSITY_FUNCTION( brightnessProperty.value ),
         numberOfRays = MIN_RAYS + Math.round( intensity * ( MAX_RAYS - MIN_RAYS ) ), // number of rays is a function of intensity
         angle = RAYS_START_ANGLE,
         deltaAngle = RAYS_ARC_ANGLE / ( numberOfRays - 1 ),
-        bulbRadius = this.bulbRadius,
         lineWidth,
         rayLength; // ray length is a function of intensity
 
-      // if intensity is zero or circuit isn't closed, we're done
-      if ( !intensity || !isClose || !this.visible ) {
-        this.hideAll();
+      // if intensity is zero or circuit isn't closed then hide node
+      this.setVisible( (intensity && isClose) );
+
+      // update node only if it's visible
+      if ( !this.visible ) {
         return;
       }
 
