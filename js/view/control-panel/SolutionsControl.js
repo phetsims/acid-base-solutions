@@ -11,6 +11,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' ),
     inherit = require( 'PHET_CORE/inherit' ),
     AquaRadioButton = require( 'SUN/AquaRadioButton' ),
+    StringUtils = require( 'PHETCOMMON/util/StringUtils' ),
     Text = require( 'SCENERY/nodes/Text' ),
     HTMLText = require( 'SCENERY/nodes/HTMLText' ),
     ChemUtils = require( 'NITROGLYCERIN/ChemUtils' ),
@@ -26,6 +27,7 @@ define( function( require ) {
     BMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/BMolecule' ),
 
   // strings
+    pattern_0solution_1symbol = require( 'string!ACID_BASE_SOLUTIONS/pattern.0solution.1symbol' ),
     waterString = require( 'string!ACID_BASE_SOLUTIONS/water' ),
     strongAcidString = require( 'string!ACID_BASE_SOLUTIONS/strongAcid' ),
     weakAcidString = require( 'string!ACID_BASE_SOLUTIONS/weakAcid' ),
@@ -37,11 +39,11 @@ define( function( require ) {
     RADIO_BUTTON_RADIUS = 7;
 
   var menuOptions = [
-    {text: new HTMLText( waterString + ChemUtils.toSubscript( ' (H2O)' ), {font: FONT, centerX: 49, centerY: 0} ), value: Solutions.WATER, icon: H2OMolecule},
-    {text: new Text( strongAcidString + ' (HA)', {font: FONT} ), value: Solutions.STRONG_ACID, icon: HAMolecule},
-    {text: new Text( weakAcidString + ' (HA)', {font: FONT} ), value: Solutions.WEAK_ACID, icon: HAMolecule},
-    {text: new Text( strongBaseString + ' (MOH)', {font: FONT} ), value: Solutions.STRONG_BASE, icon: MOHMolecule},
-    {text: new Text( weakBaseString + ' (B)', {font: FONT} ), value: Solutions.WEAK_BASE, icon: BMolecule}
+    {text: new HTMLText( StringUtils.format( pattern_0solution_1symbol, waterString, ChemUtils.toSubscript( 'H2O' ) ), {font: FONT} ), value: Solutions.WATER, icon: H2OMolecule},
+    {text: new Text( StringUtils.format( pattern_0solution_1symbol, strongAcidString, 'HA' ), {font: FONT} ), value: Solutions.STRONG_ACID, icon: HAMolecule},
+    {text: new Text( StringUtils.format( pattern_0solution_1symbol, weakAcidString, 'HA' ), {font: FONT} ), value: Solutions.WEAK_ACID, icon: HAMolecule},
+    {text: new Text( StringUtils.format( pattern_0solution_1symbol, strongBaseString, 'MOH' ), {font: FONT} ), value: Solutions.STRONG_BASE, icon: MOHMolecule},
+    {text: new Text( StringUtils.format( pattern_0solution_1symbol, weakBaseString, 'B' ), {font: FONT} ), value: Solutions.WEAK_BASE, icon: BMolecule}
   ];
 
   function SolutionsControl( model, options ) {
