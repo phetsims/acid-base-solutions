@@ -15,6 +15,7 @@ define( function( require ) {
     Node = require( 'SCENERY/nodes/Node' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     Line = require( 'SCENERY/nodes/Line' ),
+    SubSupText = require( 'SCENERY_PHET/SubSupText' ),
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
 
@@ -22,8 +23,7 @@ define( function( require ) {
     yAxisString = require( 'string!ACID_BASE_SOLUTIONS/concentrationGraph.yAxis' ),
 
   // constants
-    FONT_BIG = new PhetFont( 11 ),
-    FONT_SMALL = new PhetFont( 7 );
+    FONT = new PhetFont( 11 );
 
   function EquilibriumConcentrationBarChartBackground( width, height ) {
     var yLabel, dh = height / 10 - 1;
@@ -51,10 +51,7 @@ define( function( require ) {
       }
 
       // add text
-      this.addChild( new Node( {centerY: y, children: [
-        new Text( '10', {font: FONT_BIG, centerX: -16, centerY: 0} ),
-        new Text( (i - 8).toString(), {font: FONT_SMALL, x: -9.5} )
-      ]} ) );
+      this.addChild( new SubSupText( '10<sup>' + (i - 8) + '</sup>', {centerY: y, centerX: -16, font: FONT} ) );
     }
   }
 
