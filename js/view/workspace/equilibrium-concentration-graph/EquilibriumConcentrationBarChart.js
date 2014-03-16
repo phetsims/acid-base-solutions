@@ -12,7 +12,6 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    MOLECULES_COLORS = require( 'model/Constants/MoleculesColors' ),
     EquilibriumConcentrationSingleBar = require( './EquilibriumConcentrationSingleBar' ),
     EquilibriumConcentrationBarChartBackground = require( './EquilibriumConcentrationBarChartBackground' ),
     GameModes = require( 'model/GameModes' ),
@@ -21,7 +20,8 @@ define( function( require ) {
 
   // constants
     BAR_CHART_WIDTH = 200,
-    BAR_CHART_HEIGHT = 270;
+    BAR_CHART_HEIGHT = 270,
+    MOLECULES_COLORS = require( 'model/Constants/MoleculesColors' );
 
   function EquilibriumConcentrationBarChart( model, options ) {
     var self = this,
@@ -34,14 +34,10 @@ define( function( require ) {
     // add background
     this.addChild( new EquilibriumConcentrationBarChartBackground( BAR_CHART_WIDTH, BAR_CHART_HEIGHT ) );
 
+    // find max bars value for all solution
     model.SOLUTIONS.forEach( function( solution ) {
-      if ( solution.type in model.components ) {
-        // find max bars value for each solution
-        maxBars = Math.max( maxBars, solution.relations.length );
-
-        // save relations for further using
-        relations[solution.type] = solution.relations;
-      }
+      maxBars = Math.max( maxBars, solution.relations.length );
+      relations[solution.type] = solution.relations;
     } );
 
     for ( var i = 0; i < maxBars; i++ ) {
@@ -63,7 +59,7 @@ define( function( require ) {
           bar.setVisible( true );
           bar.setValue( model.components[newSolution].property( relations[newSolution][i].property ).value );
           bar.setFill( MOLECULES_COLORS[relations[newSolution][i].type] );
-          bar.setTranslation( (i + 0.75 + (4 - relations[newSolution].length) / 2) * BAR_CHART_WIDTH / 4, BAR_CHART_HEIGHT );
+          bar.setTranslation( (i + 0.75 + (4 - barNumber) / 2) * BAR_CHART_WIDTH / 4, BAR_CHART_HEIGHT );
         }
         else {
           bar.setVisible( false );

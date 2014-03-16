@@ -13,8 +13,8 @@ define( function( require ) {
     Screen = require( 'JOIST/Screen' ),
     Image = require( 'SCENERY/nodes/Image' ),
     ScreenView = require( 'JOIST/ScreenView' ),
-    GameModes = require( 'model/GameModes' ),
-    AcidBaseSolutionsModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsModel' ),
+    AcidBaseSolutionsCustomSolutionModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsCustomSolutionModel' ),
+    AcidBaseSolutionsIntroductionModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsIntroductionModel' ),
     AcidBaseSolutionsView = require( 'ACID_BASE_SOLUTIONS/view/AcidBaseSolutionsView' ),
     introductionIcon = require( 'image!ACID_BASE_SOLUTIONS/../images/introduction-icon.png' ),
     customSolutionIcon = require( 'image!ACID_BASE_SOLUTIONS/../images/custom-solution-icon.png' ),
@@ -31,12 +31,12 @@ define( function( require ) {
     // create and start the sim
     new Sim( simTitleString, [
       new Screen( introductionTitleString, new Image( introductionIcon ),
-        function() { return new AcidBaseSolutionsModel( ScreenView.DEFAULT_LAYOUT_BOUNDS.width, ScreenView.DEFAULT_LAYOUT_BOUNDS.height, GameModes.INTRODUCTION ); },
+        function() { return new AcidBaseSolutionsIntroductionModel( ScreenView.DEFAULT_LAYOUT_BOUNDS.width, ScreenView.DEFAULT_LAYOUT_BOUNDS.height ); },
         function( model ) { return new AcidBaseSolutionsView( model ); },
         {backgroundColor: 'rgb(230,230,230)'}
       ),
       new Screen( customSolutionTitleString, new Image( customSolutionIcon ),
-        function() { return new AcidBaseSolutionsModel( ScreenView.DEFAULT_LAYOUT_BOUNDS.width, ScreenView.DEFAULT_LAYOUT_BOUNDS.height, GameModes.CUSTOM_SOLUTION ); },
+        function() { return new AcidBaseSolutionsCustomSolutionModel( ScreenView.DEFAULT_LAYOUT_BOUNDS.width, ScreenView.DEFAULT_LAYOUT_BOUNDS.height ); },
         function( model ) { return new AcidBaseSolutionsView( model ); },
         {backgroundColor: 'rgb(230,230,230)'}
       )

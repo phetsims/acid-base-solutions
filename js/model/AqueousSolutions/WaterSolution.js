@@ -11,7 +11,8 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    AqueousSolution = require( './AqueousSolution' ),
+    Solutions = require( 'model/Solutions' ),
+    AqueousSolutionAbstract = require( './AqueousSolutionAbstract' ),
 
   // constants
     CONSTANTS = require( 'model/Constants/Constants' );
@@ -20,7 +21,15 @@ define( function( require ) {
     var self = this;
 
     // set default strength, concentration and add common properties
-    AqueousSolution.call( this, 0, 0 );
+    AqueousSolutionAbstract.call( this, 0, 0 );
+
+    this.type = Solutions.WATER;
+
+    this.relations = [
+      {type: 'H2O', property: 'H2OConcentration'},
+      {type: 'H3O', property: 'H3OConcentration'},
+      {type: 'OH', property: 'OHConcentration'}
+    ];
 
     // set links between concentrations
     this.property( 'H3OConcentration' ).link( function( value ) {
@@ -32,5 +41,5 @@ define( function( require ) {
     this.H2OConcentration = CONSTANTS.WATER_CONCENTRATION;
   }
 
-  return inherit( AqueousSolution, WaterSolution );
+  return inherit( AqueousSolutionAbstract, WaterSolution );
 } );

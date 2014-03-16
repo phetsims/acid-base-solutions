@@ -20,7 +20,7 @@ define( function( require ) {
   // constants
     CONSTANTS = require( 'model/Constants/Constants' );
 
-  function AqueousSolution( strength, concentration ) {
+  function AqueousSolutionAbstract( strength, concentration ) {
     var self = this;
 
     PropertySet.call( this, {
@@ -36,8 +36,8 @@ define( function( require ) {
       isValidStrength: false
     } );
 
-    this.property( 'H3OConcentration' ).link( function( value ) {
-      self.pH = -Math.round( 100 * Util.log10( value ) ) / 100;
+    this.property( 'H3OConcentration' ).link( function( H3OConcentrationValue ) {
+      self.pH = H3OConcentrationToPH( H3OConcentrationValue );
     } );
 
     // default values for properties will be set after first assignment
@@ -70,5 +70,11 @@ define( function( require ) {
     } );
   }
 
-  return inherit( PropertySet, AqueousSolution );
+  // private functions
+
+  var H3OConcentrationToPH = function( H3OConcentrationValue ) {
+    return -Math.round( 100 * Util.log10( H3OConcentrationValue ) ) / 100;
+  };
+
+  return inherit( PropertySet, AqueousSolutionAbstract );
 } );
