@@ -11,10 +11,14 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    AqueousSolutionSet = require( 'model/AqueousSolutions/AqueousSolutionSet' ),
     AcidBaseSolutionsAbstractModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsAbstractModel' ),
     Solutions = require( 'model/Solutions' ),
-    GameModes = require( 'model/GameModes' );
+    GameModes = require( 'model/GameModes' ),
+    WaterSolution = require( 'model/AqueousSolutions/WaterSolution' ),
+    StrongAcidSolution = require( 'model/AqueousSolutions/StrongAcidSolution' ),
+    WeakAcidSolution = require( 'model/AqueousSolutions/WeakAcidSolution' ),
+    StrongBaseSolution = require( 'model/AqueousSolutions/StrongBaseSolution' ),
+    WeakBaseSolution = require( 'model/AqueousSolutions/WeakBaseSolution' );
 
   function AcidBaseSolutionsIntroductionModel( width, height ) {
     AcidBaseSolutionsAbstractModel.call( this,
@@ -22,13 +26,13 @@ define( function( require ) {
       height,
       GameModes.INTRODUCTION,
       [
-        new AqueousSolutionSet[Solutions.WATER](),
-        new AqueousSolutionSet[Solutions.STRONG_ACID](),
-        new AqueousSolutionSet[Solutions.WEAK_ACID](),
-        new AqueousSolutionSet[Solutions.STRONG_BASE](),
-        new AqueousSolutionSet[Solutions.WEAK_BASE]()
+        new WaterSolution(),
+        new StrongAcidSolution(),
+        new WeakAcidSolution(),
+        new StrongBaseSolution(),
+        new WeakBaseSolution()
       ],
-      Solutions.WATER);
+      Solutions.WATER );
   }
 
   return inherit( AcidBaseSolutionsAbstractModel, AcidBaseSolutionsIntroductionModel );
