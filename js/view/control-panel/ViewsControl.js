@@ -36,69 +36,95 @@ define( function( require ) {
 
   // constants
     FONT = new PhetFont( 12 ),
+    RADIO_BUTTON_RADIUS = 7,
+    CHECK_BOX_WIDTH = 15,
     MOLECULES_COLORS = require( 'model/Constants/MoleculesColors' );
 
-  function ViewsControl( model, options ) {
-    var vBox = new VBox( {spacing: 4, align: 'left'} ),
-      hBox;
-    Node.call( this, options );
-    this.model = model;
-
-    // settings for menu options
-    var menuOptions = [
-      {isRadio: true, value: ViewModes.MOLECULES, text: new Text( moleculesString, {font: FONT} ), icon: new Image( magnifyingGlassImage, {scale: 0.75} )},
-      {isRadio: false, text: showSolventString, icon: new H2OMolecule()},
-      {isRadio: true, value: ViewModes.EQUILIBRIUM, text: new Node( {children: [
+  /*
+   * isRadio: flag for choosing type of button. True - radio button, false - checkbox
+   * value: value which will be assigned to model property after choosing radio button
+   * text: description text for button
+   * icon: icon for radio button
+   */
+  var buttonOptions = [
+    {
+      isRadio: true,
+      value: ViewModes.MOLECULES,
+      text: new Text( moleculesString, {font: FONT} ),
+      icon: new Image( magnifyingGlassImage, {scale: 0.75} )
+    },
+    {
+      isRadio: false,
+      text: showSolventString,
+      icon: new H2OMolecule()
+    },
+    {
+      isRadio: true,
+      value: ViewModes.EQUILIBRIUM,
+      text: new Node( {children: [
         new Text( equilibriumString, {font: FONT, centerX: -6} ),
         new Text( concentrationString, {font: FONT, centerX: 0, centerY: 8} )
-      ]} ), icon: new Node( {children: [
+      ]} ),
+      icon: new Node( {children: [
         new Rectangle( 0, 0, 24.5, 18, {fill: 'white', stroke: 'black', lineWidth: 0.5} ),
         new Rectangle( 2, 6, 3, 12, {fill: MOLECULES_COLORS.B} ),
         new Rectangle( 7.5, 3, 3, 15, {fill: MOLECULES_COLORS.H2O} ),
         new Rectangle( 13, 9, 3, 9, {fill: MOLECULES_COLORS.A} ),
         new Rectangle( 18.5, 9, 3, 9, {fill: MOLECULES_COLORS.H3O} )
       ]} )},
-      {isRadio: true, value: ViewModes.LIQUID, text: new Text( liquidString, {font: FONT} ), icon: new Image( beakerImage, {scale: 0.75} )}
-    ];
+    {
+      isRadio: true,
+      value: ViewModes.LIQUID,
+      text: new Text( liquidString, {font: FONT} ),
+      icon: new Image( beakerImage, {scale: 0.75} )
+    }
+  ];
 
-    this.checkbox = {};
-    this.radioButtons = [];
+  function ViewsControl( model, options ) {
+    var self = this,
+      solventProperty = model.property( 'solvent' ),
+      viewModeProperty = model.property( 'viewMode' );
+    VBox.call( this, _.extend( {spacing: 4, align: 'left'}, options ) );
 
     // add options to menu
-    for ( var i = 0; i < menuOptions.length; i++ ) {
-      if ( menuOptions[i].isRadio ) {
-        hBox = new HBox( {spacing: 5, children: [menuOptions[i].text, menuOptions[i].icon]} );
-        this.radioButtons.push( new AquaRadioButton( model.property( 'viewMode' ), menuOptions[i].value, hBox, {radius: 7} ) );
-        vBox.addChild( this.radioButtons[this.radioButtons.length - 1] );
+    buttonOptions.forEach( function( buttonOption ) {
+      if ( buttonOption.isRadio ) {
+        self.addChild( createRadioButton( viewModeProperty, buttonOption ) );
       }
       else {
-        this.checkbox.button = new CheckBox( new Text( menuOptions[i].text, {font: FONT} ), model.property( 'solvent' ), { boxWidth: 15 } );
-        hBox = new HBox( { spacing: 5, children: [ new HStrut( 20 ), this.checkbox.button, this.checkbox.icon = menuOptions[i].icon ] } );
-        vBox.addChild( hBox );
+        self.addChild( createCheckBox.call( self, solventProperty, buttonOption ) );
+
+        // add observers
+        var setCheckboxAvailabilityBinded = setCheckboxAvailability.bind( self, model );
+        model.property( 'testMode' ).link( setCheckboxAvailabilityBinded );
+        model.property( 'viewMode' ).link( setCheckboxAvailabilityBinded );
       }
-    }
+    } );
 
-    this.addChild( vBox );
-    vBox.updateLayout();
-
-    model.property( 'testMode' ).link( this.enableRadioButtons.bind( this ) );
-    model.property( 'viewMode' ).link( this.setCheckboxAvailability.bind( this ) );
+    this.updateLayout();
   }
 
-  return inherit( Node, ViewsControl, {
-    setCheckboxAvailability: function() {
-      this.checkbox.button.enabled = (this.model.viewMode === ViewModes.MOLECULES && this.model.testMode !== TestModes.CONDUCTIVITY);
-      /*this.checkbox.text.setFill( (value ? 'black' : 'gray') );
-       this.checkbox.icon.getChildren().forEach( function( atom ) {
-       atom['fill' + (value ? 'Default' : 'Gray')]();
-       } );*/
-    },
-    enableRadioButtons: function( isEnable ) {
-      this.radioButtons.forEach( function( radioButton ) {
-        //radioButton.enabled = isEnable;
-        //console.log(radioButton);
-      } );
-      this.setCheckboxAvailability();
-    }
-  } );
+  var createRadioButton = function( property, options ) {
+    return new AquaRadioButton( property, options.value, new HBox( {
+      spacing: 5,
+      children: [options.text, options.icon]} ), {radius: RADIO_BUTTON_RADIUS} );
+  };
+
+  var createCheckBox = function( property, options ) {
+    return new HBox( { spacing: 5, children: [
+      new HStrut( 20 ),
+      this._checkbox = new CheckBox( new HBox( {spacing: 5, children: [
+        new Text( options.text, {font: FONT} ),
+        options.icon
+      ]} ),
+        property,
+        { boxWidth: CHECK_BOX_WIDTH } )
+    ] } );
+  };
+
+  var setCheckboxAvailability = function( model ) {
+    this._checkbox.enabled = (model.viewMode === ViewModes.MOLECULES && model.testMode !== TestModes.CONDUCTIVITY);
+  };
+
+  return inherit( VBox, ViewsControl );
 } );

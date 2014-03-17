@@ -31,46 +31,51 @@ define( function( require ) {
   // constants
     FONT = new PhetFont( {size: 14, weight: 'bold'} );
 
+  var gameMenus = {};
+
+  /* menus for 'introduction' screen
+   * name: constructor name
+   * title: appropriate menu title
+   */
+  gameMenus[GameModes.INTRODUCTION] = [
+    {name: SolutionsControl, title: solutionsString},
+    {name: ViewsControl, title: viewsString},
+    {name: TestsControl, title: testsString}
+  ];
+
+  /* menus for 'custom solution' screen
+   * name: constructor name
+   * title: appropriate menu title
+   */
+  gameMenus[GameModes.CUSTOM_SOLUTION] = [
+    {name: SolutionControl, title: solutionString},
+    {name: ViewsControl, title: viewsString},
+    {name: TestsControl, title: testsString}
+  ];
+
   function ControlPanel( model ) {
     var vBox = new VBox( {x: 20, spacing: 8, align: 'left'} ),
-      menus = [],
+      menus = gameMenus[model.mode],
       strokes = [],
       maxWidth = 0,
       resetButton,
       background;
     Node.call( this );
 
-    // for 'introduction' tab add solutions menu
-    if ( model.mode === GameModes.INTRODUCTION ) {
-      menus.push( {content: new SolutionsControl( model ), text: solutionsString} );
-    }
-    // for 'custom solution' tab add solution menu
-    else if ( model.mode === GameModes.CUSTOM_SOLUTION ) {
-      menus.push( {content: new SolutionControl( model ), text: solutionString} );
-    }
-
-    // add views menu
-    menus.push( {content: new ViewsControl( model ), text: viewsString} );
-
-    // add tests menu
-    menus.push( {content: new TestsControl( model ), text: testsString} );
-
     // add background
     this.addChild( background = new Rectangle( 0, 0, 0, 0, {fill: 'rgb(204,204,255)', stroke: 'black', lineWidth: 1} ) );
 
-    // add menus to vBox, add labels and find max menu width (to align strokes with equal width)
+    // add menus to vBox, add titles and find max menu width (to align strokes with equal width)
     menus.forEach( function( menu, i ) {
-      var text = new Text( menu.text, {font: FONT, centerY: -10} );
-      strokes[i] = new Rectangle( -15, -10, 0, menu.content.getHeight() + 20, 5, 5, {stroke: 'black', lineWidth: 0.75} );
-      maxWidth = Math.max( maxWidth, menu.content.getWidth() );
-      vBox.addChild( new Node( {children: [
-        strokes[i],
-        new Node( {children: [
-          new Rectangle( -5, -text.getHeight(), text.getWidth() + 10, text.getHeight(), {fill: 'rgb(204,204,255)'} ),
-          text
-        ]} ),
-        menu.content
-      ]} ) );
+      var title = new Text( menu.title, {font: FONT, centerY: -10} ),
+        menuNode = new menu.name( model );
+
+      // create stroke for menu item
+      strokes[i] = new Rectangle( -15, -10, 0, menuNode.getHeight() + 20, 5, 5, {stroke: 'black', lineWidth: 0.75} );
+
+      // calculate max width
+      maxWidth = Math.max( maxWidth, menuNode.getWidth() );
+      vBox.addChild( createMenuItem( menuNode, strokes[i], title ) );
     } );
 
     this.addChild( vBox );
@@ -87,6 +92,18 @@ define( function( require ) {
       stroke.setRectWidth( maxWidth + 20 );
     } );
   }
+
+  // create single menu item
+  var createMenuItem = function( node, stroke, title ) {
+    return new Node( {children: [
+      stroke,
+      new Node( {children: [
+        new Rectangle( -5, -title.getHeight(), title.getWidth() + 10, title.getHeight(), {fill: 'rgb(204,204,255)'} ),
+        title
+      ]} ),
+      node
+    ]} );
+  };
 
   return inherit( Node, ControlPanel );
 } );

@@ -30,29 +30,51 @@ define( function( require ) {
     lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb.png' ),
 
   // constants
+    AQUA_RADIO_BUTTON_RADIUS = 7,
     FONT = new PhetFont( 12 );
 
-  function TestsControl( model, options ) {
-    var vBox = new VBox( {spacing: 4, align: 'left'} );
-    Node.call( this, options );
+  /*
+   * value: value which will be assigned to model property after choosing radio button
+   * text: description text for button
+   * icon: icon for radio button
+   */
+  var radioButtonOptions = [
+    {
+      value: TestModes.PH_METER,
+      text: pHMeterString,
+      icon: new Image( pHMeterImage, {scale: 0.75} )
+    },
+    {
+      value: TestModes.PH_PAPER,
+      text: pHPaperString,
+      icon: new Node( {children: [new VStrut( 10 ), new Image( pHPaperImage, {scale: 0.75, y: 6} )]} )
+    },
+    {
+      value: TestModes.CONDUCTIVITY,
+      text: conductivityString,
+      icon: new Node( {children: [new VStrut( 25 ), new Image( lightBulbImage, {scale: 0.6, y: 4} )]} )
+    }
+  ];
 
-    var menuOptions = [
-      {text: pHMeterString, value: TestModes.PH_METER, icon: new Image( pHMeterImage, {scale: 0.75} )},
-      {text: pHPaperString, value: TestModes.PH_PAPER, icon: new Node( {children: [new VStrut( 10 ), new Image( pHPaperImage, {scale: 0.75, y: 6} )]} )},
-      {text: conductivityString, value: TestModes.CONDUCTIVITY, icon: new Node( {children: [new VStrut( 25 ), new Image( lightBulbImage, {scale: 0.6, y: 4} )]} )}
-    ];
+  function TestsControl( model, options ) {
+    var self = this,
+      testModeProperty = model.property( 'testMode' );
+    VBox.call( this, _.extend( {spacing: 4, align: 'left'}, options ) );
 
     // add options to menu
-    for ( var i = 0; i < menuOptions.length; i++ ) {
-      vBox.addChild( new AquaRadioButton( model.property( 'testMode' ), menuOptions[i].value, new HBox( {spacing: 5, children: [
-        new Text( menuOptions[i].text, {font: FONT} ),
-        menuOptions[i].icon
-      ]} ), {radius: 7} ) );
-    }
+    radioButtonOptions.forEach( function( radioButtonOption ) {
+      self.addChild( createRadioButton( testModeProperty, radioButtonOption ) );
+    } );
 
-    this.addChild( vBox );
-    vBox.updateLayout();
+    self.updateLayout();
   }
 
-  return inherit( Node, TestsControl );
+  var createRadioButton = function( property, options ) {
+    return new AquaRadioButton( property, options.value, new HBox( {spacing: 5, children: [
+      new Text( options.text, {font: FONT} ),
+      options.icon
+    ]} ), {radius: AQUA_RADIO_BUTTON_RADIUS} );
+  };
+
+  return inherit( VBox, TestsControl );
 } );
