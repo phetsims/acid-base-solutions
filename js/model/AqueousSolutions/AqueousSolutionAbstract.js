@@ -20,59 +20,30 @@ define( function( require ) {
   // constants
     CONSTANTS = require( 'model/Constants/Constants' );
 
-  function AqueousSolutionAbstract( strength, concentration ) {
+  function AqueousSolutionAbstract( defaultValues ) {
     var self = this;
 
     PropertySet.call( this, {
-      strength: strength || 0,
+      strength: defaultValues.strength || 0,
       // for water concentration is equal to 0, so we should use typeof checking
-      concentration: ( typeof (concentration) === 'undefined' ? CONSTANTS.CONCENTRATION_RANGE.defaultValue : concentration ),
-      soluteConcentration: 0, // solute concentration
-      productConcentration: 0, // product concentration
-      H3OConcentration: 0, // H3O concentration
-      OHConcentration: 0, // OH concentration
-      H2OConcentration: 0, // H2O concentration
-      pH: 0, // pH of the solution at equilibrium
-      isValidStrength: false
+      concentration: ( typeof (defaultValues.concentration) === 'undefined' ? CONSTANTS.CONCENTRATION_RANGE.defaultValue : defaultValues.concentration ),
+      soluteConcentration: defaultValues.soluteConcentration || 0, // solute concentration
+      productConcentration: defaultValues.productConcentration || 0, // product concentration
+      H3OConcentration: defaultValues.H3OConcentration || 0, // H3O concentration
+      OHConcentration: defaultValues.OHConcentration || 0, // OH concentration
+      H2OConcentration: defaultValues.H2OConcentration || 0, // H2O concentration
+      pH: (typeof (defaultValues.H3OConcentration) === 'undefined' ? 0 : getPH( defaultValues.H3OConcentration )), // pH of the solution at equilibrium
+      isValidStrength: defaultValues.isValidStrength || false
     } );
 
     this.property( 'H3OConcentration' ).link( function( H3OConcentrationValue ) {
-      self.pH = H3OConcentrationToPH( H3OConcentrationValue );
-    } );
-
-    // default values for properties will be set after first assignment
-    this.property( 'soluteConcentration' ).once( function( soluteConcentrationInitValue ) {
-      self.property( 'soluteConcentration' ).storeInitialValue( soluteConcentrationInitValue );
-    } );
-
-    this.property( 'productConcentration' ).once( function( productConcentrationInitValue ) {
-      self.property( 'productConcentration' ).storeInitialValue( productConcentrationInitValue );
-    } );
-
-    this.property( 'H3OConcentration' ).once( function( H3OConcentrationInitValue ) {
-      self.property( 'H3OConcentration' ).storeInitialValue( H3OConcentrationInitValue );
-    } );
-
-    this.property( 'OHConcentration' ).once( function( OHConcentrationInitValue ) {
-      self.property( 'OHConcentration' ).storeInitialValue( OHConcentrationInitValue );
-    } );
-
-    this.property( 'H2OConcentration' ).once( function( H2OConcentrationInitValue ) {
-      self.property( 'H2OConcentration' ).storeInitialValue( H2OConcentrationInitValue );
-    } );
-
-    this.property( 'pH' ).once( function( pHInitValue ) {
-      self.property( 'pH' ).storeInitialValue( pHInitValue );
-    } );
-
-    this.property( 'isValidStrength' ).once( function( isValidStrengthInitValue ) {
-      self.property( 'isValidStrength' ).storeInitialValue( isValidStrengthInitValue );
+      self.pH = getPH( H3OConcentrationValue );
     } );
   }
 
   // private functions
 
-  var H3OConcentrationToPH = function( H3OConcentrationValue ) {
+  var getPH = function( H3OConcentrationValue ) {
     return -Math.round( 100 * Util.log10( H3OConcentrationValue ) ) / 100;
   };
 

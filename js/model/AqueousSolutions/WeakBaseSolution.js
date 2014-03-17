@@ -14,24 +14,68 @@ define( function( require ) {
     Solutions = require( 'model/Solutions' ),
     AqueousSolutionAbstract = require( './AqueousSolutionAbstract' ),
 
+  // [B] = c - [BH+]
+    getSoluteConcentration = function( concentration, productConcentration ) {
+      return (concentration - productConcentration);
+    },
+
+  // [BH+] = ( -Kb + sqrt( Kb*Kb + 4*Kb*c ) ) / 2
+    getProductConcentration = function( Kb, c ) {
+      return (-Kb + Math.sqrt( ( Kb * Kb ) + ( 4 * Kb * c ) ) ) / 2;
+    },
+
+  // [H3O+] = Kw / [OH-]
+    getH3OConcentration = function( OHConcentration ) {
+      return CONSTANTS.WATER_EQUILIBRIUM_CONSTANT / OHConcentration;
+    },
+
+  // [OH-] = [BH+]
+    getOHConcentration = function( productConcentration ) {
+      return productConcentration;
+    },
+
+  // [H2O] = W - [BH+]
+    getH2OConcentration = function( productConcentration ) {
+      return (CONSTANTS.WATER_CONCENTRATION - productConcentration);
+    },
+
+    isValidStrength = function( strength ) {
+      return CONSTANTS.WEAK_STRENGTH_RANGE.contains( strength );
+    },
+
   // constants
-    CONSTANTS = require( 'model/Constants/Constants' );
+    CONSTANTS = require( 'model/Constants/Constants' ),
+    STRENGTH_DEFAULT = CONSTANTS.WEAK_STRENGTH_RANGE.defaultValue,
+    CONCENTRATION_DEFAULT = CONSTANTS.CONCENTRATION_RANGE.defaultValue,
+    PRODUCT_CONCENTRATION_DEFAULT = getProductConcentration( STRENGTH_DEFAULT, CONCENTRATION_DEFAULT ),
+    SOLUTE_CONCENTRATION_DEFAULT = getSoluteConcentration( CONCENTRATION_DEFAULT, PRODUCT_CONCENTRATION_DEFAULT ),
+    OH_CONCENTRATION_DEFAULT = getOHConcentration( PRODUCT_CONCENTRATION_DEFAULT ),
+    H2O_CONCENTRATION_DEFAULT = getH2OConcentration( PRODUCT_CONCENTRATION_DEFAULT ),
+    H3O_CONCENTRATION_DEFAULT = getH3OConcentration( OH_CONCENTRATION_DEFAULT ),
+    IS_VALID_STRENGTH_DEFAULT = isValidStrength( STRENGTH_DEFAULT );
 
   var setSoluteConcentration = function() {
-    this.soluteConcentration = this.concentration - this.productConcentration; // [B] = c - [BH+]
+    this.soluteConcentration = getSoluteConcentration( this.concentration, this.productConcentration );
   };
 
   var setProductConcentration = function() {
-    var Kb = this.strength,
-      c = this.concentration;
-    this.productConcentration = (-Kb + Math.sqrt( ( Kb * Kb ) + ( 4 * Kb * c ) ) ) / 2;   // [BH+] = ( -Kb + sqrt( Kb*Kb + 4*Kb*c ) ) / 2
+    this.productConcentration = getProductConcentration( this.strength, this.concentration );
   };
 
   function WeakBaseSolution() {
     var self = this;
 
     // set default strength and add common properties
-    AqueousSolutionAbstract.call( this, CONSTANTS.WEAK_STRENGTH_RANGE.defaultValue );
+    AqueousSolutionAbstract.call( this, {
+      strength: STRENGTH_DEFAULT,
+      concentration: CONCENTRATION_DEFAULT,
+      soluteConcentration: SOLUTE_CONCENTRATION_DEFAULT,
+      productConcentration: PRODUCT_CONCENTRATION_DEFAULT,
+      H2OConcentration: H2O_CONCENTRATION_DEFAULT,
+      H3OConcentration: H3O_CONCENTRATION_DEFAULT,
+      OHConcentration: OH_CONCENTRATION_DEFAULT,
+      isValidStrength: IS_VALID_STRENGTH_DEFAULT
+    } );
 
     this.type = Solutions.WEAK_BASE;
 
@@ -44,12 +88,12 @@ define( function( require ) {
 
     // set links between concentrations
     this.property( 'OHConcentration' ).lazyLink( function( value ) {
-      self.H3OConcentration = CONSTANTS.WATER_EQUILIBRIUM_CONSTANT / value; // [H3O+] = Kw / [OH-]
+      self.H3OConcentration = getH3OConcentration( value );
     } );
 
     this.property( 'productConcentration' ).lazyLink( function( value ) {
-      self.OHConcentration = value; // [OH-] = [BH+]
-      self.H2OConcentration = CONSTANTS.WATER_CONCENTRATION - value; // [H2O] = W - [BH+]
+      self.OHConcentration = getOHConcentration( value );
+      self.H2OConcentration = getH2OConcentration( value );
     } );
 
     this.property( 'productConcentration' ).lazyLink( setSoluteConcentration.bind( this ) );
@@ -59,7 +103,7 @@ define( function( require ) {
     this.property( 'concentration' ).link( setProductConcentration.bind( this ) );
 
     this.property( 'strength' ).link( function( strength ) {
-      self.isValidStrength = CONSTANTS.WEAK_STRENGTH_RANGE.contains( strength );
+      self.isValidStrength = isValidStrength( strength );
     } );
   }
 

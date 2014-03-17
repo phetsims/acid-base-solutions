@@ -14,14 +14,27 @@ define( function( require ) {
     Solutions = require( 'model/Solutions' ),
     AqueousSolutionAbstract = require( './AqueousSolutionAbstract' ),
 
+  // [OH]=[H3O]
+    getOHConcentration = function( H3OConcentration ) {
+      return H3OConcentration;
+    },
+
   // constants
-    CONSTANTS = require( 'model/Constants/Constants' );
+    CONSTANTS = require( 'model/Constants/Constants' ),
+    H2O_CONCENTRATION_DEFAULT = CONSTANTS.WATER_CONCENTRATION,
+    H3O_CONCENTRATION_DEFAULT = Math.sqrt( CONSTANTS.WATER_EQUILIBRIUM_CONSTANT ),
+    OH_CONCENTRATION_DEFAULT = getOHConcentration( H3O_CONCENTRATION_DEFAULT );
 
   function WaterSolution() {
     var self = this;
 
     // set default strength, concentration and add common properties
-    AqueousSolutionAbstract.call( this, 0, 0 );
+    AqueousSolutionAbstract.call( this, {
+      concentration: 0,
+      OHConcentration: OH_CONCENTRATION_DEFAULT,
+      H2OConcentration: H2O_CONCENTRATION_DEFAULT,
+      H3OConcentration: H3O_CONCENTRATION_DEFAULT
+    } );
 
     this.type = Solutions.WATER;
 
@@ -33,7 +46,7 @@ define( function( require ) {
 
     // set links between concentrations
     this.property( 'H3OConcentration' ).link( function( value ) {
-      self.OHConcentration = value; // [OH]=[H3O]
+      self.OHConcentration = getOHConcentration( value );
     } );
 
     // default values

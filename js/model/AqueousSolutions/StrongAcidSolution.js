@@ -14,14 +14,53 @@ define( function( require ) {
     Solutions = require( 'model/Solutions' ),
     AqueousSolutionAbstract = require( './AqueousSolutionAbstract' ),
 
+  // [A-] = c
+    getProductConcentration = function( concentration ) {
+      return concentration;
+    },
+
+  // [H3O+] = c
+    getH3OConcentration = function( concentration ) {
+      return concentration;
+    },
+
+  // [H2O] = W - c
+    getH2OConcentration = function( concentration ) {
+      return CONSTANTS.WATER_CONCENTRATION - concentration;
+    },
+
+  // [OH-] = Kw / [H3O+]
+    getOHConcentration = function( H3OConcentration ) {
+      return CONSTANTS.WATER_EQUILIBRIUM_CONSTANT / H3OConcentration;
+    },
+
+    isValidStrength = function( strength ) {
+      return strength > CONSTANTS.CONCENTRATION_RANGE.max;
+    },
+
   // constants
-    CONSTANTS = require( 'model/Constants/Constants' );
+    CONSTANTS = require( 'model/Constants/Constants' ),
+    STRENGTH_DEFAULT = CONSTANTS.STRONG_STRENGTH,
+    CONCENTRATION_DEFAULT = CONSTANTS.CONCENTRATION_RANGE.defaultValue,
+    H2O_CONCENTRATION_DEFAULT = getH2OConcentration( CONCENTRATION_DEFAULT ),
+    H3O_CONCENTRATION_DEFAULT = getH3OConcentration( CONCENTRATION_DEFAULT ),
+    OH_CONCENTRATION_DEFAULT = getOHConcentration( H3O_CONCENTRATION_DEFAULT ),
+    IS_VALID_STRENGTH_DEFAULT = isValidStrength( STRENGTH_DEFAULT ),
+    PRODUCT_CONCENTRATION_DEFAULT = getProductConcentration( CONCENTRATION_DEFAULT );
 
   function StrongAcidSolution() {
     var self = this;
 
     // set default strength and add common properties
-    AqueousSolutionAbstract.call( this, CONSTANTS.STRONG_STRENGTH );
+    AqueousSolutionAbstract.call( this, {
+      strength: STRENGTH_DEFAULT,
+      concentration: CONCENTRATION_DEFAULT,
+      H2OConcentration: H2O_CONCENTRATION_DEFAULT,
+      productConcentration: PRODUCT_CONCENTRATION_DEFAULT,
+      H3OConcentration: H3O_CONCENTRATION_DEFAULT,
+      OHConcentration: OH_CONCENTRATION_DEFAULT,
+      isValidStrength: IS_VALID_STRENGTH_DEFAULT
+    } );
 
     this.type = Solutions.STRONG_ACID;
 
@@ -34,17 +73,17 @@ define( function( require ) {
 
     // set links between concentrations
     this.property( 'concentration' ).link( function( value ) {
-      self.productConcentration = value; // [A-] = c
-      self.H3OConcentration = value; // [H3O+] = c
-      self.H2OConcentration = CONSTANTS.WATER_CONCENTRATION - value; // [H2O] = W - c
+      self.productConcentration = getProductConcentration( value );
+      self.H3OConcentration = getH3OConcentration( value );
+      self.H2OConcentration = getH2OConcentration( value );
     } );
 
     this.property( 'H3OConcentration' ).link( function( value ) {
-      self.OHConcentration = CONSTANTS.WATER_EQUILIBRIUM_CONSTANT / value; // [OH-] = Kw / [H3O+]
+      self.OHConcentration = getOHConcentration( value );
     } );
 
     this.property( 'strength' ).link( function( strength ) {
-      self.isValidStrength = strength > CONSTANTS.CONCENTRATION_RANGE.max;
+      self.isValidStrength = isValidStrength( strength );
     } );
   }
 
