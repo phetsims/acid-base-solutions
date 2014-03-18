@@ -14,9 +14,9 @@ define( function( require ) {
     Node = require( 'SCENERY/nodes/Node' ),
     EquilibriumConcentrationSingleBar = require( './EquilibriumConcentrationSingleBar' ),
     EquilibriumConcentrationBarChartBackground = require( './EquilibriumConcentrationBarChartBackground' ),
-    GameModes = require( 'model/GameModes' ),
-    ViewModes = require( 'model/ViewModes' ),
-    TestModes = require( 'model/TestModes' ),
+    GameModes = require( 'model/Constants/GameModes' ),
+    ViewModes = require( 'model/Constants/ViewModes' ),
+    TestModes = require( 'model/Constants/TestModes' ),
 
   // constants
     BAR_CHART_WIDTH = 200,

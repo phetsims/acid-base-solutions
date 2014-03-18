@@ -15,7 +15,7 @@ define( function( require ) {
     Node = require( 'SCENERY/nodes/Node' ),
     LinearFunction = require( 'DOT/LinearFunction' ),
     Line = require( 'SCENERY/nodes/Line' ),
-    TestModes = require( 'model/TestModes' ),
+    TestModes = require( 'model/Constants/TestModes' ),
 
   // constants
     BRIGHTNESS_TO_INTENSITY_FUNCTION = new LinearFunction( 0, 1, 0, 1 ), // intensity of the light rays

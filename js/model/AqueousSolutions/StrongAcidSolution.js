@@ -11,7 +11,7 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    Solutions = require( 'model/Solutions' ),
+    Solutions = require( 'model/Constants/Solutions' ),
     AqueousSolutionAbstract = require( './AqueousSolutionAbstract' ),
 
   // [A-] = c

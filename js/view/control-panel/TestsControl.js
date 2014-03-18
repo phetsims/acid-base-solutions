@@ -17,7 +17,7 @@ define( function( require ) {
     HBox = require( 'SCENERY/nodes/HBox' ),
     VStrut = require( 'SUN/VStrut' ),
     Image = require( 'SCENERY/nodes/Image' ),
-    TestModes = require( 'model/TestModes' ),
+    TestModes = require( 'model/Constants/TestModes' ),
 
   // strings
     pHMeterString = require( 'string!ACID_BASE_SOLUTIONS/pHMeter' ),
@@ -56,9 +56,9 @@ define( function( require ) {
     }
   ];
 
-  function TestsControl( model, options ) {
+  function TestsControl( testModesMenuModel, options ) {
     var self = this,
-      testModeProperty = model.property( 'testMode' );
+      testModeProperty = testModesMenuModel.mode;
     VBox.call( this, _.extend( {spacing: 4, align: 'left'}, options ) );
 
     // add options to menu

@@ -14,7 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Util = require( 'DOT/Util' ),
-    ViewModes = require( 'model/ViewModes' ),
+    ViewModes = require( 'model/Constants/ViewModes' ),
 
   // molecules
     MoleculesConstructors = {

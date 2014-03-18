@@ -29,10 +29,9 @@ define( function( require ) {
     strongString = require( 'string!ACID_BASE_SOLUTIONS/strong' ),
 
   // constants
-    CONSTANTS = require( 'model/Constants/Constants' ),
     FONT = new PhetFont( 12 );
 
-  function SolutionControl( model, options ) {
+  function SolutionControl( SolutionMenuModel, options ) {
     var vBox = new VBox( {spacing: 4} ),
       strengthSlider,
       concentrationSlider;
@@ -40,8 +39,8 @@ define( function( require ) {
 
     // add type radio buttons menu
     vBox.addChild( new HBox( {spacing: 5, children: [
-      new AquaRadioButton( model.property( 'isAcid' ), true, new Text( acidString, {font: FONT} ), {radius: 7} ),
-      new AquaRadioButton( model.property( 'isAcid' ), false, new Text( baseString, {font: FONT} ), {radius: 7} )
+      new AquaRadioButton( SolutionMenuModel.isAcid, true, new Text( acidString, {font: FONT} ), {radius: 7} ),
+      new AquaRadioButton( SolutionMenuModel.isAcid, false, new Text( baseString, {font: FONT} ), {radius: 7} )
     ]} ) );
 
     // add black line
@@ -49,7 +48,7 @@ define( function( require ) {
 
     // add concentration slider
     vBox.addChild( new Text( initialConcentrationString, {font: FONT} ) );
-    vBox.addChild( concentrationSlider = new ConcentrationSlider( model.property( 'concentration' ), CONSTANTS.CONCENTRATION_RANGE ) );
+    vBox.addChild( concentrationSlider = new ConcentrationSlider( SolutionMenuModel.concentrationSlider ) );
 
     // add black line
     vBox.addChild( new Line( 15, 0, 170, 0, {stroke: 'black', lineWidth: 0.75} ) );
@@ -57,18 +56,18 @@ define( function( require ) {
     // add strength radio button
     vBox.addChild( new Text( strengthString, {font: FONT} ) );
     vBox.addChild( new HBox( {spacing: 5, children: [ // strength radio buttons menu
-      new AquaRadioButton( model.property( 'isWeak' ), true, new Text( weakString, {font: FONT} ), {radius: 7} ),
-      new AquaRadioButton( model.property( 'isWeak' ), false, new Text( strongString, {font: FONT} ), {radius: 7} )
+      new AquaRadioButton( SolutionMenuModel.isWeak, true, new Text( weakString, {font: FONT} ), {radius: 7} ),
+      new AquaRadioButton( SolutionMenuModel.isWeak, false, new Text( strongString, {font: FONT} ), {radius: 7} )
     ]} ) );
 
     // add strength slider
-    vBox.addChild( strengthSlider = new StrengthSlider( model.property( 'strength' ), CONSTANTS.WEAK_STRENGTH_RANGE ) );
+    vBox.addChild( strengthSlider = new StrengthSlider( SolutionMenuModel.strengthSlider ) );
 
     this.addChild( vBox );
     vBox.updateLayout();
 
-    model.property( 'isWeak' ).link( function( isWeak ) {
-      strengthSlider.setVisible( isWeak );
+    SolutionMenuModel.strengthSlider.visibility.link( function( visible ) {
+      strengthSlider.setVisible( visible );
     } );
   }
 

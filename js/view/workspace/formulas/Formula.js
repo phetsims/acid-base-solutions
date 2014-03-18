@@ -12,7 +12,7 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    Solutions = require( 'model/Solutions' ),
+    Solutions = require( 'model/Constants/Solutions' ),
 
     WaterFormula = require( './WaterFormula' ),
     AcidFormula = require( './AcidFormula' ),

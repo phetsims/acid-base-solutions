@@ -20,8 +20,7 @@ define( function( require ) {
     Image = require( 'SCENERY/nodes/Image' ),
     H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' ),
     HStrut = require( 'SUN/HStrut' ),
-    ViewModes = require( 'model/ViewModes' ),
-    TestModes = require( 'model/TestModes' ),
+    ViewModes = require( 'model/Constants/ViewModes' ),
 
   // strings
     moleculesString = require( 'string!ACID_BASE_SOLUTIONS/molecules' ),
@@ -80,10 +79,11 @@ define( function( require ) {
     }
   ];
 
-  function ViewsControl( model, options ) {
+  function ViewsControl( viewModesMenuModel, options ) {
     var self = this,
-      solventProperty = model.property( 'solvent' ),
-      viewModeProperty = model.property( 'viewMode' );
+      checkboxEnableProperty = viewModesMenuModel.checkboxEnable,
+      solventProperty = viewModesMenuModel.solvent,
+      viewModeProperty = viewModesMenuModel.mode;
     VBox.call( this, _.extend( {spacing: 4, align: 'left'}, options ) );
 
     // add options to menu
@@ -94,10 +94,9 @@ define( function( require ) {
       else {
         self.addChild( createCheckBox.call( self, solventProperty, buttonOption ) );
 
-        // add observers
-        var setCheckboxAvailabilityBinded = setCheckboxAvailability.bind( self, model );
-        model.property( 'testMode' ).link( setCheckboxAvailabilityBinded );
-        model.property( 'viewMode' ).link( setCheckboxAvailabilityBinded );
+        checkboxEnableProperty.link( function( isEnabled ) {
+          self._checkbox.enabled = isEnabled;
+        } );
       }
     } );
 
@@ -120,10 +119,6 @@ define( function( require ) {
         property,
         { boxWidth: CHECK_BOX_WIDTH } )
     ] } );
-  };
-
-  var setCheckboxAvailability = function( model ) {
-    this._checkbox.enabled = (model.viewMode === ViewModes.MOLECULES && model.testMode !== TestModes.CONDUCTIVITY);
   };
 
   return inherit( VBox, ViewsControl );

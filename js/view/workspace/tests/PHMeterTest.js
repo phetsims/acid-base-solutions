@@ -19,7 +19,7 @@ define( function( require ) {
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' ),
     Util = require( 'DOT/Util' ),
-    TestModes = require( 'model/TestModes' ),
+    TestModes = require( 'model/Constants/TestModes' ),
 
   // string
     pHString = require( 'string!ACID_BASE_SOLUTIONS/pH' ),

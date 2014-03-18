@@ -17,7 +17,7 @@ define( function( require ) {
     Path = require( 'SCENERY/nodes/Path' ),
     Shape = require( 'KITE/Shape' ),
     LinearFunction = require( 'DOT/LinearFunction' ),
-    TestModes = require( 'model/TestModes' ),
+    TestModes = require( 'model/Constants/TestModes' ),
 
     ConductivityTestWire = require( './ConductivityTestWire' ),
     ConductivityTestProbe = require( './ConductivityTestProbe' ),

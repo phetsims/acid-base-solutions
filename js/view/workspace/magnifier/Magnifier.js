@@ -13,8 +13,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Shape = require( 'KITE/Shape' ),
-    ViewModes = require( 'model/ViewModes' ),
-    TestModes = require( 'model/TestModes' ),
+    ViewModes = require( 'model/Constants/ViewModes' ),
+    TestModes = require( 'model/Constants/TestModes' ),
 
     MagnifierBackground = require( './MagnifierBackground' ),
     MagnifierMoleculesLayer = require( './MagnifierMoleculesLayer' );

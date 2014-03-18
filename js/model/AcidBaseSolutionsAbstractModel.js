@@ -11,19 +11,20 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     PropertySet = require( 'AXON/PropertySet' ),
-    ViewModes = require( 'model/ViewModes' ),
-    TestModes = require( 'model/TestModes' ),
+    ViewModes = require( 'model/Constants/ViewModes' ),
+    TestModes = require( 'model/Constants/TestModes' ),
+    ScreenView = require( 'JOIST/ScreenView' ),
 
   // constants
     CONSTANTS = require( 'model/Constants/Constants' );
 
-  function AcidBaseSolutionsAbstractModel( width, height, mode, solutions, defaultSolution ) {
+  function AcidBaseSolutionsAbstractModel( mode, solutions, defaultSolution ) {
     var self = this,
       setPH = function( value ) { self.pH = value; }; // observer for pH property
 
     // dimensions of the model's space
-    this.width = width;
-    this.height = height;
+    this.width = ScreenView.DEFAULT_LAYOUT_BOUNDS.width;
+    this.height = ScreenView.DEFAULT_LAYOUT_BOUNDS.height;
 
     this.mode = mode;
 

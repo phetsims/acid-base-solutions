@@ -22,25 +22,25 @@ define( function( require ) {
     strongerString = require( 'string!ACID_BASE_SOLUTIONS/stronger' ),
 
   // constants
-    FONT = new PhetFont( 14 ),
-    SLIDER_TICK_LENGTH = 10,
-    SLIDER_TICK_OFFSET = 5,
-    SLIDER_TRACK_WIDTH = 150;
+    FONT = new PhetFont( 12 ),
+    SLIDER_TICK_LENGTH = 8,
+    SLIDER_TICK_OFFSET = 4,
+    SLIDER_TRACK_WIDTH = 125;
 
-  function StrengthSlider( strengthProperty, range, coords ) {
-    var sliderProperty = new Property( Util.log10( range.defaultValue ) ),
+  function StrengthSlider( strengthSlider, coords ) {
+    var range = strengthSlider.range,
+      strengthProperty = strengthSlider.strength,
+      sliderProperty = new Property( Util.log10( range.defaultValue ) ),
       slider,
       STRENGTH_MIN = Util.log10( range.min ),
       STRENGTH_MAX = Util.log10( range.max );
     Node.call( this, coords );
-    this.scale( 0.83 );
-    this.property = sliderProperty;
 
     // add horizontal part
     this.addChild( slider = new HSlider( sliderProperty, {min: STRENGTH_MIN, max: STRENGTH_MAX}, {
-      trackSize: new Dimension2( SLIDER_TRACK_WIDTH, 5 ),
-      thumbSize: new Dimension2( 15, 25 ),
-      majorTickLength: -15
+      trackSize: new Dimension2( SLIDER_TRACK_WIDTH, 4 ),
+      thumbSize: new Dimension2( 12, 21 ),
+      majorTickLength: -12
     } ) );
 
     // add ticks

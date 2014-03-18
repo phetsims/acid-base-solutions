@@ -15,7 +15,7 @@ define( function( require ) {
     HTMLText = require( 'SCENERY/nodes/HTMLText' ),
     ChemUtils = require( 'NITROGLYCERIN/ChemUtils' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    Solutions = require( 'model/Solutions' ),
+    Solutions = require( 'model/Constants/Solutions' ),
 
     VBox = require( 'SCENERY/nodes/VBox' ),
     HBox = require( 'SCENERY/nodes/HBox' ),
@@ -70,9 +70,9 @@ define( function( require ) {
     }
   ];
 
-  function SolutionsControl( model, options ) {
+  function SolutionsControl( solutionMenuModel, options ) {
     var self = this,
-      solutionProperty = model.property( 'solution' ),
+      solutionProperty = solutionMenuModel.solution,
       radioButtons = [],
       maxHeight = 0;
     VBox.call( this, _.extend( {align: 'left'}, options ) );

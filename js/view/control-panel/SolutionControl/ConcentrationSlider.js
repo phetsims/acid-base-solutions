@@ -32,8 +32,10 @@ define( function( require ) {
     READOUT_FONT = new PhetFont( 14 ),
     arrowButtonOptions = {arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2};
 
-  function ConcentrationSlider( concentrationProperty, range ) {
-    var CONCENTRATION_MIN = Util.log10( range.min ),
+  function ConcentrationSlider( concentrationSliderModel ) {
+    var range = concentrationSliderModel.range,
+      concentrationProperty = concentrationSliderModel.concentration,
+      CONCENTRATION_MIN = Util.log10( range.min ),
       CONCENTRATION_MAX = Util.log10( range.max ),
       CONCENTRATION_STEP = 0.1,
       sliderProperty = new Property( Util.log10( range.defaultValue ) ),
@@ -44,7 +46,6 @@ define( function( require ) {
       leftArrowButton,
       rightArrowButton;
     Node.call( this, {scale: 0.85} );
-    this.property = sliderProperty;
 
     // add the readout, including the background
     panelContent.addChild( readoutBackground );
