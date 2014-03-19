@@ -11,13 +11,14 @@ define( function( require ) {
 
   // imports
   var ControlPanels = require( 'model/Constants/ControlPanels' ),
+    Solutions = require( 'model/Constants/Solutions' ),
     ConcentrationSliderModel = require( 'model/ConcentrationSliderModel' ),
     StrengthSliderModel = require( 'model/StrengthSliderModel' ),
 
   // strings
     solutionString = require( 'string!ACID_BASE_SOLUTIONS/solution' );
 
-  function SolutionMenuModel( concentrationProperty, strengthProperty, isAcidProperty, isWeakProperty ) {
+  function SolutionMenuModel( solutionProperty, concentrationProperty, strengthProperty, isAcidProperty, isWeakProperty ) {
     // control panel's type
     this.type = ControlPanels.SOLUTION;
 
@@ -33,6 +34,29 @@ define( function( require ) {
 
     // concentration of solution
     this.concentrationSlider = new ConcentrationSliderModel( concentrationProperty );
+
+    // update solution type if it was changed by radio buttons
+    var setSolution = function() {
+      var isAcid = isAcidProperty.value,
+        isWeak = isWeakProperty.value;
+
+      if ( isWeak && isAcid ) {
+        solutionProperty.value = Solutions.WEAK_ACID;
+      }
+      else if ( isWeak && !isAcid ) {
+        solutionProperty.value = Solutions.WEAK_BASE;
+      }
+      else if ( !isWeak && isAcid ) {
+        solutionProperty.value = Solutions.STRONG_ACID;
+      }
+      else if ( !isWeak && !isAcid ) {
+        solutionProperty.value = Solutions.STRONG_BASE;
+      }
+    };
+
+    // add observers
+    isAcidProperty.link( setSolution );
+    isWeakProperty.link( setSolution );
   }
 
   return SolutionMenuModel;

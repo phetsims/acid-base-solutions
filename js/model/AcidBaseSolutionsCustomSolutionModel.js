@@ -48,7 +48,7 @@ define( function( require ) {
 
     // models for control panel
     this.controlPanel = [
-      new SolutionMenuModel( this.property( 'concentration' ), this.property( 'strength' ), this.property( 'isAcid' ), this.property( 'isWeak' ) ),
+      new SolutionMenuModel( this.property( 'solution' ), this.property( 'concentration' ), this.property( 'strength' ), this.property( 'isAcid' ), this.property( 'isWeak' ) ),
       new ViewModesMenuModel( this.property( 'viewMode' ), this.property( 'testMode' ), this.property( 'solvent' ) ),
       new TestModesMenuModel( this.property( 'testMode' ) )
     ];
@@ -69,28 +69,6 @@ define( function( require ) {
       self.components[newSolution].property( 'strength' ).link( setStrength );
       self.components[newSolution].property( 'concentration' ).link( setConcentration );
     } );
-
-    // update solution type if it was changed by radio buttons
-    var setSolution = function() {
-      var isAcid = self.isAcid,
-        isWeak = self.isWeak;
-
-      if ( isWeak && isAcid ) {
-        self.solution = Solutions.WEAK_ACID;
-      }
-      else if ( isWeak && !isAcid ) {
-        self.solution = Solutions.WEAK_BASE;
-      }
-      else if ( !isWeak && isAcid ) {
-        self.solution = Solutions.STRONG_ACID;
-      }
-      else if ( !isWeak && !isAcid ) {
-        self.solution = Solutions.STRONG_BASE;
-      }
-    };
-
-    this.property( 'isAcid' ).link( setSolution );
-    this.property( 'isWeak' ).link( setSolution );
 
     this.property( 'concentration' ).link( function( concentration ) {
       self.components[self.solution].concentration = concentration;
