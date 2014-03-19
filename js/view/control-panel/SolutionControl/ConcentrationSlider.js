@@ -15,7 +15,6 @@ define( function( require ) {
     inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Panel = require( 'SUN/Panel' ),
-    Property = require( 'AXON/Property' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     Text = require( 'SCENERY/nodes/Text' ),
@@ -35,10 +34,8 @@ define( function( require ) {
   function ConcentrationSlider( concentrationSliderModel ) {
     var range = concentrationSliderModel.range,
       concentrationProperty = concentrationSliderModel.concentration,
-      CONCENTRATION_MIN = Util.log10( range.min ),
-      CONCENTRATION_MAX = Util.log10( range.max ),
-      CONCENTRATION_STEP = 0.1,
-      sliderProperty = new Property( Util.log10( range.defaultValue ) ),
+      arrowStep = concentrationSliderModel.arrowStep,
+      sliderProperty = concentrationSliderModel.slider,
       readoutText = new Text( StringUtils.format( pattern_0value_1concentration, Util.toFixed( concentrationProperty.value, 3 ), molesPerLiterString ), { font: READOUT_FONT } ),
       readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.5 ),
       panelContent = new Node(),
@@ -53,23 +50,23 @@ define( function( require ) {
     panelContent.addChild( readoutText );
 
     // create and add the slider
-    slider = new HSlider( sliderProperty, { min: CONCENTRATION_MIN, max: CONCENTRATION_MAX }, {
+    slider = new HSlider( sliderProperty, range, {
       thumbSize: new Dimension2( 15, 25 ),
       majorTickLength: 15,
       tickLabelSpacing: 2
     } );
     panelContent.addChild( slider );
-    for ( var i = 0, step = (CONCENTRATION_MAX - CONCENTRATION_MIN) / 3; i < 4; i++ ) {
-      slider.addMinorTick( CONCENTRATION_MIN + step * i, null );
+    for ( var i = 0, step = (range.max - range.min) / 3; i < 4; i++ ) {
+      slider.addMinorTick( range.min + step * i, null );
     }
 
     // create and add the arrow buttons
     leftArrowButton = new ArrowButton( 'left', function() {
-      sliderProperty.value = Math.max( sliderProperty.value - CONCENTRATION_STEP, CONCENTRATION_MIN );
+      sliderProperty.value = Math.max( sliderProperty.value - arrowStep, range.min );
     }, arrowButtonOptions );
     panelContent.addChild( leftArrowButton );
     rightArrowButton = new ArrowButton( 'right', function() {
-      sliderProperty.value = Math.min( sliderProperty.value + CONCENTRATION_STEP, CONCENTRATION_MAX );
+      sliderProperty.value = Math.min( sliderProperty.value + arrowStep, range.max );
     }, arrowButtonOptions );
     panelContent.addChild( rightArrowButton );
 
@@ -87,14 +84,9 @@ define( function( require ) {
     // put the contents into a panel
     this.addChild( new Panel( panelContent, {fill: 'rgba(0,0,0,0)', stroke: 'rgba(0,0,0,0)'} ) );
 
-    // update the readout text whenever the value changes
-    sliderProperty.link( function( value ) {
-      concentrationProperty.value = Math.pow( 10, value );
-    } );
-
+    // update the readout text when concentration value changes
     concentrationProperty.link( function( value ) {
       readoutText.text = StringUtils.format( pattern_0value_1concentration, Util.toFixed( value, 3 ), molesPerLiterString );
-      sliderProperty.value = Util.log10( value );
     } );
   }
 

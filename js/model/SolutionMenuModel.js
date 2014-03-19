@@ -62,6 +62,7 @@ define( function( require ) {
   SolutionMenuModel.prototype = {
     reset: function() {
       this.strengthSlider.reset();
+      this.concentrationSlider.reset();
     }
   };
 
