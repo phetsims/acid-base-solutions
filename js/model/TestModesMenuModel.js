@@ -26,5 +26,9 @@ define( function( require ) {
     this.mode = testModeProperty;
   }
 
+  TestModesMenuModel.prototype = {
+    reset: function() {}
+  };
+
   return TestModesMenuModel;
 } );

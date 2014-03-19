@@ -59,5 +59,11 @@ define( function( require ) {
     isWeakProperty.link( setSolution );
   }
 
+  SolutionMenuModel.prototype = {
+    reset: function() {
+      this.strengthSlider.reset();
+    }
+  };
+
   return SolutionMenuModel;
 } );

@@ -26,5 +26,9 @@ define( function( require ) {
     this.solution = solutionProperty;
   }
 
+  SolutionsMenuModel.prototype = {
+    reset: function() {}
+  };
+
   return SolutionsMenuModel;
 } );

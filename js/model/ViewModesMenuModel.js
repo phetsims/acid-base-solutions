@@ -37,12 +37,16 @@ define( function( require ) {
     this.checkboxEnable = new Property( true );
 
     var setCheckboxEnabled = function() {
-       self.checkboxEnable.value = (viewModeProperty.get() === ViewModes.MOLECULES && testModeProperty.get() !== TestModes.CONDUCTIVITY);
+      self.checkboxEnable.value = (viewModeProperty.get() === ViewModes.MOLECULES && testModeProperty.get() !== TestModes.CONDUCTIVITY);
     };
 
     viewModeProperty.link( setCheckboxEnabled );
     testModeProperty.link( setCheckboxEnabled );
   }
+
+  ViewModesMenuModel.prototype = {
+    reset: function() {}
+  };
 
   return ViewModesMenuModel;
 } );

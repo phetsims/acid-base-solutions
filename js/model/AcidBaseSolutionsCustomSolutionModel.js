@@ -79,6 +79,16 @@ define( function( require ) {
     } );
   }
 
-  return inherit( AcidBaseSolutionsAbstractModel, AcidBaseSolutionsCustomSolutionModel );
+  return inherit( AcidBaseSolutionsAbstractModel, AcidBaseSolutionsCustomSolutionModel, {
+    reset: function() {
+      // reset main properties
+      AcidBaseSolutionsAbstractModel.prototype.reset.call( this );
+
+      // reset control panels
+      this.controlPanel.forEach( function( panel ) {
+        panel.reset();
+      } );
+    }
+  } );
 
 } );
