@@ -57,6 +57,11 @@ define( function( require ) {
 
     this.type = Solutions.STRONG_BASE;
 
+    /* array with molecules which will be shown in magnifier and concentration chart bar
+     *
+     * type: type of molecule. Need to determine color or necessary view constructor
+     * property: name of property for observing concentration of molecule
+     */
     this.relations = [
       {type: 'MOH', property: 'soluteConcentration'},
       {type: 'M', property: 'productConcentration'},
