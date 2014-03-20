@@ -11,6 +11,9 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     PropertySet = require( 'AXON/PropertySet' ),
+    BeakerModel = require( './BeakerModel' ),
+    FormulaModel = require( './FormulaModel' ),
+    MagnifierModel = require( './MagnifierModel' ),
     ViewModes = require( 'model/Constants/ViewModes' ),
     TestModes = require( 'model/Constants/TestModes' ),
     ScreenView = require( 'JOIST/ScreenView' ),
@@ -47,6 +50,15 @@ define( function( require ) {
       brightness: pHToBrightness( this.components[defaultSolution].pH ), // brightness value
       resetTrigger: false // reset trigger
     } );
+
+    // beaker model (all elements in workspace have position relative to beaker)
+    this.beaker = new BeakerModel( this.width, this.height );
+
+    // formula model
+    this.formula = new FormulaModel( this.beaker, this.property( 'solution' ) );
+
+    // magnifier model
+    this.magnifier = new MagnifierModel( this.beaker, this.SOLUTIONS, this.components, this.property( 'solution' ), this.property( 'solvent' ), this.property( 'viewMode' ), this.property( 'testMode' ) );
 
     // set appropriate pH
     this.property( 'solution' ).link( function( newSolution, prevSolution ) {

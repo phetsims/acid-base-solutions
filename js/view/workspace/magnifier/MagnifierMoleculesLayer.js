@@ -34,7 +34,7 @@ define( function( require ) {
     BASE_DOTS = 2,
     MAX_MOLECULES = 50; // TODO: should be 200, but sim will load approximately 30 second
 
-  function MagnifierMoleculesLayer( model, boundedSolution, property, type, radius ) {
+  function MagnifierMoleculesLayer( magnifierModel, boundedSolution, property, type, radius ) {
     var molecules = [],
       setMoleculesBinded;
     Node.call( this );
@@ -46,13 +46,13 @@ define( function( require ) {
     }
 
     // update number of molecules only when layer is visible
-    setMoleculesBinded = setMolecules.bind( this, model, boundedSolution, property, molecules );
+    setMoleculesBinded = setMolecules.bind( this, magnifierModel, boundedSolution, property, molecules );
     property.lazyLink( setMoleculesBinded );
-    model.property( 'viewMode' ).lazyLink( setMoleculesBinded );
-    model.property( 'solution' ).link( setMoleculesBinded );
+    magnifierModel.viewMode.lazyLink( setMoleculesBinded );
+    magnifierModel.solution.link( setMoleculesBinded );
 
     // update position of molecules if solution have been switched
-    model.property( 'solution' ).link( function( newSolution ) {
+    magnifierModel.solution.link( function( newSolution ) {
       if ( boundedSolution === newSolution ) {
         updatePosition( molecules, radius );
       }
@@ -77,13 +77,13 @@ define( function( require ) {
   };
 
   // show appropriate number of molecules
-  var setMolecules = function( model, boundedSolution, property, molecules ) {
+  var setMolecules = function( magnifierModel, boundedSolution, property, molecules ) {
     var numberOfMolecules,
       visibility,
       i;
 
     // update visibility of layer
-    this.setVisible( model.solution === boundedSolution && model.viewMode === ViewModes.MOLECULES );
+    this.setVisible( magnifierModel.solution.value === boundedSolution && magnifierModel.viewMode.value === ViewModes.MOLECULES );
 
     // update number of molecules only when layer is visible
     if ( this.visible ) {

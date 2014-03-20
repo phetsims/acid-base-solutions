@@ -12,6 +12,7 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     AcidBaseSolutionsAbstractModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsAbstractModel' ),
+    BarChartModel = require( './BarChartModel' ),
     Solutions = require( 'model/Constants/Solutions' ),
     GameModes = require( 'model/Constants/GameModes' ),
     StrongAcidSolution = require( 'model/AqueousSolutions/StrongAcidSolution' ),
@@ -52,6 +53,9 @@ define( function( require ) {
       new ViewModesMenuModel( this.property( 'viewMode' ), this.property( 'testMode' ), this.property( 'solvent' ) ),
       new TestModesMenuModel( this.property( 'testMode' ) )
     ];
+
+    // concentration bar chart model
+    this.barChart = new BarChartModel( this.beaker, this.SOLUTIONS, this.components, this.property( 'solution' ), this.property( 'viewMode' ), this.property( 'testMode' ), this.property( 'concentration' ), this.property( 'strength' ) );
 
     this.property( 'solution' ).link( function( newSolution, prevSolution ) {
       // unsubscribe from previous solution strength and concentration property

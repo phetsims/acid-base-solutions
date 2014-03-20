@@ -12,7 +12,6 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    VBox = require( 'SCENERY/nodes/VBox' ),
     Beaker = require( './Beaker' ),
     Magnifier = require( './magnifier/Magnifier' ),
     Formula = require( './formulas/Formula' ),
@@ -35,17 +34,17 @@ define( function( require ) {
     // add conductivity test
     this.addChild( new ConductivityTest( model, {x: model.width / 4, y: model.height / 75} ) );
 
-    // add beaker and formulas
-    this.addChild( new VBox( {spacing: 5, x: model.width / 3, y: model.height * 0.25, children: [
-      new Beaker( model, {} ),
-      new Formula( model )
-    ]} ) );
+    // add beaker
+    this.addChild( new Beaker( model.beaker ) );
+
+    // add formulas
+    this.addChild( new Formula( model.formula ) );
 
     // add magnifier
-    this.addChild( new Magnifier( model, {x: model.width / 3, y: model.height / 1.75} ) );
+    this.addChild( new Magnifier( model.magnifier ) );
 
     // add concentration bar chart
-    this.addChild( new EquilibriumConcentrationBarChart( model, {x: model.width / 5, y: model.height * 0.3} ) );
+    this.addChild( new EquilibriumConcentrationBarChart( model.barChart ) );
   }
 
   return inherit( Node, Workspace );

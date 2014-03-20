@@ -19,13 +19,11 @@ define( function( require ) {
     StrongBaseFormula = require( './StrongBaseFormula' ),
     WeakBaseFormula = require( './WeakBaseFormula' );
 
-  function Formula( model, options ) {
+  function Formula( formulaModel ) {
     var maxWidth,
       formula,
       formulas = {};
-    Node.call( this, options );
-    this.setPickable( false );
-
+    Node.call( this, {pickable: false} );
 
     formulas[Solutions.WATER] = new WaterFormula();
     formulas[Solutions.STRONG_ACID] = new AcidFormula( false );
@@ -36,7 +34,6 @@ define( function( require ) {
     // find max width of formulas
     maxWidth = getMaxWidth( formulas );
 
-
     // add formulas with central alignment
     for ( formula in formulas ) {
       if ( formulas.hasOwnProperty( formula ) ) {
@@ -46,8 +43,10 @@ define( function( require ) {
       }
     }
 
+    this.center = formulaModel.location.plusXY( 0, this.getHeight() / 2 + 5 );
+
     // add observer for formulas
-    model.property( 'solution' ).link( function( newSolution, prevSolution ) {
+    formulaModel.solutionProperty.link( function( newSolution, prevSolution ) {
       // hide previous formula
       if ( prevSolution ) {
         formulas[prevSolution].setVisible( false );

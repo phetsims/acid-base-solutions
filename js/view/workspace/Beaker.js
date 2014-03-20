@@ -30,12 +30,10 @@ define( function( require ) {
     RIM_OFFSET = 10,
     TICK_LABEL_X_SPACING = 20;
 
-  function Beaker( model, location ) {
-    Node.call( this, {pickable: false} );
-
+  function Beaker( beakerModel ) {
     // outline of the beaker, starting from upper left
-    var BEAKER_WIDTH = model.width / 1.95,
-      BEAKER_HEIGHT = model.height / 1.66,
+    var BEAKER_WIDTH = beakerModel.width,
+      BEAKER_HEIGHT = beakerModel.height,
       outlineShape = new Shape()
         .moveTo( -BEAKER_WIDTH / 2 - RIM_OFFSET, -BEAKER_HEIGHT - RIM_OFFSET )
         .lineTo( -BEAKER_WIDTH / 2, -BEAKER_HEIGHT )
@@ -51,6 +49,8 @@ define( function( require ) {
       ticksParent,
       NUMBER_OF_TICKS = Math.round( 1 / MINOR_TICK_SPACING ),
       deltaY = BEAKER_HEIGHT / NUMBER_OF_TICKS;
+
+    Node.call( this, {pickable: false} );
 
     // add water
     this.addChild( new Path( fillShape, {
@@ -96,8 +96,7 @@ define( function( require ) {
       centerY: -deltaY * NUMBER_OF_TICKS
     } ) );
 
-    this.centerX = location.x || 0;
-    this.centerY = location.y || 0;
+    this.center = beakerModel.location;
   }
 
   return inherit( Node, Beaker );
