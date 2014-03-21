@@ -26,6 +26,12 @@ define( function( require ) {
       }
     };
 
+  /**
+   * @param {BeakerModel} beakerModel
+   * @param {Property<TestModes>} testModeProperty
+   * @param {Property<Number>} brightnessProperty
+   * @constructor
+   */
   function ConductivityTestModel( beakerModel, testModeProperty, brightnessProperty ) {
     var self = this;
 
@@ -54,7 +60,7 @@ define( function( require ) {
     this.isClosed = new Property( false );
 
     // brightness property
-    this.brightness = brightnessProperty;
+    this.brightnessProperty = brightnessProperty;
 
     testModeProperty.link( function( testMode ) {
       self.visibility.value = (testMode === TestModes.CONDUCTIVITY);

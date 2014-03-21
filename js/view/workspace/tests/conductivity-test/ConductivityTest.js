@@ -46,7 +46,7 @@ define( function( require ) {
     Node.call( this );
 
     // add light rays
-    this.addChild( new ConductivityTestLightRays( conductivityTestModel.brightness, isClose, lightBulbDarkMask.getGlobalBounds().width / 2, {x: lightBulbDarkMask.getGlobalBounds().width / 2, y: lightBulbDarkMask.getGlobalBounds().height / 2.75} ) );
+    this.addChild( new ConductivityTestLightRays( conductivityTestModel.brightnessProperty, isClose, lightBulbDarkMask.getGlobalBounds().width / 2, {x: lightBulbDarkMask.getGlobalBounds().width / 2, y: lightBulbDarkMask.getGlobalBounds().height / 2.75} ) );
 
     this.addChild( new Node( {children: [
       // add light bulb image
@@ -81,9 +81,9 @@ define( function( require ) {
 
     // set brightness of light bulb
     var setBrightness = function() {
-      lightBulbDarkMask.setOpacity( (isClose.value ? BRIGHTNESS_TO_ALPHA_FUNCTION_AGAINST_DARK_BACKGROUND( conductivityTestModel.brightness.value ) : OPACITY_MAX) );
+      lightBulbDarkMask.setOpacity( (isClose.value ? BRIGHTNESS_TO_ALPHA_FUNCTION_AGAINST_DARK_BACKGROUND( conductivityTestModel.brightnessProperty.value ) : OPACITY_MAX) );
     };
-    conductivityTestModel.brightness.link( setBrightness );
+    conductivityTestModel.brightnessProperty.link( setBrightness );
     isClose.link( setBrightness );
 
     // visibility observer
