@@ -18,6 +18,14 @@ define( function( require ) {
   // strings
     solutionString = require( 'string!ACID_BASE_SOLUTIONS/solution' );
 
+  /**
+   * @param {Property<SolutionTypes>} solutionTypeProperty
+   * @param {Property<Number>} concentrationProperty
+   * @param {Property<Number>} strengthProperty
+   * @param {Property<Boolean>} isAcidProperty
+   * @param {Property<Boolean>} isWeakProperty
+   * @constructor
+   */
   function SolutionMenuModel( solutionTypeProperty, concentrationProperty, strengthProperty, isAcidProperty, isWeakProperty ) {
     // control panel's type
     this.type = ControlPanels.SOLUTION;
@@ -36,7 +44,7 @@ define( function( require ) {
     this.concentrationSlider = new ConcentrationSliderModel( concentrationProperty );
 
     // update solution type if it was changed by radio buttons
-    var setSolution = function() {
+    var setSolutionType = function() {
       var isAcid = isAcidProperty.value,
         isWeak = isWeakProperty.value;
 
@@ -55,8 +63,8 @@ define( function( require ) {
     };
 
     // add observers
-    isAcidProperty.link( setSolution );
-    isWeakProperty.link( setSolution );
+    isAcidProperty.link( setSolutionType );
+    isWeakProperty.link( setSolutionType );
   }
 
   SolutionMenuModel.prototype = {
