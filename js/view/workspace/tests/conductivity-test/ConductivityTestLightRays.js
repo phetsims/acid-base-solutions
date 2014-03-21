@@ -15,7 +15,6 @@ define( function( require ) {
     Node = require( 'SCENERY/nodes/Node' ),
     LinearFunction = require( 'DOT/LinearFunction' ),
     Line = require( 'SCENERY/nodes/Line' ),
-    TestModes = require( 'model/Constants/TestModes' ),
 
   // constants
     BRIGHTNESS_TO_INTENSITY_FUNCTION = new LinearFunction( 0, 1, 0, 1 ), // intensity of the light rays
@@ -29,9 +28,8 @@ define( function( require ) {
     RAY_STROKE_MEDIUM = 1,
     RAY_STROKE_SMALL = 0.5;
 
-  function ConductivityTestLightRays( testModeProperty, brightnessProperty, isCloseProperty, bulbRadius, options ) {
-    var self = this,
-      setBrightnessBinded;
+  function ConductivityTestLightRays( brightnessProperty, isCloseProperty, bulbRadius, options ) {
+    var setBrightnessBinded;
     Node.call( this, options );
 
     // pre-calculate reusable objects
@@ -41,10 +39,6 @@ define( function( require ) {
     setBrightnessBinded = this.setBrightness.bind( this, brightnessProperty, isCloseProperty, bulbRadius );
     isCloseProperty.link( setBrightnessBinded );
     brightnessProperty.link( setBrightnessBinded );
-
-    testModeProperty.link( function( testMode ) {
-      self.setVisible( testMode === TestModes.CONDUCTIVITY );
-    } );
   }
 
   return inherit( Node, ConductivityTestLightRays, {

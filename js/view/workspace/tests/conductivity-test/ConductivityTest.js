@@ -47,7 +47,7 @@ define( function( require ) {
     Node.call( this );
 
     // add light rays
-    this.addChild( new ConductivityTestLightRays( conductivityTestModel.testMode, conductivityTestModel.brightness, isClose, lightBulbDarkMask.getGlobalBounds().width / 2, {x: lightBulbDarkMask.getGlobalBounds().width / 2, y: lightBulbDarkMask.getGlobalBounds().height / 2.75} ) );
+    this.addChild( new ConductivityTestLightRays( conductivityTestModel.brightness, isClose, lightBulbDarkMask.getGlobalBounds().width / 2, {x: lightBulbDarkMask.getGlobalBounds().width / 2, y: lightBulbDarkMask.getGlobalBounds().height / 2.75} ) );
 
     this.addChild( new Node( {children: [
       // add light bulb image
