@@ -12,9 +12,6 @@ define( function( require ) {
   // imports
   var Property = require( 'AXON/Property' ),
     TestModes = require( 'model/Constants/TestModes' ),
-    Vector2 = require( 'DOT/Vector2' ),
-    Range = require( 'DOT/Range' ),
-    Util = require( 'DOT/Util' ),
 
     WIRES_INITIAL_Y = 60,
 
