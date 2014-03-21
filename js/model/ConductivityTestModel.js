@@ -46,41 +46,41 @@ define( function( require ) {
     this.waterSurface = beakerModel.location.y - beakerModel.height - 60;
 
     // positive probe y-coordinate
-    this.positiveProbeY = new Property( WIRE_OPTIONS.positive.end.y );
+    this.positiveProbeYProperty = new Property( WIRE_OPTIONS.positive.end.y );
 
     // negative probe y-coordinate
-    this.negativeProbeY = new Property( WIRE_OPTIONS.negative.end.y );
+    this.negativeProbeYProperty = new Property( WIRE_OPTIONS.negative.end.y );
 
     // test mode property
     this.testMode = testModeProperty;
 
     // visibility of conductivity test
-    this.visibility = new Property( testModeProperty.value === TestModes.CONDUCTIVITY );
+    this.visibleProperty = new Property( testModeProperty.value === TestModes.CONDUCTIVITY );
 
     // property for indicating closing of electric circuit
-    this.isClosed = new Property( false );
+    this.isClosedProperty = new Property( false );
 
     // brightness property
     this.brightnessProperty = brightnessProperty;
 
     testModeProperty.link( function( testMode ) {
-      self.visibility.value = (testMode === TestModes.CONDUCTIVITY);
+      self.visibleProperty.value = (testMode === TestModes.CONDUCTIVITY);
     } );
 
-    // if both probes in water: isClosed === true
+    // if both probes in water: isClosedProperty.value === true
     var checkContact = function() {
-      self.isClosed.value = ( self.positiveProbeY.value > self.waterSurface && self.negativeProbeY.value > self.waterSurface );
+      self.isClosedProperty.value = ( self.positiveProbeYProperty.value > self.waterSurface && self.negativeProbeYProperty.value > self.waterSurface );
     };
-    this.positiveProbeY.link( checkContact );
-    this.negativeProbeY.link( checkContact );
+    this.positiveProbeYProperty.link( checkContact );
+    this.negativeProbeYProperty.link( checkContact );
   }
 
   ConductivityTestModel.prototype = {
     reset: function() {
-      this.visibility.reset();
-      this.isClosed.reset();
-      this.positiveProbeY.reset();
-      this.negativeProbeY.reset();
+      this.visibleProperty.reset();
+      this.isClosedProperty.reset();
+      this.positiveProbeYProperty.reset();
+      this.negativeProbeYProperty.reset();
     },
     getWireOptions: function() {
       return WIRE_OPTIONS;

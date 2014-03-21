@@ -50,7 +50,7 @@ define( function( require ) {
       }
     },
     setBrightness: function( brightnessProperty, isCloseProperty, bulbRadius ) {
-      var isClose = isCloseProperty.value,
+      var isClosed = isCloseProperty.value,
         intensity = BRIGHTNESS_TO_INTENSITY_FUNCTION( brightnessProperty.value ),
         numberOfRays = MIN_RAYS + Math.round( intensity * ( MAX_RAYS - MIN_RAYS ) ), // number of rays is a function of intensity
         angle = RAYS_START_ANGLE,
@@ -59,7 +59,7 @@ define( function( require ) {
         rayLength; // ray length is a function of intensity
 
       // if intensity is zero or circuit isn't closed then hide node
-      this.setVisible( (intensity && isClose) );
+      this.setVisible( (intensity && isClosed) );
 
       // update node only if it's visible
       if ( !this.visible ) {

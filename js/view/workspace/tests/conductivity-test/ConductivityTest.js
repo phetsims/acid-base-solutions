@@ -38,15 +38,15 @@ define( function( require ) {
     var self = this,
       lightBulbDarkMask = new Node( {opacity: OPACITY_MAX, children: [new Image( lightBulbGlassMaskImage, {scale: 0.33} )]} ),
       wireOptions = conductivityTestModel.getWireOptions(),
-      positiveProbeY = conductivityTestModel.positiveProbeY,
-      negativeProbeY = conductivityTestModel.negativeProbeY,
-      isClose = conductivityTestModel.isClosed,
+      positiveProbeYProperty = conductivityTestModel.positiveProbeYProperty,
+      negativeProbeYProperty = conductivityTestModel.negativeProbeYProperty,
+      isClosedProperty = conductivityTestModel.isClosedProperty,
       negativeWire,
       positiveWire;
     Node.call( this );
 
     // add light rays
-    this.addChild( new ConductivityTestLightRays( conductivityTestModel.brightnessProperty, isClose, lightBulbDarkMask.getGlobalBounds().width / 2, {x: lightBulbDarkMask.getGlobalBounds().width / 2, y: lightBulbDarkMask.getGlobalBounds().height / 2.75} ) );
+    this.addChild( new ConductivityTestLightRays( conductivityTestModel.brightnessProperty, isClosedProperty, lightBulbDarkMask.getGlobalBounds().width / 2, {x: lightBulbDarkMask.getGlobalBounds().width / 2, y: lightBulbDarkMask.getGlobalBounds().height / 2.75} ) );
 
     this.addChild( new Node( {children: [
       // add light bulb image
@@ -66,29 +66,29 @@ define( function( require ) {
     this.addChild( positiveWire = new ConductivityTestWire( 'positive', wireOptions.positive.start.x, wireOptions.positive.start.y, wireOptions.positive.end.x, wireOptions.positive.end.y ) );
 
     // add probes
-    this.addChild( new ConductivityTestProbe( 'red', '+', positiveProbeY, {x: 155, y: wireOptions.positive.end.y} ) );
-    this.addChild( new ConductivityTestProbe( 'black', '-', negativeProbeY, {x: -30, y: wireOptions.negative.end.y} ) );
+    this.addChild( new ConductivityTestProbe( 'red', '+', positiveProbeYProperty, {x: 155, y: wireOptions.positive.end.y} ) );
+    this.addChild( new ConductivityTestProbe( 'black', '-', negativeProbeYProperty, {x: -30, y: wireOptions.negative.end.y} ) );
 
     this.translation = conductivityTestModel.location;
 
     // update wires if end point was changed
-    positiveProbeY.link( function( y ) {
+    positiveProbeYProperty.link( function( y ) {
       positiveWire.setEndPoint( wireOptions.positive.end.x, y );
     } );
-    negativeProbeY.link( function( y ) {
+    negativeProbeYProperty.link( function( y ) {
       negativeWire.setEndPoint( wireOptions.negative.end.x, y );
     } );
 
     // set brightness of light bulb
     var setBrightness = function() {
-      lightBulbDarkMask.setOpacity( (isClose.value ? BRIGHTNESS_TO_ALPHA_FUNCTION_AGAINST_DARK_BACKGROUND( conductivityTestModel.brightnessProperty.value ) : OPACITY_MAX) );
+      lightBulbDarkMask.setOpacity( (isClosedProperty.value ? BRIGHTNESS_TO_ALPHA_FUNCTION_AGAINST_DARK_BACKGROUND( conductivityTestModel.brightnessProperty.value ) : OPACITY_MAX) );
     };
     conductivityTestModel.brightnessProperty.link( setBrightness );
-    isClose.link( setBrightness );
+    isClosedProperty.link( setBrightness );
 
     // visibility observer
-    conductivityTestModel.visibility.link( function( isVisible ) {
-      self.setVisible( isVisible );
+    conductivityTestModel.visibleProperty.link( function( visible ) {
+      self.setVisible( visible );
     } );
   }
 
