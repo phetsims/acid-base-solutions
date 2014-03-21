@@ -13,9 +13,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     AcidBaseSolutionsAbstractModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsAbstractModel' ),
     BarChartModel = require( 'ACID_BASE_SOLUTIONS/model/BarChartModel' ),
-    Solutions = require( 'ACID_BASE_SOLUTIONS/model/Constants/Solutions' ),
+    SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
     GameModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/GameModes' ),
-
     WaterSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/WaterSolution' ),
     StrongAcidSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/StrongAcidSolution' ),
     WeakAcidSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/WeakAcidSolution' ),
@@ -27,7 +26,7 @@ define( function( require ) {
     TestModesMenuModel = require( 'ACID_BASE_SOLUTIONS/model/TestModesMenuModel' ),
 
   // constants
-    DEFAULT_SOLUTION = Solutions.WATER;
+    DEFAULT_SOLUTION_TYPE = SolutionTypes.WATER;
 
   function AcidBaseSolutionsIntroductionModel() {
     AcidBaseSolutionsAbstractModel.call( this,
@@ -39,7 +38,7 @@ define( function( require ) {
         new StrongBaseSolution(),
         new WeakBaseSolution()
       ],
-      DEFAULT_SOLUTION );
+      DEFAULT_SOLUTION_TYPE );
 
     // models for control panel
     this.controlPanel = [

@@ -11,14 +11,14 @@ define( function( require ) {
 
   // imports
   var ControlPanels = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanels' ),
-    Solutions = require( 'ACID_BASE_SOLUTIONS/model/Constants/Solutions' ),
+    SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
     ConcentrationSliderModel = require( 'ACID_BASE_SOLUTIONS/model/ConcentrationSliderModel' ),
     StrengthSliderModel = require( 'ACID_BASE_SOLUTIONS/model/StrengthSliderModel' ),
 
   // strings
     solutionString = require( 'string!ACID_BASE_SOLUTIONS/solution' );
 
-  function SolutionMenuModel( solutionProperty, concentrationProperty, strengthProperty, isAcidProperty, isWeakProperty ) {
+  function SolutionMenuModel( solutionTypeProperty, concentrationProperty, strengthProperty, isAcidProperty, isWeakProperty ) {
     // control panel's type
     this.type = ControlPanels.SOLUTION;
 
@@ -41,16 +41,16 @@ define( function( require ) {
         isWeak = isWeakProperty.value;
 
       if ( isWeak && isAcid ) {
-        solutionProperty.value = Solutions.WEAK_ACID;
+        solutionTypeProperty.value = SolutionTypes.WEAK_ACID;
       }
       else if ( isWeak && !isAcid ) {
-        solutionProperty.value = Solutions.WEAK_BASE;
+        solutionTypeProperty.value = SolutionTypes.WEAK_BASE;
       }
       else if ( !isWeak && isAcid ) {
-        solutionProperty.value = Solutions.STRONG_ACID;
+        solutionTypeProperty.value = SolutionTypes.STRONG_ACID;
       }
       else if ( !isWeak && !isAcid ) {
-        solutionProperty.value = Solutions.STRONG_BASE;
+        solutionTypeProperty.value = SolutionTypes.STRONG_BASE;
       }
     };
 

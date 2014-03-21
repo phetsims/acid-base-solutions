@@ -11,7 +11,7 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    Solutions = require( 'model/Constants/Solutions' ),
+    SolutionTypes = require( 'model/Constants/SolutionTypes' ),
     AqueousSolutionAbstract = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/AqueousSolutionAbstract' ),
     Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' ),
 
@@ -36,7 +36,8 @@ define( function( require ) {
       H3OConcentration: H3O_CONCENTRATION_DEFAULT
     } );
 
-    this.type = Solutions.WATER;
+     //TODO rename this.solutionType
+    this.type = SolutionTypes.WATER;
 
     /* array with molecules which will be shown in magnifier and concentration chart bar
      *

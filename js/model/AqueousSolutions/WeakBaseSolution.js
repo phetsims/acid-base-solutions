@@ -11,7 +11,7 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    Solutions = require( 'ACID_BASE_SOLUTIONS/model/Constants/Solutions' ),
+    SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
     AqueousSolutionAbstract = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/AqueousSolutionAbstract' ),
     Constants = require( 'model/Constants/Constants' ),
 
@@ -77,7 +77,8 @@ define( function( require ) {
       isValidStrength: IS_VALID_STRENGTH_DEFAULT
     } );
 
-    this.type = Solutions.WEAK_BASE;
+    //TODO rename this.solutionType
+    this.type = SolutionTypes.WEAK_BASE;
 
     /* array with molecules which will be shown in magnifier and concentration chart bar
      *

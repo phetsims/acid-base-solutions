@@ -13,7 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     AcidBaseSolutionsAbstractModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsAbstractModel' ),
     BarChartModel = require( 'ACID_BASE_SOLUTIONS/model/BarChartModel' ),
-    Solutions = require( 'ACID_BASE_SOLUTIONS/model/Constants/Solutions' ),
+    SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
     GameModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/GameModes' ),
     StrongAcidSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/StrongAcidSolution' ),
     WeakAcidSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/WeakAcidSolution' ),
@@ -25,7 +25,7 @@ define( function( require ) {
     TestModesMenuModel = require( 'ACID_BASE_SOLUTIONS/model/TestModesMenuModel' ),
 
   // constants
-    DEFAULT_SOLUTION = Solutions.WEAK_ACID;
+    DEFAULT_SOLUTION_TYPE = SolutionTypes.WEAK_ACID;
 
   function AcidBaseSolutionsCustomSolutionModel() {
     var self = this,
@@ -40,12 +40,12 @@ define( function( require ) {
         new StrongBaseSolution(),
         new WeakBaseSolution()
       ],
-      DEFAULT_SOLUTION );
+      DEFAULT_SOLUTION_TYPE );
 
     this.addProperty( 'isAcid', true ); // type of solution. true - acid, false - base
     this.addProperty( 'isWeak', true ); // type of strength. true - weak, false - strong
-    this.addProperty( 'concentration', this.components[DEFAULT_SOLUTION].concentration ); // concentration of solution
-    this.addProperty( 'strength', this.components[DEFAULT_SOLUTION].strength ); // strength of solution
+    this.addProperty( 'concentration', this.components[DEFAULT_SOLUTION_TYPE].concentration ); // concentration of solution
+    this.addProperty( 'strength', this.components[DEFAULT_SOLUTION_TYPE].strength ); // strength of solution
 
     // models for control panel
     this.controlPanel = [

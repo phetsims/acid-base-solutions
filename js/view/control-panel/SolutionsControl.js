@@ -15,7 +15,7 @@ define( function( require ) {
     HTMLText = require( 'SCENERY/nodes/HTMLText' ),
     ChemUtils = require( 'NITROGLYCERIN/ChemUtils' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    Solutions = require( 'ACID_BASE_SOLUTIONS/model/Constants/Solutions' ),
+    SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
 
     VBox = require( 'SCENERY/nodes/VBox' ),
     HBox = require( 'SCENERY/nodes/HBox' ),
@@ -44,28 +44,28 @@ define( function( require ) {
    */
   var radioButtonOptions = [
     {
-      value: Solutions.WATER,
+      value: SolutionTypes.WATER,
       text: new SubSupText( StringUtils.format( pattern_0solution_1symbol, waterString, ChemUtils.toSubscript( 'H2O' ) ), {font: FONT} ),
       icon: H2OMolecule
     },
     {
-      value: Solutions.STRONG_ACID,
+      value: SolutionTypes.STRONG_ACID,
       text: new HTMLText( StringUtils.format( pattern_0solution_1symbol, strongAcidString, 'H<i>A</i>' ), {font: FONT} ),
       icon: HAMolecule
     },
     {
-      value: Solutions.WEAK_ACID,
+      value: SolutionTypes.WEAK_ACID,
       text: new HTMLText( StringUtils.format( pattern_0solution_1symbol, weakAcidString, 'H<i>A</i>' ), {font: FONT} ),
       icon: HAMolecule
     },
     {
-      value: Solutions.STRONG_BASE,
+      value: SolutionTypes.STRONG_BASE,
       text: new HTMLText( StringUtils.format( pattern_0solution_1symbol, strongBaseString, '<i>M</i>OH' ), {font: FONT} ),
       icon: MOHMolecule
     },
     {
       text: new HTMLText( StringUtils.format( pattern_0solution_1symbol, weakBaseString, '<i>B</i>' ), {font: FONT} ),
-      value: Solutions.WEAK_BASE,
+      value: SolutionTypes.WEAK_BASE,
       icon: BMolecule
     }
   ];
