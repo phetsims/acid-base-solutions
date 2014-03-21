@@ -1,3 +1,4 @@
+3/21/14 #56 add credits
 3/21/14 change 'Acid Base Solutions' to 'Acid-Base Solutions' throughout comments
 3/21/14 #53 fix malformed imports
 # 1.0.0-dev.2 3/21/14 (MLL baseline)

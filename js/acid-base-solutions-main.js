@@ -22,8 +22,12 @@ define( function( require ) {
     simTitleString = require( 'string!ACID_BASE_SOLUTIONS/acid-base-solutions.name' );
 
   var simOptions = {
-    credits: '',
-    thanks: ''
+    credits: {
+      leadDesign: 'Kelly Lancaster',
+      softwareDevelopment: 'Chris Malley',
+      designTeam: 'Patricia Loeblein, Robert Parson, Kathy Perkins',
+      thanks: 'Thanks to Mobile Learner Labs for working with the PhET development team\nto convert this simulation to HTML5.'
+    }
   };
 
   SimLauncher.launch( function() {
