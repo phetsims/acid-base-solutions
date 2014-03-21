@@ -20,9 +20,7 @@ define( function( require ) {
     ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
     TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' ),
     ScreenView = require( 'JOIST/ScreenView' ),
-
-  // constants
-    CONSTANTS = require( 'model/Constants/Constants' );
+    Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
 
   function AcidBaseSolutionsAbstractModel( mode, solutions, defaultSolution ) {
     var self = this,
@@ -89,10 +87,10 @@ define( function( require ) {
 
   // private methods
   var pHToBrightness = function( pH ) {
-    var NEUTRAL_PH = CONSTANTS.NEUTRAL_PH,
-      NEUTRAL_BRIGHTNESS = CONSTANTS.NEUTRAL_BRIGHTNESS;
+    var NEUTRAL_PH = Constants.NEUTRAL_PH,
+      NEUTRAL_BRIGHTNESS = Constants.NEUTRAL_BRIGHTNESS;
 
-    return NEUTRAL_BRIGHTNESS + ( 1 - NEUTRAL_BRIGHTNESS ) * (pH < NEUTRAL_PH ? ( NEUTRAL_PH - pH ) / ( NEUTRAL_PH - CONSTANTS.MIN_PH ) : ( pH - NEUTRAL_PH ) / ( CONSTANTS.MAX_PH - NEUTRAL_PH ) );
+    return NEUTRAL_BRIGHTNESS + ( 1 - NEUTRAL_BRIGHTNESS ) * (pH < NEUTRAL_PH ? ( NEUTRAL_PH - pH ) / ( NEUTRAL_PH - Constants.MIN_PH ) : ( pH - NEUTRAL_PH ) / ( Constants.MAX_PH - NEUTRAL_PH ) );
   };
 
   return inherit( PropertySet, AcidBaseSolutionsAbstractModel, {

@@ -19,6 +19,7 @@ define( function( require ) {
     ChemUtils = require( 'NITROGLYCERIN/ChemUtils' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     VStrut = require( 'SUN/VStrut' ),
+    Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' ),
 
   // molecules
     AMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/AMolecule' ),
@@ -36,12 +37,11 @@ define( function( require ) {
     arrowDoubleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_double.png' ),
 
   // constants
-    CONSTANTS = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' ),
-    FONT_SIZE = CONSTANTS.FORMULAS_FONT_SIZE,
+    FONT_SIZE = Constants.FORMULAS_FONT_SIZE,
     FONT = new PhetFont( FONT_SIZE ),
-    HBOX_SPACING = CONSTANTS.FORMULAS_HBOX_SPACING,
+    HBOX_SPACING = Constants.FORMULAS_HBOX_SPACING,
     TEXT_SUB_INDENT = FONT_SIZE / 8,
-    VBOX_SPACING = CONSTANTS.FORMULAS_VBOX_SPACING;
+    VBOX_SPACING = Constants.FORMULAS_VBOX_SPACING;
 
   function FormulaAbstract( options ) {
     HBox.call( this, _.extend( {spacing: HBOX_SPACING, align: 'bottom'}, options ) );

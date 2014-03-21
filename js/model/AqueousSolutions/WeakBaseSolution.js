@@ -13,6 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     Solutions = require( 'ACID_BASE_SOLUTIONS/model/Constants/Solutions' ),
     AqueousSolutionAbstract = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/AqueousSolutionAbstract' ),
+    Constants = require( 'model/Constants/Constants' ),
 
   // [B] = c - [BH+]
     getSoluteConcentration = function( concentration, productConcentration ) {
@@ -26,7 +27,7 @@ define( function( require ) {
 
   // [H3O+] = Kw / [OH-]
     getH3OConcentration = function( OHConcentration ) {
-      return CONSTANTS.WATER_EQUILIBRIUM_CONSTANT / OHConcentration;
+      return Constants.WATER_EQUILIBRIUM_CONSTANT / OHConcentration;
     },
 
   // [OH-] = [BH+]
@@ -36,17 +37,16 @@ define( function( require ) {
 
   // [H2O] = W - [BH+]
     getH2OConcentration = function( productConcentration ) {
-      return (CONSTANTS.WATER_CONCENTRATION - productConcentration);
+      return (Constants.WATER_CONCENTRATION - productConcentration);
     },
 
     isValidStrength = function( strength ) {
-      return CONSTANTS.WEAK_STRENGTH_RANGE.contains( strength );
+      return Constants.WEAK_STRENGTH_RANGE.contains( strength );
     },
 
   // constants
-    CONSTANTS = require( 'model/Constants/Constants' ),
-    STRENGTH_DEFAULT = CONSTANTS.WEAK_STRENGTH_RANGE.defaultValue,
-    CONCENTRATION_DEFAULT = CONSTANTS.CONCENTRATION_RANGE.defaultValue,
+    STRENGTH_DEFAULT = Constants.WEAK_STRENGTH_RANGE.defaultValue,
+    CONCENTRATION_DEFAULT = Constants.CONCENTRATION_RANGE.defaultValue,
     PRODUCT_CONCENTRATION_DEFAULT = getProductConcentration( STRENGTH_DEFAULT, CONCENTRATION_DEFAULT ),
     SOLUTE_CONCENTRATION_DEFAULT = getSoluteConcentration( CONCENTRATION_DEFAULT, PRODUCT_CONCENTRATION_DEFAULT ),
     OH_CONCENTRATION_DEFAULT = getOHConcentration( PRODUCT_CONCENTRATION_DEFAULT ),
