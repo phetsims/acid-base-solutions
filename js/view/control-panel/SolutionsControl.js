@@ -73,14 +73,14 @@ define( function( require ) {
 
   function SolutionsControl( solutionMenuModel, options ) {
     var self = this,
-      solutionProperty = solutionMenuModel.solution,
+      solutionTypeProperty = solutionMenuModel.solutionTypeProperty,
       radioButtons = [],
       maxHeight = 0;
     VBox.call( this, _.extend( {align: 'left'}, options ) );
 
     // define radio buttons and find max height of single button
     radioButtonOptions.forEach( function( radioButtonOption, i ) {
-      radioButtons[i] = createRadioButton( solutionProperty, radioButtonOption );
+      radioButtons[i] = createRadioButton( solutionTypeProperty, radioButtonOption );
       maxHeight = Math.max( radioButtons[i].getHeight(), maxHeight );
     } );
 
@@ -95,8 +95,8 @@ define( function( require ) {
     this.setX( this.getX() - RADIO_BUTTON_RADIUS );
   }
 
-  var createRadioButton = function( property, options ) {
-    return new AquaRadioButton( property, options.value, new HBox( {spacing: 5, children: [
+  var createRadioButton = function( solutionTypeProperty, options ) {
+    return new AquaRadioButton( solutionTypeProperty, options.value, new HBox( {spacing: 5, children: [
       options.text,
       new options.icon()
     ]

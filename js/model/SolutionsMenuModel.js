@@ -15,16 +15,19 @@ define( function( require ) {
   // strings
   var solutionsString = require( 'string!ACID_BASE_SOLUTIONS/solutions' );
 
-  function SolutionsMenuModel( solutionProperty ) {
+  /**
+   * @param {Property<SolutionTypes>} solutionTypeProperty
+   * @constructor
+   */
+  function SolutionsMenuModel( solutionTypeProperty ) {
     // control panel's type
     this.controlPanelType = ControlPanelTypes.SOLUTIONS;
 
     // control panel's title
     this.title = solutionsString;
 
-    //TODO add Property suffix
-    // selected solution
-    this.solution = solutionProperty;
+    // selected solution type
+    this.solutionTypeProperty = solutionTypeProperty;
   }
 
   SolutionsMenuModel.prototype = {
