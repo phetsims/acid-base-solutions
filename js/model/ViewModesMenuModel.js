@@ -27,12 +27,15 @@ define( function( require ) {
     // control panel's title
     this.title = viewsString;
 
+    //TODO add Property suffix
     // view mode property
     this.mode = viewModeProperty;
 
+    //TODO add Property suffix
     // solvent visibility
     this.solventVisibleProperty = solventVisibleProperty;
 
+    //TODO add Property suffix
     // solvent checkbox enable property
     this.checkboxEnable = new Property( true );
 

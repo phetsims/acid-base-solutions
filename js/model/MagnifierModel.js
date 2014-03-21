@@ -20,6 +20,7 @@ define( function( require ) {
     // magnifier location
     this.location = beakerModel.location.plusXY( 0, -beakerModel.height / 2 );
 
+    //TODO add Property suffix
     // solution property
     this.solution = solutionProperty;
 
@@ -32,12 +33,15 @@ define( function( require ) {
     // solvent visibility property
     this.solventVisibleProperty = solventVisibleProperty;
 
+    //TODO add Property suffix
     // view mode property
     this.viewMode = viewModeProperty;
 
+    //TODO add Property suffix
     // test mode property
     this.testMode = testModeProperty;
 
+    //TODO add Property suffix
     // visibility of magnifier
     this.visibility = new Property( this.findVisibility() );
 

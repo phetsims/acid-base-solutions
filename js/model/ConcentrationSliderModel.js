@@ -19,6 +19,7 @@ define( function( require ) {
   function ConcentrationSliderModel( concentrationProperty ) {
     var self = this;
 
+    //TODO add Property suffix
     // concentration of solution
     this.concentration = concentrationProperty;
 
@@ -28,6 +29,7 @@ define( function( require ) {
     // concentration step for arrow button
     this.arrowStep = 0.1;
 
+    //TODO add Property suffix
     // property for slider
     this.slider = new Property( this.range.defaultValue );
 

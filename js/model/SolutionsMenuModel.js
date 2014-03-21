@@ -22,6 +22,7 @@ define( function( require ) {
     // control panel's title
     this.title = solutionsString;
 
+    //TODO add Property suffix
     // selected solution
     this.solution = solutionProperty;
   }

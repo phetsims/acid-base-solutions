@@ -24,6 +24,7 @@ define( function( require ) {
     // bar chart location
     this.location = beakerModel.location.plusXY( (this.width - beakerModel.width) / 2, -(beakerModel.height + this.height) / 2 );
 
+    //TODO add Property suffix
     // solution property
     this.solution = solutionProperty;
 
@@ -33,18 +34,23 @@ define( function( require ) {
     // object for easy access to solutions
     this.components = components;
 
+    //TODO add Property suffix
     // view mode property
     this.viewMode = viewModeProperty;
 
+    //TODO add Property suffix
     // test mode property
     this.testMode = testModeProperty;
 
+    //TODO add Property suffix
     // strength property
     this.strength = strengthProperty;
 
+    //TODO add Property suffix
     // concentration property
     this.concentration = concentrationProperty;
 
+    //TODO add Property suffix
     // visibility of bar charts
     this.visibility = new Property( this.findVisibility() );
 

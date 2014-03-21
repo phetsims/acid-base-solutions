@@ -22,6 +22,7 @@ define( function( require ) {
     // control panel's title
     this.title = testsString;
 
+    //TODO add Property suffix
     // test mode property
     this.mode = testModeProperty;
   }

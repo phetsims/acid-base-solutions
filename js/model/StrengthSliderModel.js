@@ -26,9 +26,11 @@ define( function( require ) {
     // range of slider values
     this.range = new Range( Util.log10( WEAK_STRENGTH_RANGE.min ), Util.log10( WEAK_STRENGTH_RANGE.max ), Util.log10( WEAK_STRENGTH_RANGE.defaultValue ) );
 
+    //TODO add Property suffix
     // property for slider
     this.slider = new Property( this.range.defaultValue );
 
+    //TODO add Property suffix
     // visibility of slider
     this.visibility = new Property( isWeakProperty.value );
 

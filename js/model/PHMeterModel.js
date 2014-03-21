@@ -28,15 +28,19 @@ define( function( require ) {
     // water surface level
     this.waterSurface = beakerModel.location.y - beakerModel.height - 100;
 
+    //TODO add Property suffix
     // pH property
     this.pH = pHProperty;
 
+    //TODO add Property suffix
     // test mode property
     this.testMode = testModeProperty;
 
+    //TODO add Property suffix
     // visibility of pH meter
     this.visibility = new Property( testModeProperty.value === TestModes.PH_METER );
 
+    //TODO add Property suffix, rename to textVisibleProperty
     // visibility of text
     this.textVisibility = new Property( false );
 

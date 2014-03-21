@@ -26,6 +26,7 @@ define( function( require ) {
     // pH test location
     this.location = beakerModel.location.plusXY( -beakerModel.width / 2 + 20, -beakerModel.height - 115 );
 
+    //TODO add Property suffix
     // pH paper location
     this.paperLocation = new Property( this.location.plusXY( -57.5, -25 ) );
 
@@ -43,15 +44,19 @@ define( function( require ) {
     // water surface level
     this.waterSurface = beakerModel.location.y - beakerModel.height - 132;
 
+    //TODO add Property suffix
     // pH property
     this.pH = pHProperty;
 
+    //TODO add Property suffix
     // test mode property
     this.testMode = testModeProperty;
 
+    //TODO add Property suffix
     // visibility of pH paper
     this.visibility = new Property( testModeProperty.value === TestModes.PH_PAPER );
 
+    //TODO add Property suffix
     // height of indicator paper
     this.indicatorHeight = new Property( 0 );
 

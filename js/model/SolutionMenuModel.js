@@ -33,6 +33,7 @@ define( function( require ) {
     // control panel's title
     this.title = solutionString;
 
+    //TODO add Property suffix
     // properties for radio buttons
     this.isAcid = isAcidProperty; // type of solution. true - acid, false - base
     this.isWeak = isWeakProperty; // type of strength. true - weak, false - strong
