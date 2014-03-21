@@ -22,6 +22,12 @@ define( function( require ) {
     ScreenView = require( 'JOIST/ScreenView' ),
     Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
 
+  /**
+   * @param {GameMode} mode
+   * @param {Array<AqueousSolution>} solutions
+   * @param {Solutions} defaultSolution
+   * @constructor
+   */
   function AcidBaseSolutionsAbstractModel( mode, solutions, defaultSolution ) {
     var self = this,
       setPH = function( value ) { self.pH = value; }; // observer for pH property
