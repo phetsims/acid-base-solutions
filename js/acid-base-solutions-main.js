@@ -19,7 +19,7 @@ define( function( require ) {
     customSolutionIcon = require( 'image!ACID_BASE_SOLUTIONS/../images/custom-solution-icon.png' ),
     introductionTitleString = require( 'string!ACID_BASE_SOLUTIONS/introductionTitle' ),
     customSolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/customSolutionTitle' ),
-    simTitleString = require( 'string!ACID_BASE_SOLUTIONS/acidBaseSolutionsTitle' );
+    simTitleString = require( 'string!ACID_BASE_SOLUTIONS/acid-base-solutions.name' );
 
   var simOptions = {
     credits: '',

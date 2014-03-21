@@ -1,6 +1,6 @@
 {
   "acid": "Acid",
-  "acidBaseSolutionsTitle": "Acid-Base Solutions",
+  "acid-base-solutions.name": "Acid-Base Solutions",
   "base": "Base",
   "concentration": "Concentration",
   "concentrationGraph.yAxis": "Equilibrium Concentration (mol/L)",
