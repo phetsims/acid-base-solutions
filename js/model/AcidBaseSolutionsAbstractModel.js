@@ -41,7 +41,7 @@ define( function( require ) {
     // possible solutions
     this.SOLUTIONS = solutions;
 
-    // for easy access to solutions
+    // for easy access to solutions. This is an associative array that is indexed by {SolutionTypes}
     this.components = {};
 
     this.SOLUTIONS.forEach( function( solution ) {
