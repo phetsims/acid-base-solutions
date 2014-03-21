@@ -27,20 +27,17 @@ define( function( require ) {
     // control panel's title
     this.title = viewsString;
 
-    //TODO add Property suffix
     // view mode property
-    this.mode = viewModeProperty;
+    this.viewModeProperty = viewModeProperty;
 
-    //TODO add Property suffix
     // solvent visibility
     this.solventVisibleProperty = solventVisibleProperty;
 
-    //TODO add Property suffix
-    // solvent checkbox enable property
-    this.checkboxEnable = new Property( true );
+    // solvent check box enabled
+    this.checkboxEnabledProperty = new Property( true );
 
     var setCheckboxEnabled = function() {
-      self.checkboxEnable.value = (viewModeProperty.get() === ViewModes.MOLECULES && testModeProperty.get() !== TestModes.CONDUCTIVITY);
+      self.checkboxEnabledProperty.value = (viewModeProperty.get() === ViewModes.MOLECULES && testModeProperty.get() !== TestModes.CONDUCTIVITY);
     };
 
     viewModeProperty.link( setCheckboxEnabled );

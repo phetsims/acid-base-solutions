@@ -83,9 +83,9 @@ define( function( require ) {
 
   function ViewsControl( viewModesMenuModel, options ) {
     var self = this,
-      checkboxEnableProperty = viewModesMenuModel.checkboxEnable,
+      checkboxEnabledProperty = viewModesMenuModel.checkboxEnabledProperty,
       solventVisibleProperty = viewModesMenuModel.solventVisibleProperty,
-      viewModeProperty = viewModesMenuModel.mode;
+      viewModeProperty = viewModesMenuModel.viewModeProperty;
     VBox.call( this, _.extend( {spacing: 4, align: 'left'}, options ) );
 
     // add options to menu
@@ -96,8 +96,8 @@ define( function( require ) {
       else {
         self.addChild( createCheckBox.call( self, solventVisibleProperty, buttonOption ) );
 
-        checkboxEnableProperty.link( function( isEnabled ) {
-          self._checkbox.enabled = isEnabled;
+        checkboxEnabledProperty.link( function( enabled ) {
+          self._checkbox.enabled = enabled;
         } );
       }
     } );
