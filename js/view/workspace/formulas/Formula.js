@@ -45,14 +45,14 @@ define( function( require ) {
     this.translation = formulaModel.location.plusXY( -maxWidth / 2, 5 );
 
     // add observer for formulas
-    formulaModel.solutionProperty.link( function( newSolution, prevSolution ) {
+    formulaModel.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
       // hide previous formula
-      if ( prevSolution ) {
-        formulas[prevSolution].setVisible( false );
+      if ( prevSolutionType ) {
+        formulas[prevSolutionType].setVisible( false );
       }
 
       // show new formula
-      formulas[newSolution].setVisible( true );
+      formulas[newSolutionType].setVisible( true );
     } );
   }
 

@@ -9,12 +9,17 @@
 define( function() {
   'use strict';
 
-  function FormulaModel( beakerModel, solutionProperty ) {
+  /**
+   * @param {BeakerModel} beakerModel
+   * @param {Property<SolutionType>} solutionTypeProperty
+   * @constructor
+   */
+  function FormulaModel( beakerModel, solutionTypeProperty ) {
     // formula location
     this.location = beakerModel.location.copy();
 
     // solution property
-    this.solutionProperty = solutionProperty;
+    this.solutionTypeProperty = solutionTypeProperty;
   }
 
   return FormulaModel;
