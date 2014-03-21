@@ -25,10 +25,10 @@ define( function( require ) {
   /**
    * @param {GameMode} mode
    * @param {Array<AqueousSolution>} solutions
-   * @param {Solutions} defaultSolution
+   * @param {SolutionTypes} defaultSolutionType
    * @constructor
    */
-  function AcidBaseSolutionsAbstractModel( mode, solutions, defaultSolution ) {
+  function AcidBaseSolutionsAbstractModel( mode, solutions, defaultSolutionType ) {
     var self = this,
       setPH = function( value ) { self.pH = value; }; // observer for pH property
 
@@ -49,12 +49,13 @@ define( function( require ) {
     } );
 
     PropertySet.call( this, {
-      solution: defaultSolution, // solution's type
+      //TODO rename to solutionType
+      solution: defaultSolutionType, // solution's type
       testMode: TestModes.PH_METER, // test mode
       viewMode: ViewModes.MOLECULES, // view mode
       solvent: false, // solvent visibility
-      pH: this.components[defaultSolution].pH, // pH level of product
-      brightness: pHToBrightness( this.components[defaultSolution].pH ) // brightness value
+      pH: this.components[defaultSolutionType].pH, // pH level of product
+      brightness: pHToBrightness( this.components[defaultSolutionType].pH ) // brightness value
     } );
 
     // beaker model (all elements in workspace have position relative to beaker)
