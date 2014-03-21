@@ -21,11 +21,29 @@ define( function( require ) {
   // strings
   var pHColorKeyString = require( 'string!ACID_BASE_SOLUTIONS/pHColorKey' );
 
+  // pH paper colors, ordered from pH value 0-14
+  var PH_COLORS = [
+      'rgb(182,70,72)',
+      'rgb(196,80,86)',
+      'rgb(213,83,71)',
+      'rgb(237,123,83)',
+      'rgb(246,152,86)',
+      'rgb(244,158,79)',
+      'rgb(243,160,78)',
+      'rgb(244,182,67)',
+      'rgb(231,201,75)',
+      'rgb(93,118,88)',
+      'rgb(30,92,89)',
+      'rgb(34,90,105)',
+      'rgb(39,87,111)',
+      'rgb(27,67,90)',
+      'rgb(0,34,52)'
+    ];
+
   // constants
   var FONT_BIG = new PhetFont( 10 ),
     FONT_SMALL = new PhetFont( 8 ),
-    PH_COLORS = require( 'model/Constants/PHColors' ),
-    PAPER_DEFAUL_COLOR = PH_COLORS[PH_COLORS.length - 1],
+    PAPER_COLOR = 'rgb(217,215,154)', // color of blank pH paper, cream
     SPACE_BETWEEN_RECTS = 1,
     TABLE_RECT_HEIGHT = Constants.PH_COLOR_KEY_RECT_HEIGHT,
     TABLE_RECT_WIDTH = Constants.PH_COLOR_KEY_RECT_WIDTH;
@@ -39,18 +57,18 @@ define( function( require ) {
     this.addChild( new Text( pHColorKeyString, {font: FONT_BIG, centerY: 0} ) );
 
     // add color key table
-    for ( var i = 0; i < PH_COLORS.length - 1; i++ ) {
+    for ( var i = 0; i < PH_COLORS.length; i++ ) {
       this.addChild( new Rectangle( (TABLE_RECT_WIDTH + SPACE_BETWEEN_RECTS) * i, 10, TABLE_RECT_WIDTH, TABLE_RECT_HEIGHT, {fill: PH_COLORS[i]} ) );
       this.addChild( new Text( i.toString(), {font: FONT_SMALL, centerX: (TABLE_RECT_WIDTH + SPACE_BETWEEN_RECTS) * (i + 0.5), centerY: 46} ) );
     }
 
     // add pH paper
     this.addChild( paper = new Node( {children: [
-      new Rectangle( (PH_COLORS.length + 2) * (TABLE_RECT_WIDTH + SPACE_BETWEEN_RECTS), 0, TABLE_RECT_WIDTH, pHPaperModel.length, {cursor: 'pointer', fill: PAPER_DEFAUL_COLOR, stroke: 'rgb(150, 150, 150)', lineWidth: 0.5} ),
+      new Rectangle( (PH_COLORS.length + 3) * (TABLE_RECT_WIDTH + SPACE_BETWEEN_RECTS), 0, TABLE_RECT_WIDTH, pHPaperModel.length, {cursor: 'pointer', fill: PAPER_COLOR, stroke: 'rgb(150, 150, 150)', lineWidth: 0.5} ),
       indicatorPaper = new Rectangle( 0, 0, TABLE_RECT_WIDTH, 0, {cursor: 'pointer', fill: 'red', stroke: 'rgb(150, 150, 150)', lineWidth: 0.5} )
     ]} ) );
     indicatorPaper.rotate( Math.PI );
-    indicatorPaper.setTranslation( (PH_COLORS.length + 2) * (TABLE_RECT_WIDTH + SPACE_BETWEEN_RECTS) + TABLE_RECT_WIDTH, pHPaperModel.length );
+    indicatorPaper.setTranslation( (PH_COLORS.length + 3) * (TABLE_RECT_WIDTH + SPACE_BETWEEN_RECTS) + TABLE_RECT_WIDTH, pHPaperModel.length );
 
     // add drag and drop for paper
     var clickOffset;

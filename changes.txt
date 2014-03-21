@@ -1,3 +1,4 @@
+3/21/14 move pH paper colors into PHPaperTest, document the order dependency in the color array
 3/21/14 rename ControlPanels enum to ControlPanelTypes
 3/21/14 #59 rename solventProperty to solventVisibleProperty
 3/21/14 rename Solutions enum to SolutionTypes
