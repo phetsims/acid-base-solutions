@@ -26,27 +26,25 @@ define( function( require ) {
     // range of slider values
     this.range = new Range( Util.log10( WEAK_STRENGTH_RANGE.min ), Util.log10( WEAK_STRENGTH_RANGE.max ), Util.log10( WEAK_STRENGTH_RANGE.defaultValue ) );
 
-    //TODO add Property suffix
-    // property for slider
-    this.slider = new Property( this.range.defaultValue );
+    // property for slider's value
+    this.sliderValueProperty = new Property( this.range.defaultValue );
 
-    //TODO add Property suffix
     // visibility of slider
-    this.visibility = new Property( isWeakProperty.value );
+    this.visibleProperty = new Property( isWeakProperty.value );
 
     isWeakProperty.link( function( isWeak ) {
-      self.visibility.value = isWeak;
+      self.visibleProperty.value = isWeak;
     } );
 
-    this.slider.link( function( value ) {
+    this.sliderValueProperty.link( function( value ) {
       self.strength.value = Math.pow( 10, value );
     } );
   }
 
   StrengthSliderModel.prototype = {
     reset: function() {
-      this.slider.reset();
-      this.visibility.reset();
+      this.sliderValueProperty.reset();
+      this.visibleProperty.reset();
     }
   };
 

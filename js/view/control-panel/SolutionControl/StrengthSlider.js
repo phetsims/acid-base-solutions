@@ -29,12 +29,12 @@ define( function( require ) {
 
   function StrengthSlider( strengthSliderModel, coords ) {
     var range = strengthSliderModel.range,
-      sliderProperty = strengthSliderModel.slider,
+      sliderValueProperty = strengthSliderModel.sliderValueProperty,
       slider;
     Node.call( this, coords );
 
     // add horizontal part
-    this.addChild( slider = new HSlider( sliderProperty, range, {
+    this.addChild( slider = new HSlider( sliderValueProperty, range, {
       trackSize: new Dimension2( SLIDER_TRACK_WIDTH, 4 ),
       thumbSize: new Dimension2( 12, 21 ),
       majorTickLength: -12

@@ -66,7 +66,7 @@ define( function( require ) {
     this.addChild( vBox );
     vBox.updateLayout();
 
-    SolutionMenuModel.strengthSlider.visibility.link( function( visible ) {
+    SolutionMenuModel.strengthSlider.visibleProperty.link( function( visible ) {
       strengthSlider.setVisible( visible );
     } );
   }
