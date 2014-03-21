@@ -13,7 +13,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' ),
     ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
     TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' ),
-    ControlPanels = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanels' );
+    ControlPanelTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanelTypes' );
 
   // strings
   var viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' );
@@ -22,7 +22,7 @@ define( function( require ) {
     var self = this;
 
     // control panel's type
-    this.type = ControlPanels.VIEWS;
+    this.controlPanelType = ControlPanelTypes.VIEWS;
 
     // control panel's title
     this.title = viewsString;

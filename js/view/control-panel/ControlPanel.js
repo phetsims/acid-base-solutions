@@ -22,17 +22,17 @@ define( function( require ) {
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' ),
-    ControlPanels = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanels' );
+    ControlPanelTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanelTypes' );
 
   // constants
   var FONT = new PhetFont( {size: 14, weight: 'bold'} );
 
   // view constructors for solution controls
   var Panels = {}; //TODO is this supposed to be [] ??
-  Panels[ControlPanels.SOLUTIONS] = SolutionsControl;
-  Panels[ControlPanels.SOLUTION] = SolutionControl;
-  Panels[ControlPanels.VIEWS] = ViewsControl;
-  Panels[ControlPanels.TESTS] = TestsControl;
+  Panels[ControlPanelTypes.SOLUTIONS] = SolutionsControl;
+  Panels[ControlPanelTypes.SOLUTION] = SolutionControl;
+  Panels[ControlPanelTypes.VIEWS] = ViewsControl;
+  Panels[ControlPanelTypes.TESTS] = TestsControl;
 
   function ControlPanel( model ) {
     var vBox = new VBox( {x: 20, spacing: 8, align: 'left'} ),
@@ -48,7 +48,7 @@ define( function( require ) {
     // add menus to vBox, add titles and find max menu width (to align strokes with equal width)
     model.controlPanel.forEach( function( panel, i ) {
       var title = new Text( panel.title, {font: FONT, centerY: -10} ),
-        menuNode = new Panels[panel.type]( panel );
+        menuNode = new Panels[panel.controlPanelType]( panel );
 
       // create stroke for menu item
       strokes[i] = new Rectangle( -15, -10, 0, menuNode.getHeight() + 20, 5, 5, {stroke: 'black', lineWidth: 0.75} );

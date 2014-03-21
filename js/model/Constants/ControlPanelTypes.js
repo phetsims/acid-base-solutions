@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Possible control panels in 'Acid-Base Solutions' sim.
+ * Possible control panel types in 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
@@ -10,7 +10,7 @@ define( function() {
 
   return Object.freeze( {
     SOLUTIONS: 'solutions',
-    SOLUTION: 'solution',
+    SOLUTION: 'solution', // control panel for a custom solution
     VIEWS: 'views',
     TESTS: 'tests'
   } );

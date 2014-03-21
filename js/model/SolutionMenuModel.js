@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ControlPanels = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanels' ),
+  var ControlPanelTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanelTypes' ),
     SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
     ConcentrationSliderModel = require( 'ACID_BASE_SOLUTIONS/model/ConcentrationSliderModel' ),
     StrengthSliderModel = require( 'ACID_BASE_SOLUTIONS/model/StrengthSliderModel' );
@@ -28,7 +28,7 @@ define( function( require ) {
    */
   function SolutionMenuModel( solutionTypeProperty, concentrationProperty, strengthProperty, isAcidProperty, isWeakProperty ) {
     // control panel's type
-    this.type = ControlPanels.SOLUTION;
+    this.controlPanelType = ControlPanelTypes.SOLUTION;
 
     // control panel's title
     this.title = solutionString;

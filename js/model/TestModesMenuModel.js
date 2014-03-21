@@ -10,14 +10,14 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ControlPanels = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanels' );
+  var ControlPanelTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanelTypes' );
 
   // strings
   var testsString = require( 'string!ACID_BASE_SOLUTIONS/tests' );
 
   function TestModesMenuModel( testModeProperty ) {
     // control panel's type
-    this.type = ControlPanels.TESTS;
+    this.controlPanelType = ControlPanelTypes.TESTS;
 
     // control panel's title
     this.title = testsString;
