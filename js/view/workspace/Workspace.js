@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Workspace container for the 'Acid Base Solutions' sim.
+ * Workspace container for the 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
  */

@@ -2,7 +2,7 @@
 
 /**
  * Visual representation for single molecule type
- * within magnifier in the 'Acid Base Solutions' sim.
+ * within magnifier in the 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
  */

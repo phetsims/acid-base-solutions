@@ -2,7 +2,7 @@
 
 /**
  * Visual representation for single probe
- * in the conductivity test in the 'Acid Base Solutions' sim.
+ * in the conductivity test in the 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
  */

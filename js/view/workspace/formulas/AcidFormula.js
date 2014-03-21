@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Visual representation for formula of strong and weak acid in the 'Acid Base Solutions' sim.
+ * Visual representation for formula of strong and weak acid in the 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
  */

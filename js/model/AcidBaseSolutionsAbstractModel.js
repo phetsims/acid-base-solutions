@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Abstract model for the 'Acid Base Solutions' screen.
+ * Abstract model for the 'Acid-Base Solutions' screen.
  *
  * @author Andrey Zelenkov (Mlearner)
  */

@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Main entry point for the 'Acid Base Solutions' sim.
+ * Main entry point for the 'Acid-Base Solutions' sim.
  *
  * @author Andrew Zelenkov (Mlearner)
  */

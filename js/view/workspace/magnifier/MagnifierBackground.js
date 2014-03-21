@@ -2,7 +2,7 @@
 
 /**
  * Visual representation for magnifier's background
- * in the 'Acid Base Solutions' sim.
+ * in the 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
  */

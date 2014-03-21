@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Scene graph for the 'Acid Base Solutions' screen.
+ * Scene graph for the 'Acid-Base Solutions' screen.
  *
  * @author Andrey Zelenkov (Mlearner)
  */

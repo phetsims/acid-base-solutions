@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /*
- * RequireJS configuration file for the 'Acid Base Solutions' sim.
+ * RequireJS configuration file for the 'Acid-Base Solutions' sim.
  * Paths are relative to the location of this file.
  *
  * @author Andrey Zelenkov (Mlearner)

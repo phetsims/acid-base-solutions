@@ -2,7 +2,7 @@
 
 /**
  * Visual representation for single bar
- * in concentration chart in the 'Acid Base Solutions' sim.
+ * in concentration chart in the 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
  */

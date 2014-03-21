@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Constants for simulation 'Acid Base Solutions'.
+ * Constants for simulation 'Acid-Base Solutions'.
  *
  * @author Andrey Zelenkov (Mlearner)
  */

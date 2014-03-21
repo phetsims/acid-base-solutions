@@ -2,7 +2,7 @@
 
 /**
  * Visual representation for single wire
- * in the conductivity test in the 'Acid Base Solutions' sim.
+ * in the conductivity test in the 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
