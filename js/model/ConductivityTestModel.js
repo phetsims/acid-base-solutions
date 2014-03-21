@@ -11,11 +11,11 @@ define( function( require ) {
 
   // imports
   var Property = require( 'AXON/Property' ),
-    TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' ),
+    TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' );
 
-    WIRES_INITIAL_Y = 60,
-
-    wireOptions = {
+  // constants
+  var WIRES_INITIAL_Y = 60,
+    WIRE_OPTIONS = {
       positive: {
         start: {x: 125, y: 84},
         end: {x: 163, y: WIRES_INITIAL_Y}
@@ -39,10 +39,10 @@ define( function( require ) {
     this.waterSurface = beakerModel.location.y - beakerModel.height - 60;
 
     // positive probe y-coordinate
-    this.positiveProbeY = new Property( wireOptions.positive.end.y );
+    this.positiveProbeY = new Property( WIRE_OPTIONS.positive.end.y );
 
     // negative probe y-coordinate
-    this.negativeProbeY = new Property( wireOptions.negative.end.y );
+    this.negativeProbeY = new Property( WIRE_OPTIONS.negative.end.y );
 
     // test mode property
     this.testMode = testModeProperty;
@@ -76,7 +76,7 @@ define( function( require ) {
       this.negativeProbeY.reset();
     },
     getWireOptions: function() {
-      return wireOptions;
+      return WIRE_OPTIONS;
     }
   };
 

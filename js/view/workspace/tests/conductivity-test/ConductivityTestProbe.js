@@ -14,10 +14,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
-    SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' ),
+    SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
 
   // constants
-    PROBE_MAX_Y_COODINATE = 370,
+  var PROBE_MAX_Y_COODINATE = 370,
     PROBE_MIN_Y_COODINATE = 40;
 
   function ConductivityTestProbe( fill, type, property, options ) {

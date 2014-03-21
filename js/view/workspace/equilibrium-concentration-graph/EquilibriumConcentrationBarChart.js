@@ -13,10 +13,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     EquilibriumConcentrationSingleBar = require( 'ACID_BASE_SOLUTIONS/view/workspace/equilibrium-concentration-graph/EquilibriumConcentrationSingleBar' ),
-    EquilibriumConcentrationBarChartBackground = require( 'ACID_BASE_SOLUTIONS/view/workspace/equilibrium-concentration-graph/EquilibriumConcentrationBarChartBackground' ),
+    EquilibriumConcentrationBarChartBackground = require( 'ACID_BASE_SOLUTIONS/view/workspace/equilibrium-concentration-graph/EquilibriumConcentrationBarChartBackground' );
 
   // constants
-    MOLECULES_COLORS = require( 'ACID_BASE_SOLUTIONS/model/Constants/MoleculesColors' );
+  var MOLECULES_COLORS = require( 'ACID_BASE_SOLUTIONS/model/Constants/MoleculesColors' );
 
   function EquilibriumConcentrationBarChart( barChartModel ) {
     var self = this,

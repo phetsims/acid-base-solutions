@@ -20,16 +20,16 @@ define( function( require ) {
     Text = require( 'SCENERY/nodes/Text' ),
     HSlider = require( 'SUN/HSlider' ),
     StringUtils = require( 'PHETCOMMON/util/StringUtils' ),
-    Util = require( 'DOT/Util' ),
+    Util = require( 'DOT/Util' );
 
   // strings
-    pattern_0value_1concentration = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1concentration' ),
-    molesPerLiterString = require( 'string!ACID_BASE_SOLUTIONS/molesPerLiter' ),
+  var pattern_0value_1concentration = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1concentration' ),
+    molesPerLiterString = require( 'string!ACID_BASE_SOLUTIONS/molesPerLiter' );
 
   // constants
-    ARROW_HEIGHT = 15,
+  var ARROW_HEIGHT = 15,
     READOUT_FONT = new PhetFont( 14 ),
-    arrowButtonOptions = {arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2};
+    ARROW_BUTTON_OPTIONS = {arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2};
 
   function ConcentrationSlider( concentrationSliderModel ) {
     var range = concentrationSliderModel.range,
@@ -63,11 +63,11 @@ define( function( require ) {
     // create and add the arrow buttons
     leftArrowButton = new ArrowButton( 'left', function() {
       sliderProperty.value = Math.max( sliderProperty.value - arrowStep, range.min );
-    }, arrowButtonOptions );
+    }, ARROW_BUTTON_OPTIONS );
     panelContent.addChild( leftArrowButton );
     rightArrowButton = new ArrowButton( 'right', function() {
       sliderProperty.value = Math.min( sliderProperty.value + arrowStep, range.max );
-    }, arrowButtonOptions );
+    }, ARROW_BUTTON_OPTIONS );
     panelContent.addChild( rightArrowButton );
 
     // layout

@@ -17,14 +17,14 @@ define( function( require ) {
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     StringUtils = require( 'PHETCOMMON/util/StringUtils' ),
-    Util = require( 'DOT/Util' ),
+    Util = require( 'DOT/Util' );
 
   // strings
-    pattern_0value_1power = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1power' ),
-    negligibleString = require( 'string!ACID_BASE_SOLUTIONS/negligible' ),
+  var pattern_0value_1power = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1power' ),
+    negligibleString = require( 'string!ACID_BASE_SOLUTIONS/negligible' );
 
   // constants
-    FONT = new PhetFont( 12 );
+  var FONT = new PhetFont( 12 );
 
   function EquilibriumConcentrationSingleBar( maxHeight ) {
     Node.call( this );

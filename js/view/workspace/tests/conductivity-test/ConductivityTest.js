@@ -16,22 +16,21 @@ define( function( require ) {
     Path = require( 'SCENERY/nodes/Path' ),
     Shape = require( 'KITE/Shape' ),
     LinearFunction = require( 'DOT/LinearFunction' ),
-
     ConductivityTestWire = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/conductivity-test/ConductivityTestWire' ),
     ConductivityTestProbe = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/conductivity-test/ConductivityTestProbe' ),
-    ConductivityTestLightRays = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/conductivity-test/ConductivityTestLightRays' ),
+    ConductivityTestLightRays = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/conductivity-test/ConductivityTestLightRays' );
 
-    batteryImage = require( 'image!ACID_BASE_SOLUTIONS/battery.png' ),
+  // images
+  var batteryImage = require( 'image!ACID_BASE_SOLUTIONS/battery.png' ),
     lightBulbBaseImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-base.png' ),
     lightBulbGlassImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-glass.png' ),
-    lightBulbGlassMaskImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-glass-mask.png' ),
+    lightBulbGlassMaskImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-glass-mask.png' );
 
   // constants
-    BULB_END_X = 23,
+  var BULB_END_X = 23,
     BULB_END_Y = 84,
     BULB_TO_BATTERY_WIRE_LENGTH = 40,
     OPACITY_MAX = 0.15,
-
   // alpha of the bulb when used against a dark background. This is clamped after evaluation to keep it within the range [0,1]
     BRIGHTNESS_TO_ALPHA_FUNCTION_AGAINST_DARK_BACKGROUND = new LinearFunction( 0, 1, OPACITY_MAX, 0 );
 

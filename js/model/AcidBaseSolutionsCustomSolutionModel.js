@@ -19,13 +19,12 @@ define( function( require ) {
     WeakAcidSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/WeakAcidSolution' ),
     StrongBaseSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/StrongBaseSolution' ),
     WeakBaseSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/WeakBaseSolution' ),
-
     SolutionMenuModel = require( 'ACID_BASE_SOLUTIONS/model/SolutionMenuModel' ),
     ViewModesMenuModel = require( 'ACID_BASE_SOLUTIONS/model/ViewModesMenuModel' ),
-    TestModesMenuModel = require( 'ACID_BASE_SOLUTIONS/model/TestModesMenuModel' ),
+    TestModesMenuModel = require( 'ACID_BASE_SOLUTIONS/model/TestModesMenuModel' );
 
   // constants
-    DEFAULT_SOLUTION_TYPE = SolutionTypes.WEAK_ACID;
+  var DEFAULT_SOLUTION_TYPE = SolutionTypes.WEAK_ACID;
 
   function AcidBaseSolutionsCustomSolutionModel() {
     var self = this,

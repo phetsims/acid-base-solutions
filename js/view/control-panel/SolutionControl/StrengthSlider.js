@@ -8,19 +8,21 @@
 
 define( function( require ) {
   'use strict';
+
+  // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     HSlider = require( 'SUN/HSlider' ),
     Dimension2 = require( 'DOT/Dimension2' ),
     Text = require( 'SCENERY/nodes/Text' ),
-    PhetFont = require( 'SCENERY_PHET/PhetFont' ),
+    PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   // strings
-    weakerString = require( 'string!ACID_BASE_SOLUTIONS/weaker' ),
-    strongerString = require( 'string!ACID_BASE_SOLUTIONS/stronger' ),
+  var weakerString = require( 'string!ACID_BASE_SOLUTIONS/weaker' ),
+    strongerString = require( 'string!ACID_BASE_SOLUTIONS/stronger' );
 
   // constants
-    FONT = new PhetFont( 12 ),
+  var FONT = new PhetFont( 12 ),
     SLIDER_TICK_LENGTH = 8,
     SLIDER_TICK_OFFSET = 4,
     SLIDER_TRACK_WIDTH = 125;

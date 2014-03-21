@@ -14,10 +14,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     LinearFunction = require( 'DOT/LinearFunction' ),
-    Line = require( 'SCENERY/nodes/Line' ),
+    Line = require( 'SCENERY/nodes/Line' );
 
   // constants
-    BRIGHTNESS_TO_INTENSITY_FUNCTION = new LinearFunction( 0, 1, 0, 1 ), // intensity of the light rays
+  var BRIGHTNESS_TO_INTENSITY_FUNCTION = new LinearFunction( 0, 1, 0, 1 ), // intensity of the light rays
     MIN_RAYS = 8,
     MAX_RAYS = 60,
     MIN_RAY_LENGTH = 0,

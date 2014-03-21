@@ -8,6 +8,8 @@
 
 define( function( require ) {
   'use strict';
+
+  // imports
   var Node = require( 'SCENERY/nodes/Node' ),
     inherit = require( 'PHET_CORE/inherit' ),
     AquaRadioButton = require( 'SUN/AquaRadioButton' ),
@@ -17,20 +19,20 @@ define( function( require ) {
     HBox = require( 'SCENERY/nodes/HBox' ),
     VStrut = require( 'SUN/VStrut' ),
     Image = require( 'SCENERY/nodes/Image' ),
-    TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' ),
+    TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' );
 
   // strings
-    pHMeterString = require( 'string!ACID_BASE_SOLUTIONS/pHMeter' ),
+  var pHMeterString = require( 'string!ACID_BASE_SOLUTIONS/pHMeter' ),
     pHPaperString = require( 'string!ACID_BASE_SOLUTIONS/pHPaper' ),
-    conductivityString = require( 'string!ACID_BASE_SOLUTIONS/conductivity' ),
+    conductivityString = require( 'string!ACID_BASE_SOLUTIONS/conductivity' );
 
   // images
-    pHMeterImage = require( 'image!ACID_BASE_SOLUTIONS/pH-meter.png' ),
+  var pHMeterImage = require( 'image!ACID_BASE_SOLUTIONS/pH-meter.png' ),
     pHPaperImage = require( 'image!ACID_BASE_SOLUTIONS/pH-paper.png' ),
-    lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb.png' ),
+    lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb.png' );
 
   // constants
-    AQUA_RADIO_BUTTON_RADIUS = 7,
+  var AQUA_RADIO_BUTTON_RADIUS = 7,
     FONT = new PhetFont( 12 );
 
   /*

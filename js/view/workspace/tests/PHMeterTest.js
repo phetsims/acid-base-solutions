@@ -18,13 +18,13 @@ define( function( require ) {
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' ),
-    Util = require( 'DOT/Util' ),
+    Util = require( 'DOT/Util' );
 
-  // string
-    pHString = require( 'string!ACID_BASE_SOLUTIONS/pH' ),
+  // strings
+  var pHString = require( 'string!ACID_BASE_SOLUTIONS/pH' );
 
   // constants
-    FONT = new PhetFont( {size: 15, weight: 'bold'} );
+  var FONT = new PhetFont( {size: 15, weight: 'bold'} );
 
   function PHMeterTest( pHMeterModel ) {
     var self = this;

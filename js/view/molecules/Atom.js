@@ -8,15 +8,17 @@
 
 define( function( require ) {
   'use strict';
+
+  // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     RadialGradient = require( 'SCENERY/util/RadialGradient' ),
     Circle = require( 'SCENERY/nodes/Circle' );
 
-  var gradients = {};
+  var gradients = {}; // TODO is this supposed to be [] ?
 
   function Atom( radius, color, options ) {
     if ( !(radius in gradients) ) {
-      gradients[radius] = {};
+      gradients[radius] = {}; // TODO is this supposed to be [] ?
     }
 
     // cache gradients for next executions

@@ -14,10 +14,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Util = require( 'DOT/Util' ),
-    ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
+    ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' );
 
   // molecules
-    MoleculesConstructors = {
+  var MoleculesConstructors = {
       A: require( 'ACID_BASE_SOLUTIONS/view/molecules/AMolecule' ),
       B: require( 'ACID_BASE_SOLUTIONS/view/molecules/BMolecule' ),
       BH: require( 'ACID_BASE_SOLUTIONS/view/molecules/BHMolecule' ),
@@ -27,10 +27,10 @@ define( function( require ) {
       M: require( 'ACID_BASE_SOLUTIONS/view/molecules/MMolecule' ),
       MOH: require( 'ACID_BASE_SOLUTIONS/view/molecules/MOHMolecule' ),
       OH: require( 'ACID_BASE_SOLUTIONS/view/molecules/OHMolecule' )
-    },
+    };
 
   // constants
-    BASE_CONCENTRATION = 1E-7, // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules
+  var BASE_CONCENTRATION = 1E-7, // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules
     BASE_DOTS = 2,
     MAX_MOLECULES = 50; // TODO: should be 200, but sim will load approximately 30 second
 

@@ -13,15 +13,15 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     SolutionTypes = require( 'model/Constants/SolutionTypes' ),
     AqueousSolutionAbstract = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/AqueousSolutionAbstract' ),
-    Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' ),
+    Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
 
   // [OH]=[H3O]
-    getOHConcentration = function( H3OConcentration ) {
-      return H3OConcentration;
-    },
+  var getOHConcentration = function( H3OConcentration ) {
+    return H3OConcentration;
+  };
 
   // constants
-    H2O_CONCENTRATION_DEFAULT = Constants.WATER_CONCENTRATION,
+  var H2O_CONCENTRATION_DEFAULT = Constants.WATER_CONCENTRATION,
     H3O_CONCENTRATION_DEFAULT = Math.sqrt( Constants.WATER_EQUILIBRIUM_CONSTANT ),
     OH_CONCENTRATION_DEFAULT = getOHConcentration( H3O_CONCENTRATION_DEFAULT );
 

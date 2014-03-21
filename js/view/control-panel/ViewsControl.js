@@ -8,6 +8,8 @@
 
 define( function( require ) {
   'use strict';
+
+  // imports
   var Node = require( 'SCENERY/nodes/Node' ),
     inherit = require( 'PHET_CORE/inherit' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
@@ -20,21 +22,21 @@ define( function( require ) {
     Image = require( 'SCENERY/nodes/Image' ),
     H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' ),
     HStrut = require( 'SUN/HStrut' ),
-    ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
+    ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' );
 
   // strings
-    moleculesString = require( 'string!ACID_BASE_SOLUTIONS/molecules' ),
+  var moleculesString = require( 'string!ACID_BASE_SOLUTIONS/molecules' ),
     showSolventString = require( 'string!ACID_BASE_SOLUTIONS/showSolvent' ),
     equilibriumString = require( 'string!ACID_BASE_SOLUTIONS/equilibrium' ),
     concentrationString = require( 'string!ACID_BASE_SOLUTIONS/concentration' ),
-    liquidString = require( 'string!ACID_BASE_SOLUTIONS/liquid' ),
+    liquidString = require( 'string!ACID_BASE_SOLUTIONS/liquid' );
 
   // images
-    magnifyingGlassImage = require( 'image!ACID_BASE_SOLUTIONS/magnifying-glass.png' ),
-    beakerImage = require( 'image!ACID_BASE_SOLUTIONS/beaker.png' ),
+  var magnifyingGlassImage = require( 'image!ACID_BASE_SOLUTIONS/magnifying-glass.png' ),
+    beakerImage = require( 'image!ACID_BASE_SOLUTIONS/beaker.png' );
 
   // constants
-    FONT = new PhetFont( 12 ),
+  var FONT = new PhetFont( 12 ),
     RADIO_BUTTON_RADIUS = 7,
     CHECK_BOX_WIDTH = 15,
     MOLECULES_COLORS = require( 'model/Constants/MoleculesColors' );

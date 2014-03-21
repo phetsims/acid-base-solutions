@@ -8,16 +8,22 @@
 
 define( function( require ) {
   'use strict';
+
+  // imports
   var SimLauncher = require( 'JOIST/SimLauncher' ),
     Sim = require( 'JOIST/Sim' ),
     Screen = require( 'JOIST/Screen' ),
     Image = require( 'SCENERY/nodes/Image' ),
     AcidBaseSolutionsCustomSolutionModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsCustomSolutionModel' ),
     AcidBaseSolutionsIntroductionModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsIntroductionModel' ),
-    AcidBaseSolutionsView = require( 'ACID_BASE_SOLUTIONS/view/AcidBaseSolutionsView' ),
-    introductionIcon = require( 'image!ACID_BASE_SOLUTIONS/../images/introduction-icon.png' ),
-    customSolutionIcon = require( 'image!ACID_BASE_SOLUTIONS/../images/custom-solution-icon.png' ),
-    introductionTitleString = require( 'string!ACID_BASE_SOLUTIONS/introductionTitle' ),
+    AcidBaseSolutionsView = require( 'ACID_BASE_SOLUTIONS/view/AcidBaseSolutionsView' );
+
+  // images
+  var introductionIcon = require( 'image!ACID_BASE_SOLUTIONS/../images/introduction-icon.png' ),
+    customSolutionIcon = require( 'image!ACID_BASE_SOLUTIONS/../images/custom-solution-icon.png' );
+
+  // strings
+  var introductionTitleString = require( 'string!ACID_BASE_SOLUTIONS/introductionTitle' ),
     customSolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/customSolutionTitle' ),
     simTitleString = require( 'string!ACID_BASE_SOLUTIONS/acid-base-solutions.name' );
 

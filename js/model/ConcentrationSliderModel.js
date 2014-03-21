@@ -11,10 +11,10 @@ define( function( require ) {
   // imports
   var Property = require( 'AXON/Property' ),
     Range = require( 'DOT/Range' ),
-    Util = require( 'DOT/Util' ),
+    Util = require( 'DOT/Util' );
 
   // constants
-    CONCENTRATION_RANGE = require( 'model/Constants/Constants' ).CONCENTRATION_RANGE;
+  var CONCENTRATION_RANGE = require( 'model/Constants/Constants' ).CONCENTRATION_RANGE;
 
   function ConcentrationSliderModel( concentrationProperty ) {
     var self = this;

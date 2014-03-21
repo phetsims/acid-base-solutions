@@ -18,18 +18,18 @@ define( function( require ) {
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     Line = require( 'SCENERY/nodes/Line' ),
     StrengthSlider = require( 'ACID_BASE_SOLUTIONS/view/control-panel/SolutionControl/StrengthSlider' ),
-    ConcentrationSlider = require( 'ACID_BASE_SOLUTIONS/view/control-panel/SolutionControl/ConcentrationSlider' ),
+    ConcentrationSlider = require( 'ACID_BASE_SOLUTIONS/view/control-panel/SolutionControl/ConcentrationSlider' );
 
   // strings
-    acidString = require( 'string!ACID_BASE_SOLUTIONS/acid' ),
+  var acidString = require( 'string!ACID_BASE_SOLUTIONS/acid' ),
     baseString = require( 'string!ACID_BASE_SOLUTIONS/base' ),
     initialConcentrationString = require( 'string!ACID_BASE_SOLUTIONS/initialConcentration' ),
     strengthString = require( 'string!ACID_BASE_SOLUTIONS/strength' ),
     weakString = require( 'string!ACID_BASE_SOLUTIONS/weak' ),
-    strongString = require( 'string!ACID_BASE_SOLUTIONS/strong' ),
+    strongString = require( 'string!ACID_BASE_SOLUTIONS/strong' );
 
   // constants
-    FONT = new PhetFont( 12 );
+  var FONT = new PhetFont( 12 );
 
   function SolutionControl( SolutionMenuModel, options ) {
     var vBox = new VBox( {spacing: 4} ),

@@ -13,10 +13,10 @@ define( function( require ) {
   var Property = require( 'AXON/Property' ),
     ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
     TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' ),
-    ControlPanels = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanels' ),
+    ControlPanels = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanels' );
 
   // strings
-    viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' );
+  var viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' );
 
   function ViewModesMenuModel( viewModeProperty, testModeProperty, solventVisibleProperty ) {
     var self = this;

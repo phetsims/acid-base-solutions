@@ -13,39 +13,39 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
     AqueousSolutionAbstract = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/AqueousSolutionAbstract' ),
-    Constants = require( 'model/Constants/Constants' ),
+    Constants = require( 'model/Constants/Constants' );
 
   // [B] = c - [BH+]
-    getSoluteConcentration = function( concentration, productConcentration ) {
-      return (concentration - productConcentration);
-    },
+  var getSoluteConcentration = function( concentration, productConcentration ) {
+    return (concentration - productConcentration);
+  };
 
   // [BH+] = ( -Kb + sqrt( Kb*Kb + 4*Kb*c ) ) / 2
-    getProductConcentration = function( Kb, c ) {
-      return (-Kb + Math.sqrt( ( Kb * Kb ) + ( 4 * Kb * c ) ) ) / 2;
-    },
+  var getProductConcentration = function( Kb, c ) {
+    return (-Kb + Math.sqrt( ( Kb * Kb ) + ( 4 * Kb * c ) ) ) / 2;
+  };
 
   // [H3O+] = Kw / [OH-]
-    getH3OConcentration = function( OHConcentration ) {
-      return Constants.WATER_EQUILIBRIUM_CONSTANT / OHConcentration;
-    },
+  var getH3OConcentration = function( OHConcentration ) {
+    return Constants.WATER_EQUILIBRIUM_CONSTANT / OHConcentration;
+  };
 
   // [OH-] = [BH+]
-    getOHConcentration = function( productConcentration ) {
-      return productConcentration;
-    },
+  var getOHConcentration = function( productConcentration ) {
+    return productConcentration;
+  };
 
   // [H2O] = W - [BH+]
-    getH2OConcentration = function( productConcentration ) {
-      return (Constants.WATER_CONCENTRATION - productConcentration);
-    },
+  var getH2OConcentration = function( productConcentration ) {
+    return (Constants.WATER_CONCENTRATION - productConcentration);
+  };
 
-    isValidStrength = function( strength ) {
-      return Constants.WEAK_STRENGTH_RANGE.contains( strength );
-    },
+  var isValidStrength = function( strength ) {
+    return Constants.WEAK_STRENGTH_RANGE.contains( strength );
+  };
 
   // constants
-    STRENGTH_DEFAULT = Constants.WEAK_STRENGTH_RANGE.defaultValue,
+  var STRENGTH_DEFAULT = Constants.WEAK_STRENGTH_RANGE.defaultValue,
     CONCENTRATION_DEFAULT = Constants.CONCENTRATION_RANGE.defaultValue,
     PRODUCT_CONCENTRATION_DEFAULT = getProductConcentration( STRENGTH_DEFAULT, CONCENTRATION_DEFAULT ),
     SOLUTE_CONCENTRATION_DEFAULT = getSoluteConcentration( CONCENTRATION_DEFAULT, PRODUCT_CONCENTRATION_DEFAULT ),

@@ -16,14 +16,14 @@ define( function( require ) {
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     Shape = require( 'KITE/Shape' ),
     StringUtils = require( 'PHETCOMMON/util/StringUtils' ),
-    Text = require( 'SCENERY/nodes/Text' ),
+    Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-    pattern_0value_1units = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1units' ),
-    units_litersString = require( 'string!ACID_BASE_SOLUTIONS/liters' ),
+  var pattern_0value_1units = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1units' ),
+    units_litersString = require( 'string!ACID_BASE_SOLUTIONS/liters' );
 
   // constants
-    MAJOR_TICK_LENGTH = 25,
+  var MAJOR_TICK_LENGTH = 25,
     MINOR_TICK_LENGTH = 10,
     MINOR_TICKS_PER_MAJOR_TICK = 5,
     MINOR_TICK_SPACING = 0.1, // L

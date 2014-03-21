@@ -9,6 +9,7 @@
 define( function() {
   'use strict';
 
+  //TODO document how these are ordered
   return [
     'rgb(182,70,72)',
     'rgb(196,80,86)',

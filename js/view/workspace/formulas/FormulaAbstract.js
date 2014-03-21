@@ -19,10 +19,10 @@ define( function( require ) {
     ChemUtils = require( 'NITROGLYCERIN/ChemUtils' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     VStrut = require( 'SUN/VStrut' ),
-    Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' ),
+    Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
 
   // molecules
-    AMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/AMolecule' ),
+  var AMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/AMolecule' ),
     BMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/BMolecule' ),
     BHMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/BHMolecule' ),
     H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' ),
@@ -30,14 +30,14 @@ define( function( require ) {
     HAMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/HAMolecule' ),
     MMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/MMolecule' ),
     MOHMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/MOHMolecule' ),
-    OHMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/OHMolecule' ),
+    OHMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/OHMolecule' );
 
   // images
-    arrowSingleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_single.png' ),
-    arrowDoubleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_double.png' ),
+  var arrowSingleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_single.png' ),
+    arrowDoubleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_double.png' );
 
   // constants
-    FONT_SIZE = Constants.FORMULAS_FONT_SIZE,
+  var FONT_SIZE = Constants.FORMULAS_FONT_SIZE,
     FONT = new PhetFont( FONT_SIZE ),
     HBOX_SPACING = Constants.FORMULAS_HBOX_SPACING,
     TEXT_SUB_INDENT = FONT_SIZE / 8,

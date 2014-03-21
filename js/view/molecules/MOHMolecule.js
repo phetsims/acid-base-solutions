@@ -8,14 +8,16 @@
 
 define( function( require ) {
   'use strict';
+
+  // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' ),
     Text = require( 'SCENERY/nodes/Text' ),
-    PhetFont = require( 'SCENERY_PHET/PhetFont' ),
+    PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   // constants
-    COLOR_MOH = require( 'ACID_BASE_SOLUTIONS/model/Constants/MoleculesColors' ).MOH, // gray
+  var COLOR_MOH = require( 'ACID_BASE_SOLUTIONS/model/Constants/MoleculesColors' ).MOH, // gray
     FONT = new PhetFont( 8 );
 
   var getMolecule = function() {

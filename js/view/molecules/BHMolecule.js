@@ -8,12 +8,14 @@
 
 define( function( require ) {
   'use strict';
+
+  // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' ),
+    Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' );
 
   // constants
-    COLOR_BH = require( 'ACID_BASE_SOLUTIONS/model/Constants/MoleculesColors' ).BH;
+  var COLOR_BH = require( 'ACID_BASE_SOLUTIONS/model/Constants/MoleculesColors' ).BH;
 
   var atomCache, getMolecule = function() {
     return new Node( {children: [

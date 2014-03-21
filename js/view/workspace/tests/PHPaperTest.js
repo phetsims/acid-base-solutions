@@ -16,13 +16,13 @@ define( function( require ) {
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' ),
-    Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' ),
+    Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
 
   // strings
-    pHColorKeyString = require( 'string!ACID_BASE_SOLUTIONS/pHColorKey' ),
+  var pHColorKeyString = require( 'string!ACID_BASE_SOLUTIONS/pHColorKey' );
 
   // constants
-    FONT_BIG = new PhetFont( 10 ),
+  var FONT_BIG = new PhetFont( 10 ),
     FONT_SMALL = new PhetFont( 8 ),
     PH_COLORS = require( 'model/Constants/PHColors' ),
     PAPER_DEFAUL_COLOR = PH_COLORS[PH_COLORS.length - 1],

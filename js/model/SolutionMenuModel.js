@@ -13,10 +13,10 @@ define( function( require ) {
   var ControlPanels = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanels' ),
     SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
     ConcentrationSliderModel = require( 'ACID_BASE_SOLUTIONS/model/ConcentrationSliderModel' ),
-    StrengthSliderModel = require( 'ACID_BASE_SOLUTIONS/model/StrengthSliderModel' ),
+    StrengthSliderModel = require( 'ACID_BASE_SOLUTIONS/model/StrengthSliderModel' );
 
   // strings
-    solutionString = require( 'string!ACID_BASE_SOLUTIONS/solution' );
+  var solutionString = require( 'string!ACID_BASE_SOLUTIONS/solution' );
 
   /**
    * @param {Property<SolutionTypes>} solutionTypeProperty

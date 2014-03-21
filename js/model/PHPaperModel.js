@@ -15,10 +15,10 @@ define( function( require ) {
     Vector2 = require( 'DOT/Vector2' ),
     Bounds2 = require( 'DOT/Bounds2' ),
     Util = require( 'DOT/Util' ),
-    Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' ),
+    Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
 
   // constants
-    PAPER_LENGTH = 4 * Constants.PH_COLOR_KEY_RECT_HEIGHT;
+  var PAPER_LENGTH = 4 * Constants.PH_COLOR_KEY_RECT_HEIGHT;
 
   function PHPaperModel( beakerModel, solutionProperty, pHProperty, testModeProperty ) {
     var self = this;

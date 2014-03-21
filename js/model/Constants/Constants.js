@@ -10,10 +10,10 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var Range = require( 'DOT/Range' ),
+  var Range = require( 'DOT/Range' );
 
   // constants
-    WEAK_STRENGTH_RANGE = new Range( 1E-10, 1E2, 1E-7 ),
+  var WEAK_STRENGTH_RANGE = new Range( 1E-10, 1E2, 1E-7 ),
     STRONG_STRENGTH = WEAK_STRENGTH_RANGE.max + 1; // arbitrary, but needs to be greater than weak range
 
   return {

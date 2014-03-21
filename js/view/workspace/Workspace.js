@@ -15,10 +15,10 @@ define( function( require ) {
     Beaker = require( 'ACID_BASE_SOLUTIONS/view/workspace/Beaker' ),
     Magnifier = require( 'ACID_BASE_SOLUTIONS/view/workspace/magnifier/Magnifier' ),
     Formula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/Formula' ),
-    EquilibriumConcentrationBarChart = require( './equilibrium-concentration-graph/EquilibriumConcentrationBarChart' ),
+    EquilibriumConcentrationBarChart = require( './equilibrium-concentration-graph/EquilibriumConcentrationBarChart' );
 
   // tests
-    PHMeterTest = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/PHMeterTest' ),
+  var PHMeterTest = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/PHMeterTest' ),
     PHPaperTest = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/PHPaperTest' ),
     ConductivityTest = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/conductivity-test/ConductivityTest' );
 

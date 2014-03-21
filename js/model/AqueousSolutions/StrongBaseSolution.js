@@ -13,29 +13,29 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
     AqueousSolutionAbstract = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/AqueousSolutionAbstract' ),
-    Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' ),
+    Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
 
   // [M+] = c
-    getProductConcentration = function( concentration ) {
-      return concentration;
-    },
+  var getProductConcentration = function( concentration ) {
+    return concentration;
+  };
 
   // [OH-] = c
-    getOHConcentration = function( concentration ) {
-      return concentration;
-    },
+  var getOHConcentration = function( concentration ) {
+    return concentration;
+  };
 
   // [H3O+] = Kw / [OH-]
-    getH3OConcentration = function( OHConcentration ) {
-      return Constants.WATER_EQUILIBRIUM_CONSTANT / OHConcentration;
-    },
+  var getH3OConcentration = function( OHConcentration ) {
+    return Constants.WATER_EQUILIBRIUM_CONSTANT / OHConcentration;
+  };
 
-    isValidStrength = function( strength ) {
-      return strength > Constants.CONCENTRATION_RANGE.max;
-    },
+  var isValidStrength = function( strength ) {
+    return strength > Constants.CONCENTRATION_RANGE.max;
+  };
 
   // constants
-    STRENGTH_DEFAULT = Constants.STRONG_STRENGTH,
+  var STRENGTH_DEFAULT = Constants.STRONG_STRENGTH,
     CONCENTRATION_DEFAULT = Constants.CONCENTRATION_RANGE.defaultValue,
     OH_CONCENTRATION_DEFAULT = getOHConcentration( CONCENTRATION_DEFAULT ),
     H3O_CONCENTRATION_DEFAULT = getH3OConcentration( OH_CONCENTRATION_DEFAULT ),

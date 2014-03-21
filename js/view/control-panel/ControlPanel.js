@@ -9,6 +9,8 @@
 
 define( function( require ) {
   'use strict';
+
+  // imports
   var Node = require( 'SCENERY/nodes/Node' ),
     inherit = require( 'PHET_CORE/inherit' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
@@ -20,13 +22,13 @@ define( function( require ) {
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' ),
-    ControlPanels = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanels' ),
+    ControlPanels = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanels' );
 
   // constants
-    FONT = new PhetFont( {size: 14, weight: 'bold'} );
+  var FONT = new PhetFont( {size: 14, weight: 'bold'} );
 
-  // view conscructors for solution controls
-  var Panels = {};
+  // view constructors for solution controls
+  var Panels = {}; //TODO is this supposed to be [] ??
   Panels[ControlPanels.SOLUTIONS] = SolutionsControl;
   Panels[ControlPanels.SOLUTION] = SolutionControl;
   Panels[ControlPanels.VIEWS] = ViewsControl;

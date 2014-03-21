@@ -8,6 +8,8 @@
 
 define( function( require ) {
   'use strict';
+
+  // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     AquaRadioButton = require( 'SUN/AquaRadioButton' ),
     StringUtils = require( 'PHETCOMMON/util/StringUtils' ),
@@ -16,25 +18,24 @@ define( function( require ) {
     ChemUtils = require( 'NITROGLYCERIN/ChemUtils' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
-
     VBox = require( 'SCENERY/nodes/VBox' ),
     HBox = require( 'SCENERY/nodes/HBox' ),
     VStrut = require( 'SUN/VStrut' ),
     H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' ),
     HAMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/HAMolecule' ),
     MOHMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/MOHMolecule' ),
-    BMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/BMolecule' ),
+    BMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/BMolecule' );
 
   // strings
-    pattern_0solution_1symbol = require( 'string!ACID_BASE_SOLUTIONS/pattern.0solution.1symbol' ),
+  var pattern_0solution_1symbol = require( 'string!ACID_BASE_SOLUTIONS/pattern.0solution.1symbol' ),
     waterString = require( 'string!ACID_BASE_SOLUTIONS/water' ),
     strongAcidString = require( 'string!ACID_BASE_SOLUTIONS/strongAcid' ),
     weakAcidString = require( 'string!ACID_BASE_SOLUTIONS/weakAcid' ),
     strongBaseString = require( 'string!ACID_BASE_SOLUTIONS/strongBase' ),
-    weakBaseString = require( 'string!ACID_BASE_SOLUTIONS/weakBase' ),
+    weakBaseString = require( 'string!ACID_BASE_SOLUTIONS/weakBase' );
 
   // constants
-    FONT = new PhetFont( 12 ),
+  var FONT = new PhetFont( 12 ),
     RADIO_BUTTON_RADIUS = 7;
 
   /*
