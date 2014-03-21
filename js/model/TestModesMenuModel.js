@@ -15,6 +15,10 @@ define( function( require ) {
   // strings
   var testsString = require( 'string!ACID_BASE_SOLUTIONS/tests' );
 
+  /**
+   * @param {Property<TestModes>} testModeProperty
+   * @constructor
+   */
   function TestModesMenuModel( testModeProperty ) {
     // control panel's type
     this.controlPanelType = ControlPanelTypes.TESTS;
@@ -22,9 +26,8 @@ define( function( require ) {
     // control panel's title
     this.title = testsString;
 
-    //TODO add Property suffix
     // test mode property
-    this.mode = testModeProperty;
+    this.testModeProperty = testModeProperty;
   }
 
   TestModesMenuModel.prototype = {

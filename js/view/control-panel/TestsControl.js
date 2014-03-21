@@ -60,7 +60,7 @@ define( function( require ) {
 
   function TestsControl( testModesMenuModel, options ) {
     var self = this,
-      testModeProperty = testModesMenuModel.mode;
+      testModeProperty = testModesMenuModel.testModeProperty;
     VBox.call( this, _.extend( {spacing: 4, align: 'left'}, options ) );
 
     // add options to menu
