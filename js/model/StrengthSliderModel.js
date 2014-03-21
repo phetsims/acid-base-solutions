@@ -17,6 +17,11 @@ define( function( require ) {
   // constants
   var WEAK_STRENGTH_RANGE = require( 'model/Constants/Constants' ).WEAK_STRENGTH_RANGE;
 
+  /**
+   * @param {Property<Number>} strengthProperty
+   * @param {Property<Boolean>} isWeakProperty
+   * @constructor
+   */
   function StrengthSliderModel( strengthProperty, isWeakProperty ) {
     var self = this;
 
