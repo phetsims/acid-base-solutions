@@ -18,7 +18,7 @@ define( function( require ) {
     Util = require( 'DOT/Util' ),
 
   // constants
-    CONSTANTS = require( 'model/Constants/Constants' );
+    CONSTANTS = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
 
   function AqueousSolutionAbstract( defaultValues ) {
     var self = this;

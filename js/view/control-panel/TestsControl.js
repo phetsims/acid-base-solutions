@@ -17,7 +17,7 @@ define( function( require ) {
     HBox = require( 'SCENERY/nodes/HBox' ),
     VStrut = require( 'SUN/VStrut' ),
     Image = require( 'SCENERY/nodes/Image' ),
-    TestModes = require( 'model/Constants/TestModes' ),
+    TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' ),
 
   // strings
     pHMeterString = require( 'string!ACID_BASE_SOLUTIONS/pHMeter' ),

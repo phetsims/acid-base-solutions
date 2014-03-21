@@ -11,7 +11,7 @@ define( function( require ) {
 
   // imports
   var Property = require( 'AXON/Property' ),
-    TestModes = require( 'model/Constants/TestModes' ),
+    TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' ),
 
     WIRES_INITIAL_Y = 60,
 

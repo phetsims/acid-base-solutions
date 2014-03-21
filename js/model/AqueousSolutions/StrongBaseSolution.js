@@ -11,8 +11,8 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    Solutions = require( 'model/Constants/Solutions' ),
-    AqueousSolutionAbstract = require( './AqueousSolutionAbstract' ),
+    Solutions = require( 'ACID_BASE_SOLUTIONS/model/Constants/Solutions' ),
+    AqueousSolutionAbstract = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/AqueousSolutionAbstract' ),
 
   // [M+] = c
     getProductConcentration = function( concentration ) {

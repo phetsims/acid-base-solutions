@@ -15,7 +15,7 @@ define( function( require ) {
     HTMLText = require( 'SCENERY/nodes/HTMLText' ),
     ChemUtils = require( 'NITROGLYCERIN/ChemUtils' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    Solutions = require( 'model/Constants/Solutions' ),
+    Solutions = require( 'ACID_BASE_SOLUTIONS/model/Constants/Solutions' ),
 
     VBox = require( 'SCENERY/nodes/VBox' ),
     HBox = require( 'SCENERY/nodes/HBox' ),

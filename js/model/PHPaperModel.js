@@ -11,11 +11,11 @@ define( function( require ) {
 
   // imports
   var Property = require( 'AXON/Property' ),
-    TestModes = require( 'model/Constants/TestModes' ),
+    TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' ),
     Vector2 = require( 'DOT/Vector2' ),
     Bounds2 = require( 'DOT/Bounds2' ),
     Util = require( 'DOT/Util' ),
-    Constants = require( 'model/Constants/Constants' ),
+    Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' ),
 
   // constants
     PAPER_LENGTH = 4 * Constants.PH_COLOR_KEY_RECT_HEIGHT;

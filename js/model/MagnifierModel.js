@@ -10,8 +10,8 @@ define( function( require ) {
   'use strict';
   // imports
   var Property = require( 'AXON/Property' ),
-    ViewModes = require( 'model/Constants/ViewModes' ),
-    TestModes = require( 'model/Constants/TestModes' );
+    ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
+    TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' );
 
   function MagnifierModel( beakerModel, solutions, components, solutionProperty, solventProperty, viewModeProperty, testModeProperty ) {
     // magnifier radius

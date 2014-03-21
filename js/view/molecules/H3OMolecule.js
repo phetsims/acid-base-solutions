@@ -13,7 +13,7 @@ define( function( require ) {
     Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' ),
 
   // constants
-    COLOR_H3O = require( 'model/Constants/MoleculesColors' ).H3O;
+    COLOR_H3O = require( 'ACID_BASE_SOLUTIONS/model/Constants/MoleculesColors' ).H3O;
 
   var atomCache, getMolecule = function() {
     return new Node( {children: [

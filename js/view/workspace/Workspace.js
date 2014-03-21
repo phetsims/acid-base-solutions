@@ -12,15 +12,15 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    Beaker = require( './Beaker' ),
-    Magnifier = require( './magnifier/Magnifier' ),
-    Formula = require( './formulas/Formula' ),
+    Beaker = require( 'ACID_BASE_SOLUTIONS/view/workspace/Beaker' ),
+    Magnifier = require( 'ACID_BASE_SOLUTIONS/view/workspace/magnifier/Magnifier' ),
+    Formula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/Formula' ),
     EquilibriumConcentrationBarChart = require( './equilibrium-concentration-graph/EquilibriumConcentrationBarChart' ),
 
   // tests
-    PHMeterTest = require( './tests/PHMeterTest' ),
-    PHPaperTest = require( './tests/PHPaperTest' ),
-    ConductivityTest = require( './tests/conductivity-test/ConductivityTest' );
+    PHMeterTest = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/PHMeterTest' ),
+    PHPaperTest = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/PHPaperTest' ),
+    ConductivityTest = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/conductivity-test/ConductivityTest' );
 
   function Workspace( model, options ) {
     Node.call( this, options );

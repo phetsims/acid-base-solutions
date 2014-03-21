@@ -13,7 +13,7 @@ define( function( require ) {
     Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' ),
 
   // constants
-    COLOR_M = require( 'model/Constants/MoleculesColors' ).M;
+    COLOR_M = require( 'ACID_BASE_SOLUTIONS/model/Constants/MoleculesColors' ).M;
 
   var atomCache, getMolecule = function() {
     return new Atom( 7, COLOR_M );

@@ -36,7 +36,7 @@ define( function( require ) {
     arrowDoubleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_double.png' ),
 
   // constants
-    CONSTANTS = require( 'model/Constants/Constants' ),
+    CONSTANTS = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' ),
     FONT_SIZE = CONSTANTS.FORMULAS_FONT_SIZE,
     FONT = new PhetFont( FONT_SIZE ),
     HBOX_SPACING = CONSTANTS.FORMULAS_HBOX_SPACING,

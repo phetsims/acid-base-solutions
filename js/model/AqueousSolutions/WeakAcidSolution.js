@@ -11,8 +11,8 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    Solutions = require( 'model/Constants/Solutions' ),
-    AqueousSolutionAbstract = require( './AqueousSolutionAbstract' ),
+    Solutions = require( 'ACID_BASE_SOLUTIONS/model/Constants/Solutions' ),
+    AqueousSolutionAbstract = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/AqueousSolutionAbstract' ),
 
   // [H3O+] = ( -Ka + sqrt( Ka*Ka + 4*Ka*c ) ) / 2
     getH3OConcentration = function( Ka, c ) {

@@ -12,12 +12,11 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    Solutions = require( 'model/Constants/Solutions' ),
-
-    WaterFormula = require( './WaterFormula' ),
-    AcidFormula = require( './AcidFormula' ),
-    StrongBaseFormula = require( './StrongBaseFormula' ),
-    WeakBaseFormula = require( './WeakBaseFormula' );
+    Solutions = require( 'ACID_BASE_SOLUTIONS/model/Constants/Solutions' ),
+    WaterFormula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/WaterFormula' ),
+    AcidFormula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/AcidFormula' ),
+    StrongBaseFormula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/StrongBaseFormula' ),
+    WeakBaseFormula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/WeakBaseFormula' );
 
   function Formula( formulaModel ) {
     var maxWidth,

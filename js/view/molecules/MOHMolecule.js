@@ -15,7 +15,7 @@ define( function( require ) {
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
 
   // constants
-    COLOR_MOH = require( 'model/Constants/MoleculesColors' ).MOH, // gray
+    COLOR_MOH = require( 'ACID_BASE_SOLUTIONS/model/Constants/MoleculesColors' ).MOH, // gray
     FONT = new PhetFont( 8 );
 
   var getMolecule = function() {

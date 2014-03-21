@@ -17,9 +17,9 @@ define( function( require ) {
     Shape = require( 'KITE/Shape' ),
     LinearFunction = require( 'DOT/LinearFunction' ),
 
-    ConductivityTestWire = require( './ConductivityTestWire' ),
-    ConductivityTestProbe = require( './ConductivityTestProbe' ),
-    ConductivityTestLightRays = require( './ConductivityTestLightRays' ),
+    ConductivityTestWire = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/conductivity-test/ConductivityTestWire' ),
+    ConductivityTestProbe = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/conductivity-test/ConductivityTestProbe' ),
+    ConductivityTestLightRays = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/conductivity-test/ConductivityTestLightRays' ),
 
     batteryImage = require( 'image!ACID_BASE_SOLUTIONS/battery.png' ),
     lightBulbBaseImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-base.png' ),

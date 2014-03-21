@@ -11,14 +11,14 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     PropertySet = require( 'AXON/PropertySet' ),
-    PHMeterModel = require( './PHMeterModel' ),
-    PHPaperModel = require( './PHPaperModel' ),
-    ConductivityTestModel = require( './ConductivityTestModel' ),
-    BeakerModel = require( './BeakerModel' ),
-    FormulaModel = require( './FormulaModel' ),
-    MagnifierModel = require( './MagnifierModel' ),
-    ViewModes = require( 'model/Constants/ViewModes' ),
-    TestModes = require( 'model/Constants/TestModes' ),
+    PHMeterModel = require( 'ACID_BASE_SOLUTIONS/model/PHMeterModel' ),
+    PHPaperModel = require( 'ACID_BASE_SOLUTIONS/model/PHPaperModel' ),
+    ConductivityTestModel = require( 'ACID_BASE_SOLUTIONS/model/ConductivityTestModel' ),
+    BeakerModel = require( 'ACID_BASE_SOLUTIONS/model/BeakerModel' ),
+    FormulaModel = require( 'ACID_BASE_SOLUTIONS/model/FormulaModel' ),
+    MagnifierModel = require( 'ACID_BASE_SOLUTIONS/model/MagnifierModel' ),
+    ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
+    TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' ),
     ScreenView = require( 'JOIST/ScreenView' ),
 
   // constants

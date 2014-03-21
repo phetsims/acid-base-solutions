@@ -11,7 +11,7 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    FormulaAbstract = require( './FormulaAbstract' );
+    FormulaAbstract = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/FormulaAbstract' );
 
   function WaterFormula( options ) {
     FormulaAbstract.call( this, options );

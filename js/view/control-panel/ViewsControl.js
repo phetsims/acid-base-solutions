@@ -20,7 +20,7 @@ define( function( require ) {
     Image = require( 'SCENERY/nodes/Image' ),
     H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' ),
     HStrut = require( 'SUN/HStrut' ),
-    ViewModes = require( 'model/Constants/ViewModes' ),
+    ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
 
   // strings
     moleculesString = require( 'string!ACID_BASE_SOLUTIONS/molecules' ),

@@ -12,17 +12,17 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     AcidBaseSolutionsAbstractModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsAbstractModel' ),
-    BarChartModel = require( './BarChartModel' ),
-    Solutions = require( 'model/Constants/Solutions' ),
-    GameModes = require( 'model/Constants/GameModes' ),
-    StrongAcidSolution = require( 'model/AqueousSolutions/StrongAcidSolution' ),
-    WeakAcidSolution = require( 'model/AqueousSolutions/WeakAcidSolution' ),
-    StrongBaseSolution = require( 'model/AqueousSolutions/StrongBaseSolution' ),
-    WeakBaseSolution = require( 'model/AqueousSolutions/WeakBaseSolution' ),
+    BarChartModel = require( 'ACID_BASE_SOLUTIONS/model/BarChartModel' ),
+    Solutions = require( 'ACID_BASE_SOLUTIONS/model/Constants/Solutions' ),
+    GameModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/GameModes' ),
+    StrongAcidSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/StrongAcidSolution' ),
+    WeakAcidSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/WeakAcidSolution' ),
+    StrongBaseSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/StrongBaseSolution' ),
+    WeakBaseSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/WeakBaseSolution' ),
 
-    SolutionMenuModel = require( './SolutionMenuModel' ),
-    ViewModesMenuModel = require( './ViewModesMenuModel' ),
-    TestModesMenuModel = require( './TestModesMenuModel' ),
+    SolutionMenuModel = require( 'ACID_BASE_SOLUTIONS/model/SolutionMenuModel' ),
+    ViewModesMenuModel = require( 'ACID_BASE_SOLUTIONS/model/ViewModesMenuModel' ),
+    TestModesMenuModel = require( 'ACID_BASE_SOLUTIONS/model/TestModesMenuModel' ),
 
   // constants
     DEFAULT_SOLUTION = Solutions.WEAK_ACID;

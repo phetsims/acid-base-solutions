@@ -13,9 +13,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Shape = require( 'KITE/Shape' ),
-
-    MagnifierBackground = require( './MagnifierBackground' ),
-    MagnifierMoleculesLayer = require( './MagnifierMoleculesLayer' );
+    MagnifierBackground = require( 'ACID_BASE_SOLUTIONS/view/workspace/magnifier/MagnifierBackground' ),
+    MagnifierMoleculesLayer = require( 'ACID_BASE_SOLUTIONS/view/workspace/magnifier/MagnifierMoleculesLayer' );
 
   function Magnifier( magnifierModel ) {
     var self = this,

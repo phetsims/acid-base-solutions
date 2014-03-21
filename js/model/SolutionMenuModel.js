@@ -10,10 +10,10 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ControlPanels = require( 'model/Constants/ControlPanels' ),
-    Solutions = require( 'model/Constants/Solutions' ),
-    ConcentrationSliderModel = require( 'model/ConcentrationSliderModel' ),
-    StrengthSliderModel = require( 'model/StrengthSliderModel' ),
+  var ControlPanels = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanels' ),
+    Solutions = require( 'ACID_BASE_SOLUTIONS/model/Constants/Solutions' ),
+    ConcentrationSliderModel = require( 'ACID_BASE_SOLUTIONS/model/ConcentrationSliderModel' ),
+    StrengthSliderModel = require( 'ACID_BASE_SOLUTIONS/model/StrengthSliderModel' ),
 
   // strings
     solutionString = require( 'string!ACID_BASE_SOLUTIONS/solution' );

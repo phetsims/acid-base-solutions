@@ -11,7 +11,7 @@ define( function( require ) {
 
   // imports
   var Property = require( 'AXON/Property' ),
-    TestModes = require( 'model/Constants/TestModes' ),
+    TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' ),
     Vector2 = require( 'DOT/Vector2' ),
     Range = require( 'DOT/Range' ),
     Util = require( 'DOT/Util' );

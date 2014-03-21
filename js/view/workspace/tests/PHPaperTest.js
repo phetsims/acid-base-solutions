@@ -16,7 +16,7 @@ define( function( require ) {
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' ),
-    Constants = require( 'model/Constants/Constants' ),
+    Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' ),
 
   // strings
     pHColorKeyString = require( 'string!ACID_BASE_SOLUTIONS/pHColorKey' ),

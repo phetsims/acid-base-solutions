@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ControlPanels = require( 'model/Constants/ControlPanels' ),
+  var ControlPanels = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanels' ),
 
   // strings
     solutionsString = require( 'string!ACID_BASE_SOLUTIONS/solutions' );

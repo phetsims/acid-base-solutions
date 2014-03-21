@@ -20,7 +20,7 @@ define( function( require ) {
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' ),
-    ControlPanels = require( 'model/Constants/ControlPanels' ),
+    ControlPanels = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanels' ),
 
   // constants
     FONT = new PhetFont( {size: 14, weight: 'bold'} );
