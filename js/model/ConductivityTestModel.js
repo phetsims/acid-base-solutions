@@ -38,6 +38,7 @@ define( function( require ) {
     // conductivity test location
     this.location = beakerModel.location.plusXY( -60, -beakerModel.height - 130 );
 
+    //TODO delete dead code
     // drag range of pH meter
     //this.dragRange = new Range( this.location.value.y - 10, this.location.value.y + 75 );
 
