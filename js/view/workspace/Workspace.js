@@ -32,7 +32,7 @@ define( function( require ) {
     this.addChild( new PHPaperTest( model.pHPaper ) );
 
     // add conductivity test
-    this.addChild( new ConductivityTest( model, {x: model.width / 4, y: model.height / 75} ) );
+    this.addChild( new ConductivityTest( model.conductivityTest ) );
 
     // add beaker
     this.addChild( new Beaker( model.beaker ) );

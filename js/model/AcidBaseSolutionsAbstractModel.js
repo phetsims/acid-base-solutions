@@ -13,6 +13,7 @@ define( function( require ) {
     PropertySet = require( 'AXON/PropertySet' ),
     PHMeterModel = require( './PHMeterModel' ),
     PHPaperModel = require( './PHPaperModel' ),
+    ConductivityTestModel = require( './ConductivityTestModel' ),
     BeakerModel = require( './BeakerModel' ),
     FormulaModel = require( './FormulaModel' ),
     MagnifierModel = require( './MagnifierModel' ),
@@ -49,8 +50,7 @@ define( function( require ) {
       viewMode: ViewModes.MOLECULES, // view mode
       solvent: false, // solvent visibility
       pH: this.components[defaultSolution].pH, // pH level of product
-      brightness: pHToBrightness( this.components[defaultSolution].pH ), // brightness value
-      resetTrigger: false // reset trigger
+      brightness: pHToBrightness( this.components[defaultSolution].pH ) // brightness value
     } );
 
     // beaker model (all elements in workspace have position relative to beaker)
@@ -65,8 +65,11 @@ define( function( require ) {
     // pH meter model
     this.pHMeter = new PHMeterModel( this.beaker, this.property( 'pH' ), this.property( 'testMode' ) );
 
-    // pH paper reset
+    // pH paper model
     this.pHPaper = new PHPaperModel( this.beaker, this.property( 'solution' ), this.property( 'pH' ), this.property( 'testMode' ) );
+
+    // conductivity test model
+    this.conductivityTest = new ConductivityTestModel( this.beaker, this.property( 'testMode' ), this.property( 'brightness' ) );
 
     // set appropriate pH
     this.property( 'solution' ).link( function( newSolution, prevSolution ) {
@@ -97,7 +100,7 @@ define( function( require ) {
       // reset main properties
       PropertySet.prototype.reset.call( this );
 
-      // reset components properties
+      // reset solutions properties
       this.SOLUTIONS.forEach( function( solution ) {
         solution.reset();
       } );
@@ -108,8 +111,8 @@ define( function( require ) {
       // reset pH paper
       this.pHPaper.reset();
 
-      // send signal to views for resetting
-      this.resetTrigger = !this.resetTrigger;
+      // reset conductivity test
+      this.conductivityTest.reset();
     }
   } );
 } );

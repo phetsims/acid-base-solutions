@@ -12,12 +12,10 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    Property = require( 'AXON/Property' ),
     Image = require( 'SCENERY/nodes/Image' ),
     Path = require( 'SCENERY/nodes/Path' ),
     Shape = require( 'KITE/Shape' ),
     LinearFunction = require( 'DOT/LinearFunction' ),
-    TestModes = require( 'model/Constants/TestModes' ),
 
     ConductivityTestWire = require( './ConductivityTestWire' ),
     ConductivityTestProbe = require( './ConductivityTestProbe' ),
@@ -35,34 +33,21 @@ define( function( require ) {
     OPACITY_MAX = 0.15,
 
   // alpha of the bulb when used against a dark background. This is clamped after evaluation to keep it within the range [0,1]
-    BRIGHTNESS_TO_ALPHA_FUNCTION_AGAINST_DARK_BACKGROUND = new LinearFunction( 0, 1, OPACITY_MAX, 0 ),
+    BRIGHTNESS_TO_ALPHA_FUNCTION_AGAINST_DARK_BACKGROUND = new LinearFunction( 0, 1, OPACITY_MAX, 0 );
 
-    WATER_SURFACE = 75,
-    WIRES_INITIAL_Y = 60,
-
-    wireOptions = {
-      positive: {
-        start: {x: 125, y: 84},
-        end: {x: 163, y: WIRES_INITIAL_Y}
-      },
-      negative: {
-        start: {x: 16, y: 75},
-        end: {x: -22, y: WIRES_INITIAL_Y}
-      }
-    };
-
-  function ConductivityTest( model, options ) {
+  function ConductivityTest( conductivityTestModel ) {
     var self = this,
       lightBulbDarkMask = new Node( {opacity: OPACITY_MAX, children: [new Image( lightBulbGlassMaskImage, {scale: 0.33} )]} ),
-      positiveProbeY = new Property( wireOptions.positive.end.y ),
-      negativeProbeY = new Property( wireOptions.negative.end.y ),
-      isClose = new Property( false ),
+      wireOptions = conductivityTestModel.getWireOptions(),
+      positiveProbeY = conductivityTestModel.positiveProbeY,
+      negativeProbeY = conductivityTestModel.negativeProbeY,
+      isClose = conductivityTestModel.isClosed,
       negativeWire,
       positiveWire;
-    Node.call( this, options );
+    Node.call( this );
 
     // add light rays
-    this.addChild( new ConductivityTestLightRays( model.property( 'testMode' ), model.property( 'brightness' ), isClose, lightBulbDarkMask.getGlobalBounds().width / 2, {x: lightBulbDarkMask.getGlobalBounds().width / 2, y: lightBulbDarkMask.getGlobalBounds().height / 2.75} ) );
+    this.addChild( new ConductivityTestLightRays( conductivityTestModel.testMode, conductivityTestModel.brightness, isClose, lightBulbDarkMask.getGlobalBounds().width / 2, {x: lightBulbDarkMask.getGlobalBounds().width / 2, y: lightBulbDarkMask.getGlobalBounds().height / 2.75} ) );
 
     this.addChild( new Node( {children: [
       // add light bulb image
@@ -82,15 +67,10 @@ define( function( require ) {
     this.addChild( positiveWire = new ConductivityTestWire( 'positive', wireOptions.positive.start.x, wireOptions.positive.start.y, wireOptions.positive.end.x, wireOptions.positive.end.y ) );
 
     // add probes
-    this.addChild( new ConductivityTestProbe( 'red', '+', positiveProbeY, {x: 155, y: WIRES_INITIAL_Y} ) );
-    this.addChild( new ConductivityTestProbe( 'black', '-', negativeProbeY, {x: -30, y: WIRES_INITIAL_Y} ) );
+    this.addChild( new ConductivityTestProbe( 'red', '+', positiveProbeY, {x: 155, y: wireOptions.positive.end.y} ) );
+    this.addChild( new ConductivityTestProbe( 'black', '-', negativeProbeY, {x: -30, y: wireOptions.negative.end.y} ) );
 
-    // if both probes in water: isContact === true
-    var checkContact = function() {
-      isClose.value = ( positiveProbeY.value > WATER_SURFACE && negativeProbeY.value > WATER_SURFACE );
-    };
-    positiveProbeY.link( checkContact );
-    negativeProbeY.link( checkContact );
+    this.translation = conductivityTestModel.location;
 
     // update wires if end point was changed
     positiveProbeY.link( function( y ) {
@@ -102,19 +82,14 @@ define( function( require ) {
 
     // set brightness of light bulb
     var setBrightness = function() {
-      lightBulbDarkMask.setOpacity( (isClose.value ? BRIGHTNESS_TO_ALPHA_FUNCTION_AGAINST_DARK_BACKGROUND( model.brightness ) : OPACITY_MAX) );
+      lightBulbDarkMask.setOpacity( (isClose.value ? BRIGHTNESS_TO_ALPHA_FUNCTION_AGAINST_DARK_BACKGROUND( conductivityTestModel.brightness.value ) : OPACITY_MAX) );
     };
-    model.property( 'brightness' ).link( setBrightness );
+    conductivityTestModel.brightness.link( setBrightness );
     isClose.link( setBrightness );
 
     // visibility observer
-    model.property( 'testMode' ).link( function( mode ) {
-      self.setVisible( mode === TestModes.CONDUCTIVITY );
-    } );
-
-    model.property( 'resetTrigger' ).link( function() {
-      positiveProbeY.reset();
-      negativeProbeY.reset();
+    conductivityTestModel.visibility.link( function( isVisible ) {
+      self.setVisible( isVisible );
     } );
   }
 
