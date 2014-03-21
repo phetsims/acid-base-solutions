@@ -18,6 +18,12 @@ define( function( require ) {
   // strings
   var viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' );
 
+  /**
+   * @param {Property<ViewModes>} viewModeProperty
+   * @param {Property<TestModes>} testModeProperty
+   * @param {Property<Boolean>} solventVisibleProperty
+   * @constructor
+   */
   function ViewModesMenuModel( viewModeProperty, testModeProperty, solventVisibleProperty ) {
     var self = this;
 
