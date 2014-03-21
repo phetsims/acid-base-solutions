@@ -50,7 +50,7 @@ define( function( require ) {
     // models for control panel
     this.controlPanel = [
       new SolutionMenuModel( this.property( 'solution' ), this.property( 'concentration' ), this.property( 'strength' ), this.property( 'isAcid' ), this.property( 'isWeak' ) ),
-      new ViewModesMenuModel( this.property( 'viewMode' ), this.property( 'testMode' ), this.property( 'solvent' ) ),
+      new ViewModesMenuModel( this.property( 'viewMode' ), this.property( 'testMode' ), this.property( 'solventVisible' ) ),
       new TestModesMenuModel( this.property( 'testMode' ) )
     ];
 

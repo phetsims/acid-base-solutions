@@ -18,7 +18,7 @@ define( function( require ) {
   // strings
     viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' );
 
-  function ViewModesMenuModel( viewModeProperty, testModeProperty, solventProperty ) {
+  function ViewModesMenuModel( viewModeProperty, testModeProperty, solventVisibleProperty ) {
     var self = this;
 
     // control panel's type
@@ -31,7 +31,7 @@ define( function( require ) {
     this.mode = viewModeProperty;
 
     // solvent visibility
-    this.solvent = solventProperty;
+    this.solventVisibleProperty = solventVisibleProperty;
 
     // solvent checkbox enable property
     this.checkboxEnable = new Property( true );

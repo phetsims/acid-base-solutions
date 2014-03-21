@@ -82,7 +82,7 @@ define( function( require ) {
   function ViewsControl( viewModesMenuModel, options ) {
     var self = this,
       checkboxEnableProperty = viewModesMenuModel.checkboxEnable,
-      solventProperty = viewModesMenuModel.solvent,
+      solventVisibleProperty = viewModesMenuModel.solventVisibleProperty,
       viewModeProperty = viewModesMenuModel.mode;
     VBox.call( this, _.extend( {spacing: 4, align: 'left'}, options ) );
 
@@ -92,7 +92,7 @@ define( function( require ) {
         self.addChild( createRadioButton( viewModeProperty, buttonOption ) );
       }
       else {
-        self.addChild( createCheckBox.call( self, solventProperty, buttonOption ) );
+        self.addChild( createCheckBox.call( self, solventVisibleProperty, buttonOption ) );
 
         checkboxEnableProperty.link( function( isEnabled ) {
           self._checkbox.enabled = isEnabled;

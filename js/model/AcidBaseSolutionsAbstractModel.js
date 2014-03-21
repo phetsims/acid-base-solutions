@@ -53,7 +53,7 @@ define( function( require ) {
       solution: defaultSolutionType, // solution's type
       testMode: TestModes.PH_METER, // test mode
       viewMode: ViewModes.MOLECULES, // view mode
-      solvent: false, // solvent visibility
+      solventVisible: false, // solvent visibility
       pH: this.components[defaultSolutionType].pH, // pH level of product
       brightness: pHToBrightness( this.components[defaultSolutionType].pH ) // brightness value
     } );
@@ -65,7 +65,7 @@ define( function( require ) {
     this.formula = new FormulaModel( this.beaker, this.property( 'solution' ) );
 
     // magnifier model
-    this.magnifier = new MagnifierModel( this.beaker, this.SOLUTIONS, this.components, this.property( 'solution' ), this.property( 'solvent' ), this.property( 'viewMode' ), this.property( 'testMode' ) );
+    this.magnifier = new MagnifierModel( this.beaker, this.SOLUTIONS, this.components, this.property( 'solution' ), this.property( 'solventVisible' ), this.property( 'viewMode' ), this.property( 'testMode' ) );
 
     // pH meter model
     this.pHMeter = new PHMeterModel( this.beaker, this.property( 'pH' ), this.property( 'testMode' ) );

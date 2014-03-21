@@ -27,7 +27,7 @@ define( function( require ) {
     this.container.setClipArea( new Shape().circle( 0, 0, RADIUS - 4 ) );
 
     // add background
-    this.addChild( new MagnifierBackground( magnifierModel.solvent, this.container, RADIUS ) );
+    this.addChild( new MagnifierBackground( magnifierModel.solventVisibleProperty, this.container, RADIUS ) );
 
     // add molecules layers for each solution
     magnifierModel.solutions.forEach( function( solution ) {

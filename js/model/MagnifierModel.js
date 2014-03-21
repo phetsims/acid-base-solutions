@@ -13,7 +13,7 @@ define( function( require ) {
     ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
     TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' );
 
-  function MagnifierModel( beakerModel, solutions, components, solutionProperty, solventProperty, viewModeProperty, testModeProperty ) {
+  function MagnifierModel( beakerModel, solutions, components, solutionProperty, solventVisibleProperty, viewModeProperty, testModeProperty ) {
     // magnifier radius
     this.radius = beakerModel.height / 2.15;
 
@@ -30,7 +30,7 @@ define( function( require ) {
     this.components = components;
 
     // solvent visibility property
-    this.solvent = solventProperty;
+    this.solventVisibleProperty = solventVisibleProperty;
 
     // view mode property
     this.viewMode = viewModeProperty;

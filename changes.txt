@@ -1,3 +1,4 @@
+3/21/14 #59 rename solventProperty to solventVisibleProperty
 3/21/14 rename Solutions enum to SolutionTypes
 3/21/14 #53 fix import of Constants that was incorrectly named (CONSTANTS) and not located with other imports
 3/21/14 #56 add credits
