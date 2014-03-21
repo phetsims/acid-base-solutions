@@ -22,7 +22,7 @@ define( function( require ) {
     this.height = beakerModel.height / 1.125;
 
     // bar chart location
-    this.location = beakerModel.location.plusXY( -20, 0 );
+    this.location = beakerModel.location.plusXY( (this.width - beakerModel.width) / 2, -(beakerModel.height + this.height) / 2 );
 
     // solution property
     this.solution = solutionProperty;

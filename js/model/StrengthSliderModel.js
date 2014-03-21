@@ -30,7 +30,7 @@ define( function( require ) {
     this.slider = new Property( this.range.defaultValue );
 
     // visibility of slider
-    this.visibility = new Property( isWeakProperty.get() );
+    this.visibility = new Property( isWeakProperty.value );
 
     isWeakProperty.link( function( isWeak ) {
       self.visibility.value = isWeak;

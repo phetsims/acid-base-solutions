@@ -43,7 +43,7 @@ define( function( require ) {
       }
     }
 
-    this.center = formulaModel.location.plusXY( 0, this.getHeight() / 2 + 5 );
+    this.translation = formulaModel.location.plusXY( -maxWidth / 2, 5 );
 
     // add observer for formulas
     formulaModel.solutionProperty.link( function( newSolution, prevSolution ) {

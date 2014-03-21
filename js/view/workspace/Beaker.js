@@ -96,7 +96,7 @@ define( function( require ) {
       centerY: -deltaY * NUMBER_OF_TICKS
     } ) );
 
-    this.center = beakerModel.location;
+    this.translation = beakerModel.location;
   }
 
   return inherit( Node, Beaker );

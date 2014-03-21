@@ -11,6 +11,8 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     PropertySet = require( 'AXON/PropertySet' ),
+    PHMeterModel = require( './PHMeterModel' ),
+    PHPaperModel = require( './PHPaperModel' ),
     BeakerModel = require( './BeakerModel' ),
     FormulaModel = require( './FormulaModel' ),
     MagnifierModel = require( './MagnifierModel' ),
@@ -60,6 +62,12 @@ define( function( require ) {
     // magnifier model
     this.magnifier = new MagnifierModel( this.beaker, this.SOLUTIONS, this.components, this.property( 'solution' ), this.property( 'solvent' ), this.property( 'viewMode' ), this.property( 'testMode' ) );
 
+    // pH meter model
+    this.pHMeter = new PHMeterModel( this.beaker, this.property( 'pH' ), this.property( 'testMode' ) );
+
+    // pH paper reset
+    this.pHPaper = new PHPaperModel( this.beaker, this.property( 'solution' ), this.property( 'pH' ), this.property( 'testMode' ) );
+
     // set appropriate pH
     this.property( 'solution' ).link( function( newSolution, prevSolution ) {
       // unsubscribe from previous solution pH property
@@ -93,6 +101,12 @@ define( function( require ) {
       this.SOLUTIONS.forEach( function( solution ) {
         solution.reset();
       } );
+
+      // reset pH meter
+      this.pHMeter.reset();
+
+      // reset pH paper
+      this.pHPaper.reset();
 
       // send signal to views for resetting
       this.resetTrigger = !this.resetTrigger;

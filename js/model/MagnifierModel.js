@@ -18,7 +18,7 @@ define( function( require ) {
     this.radius = beakerModel.height / 2.15;
 
     // magnifier location
-    this.location = beakerModel.location.plusXY( beakerModel.width / 2 - this.radius, beakerModel.height / 4 - this.radius / 2 );
+    this.location = beakerModel.location.plusXY( 0, -beakerModel.height / 2 );
 
     // solution property
     this.solution = solutionProperty;

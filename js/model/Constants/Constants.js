@@ -25,6 +25,8 @@ define( function( require ) {
     MIN_PH: 0,
     NEUTRAL_BRIGHTNESS: 0.05, // brightness when pH == NEUTRAL_PH
     NEUTRAL_PH: 7,
+    PH_COLOR_KEY_RECT_HEIGHT: 28, // height of single color key rectangle
+    PH_COLOR_KEY_RECT_WIDTH: 14, // width of single color key rectangle
     STRONG_STRENGTH: STRONG_STRENGTH,
     WATER_EQUILIBRIUM_CONSTANT: 1E-14,
     WATER_CONCENTRATION: 55.6, // water concentration when it's used as a solvent, mol/L

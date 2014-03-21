@@ -26,10 +26,10 @@ define( function( require ) {
     Node.call( this, options );
 
     // add pH meter
-    this.addChild( new PHMeterTest( model, {x: model.width / 2.2, y: model.height / 20} ) );
+    this.addChild( new PHMeterTest( model.pHMeter ) );
 
     // add pH paper
-    this.addChild( new PHPaperTest( model, {x: model.width / 8, y: model.height / 45} ) );
+    this.addChild( new PHPaperTest( model.pHPaper ) );
 
     // add conductivity test
     this.addChild( new ConductivityTest( model, {x: model.width / 4, y: model.height / 75} ) );

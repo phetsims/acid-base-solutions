@@ -45,7 +45,7 @@ define( function( require ) {
       }
     } );
 
-    this.center = magnifierModel.location;
+    this.translation = magnifierModel.location;
 
     magnifierModel.visibility.link( function( isVisible ) {
       self.setVisible( isVisible );

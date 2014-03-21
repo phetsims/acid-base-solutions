@@ -64,7 +64,7 @@ define( function( require ) {
       }
     } );
 
-    this.center = barChartModel.location;
+    this.translation = barChartModel.location;
 
     var updateBarValuesBinded = updateBarValues.bind( this, barChartModel, relations );
     barChartModel.viewMode.link( updateBarValuesBinded );

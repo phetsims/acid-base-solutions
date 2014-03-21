@@ -19,20 +19,16 @@ define( function( require ) {
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' ),
     Util = require( 'DOT/Util' ),
-    TestModes = require( 'model/Constants/TestModes' ),
 
   // string
     pHString = require( 'string!ACID_BASE_SOLUTIONS/pH' ),
 
   // constants
-    FONT = new PhetFont( {size: 15, weight: 'bold'} ),
-    PROBE_MAX_Y_COODINATE = 100,
-    PROBE_MIN_Y_COODINATE = 25.2,
-    WATER_SURFACE = 38;
+    FONT = new PhetFont( {size: 15, weight: 'bold'} );
 
-  function PHMeterTest( model, options ) {
+  function PHMeterTest( pHMeterModel ) {
     var self = this;
-    Node.call( this, _.extend( {cursor: 'pointer'}, options ) );
+    Node.call( this, {cursor: 'pointer'} );
 
     // add sensor
     this.addChild( new Node( {children: [
@@ -52,35 +48,32 @@ define( function( require ) {
     var clickYOffset;
     this.addInputListener( new SimpleDragHandler( {
       start: function( e ) {
+        // get offset
         clickYOffset = self.globalToParentPoint( e.pointer.point ).y - e.currentTarget.y;
       },
       drag: function( e ) {
         // new y-coordinate
-        var y = self.globalToParentPoint( e.pointer.point ).y - clickYOffset;
-        // check limitation
-        y = Math.min( Math.max( PROBE_MIN_Y_COODINATE, y ), PROBE_MAX_Y_COODINATE );
-        // move to new position
-        self.setYValue( y );
+        pHMeterModel.move( self.globalToParentPoint( e.pointer.point ).y - clickYOffset );
       }
     } ) );
 
-    model.property( 'pH' ).link( function( pH ) {
+    // add observers
+    pHMeterModel.location.link( function( location ) {
+      self.translation = location;
+    } );
+
+    pHMeterModel.textVisibility.link( function( isTextVisible ) {
+      self.pHText.setVisible( isTextVisible );
+    } );
+
+    pHMeterModel.pH.link( function( pH ) {
       self.pHText.setText( Util.toFixed( pH, 2 ) );
     } );
 
-    model.property( 'testMode' ).link( function( mode ) {
-      self.setVisible( mode === TestModes.PH_METER );
-    } );
-
-    model.property( 'resetTrigger' ).link( function() {
-      self.setYValue( options.y || 0 );
+    pHMeterModel.visibility.link( function( isVisible ) {
+      self.setVisible( isVisible );
     } );
   }
 
-  return inherit( Node, PHMeterTest, {
-    setYValue: function( y ) {
-      this.y = y;
-      this.pHText.setVisible( this.y > WATER_SURFACE );
-    }
-  } );
+  return inherit( Node, PHMeterTest );
 } );

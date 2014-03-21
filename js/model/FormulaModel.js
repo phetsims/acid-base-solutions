@@ -11,7 +11,7 @@ define( function() {
 
   function FormulaModel( beakerModel, solutionProperty ) {
     // formula location
-    this.location = beakerModel.location.plusXY( 0, beakerModel.height / 2 + 5 );
+    this.location = beakerModel.location.copy();
 
     // solution property
     this.solutionProperty = solutionProperty;

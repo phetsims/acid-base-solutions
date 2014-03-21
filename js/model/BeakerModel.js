@@ -20,7 +20,7 @@ define( function( require ) {
     this.height = modelHeight / 1.66;
 
     // beaker location
-    this.location = new Vector2( modelWidth / 3, modelHeight / 1.77 );
+    this.location = new Vector2( modelWidth / 2.9, modelHeight / 1.15 );
   }
 
   return BeakerModel;
