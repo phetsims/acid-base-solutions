@@ -36,7 +36,6 @@ define( function( require ) {
       H3OConcentration: H3O_CONCENTRATION_DEFAULT
     } );
 
-     //TODO rename this.solutionType
     this.type = SolutionTypes.WATER;
 
     /* array with molecules which will be shown in magnifier and concentration chart bar

@@ -62,7 +62,6 @@ define( function( require ) {
       isValidStrength: IS_VALID_STRENGTH_DEFAULT
     } );
 
-    //TODO rename this.solutionType
     this.type = SolutionTypes.STRONG_ACID;
 
     /* array with molecules which will be shown in magnifier and concentration chart bar
