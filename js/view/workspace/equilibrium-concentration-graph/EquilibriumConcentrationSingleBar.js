@@ -41,6 +41,7 @@ define( function( require ) {
 
 
   return inherit( Node, EquilibriumConcentrationSingleBar, {
+
     // set height and text value of bar
     setValue: function( value ) {
       var barHeight = Math.abs( Util.log10( value ) + 8 ) * this._maxHeight / 10,
@@ -77,6 +78,7 @@ define( function( require ) {
         this._text.setText( Util.toFixed( value, 1 ) );
       }
     },
+
     // set color of rectangle
     setFill: function( color ) {
       this._rectangle.setFill( color );
