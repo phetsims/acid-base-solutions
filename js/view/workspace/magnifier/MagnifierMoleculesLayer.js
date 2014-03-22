@@ -16,7 +16,7 @@ define( function( require ) {
     Util = require( 'DOT/Util' ),
     ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' );
 
-  // molecules
+  // molecules. The field names here must correspond to the 'key' fields in AqueousSolutionAbstract.molecules.
   var MoleculesConstructors = {
       A: require( 'ACID_BASE_SOLUTIONS/view/molecules/AMolecule' ),
       B: require( 'ACID_BASE_SOLUTIONS/view/molecules/BMolecule' ),
