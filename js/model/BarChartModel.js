@@ -14,6 +14,17 @@ define( function( require ) {
     ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
     TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' );
 
+  /**
+   * @param {BeakerModel} beakerModel
+   * @param {Array<AqueousSolutionAbstract>} solutions
+   * @param {Array<AqueousSolutionAbstract>} components
+   * @param {Property<SolutionTypes>} solutionTypeProperty
+   * @param {Property<ViewModes>} viewModeProperty
+   * @param {Property<TestModes>} testModeProperty
+   * @param {Property<Number>} concentrationProperty
+   * @param {Property<Number>} strengthProperty
+   * @constructor
+   */
   function BarChartModel( beakerModel, solutions, components, solutionTypeProperty, viewModeProperty, testModeProperty, concentrationProperty, strengthProperty ) {
     // bar chart width
     this.width = beakerModel.width / 2;
