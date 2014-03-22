@@ -18,6 +18,10 @@ define( function( require ) {
     StrongBaseFormula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/StrongBaseFormula' ),
     WeakBaseFormula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/WeakBaseFormula' );
 
+  /**
+   * @param {FormulaModel} formulaModel
+   * @constructor
+   */
   function Formula( formulaModel ) {
     var maxWidth,
       formula,

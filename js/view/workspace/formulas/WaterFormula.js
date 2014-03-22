@@ -16,14 +16,12 @@ define( function( require ) {
   function WaterFormula( options ) {
     FormulaAbstract.call( this, options );
 
-    // left expression
     // left expression: H2O molecule
     this.addChild( this.H2ODoubleNode() );
 
     // reverse sign
     this.addChild( this.reverseSignNode() );
 
-    // right expression
     // right expression: H3O molecule
     this.addChild( this.H3ONode() );
 

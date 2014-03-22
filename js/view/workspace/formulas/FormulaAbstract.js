@@ -48,6 +48,7 @@ define( function( require ) {
   }
 
   return inherit( HBox, FormulaAbstract, {
+
     // A- node
     ANode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
@@ -56,6 +57,7 @@ define( function( require ) {
         new VStrut( TEXT_SUB_INDENT )
       ]} );
     },
+
     // B node
     BNode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
@@ -64,6 +66,7 @@ define( function( require ) {
         new VStrut( TEXT_SUB_INDENT )
       ]} );
     },
+
     // BH+ node
     BHNode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
@@ -72,6 +75,7 @@ define( function( require ) {
         new VStrut( TEXT_SUB_INDENT )
       ]} );
     },
+
     // H2O node
     H2ONode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
@@ -79,6 +83,7 @@ define( function( require ) {
         new SubSupText( ChemUtils.toSubscript( 'H2O' ), {font: FONT} )
       ]} );
     },
+
     // 2H2O node
     H2ODoubleNode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
@@ -89,6 +94,7 @@ define( function( require ) {
         new SubSupText( '2' + ChemUtils.toSubscript( 'H2O' ), {font: FONT} )
       ]} );
     },
+
     // H3O+ node
     H3ONode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
@@ -96,6 +102,7 @@ define( function( require ) {
         new SubSupText( ChemUtils.toSubscript( 'H3O' ) + '<sup>+</sup>', {font: FONT} )
       ]} );
     },
+
     // HA node
     HANode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
@@ -104,6 +111,7 @@ define( function( require ) {
         new VStrut( TEXT_SUB_INDENT )
       ]} );
     },
+
     // M+ node
     MNode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
@@ -112,6 +120,7 @@ define( function( require ) {
         new VStrut( TEXT_SUB_INDENT )
       ]} );
     },
+
     // MOH node
     MOHNode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
@@ -120,6 +129,7 @@ define( function( require ) {
         new VStrut( TEXT_SUB_INDENT )
       ]} );
     },
+
     // OH- node
     OHNode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
@@ -128,6 +138,7 @@ define( function( require ) {
         new VStrut( TEXT_SUB_INDENT )
       ]} );
     },
+
     // plus sign node
     plusSignNode: function() {
       return new VBox( {children: [
@@ -135,6 +146,7 @@ define( function( require ) {
         new VStrut( TEXT_SUB_INDENT + VBOX_SPACING )
       ]} );
     },
+
     // reverse sign node
     reverseSignNode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [
@@ -142,6 +154,7 @@ define( function( require ) {
         new VStrut( TEXT_SUB_INDENT + FONT_SIZE / 4 - 2 )
       ]} );
     },
+
     // straight sign node
     straightSignNode: function() {
       return new VBox( {spacing: VBOX_SPACING, children: [

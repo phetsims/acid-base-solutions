@@ -16,7 +16,6 @@ define( function( require ) {
   function WeakBaseFormula( options ) {
     FormulaAbstract.call( this, options );
 
-    // left expression
     // left expression: B molecule
     this.addChild( this.BNode() );
 
@@ -29,7 +28,6 @@ define( function( require ) {
     // reverse sign
     this.addChild( this.reverseSignNode() );
 
-    // right expression
     // right expression: BH molecule
     this.addChild( this.BHNode() );
 

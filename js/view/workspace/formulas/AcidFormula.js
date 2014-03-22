@@ -16,7 +16,6 @@ define( function( require ) {
   function AcidFormula( isWeak, options ) {
     FormulaAbstract.call( this, options );
 
-    // left expression
     // left expression: HA molecule
     this.addChild( this.HANode() );
 
@@ -29,7 +28,6 @@ define( function( require ) {
     // straight or reverse sign (depend on flag isWeak)
     this.addChild( (isWeak ? this.reverseSignNode() : this.straightSignNode()) );
 
-    // right expression
     // right expression: A molecule
     this.addChild( this.ANode() );
 

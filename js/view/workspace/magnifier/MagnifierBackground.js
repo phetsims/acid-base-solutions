@@ -20,6 +20,12 @@ define( function( require ) {
   // images
   var solventBackgroundImage = require( 'image!ACID_BASE_SOLUTIONS/../images/solvent.png' );
 
+  /**
+   * @param {Property<Boolean>} solventVisibleProperty
+   * @param {Node} container
+   * @param {Number} radius
+   * @constructor
+   */
   function MagnifierBackground( solventVisibleProperty, container, radius ) {
     var rectangle, solventBackground;
     Node.call( this );
@@ -32,6 +38,7 @@ define( function( require ) {
     // add lens
     this.addChild( new Circle( radius, {stroke: 'black', lineWidth: 8} ) );
 
+    //TODO why adding to container, why not handling clipping in here?
     // add solvent background
     container.addChild( solventBackground = new Image( solventBackgroundImage, {scale: 0.5, x: -radius * Math.SQRT2, y: -radius * Math.SQRT2} ) );
 
