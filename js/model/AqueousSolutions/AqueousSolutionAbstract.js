@@ -1,6 +1,8 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
+ * Base type for solutions.
+ * <p>
  * A solution is a homogeneous mixture composed of two or more substances.
  * In such a mixture, a solute is dissolved in another substance, known as a solvent.
  * In an aqueous solution, the solvent is water. The substance that is produced as
