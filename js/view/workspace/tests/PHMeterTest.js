@@ -58,7 +58,7 @@ define( function( require ) {
     } ) );
 
     // add observers
-    pHMeterModel.location.link( function( location ) {
+    pHMeterModel.locationProperty.link( function( location ) {
       self.translation = location;
     } );
 

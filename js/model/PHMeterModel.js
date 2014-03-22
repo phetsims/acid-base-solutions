@@ -20,10 +20,11 @@ define( function( require ) {
     var self = this;
 
     // pH meter location
-    this.location = new Property( beakerModel.location.plusXY( beakerModel.width / 2 - 85, -beakerModel.height - 105 ) );
+    this.locationProperty = new Property( beakerModel.location.plusXY( beakerModel.width / 2 - 85, -beakerModel.height - 105 ) );
 
+    //TODO this should be based on beaker bounds, not initial meter position
     // drag range of pH meter
-    this.dragRange = new Range( this.location.value.y - 10, this.location.value.y + 75 );
+    this.dragRange = new Range( this.locationProperty.value.y - 10, this.locationProperty.value.y + 75 );
 
     // water surface level
     this.waterSurface = beakerModel.location.y - beakerModel.height - 100;
@@ -41,7 +42,7 @@ define( function( require ) {
       self.visibleProperty.value = (testMode === TestModes.PH_METER);
     } );
 
-    this.location.link( function( location ) {
+    this.locationProperty.link( function( location ) {
       self.textVisibileProperty.value = (location.y > self.waterSurface);
     } );
   }
@@ -49,14 +50,14 @@ define( function( require ) {
   PHMeterModel.prototype = {
 
     reset: function() {
-      this.location.reset();
+      this.locationProperty.reset();
       this.visibleProperty.reset();
       this.textVisibileProperty.reset();
     },
 
     move: function( yCoord ) {
       // check limitation
-      this.location.value = new Vector2( this.location.value.x, Util.clamp(
+      this.locationProperty.value = new Vector2( this.locationProperty.value.x, Util.clamp(
         yCoord,
         this.dragRange.min,
         this.dragRange.max
