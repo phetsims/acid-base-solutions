@@ -21,12 +21,12 @@ define( function( require ) {
     return new Atom( 7, COLOR_A );
   };
 
-  //TODO in all molecules types, coords is actually options and should be 2nd param. fromCache should also be an option
-  function AMolecule( coords, fromCache ) {
-    Node.call( this, coords );
+  function AMolecule( options ) {
+    options = _.extend( { fromCache: false }, options );
+    Node.call( this, options );
 
     // cache values for next execution
-    this.addChild( fromCache ? (atomCache ? atomCache : atomCache = getMolecule()) : getMolecule() );
+    this.addChild( options.fromCache ? (atomCache ? atomCache : atomCache = getMolecule()) : getMolecule() );
   }
 
   return inherit( Node, AMolecule );

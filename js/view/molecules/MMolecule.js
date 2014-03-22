@@ -21,11 +21,12 @@ define( function( require ) {
     return new Atom( 7, COLOR_M );
   };
 
-  function MMolecule( coords, fromCache ) {
-    Node.call( this, coords );
+  function MMolecule( options ) {
+    options = _.extend( { fromCache: false }, options );
+    Node.call( this, options );
 
     // cache values for next execution
-    this.addChild( fromCache ? (atomCache ? atomCache : atomCache = getMolecule()) : getMolecule() );
+    this.addChild( options.fromCache ? (atomCache ? atomCache : atomCache = getMolecule()) : getMolecule() );
   }
 
   return inherit( Node, MMolecule );

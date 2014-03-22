@@ -32,11 +32,12 @@ define( function( require ) {
     ]} );
   }, atomCache;
 
-  function MOHMolecule( coords, fromCache ) {
-    Node.call( this, coords );
+  function MOHMolecule( options ) {
+    options = _.extend( { fromCache: false }, options );
+    Node.call( this, options );
 
     // cache values for next execution
-    this.addChild( fromCache ? (atomCache ? atomCache : atomCache = getMolecule()) : getMolecule() );
+    this.addChild( options.fromCache ? (atomCache ? atomCache : atomCache = getMolecule()) : getMolecule() );
   }
 
   return inherit( Node, MOHMolecule );
