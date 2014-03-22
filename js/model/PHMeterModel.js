@@ -22,7 +22,6 @@ define( function( require ) {
     // pH meter location
     this.locationProperty = new Property( beakerModel.location.plusXY( beakerModel.width / 2 - 85, -beakerModel.height - 105 ) );
 
-    //TODO this should be based on beaker bounds, not initial meter position
     // drag range of pH meter
     this.dragRange = new Range( this.locationProperty.value.y - 10, this.locationProperty.value.y + 75 );
 
