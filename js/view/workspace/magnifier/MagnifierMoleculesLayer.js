@@ -50,7 +50,6 @@ define( function( require ) {
 
     // add molecules
     for ( var i = 0; i < MAX_MOLECULES; i++ ) {
-      //TODO the order of args to the constructor is odd, options are first
       this.addChild( molecules[i] = new MoleculesConstructors[molecule.key]( { visible: false, fromCache: true } ) );
     }
 
