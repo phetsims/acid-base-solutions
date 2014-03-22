@@ -25,7 +25,7 @@ define( function( require ) {
 
     //TODO add Property suffix
     // concentration of solution
-    this.concentration = concentrationProperty;
+    this.concentrationProperty = concentrationProperty;
 
     // range of slider
     this.range = new Range( Util.log10( CONCENTRATION_RANGE.min ), Util.log10( CONCENTRATION_RANGE.max ), Util.log10( CONCENTRATION_RANGE.defaultValue ) );
@@ -37,7 +37,7 @@ define( function( require ) {
     this.sliderValueProperty = new Property( this.range.defaultValue );
 
     this.sliderValueProperty.link( function( value ) {
-      self.concentration.value = Math.pow( 10, value );
+      self.concentrationProperty.value = Math.pow( 10, value );
     } );
   }
 

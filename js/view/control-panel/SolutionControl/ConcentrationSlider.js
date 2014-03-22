@@ -33,7 +33,7 @@ define( function( require ) {
 
   function ConcentrationSlider( concentrationSliderModel ) {
     var range = concentrationSliderModel.range,
-      concentrationProperty = concentrationSliderModel.concentration,
+      concentrationProperty = concentrationSliderModel.concentrationProperty,
       arrowStep = concentrationSliderModel.arrowStep,
       sliderProperty = concentrationSliderModel.sliderValueProperty,
       readoutText = new Text( StringUtils.format( pattern_0value_1concentration, Util.toFixed( concentrationProperty.value, 3 ), molesPerLiterString ), { font: READOUT_FONT } ),
