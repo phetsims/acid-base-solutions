@@ -37,13 +37,11 @@ define( function( require ) {
     this.isAcidProperty = isAcidProperty; // type of solution. true - acid, false - base
     this.isWeakProperty = isWeakProperty; // type of strength. true - weak, false - strong
 
-    //TODO rename
-    // strength of solution
-    this.strengthSlider = new StrengthSliderModel( strengthProperty, isWeakProperty );
+    // model for strength slider
+    this.strengthSliderModel = new StrengthSliderModel( strengthProperty, isWeakProperty );
 
-    //TODO rename
-    // concentration of solution
-    this.concentrationSlider = new ConcentrationSliderModel( concentrationProperty );
+    // model for concentration slider
+    this.concentrationSliderModel = new ConcentrationSliderModel( concentrationProperty );
 
     // update solution type if it was changed by radio buttons
     var setSolutionType = function() {
@@ -71,8 +69,8 @@ define( function( require ) {
 
   SolutionMenuModel.prototype = {
     reset: function() {
-      this.strengthSlider.reset();
-      this.concentrationSlider.reset();
+      this.strengthSliderModel.reset();
+      this.concentrationSliderModel.reset();
     }
   };
 

@@ -32,9 +32,10 @@ define( function( require ) {
   var FONT = new PhetFont( 12 );
 
   function SolutionControl( solutionMenuModel, options ) {
+
     var vBox = new VBox( {spacing: 4} ),
-      strengthSlider,
-      concentrationSlider;
+      strengthSlider;
+
     Node.call( this, options );
 
     // add type radio buttons menu
@@ -48,7 +49,7 @@ define( function( require ) {
 
     // add concentration slider
     vBox.addChild( new Text( initialConcentrationString, {font: FONT} ) );
-    vBox.addChild( new ConcentrationSlider( solutionMenuModel.concentrationSlider ) );
+    vBox.addChild( new ConcentrationSlider( solutionMenuModel.concentrationSliderModel ) );
 
     // add black line
     vBox.addChild( new Line( 15, 0, 170, 0, {stroke: 'black', lineWidth: 0.75} ) );
@@ -61,12 +62,12 @@ define( function( require ) {
     ]} ) );
 
     // add strength slider
-    vBox.addChild( strengthSlider = new StrengthSlider( solutionMenuModel.strengthSlider ) );
+    vBox.addChild( strengthSlider = new StrengthSlider( solutionMenuModel.strengthSliderModel ) );
 
     this.addChild( vBox );
     vBox.updateLayout();
 
-    solutionMenuModel.strengthSlider.visibleProperty.link( function( visible ) {
+    solutionMenuModel.strengthSliderModel.visibleProperty.link( function( visible ) {
       strengthSlider.setVisible( visible );
     } );
   }
