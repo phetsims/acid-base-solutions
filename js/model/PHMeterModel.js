@@ -42,7 +42,6 @@ define( function( require ) {
     } );
 
     this.location.link( function( location ) {
-      //TODO this should be based on pHProperty.value, not location of the meter
       self.textVisibileProperty.value = (location.y > self.waterSurface);
     } );
   }
