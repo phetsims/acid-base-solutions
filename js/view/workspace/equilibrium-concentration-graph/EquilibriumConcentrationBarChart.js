@@ -18,6 +18,10 @@ define( function( require ) {
   // constants
   var MOLECULES_COLORS = require( 'ACID_BASE_SOLUTIONS/model/Constants/MoleculesColors' );
 
+  /**
+   * @param {BarChartModel} barChartModel
+   * @constructor
+   */
   function EquilibriumConcentrationBarChart( barChartModel ) {
     var self = this,
       maxBars = 0,
@@ -78,7 +82,11 @@ define( function( require ) {
     }
   }
 
-  // update values of bars
+  /**
+   * Update values of bars.
+   * @param {BarChartModel} model
+   * @param {Array<AqueousSolutions>} solutions associative array of solutions, indexed by solutionType
+   */
   var updateBarValues = function( model, solutions ) {
 
     var solutionType = model.solutionTypeProperty.value;
