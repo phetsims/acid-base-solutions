@@ -17,7 +17,6 @@ define( function( require ) {
   /**
    * @param {BeakerModel} beakerModel
    * @param {Array<AqueousSolutionAbstract>} solutions
-   * @param {Array<AqueousSolutionAbstract>} components
    * @param {Property<SolutionTypes>} solutionTypeProperty
    * @param {Property<ViewModes>} viewModeProperty
    * @param {Property<TestModes>} testModeProperty
@@ -25,7 +24,7 @@ define( function( require ) {
    * @param {Property<Number>} strengthProperty optional, provided for custom solutions
    * @constructor
    */
-  function BarChartModel( beakerModel, solutions, components, solutionTypeProperty, viewModeProperty, testModeProperty, concentrationProperty, strengthProperty ) {
+  function BarChartModel( beakerModel, solutions, solutionTypeProperty, viewModeProperty, testModeProperty, concentrationProperty, strengthProperty ) {
     // bar chart width
     this.width = beakerModel.width / 2;
 
@@ -38,11 +37,8 @@ define( function( require ) {
     // solution property
     this.solutionTypeProperty = solutionTypeProperty;
 
-    // array of possible solutions
+    // associative array of possible solutions, indexed by solutionType
     this.solutions = solutions;
-
-    // object for easy access to solutions
-    this.components = components;
 
     // view mode property
     this.viewModeProperty = viewModeProperty;

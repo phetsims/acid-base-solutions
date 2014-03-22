@@ -20,7 +20,7 @@ define( function( require ) {
 
   function EquilibriumConcentrationBarChart( barChartModel ) {
     var self = this,
-      molecules = {}, //TODO should this be [] ?
+      molecules = {},// associative array, maps {SolutionTypes} to an array of molecules for that solution type
       maxBars = 0,
       BAR_CHART_WIDTH = barChartModel.width,
       BAR_CHART_HEIGHT = barChartModel.height;
@@ -31,10 +31,11 @@ define( function( require ) {
     this.addChild( new EquilibriumConcentrationBarChartBackground( BAR_CHART_WIDTH, BAR_CHART_HEIGHT ) );
 
     // find max bars value for all solution
-    barChartModel.solutions.forEach( function( solution ) {
+    for ( var key in barChartModel.solutions ) {
+      var solution = barChartModel.solutions[ key ];
       maxBars = Math.max( maxBars, solution.molecules.length );
       molecules[solution.type] = solution.molecules;
-    } );
+    };
 
     // create bars
     for ( var i = 0; i < maxBars; i++ ) {
@@ -54,7 +55,7 @@ define( function( require ) {
         if ( i < barNumber ) {
           // set visibility, color, value and position of new bars
           bar.setVisible( true );
-          bar.setValue( barChartModel.components[solutionType].property( molecules[solutionType][i].concentrationPropertyName ).value );
+          bar.setValue( barChartModel.solutions[solutionType].property( molecules[solutionType][i].concentrationPropertyName ).value );
           bar.setFill( MOLECULES_COLORS[molecules[solutionType][i].key] );
           bar.setTranslation( (i + 0.75 + (4 - barNumber) / 2) * BAR_CHART_WIDTH / 4, BAR_CHART_HEIGHT );
         }
@@ -85,7 +86,7 @@ define( function( require ) {
 
     if ( this.visible ) {
       for ( var i = 0; i < barNumber; i++ ) {
-        this._bars[i].setValue( model.components[solutionType].property( molecules[solutionType][i].concentrationPropertyName ).value );
+        this._bars[i].setValue( model.solutions[solutionType].property( molecules[solutionType][i].concentrationPropertyName ).value );
       }
     }
   };

@@ -14,11 +14,11 @@ define( function( require ) {
     RadialGradient = require( 'SCENERY/util/RadialGradient' ),
     Circle = require( 'SCENERY/nodes/Circle' );
 
-  var gradients = {}; // TODO is this supposed to be [] ?
+  var gradients = {};
 
   function Atom( radius, color, options ) {
     if ( !(radius in gradients) ) {
-      gradients[radius] = {}; // TODO is this supposed to be [] ?
+      gradients[radius] = {};
     }
 
     // cache gradients for next executions

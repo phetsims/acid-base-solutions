@@ -38,14 +38,10 @@ define( function( require ) {
 
     this.mode = mode;
 
-    // possible solutions
-    this.SOLUTIONS = solutions;
-
-    // for easy access to solutions. This is an associative array that is indexed by {SolutionTypes}
-    this.components = {};
-
-    this.SOLUTIONS.forEach( function( solution ) {
-      self.components[solution.type] = solution;
+    // convert to an associative array, so we can look up solutions by solutionType
+    this.solutions = {};
+    solutions.forEach( function( solution ) {
+      self.solutions[solution.type] = solution;
     } );
 
     PropertySet.call( this, {
@@ -53,8 +49,8 @@ define( function( require ) {
       testMode: TestModes.PH_METER, // test mode
       viewMode: ViewModes.MOLECULES, // view mode
       solventVisible: false, // solvent visibility
-      pH: this.components[defaultSolutionType].pH, // pH level of product
-      brightness: pHToBrightness( this.components[defaultSolutionType].pH ) // brightness value
+      pH: this.solutions[defaultSolutionType].pH, // pH level of product
+      brightness: pHToBrightness( this.solutions[defaultSolutionType].pH ) // brightness value
     } );
 
     // beaker model (all elements in workspace have position relative to beaker)
@@ -64,7 +60,7 @@ define( function( require ) {
     this.formula = new FormulaModel( this.beaker, this.property( 'solutionType' ) );
 
     // magnifier model
-    this.magnifier = new MagnifierModel( this.beaker, this.SOLUTIONS, this.components, this.property( 'solutionType' ), this.property( 'solventVisible' ), this.property( 'viewMode' ), this.property( 'testMode' ) );
+    this.magnifier = new MagnifierModel( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'solventVisible' ), this.property( 'viewMode' ), this.property( 'testMode' ) );
 
     // pH meter model
     this.pHMeter = new PHMeterModel( this.beaker, this.property( 'pH' ), this.property( 'testMode' ) );
@@ -79,10 +75,10 @@ define( function( require ) {
     this.property( 'solutionType' ).link( function( newSolution, prevSolution ) {
       // unsubscribe from previous solution pH property
       if ( prevSolution ) {
-        self.components[prevSolution].property( 'pH' ).unlink( setPH );
+        self.solutions[prevSolution].property( 'pH' ).unlink( setPH );
       }
       // subscribe to new solution pH property
-      self.components[newSolution].property( 'pH' ).link( setPH );
+      self.solutions[newSolution].property( 'pH' ).link( setPH );
     } );
 
     // set brightness of light rays depend on pH value
@@ -105,7 +101,7 @@ define( function( require ) {
       PropertySet.prototype.reset.call( this );
 
       // reset solutions properties
-      this.SOLUTIONS.forEach( function( solution ) {
+      this.solutions.forEach( function( solution ) {
         solution.reset();
       } );
 

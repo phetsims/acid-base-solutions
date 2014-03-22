@@ -16,14 +16,13 @@ define( function( require ) {
   /**
    * @param {BeakerModel} beakerModel
    * @param {Array<AqueousSolutionAbstract>} solutions
-   * @param {Array<AqueousSolutionAbstract>} components
    * @param {Property<SolutionTypes>} solutionTypeProperty
    * @param {Property<Boolean>} solventVisibleProperty
    * @param {Property<ViewModes>} viewModeProperty
    * @param {Property<TestModes>} testModeProperty
    * @constructor
    */
-  function MagnifierModel( beakerModel, solutions, components, solutionTypeProperty, solventVisibleProperty, viewModeProperty, testModeProperty ) {
+  function MagnifierModel( beakerModel, solutions, solutionTypeProperty, solventVisibleProperty, viewModeProperty, testModeProperty ) {
     // magnifier radius
     this.radius = beakerModel.height / 2.15;
 
@@ -33,11 +32,8 @@ define( function( require ) {
     // solution type property
     this.solutionTypeProperty = solutionTypeProperty;
 
-    // array of possible solutions
+    // associative array of possible solutions, indexed by solutionType
     this.solutions = solutions;
-
-    // object for easy access to solutions
-    this.components = components;
 
     // solvent visibility property
     this.solventVisibleProperty = solventVisibleProperty;

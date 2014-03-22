@@ -43,8 +43,8 @@ define( function( require ) {
 
     this.addProperty( 'isAcid', true ); // type of solution. true - acid, false - base
     this.addProperty( 'isWeak', true ); // type of strength. true - weak, false - strong
-    this.addProperty( 'concentration', this.components[DEFAULT_SOLUTION_TYPE].concentration ); // concentration of solution
-    this.addProperty( 'strength', this.components[DEFAULT_SOLUTION_TYPE].strength ); // strength of solution
+    this.addProperty( 'concentration', this.solutions[DEFAULT_SOLUTION_TYPE].concentration ); // concentration of solution
+    this.addProperty( 'strength', this.solutions[DEFAULT_SOLUTION_TYPE].strength ); // strength of solution
 
     // models for control panel
     this.controlPanel = [
@@ -54,31 +54,31 @@ define( function( require ) {
     ];
 
     // concentration bar chart model
-    this.barChart = new BarChartModel( this.beaker, this.SOLUTIONS, this.components, this.property( 'solutionType' ), this.property( 'viewMode' ), this.property( 'testMode' ), this.property( 'concentration' ), this.property( 'strength' ) );
+    this.barChart = new BarChartModel( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'viewMode' ), this.property( 'testMode' ), this.property( 'concentration' ), this.property( 'strength' ) );
 
     this.property( 'solutionType' ).link( function( newSolution, prevSolution ) {
       // unsubscribe from previous solution strength and concentration property
       if ( prevSolution ) {
-        self.components[prevSolution].property( 'strength' ).unlink( setStrength );
-        self.components[prevSolution].property( 'concentration' ).unlink( setConcentration );
+        self.solutions[prevSolution].property( 'strength' ).unlink( setStrength );
+        self.solutions[prevSolution].property( 'concentration' ).unlink( setConcentration );
 
         // we need set concentration and strength values of new solution
         // equal to values from previous solution
-        self.components[newSolution].strength = self.components[prevSolution].strength;
-        self.components[newSolution].concentration = self.components[prevSolution].concentration;
+        self.solutions[newSolution].strength = self.solutions[prevSolution].strength;
+        self.solutions[newSolution].concentration = self.solutions[prevSolution].concentration;
       }
 
       // subscribe to new solution strength and concentration property
-      self.components[newSolution].property( 'strength' ).link( setStrength );
-      self.components[newSolution].property( 'concentration' ).link( setConcentration );
+      self.solutions[newSolution].property( 'strength' ).link( setStrength );
+      self.solutions[newSolution].property( 'concentration' ).link( setConcentration );
     } );
 
     this.property( 'concentration' ).link( function( concentration ) {
-      self.components[self.solutionType].concentration = concentration;
+      self.solutions[self.solutionType].concentration = concentration;
     } );
 
     this.property( 'strength' ).link( function( strength ) {
-      self.components[self.solutionType].strength = strength;
+      self.solutions[self.solutionType].strength = strength;
     } );
   }
 

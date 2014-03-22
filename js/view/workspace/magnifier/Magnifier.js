@@ -34,20 +34,21 @@ define( function( require ) {
     this.addChild( new MagnifierBackground( magnifierModel.solventVisibleProperty, this.container, RADIUS ) );
 
     // add molecules layers for each solution
-    magnifierModel.solutions.forEach( function( solution ) {
+    for ( var key in magnifierModel.solutions ) {
+      var solution = magnifierModel.solutions[ key ];
       var solutionType = solution.type;
-      if ( solutionType in magnifierModel.components ) {
+      if ( solutionType in magnifierModel.solutions ) {
         layers[solutionType] = new Node();
         solution.molecules.forEach( function( molecule ) {
           // get the property that determines the molecule's concentration
-          var property = magnifierModel.components[solutionType].property( molecule.concentrationPropertyName );
+          var property = magnifierModel.solutions[solutionType].property( molecule.concentrationPropertyName );
           if ( molecule.key !== 'H2O' && property.get() ) {
             layers[solutionType].addChild( new MagnifierMoleculesLayer( magnifierModel, solutionType, property, molecule, RADIUS ) );
           }
         } );
         self.container.addChild( layers[solutionType] );
       }
-    } );
+    };
 
     this.translation = magnifierModel.location;
 

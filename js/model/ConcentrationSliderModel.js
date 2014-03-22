@@ -23,7 +23,6 @@ define( function( require ) {
   function ConcentrationSliderModel( concentrationProperty ) {
     var self = this;
 
-    //TODO add Property suffix
     // concentration of solution
     this.concentrationProperty = concentrationProperty;
 

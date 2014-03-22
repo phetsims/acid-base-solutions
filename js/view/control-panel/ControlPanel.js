@@ -27,8 +27,8 @@ define( function( require ) {
   // constants
   var FONT = new PhetFont( {size: 14, weight: 'bold'} );
 
-  // view constructors for solution controls
-  var Panels = {}; //TODO is this supposed to be [] ??
+  // view constructors for solution controls, associative array
+  var Panels = {};
   Panels[ControlPanelTypes.SOLUTIONS] = SolutionsControl;
   Panels[ControlPanelTypes.SOLUTION] = SolutionControl;
   Panels[ControlPanelTypes.VIEWS] = ViewsControl;
