@@ -1,4 +1,5 @@
-3/31/14 change field names of 'relations' data structure that describes a solution's molecules
+3/21/14 move initialization of solutionType and molecules fields to AqueousSolutionAbstract, pass values in constructor
+3/21/14 change field names of 'relations' data structure that describes a solution's molecules
 3/21/14 #57 rename 'solution' property to 'solutionType'
 3/21/14 #58 property naming convention is not followed
 3/21/14 move pH paper colors into PHPaperTest, document the order dependency in the color array

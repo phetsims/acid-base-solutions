@@ -29,25 +29,20 @@ define( function( require ) {
     var self = this;
 
     // set default strength, concentration and add common properties
-    AqueousSolutionAbstract.call( this, {
-      concentration: 0,
-      OHConcentration: OH_CONCENTRATION_DEFAULT,
-      H2OConcentration: H2O_CONCENTRATION_DEFAULT,
-      H3OConcentration: H3O_CONCENTRATION_DEFAULT
-    } );
-
-    this.type = SolutionTypes.WATER;
-
-    /*
-     * Description of molecules that make up this solution.
-     * key: string used to identify the molecule, used to look up color or view constructor
-     * concentrationPropertyName: name of property that determines concentration of molecule
-     */
-    this.molecules = [
-      {key: 'H2O', concentrationPropertyName: 'H2OConcentration'},
-      {key: 'H3O', concentrationPropertyName: 'H3OConcentration'},
-      {key: 'OH', concentrationPropertyName: 'OHConcentration'}
-    ];
+    AqueousSolutionAbstract.call( this, SolutionTypes.WATER,
+      [
+        // molecules found in this solution
+        {key: 'H2O', concentrationPropertyName: 'H2OConcentration'},
+        {key: 'H3O', concentrationPropertyName: 'H3OConcentration'},
+        {key: 'OH', concentrationPropertyName: 'OHConcentration'}
+      ],
+      {
+        // initial values for solution properties
+        concentration: 0,
+        OHConcentration: OH_CONCENTRATION_DEFAULT,
+        H2OConcentration: H2O_CONCENTRATION_DEFAULT,
+        H3OConcentration: H3O_CONCENTRATION_DEFAULT
+      } );
 
     // set links between concentrations
     this.property( 'H3OConcentration' ).link( function( value ) {

@@ -65,29 +65,24 @@ define( function( require ) {
     var self = this;
 
     // set default strength and add common properties
-    AqueousSolutionAbstract.call( this, {
-      strength: STRENGTH_DEFAULT,
-      concentration: CONCENTRATION_DEFAULT,
-      productConcentration: PRODUCT_CONCENTRATION_DEFAULT,
-      H3OConcentration: H3O_CONCENTRATION_DEFAULT,
-      OHConcentration: OH_CONCENTRATION_DEFAULT,
-      H2OConcentration: H2O_CONCENTRATION_DEFAULT,
-      isValidStrength: IS_VALID_STRENGTH_DEFAULT
-    } );
-
-    this.type = SolutionTypes.WEAK_ACID;
-
-    /*
-     * Description of molecules that make up this solution.
-     * key: string used to identify the molecule, used to look up color or view constructor
-     * concentrationPropertyName: name of property that determines concentration of molecule
-     */
-    this.molecules = [
-      {key: 'HA', concentrationPropertyName: 'soluteConcentration'},
-      {key: 'H2O', concentrationPropertyName: 'H2OConcentration'},
-      {key: 'A', concentrationPropertyName: 'productConcentration'},
-      {key: 'H3O', concentrationPropertyName: 'H3OConcentration'}
-    ];
+    AqueousSolutionAbstract.call( this, SolutionTypes.WEAK_ACID,
+      [
+        // molecules found in this solution
+        {key: 'HA', concentrationPropertyName: 'soluteConcentration'},
+        {key: 'H2O', concentrationPropertyName: 'H2OConcentration'},
+        {key: 'A', concentrationPropertyName: 'productConcentration'},
+        {key: 'H3O', concentrationPropertyName: 'H3OConcentration'}
+      ],
+      {
+        // initial values for solution properties
+        strength: STRENGTH_DEFAULT,
+        concentration: CONCENTRATION_DEFAULT,
+        productConcentration: PRODUCT_CONCENTRATION_DEFAULT,
+        H3OConcentration: H3O_CONCENTRATION_DEFAULT,
+        OHConcentration: OH_CONCENTRATION_DEFAULT,
+        H2OConcentration: H2O_CONCENTRATION_DEFAULT,
+        isValidStrength: IS_VALID_STRENGTH_DEFAULT
+      } );
 
     // set links between concentrations
     this.property( 'H3OConcentration' ).link( setSoluteConcentration.bind( this ) );

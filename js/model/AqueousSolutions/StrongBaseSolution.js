@@ -46,27 +46,22 @@ define( function( require ) {
     var self = this;
 
     // set default strength and add common properties
-    AqueousSolutionAbstract.call( this, {
-      strength: STRENGTH_DEFAULT,
-      concentration: CONCENTRATION_DEFAULT,
-      productConcentration: PRODUCT_CONCENTRATION_DEFAULT,
-      OHConcentration: OH_CONCENTRATION_DEFAULT,
-      H3OConcentration: H3O_CONCENTRATION_DEFAULT,
-      isValidStrength: IS_VALID_STRENGTH_DEFAULT
-    } );
-
-    this.type = SolutionTypes.STRONG_BASE;
-
-    /*
-     * Description of molecules that make up this solution.
-     * key: string used to identify the molecule, used to look up color or view constructor
-     * concentrationPropertyName: name of property that determines concentration of molecule
-     */
-    this.molecules = [
-      {key: 'MOH', concentrationPropertyName: 'soluteConcentration'},
-      {key: 'M', concentrationPropertyName: 'productConcentration'},
-      {key: 'OH', concentrationPropertyName: 'OHConcentration'}
-    ];
+    AqueousSolutionAbstract.call( this, SolutionTypes.STRONG_BASE,
+      [
+        // molecules found in this solution
+        {key: 'MOH', concentrationPropertyName: 'soluteConcentration'},
+        {key: 'M', concentrationPropertyName: 'productConcentration'},
+        {key: 'OH', concentrationPropertyName: 'OHConcentration'}
+      ],
+      {
+        // initial values for solution properties
+        strength: STRENGTH_DEFAULT,
+        concentration: CONCENTRATION_DEFAULT,
+        productConcentration: PRODUCT_CONCENTRATION_DEFAULT,
+        OHConcentration: OH_CONCENTRATION_DEFAULT,
+        H3OConcentration: H3O_CONCENTRATION_DEFAULT,
+        isValidStrength: IS_VALID_STRENGTH_DEFAULT
+      } );
 
     // set links between concentrations
     this.property( 'concentration' ).link( function( value ) {

@@ -18,8 +18,24 @@ define( function( require ) {
     Util = require( 'DOT/Util' ),
     Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
 
-  function AqueousSolutionAbstract( defaultValues ) {
+  /**
+   * @param {SolutionTypes} solutionType
+   * @param {Array} molecules see this.molecules below
+   * @param {*} defaultValues initial values for solution properties
+   * @constructor
+   */
+  function AqueousSolutionAbstract( solutionType, molecules, defaultValues ) {
     var self = this;
+
+    this.type = solutionType;
+
+    /*
+     * Description of molecules that make up this solution.
+     * This is an array of objects with these fields.
+     * key: string used to identify the molecule, used to look up color or view constructor
+     * concentrationPropertyName: name of property that determines concentration of molecule
+     */
+    this.molecules = molecules;
 
     PropertySet.call( this, {
       strength: defaultValues.strength || 0,

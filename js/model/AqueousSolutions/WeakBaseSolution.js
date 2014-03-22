@@ -66,30 +66,25 @@ define( function( require ) {
     var self = this;
 
     // set default strength and add common properties
-    AqueousSolutionAbstract.call( this, {
-      strength: STRENGTH_DEFAULT,
-      concentration: CONCENTRATION_DEFAULT,
-      soluteConcentration: SOLUTE_CONCENTRATION_DEFAULT,
-      productConcentration: PRODUCT_CONCENTRATION_DEFAULT,
-      H2OConcentration: H2O_CONCENTRATION_DEFAULT,
-      H3OConcentration: H3O_CONCENTRATION_DEFAULT,
-      OHConcentration: OH_CONCENTRATION_DEFAULT,
-      isValidStrength: IS_VALID_STRENGTH_DEFAULT
-    } );
-
-    this.type = SolutionTypes.WEAK_BASE;
-
-    /*
-     * Description of molecules that make up this solution.
-     * key: string used to identify the molecule, used to look up color or view constructor
-     * concentrationPropertyName: name of property that determines concentration of molecule
-     */
-    this.molecules = [
-      {key: 'B', concentrationPropertyName: 'soluteConcentration'},
-      {key: 'H2O', concentrationPropertyName: 'H2OConcentration'},
-      {key: 'BH', concentrationPropertyName: 'productConcentration'},
-      {key: 'OH', concentrationPropertyName: 'OHConcentration'}
-    ];
+    AqueousSolutionAbstract.call( this, SolutionTypes.WEAK_BASE,
+      [
+        // molecules found in this solution
+        {key: 'B', concentrationPropertyName: 'soluteConcentration'},
+        {key: 'H2O', concentrationPropertyName: 'H2OConcentration'},
+        {key: 'BH', concentrationPropertyName: 'productConcentration'},
+        {key: 'OH', concentrationPropertyName: 'OHConcentration'}
+      ],
+      {
+        // initial values for solution properties
+        strength: STRENGTH_DEFAULT,
+        concentration: CONCENTRATION_DEFAULT,
+        soluteConcentration: SOLUTE_CONCENTRATION_DEFAULT,
+        productConcentration: PRODUCT_CONCENTRATION_DEFAULT,
+        H2OConcentration: H2O_CONCENTRATION_DEFAULT,
+        H3OConcentration: H3O_CONCENTRATION_DEFAULT,
+        OHConcentration: OH_CONCENTRATION_DEFAULT,
+        isValidStrength: IS_VALID_STRENGTH_DEFAULT
+      } );
 
     // set links between concentrations
     this.property( 'OHConcentration' ).lazyLink( function( value ) {
