@@ -47,10 +47,6 @@ define( function( require ) {
     // negative probe y-coordinate
     this.negativeProbeYProperty = new Property( WIRE_OPTIONS.negative.end.y );
 
-    //TODO add Property suffix
-    // test mode property
-    this.testMode = testModeProperty;
-
     // visibility of conductivity test
     this.visibleProperty = new Property( testModeProperty.value === TestModes.CONDUCTIVITY );
 
