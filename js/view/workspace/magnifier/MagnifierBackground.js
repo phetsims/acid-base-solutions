@@ -38,7 +38,6 @@ define( function( require ) {
     // add lens
     this.addChild( new Circle( radius, {stroke: 'black', lineWidth: 8} ) );
 
-    //TODO why adding to container, why not handling clipping in here?
     // add solvent background
     container.addChild( solventBackground = new Image( solventBackgroundImage, {scale: 0.5, x: -radius * Math.SQRT2, y: -radius * Math.SQRT2} ) );
 
