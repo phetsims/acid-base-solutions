@@ -34,7 +34,15 @@ define( function( require ) {
     BASE_DOTS = 2,
     MAX_MOLECULES = 50; // TODO: should be 200, but sim will load approximately 30 second
 
-  function MagnifierMoleculesLayer( magnifierModel, boundedSolution, property, type, radius ) {
+  /**
+   * @param {MagnifierModel} magnifierModel
+   * @param {SolutionTypes} layerSolutionType solution type for this layer
+   * @param {Property<Number>} property the property that determines the molecule's concentration
+   * @param type the name of the molecule
+   * @param radius the molecule's radius
+   * @constructor
+   */
+  function MagnifierMoleculesLayer( magnifierModel, layerSolutionType, property, type, radius ) {
     var molecules = [],
       setMoleculesBinded;
     Node.call( this );
@@ -47,14 +55,14 @@ define( function( require ) {
     }
 
     // update number of molecules only when layer is visible
-    setMoleculesBinded = setMolecules.bind( this, magnifierModel, boundedSolution, property, molecules );
+    setMoleculesBinded = setMolecules.bind( this, magnifierModel, layerSolutionType, property, molecules );
     property.lazyLink( setMoleculesBinded );
     magnifierModel.viewModeProperty.lazyLink( setMoleculesBinded );
     magnifierModel.solutionTypeProperty.link( setMoleculesBinded );
 
     // update position of molecules if solution type has been switched
-    magnifierModel.solutionTypeProperty.link( function( newSolution ) {
-      if ( boundedSolution === newSolution ) {
+    magnifierModel.solutionTypeProperty.link( function( solutionType ) {
+      if ( layerSolutionType === solutionType ) {
         updatePosition( molecules, radius );
       }
     } );
@@ -78,13 +86,13 @@ define( function( require ) {
   };
 
   // show appropriate number of molecules
-  var setMolecules = function( magnifierModel, boundedSolution, property, molecules ) {
+  var setMolecules = function( magnifierModel, layerSolutionType, property, molecules ) {
     var numberOfMolecules,
       visibility,
       i;
 
     // update visibility of layer
-    this.setVisible( magnifierModel.solutionTypeProperty.value === boundedSolution && magnifierModel.viewModeProperty.value === ViewModes.MOLECULES );
+    this.setVisible( magnifierModel.solutionTypeProperty.value === layerSolutionType && magnifierModel.viewModeProperty.value === ViewModes.MOLECULES );
 
     // update number of molecules only when layer is visible
     if ( this.visible ) {

@@ -16,6 +16,10 @@ define( function( require ) {
     MagnifierBackground = require( 'ACID_BASE_SOLUTIONS/view/workspace/magnifier/MagnifierBackground' ),
     MagnifierMoleculesLayer = require( 'ACID_BASE_SOLUTIONS/view/workspace/magnifier/MagnifierMoleculesLayer' );
 
+  /**
+   * @param {MagnifierModel} magnifierModel
+   * @constructor
+   */
   function Magnifier( magnifierModel ) {
     var self = this,
       RADIUS = magnifierModel.radius,
@@ -31,17 +35,17 @@ define( function( require ) {
 
     // add molecules layers for each solution
     magnifierModel.solutions.forEach( function( solution ) {
-      var type = solution.type;
-      if ( type in magnifierModel.components ) {
-        layers[type] = new Node();
+      var solutionType = solution.type;
+      if ( solutionType in magnifierModel.components ) {
+        layers[solutionType] = new Node();
         solution.relations.forEach( function( molecule ) {
           // get the property that determines the molecule's concentration
-          var property = magnifierModel.components[type].property( molecule.property );
+          var property = magnifierModel.components[solutionType].property( molecule.property );
           if ( molecule.type !== 'H2O' && property.get() ) {
-            layers[type].addChild( new MagnifierMoleculesLayer( magnifierModel, type, property, molecule.type, RADIUS ) );
+            layers[solutionType].addChild( new MagnifierMoleculesLayer( magnifierModel, solutionType, property, molecule.type, RADIUS ) );
           }
         } );
-        self.container.addChild( layers[type] );
+        self.container.addChild( layers[solutionType] );
       }
     } );
 
