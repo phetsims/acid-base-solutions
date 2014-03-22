@@ -28,36 +28,30 @@ define( function( require ) {
     // water surface level
     this.waterSurface = beakerModel.location.y - beakerModel.height - 100;
 
-    //TODO add Property suffix
     // pH property
-    this.pH = pHProperty;
+    this.pHProperty = pHProperty;
 
-    //TODO add Property suffix
-    // test mode property
-    this.testMode = testModeProperty;
-
-    //TODO add Property suffix
     // visibility of pH meter
-    this.visibility = new Property( testModeProperty.value === TestModes.PH_METER );
+    this.visibleProperty = new Property( testModeProperty.value === TestModes.PH_METER );
 
-    //TODO add Property suffix, rename to textVisibleProperty
     // visibility of text
-    this.textVisibility = new Property( false );
+    this.textVisibileProperty = new Property( false );
 
     testModeProperty.link( function( testMode ) {
-      self.visibility.value = (testMode === TestModes.PH_METER);
+      self.visibleProperty.value = (testMode === TestModes.PH_METER);
     } );
 
     this.location.link( function( location ) {
-      self.textVisibility.value = (location.y > self.waterSurface);
+      //TODO this should be based on pHProperty.value, not location of the meter
+      self.textVisibileProperty.value = (location.y > self.waterSurface);
     } );
   }
 
   PHMeterModel.prototype = {
     reset: function() {
       this.location.reset();
-      this.visibility.reset();
-      this.textVisibility.reset();
+      this.visibleProperty.reset();
+      this.textVisibileProperty.reset();
     },
     move: function( yCoord ) {
       // check limitation

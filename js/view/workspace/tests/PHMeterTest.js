@@ -62,15 +62,15 @@ define( function( require ) {
       self.translation = location;
     } );
 
-    pHMeterModel.textVisibility.link( function( isTextVisible ) {
-      self.pHText.setVisible( isTextVisible );
+    pHMeterModel.textVisibileProperty.link( function( visible ) {
+      self.pHText.setVisible( visible );
     } );
 
-    pHMeterModel.pH.link( function( pH ) {
+    pHMeterModel.pHProperty.link( function( pH ) {
       self.pHText.setText( Util.toFixed( pH, 2 ) );
     } );
 
-    pHMeterModel.visibility.link( function( isVisible ) {
+    pHMeterModel.visibleProperty.link( function( isVisible ) {
       self.setVisible( isVisible );
     } );
   }
