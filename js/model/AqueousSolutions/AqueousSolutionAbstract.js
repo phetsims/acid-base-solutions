@@ -39,8 +39,6 @@ define( function( require ) {
     } );
   }
 
-  // private functions
-
   var getPH = function( H3OConcentrationValue ) {
     return -Math.round( 100 * Util.log10( H3OConcentrationValue ) ) / 100;
   };
