@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Model for the solutions control panel in 'Acid-Base Solutions' sim.
+ * Model for the 'Solutions' control panel in 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
