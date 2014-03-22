@@ -26,64 +26,58 @@ define( function( require ) {
     // pH test location
     this.location = beakerModel.location.plusXY( -beakerModel.width / 2 + 20, -beakerModel.height - 115 );
 
-    //TODO add Property suffix
     // pH paper location
-    this.paperLocation = new Property( this.location.plusXY( -57.5, -25 ) );
+    this.locationProperty = new Property( this.location.plusXY( -57.5, -25 ) );
 
     // length of pH paper
     this.length = PAPER_LENGTH;
 
     // drag range of pH paper
     this.dragBounds = new Bounds2(
-      this.paperLocation.value.x - beakerModel.width + 85,
-      this.paperLocation.value.y - 5,
-      this.paperLocation.value.x + 50,
-      this.paperLocation.value.y + beakerModel.height
+      this.locationProperty.value.x - beakerModel.width + 85,
+      this.locationProperty.value.y - 5,
+      this.locationProperty.value.x + 50,
+      this.locationProperty.value.y + beakerModel.height
     );
 
     // water surface level
     this.waterSurface = beakerModel.location.y - beakerModel.height - 132;
 
-    //TODO add Property suffix
     // pH property
-    this.pH = pHProperty;
+    this.pHProperty = pHProperty;
 
-    //TODO add Property suffix
-    // test mode property
-    this.testMode = testModeProperty;
-
-    //TODO add Property suffix
     // visibility of pH paper
-    this.visibility = new Property( testModeProperty.value === TestModes.PH_PAPER );
+    this.visibleProperty = new Property( testModeProperty.value === TestModes.PH_PAPER );
 
-    //TODO add Property suffix
     // height of indicator paper
-    this.indicatorHeight = new Property( 0 );
+    this.indicatorHeightProperty = new Property( 0 );
 
     // add observers
     testModeProperty.link( function( testMode ) {
-      self.visibility.value = (testMode === TestModes.PH_PAPER);
+      self.visibleProperty.value = (testMode === TestModes.PH_PAPER);
     } );
 
     solutionProperty.link( function() {
-      self.indicatorHeight.value = 0;
+      self.indicatorHeightProperty.value = 0;
       self.setIndicatorHeight();
     } );
 
-    this.paperLocation.link( function() {
+    this.locationProperty.link( function() {
       self.setIndicatorHeight();
     } );
   }
 
   PHPaperModel.prototype = {
+
     reset: function() {
-      this.paperLocation.reset();
-      this.visibility.reset();
-      this.indicatorHeight.reset();
+      this.locationProperty.reset();
+      this.visibleProperty.reset();
+      this.indicatorHeightProperty.reset();
     },
+
     move: function( v ) {
       // check limitation
-      this.paperLocation.value = new Vector2( Util.clamp(
+      this.locationProperty.value = new Vector2( Util.clamp(
         v.x,
         this.dragBounds.minX,
         this.dragBounds.maxX
@@ -93,11 +87,12 @@ define( function( require ) {
         this.dragBounds.maxY
       ) );
     },
+
     setIndicatorHeight: function() {
-      if ( this.paperLocation.value.y > this.waterSurface ) {
-        this.indicatorHeight.value = Util.clamp(
-          this.paperLocation.value.y - this.waterSurface + 5,
-          this.indicatorHeight.value,
+      if ( this.locationProperty.value.y > this.waterSurface ) {
+        this.indicatorHeightProperty.value = Util.clamp(
+          this.locationProperty.value.y - this.waterSurface + 5,
+          this.indicatorHeightProperty.value,
           PAPER_LENGTH
         );
       }

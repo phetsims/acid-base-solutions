@@ -86,19 +86,19 @@ define( function( require ) {
     this.translation = pHPaperModel.location;
 
     // add observers
-    pHPaperModel.paperLocation.link( function( location ) {
+    pHPaperModel.locationProperty.link( function( location ) {
       paper.translation = location;
     } );
 
-    pHPaperModel.indicatorHeight.link( function( newHeight ) {
+    pHPaperModel.indicatorHeightProperty.link( function( newHeight ) {
       indicatorPaper.setRectHeight( newHeight );
     } );
 
-    pHPaperModel.visibility.link( function( isVisible ) {
-      self.setVisible( isVisible );
+    pHPaperModel.visibleProperty.link( function( visible ) {
+      self.setVisible( visible );
     } );
 
-    pHPaperModel.pH.link( function( pHValue ) {
+    pHPaperModel.pHProperty.link( function( pHValue ) {
       indicatorPaper.setFill( PH_COLORS[Math.round( pHValue )] );
     } );
   }
