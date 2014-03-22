@@ -21,8 +21,8 @@ define( function( require ) {
    * @param {Property<SolutionTypes>} solutionTypeProperty
    * @param {Property<ViewModes>} viewModeProperty
    * @param {Property<TestModes>} testModeProperty
-   * @param {Property<Number>} concentrationProperty
-   * @param {Property<Number>} strengthProperty
+   * @param {Property<Number>} concentrationProperty optional, provided for custom solutions
+   * @param {Property<Number>} strengthProperty optional, provided for custom solutions
    * @constructor
    */
   function BarChartModel( beakerModel, solutions, components, solutionTypeProperty, viewModeProperty, testModeProperty, concentrationProperty, strengthProperty ) {
