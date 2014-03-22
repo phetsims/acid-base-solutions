@@ -13,16 +13,15 @@ define( function( require ) {
     ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
     TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' );
 
-  function MagnifierModel( beakerModel, solutions, components, solutionProperty, solventVisibleProperty, viewModeProperty, testModeProperty ) {
+  function MagnifierModel( beakerModel, solutions, components, solutionTypeProperty, solventVisibleProperty, viewModeProperty, testModeProperty ) {
     // magnifier radius
     this.radius = beakerModel.height / 2.15;
 
     // magnifier location
     this.location = beakerModel.location.plusXY( 0, -beakerModel.height / 2 );
 
-    //TODO add Property suffix
-    // solution property
-    this.solution = solutionProperty;
+    // solution type property
+    this.solutionTypeProperty = solutionTypeProperty;
 
     // array of possible solutions
     this.solutions = solutions;
@@ -33,17 +32,14 @@ define( function( require ) {
     // solvent visibility property
     this.solventVisibleProperty = solventVisibleProperty;
 
-    //TODO add Property suffix
     // view mode property
-    this.viewMode = viewModeProperty;
+    this.viewModeProperty = viewModeProperty;
 
-    //TODO add Property suffix
     // test mode property
-    this.testMode = testModeProperty;
+    this.testModeProperty = testModeProperty;
 
-    //TODO add Property suffix
     // visibility of magnifier
-    this.visibility = new Property( this.findVisibility() );
+    this.visibleProperty = new Property( this.findVisibility() );
 
     // add observers
     var setVisibilityBinded = this.setVisibility.bind( this );
@@ -52,11 +48,13 @@ define( function( require ) {
   }
 
   MagnifierModel.prototype = {
+
     findVisibility: function() {
-      return (this.viewMode.value === ViewModes.MOLECULES && this.testMode.value !== TestModes.CONDUCTIVITY);
+      return (this.viewModeProperty.value === ViewModes.MOLECULES && this.testModeProperty.value !== TestModes.CONDUCTIVITY);
     },
+
     setVisibility: function() {
-      this.visibility.value = this.findVisibility();
+      this.visibleProperty.value = this.findVisibility();
     }
   };
 

@@ -46,8 +46,8 @@ define( function( require ) {
 
     this.translation = magnifierModel.location;
 
-    magnifierModel.visibility.link( function( isVisible ) {
-      self.setVisible( isVisible );
+    magnifierModel.visibleProperty.link( function( visible ) {
+      self.setVisible( visible );
     } );
   }
 
