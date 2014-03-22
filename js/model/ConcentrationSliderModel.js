@@ -16,6 +16,10 @@ define( function( require ) {
   // constants
   var CONCENTRATION_RANGE = require( 'model/Constants/Constants' ).CONCENTRATION_RANGE;
 
+  /**
+   * @param {Property<Number>} concentrationProperty
+   * @constructor
+   */
   function ConcentrationSliderModel( concentrationProperty ) {
     var self = this;
 
