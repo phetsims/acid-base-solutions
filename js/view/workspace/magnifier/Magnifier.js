@@ -31,11 +31,12 @@ define( function( require ) {
 
     // add molecules layers for each solution
     magnifierModel.solutions.forEach( function( solution ) {
-      var type = solution.type, property;
+      var type = solution.type;
       if ( type in magnifierModel.components ) {
         layers[type] = new Node();
         solution.relations.forEach( function( molecule ) {
-          property = magnifierModel.components[type].property( molecule.property );
+          // get the property that determines the molecule's concentration
+          var property = magnifierModel.components[type].property( molecule.property );
           if ( molecule.type !== 'H2O' && property.get() ) {
             layers[type].addChild( new MagnifierMoleculesLayer( magnifierModel, type, property, molecule.type, RADIUS ) );
           }
