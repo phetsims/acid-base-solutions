@@ -21,6 +21,7 @@ define( function( require ) {
     return new Atom( 7, COLOR_A );
   };
 
+  //TODO in all molecules types, coords is actually options and should be 2nd param. fromCache should also be an option
   function AMolecule( coords, fromCache ) {
     Node.call( this, coords );
 
