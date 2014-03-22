@@ -20,7 +20,14 @@ define( function( require ) {
   // constants
   var PAPER_LENGTH = 4 * Constants.PH_COLOR_KEY_RECT_HEIGHT;
 
-  function PHPaperModel( beakerModel, solutionProperty, pHProperty, testModeProperty ) {
+  /**
+   * @param {BeakerModel} beakerModel
+   * @param {Property<SolutionType>} solutionTypeProperty
+   * @param {Property<Number>} pHProperty
+   * @param {Property<TestModes>} testModeProperty
+   * @constructor
+   */
+  function PHPaperModel( beakerModel, solutionTypeProperty, pHProperty, testModeProperty ) {
     var self = this;
 
     // pH test location
@@ -57,7 +64,7 @@ define( function( require ) {
       self.visibleProperty.value = (testMode === TestModes.PH_PAPER);
     } );
 
-    solutionProperty.link( function() {
+    solutionTypeProperty.link( function() {
       self.indicatorHeightProperty.value = 0;
       self.setIndicatorHeight();
     } );
