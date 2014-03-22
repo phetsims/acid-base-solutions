@@ -49,8 +49,7 @@ define( function( require ) {
     } );
 
     PropertySet.call( this, {
-      //TODO rename to solutionType
-      solution: defaultSolutionType, // solution's type
+      solutionType: defaultSolutionType, // solution's type
       testMode: TestModes.PH_METER, // test mode
       viewMode: ViewModes.MOLECULES, // view mode
       solventVisible: false, // solvent visibility
@@ -62,22 +61,22 @@ define( function( require ) {
     this.beaker = new BeakerModel( this.width, this.height );
 
     // formula model
-    this.formula = new FormulaModel( this.beaker, this.property( 'solution' ) );
+    this.formula = new FormulaModel( this.beaker, this.property( 'solutionType' ) );
 
     // magnifier model
-    this.magnifier = new MagnifierModel( this.beaker, this.SOLUTIONS, this.components, this.property( 'solution' ), this.property( 'solventVisible' ), this.property( 'viewMode' ), this.property( 'testMode' ) );
+    this.magnifier = new MagnifierModel( this.beaker, this.SOLUTIONS, this.components, this.property( 'solutionType' ), this.property( 'solventVisible' ), this.property( 'viewMode' ), this.property( 'testMode' ) );
 
     // pH meter model
     this.pHMeter = new PHMeterModel( this.beaker, this.property( 'pH' ), this.property( 'testMode' ) );
 
     // pH paper model
-    this.pHPaper = new PHPaperModel( this.beaker, this.property( 'solution' ), this.property( 'pH' ), this.property( 'testMode' ) );
+    this.pHPaper = new PHPaperModel( this.beaker, this.property( 'solutionType' ), this.property( 'pH' ), this.property( 'testMode' ) );
 
     // conductivity test model
     this.conductivityTest = new ConductivityTestModel( this.beaker, this.property( 'testMode' ), this.property( 'brightness' ) );
 
     // set appropriate pH
-    this.property( 'solution' ).link( function( newSolution, prevSolution ) {
+    this.property( 'solutionType' ).link( function( newSolution, prevSolution ) {
       // unsubscribe from previous solution pH property
       if ( prevSolution ) {
         self.components[prevSolution].property( 'pH' ).unlink( setPH );

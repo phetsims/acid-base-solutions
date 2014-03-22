@@ -41,13 +41,14 @@ define( function( require ) {
 
     // models for control panel
     this.controlPanel = [
-      new SolutionsMenuModel( this.property( 'solution' ) ),
+      new SolutionsMenuModel( this.property( 'solutionType' ) ),
       new ViewModesMenuModel( this.property( 'viewMode' ), this.property( 'testMode' ), this.property( 'solventVisible' ) ),
       new TestModesMenuModel( this.property( 'testMode' ) )
     ];
 
+    //TODO this looks the same as AcidBaseSolutionsCustomSolutionModel, move into base type?
     // concentration bar chart model
-    this.barChart = new BarChartModel( this.beaker, this.SOLUTIONS, this.components, this.property( 'solution' ), this.property( 'viewMode' ), this.property( 'testMode' ) );
+    this.barChart = new BarChartModel( this.beaker, this.SOLUTIONS, this.components, this.property( 'solutionType' ), this.property( 'viewMode' ), this.property( 'testMode' ) );
   }
 
   return inherit( AcidBaseSolutionsAbstractModel, AcidBaseSolutionsIntroductionModel );

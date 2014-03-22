@@ -48,15 +48,15 @@ define( function( require ) {
 
     // models for control panel
     this.controlPanel = [
-      new SolutionMenuModel( this.property( 'solution' ), this.property( 'concentration' ), this.property( 'strength' ), this.property( 'isAcid' ), this.property( 'isWeak' ) ),
+      new SolutionMenuModel( this.property( 'solutionType' ), this.property( 'concentration' ), this.property( 'strength' ), this.property( 'isAcid' ), this.property( 'isWeak' ) ),
       new ViewModesMenuModel( this.property( 'viewMode' ), this.property( 'testMode' ), this.property( 'solventVisible' ) ),
       new TestModesMenuModel( this.property( 'testMode' ) )
     ];
 
     // concentration bar chart model
-    this.barChart = new BarChartModel( this.beaker, this.SOLUTIONS, this.components, this.property( 'solution' ), this.property( 'viewMode' ), this.property( 'testMode' ), this.property( 'concentration' ), this.property( 'strength' ) );
+    this.barChart = new BarChartModel( this.beaker, this.SOLUTIONS, this.components, this.property( 'solutionType' ), this.property( 'viewMode' ), this.property( 'testMode' ), this.property( 'concentration' ), this.property( 'strength' ) );
 
-    this.property( 'solution' ).link( function( newSolution, prevSolution ) {
+    this.property( 'solutionType' ).link( function( newSolution, prevSolution ) {
       // unsubscribe from previous solution strength and concentration property
       if ( prevSolution ) {
         self.components[prevSolution].property( 'strength' ).unlink( setStrength );
@@ -74,11 +74,11 @@ define( function( require ) {
     } );
 
     this.property( 'concentration' ).link( function( concentration ) {
-      self.components[self.solution].concentration = concentration;
+      self.components[self.solutionType].concentration = concentration;
     } );
 
     this.property( 'strength' ).link( function( strength ) {
-      self.components[self.solution].strength = strength;
+      self.components[self.solutionType].strength = strength;
     } );
   }
 

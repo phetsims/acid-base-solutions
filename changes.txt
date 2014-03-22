@@ -1,3 +1,4 @@
+3/21/14 #57 rename 'solution' property to 'solutionType'
 3/21/14 #58 property naming convention is not followed
 3/21/14 move pH paper colors into PHPaperTest, document the order dependency in the color array
 3/21/14 rename ControlPanels enum to ControlPanelTypes
