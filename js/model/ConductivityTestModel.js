@@ -69,12 +69,14 @@ define( function( require ) {
   }
 
   ConductivityTestModel.prototype = {
+
     reset: function() {
       this.visibleProperty.reset();
       this.isClosedProperty.reset();
       this.positiveProbeYProperty.reset();
       this.negativeProbeYProperty.reset();
     },
+
     getWireOptions: function() {
       return WIRE_OPTIONS;
     }

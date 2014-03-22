@@ -47,11 +47,13 @@ define( function( require ) {
   }
 
   PHMeterModel.prototype = {
+
     reset: function() {
       this.location.reset();
       this.visibleProperty.reset();
       this.textVisibileProperty.reset();
     },
+
     move: function( yCoord ) {
       // check limitation
       this.location.value = new Vector2( this.location.value.x, Util.clamp(
