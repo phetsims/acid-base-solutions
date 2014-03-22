@@ -38,11 +38,11 @@ define( function( require ) {
    * @param {MagnifierModel} magnifierModel
    * @param {SolutionTypes} layerSolutionType solution type for this layer
    * @param {Property<Number>} property the property that determines the molecule's concentration
-   * @param type the name of the molecule
+   * @param molecule the molecule description
    * @param radius the molecule's radius
    * @constructor
    */
-  function MagnifierMoleculesLayer( magnifierModel, layerSolutionType, property, type, radius ) {
+  function MagnifierMoleculesLayer( magnifierModel, layerSolutionType, property, molecule, radius ) {
     var molecules = [],
       setMoleculesBinded;
     Node.call( this );
@@ -51,7 +51,7 @@ define( function( require ) {
     // add molecules
     for ( var i = 0; i < MAX_MOLECULES; i++ ) {
       //TODO the order of args to the constructor is odd, options are first
-      this.addChild( molecules[i] = new MoleculesConstructors[type]( {visible: false}, true ) );
+      this.addChild( molecules[i] = new MoleculesConstructors[molecule.key]( {visible: false}, true ) );
     }
 
     // update number of molecules only when layer is visible

@@ -20,7 +20,7 @@ define( function( require ) {
 
   function EquilibriumConcentrationBarChart( barChartModel ) {
     var self = this,
-      relations = {},
+      molecules = {}, //TODO should this be [] ?
       maxBars = 0,
       BAR_CHART_WIDTH = barChartModel.width,
       BAR_CHART_HEIGHT = barChartModel.height;
@@ -32,8 +32,8 @@ define( function( require ) {
 
     // find max bars value for all solution
     barChartModel.solutions.forEach( function( solution ) {
-      maxBars = Math.max( maxBars, solution.relations.length );
-      relations[solution.type] = solution.relations;
+      maxBars = Math.max( maxBars, solution.molecules.length );
+      molecules[solution.type] = solution.molecules;
     } );
 
     // create bars
@@ -47,15 +47,15 @@ define( function( require ) {
     } );
 
     barChartModel.solutionTypeProperty.link( function( solutionType ) {
-      var barNumber = relations[solutionType].length;
+      var barNumber = molecules[solutionType].length;
 
       for ( var i = 0, bar; i < maxBars; i++ ) {
         bar = self._bars[i];
         if ( i < barNumber ) {
           // set visibility, color, value and position of new bars
           bar.setVisible( true );
-          bar.setValue( barChartModel.components[solutionType].property( relations[solutionType][i].property ).value );
-          bar.setFill( MOLECULES_COLORS[relations[solutionType][i].type] );
+          bar.setValue( barChartModel.components[solutionType].property( molecules[solutionType][i].concentrationPropertyName ).value );
+          bar.setFill( MOLECULES_COLORS[molecules[solutionType][i].key] );
           bar.setTranslation( (i + 0.75 + (4 - barNumber) / 2) * BAR_CHART_WIDTH / 4, BAR_CHART_HEIGHT );
         }
         else {
@@ -66,7 +66,7 @@ define( function( require ) {
 
     this.translation = barChartModel.location;
 
-    var updateBarValuesBinded = updateBarValues.bind( this, barChartModel, relations );
+    var updateBarValuesBinded = updateBarValues.bind( this, barChartModel, molecules );
     barChartModel.viewModeProperty.link( updateBarValuesBinded );
 
     // listeners for 'custom solution' tab
@@ -79,13 +79,13 @@ define( function( require ) {
   // private methods
 
   // update values of bars
-  var updateBarValues = function( model, relations ) {
+  var updateBarValues = function( model, molecules ) {
     var solutionType = model.solutionTypeProperty.value,
-      barNumber = relations[solutionType].length;
+      barNumber = molecules[solutionType].length;
 
     if ( this.visible ) {
       for ( var i = 0; i < barNumber; i++ ) {
-        this._bars[i].setValue( model.components[solutionType].property( relations[solutionType][i].property ).value );
+        this._bars[i].setValue( model.components[solutionType].property( molecules[solutionType][i].concentrationPropertyName ).value );
       }
     }
   };

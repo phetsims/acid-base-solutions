@@ -38,11 +38,11 @@ define( function( require ) {
       var solutionType = solution.type;
       if ( solutionType in magnifierModel.components ) {
         layers[solutionType] = new Node();
-        solution.relations.forEach( function( molecule ) {
+        solution.molecules.forEach( function( molecule ) {
           // get the property that determines the molecule's concentration
-          var property = magnifierModel.components[solutionType].property( molecule.property );
-          if ( molecule.type !== 'H2O' && property.get() ) {
-            layers[solutionType].addChild( new MagnifierMoleculesLayer( magnifierModel, solutionType, property, molecule.type, RADIUS ) );
+          var property = magnifierModel.components[solutionType].property( molecule.concentrationPropertyName );
+          if ( molecule.key !== 'H2O' && property.get() ) {
+            layers[solutionType].addChild( new MagnifierMoleculesLayer( magnifierModel, solutionType, property, molecule, RADIUS ) );
           }
         } );
         self.container.addChild( layers[solutionType] );

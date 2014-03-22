@@ -77,16 +77,16 @@ define( function( require ) {
 
     this.type = SolutionTypes.WEAK_ACID;
 
-    /* array with molecules which will be shown in magnifier and concentration chart bar
-     *
-     * type: type of molecule. Need to determine color or necessary view constructor
-     * property: name of property for observing concentration of molecule
+    /*
+     * Description of molecules that make up this solution.
+     * key: string used to identify the molecule, used to look up color or view constructor
+     * concentrationPropertyName: name of property that determines concentration of molecule
      */
-    this.relations = [
-      {type: 'HA', property: 'soluteConcentration'},
-      {type: 'H2O', property: 'H2OConcentration'},
-      {type: 'A', property: 'productConcentration'},
-      {type: 'H3O', property: 'H3OConcentration'}
+    this.molecules = [
+      {key: 'HA', concentrationPropertyName: 'soluteConcentration'},
+      {key: 'H2O', concentrationPropertyName: 'H2OConcentration'},
+      {key: 'A', concentrationPropertyName: 'productConcentration'},
+      {key: 'H3O', concentrationPropertyName: 'H3OConcentration'}
     ];
 
     // set links between concentrations
