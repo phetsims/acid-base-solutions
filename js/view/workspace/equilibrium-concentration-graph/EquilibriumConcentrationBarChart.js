@@ -42,20 +42,20 @@ define( function( require ) {
     }
 
     // add observers
-    barChartModel.visibility.link( function( isVisible ) {
-      self.setVisible( isVisible );
+    barChartModel.visibleProperty.link( function( visible ) {
+      self.setVisible( visible );
     } );
 
-    barChartModel.solution.link( function( newSolution ) {
-      var barNumber = relations[newSolution].length;
+    barChartModel.solutionTypeProperty.link( function( solutionType ) {
+      var barNumber = relations[solutionType].length;
 
       for ( var i = 0, bar; i < maxBars; i++ ) {
         bar = self._bars[i];
         if ( i < barNumber ) {
           // set visibility, color, value and position of new bars
           bar.setVisible( true );
-          bar.setValue( barChartModel.components[newSolution].property( relations[newSolution][i].property ).value );
-          bar.setFill( MOLECULES_COLORS[relations[newSolution][i].type] );
+          bar.setValue( barChartModel.components[solutionType].property( relations[solutionType][i].property ).value );
+          bar.setFill( MOLECULES_COLORS[relations[solutionType][i].type] );
           bar.setTranslation( (i + 0.75 + (4 - barNumber) / 2) * BAR_CHART_WIDTH / 4, BAR_CHART_HEIGHT );
         }
         else {
@@ -67,12 +67,12 @@ define( function( require ) {
     this.translation = barChartModel.location;
 
     var updateBarValuesBinded = updateBarValues.bind( this, barChartModel, relations );
-    barChartModel.viewMode.link( updateBarValuesBinded );
+    barChartModel.viewModeProperty.link( updateBarValuesBinded );
 
     // listeners for 'custom solution' tab
-    if ( barChartModel.strength && barChartModel.concentration ) {
-      barChartModel.strength.link( updateBarValuesBinded );
-      barChartModel.concentration.link( updateBarValuesBinded );
+    if ( barChartModel.strengthProperty && barChartModel.concentrationProperty ) {
+      barChartModel.strengthProperty.link( updateBarValuesBinded );
+      barChartModel.concentrationProperty.link( updateBarValuesBinded );
     }
   }
 
@@ -80,12 +80,12 @@ define( function( require ) {
 
   // update values of bars
   var updateBarValues = function( model, relations ) {
-    var solution = model.solution.value,
-      barNumber = relations[solution].length;
+    var solutionType = model.solutionTypeProperty.value,
+      barNumber = relations[solutionType].length;
 
     if ( this.visible ) {
       for ( var i = 0; i < barNumber; i++ ) {
-        this._bars[i].setValue( model.components[solution].property( relations[solution][i].property ).value );
+        this._bars[i].setValue( model.components[solutionType].property( relations[solutionType][i].property ).value );
       }
     }
   };

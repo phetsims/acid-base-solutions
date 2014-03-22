@@ -25,6 +25,7 @@ define( function( require ) {
   function StrengthSliderModel( strengthProperty, isWeakProperty ) {
     var self = this;
 
+    //TODO add Property suffix
     // strength of solution
     this.strength = strengthProperty;
 

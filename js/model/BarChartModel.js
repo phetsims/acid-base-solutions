@@ -14,7 +14,7 @@ define( function( require ) {
     ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
     TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' );
 
-  function BarChartModel( beakerModel, solutions, components, solutionProperty, viewModeProperty, testModeProperty, concentrationProperty, strengthProperty ) {
+  function BarChartModel( beakerModel, solutions, components, solutionTypeProperty, viewModeProperty, testModeProperty, concentrationProperty, strengthProperty ) {
     // bar chart width
     this.width = beakerModel.width / 2;
 
@@ -24,9 +24,8 @@ define( function( require ) {
     // bar chart location
     this.location = beakerModel.location.plusXY( (this.width - beakerModel.width) / 2, -(beakerModel.height + this.height) / 2 );
 
-    //TODO add Property suffix
     // solution property
-    this.solution = solutionProperty;
+    this.solutionTypeProperty = solutionTypeProperty;
 
     // array of possible solutions
     this.solutions = solutions;
@@ -34,25 +33,20 @@ define( function( require ) {
     // object for easy access to solutions
     this.components = components;
 
-    //TODO add Property suffix
     // view mode property
-    this.viewMode = viewModeProperty;
+    this.viewModeProperty = viewModeProperty;
 
-    //TODO add Property suffix
     // test mode property
-    this.testMode = testModeProperty;
+    this.testModeProperty = testModeProperty;
 
-    //TODO add Property suffix
     // strength property
-    this.strength = strengthProperty;
+    this.strengthProperty = strengthProperty;
 
-    //TODO add Property suffix
     // concentration property
-    this.concentration = concentrationProperty;
+    this.concentrationProperty = concentrationProperty;
 
-    //TODO add Property suffix
     // visibility of bar charts
-    this.visibility = new Property( this.findVisibility() );
+    this.visibleProperty = new Property( this.findVisibility() );
 
     // add observers
     var setVisibilityBinded = this.setVisibility.bind( this );
@@ -63,11 +57,11 @@ define( function( require ) {
   BarChartModel.prototype = {
 
     findVisibility: function() {
-      return (this.viewMode.value === ViewModes.EQUILIBRIUM && this.testMode.value !== TestModes.CONDUCTIVITY);
+      return (this.viewModeProperty.value === ViewModes.EQUILIBRIUM && this.testModeProperty.value !== TestModes.CONDUCTIVITY);
     },
 
     setVisibility: function() {
-      this.visibility.value = this.findVisibility();
+      this.visibleProperty.value = this.findVisibility();
     }
   };
 
