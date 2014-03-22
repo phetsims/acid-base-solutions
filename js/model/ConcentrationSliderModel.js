@@ -33,18 +33,17 @@ define( function( require ) {
     // concentration step for arrow button
     this.arrowStep = 0.1;
 
-    //TODO add Property suffix
-    // property for slider
-    this.slider = new Property( this.range.defaultValue );
+    // property for slider value
+    this.sliderValueProperty = new Property( this.range.defaultValue );
 
-    this.slider.link( function( value ) {
+    this.sliderValueProperty.link( function( value ) {
       self.concentration.value = Math.pow( 10, value );
     } );
   }
 
   ConcentrationSliderModel.prototype = {
     reset: function() {
-      this.slider.reset();
+      this.sliderValueProperty.reset();
     }
   };
 

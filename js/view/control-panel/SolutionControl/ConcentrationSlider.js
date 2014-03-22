@@ -35,7 +35,7 @@ define( function( require ) {
     var range = concentrationSliderModel.range,
       concentrationProperty = concentrationSliderModel.concentration,
       arrowStep = concentrationSliderModel.arrowStep,
-      sliderProperty = concentrationSliderModel.slider,
+      sliderProperty = concentrationSliderModel.sliderValueProperty,
       readoutText = new Text( StringUtils.format( pattern_0value_1concentration, Util.toFixed( concentrationProperty.value, 3 ), molesPerLiterString ), { font: READOUT_FONT } ),
       readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.5 ),
       panelContent = new Node(),
