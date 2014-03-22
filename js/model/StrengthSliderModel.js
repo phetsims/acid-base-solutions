@@ -25,9 +25,8 @@ define( function( require ) {
   function StrengthSliderModel( strengthProperty, isWeakProperty ) {
     var self = this;
 
-    //TODO add Property suffix
     // strength of solution
-    this.strength = strengthProperty;
+    this.strengthProperty = strengthProperty;
 
     // range of slider values
     this.range = new Range( Util.log10( WEAK_STRENGTH_RANGE.min ), Util.log10( WEAK_STRENGTH_RANGE.max ), Util.log10( WEAK_STRENGTH_RANGE.defaultValue ) );
@@ -43,7 +42,7 @@ define( function( require ) {
     } );
 
     this.sliderValueProperty.link( function( value ) {
-      self.strength.value = Math.pow( 10, value );
+      self.strengthProperty.value = Math.pow( 10, value );
     } );
   }
 

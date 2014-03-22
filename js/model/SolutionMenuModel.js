@@ -33,14 +33,15 @@ define( function( require ) {
     // control panel's title
     this.title = solutionString;
 
-    //TODO add Property suffix
     // properties for radio buttons
-    this.isAcid = isAcidProperty; // type of solution. true - acid, false - base
-    this.isWeak = isWeakProperty; // type of strength. true - weak, false - strong
+    this.isAcidProperty = isAcidProperty; // type of solution. true - acid, false - base
+    this.isWeakProperty = isWeakProperty; // type of strength. true - weak, false - strong
 
+    //TODO rename
     // strength of solution
     this.strengthSlider = new StrengthSliderModel( strengthProperty, isWeakProperty );
 
+    //TODO rename
     // concentration of solution
     this.concentrationSlider = new ConcentrationSliderModel( concentrationProperty );
 
