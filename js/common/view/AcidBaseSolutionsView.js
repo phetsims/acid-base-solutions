@@ -4,7 +4,6 @@
  * Base type for views in 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
- * @author Chris Malley (PixelZoom, Inc.)
  */
 
 define( function( require ) {
