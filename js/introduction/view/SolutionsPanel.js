@@ -116,6 +116,7 @@ define( function( require ) {
       maxHeight = Math.max( control.height, maxHeight );
     } );
     options.children.forEach( function( control ) {
+      //TODO this strut needs to be vertically centered
       control.addChild( new VStrut( maxHeight ) );
     } );
 
