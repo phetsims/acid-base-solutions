@@ -99,7 +99,7 @@ define( function( require ) {
 
       // reset solutions
       for ( var solutionType in this.solutions ) {
-        debugger;//XXX
+        //TODO reset appears to be undefined for each solution
         this.solutions[solutionType].reset();
       };
 
