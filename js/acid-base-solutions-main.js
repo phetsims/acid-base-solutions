@@ -21,8 +21,8 @@ define( function( require ) {
   var SimLauncher = require( 'JOIST/SimLauncher' );
 
   // images
-  var customSolutionIcon = require( 'image!ACID_BASE_SOLUTIONS/../images/custom-solution-icon.png' );
-  var introductionIcon = require( 'image!ACID_BASE_SOLUTIONS/../images/introduction-icon.png' );
+  var customSolutionIcon = require( 'image!ACID_BASE_SOLUTIONS/custom-solution-icon.png' );
+  var introductionIcon = require( 'image!ACID_BASE_SOLUTIONS/introduction-icon.png' );
 
   // strings
   var customSolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/customSolutionTitle' );
