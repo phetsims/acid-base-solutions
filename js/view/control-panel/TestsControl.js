@@ -10,68 +10,32 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var Node = require( 'SCENERY/nodes/Node' ),
-    inherit = require( 'PHET_CORE/inherit' ),
+  var inherit = require( 'PHET_CORE/inherit' ),
     AquaRadioButton = require( 'SUN/AquaRadioButton' ),
-    Text = require( 'SCENERY/nodes/Text' ),
-    PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     VBox = require( 'SCENERY/nodes/VBox' ),
-    HBox = require( 'SCENERY/nodes/HBox' ),
-    VStrut = require( 'SUN/VStrut' ),
     Image = require( 'SCENERY/nodes/Image' ),
     TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' );
 
   // images
-  var pHMeterImage = require( 'image!ACID_BASE_SOLUTIONS/pH-meter.png' ),
-    pHPaperImage = require( 'image!ACID_BASE_SOLUTIONS/pH-paper.png' ),
-    lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb.png' );
-
-  // constants
-  var AQUA_RADIO_BUTTON_RADIUS = 7,
-    FONT = new PhetFont( 12 );
-
-  /*
-   * value: value which will be assigned to model property after choosing radio button
-   * text: description text for button
-   * icon: icon for radio button
-   */
-  var radioButtonOptions = [
-    {
-      value: TestModes.PH_METER,
-      text: '', //TODO switch to icons only
-      icon: new Image( pHMeterImage, {scale: 0.75} )
-    },
-    {
-      value: TestModes.PH_PAPER,
-      text: '', //TODO switch to icons only
-      icon: new Node( {children: [new VStrut( 10 ), new Image( pHPaperImage, {scale: 0.75, y: 6} )]} )
-    },
-    {
-      value: TestModes.CONDUCTIVITY,
-      text: '', //TODO switch to icons only
-      icon: new Node( {children: [new VStrut( 25 ), new Image( lightBulbImage, {scale: 0.6, y: 4} )]} )
-    }
-  ];
+  var pHMeterImage = require( 'image!ACID_BASE_SOLUTIONS/pH-meter.png' );
+  var pHPaperImage = require( 'image!ACID_BASE_SOLUTIONS/pH-paper.png' );
+  var lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb.png' );
 
   function TestsControl( testModesMenuModel, options ) {
-    var self = this,
-      testModeProperty = testModesMenuModel.testModeProperty;
-    VBox.call( this, _.extend( {spacing: 4, align: 'left'}, options ) );
 
-    // add options to menu
-    radioButtonOptions.forEach( function( radioButtonOption ) {
-      self.addChild( createRadioButton( testModeProperty, radioButtonOption ) );
-    } );
+    options = _.extend( {
+      spacing: 4,
+      align: 'left'
+    }, options );
 
-    self.updateLayout();
+    options.children = [
+      new AquaRadioButton( testModesMenuModel.testModeProperty, TestModes.PH_METER, new Image( pHMeterImage, {scale: 0.75} ), {radius: 7} ),
+      new AquaRadioButton( testModesMenuModel.testModeProperty, TestModes.PH_PAPER, new Image( pHPaperImage, {scale: 0.75} ), {radius: 7} ),
+      new AquaRadioButton( testModesMenuModel.testModeProperty, TestModes.CONDUCTIVITY, new Image( lightBulbImage, {scale: 0.75} ), {radius: 7} )
+    ];
+
+    VBox.call( this, options );
   }
-
-  var createRadioButton = function( property, options ) {
-    return new AquaRadioButton( property, options.value, new HBox( {spacing: 5, children: [
-      new Text( options.text, {font: FONT} ),
-      options.icon
-    ]} ), {radius: AQUA_RADIO_BUTTON_RADIUS} );
-  };
 
   return inherit( VBox, TestsControl );
 } );
