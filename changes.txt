@@ -1,3 +1,4 @@
+3/24/14 #5 skeleton of MagnifierNode, which will draw molecules directly to Canvas
 3/24/14 #3 gray out 'Solvent' check box test and icon when disabled
 3/24/14 replace Beaker.width and height with Beaker.size
 3/24/14 #62 move BeakerModel to common/model/Beaker
