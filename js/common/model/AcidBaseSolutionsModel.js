@@ -14,7 +14,7 @@ define( function( require ) {
     PHMeterModel = require( 'ACID_BASE_SOLUTIONS/model/PHMeterModel' ),
     PHPaperModel = require( 'ACID_BASE_SOLUTIONS/model/PHPaperModel' ),
     ConductivityTestModel = require( 'ACID_BASE_SOLUTIONS/model/ConductivityTestModel' ),
-    BeakerModel = require( 'ACID_BASE_SOLUTIONS/model/BeakerModel' ),
+    Beaker = require( 'ACID_BASE_SOLUTIONS/common/model/Beaker' ),
     FormulaModel = require( 'ACID_BASE_SOLUTIONS/model/FormulaModel' ),
     MagnifierModel = require( 'ACID_BASE_SOLUTIONS/model/MagnifierModel' ),
     ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
@@ -30,10 +30,6 @@ define( function( require ) {
   function AcidBaseSolutionsModel( solutions, defaultSolutionType ) {
     var self = this,
       setPH = function( value ) { self.pH = value; }; // observer for pH property
-
-    // dimensions of the model's space
-    this.width = ScreenView.DEFAULT_LAYOUT_BOUNDS.width;
-    this.height = ScreenView.DEFAULT_LAYOUT_BOUNDS.height;
 
     // convert to an associative array, so we can look up solutions by solutionType
     this.solutions = {};
@@ -51,7 +47,7 @@ define( function( require ) {
     } );
 
     // beaker model (all elements in workspace have position relative to beaker)
-    this.beaker = new BeakerModel( this.width, this.height );
+    this.beaker = new Beaker();
 
     // formula model
     this.formula = new FormulaModel( this.beaker, this.property( 'solutionType' ) );

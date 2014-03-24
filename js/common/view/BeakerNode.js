@@ -30,10 +30,14 @@ define( function( require ) {
     RIM_OFFSET = 10,
     TICK_LABEL_X_SPACING = 20;
 
-  function BeakerNode( beakerModel ) {
+  /**
+   * @param {Beaker} beaker
+   * @constructor
+   */
+  function BeakerNode( beaker ) {
     // outline of the beaker, starting from upper left
-    var BEAKER_WIDTH = beakerModel.width,
-      BEAKER_HEIGHT = beakerModel.height,
+    var BEAKER_WIDTH = beaker.width,
+      BEAKER_HEIGHT = beaker.height,
       outlineShape = new Shape()
         .moveTo( -BEAKER_WIDTH / 2 - RIM_OFFSET, -BEAKER_HEIGHT - RIM_OFFSET )
         .lineTo( -BEAKER_WIDTH / 2, -BEAKER_HEIGHT )
@@ -96,7 +100,7 @@ define( function( require ) {
       centerY: -deltaY * NUMBER_OF_TICKS
     } ) );
 
-    this.translation = beakerModel.location;
+    this.translation = beaker.location;
   }
 
   return inherit( Node, BeakerNode );
