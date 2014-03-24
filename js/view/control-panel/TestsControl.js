@@ -21,11 +21,6 @@ define( function( require ) {
     Image = require( 'SCENERY/nodes/Image' ),
     TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' );
 
-  // strings
-  var pHMeterString = require( 'string!ACID_BASE_SOLUTIONS/pHMeter' ),
-    pHPaperString = require( 'string!ACID_BASE_SOLUTIONS/pHPaper' ),
-    conductivityString = require( 'string!ACID_BASE_SOLUTIONS/conductivity' );
-
   // images
   var pHMeterImage = require( 'image!ACID_BASE_SOLUTIONS/pH-meter.png' ),
     pHPaperImage = require( 'image!ACID_BASE_SOLUTIONS/pH-paper.png' ),
@@ -43,17 +38,17 @@ define( function( require ) {
   var radioButtonOptions = [
     {
       value: TestModes.PH_METER,
-      text: pHMeterString,
+      text: '', //TODO switch to icons only
       icon: new Image( pHMeterImage, {scale: 0.75} )
     },
     {
       value: TestModes.PH_PAPER,
-      text: pHPaperString,
+      text: '', //TODO switch to icons only
       icon: new Node( {children: [new VStrut( 10 ), new Image( pHPaperImage, {scale: 0.75, y: 6} )]} )
     },
     {
       value: TestModes.CONDUCTIVITY,
-      text: conductivityString,
+      text: '', //TODO switch to icons only
       icon: new Node( {children: [new VStrut( 25 ), new Image( lightBulbImage, {scale: 0.6, y: 4} )]} )
     }
   ];
