@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Visual representation for pH paper test in the 'Acid-Base Solutions' sim.
+ * Visual representation for pH paper in the 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
@@ -48,7 +48,7 @@ define( function( require ) {
     TABLE_RECT_HEIGHT = Constants.PH_COLOR_KEY_RECT_HEIGHT,
     TABLE_RECT_WIDTH = Constants.PH_COLOR_KEY_RECT_WIDTH;
 
-  function PHPaperTest( pHPaperModel ) {
+  function PHPaperNode( pHPaperModel ) {
     var self = this,
       indicatorPaper,
       paper;
@@ -103,5 +103,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, PHPaperTest );
+  return inherit( Node, PHPaperNode );
 } );

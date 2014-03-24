@@ -16,16 +16,16 @@ define( function( require ) {
   var Formula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/Formula' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Magnifier = require( 'ACID_BASE_SOLUTIONS/view/workspace/magnifier/Magnifier' );
-  var PHMeterTest = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/PHMeterTest' );
-  var PHPaperTest = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/PHPaperTest' );
+  var PHMeterNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHMeterNode' );
+  var PHPaperNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHPaperNode' );
   var ScreenView = require( 'JOIST/ScreenView' );
 
   function AcidBaseSolutionsView( model ) {
 
     ScreenView.call( this, { renderer: 'svg' } );
 
-    this.addChild( new PHMeterTest( model.pHMeter ) );
-    this.addChild( new PHPaperTest( model.pHPaper ) );
+    this.addChild( new PHMeterNode( model.pHMeter ) );
+    this.addChild( new PHPaperNode( model.pHPaper ) );
     this.addChild( new ConductivityTest( model.conductivityTest ) );
     this.addChild( new BeakerNode( model.beaker ) );
     this.addChild( new Formula( model.formula ) );

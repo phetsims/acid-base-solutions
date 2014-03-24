@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Visual representation for pH meter test in the 'Acid-Base Solutions' sim.
+ * Visual representation for pH meter in the 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
@@ -26,7 +26,7 @@ define( function( require ) {
   // constants
   var FONT = new PhetFont( {size: 15, weight: 'bold'} );
 
-  function PHMeterTest( pHMeterModel ) {
+  function PHMeterNode( pHMeterModel ) {
     var self = this;
     Node.call( this, {cursor: 'pointer'} );
 
@@ -75,5 +75,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, PHMeterTest );
+  return inherit( Node, PHMeterNode );
 } );
