@@ -9,20 +9,14 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var AcidBaseSolutionsView = require( 'common/view/AcidBaseSolutionsView' );
   var ControlPanel = require( 'view/control-panel/ControlPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var ScreenView = require( 'JOIST/ScreenView' );
-  var Workspace = require( 'ACID_BASE_SOLUTIONS/view/workspace/Workspace' );
 
   function IntroductionView( model ) {
-    ScreenView.call( this, { renderer: 'svg' } );
-
-    // add control panel
+    AcidBaseSolutionsView.call( this, model );
     this.addChild( new ControlPanel( model ).mutate( {right: this.layoutBounds.maxX, bottom: this.layoutBounds.maxY} ) );
-
-    // add workspace
-    this.addChild( new Workspace( model ) );
   }
 
-  return inherit( ScreenView, IntroductionView );
+  return inherit( AcidBaseSolutionsView, IntroductionView );
 } );
