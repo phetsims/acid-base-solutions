@@ -12,7 +12,7 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    Beaker = require( 'ACID_BASE_SOLUTIONS/view/workspace/Beaker' ),
+    BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' ),
     Magnifier = require( 'ACID_BASE_SOLUTIONS/view/workspace/magnifier/Magnifier' ),
     Formula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/Formula' ),
     EquilibriumConcentrationBarChart = require( './equilibrium-concentration-graph/EquilibriumConcentrationBarChart' );
@@ -35,7 +35,7 @@ define( function( require ) {
     this.addChild( new ConductivityTest( model.conductivityTest ) );
 
     // add beaker
-    this.addChild( new Beaker( model.beaker ) );
+    this.addChild( new BeakerNode( model.beaker ) );
 
     // add formulas
     this.addChild( new Formula( model.formula ) );

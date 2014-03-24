@@ -1,3 +1,4 @@
+3/24/14 move Beaker to common/view/BeakerNode
 3/24/14 move control panel to proper subdirs, rename with 'Panel' suffix
 3/24/14 #61 bad image imports in main.js
 3/24/14 create ScreenView subtypes for each screen

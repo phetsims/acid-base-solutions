@@ -30,7 +30,7 @@ define( function( require ) {
     RIM_OFFSET = 10,
     TICK_LABEL_X_SPACING = 20;
 
-  function Beaker( beakerModel ) {
+  function BeakerNode( beakerModel ) {
     // outline of the beaker, starting from upper left
     var BEAKER_WIDTH = beakerModel.width,
       BEAKER_HEIGHT = beakerModel.height,
@@ -99,5 +99,5 @@ define( function( require ) {
     this.translation = beakerModel.location;
   }
 
-  return inherit( Node, Beaker );
+  return inherit( Node, BeakerNode );
 } );
