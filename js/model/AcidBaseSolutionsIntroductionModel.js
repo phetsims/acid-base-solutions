@@ -14,7 +14,6 @@ define( function( require ) {
     AcidBaseSolutionsAbstractModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsAbstractModel' ),
     BarChartModel = require( 'ACID_BASE_SOLUTIONS/model/BarChartModel' ),
     SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
-    GameModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/GameModes' ),
     WaterSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/WaterSolution' ),
     StrongAcidSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/StrongAcidSolution' ),
     WeakAcidSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/WeakAcidSolution' ),
@@ -29,7 +28,6 @@ define( function( require ) {
 
   function AcidBaseSolutionsIntroductionModel() {
     AcidBaseSolutionsAbstractModel.call( this,
-      GameModes.INTRODUCTION,
       [
         new WaterSolution(),
         new StrongAcidSolution(),

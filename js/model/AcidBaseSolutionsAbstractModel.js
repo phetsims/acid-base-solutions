@@ -23,20 +23,17 @@ define( function( require ) {
     Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
 
   /**
-   * @param {GameMode} mode
    * @param {Array<AqueousSolution>} solutions
    * @param {SolutionTypes} defaultSolutionType
    * @constructor
    */
-  function AcidBaseSolutionsAbstractModel( mode, solutions, defaultSolutionType ) {
+  function AcidBaseSolutionsAbstractModel( solutions, defaultSolutionType ) {
     var self = this,
       setPH = function( value ) { self.pH = value; }; // observer for pH property
 
     // dimensions of the model's space
     this.width = ScreenView.DEFAULT_LAYOUT_BOUNDS.width;
     this.height = ScreenView.DEFAULT_LAYOUT_BOUNDS.height;
-
-    this.mode = mode;
 
     // convert to an associative array, so we can look up solutions by solutionType
     this.solutions = {};

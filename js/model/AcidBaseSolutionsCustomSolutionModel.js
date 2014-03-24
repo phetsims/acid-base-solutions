@@ -14,7 +14,6 @@ define( function( require ) {
     AcidBaseSolutionsAbstractModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsAbstractModel' ),
     BarChartModel = require( 'ACID_BASE_SOLUTIONS/model/BarChartModel' ),
     SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
-    GameModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/GameModes' ),
     StrongAcidSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/StrongAcidSolution' ),
     WeakAcidSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/WeakAcidSolution' ),
     StrongBaseSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/StrongBaseSolution' ),
@@ -32,7 +31,6 @@ define( function( require ) {
       setConcentration = function( value ) { self.concentration = value; }; // observer for strength property
 
     AcidBaseSolutionsAbstractModel.call( this,
-      GameModes.CUSTOM_SOLUTION,
       [
         new StrongAcidSolution(),
         new WeakAcidSolution(),
