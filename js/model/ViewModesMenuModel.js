@@ -20,12 +20,10 @@ define( function( require ) {
 
   /**
    * @param {Property<ViewModes>} viewModeProperty
-   * @param {Property<TestModes>} testModeProperty
    * @param {Property<Boolean>} solventVisibleProperty
    * @constructor
    */
-  function ViewModesMenuModel( viewModeProperty, testModeProperty, solventVisibleProperty ) {
-    var self = this;
+  function ViewModesMenuModel( viewModeProperty, solventVisibleProperty ) {
 
     // control panel's type
     this.controlPanelType = ControlPanelTypes.VIEWS;
@@ -38,16 +36,6 @@ define( function( require ) {
 
     // solvent visibility
     this.solventVisibleProperty = solventVisibleProperty;
-
-    // solvent check box enabled
-    this.checkboxEnabledProperty = new Property( true );
-
-    var setCheckboxEnabled = function() {
-      self.checkboxEnabledProperty.value = (viewModeProperty.get() === ViewModes.MOLECULES && testModeProperty.get() !== TestModes.CONDUCTIVITY);
-    };
-
-    viewModeProperty.link( setCheckboxEnabled );
-    testModeProperty.link( setCheckboxEnabled );
   }
 
   ViewModesMenuModel.prototype = {

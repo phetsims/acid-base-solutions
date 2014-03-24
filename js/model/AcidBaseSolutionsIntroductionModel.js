@@ -40,7 +40,7 @@ define( function( require ) {
     // models for control panel
     this.controlPanel = [
       new SolutionsMenuModel( this.property( 'solutionType' ) ),
-      new ViewModesMenuModel( this.property( 'viewMode' ), this.property( 'testMode' ), this.property( 'solventVisible' ) ),
+      new ViewModesMenuModel( this.property( 'viewMode' ), this.property( 'solventVisible' ) ),
       new TestModesMenuModel( this.property( 'testMode' ) )
     ];
 

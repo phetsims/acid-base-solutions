@@ -10,7 +10,7 @@ define( function() {
 
   return Object.freeze( {
     MOLECULES: 'molecules',
-    EQUILIBRIUM: 'equilibrium',
+    GRAPH: 'graph',
     HIDE_VIEWS: 'hideViews'
   } );
 } );

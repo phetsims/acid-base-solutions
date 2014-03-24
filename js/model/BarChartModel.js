@@ -64,7 +64,7 @@ define( function( require ) {
   BarChartModel.prototype = {
 
     findVisibility: function() {
-      return (this.viewModeProperty.value === ViewModes.EQUILIBRIUM && this.testModeProperty.value !== TestModes.CONDUCTIVITY);
+      return (this.viewModeProperty.value === ViewModes.GRAPH && this.testModeProperty.value !== TestModes.CONDUCTIVITY);
     },
 
     setVisibility: function() {

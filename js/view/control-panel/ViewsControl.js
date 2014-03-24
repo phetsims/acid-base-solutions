@@ -22,7 +22,8 @@ define( function( require ) {
     Image = require( 'SCENERY/nodes/Image' ),
     H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' ),
     HStrut = require( 'SUN/HStrut' ),
-    ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' );
+    ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
+    MoleculeColors = require( 'model/Constants/MoleculesColors' );
 
   // strings
   var moleculesString = require( 'string!ACID_BASE_SOLUTIONS/molecules' ),
@@ -37,87 +38,81 @@ define( function( require ) {
   // constants
   var FONT = new PhetFont( 12 ),
     RADIO_BUTTON_RADIUS = 7,
+    TEXT_ICON_X_SPACING = 10,
     CHECK_BOX_WIDTH = 15,
-    MOLECULES_COLORS = require( 'model/Constants/MoleculesColors' );
+    ICON_SCALE = 0.75; // TODO rescale image files so that this is unnecessary
 
-  /*
-   * isRadio: flag for choosing type of button. True - radio button, false - checkbox
-   * value: value which will be assigned to model property after choosing radio button
-   * text: description text for button
-   * icon: icon for radio button
-   */
-  var buttonOptions = [
-    {
-      isRadio: true,
-      value: ViewModes.MOLECULES,
-      text: new Text( moleculesString, {font: FONT} ),
-      icon: new Image( magnifyingGlassImage, {scale: 0.75} )
-    },
-    {
-      isRadio: false,
-      text: solventString,
-      icon: new H2OMolecule()
-    },
-    {
-      isRadio: true,
-      value: ViewModes.EQUILIBRIUM,
-      text: new Text( graphString, {font: FONT } ),
-      icon: new Node( {children: [
-        new Rectangle( 0, 0, 24.5, 18, {fill: 'white', stroke: 'black', lineWidth: 0.5} ),
-        new Rectangle( 2, 6, 3, 12, {fill: MOLECULES_COLORS.B} ),
-        new Rectangle( 7.5, 3, 3, 15, {fill: MOLECULES_COLORS.H2O} ),
-        new Rectangle( 13, 9, 3, 9, {fill: MOLECULES_COLORS.A} ),
-        new Rectangle( 18.5, 9, 3, 9, {fill: MOLECULES_COLORS.H3O} )
-      ]} )},
-    {
-      isRadio: true,
-      value: ViewModes.HIDE_VIEWS,
-      text: new Text( hideViewsString, {font: FONT} ),
-      icon: new Image( beakerImage, {scale: 0.75} )
-    }
-  ];
+  // Creates an icon of the graph, with 4 bars (similar to weak acid)
+  var createGraphIcon = function() {
+    return new Node( {children: [
+      new Rectangle( 0, 0, 24.5, 18, {fill: 'white', stroke: 'black', lineWidth: 0.5} ),
+      new Rectangle( 2, 6, 3, 12, {fill: MoleculeColors.B} ),
+      new Rectangle( 7.5, 3, 3, 15, {fill: MoleculeColors.H2O} ),
+      new Rectangle( 13, 9, 3, 9, {fill: MoleculeColors.A} ),
+      new Rectangle( 18.5, 9, 3, 9, {fill: MoleculeColors.H3O} )
+    ]} );
+  };
 
   function ViewsControl( viewModesMenuModel, options ) {
-    var self = this,
-      checkboxEnabledProperty = viewModesMenuModel.checkboxEnabledProperty,
-      solventVisibleProperty = viewModesMenuModel.solventVisibleProperty,
-      viewModeProperty = viewModesMenuModel.viewModeProperty;
-    VBox.call( this, _.extend( {spacing: 4, align: 'left'}, options ) );
 
-    // add options to menu
-    buttonOptions.forEach( function( buttonOption ) {
-      if ( buttonOption.isRadio ) {
-        self.addChild( createRadioButton( viewModeProperty, buttonOption ) );
-      }
-      else {
-        self.addChild( createCheckBox.call( self, solventVisibleProperty, buttonOption ) );
+    options = _.extend( {
+      spacing: 4,
+      align: 'left'
+    }, options );
 
-        checkboxEnabledProperty.link( function( enabled ) {
-          self._checkbox.enabled = enabled;
-        } );
-      }
+    // Molecules
+    var moleculesRadioButton = new AquaRadioButton( viewModesMenuModel.viewModeProperty, ViewModes.MOLECULES,
+      new HBox( {
+        spacing: TEXT_ICON_X_SPACING,
+        children: [
+          new Text( moleculesString, {font: FONT} ),
+          new Image( magnifyingGlassImage, {scale: ICON_SCALE} )
+        ]
+      } ), {radius: RADIO_BUTTON_RADIUS} );
+
+    // Solvent
+    var solventCheckBox = new CheckBox( new HBox( {
+      spacing: TEXT_ICON_X_SPACING,
+      children: [
+        new Text( solventString, {font: FONT} ),
+        new H2OMolecule()
+      ]
+    } ), viewModesMenuModel.solventVisibleProperty, { boxWidth: CHECK_BOX_WIDTH } );
+
+    // Graph
+    var graphRadioButton = new AquaRadioButton( viewModesMenuModel.viewModeProperty, ViewModes.GRAPH,
+      new HBox( {
+        spacing: TEXT_ICON_X_SPACING,
+        children: [
+          new Text( graphString, {font: FONT} ),
+          createGraphIcon()
+        ]
+      } ), {radius: RADIO_BUTTON_RADIUS} );
+
+    // Hide Views
+    var hideViewsRadioButton = new AquaRadioButton( viewModesMenuModel.viewModeProperty, ViewModes.HIDE_VIEWS,
+      new HBox( {
+        spacing: TEXT_ICON_X_SPACING,
+        children: [
+          new Text( hideViewsString, {font: FONT} ),
+          new Image( beakerImage, {scale: ICON_SCALE} )
+        ]
+      } ), {radius: RADIO_BUTTON_RADIUS} );
+
+    options.children = [
+      moleculesRadioButton,
+      new HBox( { children: [ new HStrut( 10 ), solventCheckBox ] } ),
+      graphRadioButton,
+      hideViewsRadioButton
+    ];
+
+    // disable the 'Solvent' check box unless 'Molecules' is selected
+    viewModesMenuModel.viewModeProperty.link( function( viewMode ) {
+      solventCheckBox.enabled = ( viewMode === ViewModes.MOLECULES );
     } );
 
-    this.updateLayout();
+    VBox.call( this, options );
   }
-
-  var createRadioButton = function( property, options ) {
-    return new AquaRadioButton( property, options.value, new HBox( {
-      spacing: 5,
-      children: [options.text, options.icon]} ), {radius: RADIO_BUTTON_RADIUS} );
-  };
-
-  var createCheckBox = function( property, options ) {
-    return new HBox( { spacing: 5, children: [
-      new HStrut( 20 ),
-      this._checkbox = new CheckBox( new HBox( {spacing: 5, children: [
-        new Text( options.text, {font: FONT} ),
-        options.icon
-      ]} ),
-        property,
-        { boxWidth: CHECK_BOX_WIDTH } )
-    ] } );
-  };
 
   return inherit( VBox, ViewsControl );
 } );
