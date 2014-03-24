@@ -1,3 +1,4 @@
+3/24/15 #56 changes to credits
 3/24/14 #51 simplify ViewsControl in preparation for UI changes
 3/24/14 #51 simplify TestsControl in preparation for UI changes
 3/24/14 #51 delete strings for 'Test' controls, these will be icons only
