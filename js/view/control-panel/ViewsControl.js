@@ -1,46 +1,47 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Visual representation of views mode menu.
+ * 'Views' control panel
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 define( function( require ) {
   'use strict';
 
   // imports
-  var Node = require( 'SCENERY/nodes/Node' ),
-    inherit = require( 'PHET_CORE/inherit' ),
-    Rectangle = require( 'SCENERY/nodes/Rectangle' ),
-    AquaRadioButton = require( 'SUN/AquaRadioButton' ),
-    CheckBox = require( 'SUN/CheckBox' ),
-    Text = require( 'SCENERY/nodes/Text' ),
-    PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    VBox = require( 'SCENERY/nodes/VBox' ),
-    HBox = require( 'SCENERY/nodes/HBox' ),
-    Image = require( 'SCENERY/nodes/Image' ),
-    H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' ),
-    HStrut = require( 'SUN/HStrut' ),
-    ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
-    MoleculeColors = require( 'model/Constants/MoleculesColors' );
+  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  var CheckBox = require( 'SUN/CheckBox' );
+  var H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
+  var HStrut = require( 'SUN/HStrut' );
+  var Image = require( 'SCENERY/nodes/Image' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var MoleculeColors = require( 'model/Constants/MoleculesColors' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var Text = require( 'SCENERY/nodes/Text' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
+  var ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' );
 
   // strings
-  var moleculesString = require( 'string!ACID_BASE_SOLUTIONS/molecules' ),
-    solventString = require( 'string!ACID_BASE_SOLUTIONS/solvent' ),
-    graphString = require( 'string!ACID_BASE_SOLUTIONS/graph' ),
-    hideViewsString = require( 'string!ACID_BASE_SOLUTIONS/hideViews' );
+  var graphString = require( 'string!ACID_BASE_SOLUTIONS/graph' );
+  var hideViewsString = require( 'string!ACID_BASE_SOLUTIONS/hideViews' );
+  var moleculesString = require( 'string!ACID_BASE_SOLUTIONS/molecules' );
+  var solventString = require( 'string!ACID_BASE_SOLUTIONS/solvent' );
 
   // images
-  var magnifyingGlassImage = require( 'image!ACID_BASE_SOLUTIONS/magnifying-glass.png' ),
-    beakerImage = require( 'image!ACID_BASE_SOLUTIONS/beaker.png' );
+  var beakerImage = require( 'image!ACID_BASE_SOLUTIONS/beaker.png' );
+  var magnifyingGlassImage = require( 'image!ACID_BASE_SOLUTIONS/magnifying-glass.png' );
 
   // constants
-  var FONT = new PhetFont( 12 ),
-    RADIO_BUTTON_RADIUS = 7,
-    TEXT_ICON_X_SPACING = 10,
-    CHECK_BOX_WIDTH = 15,
-    ICON_SCALE = 0.75; // TODO rescale image files so that this is unnecessary
+  var TEXT_ICON_X_SPACING = 10;
+  var RADIO_BUTTON_OPTIONS = { radius: 7 };
+  var CHECK_BOX_OPTIONS = { boxWidth: 15 };
+  var TEXT_OPTIONS = { font: new PhetFont( 12 ) };
+  var ICON_OPTIONS = { scale: 0.75 };
 
   // Creates an icon of the graph, with 4 bars (similar to weak acid)
   var createGraphIcon = function() {
@@ -53,6 +54,11 @@ define( function( require ) {
     ]} );
   };
 
+  /**
+   * @param {ViewModesMenuModel} viewModesMenuModel
+   * @param {*} options
+   * @constructor
+   */
   function ViewsControl( viewModesMenuModel, options ) {
 
     options = _.extend( {
@@ -65,39 +71,39 @@ define( function( require ) {
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
-          new Text( moleculesString, {font: FONT} ),
-          new Image( magnifyingGlassImage, {scale: ICON_SCALE} )
+          new Text( moleculesString, TEXT_OPTIONS ),
+          new Image( magnifyingGlassImage, ICON_OPTIONS )
         ]
-      } ), {radius: RADIO_BUTTON_RADIUS} );
+      } ), RADIO_BUTTON_OPTIONS );
 
     // Solvent
     var solventCheckBox = new CheckBox( new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
-        new Text( solventString, {font: FONT} ),
+        new Text( solventString, TEXT_OPTIONS ),
         new H2OMolecule()
       ]
-    } ), viewModesMenuModel.solventVisibleProperty, { boxWidth: CHECK_BOX_WIDTH } );
+    } ), viewModesMenuModel.solventVisibleProperty, CHECK_BOX_OPTIONS );
 
     // Graph
     var graphRadioButton = new AquaRadioButton( viewModesMenuModel.viewModeProperty, ViewModes.GRAPH,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
-          new Text( graphString, {font: FONT} ),
+          new Text( graphString, TEXT_OPTIONS ),
           createGraphIcon()
         ]
-      } ), {radius: RADIO_BUTTON_RADIUS} );
+      } ), RADIO_BUTTON_OPTIONS );
 
     // Hide Views
     var hideViewsRadioButton = new AquaRadioButton( viewModesMenuModel.viewModeProperty, ViewModes.HIDE_VIEWS,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
-          new Text( hideViewsString, {font: FONT} ),
-          new Image( beakerImage, {scale: ICON_SCALE} )
+          new Text( hideViewsString, TEXT_OPTIONS ),
+          new Image( beakerImage, ICON_OPTIONS )
         ]
-      } ), {radius: RADIO_BUTTON_RADIUS} );
+      } ), RADIO_BUTTON_OPTIONS );
 
     options.children = [
       moleculesRadioButton,

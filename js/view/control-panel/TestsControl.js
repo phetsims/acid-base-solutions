@@ -1,26 +1,36 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Visual representation of test menu.
+ * 'Tests' control panel
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 define( function( require ) {
   'use strict';
 
   // imports
-  var inherit = require( 'PHET_CORE/inherit' ),
-    AquaRadioButton = require( 'SUN/AquaRadioButton' ),
-    VBox = require( 'SCENERY/nodes/VBox' ),
-    Image = require( 'SCENERY/nodes/Image' ),
-    TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' );
+  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  var Image = require( 'SCENERY/nodes/Image' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // images
+  var lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb.png' );
   var pHMeterImage = require( 'image!ACID_BASE_SOLUTIONS/pH-meter.png' );
   var pHPaperImage = require( 'image!ACID_BASE_SOLUTIONS/pH-paper.png' );
-  var lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb.png' );
 
+  // constants
+  var ICON_OPTIONS = { scale: 0.75 };
+  var RADIO_BUTTON_OPTIONS = { radius: 7 };
+
+  /**
+   * @param {TestModesMenuModel} testModesMenuModel
+   * @param {*} options
+   * @constructor
+   */
   function TestsControl( testModesMenuModel, options ) {
 
     options = _.extend( {
@@ -29,9 +39,9 @@ define( function( require ) {
     }, options );
 
     options.children = [
-      new AquaRadioButton( testModesMenuModel.testModeProperty, TestModes.PH_METER, new Image( pHMeterImage, {scale: 0.75} ), {radius: 7} ),
-      new AquaRadioButton( testModesMenuModel.testModeProperty, TestModes.PH_PAPER, new Image( pHPaperImage, {scale: 0.75} ), {radius: 7} ),
-      new AquaRadioButton( testModesMenuModel.testModeProperty, TestModes.CONDUCTIVITY, new Image( lightBulbImage, {scale: 0.75} ), {radius: 7} )
+      new AquaRadioButton( testModesMenuModel.testModeProperty, TestModes.PH_METER, new Image( pHMeterImage, ICON_OPTIONS ), RADIO_BUTTON_OPTIONS ),
+      new AquaRadioButton( testModesMenuModel.testModeProperty, TestModes.PH_PAPER, new Image( pHPaperImage, ICON_OPTIONS ), RADIO_BUTTON_OPTIONS ),
+      new AquaRadioButton( testModesMenuModel.testModeProperty, TestModes.CONDUCTIVITY, new Image( lightBulbImage, ICON_OPTIONS ), RADIO_BUTTON_OPTIONS )
     ];
 
     VBox.call( this, options );
