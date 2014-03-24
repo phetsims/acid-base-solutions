@@ -12,7 +12,6 @@ define( function( require ) {
   var ControlPanel = require( 'view/control-panel/ControlPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ScreenView = require( 'JOIST/ScreenView' );
-
   var Workspace = require( 'ACID_BASE_SOLUTIONS/view/workspace/Workspace' );
 
   function IntroductionView( model ) {
