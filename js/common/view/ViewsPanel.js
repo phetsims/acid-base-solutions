@@ -78,13 +78,17 @@ define( function( require ) {
       } ), RADIO_BUTTON_OPTIONS );
 
     // Solvent
-    var solventCheckBox = new CheckBox( new HBox( {
+    var solventLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
         new Text( solventString, TEXT_OPTIONS ),
         new H2OMolecule()
       ]
-    } ), solventVisibleProperty, CHECK_BOX_OPTIONS );
+    } );
+    solventLabel.setEnabled = function( enabled ) {
+      solventLabel.opacity = ( enabled ? 1 : 0.5 ); // gray out when disabled
+    };
+    var solventCheckBox = new CheckBox( solventLabel, solventVisibleProperty, CHECK_BOX_OPTIONS );
 
     // Graph
     var graphRadioButton = new AquaRadioButton( viewModeProperty, ViewModes.GRAPH,
@@ -108,7 +112,7 @@ define( function( require ) {
 
     options.children = [
       moleculesRadioButton,
-      new HBox( { children: [ new HStrut( 10 ), solventCheckBox ] } ),
+      new HBox( { children: [ new HStrut( 20 ), solventCheckBox ] } ),
       graphRadioButton,
       hideViewsRadioButton
     ];
