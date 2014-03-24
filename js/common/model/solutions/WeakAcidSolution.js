@@ -12,7 +12,7 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
-    AqueousSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/AqueousSolution' ),
+    AqueousSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/AqueousSolution' ),
     Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
 
   // [H3O+] = ( -Ka + sqrt( Ka*Ka + 4*Ka*c ) ) / 2

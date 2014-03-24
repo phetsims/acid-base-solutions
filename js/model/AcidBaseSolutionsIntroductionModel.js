@@ -11,14 +11,14 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    AcidBaseSolutionsModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsModel' ),
+    AcidBaseSolutionsModel = require( 'ACID_BASE_SOLUTIONS/common/model/AcidBaseSolutionsModel' ),
     BarChartModel = require( 'ACID_BASE_SOLUTIONS/model/BarChartModel' ),
     SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
-    WaterSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/WaterSolution' ),
-    StrongAcidSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/StrongAcidSolution' ),
-    WeakAcidSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/WeakAcidSolution' ),
-    StrongBaseSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/StrongBaseSolution' ),
-    WeakBaseSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/WeakBaseSolution' ),
+    WaterSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/WaterSolution' ),
+    StrongAcidSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/StrongAcidSolution' ),
+    WeakAcidSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/WeakAcidSolution' ),
+    StrongBaseSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/StrongBaseSolution' ),
+    WeakBaseSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/WeakBaseSolution' ),
     SolutionsMenuModel = require( 'ACID_BASE_SOLUTIONS/model/SolutionsMenuModel' ),
     ViewModesMenuModel = require( 'ACID_BASE_SOLUTIONS/model/ViewModesMenuModel' ),
     TestModesMenuModel = require( 'ACID_BASE_SOLUTIONS/model/TestModesMenuModel' );
