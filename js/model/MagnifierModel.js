@@ -15,7 +15,7 @@ define( function( require ) {
 
   /**
    * @param {BeakerModel} beakerModel
-   * @param {Array<AqueousSolutionAbstract>} solutions
+   * @param {Array<AqueousSolution>} solutions
    * @param {Property<SolutionTypes>} solutionTypeProperty
    * @param {Property<Boolean>} solventVisibleProperty
    * @param {Property<ViewModes>} viewModeProperty

@@ -26,7 +26,7 @@ define( function( require ) {
    * @param {*} defaultValues initial values for solution properties
    * @constructor
    */
-  function AqueousSolutionAbstract( solutionType, molecules, defaultValues ) {
+  function AqueousSolution( solutionType, molecules, defaultValues ) {
     var self = this;
 
     this.type = solutionType;
@@ -61,5 +61,5 @@ define( function( require ) {
     return -Math.round( 100 * Util.log10( H3OConcentrationValue ) ) / 100;
   };
 
-  return inherit( PropertySet, AqueousSolutionAbstract );
+  return inherit( PropertySet, AqueousSolution );
 } );

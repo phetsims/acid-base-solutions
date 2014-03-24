@@ -12,7 +12,7 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
-    AqueousSolutionAbstract = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/AqueousSolutionAbstract' ),
+    AqueousSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/AqueousSolution' ),
     Constants = require( 'model/Constants/Constants' );
 
   // [B] = c - [BH+]
@@ -66,7 +66,7 @@ define( function( require ) {
     var self = this;
 
     // set default strength and add common properties
-    AqueousSolutionAbstract.call( this, SolutionTypes.WEAK_BASE,
+    AqueousSolution.call( this, SolutionTypes.WEAK_BASE,
       [
         // molecules found in this solution
         {key: 'B', concentrationPropertyName: 'soluteConcentration'},
@@ -107,5 +107,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( AqueousSolutionAbstract, WeakBaseSolution );
+  return inherit( AqueousSolution, WeakBaseSolution );
 } );

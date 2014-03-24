@@ -12,7 +12,7 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     SolutionTypes = require( 'model/Constants/SolutionTypes' ),
-    AqueousSolutionAbstract = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/AqueousSolutionAbstract' ),
+    AqueousSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/AqueousSolution' ),
     Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
 
   // [OH]=[H3O]
@@ -29,7 +29,7 @@ define( function( require ) {
     var self = this;
 
     // set default strength, concentration and add common properties
-    AqueousSolutionAbstract.call( this, SolutionTypes.WATER,
+    AqueousSolution.call( this, SolutionTypes.WATER,
       [
         // molecules found in this solution
         {key: 'H2O', concentrationPropertyName: 'H2OConcentration'},
@@ -54,5 +54,5 @@ define( function( require ) {
     this.H2OConcentration = Constants.WATER_CONCENTRATION;
   }
 
-  return inherit( AqueousSolutionAbstract, WaterSolution );
+  return inherit( AqueousSolution, WaterSolution );
 } );

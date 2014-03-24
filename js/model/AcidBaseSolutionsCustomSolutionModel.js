@@ -11,7 +11,7 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    AcidBaseSolutionsAbstractModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsAbstractModel' ),
+    AcidBaseSolutionsModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsModel' ),
     BarChartModel = require( 'ACID_BASE_SOLUTIONS/model/BarChartModel' ),
     SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
     StrongAcidSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/StrongAcidSolution' ),
@@ -30,7 +30,7 @@ define( function( require ) {
       setStrength = function( value ) { self.strength = value; }, // observer for strength property
       setConcentration = function( value ) { self.concentration = value; }; // observer for strength property
 
-    AcidBaseSolutionsAbstractModel.call( this,
+    AcidBaseSolutionsModel.call( this,
       [
         new StrongAcidSolution(),
         new WeakAcidSolution(),
@@ -80,10 +80,10 @@ define( function( require ) {
     } );
   }
 
-  return inherit( AcidBaseSolutionsAbstractModel, AcidBaseSolutionsCustomSolutionModel, {
+  return inherit( AcidBaseSolutionsModel, AcidBaseSolutionsCustomSolutionModel, {
     reset: function() {
       // reset main properties
-      AcidBaseSolutionsAbstractModel.prototype.reset.call( this );
+      AcidBaseSolutionsModel.prototype.reset.call( this );
 
       // reset control panels
       this.controlPanel.forEach( function( panel ) {

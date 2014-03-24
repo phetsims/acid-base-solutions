@@ -1,7 +1,7 @@
-// Copyright 2002-2013, University of Colorado Boulder
+// Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Abstract model for the 'Acid-Base Solutions' screen.
+ * Base type for models in the 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
@@ -27,7 +27,7 @@ define( function( require ) {
    * @param {SolutionTypes} defaultSolutionType
    * @constructor
    */
-  function AcidBaseSolutionsAbstractModel( solutions, defaultSolutionType ) {
+  function AcidBaseSolutionsModel( solutions, defaultSolutionType ) {
     var self = this,
       setPH = function( value ) { self.pH = value; }; // observer for pH property
 
@@ -92,7 +92,7 @@ define( function( require ) {
     return NEUTRAL_BRIGHTNESS + ( 1 - NEUTRAL_BRIGHTNESS ) * (pH < NEUTRAL_PH ? ( NEUTRAL_PH - pH ) / ( NEUTRAL_PH - Constants.MIN_PH ) : ( pH - NEUTRAL_PH ) / ( Constants.MAX_PH - NEUTRAL_PH ) );
   };
 
-  return inherit( PropertySet, AcidBaseSolutionsAbstractModel, {
+  return inherit( PropertySet, AcidBaseSolutionsModel, {
     reset: function() {
       // reset main properties
       PropertySet.prototype.reset.call( this );

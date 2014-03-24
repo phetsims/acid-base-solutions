@@ -11,7 +11,7 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    AcidBaseSolutionsAbstractModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsAbstractModel' ),
+    AcidBaseSolutionsModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsModel' ),
     BarChartModel = require( 'ACID_BASE_SOLUTIONS/model/BarChartModel' ),
     SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
     WaterSolution = require( 'ACID_BASE_SOLUTIONS/model/AqueousSolutions/WaterSolution' ),
@@ -27,7 +27,7 @@ define( function( require ) {
   var DEFAULT_SOLUTION_TYPE = SolutionTypes.WATER;
 
   function AcidBaseSolutionsIntroductionModel() {
-    AcidBaseSolutionsAbstractModel.call( this,
+    AcidBaseSolutionsModel.call( this,
       [
         new WaterSolution(),
         new StrongAcidSolution(),
@@ -48,6 +48,6 @@ define( function( require ) {
     this.barChart = new BarChartModel( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'viewMode' ), this.property( 'testMode' ) );
   }
 
-  return inherit( AcidBaseSolutionsAbstractModel, AcidBaseSolutionsIntroductionModel );
+  return inherit( AcidBaseSolutionsModel, AcidBaseSolutionsIntroductionModel );
 
 } );

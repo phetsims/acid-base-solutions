@@ -17,7 +17,7 @@ define( function( require ) {
     GRAY = 'rgb(120,120,120)',
     H2O_FACTOR = 0.85;
 
-  // The field names here must correspond to the 'key' fields in AqueousSolutionAbstract.molecules.
+  // The field names here must correspond to the 'key' fields in AqueousSolution.molecules.
   return {
     A: 'rgb(0,170,255)',
     B: GRAY,
