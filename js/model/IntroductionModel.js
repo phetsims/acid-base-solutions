@@ -26,7 +26,7 @@ define( function( require ) {
   // constants
   var DEFAULT_SOLUTION_TYPE = SolutionTypes.WATER;
 
-  function AcidBaseSolutionsIntroductionModel() {
+  function IntroductionModel() {
     AcidBaseSolutionsModel.call( this,
       [
         new WaterSolution(),
@@ -48,6 +48,6 @@ define( function( require ) {
     this.barChart = new BarChartModel( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'viewMode' ), this.property( 'testMode' ) );
   }
 
-  return inherit( AcidBaseSolutionsModel, AcidBaseSolutionsIntroductionModel );
+  return inherit( AcidBaseSolutionsModel, IntroductionModel );
 
 } );

@@ -1,3 +1,4 @@
+3/24/14 rename screen-specific model types
 3/24/14 create 'common' subdir, move some model types
 3/24/14 remove unnecessary 'Abstract' from some long type names
 3/24/14 #51 simplify SolutionsControl in preparation for UI changes

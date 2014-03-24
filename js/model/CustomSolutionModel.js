@@ -25,7 +25,7 @@ define( function( require ) {
   // constants
   var DEFAULT_SOLUTION_TYPE = SolutionTypes.WEAK_ACID;
 
-  function AcidBaseSolutionsCustomSolutionModel() {
+  function CustomSolutionModel() {
     var self = this,
       setStrength = function( value ) { self.strength = value; }, // observer for strength property
       setConcentration = function( value ) { self.concentration = value; }; // observer for strength property
@@ -80,7 +80,7 @@ define( function( require ) {
     } );
   }
 
-  return inherit( AcidBaseSolutionsModel, AcidBaseSolutionsCustomSolutionModel, {
+  return inherit( AcidBaseSolutionsModel, CustomSolutionModel, {
     reset: function() {
       // reset main properties
       AcidBaseSolutionsModel.prototype.reset.call( this );

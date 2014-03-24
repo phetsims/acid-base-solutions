@@ -14,8 +14,8 @@ define( function( require ) {
     Sim = require( 'JOIST/Sim' ),
     Screen = require( 'JOIST/Screen' ),
     Image = require( 'SCENERY/nodes/Image' ),
-    AcidBaseSolutionsCustomSolutionModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsCustomSolutionModel' ),
-    AcidBaseSolutionsIntroductionModel = require( 'ACID_BASE_SOLUTIONS/model/AcidBaseSolutionsIntroductionModel' ),
+    CustomSolutionModel = require( 'ACID_BASE_SOLUTIONS/model/CustomSolutionModel' ),
+    IntroductionModel = require( 'ACID_BASE_SOLUTIONS/model/IntroductionModel' ),
     AcidBaseSolutionsView = require( 'ACID_BASE_SOLUTIONS/view/AcidBaseSolutionsView' );
 
   // images
@@ -40,12 +40,12 @@ define( function( require ) {
     // create and start the sim
     new Sim( simTitleString, [
       new Screen( introductionTitleString, new Image( introductionIcon ),
-        function() { return new AcidBaseSolutionsIntroductionModel(); },
+        function() { return new IntroductionModel(); },
         function( model ) { return new AcidBaseSolutionsView( model ); },
         {backgroundColor: 'rgb(230,230,230)'}
       ),
       new Screen( customSolutionTitleString, new Image( customSolutionIcon ),
-        function() { return new AcidBaseSolutionsCustomSolutionModel(); },
+        function() { return new CustomSolutionModel(); },
         function( model ) { return new AcidBaseSolutionsView( model ); },
         {backgroundColor: 'rgb(230,230,230)'}
       )
