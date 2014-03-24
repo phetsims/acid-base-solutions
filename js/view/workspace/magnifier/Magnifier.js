@@ -48,7 +48,7 @@ define( function( require ) {
         } );
         self.container.addChild( layers[solutionType] );
       }
-    };
+    }
 
     this.translation = magnifierModel.location;
 

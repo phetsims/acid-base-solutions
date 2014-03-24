@@ -10,10 +10,7 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var Property = require( 'AXON/Property' ),
-    ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
-    TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' ),
-    ControlPanelTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanelTypes' );
+  var ControlPanelTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanelTypes' );
 
   // strings
   var viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' );

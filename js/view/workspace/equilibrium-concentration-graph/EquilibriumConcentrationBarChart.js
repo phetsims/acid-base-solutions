@@ -37,7 +37,7 @@ define( function( require ) {
     for ( var key in barChartModel.solutions ) {
       var solution = barChartModel.solutions[ key ];
       maxBars = Math.max( maxBars, solution.molecules.length );
-    };
+    }
 
     // create enough bars for all solutions
     for ( var i = 0; i < maxBars; i++ ) {
