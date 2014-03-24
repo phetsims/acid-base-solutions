@@ -1,107 +1,126 @@
-// Copyright 2002-2013, University of Colorado Boulder
+// Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Visual representation of solutions radio buttons menu.
+ * 'Solutions' control panel
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 define( function( require ) {
   'use strict';
 
   // imports
-  var inherit = require( 'PHET_CORE/inherit' ),
-    AquaRadioButton = require( 'SUN/AquaRadioButton' ),
-    StringUtils = require( 'PHETCOMMON/util/StringUtils' ),
-    SubSupText = require( 'SCENERY_PHET/SubSupText' ),
-    HTMLText = require( 'SCENERY/nodes/HTMLText' ),
-    ChemUtils = require( 'NITROGLYCERIN/ChemUtils' ),
-    PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
-    VBox = require( 'SCENERY/nodes/VBox' ),
-    HBox = require( 'SCENERY/nodes/HBox' ),
-    VStrut = require( 'SUN/VStrut' ),
-    H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' ),
-    HAMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/HAMolecule' ),
-    MOHMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/MOHMolecule' ),
-    BMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/BMolecule' );
+  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  var BMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/BMolecule' );
+  var ChemUtils = require( 'NITROGLYCERIN/ChemUtils' );
+  var H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' );
+  var HAMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/HAMolecule' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
+  var HTMLText = require( 'SCENERY/nodes/HTMLText' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var MOHMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/MOHMolecule' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
+  var VStrut = require( 'SUN/VStrut' );
 
   // strings
-  var pattern_0solution_1symbol = require( 'string!ACID_BASE_SOLUTIONS/pattern.0solution.1symbol' ),
-    waterString = require( 'string!ACID_BASE_SOLUTIONS/water' ),
-    strongAcidString = require( 'string!ACID_BASE_SOLUTIONS/strongAcid' ),
-    weakAcidString = require( 'string!ACID_BASE_SOLUTIONS/weakAcid' ),
-    strongBaseString = require( 'string!ACID_BASE_SOLUTIONS/strongBase' ),
-    weakBaseString = require( 'string!ACID_BASE_SOLUTIONS/weakBase' );
+  var pattern_0solution_1symbol = require( 'string!ACID_BASE_SOLUTIONS/pattern.0solution.1symbol' );
+  var strongAcidString = require( 'string!ACID_BASE_SOLUTIONS/strongAcid' );
+  var strongBaseString = require( 'string!ACID_BASE_SOLUTIONS/strongBase' );
+  var waterString = require( 'string!ACID_BASE_SOLUTIONS/water' );
+  var weakAcidString = require( 'string!ACID_BASE_SOLUTIONS/weakAcid' );
+  var weakBaseString = require( 'string!ACID_BASE_SOLUTIONS/weakBase' );
 
   // constants
-  var FONT = new PhetFont( 12 ),
-    RADIO_BUTTON_RADIUS = 7;
+  var RADIO_BUTTON_OPTIONS = { radius: 7 };
+  var TEXT_OPTIONS = { font: new PhetFont( 12 ) };
+  var TEXT_ICON_X_SPACING = 10;
 
-  /*
-   * value: value which will be assigned to model property after choosing radio button
-   * text: description text for button
-   * icon: icon for radio button
+  /**
+   * @param {SolutionsMenuModel} solutionMenuModel
+   * @param options
+   * @constructor
    */
-  var radioButtonOptions = [
-    {
-      value: SolutionTypes.WATER,
-      text: new SubSupText( StringUtils.format( pattern_0solution_1symbol, waterString, ChemUtils.toSubscript( 'H2O' ) ), {font: FONT} ),
-      icon: H2OMolecule
-    },
-    {
-      value: SolutionTypes.STRONG_ACID,
-      text: new HTMLText( StringUtils.format( pattern_0solution_1symbol, strongAcidString, 'H<i>A</i>' ), {font: FONT} ),
-      icon: HAMolecule
-    },
-    {
-      value: SolutionTypes.WEAK_ACID,
-      text: new HTMLText( StringUtils.format( pattern_0solution_1symbol, weakAcidString, 'H<i>A</i>' ), {font: FONT} ),
-      icon: HAMolecule
-    },
-    {
-      value: SolutionTypes.STRONG_BASE,
-      text: new HTMLText( StringUtils.format( pattern_0solution_1symbol, strongBaseString, '<i>M</i>OH' ), {font: FONT} ),
-      icon: MOHMolecule
-    },
-    {
-      text: new HTMLText( StringUtils.format( pattern_0solution_1symbol, weakBaseString, '<i>B</i>' ), {font: FONT} ),
-      value: SolutionTypes.WEAK_BASE,
-      icon: BMolecule
-    }
-  ];
-
   function SolutionsControl( solutionMenuModel, options ) {
-    var self = this,
-      solutionTypeProperty = solutionMenuModel.solutionTypeProperty,
-      radioButtons = [],
-      maxHeight = 0;
-    VBox.call( this, _.extend( {align: 'left'}, options ) );
 
-    // define radio buttons and find max height of single button
-    radioButtonOptions.forEach( function( radioButtonOption, i ) {
-      radioButtons[i] = createRadioButton( solutionTypeProperty, radioButtonOption );
-      maxHeight = Math.max( radioButtons[i].getHeight(), maxHeight );
+    options = _.extend( {
+      spacing: 0,
+      align: 'left'
+    }, options );
+
+    // Water
+    var waterRadioButton = new AquaRadioButton( solutionMenuModel.solutionTypeProperty, SolutionTypes.WATER,
+      new HBox( {
+        spacing: TEXT_ICON_X_SPACING,
+        children: [
+          new SubSupText( StringUtils.format( pattern_0solution_1symbol, waterString, ChemUtils.toSubscript( 'H2O' ) ), TEXT_OPTIONS ),
+          new H2OMolecule()
+        ]
+      } ), RADIO_BUTTON_OPTIONS );
+
+    // Strong Acid
+    var strongAcidRadioButton = new AquaRadioButton( solutionMenuModel.solutionTypeProperty, SolutionTypes.STRONG_ACID,
+      new HBox( {
+        spacing: TEXT_ICON_X_SPACING,
+        children: [
+          new HTMLText( StringUtils.format( pattern_0solution_1symbol, strongAcidString, 'H<i>A</i>' ), TEXT_OPTIONS ),
+          new HAMolecule()
+        ]
+      } ), RADIO_BUTTON_OPTIONS );
+
+    // Weak Acid
+    var weakAcidRadioButton = new AquaRadioButton( solutionMenuModel.solutionTypeProperty, SolutionTypes.WEAK_ACID,
+      new HBox( {
+        spacing: TEXT_ICON_X_SPACING,
+        children: [
+          new HTMLText( StringUtils.format( pattern_0solution_1symbol, weakAcidString, 'H<i>A</i>' ), TEXT_OPTIONS ),
+          new HAMolecule()
+        ]
+      } ), RADIO_BUTTON_OPTIONS );
+
+    // Strong Base
+    var strongBaseRadioButton = new AquaRadioButton( solutionMenuModel.solutionTypeProperty, SolutionTypes.STRONG_BASE,
+      new HBox( {
+        spacing: TEXT_ICON_X_SPACING,
+        children: [
+          new HTMLText( StringUtils.format( pattern_0solution_1symbol, strongBaseString, '<i>M</i>OH' ), TEXT_OPTIONS ),
+          new MOHMolecule()
+        ]
+      } ), RADIO_BUTTON_OPTIONS );
+
+    // Weak Base
+    var weakBaseRadioButton = new AquaRadioButton( solutionMenuModel.solutionTypeProperty, SolutionTypes.WEAK_BASE,
+      new HBox( {
+        spacing: TEXT_ICON_X_SPACING,
+        children: [
+          new HTMLText( StringUtils.format( pattern_0solution_1symbol, weakBaseString, '<i>B</i>' ), TEXT_OPTIONS ),
+          new BMolecule()
+        ]
+      } ), RADIO_BUTTON_OPTIONS );
+
+    options.children = [
+      waterRadioButton,
+      strongAcidRadioButton,
+      weakAcidRadioButton,
+      strongBaseRadioButton,
+      weakBaseRadioButton
+    ];
+
+    // Make all controls have the same height
+    var maxHeight = 0;
+    options.children.forEach( function( control, i ) {
+      maxHeight = Math.max( control.height, maxHeight );
+    } );
+    options.children.forEach( function( control ) {
+      control.addChild( new VStrut( maxHeight ) );
     } );
 
-    // add options to menu
-    radioButtons.forEach( function( radioButton ) {
-      self.addChild( new HBox( {align: 'left', children: [new VStrut( maxHeight ), radioButton]} ) );
-    } );
-
-    this.updateLayout();
-
-    // adjust node position
-    this.setX( this.getX() - RADIO_BUTTON_RADIUS );
+    VBox.call( this, options );
   }
-
-  var createRadioButton = function( solutionTypeProperty, options ) {
-    return new AquaRadioButton( solutionTypeProperty, options.value, new HBox( {spacing: 5, children: [
-      options.text,
-      new options.icon()
-    ]
-    } ), {radius: RADIO_BUTTON_RADIUS} );
-  };
 
   return inherit( VBox, SolutionsControl );
 } );
