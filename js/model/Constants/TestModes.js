@@ -9,8 +9,8 @@ define( function() {
   'use strict';
 
   return Object.freeze( {
-    PH_METER: 'ph_meter',
-    PH_PAPER: 'ph_paper',
+    PH_METER: 'pHMeter',
+    PH_PAPER: 'pHPaper',
     CONDUCTIVITY: 'conductivity'
   } );
 } );
