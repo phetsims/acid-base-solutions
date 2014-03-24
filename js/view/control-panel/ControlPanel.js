@@ -14,10 +14,10 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' ),
     inherit = require( 'PHET_CORE/inherit' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
-    SolutionControl = require( 'ACID_BASE_SOLUTIONS/view/control-panel/SolutionControl/SolutionControl' ),
-    SolutionsControl = require( 'ACID_BASE_SOLUTIONS/view/control-panel/SolutionsControl' ),
-    ViewsControl = require( 'ACID_BASE_SOLUTIONS/view/control-panel/ViewsControl' ),
-    TestsControl = require( 'ACID_BASE_SOLUTIONS/view/control-panel/TestsControl' ),
+    SolutionPanel = require( 'ACID_BASE_SOLUTIONS/customsolution/view/SolutionPanel' ),
+    SolutionsPanel = require( 'ACID_BASE_SOLUTIONS/introduction/view/SolutionsPanel' ),
+    ViewsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ViewsPanel' ),
+    TestsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/TestsPanel' ),
     VBox = require( 'SCENERY/nodes/VBox' ),
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
@@ -29,10 +29,10 @@ define( function( require ) {
 
   // view constructors for solution controls, associative array
   var Panels = {};
-  Panels[ControlPanelTypes.SOLUTIONS] = SolutionsControl;
-  Panels[ControlPanelTypes.SOLUTION] = SolutionControl;
-  Panels[ControlPanelTypes.VIEWS] = ViewsControl;
-  Panels[ControlPanelTypes.TESTS] = TestsControl;
+  Panels[ControlPanelTypes.SOLUTIONS] = SolutionsPanel;
+  Panels[ControlPanelTypes.SOLUTION] = SolutionPanel;
+  Panels[ControlPanelTypes.VIEWS] = ViewsPanel;
+  Panels[ControlPanelTypes.TESTS] = TestsPanel;
 
   function ControlPanel( model ) {
     var vBox = new VBox( {x: 20, spacing: 8, align: 'left'} ),

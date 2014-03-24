@@ -59,7 +59,7 @@ define( function( require ) {
    * @param {*} options
    * @constructor
    */
-  function ViewsControl( viewModesMenuModel, options ) {
+  function ViewsPanel( viewModesMenuModel, options ) {
 
     options = _.extend( {
       spacing: 4,
@@ -120,5 +120,5 @@ define( function( require ) {
     VBox.call( this, options );
   }
 
-  return inherit( VBox, ViewsControl );
+  return inherit( VBox, ViewsPanel );
 } );

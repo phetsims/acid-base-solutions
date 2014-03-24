@@ -31,7 +31,7 @@ define( function( require ) {
    * @param {*} options
    * @constructor
    */
-  function TestsControl( testModesMenuModel, options ) {
+  function TestsPanel( testModesMenuModel, options ) {
 
     options = _.extend( {
       spacing: 4,
@@ -47,5 +47,5 @@ define( function( require ) {
     VBox.call( this, options );
   }
 
-  return inherit( VBox, TestsControl );
+  return inherit( VBox, TestsPanel );
 } );

@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Visual representation of solution menu.
+ * 'Solution' control panel, for controlling a custom solution.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
@@ -17,8 +17,8 @@ define( function( require ) {
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     Line = require( 'SCENERY/nodes/Line' ),
-    StrengthSlider = require( 'ACID_BASE_SOLUTIONS/view/control-panel/SolutionControl/StrengthSlider' ),
-    ConcentrationSlider = require( 'ACID_BASE_SOLUTIONS/view/control-panel/SolutionControl/ConcentrationSlider' );
+    StrengthSlider = require( 'ACID_BASE_SOLUTIONS/customsolution/view/StrengthSlider' ),
+    ConcentrationSlider = require( 'ACID_BASE_SOLUTIONS/customsolution/view/ConcentrationSlider' );
 
   // strings
   var acidString = require( 'string!ACID_BASE_SOLUTIONS/acid' ),
@@ -36,7 +36,7 @@ define( function( require ) {
    * @param {*} options
    * @constructor
    */
-  function SolutionControl( solutionMenuModel, options ) {
+  function SolutionPanel( solutionMenuModel, options ) {
 
     var vBox = new VBox( {spacing: 4} ),
       strengthSlider;
@@ -77,5 +77,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, SolutionControl );
+  return inherit( Node, SolutionPanel );
 } );

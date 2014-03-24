@@ -45,7 +45,7 @@ define( function( require ) {
    * @param options
    * @constructor
    */
-  function SolutionsControl( solutionMenuModel, options ) {
+  function SolutionsPanel( solutionMenuModel, options ) {
 
     options = _.extend( {
       spacing: 0,
@@ -122,5 +122,5 @@ define( function( require ) {
     VBox.call( this, options );
   }
 
-  return inherit( VBox, SolutionsControl );
+  return inherit( VBox, SolutionsPanel );
 } );
