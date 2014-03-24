@@ -27,11 +27,11 @@ define( function( require ) {
   var RADIO_BUTTON_OPTIONS = { radius: 7 };
 
   /**
-   * @param {TestModesMenuModel} testModesMenuModel
+   * @param {Property<TestModes>} testModeProperty
    * @param {*} options
    * @constructor
    */
-  function TestsPanel( testModesMenuModel, options ) {
+  function TestsPanel( testModeProperty, options ) {
 
     options = _.extend( {
       spacing: 4,
@@ -39,9 +39,9 @@ define( function( require ) {
     }, options );
 
     options.children = [
-      new AquaRadioButton( testModesMenuModel.testModeProperty, TestModes.PH_METER, new Image( pHMeterImage, ICON_OPTIONS ), RADIO_BUTTON_OPTIONS ),
-      new AquaRadioButton( testModesMenuModel.testModeProperty, TestModes.PH_PAPER, new Image( pHPaperImage, ICON_OPTIONS ), RADIO_BUTTON_OPTIONS ),
-      new AquaRadioButton( testModesMenuModel.testModeProperty, TestModes.CONDUCTIVITY, new Image( lightBulbImage, ICON_OPTIONS ), RADIO_BUTTON_OPTIONS )
+      new AquaRadioButton( testModeProperty, TestModes.PH_METER, new Image( pHMeterImage, ICON_OPTIONS ), RADIO_BUTTON_OPTIONS ),
+      new AquaRadioButton( testModeProperty, TestModes.PH_PAPER, new Image( pHPaperImage, ICON_OPTIONS ), RADIO_BUTTON_OPTIONS ),
+      new AquaRadioButton( testModeProperty, TestModes.CONDUCTIVITY, new Image( lightBulbImage, ICON_OPTIONS ), RADIO_BUTTON_OPTIONS )
     ];
 
     VBox.call( this, options );

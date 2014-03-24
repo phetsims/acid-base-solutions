@@ -55,11 +55,12 @@ define( function( require ) {
   };
 
   /**
-   * @param {ViewModesMenuModel} viewModesMenuModel
+   * @param {Property<ViewModes>} viewModeProperty
+   * @param {Property<Boolean>} solventVisibleProperty
    * @param {*} options
    * @constructor
    */
-  function ViewsPanel( viewModesMenuModel, options ) {
+  function ViewsPanel( viewModeProperty, solventVisibleProperty, options ) {
 
     options = _.extend( {
       spacing: 4,
@@ -67,7 +68,7 @@ define( function( require ) {
     }, options );
 
     // Molecules
-    var moleculesRadioButton = new AquaRadioButton( viewModesMenuModel.viewModeProperty, ViewModes.MOLECULES,
+    var moleculesRadioButton = new AquaRadioButton( viewModeProperty, ViewModes.MOLECULES,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
@@ -83,10 +84,10 @@ define( function( require ) {
         new Text( solventString, TEXT_OPTIONS ),
         new H2OMolecule()
       ]
-    } ), viewModesMenuModel.solventVisibleProperty, CHECK_BOX_OPTIONS );
+    } ), solventVisibleProperty, CHECK_BOX_OPTIONS );
 
     // Graph
-    var graphRadioButton = new AquaRadioButton( viewModesMenuModel.viewModeProperty, ViewModes.GRAPH,
+    var graphRadioButton = new AquaRadioButton( viewModeProperty, ViewModes.GRAPH,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
@@ -96,7 +97,7 @@ define( function( require ) {
       } ), RADIO_BUTTON_OPTIONS );
 
     // Hide Views
-    var hideViewsRadioButton = new AquaRadioButton( viewModesMenuModel.viewModeProperty, ViewModes.HIDE_VIEWS,
+    var hideViewsRadioButton = new AquaRadioButton( viewModeProperty, ViewModes.HIDE_VIEWS,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
@@ -113,7 +114,7 @@ define( function( require ) {
     ];
 
     // disable the 'Solvent' check box unless 'Molecules' is selected
-    viewModesMenuModel.viewModeProperty.link( function( viewMode ) {
+    viewModeProperty.link( function( viewMode ) {
       solventCheckBox.enabled = ( viewMode === ViewModes.MOLECULES );
     } );
 

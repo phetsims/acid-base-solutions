@@ -15,11 +15,9 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var SolutionMenuModel = require( 'ACID_BASE_SOLUTIONS/model/SolutionMenuModel' );
   var SolutionPanel = require( 'ACID_BASE_SOLUTIONS/customsolution/view/SolutionPanel' );
-  var TestModesMenuModel = require( 'ACID_BASE_SOLUTIONS/model/TestModesMenuModel' );
   var TestsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/TestsPanel' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-  var ViewModesMenuModel = require( 'ACID_BASE_SOLUTIONS/model/ViewModesMenuModel' );
   var ViewsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ViewsPanel' );
   var VStrut = require( 'SUN/VStrut' );
 
@@ -44,8 +42,8 @@ define( function( require ) {
 
     // panels
     var solutionPanel = new SolutionPanel( new SolutionMenuModel( model.property( 'solutionType' ), model.property( 'concentration' ), model.property( 'strength' ), model.property( 'isAcid' ), model.property( 'isWeak' ) ) );
-    var viewsPanel = new ViewsPanel( new ViewModesMenuModel( model.property( 'viewMode' ), model.property( 'solventVisible' ) ) );
-    var testsPanel = new TestsPanel( new TestModesMenuModel( model.property( 'testMode' ) ) );
+    var viewsPanel = new ViewsPanel( model.property( 'viewMode' ), model.property( 'solventVisible' ) );
+    var testsPanel = new TestsPanel( model.property( 'testMode' ) );
 
     var children = [
       solutionTitle,
