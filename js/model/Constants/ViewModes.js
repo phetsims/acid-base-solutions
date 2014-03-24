@@ -11,6 +11,6 @@ define( function() {
   return Object.freeze( {
     MOLECULES: 'molecules',
     EQUILIBRIUM: 'equilibrium',
-    LIQUID: 'liquid'
+    HIDE_VIEWS: 'hideViews'
   } );
 } );

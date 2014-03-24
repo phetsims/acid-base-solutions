@@ -1,3 +1,4 @@
+3/24/14 #51 change strings in control panels
 3/21/14 #60 partial cleanup of molecule node constructors
 3/21/14 delete unnecessary intermediate associative array in bar graph
 3/21/14 model: collapse this.SOLUTIONS and this.components to this.solutions (2 arrays are unnecessary)

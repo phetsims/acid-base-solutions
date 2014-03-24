@@ -26,10 +26,9 @@ define( function( require ) {
 
   // strings
   var moleculesString = require( 'string!ACID_BASE_SOLUTIONS/molecules' ),
-    showSolventString = require( 'string!ACID_BASE_SOLUTIONS/showSolvent' ),
-    equilibriumString = require( 'string!ACID_BASE_SOLUTIONS/equilibrium' ),
-    concentrationString = require( 'string!ACID_BASE_SOLUTIONS/concentration' ),
-    liquidString = require( 'string!ACID_BASE_SOLUTIONS/liquid' );
+    solventString = require( 'string!ACID_BASE_SOLUTIONS/solvent' ),
+    graphString = require( 'string!ACID_BASE_SOLUTIONS/graph' ),
+    hideViewsString = require( 'string!ACID_BASE_SOLUTIONS/hideViews' );
 
   // images
   var magnifyingGlassImage = require( 'image!ACID_BASE_SOLUTIONS/magnifying-glass.png' ),
@@ -56,16 +55,13 @@ define( function( require ) {
     },
     {
       isRadio: false,
-      text: showSolventString,
+      text: solventString,
       icon: new H2OMolecule()
     },
     {
       isRadio: true,
       value: ViewModes.EQUILIBRIUM,
-      text: new Node( {children: [
-        new Text( equilibriumString, {font: FONT, centerX: -6} ),
-        new Text( concentrationString, {font: FONT, centerX: 0, centerY: 8} )
-      ]} ),
+      text: new Text( graphString, {font: FONT } ),
       icon: new Node( {children: [
         new Rectangle( 0, 0, 24.5, 18, {fill: 'white', stroke: 'black', lineWidth: 0.5} ),
         new Rectangle( 2, 6, 3, 12, {fill: MOLECULES_COLORS.B} ),
@@ -75,8 +71,8 @@ define( function( require ) {
       ]} )},
     {
       isRadio: true,
-      value: ViewModes.LIQUID,
-      text: new Text( liquidString, {font: FONT} ),
+      value: ViewModes.HIDE_VIEWS,
+      text: new Text( hideViewsString, {font: FONT} ),
       icon: new Image( beakerImage, {scale: 0.75} )
     }
   ];
