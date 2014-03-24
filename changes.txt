@@ -1,14 +1,14 @@
-3/24/14 move PHMeterTest to common/view/PHMeterNode
-3/24/14 move PHPaperTest to common/view/PHPaperNode
-3/24/14 convert Workspace to common/view/AcidBaseSolutionsView, base type for all ScreenViews
-3/24/14 move Beaker to common/view/BeakerNode
-3/24/14 move control panel to proper subdirs, rename with 'Panel' suffix
+3/24/14 #62 move PHMeterTest to common/view/PHMeterNode
+3/24/14 #62 move PHPaperTest to common/view/PHPaperNode
+3/24/14 #63 convert Workspace to common/view/AcidBaseSolutionsView, base type for all ScreenViews
+3/24/14 #62 move Beaker to common/view/BeakerNode
+3/24/14 #62 move control panel to proper subdirs, rename with 'Panel' suffix
 3/24/14 #61 bad image imports in main.js
-3/24/14 create ScreenView subtypes for each screen
-3/24/14 create 'introduction' and 'customsolution' subdirs, move screen-specific model subtypes there
-3/24/14 rename screen-specific model types
-3/24/14 create 'common' subdir, move some model types
-3/24/14 remove unnecessary 'Abstract' from some long type names
+3/24/14 #63 create ScreenView subtypes for each screen
+3/24/14 #62 create 'introduction' and 'customsolution' subdirs, move screen-specific model subtypes there
+3/24/14 #63 rename screen-specific model types
+3/24/14 #62 create 'common' subdir, move some model types
+3/24/14 #62 remove unnecessary 'Abstract' from some long type names
 3/24/14 #51 simplify SolutionsControl in preparation for UI changes
 3/24/15 #56 changes to credits
 3/24/14 #51 simplify ViewsControl in preparation for UI changes
