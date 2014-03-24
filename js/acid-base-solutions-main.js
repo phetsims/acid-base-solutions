@@ -14,8 +14,8 @@ define( function( require ) {
     Sim = require( 'JOIST/Sim' ),
     Screen = require( 'JOIST/Screen' ),
     Image = require( 'SCENERY/nodes/Image' ),
-    CustomSolutionModel = require( 'ACID_BASE_SOLUTIONS/model/CustomSolutionModel' ),
-    IntroductionModel = require( 'ACID_BASE_SOLUTIONS/model/IntroductionModel' ),
+    CustomSolutionModel = require( 'ACID_BASE_SOLUTIONS/customsolution/model/CustomSolutionModel' ),
+    IntroductionModel = require( 'ACID_BASE_SOLUTIONS/introduction/model/IntroductionModel' ),
     AcidBaseSolutionsView = require( 'ACID_BASE_SOLUTIONS/view/AcidBaseSolutionsView' );
 
   // images

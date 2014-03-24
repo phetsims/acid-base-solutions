@@ -1,3 +1,4 @@
+3/24/14 create 'introduction' and 'customsolution' subdirs, move screen-specific model subtypes there
 3/24/14 rename screen-specific model types
 3/24/14 create 'common' subdir, move some model types
 3/24/14 remove unnecessary 'Abstract' from some long type names
