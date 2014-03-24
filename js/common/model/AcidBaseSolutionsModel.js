@@ -101,7 +101,7 @@ define( function( require ) {
       for ( var solutionType in this.solutions ) {
         //TODO reset appears to be undefined for each solution
         this.solutions[solutionType].reset();
-      };
+      }
 
       // reset pH meter
       this.pHMeter.reset();
