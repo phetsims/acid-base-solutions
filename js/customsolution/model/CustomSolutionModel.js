@@ -44,13 +44,6 @@ define( function( require ) {
     this.addProperty( 'concentration', this.solutions[DEFAULT_SOLUTION_TYPE].concentration ); // concentration of solution
     this.addProperty( 'strength', this.solutions[DEFAULT_SOLUTION_TYPE].strength ); // strength of solution
 
-    // models for control panel
-    this.controlPanel = [
-      new SolutionMenuModel( this.property( 'solutionType' ), this.property( 'concentration' ), this.property( 'strength' ), this.property( 'isAcid' ), this.property( 'isWeak' ) ),
-      new ViewModesMenuModel( this.property( 'viewMode' ), this.property( 'solventVisible' ) ),
-      new TestModesMenuModel( this.property( 'testMode' ) )
-    ];
-
     // concentration bar chart model
     this.barChart = new BarChartModel( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'viewMode' ), this.property( 'testMode' ), this.property( 'concentration' ), this.property( 'strength' ) );
 
@@ -80,16 +73,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( AcidBaseSolutionsModel, CustomSolutionModel, {
-    reset: function() {
-      // reset main properties
-      AcidBaseSolutionsModel.prototype.reset.call( this );
-
-      // reset control panels
-      this.controlPanel.forEach( function( panel ) {
-        panel.reset();
-      } );
-    }
-  } );
-
+  return inherit( AcidBaseSolutionsModel, CustomSolutionModel );
 } );

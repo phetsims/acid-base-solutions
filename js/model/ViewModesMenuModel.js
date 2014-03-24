@@ -10,7 +10,6 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ControlPanelTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanelTypes' );
 
   // strings
   var viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' );
@@ -21,9 +20,6 @@ define( function( require ) {
    * @constructor
    */
   function ViewModesMenuModel( viewModeProperty, solventVisibleProperty ) {
-
-    // control panel's type
-    this.controlPanelType = ControlPanelTypes.VIEWS;
 
     // control panel's title
     this.title = viewsString;

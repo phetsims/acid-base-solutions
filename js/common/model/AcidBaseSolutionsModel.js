@@ -97,10 +97,11 @@ define( function( require ) {
       // reset main properties
       PropertySet.prototype.reset.call( this );
 
-      // reset solutions properties
-      this.solutions.forEach( function( solution ) {
-        solution.reset();
-      } );
+      // reset solutions
+      for ( var solutionType in this.solutions ) {
+        debugger;//XXX
+        this.solutions[solutionType].reset();
+      };
 
       // reset pH meter
       this.pHMeter.reset();

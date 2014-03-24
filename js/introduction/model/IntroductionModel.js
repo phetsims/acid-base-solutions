@@ -18,13 +18,7 @@ define( function( require ) {
     StrongAcidSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/StrongAcidSolution' ),
     WeakAcidSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/WeakAcidSolution' ),
     StrongBaseSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/StrongBaseSolution' ),
-    WeakBaseSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/WeakBaseSolution' ),
-    SolutionsMenuModel = require( 'ACID_BASE_SOLUTIONS/model/SolutionsMenuModel' ),
-    ViewModesMenuModel = require( 'ACID_BASE_SOLUTIONS/model/ViewModesMenuModel' ),
-    TestModesMenuModel = require( 'ACID_BASE_SOLUTIONS/model/TestModesMenuModel' );
-
-  // constants
-  var DEFAULT_SOLUTION_TYPE = SolutionTypes.WATER;
+    WeakBaseSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/WeakBaseSolution' );
 
   function IntroductionModel() {
     AcidBaseSolutionsModel.call( this,
@@ -35,14 +29,7 @@ define( function( require ) {
         new StrongBaseSolution(),
         new WeakBaseSolution()
       ],
-      DEFAULT_SOLUTION_TYPE );
-
-    // models for control panel
-    this.controlPanel = [
-      new SolutionsMenuModel( this.property( 'solutionType' ) ),
-      new ViewModesMenuModel( this.property( 'viewMode' ), this.property( 'solventVisible' ) ),
-      new TestModesMenuModel( this.property( 'testMode' ) )
-    ];
+      SolutionTypes.WATER );
 
     // concentration bar chart model
     this.barChart = new BarChartModel( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'viewMode' ), this.property( 'testMode' ) );

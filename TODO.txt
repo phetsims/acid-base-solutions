@@ -1,0 +1,3 @@
+TODO list for acid-base-solutions
+
+- fix 'Rest All' for solutions, their reset function is shown as undefined in AcidBaseSolutionModel.reset

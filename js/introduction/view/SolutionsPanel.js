@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * 'Solutions' control panel
+ * 'Solutions' control panel, for switching between solution types.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -41,11 +41,11 @@ define( function( require ) {
   var TEXT_ICON_X_SPACING = 10;
 
   /**
-   * @param {SolutionsMenuModel} solutionMenuModel
+   * @param {Property<SolutionType>} solutionTypeProperty
    * @param options
    * @constructor
    */
-  function SolutionsPanel( solutionMenuModel, options ) {
+  function SolutionsPanel( solutionTypeProperty, options ) {
 
     options = _.extend( {
       spacing: 0,
@@ -53,7 +53,7 @@ define( function( require ) {
     }, options );
 
     // Water
-    var waterRadioButton = new AquaRadioButton( solutionMenuModel.solutionTypeProperty, SolutionTypes.WATER,
+    var waterRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionTypes.WATER,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
@@ -63,7 +63,7 @@ define( function( require ) {
       } ), RADIO_BUTTON_OPTIONS );
 
     // Strong Acid
-    var strongAcidRadioButton = new AquaRadioButton( solutionMenuModel.solutionTypeProperty, SolutionTypes.STRONG_ACID,
+    var strongAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionTypes.STRONG_ACID,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
@@ -73,7 +73,7 @@ define( function( require ) {
       } ), RADIO_BUTTON_OPTIONS );
 
     // Weak Acid
-    var weakAcidRadioButton = new AquaRadioButton( solutionMenuModel.solutionTypeProperty, SolutionTypes.WEAK_ACID,
+    var weakAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionTypes.WEAK_ACID,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
@@ -83,7 +83,7 @@ define( function( require ) {
       } ), RADIO_BUTTON_OPTIONS );
 
     // Strong Base
-    var strongBaseRadioButton = new AquaRadioButton( solutionMenuModel.solutionTypeProperty, SolutionTypes.STRONG_BASE,
+    var strongBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionTypes.STRONG_BASE,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
@@ -93,7 +93,7 @@ define( function( require ) {
       } ), RADIO_BUTTON_OPTIONS );
 
     // Weak Base
-    var weakBaseRadioButton = new AquaRadioButton( solutionMenuModel.solutionTypeProperty, SolutionTypes.WEAK_BASE,
+    var weakBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionTypes.WEAK_BASE,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [

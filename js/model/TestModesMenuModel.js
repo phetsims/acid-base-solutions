@@ -10,7 +10,6 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ControlPanelTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ControlPanelTypes' );
 
   // strings
   var testsString = require( 'string!ACID_BASE_SOLUTIONS/tests' );
@@ -20,8 +19,6 @@ define( function( require ) {
    * @constructor
    */
   function TestModesMenuModel( testModeProperty ) {
-    // control panel's type
-    this.controlPanelType = ControlPanelTypes.TESTS;
 
     // control panel's title
     this.title = testsString;
