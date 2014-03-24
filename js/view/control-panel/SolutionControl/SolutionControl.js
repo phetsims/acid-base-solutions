@@ -31,6 +31,11 @@ define( function( require ) {
   // constants
   var FONT = new PhetFont( 12 );
 
+  /**
+   * @param {SolutionMenuModel} solutionMenuModel
+   * @param {*} options
+   * @constructor
+   */
   function SolutionControl( solutionMenuModel, options ) {
 
     var vBox = new VBox( {spacing: 4} ),
