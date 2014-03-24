@@ -21,17 +21,17 @@ define( function( require ) {
   var PAPER_LENGTH = 4 * Constants.PH_COLOR_KEY_RECT_HEIGHT;
 
   /**
-   * @param {BeakerModel} beakerModel
+   * @param {Beaker} beaker
    * @param {Property<SolutionType>} solutionTypeProperty
    * @param {Property<Number>} pHProperty
    * @param {Property<TestModes>} testModeProperty
    * @constructor
    */
-  function PHPaperModel( beakerModel, solutionTypeProperty, pHProperty, testModeProperty ) {
+  function PHPaperModel( beaker, solutionTypeProperty, pHProperty, testModeProperty ) {
     var self = this;
 
     // pH test location
-    this.location = beakerModel.location.plusXY( -beakerModel.width / 2 + 20, -beakerModel.height - 115 );
+    this.location = beaker.location.plusXY( -beaker.size.width / 2 + 20, -beaker.size.height - 115 );
 
     // pH paper location
     this.locationProperty = new Property( this.location.plusXY( -57.5, -25 ) );
@@ -41,14 +41,14 @@ define( function( require ) {
 
     // drag range of pH paper
     this.dragBounds = new Bounds2(
-      this.locationProperty.value.x - beakerModel.width + 85,
+      this.locationProperty.value.x - beaker.size.width + 85,
       this.locationProperty.value.y - 5,
       this.locationProperty.value.x + 50,
-      this.locationProperty.value.y + beakerModel.height
+      this.locationProperty.value.y + beaker.size.height
     );
 
     // water surface level
-    this.waterSurface = beakerModel.location.y - beakerModel.height - 132;
+    this.waterSurface = beaker.location.y - beaker.size.height - 132;
 
     // pH property
     this.pHProperty = pHProperty;

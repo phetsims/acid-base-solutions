@@ -27,19 +27,19 @@ define( function( require ) {
     };
 
   /**
-   * @param {BeakerModel} beakerModel
+   * @param {Beaker} beaker
    * @param {Property<TestModes>} testModeProperty
    * @param {Property<Number>} brightnessProperty
    * @constructor
    */
-  function ConductivityTestModel( beakerModel, testModeProperty, brightnessProperty ) {
+  function ConductivityTestModel( beaker, testModeProperty, brightnessProperty ) {
     var self = this;
 
     // conductivity test location
-    this.location = beakerModel.location.plusXY( -60, -beakerModel.height - 130 );
+    this.location = beaker.location.plusXY( -60, -beaker.size.height - 130 );
 
     // water surface level
-    this.waterSurface = beakerModel.location.y - beakerModel.height - 60;
+    this.waterSurface = beaker.location.y - beaker.size.height - 60;
 
     // positive probe y-coordinate
     this.positiveProbeYProperty = new Property( WIRE_OPTIONS.positive.end.y );

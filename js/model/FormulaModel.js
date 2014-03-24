@@ -10,13 +10,13 @@ define( function() {
   'use strict';
 
   /**
-   * @param {BeakerModel} beakerModel
+   * @param {Beaker} beaker
    * @param {Property<SolutionType>} solutionTypeProperty
    * @constructor
    */
-  function FormulaModel( beakerModel, solutionTypeProperty ) {
+  function FormulaModel( beaker, solutionTypeProperty ) {
     // formula location
-    this.location = beakerModel.location.copy();
+    this.location = beaker.location.copy();
 
     // solution property
     this.solutionTypeProperty = solutionTypeProperty;

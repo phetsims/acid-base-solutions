@@ -20,8 +20,7 @@ define( function( require ) {
       location: new Vector2( 265, 440 )
     } );
 
-    this.width = options.size.width;
-    this.height = options.size.height;
+    this.size = options.size;
     this.location = options.location;
   }
 

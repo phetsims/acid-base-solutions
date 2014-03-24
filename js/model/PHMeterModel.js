@@ -16,17 +16,17 @@ define( function( require ) {
     Range = require( 'DOT/Range' ),
     Util = require( 'DOT/Util' );
 
-  function PHMeterModel( beakerModel, pHProperty, testModeProperty ) {
+  function PHMeterModel( beaker, pHProperty, testModeProperty ) {
     var self = this;
 
     // pH meter location
-    this.locationProperty = new Property( beakerModel.location.plusXY( beakerModel.width / 2 - 85, -beakerModel.height - 105 ) );
+    this.locationProperty = new Property( beaker.location.plusXY( beaker.size.width / 2 - 85, -beaker.size.height - 105 ) );
 
     // drag range of pH meter
     this.dragRange = new Range( this.locationProperty.value.y - 10, this.locationProperty.value.y + 75 );
 
     // water surface level
-    this.waterSurface = beakerModel.location.y - beakerModel.height - 100;
+    this.waterSurface = beaker.location.y - beaker.size.height - 100;
 
     // pH property
     this.pHProperty = pHProperty;

@@ -15,7 +15,7 @@ define( function( require ) {
     TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' );
 
   /**
-   * @param {BeakerModel} beakerModel
+   * @param {Beaker} beaker
    * @param {Array<AqueousSolution>} solutions
    * @param {Property<SolutionTypes>} solutionTypeProperty
    * @param {Property<ViewModes>} viewModeProperty
@@ -24,15 +24,15 @@ define( function( require ) {
    * @param {Property<Number>} strengthProperty optional, provided for custom solutions
    * @constructor
    */
-  function BarChartModel( beakerModel, solutions, solutionTypeProperty, viewModeProperty, testModeProperty, concentrationProperty, strengthProperty ) {
+  function BarChartModel( beaker, solutions, solutionTypeProperty, viewModeProperty, testModeProperty, concentrationProperty, strengthProperty ) {
     // bar chart width
-    this.width = beakerModel.width / 2;
+    this.width = beaker.size.width / 2;
 
     // bar chart height
-    this.height = beakerModel.height / 1.125;
+    this.height = beaker.size.height / 1.125;
 
     // bar chart location
-    this.location = beakerModel.location.plusXY( (this.width - beakerModel.width) / 2, -(beakerModel.height + this.height) / 2 );
+    this.location = beaker.location.plusXY( (this.width - beaker.size.width) / 2, -(beaker.size.height + this.height) / 2 );
 
     // solution property
     this.solutionTypeProperty = solutionTypeProperty;

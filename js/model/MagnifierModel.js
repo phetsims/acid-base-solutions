@@ -14,7 +14,7 @@ define( function( require ) {
     TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' );
 
   /**
-   * @param {BeakerModel} beakerModel
+   * @param {Beaker} beaker
    * @param {Array<AqueousSolution>} solutions
    * @param {Property<SolutionTypes>} solutionTypeProperty
    * @param {Property<Boolean>} solventVisibleProperty
@@ -22,12 +22,12 @@ define( function( require ) {
    * @param {Property<TestModes>} testModeProperty
    * @constructor
    */
-  function MagnifierModel( beakerModel, solutions, solutionTypeProperty, solventVisibleProperty, viewModeProperty, testModeProperty ) {
+  function MagnifierModel( beaker, solutions, solutionTypeProperty, solventVisibleProperty, viewModeProperty, testModeProperty ) {
     // magnifier radius
-    this.radius = beakerModel.height / 2.15;
+    this.radius = beaker.size.height / 2.15;
 
     // magnifier location
-    this.location = beakerModel.location.plusXY( 0, -beakerModel.height / 2 );
+    this.location = beaker.location.plusXY( 0, -beaker.size.height / 2 );
 
     // solution type property
     this.solutionTypeProperty = solutionTypeProperty;

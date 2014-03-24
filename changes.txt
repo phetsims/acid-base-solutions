@@ -1,3 +1,4 @@
+3/24/14 replace Beaker.width and height with Beaker.size
 3/24/14 #62 move BeakerModel to common/model/Beaker
 3/24/14 #63 make TestModesMenuModel and ViewModesMenuModel obsolete, delete them
 3/24/14 #63 subtypes for screen-specific control panels

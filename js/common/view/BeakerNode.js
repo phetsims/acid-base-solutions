@@ -36,8 +36,8 @@ define( function( require ) {
    */
   function BeakerNode( beaker ) {
     // outline of the beaker, starting from upper left
-    var BEAKER_WIDTH = beaker.width,
-      BEAKER_HEIGHT = beaker.height,
+    var BEAKER_WIDTH = beaker.size.width,
+      BEAKER_HEIGHT = beaker.size.height,
       outlineShape = new Shape()
         .moveTo( -BEAKER_WIDTH / 2 - RIM_OFFSET, -BEAKER_HEIGHT - RIM_OFFSET )
         .lineTo( -BEAKER_WIDTH / 2, -BEAKER_HEIGHT )
