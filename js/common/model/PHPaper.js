@@ -24,7 +24,7 @@ define( function( require ) {
    * @param {Property<TestModes>} testModeProperty
    * @constructor
    */
-  function PHPaperModel( beaker, solutionTypeProperty, pHProperty, testModeProperty ) {
+  function PHPaper( beaker, solutionTypeProperty, pHProperty, testModeProperty ) {
 
     var self = this;
 
@@ -59,7 +59,7 @@ define( function( require ) {
     } );
   }
 
-  PHPaperModel.prototype = {
+  PHPaper.prototype = {
 
     reset: function() {
       this.locationProperty.reset();
@@ -82,5 +82,5 @@ define( function( require ) {
     }
   };
 
-  return PHPaperModel;
+  return PHPaper;
 } );

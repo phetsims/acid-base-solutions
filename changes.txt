@@ -1,3 +1,4 @@
+3/25/14 #62 move PHPaperModel to common/model/PHPaper
 3/25/14 #68 use single quotes around 'use strict'
 3/25/14 #66 decouple pH paper from color key in model and view, they are not related
 3/25/14 #66 fix pH paper model and view so that location is at bottom-center of paper

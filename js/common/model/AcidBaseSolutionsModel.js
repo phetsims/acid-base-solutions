@@ -12,7 +12,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     PropertySet = require( 'AXON/PropertySet' ),
     PHMeter = require( 'ACID_BASE_SOLUTIONS/common/model/PHMeter' ),
-    PHPaperModel = require( 'ACID_BASE_SOLUTIONS/model/PHPaperModel' ),
+    PHPaper = require( 'ACID_BASE_SOLUTIONS/common/model/PHPaper' ),
     ConductivityTestModel = require( 'ACID_BASE_SOLUTIONS/model/ConductivityTestModel' ),
     Beaker = require( 'ACID_BASE_SOLUTIONS/common/model/Beaker' ),
     FormulaModel = require( 'ACID_BASE_SOLUTIONS/model/FormulaModel' ),
@@ -58,7 +58,7 @@ define( function( require ) {
     this.pHMeter = new PHMeter( this.beaker, this.property( 'pH' ), this.property( 'testMode' ) );
 
     // pH paper model
-    this.pHPaper = new PHPaperModel( this.beaker, this.property( 'solutionType' ), this.property( 'pH' ), this.property( 'testMode' ) );
+    this.pHPaper = new PHPaper( this.beaker, this.property( 'solutionType' ), this.property( 'pH' ), this.property( 'testMode' ) );
 
     // conductivity test model
     this.conductivityTest = new ConductivityTestModel( this.beaker, this.property( 'testMode' ), this.property( 'brightness' ) );
