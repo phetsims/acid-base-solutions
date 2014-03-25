@@ -1,3 +1,4 @@
+3/25/14 remove odd color computation for H2O
 3/25/14 #62 move MoleculeColors to common/ABSColors
 3/25/14 #62 move Constants to common/ABSConstants
 3/25/14 #62 move enums to common/enum

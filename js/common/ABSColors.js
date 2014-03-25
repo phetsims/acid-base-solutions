@@ -1,9 +1,10 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Colors for all molecules.
+ * Colors used through this simulation.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';
@@ -12,10 +13,7 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
 
   // constants
-  //TODO is the alpha in this color ever used?
-  var AQUEOUS_SOLUTION = new Color( 193, 222, 227, 0.7 ); // transparent light blue
   var GRAY_MOLECULE = 'rgb(120,120,120)';
-  var H2O_FACTOR = 0.85;
 
   // The field names here must correspond to the 'key' fields in AqueousSolution.molecules.
   return {
@@ -23,7 +21,7 @@ define( function( require ) {
     B: GRAY_MOLECULE,
     BH: 'rgb(255,170,0)',
     //TODO why is this factor applied?
-    H2O: new Color( AQUEOUS_SOLUTION.getRed() * H2O_FACTOR, AQUEOUS_SOLUTION.getGreen() * H2O_FACTOR, AQUEOUS_SOLUTION.getBlue() * H2O_FACTOR ),
+    H2O: 'rgb(164,189,193)',
     H3O: 'rgb(255,85,0)',
     HA: GRAY_MOLECULE,
     M: 'rgb(255,170,0)',
