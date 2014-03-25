@@ -4,45 +4,103 @@
  * Visual representation for pH meter in the 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 define( function( require ) {
   'use strict';
 
   // imports
-  var inherit = require( 'PHET_CORE/inherit' ),
-    Node = require( 'SCENERY/nodes/Node' ),
-    Path = require( 'SCENERY/nodes/Path' ),
-    Shape = require( 'KITE/Shape' ),
-    Rectangle = require( 'SCENERY/nodes/Rectangle' ),
-    Text = require( 'SCENERY/nodes/Text' ),
-    PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' ),
-    Util = require( 'DOT/Util' );
+  var Circle = require( 'SCENERY/nodes/Circle' );
+  var Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var Path = require( 'SCENERY/nodes/Path' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var Shape = require( 'KITE/Shape' );
+  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var Text = require( 'SCENERY/nodes/Text' );
+  var Util = require( 'DOT/Util' );
 
   // strings
+  var patternLabelValue = require( 'string!ACID_BASE_SOLUTIONS/pattern.0label.1value' );
   var pHString = require( 'string!ACID_BASE_SOLUTIONS/pH' );
 
   // constants
-  var FONT = new PhetFont( {size: 15, weight: 'bold'} );
+  var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
+  var DECIMAL_PLACES = 2;
+  var FONT = new PhetFont( { size: 15, weight: 'bold' } );
+  var TIP_WIDTH = 14;
+  var TIP_HEIGHT = 36;
+  var SHAFT_WIDTH = 5;
+  var SHAFT_HEIGHT = 50;
+  var X_MARGIN = 12;
+  var Y_MARGIN = 8;
 
-  function PHMeterNode( pHMeterModel ) {
+  // format a pH value for display.
+  var formatText = function( pH ) {
+    if ( pH === null ) {
+      return StringUtils.format( patternLabelValue, pHString, '' );
+    }
+    else {
+      return StringUtils.format( patternLabelValue, pHString, Util.toFixed( pH, DECIMAL_PLACES ) );
+    }
+  };
+
+  /**
+   * @param {PHMeterModel} pHMeter
+   * @constructor
+   */
+  function PHMeterNode( pHMeter ) {
+
     var self = this;
     Node.call( this, {cursor: 'pointer'} );
 
-    // add sensor
-    this.addChild( new Node( {children: [
-      new Rectangle( 12, 16, 5, 52, {fill: 'rgb(192,192,192)', stroke: 'rgb(160,160,160)', lineWidth: 0.5} ),
-      new Rectangle( 7.5, 65, 14, 22, 3, 3, {fill: 'black'} ),
-      new Path( new Shape().moveTo( 7.5, 85 ).lineTo( 21.5, 85 ).lineTo( 14.5, 100 ).lineTo( 7.5, 85 ), {fill: 'black'} )
-    ]} ) );
+    // probe tip: clockwise from tip of probe, origin at upper-left of shape
+    var cornerRadius = 4;
+    var tipNode = new Path( new Shape()
+      .moveTo( TIP_WIDTH / 2, TIP_HEIGHT )
+      .lineTo( 0, 0.6 * TIP_HEIGHT )
+      .lineTo( 0, cornerRadius )
+      .arc( cornerRadius, cornerRadius, cornerRadius, Math.PI, 1.5 * Math.PI )
+      .lineTo( cornerRadius, 0 )
+      .lineTo( TIP_WIDTH - cornerRadius, 0 )
+      .arc( TIP_WIDTH - cornerRadius, cornerRadius, cornerRadius, -0.5 * Math.PI, 0 )
+      .lineTo( TIP_WIDTH, 0.6 * TIP_HEIGHT )
+      .close(),
+      { fill: 'black' }
+    );
 
-    // add background view
-    this.addChild( new Rectangle( 0, -16, 75, 32, 5, 5, {fill: 'rgb(192,192,192)', stroke: 'rgb(64,64,64)', lineWidth: 1.5} ) );
+    // probe shaft
+    var shaftNode = new Rectangle( 0, 0, SHAFT_WIDTH, SHAFT_HEIGHT,
+      { fill: 'rgb(192,192,192)', stroke: 'rgb(160,160,160)', lineWidth: 0.5 } );
 
-    // add text
-    this.addChild( new Text( pHString + ':', {font: FONT, centerX: 18, centerY: 0} ) );
-    this.addChild( this.pHText = new Text( '', {font: FONT, centerX: 34, centerY: 0} ) );
+    // text, initialized with widest value for layout
+    var textNode = new Text( formatText( Constants.MAX_PH ), {font: FONT, centerX: 34, centerY: 0} );
+
+    // background sized to fit text
+    var backgroundNode = new Rectangle( 0, 0, textNode.width + ( 2 * X_MARGIN ), textNode.height + ( 2 * Y_MARGIN ), 5, 5,
+      {fill: 'rgb(192,192,192)', stroke: 'rgb(64,64,64)', lineWidth: 1.5} );
+
+    // layout, origin at probe tip
+    var overlap = 1; // to hide seams
+    tipNode.centerX = shaftNode.centerX = 0;
+    tipNode.bottom = 0;
+    shaftNode.bottom = tipNode.top + overlap;
+    backgroundNode.left = shaftNode.centerX - ( 0.25 * backgroundNode.width );
+    backgroundNode.bottom = shaftNode.top + overlap;
+    textNode.center = backgroundNode.center;
+
+    // rendering order
+    this.addChild( shaftNode );
+    this.addChild( tipNode );
+    this.addChild( backgroundNode );
+    this.addChild( textNode );
+    if ( SHOW_ORIGIN ) {
+      this.addChild( new Circle( 4, { fill: 'red' } ) );
+    }
 
     // init drag
     var clickYOffset;
@@ -53,25 +111,22 @@ define( function( require ) {
       },
       drag: function( e ) {
         // new y-coordinate
-        pHMeterModel.move( self.globalToParentPoint( e.pointer.point ).y - clickYOffset );
+        pHMeter.move( self.globalToParentPoint( e.pointer.point ).y - clickYOffset );
       }
     } ) );
 
-    // add observers
-    pHMeterModel.locationProperty.link( function( location ) {
+    var updateText = function() {
+      textNode.text = pHMeter.inSolution() ? formatText( pHMeter.pHProperty.value ) : formatText( null );
+    };
+    pHMeter.pHProperty.link( updateText.bind( this ) );
+    pHMeter.locationProperty.link( updateText.bind( this ) );
+
+    pHMeter.locationProperty.link( function( location ) {
       self.translation = location;
     } );
 
-    pHMeterModel.textVisibileProperty.link( function( visible ) {
-      self.pHText.setVisible( visible );
-    } );
-
-    pHMeterModel.pHProperty.link( function( pH ) {
-      self.pHText.setText( Util.toFixed( pH, 2 ) );
-    } );
-
-    pHMeterModel.visibleProperty.link( function( isVisible ) {
-      self.setVisible( isVisible );
+    pHMeter.visibleProperty.link( function( visible ) {
+      self.visible = visible;
     } );
   }
 
