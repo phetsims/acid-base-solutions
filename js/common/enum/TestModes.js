@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Possible test modes in 'Acid-Base Solutions' sim.
+ * Possible choices in the 'Tests' control panel.
  *
  * @author Andrey Zelenkov (Mlearner)
  */

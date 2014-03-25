@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Possible view modes in 'Acid-Base Solutions' sim.
+ * Possible choices in the 'Views' control panel.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
