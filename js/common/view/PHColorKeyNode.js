@@ -46,8 +46,12 @@ define( function( require ) {
   var CHIP_HEIGHT = 28;
   var CHIP_X_SPACING = 1;
 
-  //TODO decouple from pHPaperModel
-  function PHColorKeyNode( pHPaperModel, options ) {
+  /**
+   * @param {Property<Boolean>} visibleProperty
+   * @param {*} options any Node options
+   * @constructor
+   */
+  function PHColorKeyNode( visibleProperty, options ) {
 
     var self = this;
     Node.call( this );
@@ -61,8 +65,8 @@ define( function( require ) {
       this.addChild( new Text( i.toString(), {font: FONT_SMALL, centerX: (CHIP_WIDTH + CHIP_X_SPACING) * (i + 0.5), centerY: 46} ) );
     }
 
-    pHPaperModel.visibleProperty.link( function( visible ) {
-      self.setVisible( visible );
+    visibleProperty.link( function( visible ) {
+      self.visible = visible;
     } );
 
     this.mutate( options );
