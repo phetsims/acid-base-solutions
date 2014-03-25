@@ -42,7 +42,7 @@ define( function( require ) {
     // visibility
     this.visibleProperty = new Property( testModeProperty.value === TestModes.PH_PAPER );
 
-    // height of indicator
+    // height of indicator, the portion of the paper that changes color when dipped in solution
     this.indicatorHeightProperty = new Property( 0 );
 
     testModeProperty.link( function( testMode ) {
@@ -51,11 +51,11 @@ define( function( require ) {
 
     solutionTypeProperty.link( function() {
       self.indicatorHeightProperty.value = 0; // clear the indicator color from the paper
-      self.setIndicatorHeight();
+      self.updateIndicatorHeight();
     } );
 
     this.locationProperty.link( function() {
-      self.setIndicatorHeight();
+      self.updateIndicatorHeight();
     } );
   }
 
@@ -74,7 +74,11 @@ define( function( require ) {
         Util.clamp( v.y, this.dragBounds.minY, this.dragBounds.maxY ) );
     },
 
-    setIndicatorHeight: function() {
+    /**
+     * Updates the height of the indicator. The indicator height only increases, since we want the
+     * indicator color to be shown on the paper when it is dipped into solution and pulled out.
+     */
+    updateIndicatorHeight: function() {
       if ( this.beaker.containsPoint( this.locationProperty.value ) ) {
         this.indicatorHeightProperty.value =
         Util.clamp( this.locationProperty.value.y - this.beaker.top + 5, this.indicatorHeightProperty.value, Constants.PH_PAPER_SIZE.height );
