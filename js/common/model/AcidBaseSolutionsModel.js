@@ -19,7 +19,6 @@ define( function( require ) {
     MagnifierModel = require( 'ACID_BASE_SOLUTIONS/model/MagnifierModel' ),
     ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
     TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' ),
-    ScreenView = require( 'JOIST/ScreenView' ),
     Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
 
   /**
