@@ -8,7 +8,7 @@
  */
 
 define( function( require ) {
-  "use strict";
+  'use strict';
 
   // imports
   var BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );

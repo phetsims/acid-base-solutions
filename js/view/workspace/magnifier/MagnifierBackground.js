@@ -8,7 +8,7 @@
  */
 
 define( function( require ) {
-  "use strict";
+  'use strict';
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
