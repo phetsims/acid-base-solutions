@@ -11,27 +11,32 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var Property = require( 'AXON/Property' ),
-    TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' ),
-    Vector2 = require( 'DOT/Vector2' ),
-    Range = require( 'DOT/Range' ),
-    Util = require( 'DOT/Util' );
+  var Property = require( 'AXON/Property' );
+  var Range = require( 'DOT/Range' );
+  var TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' );
+  var Util = require( 'DOT/Util' );
+  var Vector2 = require( 'DOT/Vector2' );
 
+  /**
+   * @param {Beaker} beaker
+   * @param {Property<Number>} pHProperty
+   * @param {Property<TestsMode>} testModeProperty
+   * @constructor
+   */
   function PHMeter( beaker, pHProperty, testModeProperty ) {
+
     var self = this;
 
     this.beaker = beaker;
-
-    // location, at tip of probe
-    this.locationProperty = new Property( beaker.location.plusXY( beaker.size.width / 2 - 85, -beaker.size.height - 5 ) );
-
-    // drag range (y coordinate)
-    this.dragRange = new Range( this.locationProperty.value.y - 10, this.locationProperty.value.y + 75 );
-
-    // pH property
     this.pHProperty = pHProperty;
 
-    // visibility of pH meter
+    // drag range (y coordinate)
+    this.dragRange = new Range( beaker.top - 15, beaker.top + 75 );
+
+    // location, at tip of probe
+    this.locationProperty = new Property( new Vector2( beaker.right - 85, beaker.top - 5 ) );
+
+    // visibility
     this.visibleProperty = new Property( testModeProperty.value === TestModes.PH_METER );
 
     testModeProperty.link( function( testMode ) {

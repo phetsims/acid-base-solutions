@@ -29,15 +29,13 @@ define( function( require ) {
     var self = this;
 
     this.beaker = beaker;
+    this.pHProperty = pHProperty;
 
     // drag range
     this.dragBounds = new Bounds2( beaker.left + 20, beaker.top - 20, beaker.right - 20, beaker.bottom - 20 );
 
     // location
     this.locationProperty = new Property( new Vector2( beaker.right - 60, beaker.top - 10 ) );
-
-    // pH property
-    this.pHProperty = pHProperty;
 
     // visibility
     this.visibleProperty = new Property( testModeProperty.value === TestModes.PH_PAPER );
