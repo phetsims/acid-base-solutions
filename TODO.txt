@@ -3,3 +3,6 @@ TODO list for acid-base-solutions
 - fix 'Rest All' for solutions, their reset function is shown as undefined in AcidBaseSolutionModel.reset
 - #5 delete stuff under view/workspace/magnifier when direct-to-Canvas version is completed
 - replace solutionTypeProperty with solutionProperty
+
+DESIGN
+- move pH values above color key?

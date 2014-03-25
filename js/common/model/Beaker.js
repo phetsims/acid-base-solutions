@@ -25,9 +25,14 @@ define( function( require ) {
 
     this.size = options.size;
     this.location = options.location;
-    this.bounds = new Bounds2(
-      this.location.x - this.size.width / 2, this.location.y - this.size.height,
-      this.location.x + this.size.width / 2, this.location.y );
+
+    // convenience coordinates
+    this.left = this.location.x - this.size.width / 2;
+    this.right = this.left + this.size.width;
+    this.bottom = this.location.y;
+    this.top = this.bottom - this.size.height;
+
+    this.bounds = new Bounds2( this.left, this.top, this.right, this.bottom );
   }
 
   Beaker.prototype = {
