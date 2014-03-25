@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var SolutionTypes = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionTypes' ),
+  var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' ),
     ConcentrationSliderModel = require( 'ACID_BASE_SOLUTIONS/model/ConcentrationSliderModel' ),
     StrengthSliderModel = require( 'ACID_BASE_SOLUTIONS/model/StrengthSliderModel' );
 
@@ -17,7 +17,7 @@ define( function( require ) {
   var solutionString = require( 'string!ACID_BASE_SOLUTIONS/solution' );
 
   /**
-   * @param {Property<SolutionTypes>} solutionTypeProperty
+   * @param {Property<SolutionType>} solutionTypeProperty
    * @param {Property<Number>} concentrationProperty
    * @param {Property<Number>} strengthProperty
    * @param {Property<Boolean>} isAcidProperty
@@ -45,16 +45,16 @@ define( function( require ) {
         isWeak = isWeakProperty.value;
 
       if ( isWeak && isAcid ) {
-        solutionTypeProperty.value = SolutionTypes.WEAK_ACID;
+        solutionTypeProperty.value = SolutionType.WEAK_ACID;
       }
       else if ( isWeak && !isAcid ) {
-        solutionTypeProperty.value = SolutionTypes.WEAK_BASE;
+        solutionTypeProperty.value = SolutionType.WEAK_BASE;
       }
       else if ( !isWeak && isAcid ) {
-        solutionTypeProperty.value = SolutionTypes.STRONG_ACID;
+        solutionTypeProperty.value = SolutionType.STRONG_ACID;
       }
       else if ( !isWeak && !isAcid ) {
-        solutionTypeProperty.value = SolutionTypes.STRONG_BASE;
+        solutionTypeProperty.value = SolutionType.STRONG_BASE;
       }
     };
 

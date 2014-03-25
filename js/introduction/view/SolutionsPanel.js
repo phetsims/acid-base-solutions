@@ -20,7 +20,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var MOHMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/MOHMolecule' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var SolutionTypes = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionTypes' );
+  var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -52,7 +52,7 @@ define( function( require ) {
     }, options );
 
     // Water
-    var waterRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionTypes.WATER,
+    var waterRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WATER,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
@@ -62,7 +62,7 @@ define( function( require ) {
       } ), RADIO_BUTTON_OPTIONS );
 
     // Strong Acid
-    var strongAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionTypes.STRONG_ACID,
+    var strongAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_ACID,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
@@ -72,7 +72,7 @@ define( function( require ) {
       } ), RADIO_BUTTON_OPTIONS );
 
     // Weak Acid
-    var weakAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionTypes.WEAK_ACID,
+    var weakAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_ACID,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
@@ -82,7 +82,7 @@ define( function( require ) {
       } ), RADIO_BUTTON_OPTIONS );
 
     // Strong Base
-    var strongBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionTypes.STRONG_BASE,
+    var strongBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_BASE,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
@@ -92,7 +92,7 @@ define( function( require ) {
       } ), RADIO_BUTTON_OPTIONS );
 
     // Weak Base
-    var weakBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionTypes.WEAK_BASE,
+    var weakBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_BASE,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [

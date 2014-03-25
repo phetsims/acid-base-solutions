@@ -20,7 +20,7 @@ define( function( require ) {
     ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
 
   /**
-   * @param {SolutionTypes} solutionType
+   * @param {SolutionType} solutionType
    * @param {Array} molecules see this.molecules below
    * @param {*} defaultValues initial values for solution properties
    * @constructor

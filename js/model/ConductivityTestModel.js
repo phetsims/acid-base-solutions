@@ -10,7 +10,7 @@ define( function( require ) {
 
   // imports
   var Property = require( 'AXON/Property' ),
-    TestModes = require( 'ACID_BASE_SOLUTIONS/common/enum/TestModes' );
+    TestMode = require( 'ACID_BASE_SOLUTIONS/common/enum/TestMode' );
 
   // constants
   var WIRES_INITIAL_Y = 60,
@@ -27,7 +27,7 @@ define( function( require ) {
 
   /**
    * @param {Beaker} beaker
-   * @param {Property<TestModes>} testModeProperty
+   * @param {Property<TestMode>} testModeProperty
    * @param {Property<Number>} brightnessProperty
    * @constructor
    */
@@ -47,7 +47,7 @@ define( function( require ) {
     this.negativeProbeYProperty = new Property( WIRE_OPTIONS.negative.end.y );
 
     // visibility of conductivity test
-    this.visibleProperty = new Property( testModeProperty.value === TestModes.CONDUCTIVITY );
+    this.visibleProperty = new Property( testModeProperty.value === TestMode.CONDUCTIVITY );
 
     // property for indicating closing of electric circuit
     this.isClosedProperty = new Property( false );
@@ -56,7 +56,7 @@ define( function( require ) {
     this.brightnessProperty = brightnessProperty;
 
     testModeProperty.link( function( testMode ) {
-      self.visibleProperty.value = (testMode === TestModes.CONDUCTIVITY);
+      self.visibleProperty.value = (testMode === TestMode.CONDUCTIVITY);
     } );
 
     // if both probes in water: isClosedProperty.value === true

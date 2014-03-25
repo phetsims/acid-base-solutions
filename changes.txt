@@ -1,3 +1,4 @@
+3/25/14 #70 use singular names for enums
 3/25/14 #62 rename ABSColors to MoleculeColors, since there's a dependency here in AqueousSolution.molecules
 3/25/14 remove odd color computation for H2O
 3/25/14 #62 move MoleculeColors to common/ABSColors

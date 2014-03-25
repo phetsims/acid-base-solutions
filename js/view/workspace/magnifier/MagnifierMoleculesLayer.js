@@ -13,7 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Util = require( 'DOT/Util' ),
-    ViewModes = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewModes' );
+    ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );
 
   // molecules. The field names here must correspond to the 'key' fields in AqueousSolution.molecules.
   var MoleculesConstructors = {
@@ -35,7 +35,7 @@ define( function( require ) {
 
   /**
    * @param {MagnifierModel} magnifierModel
-   * @param {SolutionTypes} layerSolutionType solution type for this layer
+   * @param {SolutionType} layerSolutionType solution type for this layer
    * @param {Property<Number>} property the property that determines the molecule's concentration
    * @param molecule the molecule description
    * @param radius the molecule's radius
@@ -90,7 +90,7 @@ define( function( require ) {
       i;
 
     // update visibility of layer
-    this.setVisible( magnifierModel.solutionTypeProperty.value === layerSolutionType && magnifierModel.viewModeProperty.value === ViewModes.MOLECULES );
+    this.setVisible( magnifierModel.solutionTypeProperty.value === layerSolutionType && magnifierModel.viewModeProperty.value === ViewMode.MOLECULES );
 
     // update number of molecules only when layer is visible
     if ( this.visible ) {

@@ -17,13 +17,13 @@ define( function( require ) {
     Beaker = require( 'ACID_BASE_SOLUTIONS/common/model/Beaker' ),
     FormulaModel = require( 'ACID_BASE_SOLUTIONS/model/FormulaModel' ),
     MagnifierModel = require( 'ACID_BASE_SOLUTIONS/model/MagnifierModel' ),
-    ViewModes = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewModes' ),
-    TestModes = require( 'ACID_BASE_SOLUTIONS/common/enum/TestModes' ),
+    ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' ),
+    TestMode = require( 'ACID_BASE_SOLUTIONS/common/enum/TestMode' ),
     ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
 
   /**
    * @param {Array<AqueousSolution>} solutions
-   * @param {SolutionTypes} defaultSolutionType
+   * @param {SolutionType} defaultSolutionType
    * @constructor
    */
   function AcidBaseSolutionsModel( solutions, defaultSolutionType ) {
@@ -38,8 +38,8 @@ define( function( require ) {
 
     PropertySet.call( this, {
       solutionType: defaultSolutionType, // solution's type
-      testMode: TestModes.PH_METER, // test mode
-      viewMode: ViewModes.MOLECULES, // view mode
+      testMode: TestMode.PH_METER, // test mode
+      viewMode: ViewMode.MOLECULES, // view mode
       solventVisible: false, // solvent visibility
       pH: this.solutions[defaultSolutionType].pH, // pH level of product
       brightness: pHToBrightness( this.solutions[defaultSolutionType].pH ) // brightness value

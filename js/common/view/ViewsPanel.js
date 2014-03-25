@@ -23,7 +23,7 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-  var ViewModes = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewModes' );
+  var ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );
 
   // strings
   var graphString = require( 'string!ACID_BASE_SOLUTIONS/graph' );
@@ -54,7 +54,7 @@ define( function( require ) {
   };
 
   /**
-   * @param {Property<ViewModes>} viewModeProperty
+   * @param {Property<ViewMode>} viewModeProperty
    * @param {Property<Boolean>} solventVisibleProperty
    * @param {*} options
    * @constructor
@@ -67,7 +67,7 @@ define( function( require ) {
     }, options );
 
     // Molecules
-    var moleculesRadioButton = new AquaRadioButton( viewModeProperty, ViewModes.MOLECULES,
+    var moleculesRadioButton = new AquaRadioButton( viewModeProperty, ViewMode.MOLECULES,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
@@ -90,7 +90,7 @@ define( function( require ) {
     var solventCheckBox = new CheckBox( solventLabel, solventVisibleProperty, CHECK_BOX_OPTIONS );
 
     // Graph
-    var graphRadioButton = new AquaRadioButton( viewModeProperty, ViewModes.GRAPH,
+    var graphRadioButton = new AquaRadioButton( viewModeProperty, ViewMode.GRAPH,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
@@ -100,7 +100,7 @@ define( function( require ) {
       } ), RADIO_BUTTON_OPTIONS );
 
     // Hide Views
-    var hideViewsRadioButton = new AquaRadioButton( viewModeProperty, ViewModes.HIDE_VIEWS,
+    var hideViewsRadioButton = new AquaRadioButton( viewModeProperty, ViewMode.HIDE_VIEWS,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
@@ -118,7 +118,7 @@ define( function( require ) {
 
     // disable the 'Solvent' check box unless 'Molecules' is selected
     viewModeProperty.link( function( viewMode ) {
-      solventCheckBox.enabled = ( viewMode === ViewModes.MOLECULES );
+      solventCheckBox.enabled = ( viewMode === ViewMode.MOLECULES );
     } );
 
     VBox.call( this, options );

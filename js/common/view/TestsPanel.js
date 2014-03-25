@@ -13,7 +13,7 @@ define( function( require ) {
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var TestModes = require( 'ACID_BASE_SOLUTIONS/common/enum/TestModes' );
+  var TestMode = require( 'ACID_BASE_SOLUTIONS/common/enum/TestMode' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   // images
@@ -26,7 +26,7 @@ define( function( require ) {
   var RADIO_BUTTON_OPTIONS = { radius: 7 };
 
   /**
-   * @param {Property<TestModes>} testModeProperty
+   * @param {Property<TestMode>} testModeProperty
    * @param {*} options
    * @constructor
    */
@@ -38,9 +38,9 @@ define( function( require ) {
     }, options );
 
     options.children = [
-      new AquaRadioButton( testModeProperty, TestModes.PH_METER, new Image( pHMeterImage, ICON_OPTIONS ), RADIO_BUTTON_OPTIONS ),
-      new AquaRadioButton( testModeProperty, TestModes.PH_PAPER, new Image( pHPaperImage, ICON_OPTIONS ), RADIO_BUTTON_OPTIONS ),
-      new AquaRadioButton( testModeProperty, TestModes.CONDUCTIVITY, new Image( lightBulbImage, ICON_OPTIONS ), RADIO_BUTTON_OPTIONS )
+      new AquaRadioButton( testModeProperty, TestMode.PH_METER, new Image( pHMeterImage, ICON_OPTIONS ), RADIO_BUTTON_OPTIONS ),
+      new AquaRadioButton( testModeProperty, TestMode.PH_PAPER, new Image( pHPaperImage, ICON_OPTIONS ), RADIO_BUTTON_OPTIONS ),
+      new AquaRadioButton( testModeProperty, TestMode.CONDUCTIVITY, new Image( lightBulbImage, ICON_OPTIONS ), RADIO_BUTTON_OPTIONS )
     ];
 
     VBox.call( this, options );

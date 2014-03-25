@@ -12,14 +12,14 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     AcidBaseSolutionsModel = require( 'ACID_BASE_SOLUTIONS/common/model/AcidBaseSolutionsModel' ),
     BarChartModel = require( 'ACID_BASE_SOLUTIONS/model/BarChartModel' ),
-    SolutionTypes = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionTypes' ),
+    SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' ),
     StrongAcidSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/StrongAcidSolution' ),
     WeakAcidSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/WeakAcidSolution' ),
     StrongBaseSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/StrongBaseSolution' ),
     WeakBaseSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/WeakBaseSolution' );
 
   // constants
-  var DEFAULT_SOLUTION_TYPE = SolutionTypes.WEAK_ACID;
+  var DEFAULT_SOLUTION_TYPE = SolutionType.WEAK_ACID;
 
   function CustomSolutionModel() {
     var self = this,

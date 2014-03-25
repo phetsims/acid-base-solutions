@@ -12,7 +12,7 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    SolutionTypes = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionTypes' ),
+    SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' ),
     WaterFormula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/WaterFormula' ),
     AcidFormula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/AcidFormula' ),
     StrongBaseFormula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/StrongBaseFormula' ),
@@ -28,11 +28,11 @@ define( function( require ) {
       formulas = {};
     Node.call( this, {pickable: false} );
 
-    formulas[SolutionTypes.WATER] = new WaterFormula();
-    formulas[SolutionTypes.STRONG_ACID] = new AcidFormula( false );
-    formulas[SolutionTypes.WEAK_ACID] = new AcidFormula( true );
-    formulas[SolutionTypes.STRONG_BASE] = new StrongBaseFormula();
-    formulas[SolutionTypes.WEAK_BASE] = new WeakBaseFormula();
+    formulas[SolutionType.WATER] = new WaterFormula();
+    formulas[SolutionType.STRONG_ACID] = new AcidFormula( false );
+    formulas[SolutionType.WEAK_ACID] = new AcidFormula( true );
+    formulas[SolutionType.STRONG_BASE] = new StrongBaseFormula();
+    formulas[SolutionType.WEAK_BASE] = new WeakBaseFormula();
 
     // find max width of formulas
     maxWidth = getMaxWidth( formulas );

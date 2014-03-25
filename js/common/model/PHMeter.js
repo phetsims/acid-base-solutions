@@ -12,7 +12,7 @@ define( function( require ) {
   // imports
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
-  var TestModes = require( 'ACID_BASE_SOLUTIONS/common/enum/TestModes' );
+  var TestMode = require( 'ACID_BASE_SOLUTIONS/common/enum/TestMode' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -36,10 +36,10 @@ define( function( require ) {
     this.locationProperty = new Property( new Vector2( beaker.right - 85, beaker.top - 5 ) );
 
     // visibility
-    this.visibleProperty = new Property( testModeProperty.value === TestModes.PH_METER );
+    this.visibleProperty = new Property( testModeProperty.value === TestMode.PH_METER );
 
     testModeProperty.link( function( testMode ) {
-      self.visibleProperty.value = ( testMode === TestModes.PH_METER );
+      self.visibleProperty.value = ( testMode === TestMode.PH_METER );
     } );
   }
 

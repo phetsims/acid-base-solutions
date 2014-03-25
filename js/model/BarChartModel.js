@@ -10,15 +10,15 @@ define( function( require ) {
 
   // imports
   var Property = require( 'AXON/Property' ),
-    ViewModes = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewModes' ),
-    TestModes = require( 'ACID_BASE_SOLUTIONS/common/enum/TestModes' );
+    ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' ),
+    TestMode = require( 'ACID_BASE_SOLUTIONS/common/enum/TestMode' );
 
   /**
    * @param {Beaker} beaker
    * @param {Array<AqueousSolution>} solutions
-   * @param {Property<SolutionTypes>} solutionTypeProperty
-   * @param {Property<ViewModes>} viewModeProperty
-   * @param {Property<TestModes>} testModeProperty
+   * @param {Property<SolutionType>} solutionTypeProperty
+   * @param {Property<ViewMode>} viewModeProperty
+   * @param {Property<TestMode>} testModeProperty
    * @param {Property<Number>} concentrationProperty optional, provided for custom solutions
    * @param {Property<Number>} strengthProperty optional, provided for custom solutions
    * @constructor
@@ -63,7 +63,7 @@ define( function( require ) {
   BarChartModel.prototype = {
 
     findVisibility: function() {
-      return (this.viewModeProperty.value === ViewModes.GRAPH && this.testModeProperty.value !== TestModes.CONDUCTIVITY);
+      return (this.viewModeProperty.value === ViewMode.GRAPH && this.testModeProperty.value !== TestMode.CONDUCTIVITY);
     },
 
     setVisibility: function() {

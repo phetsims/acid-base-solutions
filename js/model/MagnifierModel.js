@@ -9,16 +9,16 @@ define( function( require ) {
   'use strict';
   // imports
   var Property = require( 'AXON/Property' ),
-    ViewModes = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewModes' ),
-    TestModes = require( 'ACID_BASE_SOLUTIONS/common/enum/TestModes' );
+    ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' ),
+    TestMode = require( 'ACID_BASE_SOLUTIONS/common/enum/TestMode' );
 
   /**
    * @param {Beaker} beaker
    * @param {Array<AqueousSolution>} solutions
-   * @param {Property<SolutionTypes>} solutionTypeProperty
+   * @param {Property<SolutionType>} solutionTypeProperty
    * @param {Property<Boolean>} solventVisibleProperty
-   * @param {Property<ViewModes>} viewModeProperty
-   * @param {Property<TestModes>} testModeProperty
+   * @param {Property<ViewMode>} viewModeProperty
+   * @param {Property<TestMode>} testModeProperty
    * @constructor
    */
   function MagnifierModel( beaker, solutions, solutionTypeProperty, solventVisibleProperty, viewModeProperty, testModeProperty ) {
@@ -55,7 +55,7 @@ define( function( require ) {
   MagnifierModel.prototype = {
 
     findVisibility: function() {
-      return (this.viewModeProperty.value === ViewModes.MOLECULES && this.testModeProperty.value !== TestModes.CONDUCTIVITY);
+      return (this.viewModeProperty.value === ViewMode.MOLECULES && this.testModeProperty.value !== TestMode.CONDUCTIVITY);
     },
 
     setVisibility: function() {
