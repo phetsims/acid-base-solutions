@@ -11,7 +11,7 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     PropertySet = require( 'AXON/PropertySet' ),
-    PHMeterModel = require( 'ACID_BASE_SOLUTIONS/model/PHMeterModel' ),
+    PHMeter = require( 'ACID_BASE_SOLUTIONS/common/model/PHMeter' ),
     PHPaperModel = require( 'ACID_BASE_SOLUTIONS/model/PHPaperModel' ),
     ConductivityTestModel = require( 'ACID_BASE_SOLUTIONS/model/ConductivityTestModel' ),
     Beaker = require( 'ACID_BASE_SOLUTIONS/common/model/Beaker' ),
@@ -56,7 +56,7 @@ define( function( require ) {
     this.magnifier = new MagnifierModel( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'solventVisible' ), this.property( 'viewMode' ), this.property( 'testMode' ) );
 
     // pH meter model
-    this.pHMeter = new PHMeterModel( this.beaker, this.property( 'pH' ), this.property( 'testMode' ) );
+    this.pHMeter = new PHMeter( this.beaker, this.property( 'pH' ), this.property( 'testMode' ) );
 
     // pH paper model
     this.pHPaper = new PHPaperModel( this.beaker, this.property( 'solutionType' ), this.property( 'pH' ), this.property( 'testMode' ) );

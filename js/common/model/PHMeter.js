@@ -17,7 +17,7 @@ define( function( require ) {
     Range = require( 'DOT/Range' ),
     Util = require( 'DOT/Util' );
 
-  function PHMeterModel( beaker, pHProperty, testModeProperty ) {
+  function PHMeter( beaker, pHProperty, testModeProperty ) {
     var self = this;
 
     this.beaker = beaker;
@@ -39,7 +39,7 @@ define( function( require ) {
     } );
   }
 
-  PHMeterModel.prototype = {
+  PHMeter.prototype = {
 
     reset: function() {
       this.locationProperty.reset();
@@ -57,5 +57,5 @@ define( function( require ) {
     }
   };
 
-  return PHMeterModel;
+  return PHMeter;
 } );

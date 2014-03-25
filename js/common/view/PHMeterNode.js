@@ -50,7 +50,7 @@ define( function( require ) {
   };
 
   /**
-   * @param {PHMeterModel} pHMeter
+   * @param {PHMeter} pHMeter
    * @constructor
    */
   function PHMeterNode( pHMeter ) {

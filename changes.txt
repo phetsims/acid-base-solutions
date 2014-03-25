@@ -1,3 +1,4 @@
+3/25/14 #62 move PHMeterModel to common/model/PHMeter
 3/25/14 #65 internationalize the pH meter's display
 3/25/14 #64 fix pH meter model so that location is at the probe's tip
 3/24/14 #5 skeleton of MagnifierNode, which will draw molecules directly to Canvas
