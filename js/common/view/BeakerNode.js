@@ -10,17 +10,17 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var inherit = require( 'PHET_CORE/inherit' ),
-    Node = require( 'SCENERY/nodes/Node' ),
-    Path = require( 'SCENERY/nodes/Path' ),
-    PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    Shape = require( 'KITE/Shape' ),
-    StringUtils = require( 'PHETCOMMON/util/StringUtils' ),
-    Text = require( 'SCENERY/nodes/Text' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var Path = require( 'SCENERY/nodes/Path' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Shape = require( 'KITE/Shape' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var pattern_0value_1units = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1units' ),
-    units_litersString = require( 'string!ACID_BASE_SOLUTIONS/liters' );
+  var pattern_0value_1units = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1units' );
+  var units_litersString = require( 'string!ACID_BASE_SOLUTIONS/liters' );
 
   // constants
   var MAJOR_TICK_LENGTH = 25,
