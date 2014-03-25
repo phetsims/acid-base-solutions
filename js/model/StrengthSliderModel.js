@@ -11,10 +11,11 @@ define( function( require ) {
   // imports
   var Property = require( 'AXON/Property' ),
     Range = require( 'DOT/Range' ),
+    ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' ),
     Util = require( 'DOT/Util' );
 
   // constants
-  var WEAK_STRENGTH_RANGE = require( 'model/Constants/Constants' ).WEAK_STRENGTH_RANGE;
+  var WEAK_STRENGTH_RANGE = ABSConstants.WEAK_STRENGTH_RANGE;
 
   /**
    * @param {Property<Number>} strengthProperty

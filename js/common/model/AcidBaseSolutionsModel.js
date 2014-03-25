@@ -19,7 +19,7 @@ define( function( require ) {
     MagnifierModel = require( 'ACID_BASE_SOLUTIONS/model/MagnifierModel' ),
     ViewModes = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewModes' ),
     TestModes = require( 'ACID_BASE_SOLUTIONS/common/enum/TestModes' ),
-    Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
+    ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
 
   /**
    * @param {Array<AqueousSolution>} solutions
@@ -81,10 +81,10 @@ define( function( require ) {
 
   // private methods
   var pHToBrightness = function( pH ) {
-    var NEUTRAL_PH = Constants.NEUTRAL_PH,
-      NEUTRAL_BRIGHTNESS = Constants.NEUTRAL_BRIGHTNESS;
+    var NEUTRAL_PH = ABSConstants.NEUTRAL_PH,
+      NEUTRAL_BRIGHTNESS = ABSConstants.NEUTRAL_BRIGHTNESS;
 
-    return NEUTRAL_BRIGHTNESS + ( 1 - NEUTRAL_BRIGHTNESS ) * (pH < NEUTRAL_PH ? ( NEUTRAL_PH - pH ) / ( NEUTRAL_PH - Constants.MIN_PH ) : ( pH - NEUTRAL_PH ) / ( Constants.MAX_PH - NEUTRAL_PH ) );
+    return NEUTRAL_BRIGHTNESS + ( 1 - NEUTRAL_BRIGHTNESS ) * (pH < NEUTRAL_PH ? ( NEUTRAL_PH - pH ) / ( NEUTRAL_PH - ABSConstants.MIN_PH ) : ( pH - NEUTRAL_PH ) / ( ABSConstants.MAX_PH - NEUTRAL_PH ) );
   };
 
   return inherit( PropertySet, AcidBaseSolutionsModel, {

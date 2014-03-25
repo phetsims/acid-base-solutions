@@ -11,7 +11,7 @@ define( function( require ) {
 
   // imports
   var Circle = require( 'SCENERY/nodes/Circle' );
-  var Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
+  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PHColorKeyNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHColorKeyNode' );
@@ -28,8 +28,8 @@ define( function( require ) {
     Node.call( this );
 
     // blank paper
-    var width = Constants.PH_PAPER_SIZE.width;
-    var height = Constants.PH_PAPER_SIZE.height;
+    var width = ABSConstants.PH_PAPER_SIZE.width;
+    var height = ABSConstants.PH_PAPER_SIZE.height;
     var paperNode = new Rectangle( 0, 0, width, height, { cursor: 'pointer', fill: PAPER_COLOR, stroke: 'rgb(150, 150, 150)', lineWidth: 0.5 } );
 
     // portion of the paper that changes color

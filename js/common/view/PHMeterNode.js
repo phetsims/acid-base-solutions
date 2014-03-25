@@ -11,7 +11,7 @@ define( function( require ) {
 
   // imports
   var Circle = require( 'SCENERY/nodes/Circle' );
-  var Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
+  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
@@ -77,7 +77,7 @@ define( function( require ) {
       { fill: 'rgb(192,192,192)', stroke: 'rgb(160,160,160)', lineWidth: 0.5 } );
 
     // text, initialized with widest value for layout
-    var textNode = new Text( formatText( Constants.MAX_PH ), {font: FONT, centerX: 34, centerY: 0} );
+    var textNode = new Text( formatText( ABSConstants.MAX_PH ), {font: FONT, centerX: 34, centerY: 0} );
 
     // background sized to fit text
     var backgroundNode = new Rectangle( 0, 0, textNode.width + ( 2 * X_MARGIN ), textNode.height + ( 2 * Y_MARGIN ), 5, 5,

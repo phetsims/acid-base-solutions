@@ -10,10 +10,11 @@ define( function( require ) {
   // imports
   var Property = require( 'AXON/Property' ),
     Range = require( 'DOT/Range' ),
+    ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' ),
     Util = require( 'DOT/Util' );
 
   // constants
-  var CONCENTRATION_RANGE = require( 'model/Constants/Constants' ).CONCENTRATION_RANGE;
+  var CONCENTRATION_RANGE = ABSConstants.CONCENTRATION_RANGE;
 
   /**
    * @param {Property<Number>} concentrationProperty

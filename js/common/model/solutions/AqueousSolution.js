@@ -17,7 +17,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     PropertySet = require( 'AXON/PropertySet' ),
     Util = require( 'DOT/Util' ),
-    Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
+    ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
 
   /**
    * @param {SolutionTypes} solutionType
@@ -41,7 +41,7 @@ define( function( require ) {
     PropertySet.call( this, {
       strength: defaultValues.strength || 0,
       // for water concentration is equal to 0, so we should use typeof checking
-      concentration: ( typeof (defaultValues.concentration) === 'undefined' ? Constants.CONCENTRATION_RANGE.defaultValue : defaultValues.concentration ),
+      concentration: ( typeof (defaultValues.concentration) === 'undefined' ? ABSConstants.CONCENTRATION_RANGE.defaultValue : defaultValues.concentration ),
       soluteConcentration: defaultValues.soluteConcentration || 0, // solute concentration
       productConcentration: defaultValues.productConcentration || 0, // product concentration
       H3OConcentration: defaultValues.H3OConcentration || 0, // H3O concentration

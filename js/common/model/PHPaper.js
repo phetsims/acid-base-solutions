@@ -10,7 +10,7 @@ define( function( require ) {
 
   // imports
   var Bounds2 = require( 'DOT/Bounds2' );
-  var Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
+  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var Property = require( 'AXON/Property' );
   var TestModes = require( 'ACID_BASE_SOLUTIONS/common/enum/TestModes' );
   var Util = require( 'DOT/Util' );
@@ -78,7 +78,7 @@ define( function( require ) {
     updateIndicatorHeight: function() {
       if ( this.beaker.containsPoint( this.locationProperty.value ) ) {
         this.indicatorHeightProperty.value =
-        Util.clamp( this.locationProperty.value.y - this.beaker.top + 5, this.indicatorHeightProperty.value, Constants.PH_PAPER_SIZE.height );
+        Util.clamp( this.locationProperty.value.y - this.beaker.top + 5, this.indicatorHeightProperty.value, ABSConstants.PH_PAPER_SIZE.height );
       }
     }
   };

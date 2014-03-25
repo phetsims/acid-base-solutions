@@ -13,7 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     SolutionTypes = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionTypes' ),
     AqueousSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/AqueousSolution' ),
-    Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
+    ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
 
   // [OH]=[H3O]
   var getOHConcentration = function( H3OConcentration ) {
@@ -21,8 +21,8 @@ define( function( require ) {
   };
 
   // constants
-  var H2O_CONCENTRATION_DEFAULT = Constants.WATER_CONCENTRATION,
-    H3O_CONCENTRATION_DEFAULT = Math.sqrt( Constants.WATER_EQUILIBRIUM_CONSTANT ),
+  var H2O_CONCENTRATION_DEFAULT = ABSConstants.WATER_CONCENTRATION,
+    H3O_CONCENTRATION_DEFAULT = Math.sqrt( ABSConstants.WATER_EQUILIBRIUM_CONSTANT ),
     OH_CONCENTRATION_DEFAULT = getOHConcentration( H3O_CONCENTRATION_DEFAULT );
 
   function WaterSolution() {
@@ -50,8 +50,8 @@ define( function( require ) {
     } );
 
     // default values
-    this.H3OConcentration = Math.sqrt( Constants.WATER_EQUILIBRIUM_CONSTANT );
-    this.H2OConcentration = Constants.WATER_CONCENTRATION;
+    this.H3OConcentration = Math.sqrt( ABSConstants.WATER_EQUILIBRIUM_CONSTANT );
+    this.H2OConcentration = ABSConstants.WATER_CONCENTRATION;
   }
 
   return inherit( AqueousSolution, WaterSolution );

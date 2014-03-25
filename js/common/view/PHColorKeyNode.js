@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
+  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -42,7 +42,7 @@ define( function( require ) {
   // constants
   var FONT_BIG = new PhetFont( 10 );
   var FONT_SMALL = new PhetFont( 8 );
-  var CHIP_WIDTH = Constants.PH_PAPER_SIZE.width;
+  var CHIP_WIDTH = ABSConstants.PH_PAPER_SIZE.width;
   var CHIP_HEIGHT = 28;
   var CHIP_X_SPACING = 1;
 
