@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Possible solution types in 'Acid-Base Solutions' sim.
+ * Possible choices in the 'Solutions' control panel.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
