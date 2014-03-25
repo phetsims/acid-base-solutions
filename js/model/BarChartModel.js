@@ -10,8 +10,8 @@ define( function( require ) {
 
   // imports
   var Property = require( 'AXON/Property' ),
-    ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
-    TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' );
+    ViewModes = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewModes' ),
+    TestModes = require( 'ACID_BASE_SOLUTIONS/common/enum/TestModes' );
 
   /**
    * @param {Beaker} beaker

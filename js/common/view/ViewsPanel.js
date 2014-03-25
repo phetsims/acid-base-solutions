@@ -23,7 +23,7 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-  var ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' );
+  var ViewModes = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewModes' );
 
   // strings
   var graphString = require( 'string!ACID_BASE_SOLUTIONS/graph' );

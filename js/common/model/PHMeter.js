@@ -12,7 +12,7 @@ define( function( require ) {
   // imports
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
-  var TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' );
+  var TestModes = require( 'ACID_BASE_SOLUTIONS/common/enum/TestModes' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 

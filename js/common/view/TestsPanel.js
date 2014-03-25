@@ -13,7 +13,7 @@ define( function( require ) {
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' );
+  var TestModes = require( 'ACID_BASE_SOLUTIONS/common/enum/TestModes' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   // images

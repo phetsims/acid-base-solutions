@@ -17,8 +17,8 @@ define( function( require ) {
     Beaker = require( 'ACID_BASE_SOLUTIONS/common/model/Beaker' ),
     FormulaModel = require( 'ACID_BASE_SOLUTIONS/model/FormulaModel' ),
     MagnifierModel = require( 'ACID_BASE_SOLUTIONS/model/MagnifierModel' ),
-    ViewModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/ViewModes' ),
-    TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' ),
+    ViewModes = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewModes' ),
+    TestModes = require( 'ACID_BASE_SOLUTIONS/common/enum/TestModes' ),
     Constants = require( 'ACID_BASE_SOLUTIONS/model/Constants/Constants' );
 
   /**

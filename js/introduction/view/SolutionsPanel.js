@@ -20,7 +20,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var MOHMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/MOHMolecule' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' );
+  var SolutionTypes = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionTypes' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var VBox = require( 'SCENERY/nodes/VBox' );

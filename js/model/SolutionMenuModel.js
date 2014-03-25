@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
+  var SolutionTypes = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionTypes' ),
     ConcentrationSliderModel = require( 'ACID_BASE_SOLUTIONS/model/ConcentrationSliderModel' ),
     StrengthSliderModel = require( 'ACID_BASE_SOLUTIONS/model/StrengthSliderModel' );
 

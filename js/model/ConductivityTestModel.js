@@ -10,7 +10,7 @@ define( function( require ) {
 
   // imports
   var Property = require( 'AXON/Property' ),
-    TestModes = require( 'ACID_BASE_SOLUTIONS/model/Constants/TestModes' );
+    TestModes = require( 'ACID_BASE_SOLUTIONS/common/enum/TestModes' );
 
   // constants
   var WIRES_INITIAL_Y = 60,

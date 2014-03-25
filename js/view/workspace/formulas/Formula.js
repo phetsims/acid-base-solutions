@@ -12,7 +12,7 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    SolutionTypes = require( 'ACID_BASE_SOLUTIONS/model/Constants/SolutionTypes' ),
+    SolutionTypes = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionTypes' ),
     WaterFormula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/WaterFormula' ),
     AcidFormula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/AcidFormula' ),
     StrongBaseFormula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/StrongBaseFormula' ),
