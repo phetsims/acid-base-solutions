@@ -9,15 +9,13 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' );
 
-  // constants
-  var COLOR_B = require( 'ACID_BASE_SOLUTIONS/model/Constants/MoleculesColors' ).B;
-
   var atomCache, getMolecule = function() {
-    return new Atom( 7, COLOR_B );
+    return new Atom( 7, ABSColors.B );
   };
 
   function BMolecule( options ) {

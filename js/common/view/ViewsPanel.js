@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var CheckBox = require( 'SUN/CheckBox' );
   var H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' );
@@ -17,7 +18,6 @@ define( function( require ) {
   var HStrut = require( 'SUN/HStrut' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MoleculeColors = require( 'model/Constants/MoleculesColors' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -46,10 +46,10 @@ define( function( require ) {
   var createGraphIcon = function() {
     return new Node( {children: [
       new Rectangle( 0, 0, 24.5, 18, {fill: 'white', stroke: 'black', lineWidth: 0.5} ),
-      new Rectangle( 2, 6, 3, 12, {fill: MoleculeColors.B} ),
-      new Rectangle( 7.5, 3, 3, 15, {fill: MoleculeColors.H2O} ),
-      new Rectangle( 13, 9, 3, 9, {fill: MoleculeColors.A} ),
-      new Rectangle( 18.5, 9, 3, 9, {fill: MoleculeColors.H3O} )
+      new Rectangle( 2, 6, 3, 12, {fill: ABSColors.B} ),
+      new Rectangle( 7.5, 3, 3, 15, {fill: ABSColors.H2O} ),
+      new Rectangle( 13, 9, 3, 9, {fill: ABSColors.A} ),
+      new Rectangle( 18.5, 9, 3, 9, {fill: ABSColors.H3O} )
     ]} );
   };
 

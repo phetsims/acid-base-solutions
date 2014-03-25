@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' ),
@@ -16,17 +17,16 @@ define( function( require ) {
     PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   // constants
-  var COLOR_MOH = require( 'ACID_BASE_SOLUTIONS/model/Constants/MoleculesColors' ).MOH, // gray
-    FONT = new PhetFont( 8 );
+  var FONT = new PhetFont( 8 );
 
   var getMolecule = function() {
     return new Node( {children: [
       // add M ion
-      new Atom( 6, COLOR_MOH, {x: 0, y: 0} ),
+      new Atom( 6, ABSColors.MOH, {x: 0, y: 0} ),
       new Text( '+', {centerX: 0, centerY: 8.5, font: FONT} ),
       // add OH ion
-      new Atom( 7, COLOR_MOH, {x: 15, y: 0} ),
-      new Atom( 4, COLOR_MOH, {x: 22, y: -4} ),
+      new Atom( 7, ABSColors.MOH, {x: 15, y: 0} ),
+      new Atom( 4, ABSColors.MOH, {x: 22, y: -4} ),
       new Text( '-', {centerX: 15, centerY: 8.5, font: FONT} )
     ]} );
   }, atomCache;
