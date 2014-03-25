@@ -46,7 +46,7 @@ define( function( require ) {
       this.visibleProperty.reset();
     },
 
-    move: function( y ) {
+    moveY: function( y ) {
       this.locationProperty.value = new Vector2( this.locationProperty.value.x,
         Util.clamp( y, this.dragRange.min, this.dragRange.max ) );  // constrain to drag bounds
     },

@@ -111,7 +111,7 @@ define( function( require ) {
       },
       drag: function( e ) {
         // new y-coordinate
-        pHMeter.move( self.globalToParentPoint( e.pointer.point ).y - clickYOffset );
+        pHMeter.moveY( self.globalToParentPoint( e.pointer.point ).y - clickYOffset );
       }
     } ) );
 
