@@ -1,16 +1,12 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Colors used through this simulation.
+ * Molecule colors.
  *
  * @author Andrey Zelenkov (Mlearner)
- * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';
-
-  // imports
-  var Color = require( 'SCENERY/util/Color' );
 
   // constants
   var GRAY_MOLECULE = 'rgb(120,120,120)';

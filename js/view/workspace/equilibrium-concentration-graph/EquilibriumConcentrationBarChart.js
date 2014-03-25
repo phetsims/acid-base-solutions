@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
+  var MoleculeColors = require( 'ACID_BASE_SOLUTIONS/common/MoleculeColors' );
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     EquilibriumConcentrationSingleBar = require( 'ACID_BASE_SOLUTIONS/view/workspace/equilibrium-concentration-graph/EquilibriumConcentrationSingleBar' ),
@@ -58,7 +58,7 @@ define( function( require ) {
           // set visibility, color, value and position of new bars
           bar.setVisible( true );
           bar.setValue( barChartModel.solutions[solutionType].property( molecules[i].concentrationPropertyName ).value );
-          bar.setFill( ABSColors[molecules[i].key] );
+          bar.setFill( MoleculeColors[molecules[i].key] );
           bar.setTranslation( (i + 0.75 + (4 - numberOfMolecules) / 2) * BAR_CHART_WIDTH / 4, BAR_CHART_HEIGHT );
         }
         else {
