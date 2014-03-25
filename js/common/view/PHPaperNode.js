@@ -4,8 +4,8 @@
  * Visual representation for pH paper in the 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
-
 define( function( require ) {
   'use strict';
 

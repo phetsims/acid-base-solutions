@@ -5,7 +5,6 @@
  *
  * @author Andrey Zelenkov (Mlearner)
  */
-
 define( function() {
   'use strict';
 

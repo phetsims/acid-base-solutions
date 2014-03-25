@@ -6,14 +6,13 @@
  *
  * @author Andrey Zelenkov (Mlearner)
  */
-
 define( function( require ) {
   'use strict';
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    SubSupText  = require( 'SCENERY_PHET/SubSupText' ),
+    SubSupText = require( 'SCENERY_PHET/SubSupText' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     StringUtils = require( 'PHETCOMMON/util/StringUtils' ),
@@ -50,7 +49,8 @@ define( function( require ) {
       // set bar height
       if ( isFinite( barHeight ) ) {
         this._rectangle.setRectHeight( barHeight );
-      } else {
+      }
+      else {
         this._rectangle.setRectHeight( 0 );
       }
 

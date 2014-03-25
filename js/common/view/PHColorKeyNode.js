@@ -4,8 +4,8 @@
  * pH color key, a set of color 'chips' for pH values.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
-
 define( function( require ) {
   'use strict';
 

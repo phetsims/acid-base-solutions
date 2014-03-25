@@ -6,7 +6,6 @@
  *
  * @author Andrey Zelenkov (Mlearner)
  */
-
 require.config( {
 
   deps: ['acid-base-solutions-main'],

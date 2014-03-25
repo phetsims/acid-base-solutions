@@ -6,7 +6,6 @@
  *
  * @author Andrey Zelenkov (Mlearner)
  */
-
 define( function( require ) {
   'use strict';
 
@@ -17,9 +16,9 @@ define( function( require ) {
 
   // constants
   var CONTROL_POINT = {
-      positive: {x: 12.5, y: -50},
-      negative: {x: -12.5, y: -50}
-    };
+    positive: {x: 12.5, y: -50},
+    negative: {x: -12.5, y: -50}
+  };
 
   function ConductivityTestWire( type, startX, startY, endX, endY ) {
     Path.call( this );

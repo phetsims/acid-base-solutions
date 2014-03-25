@@ -6,7 +6,6 @@
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
  */
-
 define( function( require ) {
   'use strict';
 
@@ -47,7 +46,7 @@ define( function( require ) {
         magnifierNode,
         graphNode
       ]
-    });
+    } );
     this.addChild( rootNode );
   }
 
