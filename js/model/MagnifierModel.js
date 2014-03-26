@@ -10,7 +10,7 @@ define( function( require ) {
   // imports
   var Property = require( 'AXON/Property' ),
     ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' ),
-    TestMode = require( 'ACID_BASE_SOLUTIONS/common/enum/TestMode' );
+    ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
 
   /**
    * @param {Beaker} beaker
@@ -18,10 +18,10 @@ define( function( require ) {
    * @param {Property<SolutionType>} solutionTypeProperty
    * @param {Property<Boolean>} solventVisibleProperty
    * @param {Property<ViewMode>} viewModeProperty
-   * @param {Property<TestMode>} testModeProperty
+   * @param {Property<ToolMode>} toolModeProperty
    * @constructor
    */
-  function MagnifierModel( beaker, solutions, solutionTypeProperty, solventVisibleProperty, viewModeProperty, testModeProperty ) {
+  function MagnifierModel( beaker, solutions, solutionTypeProperty, solventVisibleProperty, viewModeProperty, toolModeProperty ) {
     // magnifier radius
     this.radius = beaker.size.height / 2.15;
 
@@ -41,7 +41,7 @@ define( function( require ) {
     this.viewModeProperty = viewModeProperty;
 
     // test mode property
-    this.testModeProperty = testModeProperty;
+    this.toolModeProperty = toolModeProperty;
 
     // visibility of magnifier
     this.visibleProperty = new Property( this.findVisibility() );
@@ -49,13 +49,13 @@ define( function( require ) {
     // add observers
     var setVisibilityBinded = this.setVisibility.bind( this );
     viewModeProperty.link( setVisibilityBinded );
-    testModeProperty.link( setVisibilityBinded );
+    toolModeProperty.link( setVisibilityBinded );
   }
 
   MagnifierModel.prototype = {
 
     findVisibility: function() {
-      return (this.viewModeProperty.value === ViewMode.MOLECULES && this.testModeProperty.value !== TestMode.CONDUCTIVITY);
+      return (this.viewModeProperty.value === ViewMode.MOLECULES && this.toolModeProperty.value !== ToolMode.CONDUCTIVITY);
     },
 
     setVisibility: function() {

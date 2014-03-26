@@ -31,7 +31,7 @@ define( function( require ) {
       SolutionType.WATER );
 
     // concentration bar chart model
-    this.barChart = new BarChartModel( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'viewMode' ), this.property( 'testMode' ) );
+    this.barChart = new BarChartModel( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'viewMode' ), this.property( 'toolMode' ) );
   }
 
   return inherit( AcidBaseSolutionsModel, IntroductionModel );

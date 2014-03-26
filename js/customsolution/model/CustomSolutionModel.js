@@ -41,7 +41,7 @@ define( function( require ) {
     this.addProperty( 'strength', this.solutions[DEFAULT_SOLUTION_TYPE].strength ); // strength of solution
 
     // concentration bar chart model
-    this.barChart = new BarChartModel( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'viewMode' ), this.property( 'testMode' ), this.property( 'concentration' ), this.property( 'strength' ) );
+    this.barChart = new BarChartModel( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'viewMode' ), this.property( 'toolMode' ), this.property( 'concentration' ), this.property( 'strength' ) );
 
     this.property( 'solutionType' ).link( function( newSolution, prevSolution ) {
       // unsubscribe from previous solution strength and concentration property

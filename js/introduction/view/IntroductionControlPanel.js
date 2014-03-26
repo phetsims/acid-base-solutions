@@ -13,7 +13,7 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var SolutionsPanel = require( 'ACID_BASE_SOLUTIONS/introduction/view/SolutionsPanel' );
-  var TestsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/TestsPanel' );
+  var ToolsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ToolsPanel' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var ViewsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ViewsPanel' );
@@ -21,7 +21,7 @@ define( function( require ) {
 
   // strings
   var solutionsString = require( 'string!ACID_BASE_SOLUTIONS/solutions' );
-  var testsString = require( 'string!ACID_BASE_SOLUTIONS/tests' );
+  var toolsString = require( 'string!ACID_BASE_SOLUTIONS/tools' );
   var viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' );
 
   // constants
@@ -36,12 +36,12 @@ define( function( require ) {
     // titles
     var solutionsTitle = new Text( solutionsString, TITLE_OPTIONS );
     var viewsTitle = new Text( viewsString, TITLE_OPTIONS );
-    var testsTitle = new Text( testsString, TITLE_OPTIONS );
+    var toolsTitle = new Text( toolsString, TITLE_OPTIONS );
 
     // panels
     var solutionsPanel = new SolutionsPanel( model.property( 'solutionType' ) );
     var viewsPanel = new ViewsPanel( model.property( 'viewMode' ), model.property( 'solventVisible' ) );
-    var testsPanel = new TestsPanel( model.property( 'testMode' ) );
+    var toolsPanel = new ToolsPanel( model.property( 'toolMode' ) );
 
     var children = [
       solutionsTitle,
@@ -52,9 +52,9 @@ define( function( require ) {
       new VStrut( 10 ),
       viewsPanel,
       new VStrut( 20 ),
-      testsTitle,
+      toolsTitle,
       new VStrut( 10 ),
-      testsPanel
+      toolsPanel
     ];
 
     Panel.call( this, new VBox( { align: 'left', children: children } ), {

@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Possible choices in the 'Tests' control panel.
+ * Possible choices in the 'Tools' control panel.
  *
  * @author Andrey Zelenkov (Mlearner)
  */

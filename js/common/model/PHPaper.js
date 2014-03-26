@@ -12,7 +12,7 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var Property = require( 'AXON/Property' );
-  var TestMode = require( 'ACID_BASE_SOLUTIONS/common/enum/TestMode' );
+  var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -20,10 +20,10 @@ define( function( require ) {
    * @param {Beaker} beaker
    * @param {Property<SolutionType>} solutionTypeProperty
    * @param {Property<Number>} pHProperty
-   * @param {Property<TestMode>} testModeProperty
+   * @param {Property<ToolMode>} toolModeProperty
    * @constructor
    */
-  function PHPaper( beaker, solutionTypeProperty, pHProperty, testModeProperty ) {
+  function PHPaper( beaker, solutionTypeProperty, pHProperty, toolModeProperty ) {
 
     var self = this;
 
@@ -37,13 +37,13 @@ define( function( require ) {
     this.locationProperty = new Property( new Vector2( beaker.right - 60, beaker.top - 10 ) );
 
     // visibility
-    this.visibleProperty = new Property( testModeProperty.value === TestMode.PH_PAPER );
+    this.visibleProperty = new Property( toolModeProperty.value === ToolMode.PH_PAPER );
 
     // height of indicator, the portion of the paper that changes color when dipped in solution
     this.indicatorHeightProperty = new Property( 0 );
 
-    testModeProperty.link( function( testMode ) {
-      self.visibleProperty.value = (testMode === TestMode.PH_PAPER);
+    toolModeProperty.link( function( toolMode ) {
+      self.visibleProperty.value = (toolMode === ToolMode.PH_PAPER);
     } );
 
     solutionTypeProperty.link( function() {

@@ -11,19 +11,19 @@ define( function( require ) {
   // imports
   var Property = require( 'AXON/Property' ),
     ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' ),
-    TestMode = require( 'ACID_BASE_SOLUTIONS/common/enum/TestMode' );
+    ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
 
   /**
    * @param {Beaker} beaker
    * @param {Array<AqueousSolution>} solutions
    * @param {Property<SolutionType>} solutionTypeProperty
    * @param {Property<ViewMode>} viewModeProperty
-   * @param {Property<TestMode>} testModeProperty
+   * @param {Property<ToolMode>} toolModeProperty
    * @param {Property<Number>} concentrationProperty optional, provided for custom solutions
    * @param {Property<Number>} strengthProperty optional, provided for custom solutions
    * @constructor
    */
-  function BarChartModel( beaker, solutions, solutionTypeProperty, viewModeProperty, testModeProperty, concentrationProperty, strengthProperty ) {
+  function BarChartModel( beaker, solutions, solutionTypeProperty, viewModeProperty, toolModeProperty, concentrationProperty, strengthProperty ) {
     // bar chart width
     this.width = beaker.size.width / 2;
 
@@ -43,7 +43,7 @@ define( function( require ) {
     this.viewModeProperty = viewModeProperty;
 
     // test mode property
-    this.testModeProperty = testModeProperty;
+    this.toolModeProperty = toolModeProperty;
 
     // strength property
     this.strengthProperty = strengthProperty;
@@ -57,13 +57,13 @@ define( function( require ) {
     // add observers
     var setVisibilityBinded = this.setVisibility.bind( this );
     viewModeProperty.link( setVisibilityBinded );
-    testModeProperty.link( setVisibilityBinded );
+    toolModeProperty.link( setVisibilityBinded );
   }
 
   BarChartModel.prototype = {
 
     findVisibility: function() {
-      return (this.viewModeProperty.value === ViewMode.GRAPH && this.testModeProperty.value !== TestMode.CONDUCTIVITY);
+      return (this.viewModeProperty.value === ViewMode.GRAPH && this.toolModeProperty.value !== ToolMode.CONDUCTIVITY);
     },
 
     setVisibility: function() {

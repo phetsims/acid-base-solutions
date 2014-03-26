@@ -14,7 +14,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var SolutionMenuModel = require( 'ACID_BASE_SOLUTIONS/model/SolutionMenuModel' );
   var SolutionPanel = require( 'ACID_BASE_SOLUTIONS/customsolution/view/SolutionPanel' );
-  var TestsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/TestsPanel' );
+  var ToolsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ToolsPanel' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var ViewsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ViewsPanel' );
@@ -22,7 +22,7 @@ define( function( require ) {
 
   // strings
   var solutionString = require( 'string!ACID_BASE_SOLUTIONS/solution' );
-  var testsString = require( 'string!ACID_BASE_SOLUTIONS/tests' );
+  var toolsString = require( 'string!ACID_BASE_SOLUTIONS/tools' );
   var viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' );
 
   // constants
@@ -37,12 +37,12 @@ define( function( require ) {
     // titles
     var solutionTitle = new Text( solutionString, TITLE_OPTIONS );
     var viewsTitle = new Text( viewsString, TITLE_OPTIONS );
-    var testsTitle = new Text( testsString, TITLE_OPTIONS );
+    var toolsTitle = new Text( toolsString, TITLE_OPTIONS );
 
     // panels
     var solutionPanel = new SolutionPanel( new SolutionMenuModel( model.property( 'solutionType' ), model.property( 'concentration' ), model.property( 'strength' ), model.property( 'isAcid' ), model.property( 'isWeak' ) ) );
     var viewsPanel = new ViewsPanel( model.property( 'viewMode' ), model.property( 'solventVisible' ) );
-    var testsPanel = new TestsPanel( model.property( 'testMode' ) );
+    var toolsPanel = new ToolsPanel( model.property( 'toolMode' ) );
 
     var children = [
       solutionTitle,
@@ -53,9 +53,9 @@ define( function( require ) {
       new VStrut( 10 ),
       viewsPanel,
       new VStrut( 20 ),
-      testsTitle,
+      toolsTitle,
       new VStrut( 10 ),
-      testsPanel
+      toolsPanel
     ];
 
     Panel.call( this, new VBox( { align: 'left', children: children } ), {

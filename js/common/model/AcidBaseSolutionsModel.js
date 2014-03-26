@@ -18,7 +18,7 @@ define( function( require ) {
     FormulaModel = require( 'ACID_BASE_SOLUTIONS/model/FormulaModel' ),
     MagnifierModel = require( 'ACID_BASE_SOLUTIONS/model/MagnifierModel' ),
     ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' ),
-    TestMode = require( 'ACID_BASE_SOLUTIONS/common/enum/TestMode' ),
+    ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' ),
     ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
 
   /**
@@ -38,7 +38,7 @@ define( function( require ) {
 
     PropertySet.call( this, {
       solutionType: defaultSolutionType, // solution's type
-      testMode: TestMode.PH_METER, // test mode
+      toolMode: ToolMode.PH_METER, // test mode
       viewMode: ViewMode.MOLECULES, // view mode
       solventVisible: false, // solvent visibility
       pH: this.solutions[defaultSolutionType].pH, // pH level of product
@@ -52,16 +52,16 @@ define( function( require ) {
     this.formula = new FormulaModel( this.beaker, this.property( 'solutionType' ) );
 
     // magnifier model
-    this.magnifier = new MagnifierModel( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'solventVisible' ), this.property( 'viewMode' ), this.property( 'testMode' ) );
+    this.magnifier = new MagnifierModel( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'solventVisible' ), this.property( 'viewMode' ), this.property( 'toolMode' ) );
 
     // pH meter model
-    this.pHMeter = new PHMeter( this.beaker, this.property( 'pH' ), this.property( 'testMode' ) );
+    this.pHMeter = new PHMeter( this.beaker, this.property( 'pH' ), this.property( 'toolMode' ) );
 
     // pH paper model
-    this.pHPaper = new PHPaper( this.beaker, this.property( 'solutionType' ), this.property( 'pH' ), this.property( 'testMode' ) );
+    this.pHPaper = new PHPaper( this.beaker, this.property( 'solutionType' ), this.property( 'pH' ), this.property( 'toolMode' ) );
 
     // conductivity test model
-    this.conductivityTest = new ConductivityTestModel( this.beaker, this.property( 'testMode' ), this.property( 'brightness' ) );
+    this.conductivityTest = new ConductivityTestModel( this.beaker, this.property( 'toolMode' ), this.property( 'brightness' ) );
 
     // set appropriate pH
     this.property( 'solutionType' ).link( function( newSolution, prevSolution ) {
