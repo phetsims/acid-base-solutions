@@ -38,7 +38,7 @@ define( function( require ) {
 
     // controls
     var solutionsControl = new SolutionsControl( model.property( 'solutionType' ), PANEL_OPTIONS );
-    var viewsControl = new ViewsControl( model.property( 'viewMode' ), model.property( 'solventVisible' ), PANEL_OPTIONS );
+    var viewsControl = new ViewsControl( model.property( 'viewMode' ), model.property( 'toolMode' ), model.property( 'solventVisible' ), PANEL_OPTIONS );
     var toolsControl = new ToolsControl( model.property( 'toolMode' ), PANEL_OPTIONS );
 
     // panels with equal widths

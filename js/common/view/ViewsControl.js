@@ -22,6 +22,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );
 
@@ -56,11 +57,14 @@ define( function( require ) {
 
   /**
    * @param {Property<ViewMode>} viewModeProperty
+   * @param {Property<ToolMode>} toolModeProperty
    * @param {Property<Boolean>} solventVisibleProperty
    * @param {*} options
    * @constructor
    */
-  function ViewsControl( viewModeProperty, solventVisibleProperty, options ) {
+  function ViewsControl( viewModeProperty, toolModeProperty, solventVisibleProperty, options ) {
+
+    var self = this;
 
     options = _.extend( {
       titleFont: new PhetFont(),
@@ -122,12 +126,19 @@ define( function( require ) {
       hideViewsRadioButton
     ];
 
+    VBox.call( this, options );
+
     // disable the 'Solvent' check box unless 'Molecules' is selected
     viewModeProperty.link( function( viewMode ) {
       solventCheckBox.enabled = ( viewMode === ViewMode.MOLECULES );
     } );
 
-    VBox.call( this, options );
+    // disable this control when the conductivity tool is selected
+    toolModeProperty.link( function( toolMode ) {
+      var enabled = ( toolMode !== ToolMode.CONDUCTIVITY );
+      self.opacity = enabled ? 1 : 0.5;
+      self.pickable = enabled;
+    } );
   }
 
   return inherit( VBox, ViewsControl );

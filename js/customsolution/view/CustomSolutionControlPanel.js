@@ -39,7 +39,7 @@ define( function( require ) {
 
     // controls
     var solutionControl = new SolutionControl( new SolutionMenuModel( model.property( 'solutionType' ), model.property( 'concentration' ), model.property( 'strength' ), model.property( 'isAcid' ), model.property( 'isWeak' ) ), PANEL_OPTIONS );
-    var viewsControl = new ViewsControl( model.property( 'viewMode' ), model.property( 'solventVisible' ), PANEL_OPTIONS );
+    var viewsControl = new ViewsControl( model.property( 'viewMode' ), model.property( 'toolMode' ), model.property( 'solventVisible' ), PANEL_OPTIONS );
     var toolsControl = new ToolsControl( model.property( 'toolMode' ), PANEL_OPTIONS );
 
     // panels with equal widths
