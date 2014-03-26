@@ -30,7 +30,7 @@ define( function( require ) {
     this.beaker = beaker;
     this.pHProperty = pHProperty;
 
-    // drag range
+    // drag bounds
     this.dragBounds = new Bounds2( beaker.left + 20, beaker.top - 20, beaker.right - 20, beaker.bottom - 20 );
 
     // location
