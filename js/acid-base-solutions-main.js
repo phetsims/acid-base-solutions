@@ -29,7 +29,7 @@ define( function( require ) {
   var simTitleString = require( 'string!ACID_BASE_SOLUTIONS/acid-base-solutions.name' );
 
   // constants
-  var SCREEN_BACKGROUND_COLOR = 'rgb(230,230,230)';
+  var SCREEN_BACKGROUND_COLOR = 'white';
 
   var screens = [
     new Screen( introductionTitleString, new Image( introductionIcon ),
