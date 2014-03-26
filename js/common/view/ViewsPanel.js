@@ -1,5 +1,6 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
+//TODO this is not actually a Panel subtype
 /**
  * 'Views' control panel
  *

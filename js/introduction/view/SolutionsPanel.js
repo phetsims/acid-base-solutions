@@ -1,5 +1,6 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
+//TODO this is not actually a Panel subtype
 /**
  * 'Solutions' control panel, for switching between solution types.
  *

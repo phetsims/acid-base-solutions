@@ -1,5 +1,6 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
+//TODO this is not actually a Panel subtype
 /**
  * 'Solution' control panel, for controlling a custom solution.
  *
