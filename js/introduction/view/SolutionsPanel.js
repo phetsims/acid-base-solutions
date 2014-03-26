@@ -24,6 +24,7 @@ define( function( require ) {
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VStrut = require( 'SUN/VStrut' );
 
@@ -31,6 +32,7 @@ define( function( require ) {
   var pattern_0solution_1symbol = require( 'string!ACID_BASE_SOLUTIONS/pattern.0solution.1symbol' );
   var strongAcidString = require( 'string!ACID_BASE_SOLUTIONS/strongAcid' );
   var strongBaseString = require( 'string!ACID_BASE_SOLUTIONS/strongBase' );
+  var solutionsString = require( 'string!ACID_BASE_SOLUTIONS/solutions' );
   var waterString = require( 'string!ACID_BASE_SOLUTIONS/water' );
   var weakAcidString = require( 'string!ACID_BASE_SOLUTIONS/weakAcid' );
   var weakBaseString = require( 'string!ACID_BASE_SOLUTIONS/weakBase' );
@@ -48,9 +50,13 @@ define( function( require ) {
   function SolutionsPanel( solutionTypeProperty, options ) {
 
     options = _.extend( {
-      spacing: 0,
+      titleFont: new PhetFont(),
+      spacing: 4,
       align: 'left'
     }, options );
+
+    // title
+    var titleNode = new Text( solutionsString, { font: options.titleFont } );
 
     // Water
     var waterRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WATER,
@@ -102,7 +108,7 @@ define( function( require ) {
         ]
       } ), RADIO_BUTTON_OPTIONS );
 
-    options.children = [
+    var buttons = [
       waterRadioButton,
       strongAcidRadioButton,
       weakAcidRadioButton,
@@ -110,16 +116,20 @@ define( function( require ) {
       weakBaseRadioButton
     ];
 
-    // Make all controls have the same height
+    // Make all buttons have the same height
     var maxHeight = 0;
-    options.children.forEach( function( control, i ) {
-      maxHeight = Math.max( control.height, maxHeight );
+    buttons.forEach( function( button ) {
+      maxHeight = Math.max( button.height, maxHeight );
     } );
-    options.children.forEach( function( control ) {
-      //TODO this strut needs to be vertically centered
-      control.addChild( new VStrut( maxHeight ) );
+    var vStrut = new VStrut( maxHeight );
+    buttons.forEach( function( button ) {
+      var buttonCenterY = button.centerY;
+      button.addChild( vStrut );
+      vStrut.centerY = buttonCenterY;
     } );
 
+    options.children = buttons;
+    options.children.unshift( titleNode ); // prepend
     VBox.call( this, options );
   }
 

@@ -17,8 +17,15 @@ define( function( require ) {
   var InOutRadioButton = require( 'SUN/InOutRadioButton' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var Panel = require( 'SUN/Panel' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
   var VStrut = require( 'SUN/VStrut' );
+
+  // strings
+  var toolsString = require( 'string!ACID_BASE_SOLUTIONS/tools' );
 
   // images
   var lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-icon.png' );
@@ -50,8 +57,9 @@ define( function( require ) {
   function ToolsPanel( toolModeProperty, options ) {
 
     options = _.extend( {
-      spacing: 4,
-      align: 'left'
+      titleFont: new PhetFont(),
+      align: 'left',
+      spacing: 4
     }, options );
 
     var pHMeterNode = new Image( pHMeterImage, ICON_OPTIONS );
@@ -63,13 +71,18 @@ define( function( require ) {
     var minHeight = Math.max( pHMeterNode.height, Math.max( pHPaperNode.height, lightBulbNode.height ) );
 
     options.children = [
-      new InOutRadioButton( toolModeProperty, ToolMode.PH_METER, createIcon( pHMeterNode, minWidth, minHeight ), RADIO_BUTTON_OPTIONS ),
-      new InOutRadioButton( toolModeProperty, ToolMode.PH_PAPER, createIcon( pHPaperNode, minWidth, minHeight ), RADIO_BUTTON_OPTIONS ),
-      new InOutRadioButton( toolModeProperty, ToolMode.CONDUCTIVITY, createIcon( lightBulbNode, minWidth, minHeight ), RADIO_BUTTON_OPTIONS )
+      new Text( toolsString, { font: options.titleFont } ),
+      new HBox( {
+        children: [
+          new InOutRadioButton( toolModeProperty, ToolMode.PH_METER, createIcon( pHMeterNode, minWidth, minHeight ), RADIO_BUTTON_OPTIONS ),
+          new InOutRadioButton( toolModeProperty, ToolMode.PH_PAPER, createIcon( pHPaperNode, minWidth, minHeight ), RADIO_BUTTON_OPTIONS ),
+          new InOutRadioButton( toolModeProperty, ToolMode.CONDUCTIVITY, createIcon( lightBulbNode, minWidth, minHeight ), RADIO_BUTTON_OPTIONS )
+        ]
+      } )
     ];
 
-    HBox.call( this, options );
+    VBox.call( this, options );
   }
 
-  return inherit( HBox, ToolsPanel );
+  return inherit( VBox, ToolsPanel );
 } );

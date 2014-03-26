@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var HStrut = require( 'SUN/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -20,13 +21,17 @@ define( function( require ) {
   var ViewsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ViewsPanel' );
   var VStrut = require( 'SUN/VStrut' );
 
-  // strings
-  var solutionString = require( 'string!ACID_BASE_SOLUTIONS/solution' );
-  var toolsString = require( 'string!ACID_BASE_SOLUTIONS/tools' );
-  var viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' );
-
   // constants
-  var TITLE_OPTIONS = { font: new PhetFont( { size: 14, weight: 'bold' } ) };
+  var PANEL_OPTIONS = {
+    fill: 'rgb(208,212,255)',
+    titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
+    xMargin: 15,
+    yMargin: 8
+  };
+
+  var createPanel = function( node, minWidth ) {
+    return new Panel( new VBox( { children: [ new HStrut( minWidth ), node ], align: 'left', spacing: 0 } ), PANEL_OPTIONS );
+  };
 
   /**
    * @param {CustomSolutionModel} model
@@ -34,36 +39,26 @@ define( function( require ) {
    */
   function CustomSolutionControlPanel( model ) {
 
-    // titles
-    var solutionTitle = new Text( solutionString, TITLE_OPTIONS );
-    var viewsTitle = new Text( viewsString, TITLE_OPTIONS );
-    var toolsTitle = new Text( toolsString, TITLE_OPTIONS );
-
     // panels
-    var solutionPanel = new SolutionPanel( new SolutionMenuModel( model.property( 'solutionType' ), model.property( 'concentration' ), model.property( 'strength' ), model.property( 'isAcid' ), model.property( 'isWeak' ) ) );
-    var viewsPanel = new ViewsPanel( model.property( 'viewMode' ), model.property( 'solventVisible' ) );
-    var toolsPanel = new ToolsPanel( model.property( 'toolMode' ) );
+    var solutionPanel = new SolutionPanel( new SolutionMenuModel( model.property( 'solutionType' ), model.property( 'concentration' ), model.property( 'strength' ), model.property( 'isAcid' ), model.property( 'isWeak' ) ), PANEL_OPTIONS );
+    var viewsPanel = new ViewsPanel( model.property( 'viewMode' ), model.property( 'solventVisible' ), PANEL_OPTIONS );
+    var toolsPanel = new ToolsPanel( model.property( 'toolMode' ), PANEL_OPTIONS );
 
+    // panels with equal widths
+    var maxWidth = Math.max( solutionPanel.width, Math.max( viewsPanel.width, toolsPanel.width ) );
     var children = [
-      solutionTitle,
-      new VStrut( 10 ),
-      solutionPanel,
-      new VStrut( 15 ),
-      viewsTitle,
-      new VStrut( 10 ),
-      viewsPanel,
-      new VStrut( 15 ),
-      toolsTitle,
-      new VStrut( 10 ),
-      toolsPanel
+      createPanel( solutionPanel, maxWidth ),
+      createPanel( viewsPanel, maxWidth ),
+      createPanel( toolsPanel, maxWidth )
     ];
 
-    Panel.call( this, new VBox( { align: 'left', children: children } ), {
-      fill: 'rgb(208,212,255)',
-      xMargin: 15,
-      yMargin: 10
+    // stack panels vertically
+    VBox.call( this, {
+      align: 'left',
+      spacing: 5,
+      children: children
     } );
   }
 
-  return inherit( Panel, CustomSolutionControlPanel );
+  return inherit( VBox, CustomSolutionControlPanel );
 } );

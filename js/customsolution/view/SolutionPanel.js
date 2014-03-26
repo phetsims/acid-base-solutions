@@ -26,7 +26,8 @@ define( function( require ) {
     initialConcentrationString = require( 'string!ACID_BASE_SOLUTIONS/initialConcentration' ),
     strengthString = require( 'string!ACID_BASE_SOLUTIONS/strength' ),
     weakString = require( 'string!ACID_BASE_SOLUTIONS/weak' ),
-    strongString = require( 'string!ACID_BASE_SOLUTIONS/strong' );
+    strongString = require( 'string!ACID_BASE_SOLUTIONS/strong' ),
+    solutionString = require( 'string!ACID_BASE_SOLUTIONS/solution' );
 
   // constants
   var FONT = new PhetFont( 12 );
@@ -38,10 +39,18 @@ define( function( require ) {
    */
   function SolutionPanel( solutionMenuModel, options ) {
 
-    var vBox = new VBox( {spacing: 4} ),
+    options = _.extend( {
+      titleFont: new PhetFont(),
+      spacing: 4,
+      align: 'left'
+    }, options );
+
+    var vBox = new VBox( options ),
       strengthSlider;
 
     Node.call( this, options );
+
+    vBox.addChild( new Text( solutionString, { font: options.titleFont } ) );
 
     // add type radio buttons menu
     vBox.addChild( new HBox( {spacing: 5, children: [
