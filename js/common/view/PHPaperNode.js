@@ -25,12 +25,12 @@ define( function( require ) {
   function PHPaperNode( pHPaper ) {
 
     var self = this;
-    Node.call( this );
+    Node.call( this, { cursor: 'pointer' } );
 
     // blank paper
     var width = ABSConstants.PH_PAPER_SIZE.width;
     var height = ABSConstants.PH_PAPER_SIZE.height;
-    var paperNode = new Rectangle( 0, 0, width, height, { cursor: 'pointer', fill: PAPER_COLOR, stroke: 'rgb(150, 150, 150)', lineWidth: 0.5 } );
+    var paperNode = new Rectangle( 0, 0, width, height, { fill: PAPER_COLOR, stroke: 'rgb(150, 150, 150)', lineWidth: 0.5 } );
 
     // portion of the paper that changes color
     var indicatorNode = new Rectangle( 0, 0, width, 0, { fill: 'red', stroke: 'rgb(150, 150, 150)', lineWidth: 0.5 } );
