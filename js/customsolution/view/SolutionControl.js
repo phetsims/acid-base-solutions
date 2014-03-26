@@ -1,8 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
-//TODO this is not actually a Panel subtype
 /**
- * 'Solution' control panel, for controlling a custom solution.
+ * Control for modifying a custom solutions.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
@@ -37,7 +36,7 @@ define( function( require ) {
    * @param {*} options
    * @constructor
    */
-  function SolutionPanel( solutionMenuModel, options ) {
+  function SolutionControl( solutionMenuModel, options ) {
 
     options = _.extend( {
       titleFont: new PhetFont(),
@@ -86,5 +85,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, SolutionPanel );
+  return inherit( Node, SolutionControl );
 } );

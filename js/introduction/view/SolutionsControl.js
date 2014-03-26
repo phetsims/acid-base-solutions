@@ -1,8 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
-//TODO this is not actually a Panel subtype
 /**
- * 'Solutions' control panel, for switching between solution types.
+ * Control for selecting between a set of mutually-exclusive solutions.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -47,7 +46,7 @@ define( function( require ) {
    * @param options
    * @constructor
    */
-  function SolutionsPanel( solutionTypeProperty, options ) {
+  function SolutionsControl( solutionTypeProperty, options ) {
 
     options = _.extend( {
       titleFont: new PhetFont(),
@@ -133,5 +132,5 @@ define( function( require ) {
     VBox.call( this, options );
   }
 
-  return inherit( VBox, SolutionsPanel );
+  return inherit( VBox, SolutionsControl );
 } );

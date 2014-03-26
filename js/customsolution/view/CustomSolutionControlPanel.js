@@ -14,10 +14,10 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var SolutionMenuModel = require( 'ACID_BASE_SOLUTIONS/model/SolutionMenuModel' );
-  var SolutionPanel = require( 'ACID_BASE_SOLUTIONS/customsolution/view/SolutionPanel' );
-  var ToolsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ToolsPanel' );
+  var SolutionControl = require( 'ACID_BASE_SOLUTIONS/customsolution/view/SolutionControl' );
+  var ToolsControl = require( 'ACID_BASE_SOLUTIONS/common/view/ToolsControl' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-  var ViewsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ViewsPanel' );
+  var ViewsControl = require( 'ACID_BASE_SOLUTIONS/common/view/ViewsControl' );
 
   // constants
   var PANEL_OPTIONS = {
@@ -37,17 +37,17 @@ define( function( require ) {
    */
   function CustomSolutionControlPanel( model ) {
 
-    // panels
-    var solutionPanel = new SolutionPanel( new SolutionMenuModel( model.property( 'solutionType' ), model.property( 'concentration' ), model.property( 'strength' ), model.property( 'isAcid' ), model.property( 'isWeak' ) ), PANEL_OPTIONS );
-    var viewsPanel = new ViewsPanel( model.property( 'viewMode' ), model.property( 'solventVisible' ), PANEL_OPTIONS );
-    var toolsPanel = new ToolsPanel( model.property( 'toolMode' ), PANEL_OPTIONS );
+    // controls
+    var solutionControl = new SolutionControl( new SolutionMenuModel( model.property( 'solutionType' ), model.property( 'concentration' ), model.property( 'strength' ), model.property( 'isAcid' ), model.property( 'isWeak' ) ), PANEL_OPTIONS );
+    var viewsControl = new ViewsControl( model.property( 'viewMode' ), model.property( 'solventVisible' ), PANEL_OPTIONS );
+    var toolsControl = new ToolsControl( model.property( 'toolMode' ), PANEL_OPTIONS );
 
     // panels with equal widths
-    var maxWidth = Math.max( solutionPanel.width, Math.max( viewsPanel.width, toolsPanel.width ) );
+    var maxWidth = Math.max( solutionControl.width, Math.max( viewsControl.width, toolsControl.width ) );
     var children = [
-      createPanel( solutionPanel, maxWidth ),
-      createPanel( viewsPanel, maxWidth ),
-      createPanel( toolsPanel, maxWidth )
+      createPanel( solutionControl, maxWidth ),
+      createPanel( viewsControl, maxWidth ),
+      createPanel( toolsControl, maxWidth )
     ];
 
     // stack panels vertically

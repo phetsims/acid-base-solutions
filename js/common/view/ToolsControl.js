@@ -1,8 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
-//TODO this is not actually a Panel subtype
 /**
- * 'Tools' control panel
+ * Control for selecting between a set of mutually-exclusive tools.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -53,7 +52,7 @@ define( function( require ) {
    * @param {*} options
    * @constructor
    */
-  function ToolsPanel( toolModeProperty, options ) {
+  function ToolsControl( toolModeProperty, options ) {
 
     options = _.extend( {
       titleFont: new PhetFont(),
@@ -83,5 +82,5 @@ define( function( require ) {
     VBox.call( this, options );
   }
 
-  return inherit( VBox, ToolsPanel );
+  return inherit( VBox, ToolsControl );
 } );

@@ -13,10 +13,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var SolutionsPanel = require( 'ACID_BASE_SOLUTIONS/introduction/view/SolutionsPanel' );
-  var ToolsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ToolsPanel' );
+  var SolutionsControl = require( 'ACID_BASE_SOLUTIONS/introduction/view/SolutionsControl' );
+  var ToolsControl = require( 'ACID_BASE_SOLUTIONS/common/view/ToolsControl' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-  var ViewsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ViewsPanel' );
+  var ViewsControl = require( 'ACID_BASE_SOLUTIONS/common/view/ViewsControl' );
 
   // constants
   var PANEL_OPTIONS = {
@@ -37,16 +37,16 @@ define( function( require ) {
   function IntroductionControlPanel( model ) {
 
     // controls
-    var solutionsPanel = new SolutionsPanel( model.property( 'solutionType' ), PANEL_OPTIONS );
-    var viewsPanel = new ViewsPanel( model.property( 'viewMode' ), model.property( 'solventVisible' ), PANEL_OPTIONS );
-    var toolsPanel = new ToolsPanel( model.property( 'toolMode' ), PANEL_OPTIONS );
+    var solutionsControl = new SolutionsControl( model.property( 'solutionType' ), PANEL_OPTIONS );
+    var viewsControl = new ViewsControl( model.property( 'viewMode' ), model.property( 'solventVisible' ), PANEL_OPTIONS );
+    var toolsControl = new ToolsControl( model.property( 'toolMode' ), PANEL_OPTIONS );
 
     // panels with equal widths
-    var maxWidth = Math.max( solutionsPanel.width, Math.max( viewsPanel.width, toolsPanel.width ) );
+    var maxWidth = Math.max( solutionsControl.width, Math.max( viewsControl.width, toolsControl.width ) );
     var children = [
-      createPanel( solutionsPanel, maxWidth ),
-      createPanel( viewsPanel, maxWidth ),
-      createPanel( toolsPanel, maxWidth )
+      createPanel( solutionsControl, maxWidth ),
+      createPanel( viewsControl, maxWidth ),
+      createPanel( toolsControl, maxWidth )
     ];
 
     // stack panels vertically

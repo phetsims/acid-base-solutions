@@ -1,8 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
-//TODO this is not actually a Panel subtype
 /**
- * 'Views' control panel
+ * Control for selecting between a set of mutually-exclusive 'views'.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -61,7 +60,7 @@ define( function( require ) {
    * @param {*} options
    * @constructor
    */
-  function ViewsPanel( viewModeProperty, solventVisibleProperty, options ) {
+  function ViewsControl( viewModeProperty, solventVisibleProperty, options ) {
 
     options = _.extend( {
       titleFont: new PhetFont(),
@@ -131,5 +130,5 @@ define( function( require ) {
     VBox.call( this, options );
   }
 
-  return inherit( VBox, ViewsPanel );
+  return inherit( VBox, ViewsControl );
 } );
