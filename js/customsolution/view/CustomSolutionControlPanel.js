@@ -26,7 +26,7 @@ define( function( require ) {
   var viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' );
 
   // constants
-  var TITLE_OPTIONS = { font: new PhetFont( { size: 18, weight: 'bold' } ) };
+  var TITLE_OPTIONS = { font: new PhetFont( { size: 14, weight: 'bold' } ) };
 
   /**
    * @param {CustomSolutionModel} model
@@ -48,11 +48,11 @@ define( function( require ) {
       solutionTitle,
       new VStrut( 10 ),
       solutionPanel,
-      new VStrut( 20 ),
+      new VStrut( 15 ),
       viewsTitle,
       new VStrut( 10 ),
       viewsPanel,
-      new VStrut( 20 ),
+      new VStrut( 15 ),
       toolsTitle,
       new VStrut( 10 ),
       toolsPanel

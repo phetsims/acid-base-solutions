@@ -23,9 +23,9 @@ define( function( require ) {
 
     // layout
     controlPanel.right = this.layoutBounds.maxX - 20;
-    controlPanel.top = this.layoutBounds.minY;
-    resetAllButton.centerX = controlPanel.centerX;
-    resetAllButton.top = controlPanel.bottom + 20;
+    controlPanel.top = this.layoutBounds.minY + 10;
+    resetAllButton.right = controlPanel.right;
+    resetAllButton.top = controlPanel.bottom + 10;
 
     // rendering order
     this.addChild( controlPanel );

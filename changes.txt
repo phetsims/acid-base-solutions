@@ -1,3 +1,4 @@
+3/25/14 #51 make controls panels fit on screen
 3/25/14 #51 use 'white' screen backgrounds
 3/25/14 #51 set proper fill color for control panels
 3/25/14 #51 switch to sun.InOutRadioButton for 'Tools' panel
