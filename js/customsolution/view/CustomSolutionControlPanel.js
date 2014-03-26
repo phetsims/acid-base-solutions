@@ -16,10 +16,8 @@ define( function( require ) {
   var SolutionMenuModel = require( 'ACID_BASE_SOLUTIONS/model/SolutionMenuModel' );
   var SolutionPanel = require( 'ACID_BASE_SOLUTIONS/customsolution/view/SolutionPanel' );
   var ToolsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ToolsPanel' );
-  var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var ViewsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ViewsPanel' );
-  var VStrut = require( 'SUN/VStrut' );
 
   // constants
   var PANEL_OPTIONS = {

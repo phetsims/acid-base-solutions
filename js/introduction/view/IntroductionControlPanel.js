@@ -11,14 +11,12 @@ define( function( require ) {
   // imports
   var HStrut = require( 'SUN/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var SolutionsPanel = require( 'ACID_BASE_SOLUTIONS/introduction/view/SolutionsPanel' );
   var ToolsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ToolsPanel' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var ViewsPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ViewsPanel' );
-  var VStrut = require( 'SUN/VStrut' );
 
   // constants
   var PANEL_OPTIONS = {
