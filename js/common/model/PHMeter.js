@@ -30,7 +30,7 @@ define( function( require ) {
     this.pHProperty = pHProperty;
 
     // drag range (y coordinate)
-    this.dragRange = new Range( beaker.top - 15, beaker.top + 75 );
+    this.dragYRange = new Range( beaker.top - 15, beaker.top + 70 );
 
     // location, at tip of probe
     this.locationProperty = new Property( new Vector2( beaker.right - 85, beaker.top - 5 ) );
@@ -52,7 +52,7 @@ define( function( require ) {
 
     moveY: function( y ) {
       this.locationProperty.value = new Vector2( this.locationProperty.value.x,
-        Util.clamp( y, this.dragRange.min, this.dragRange.max ) );  // constrain to drag bounds
+        Util.clamp( y, this.dragYRange.min, this.dragYRange.max ) );  // constrain to drag bounds
     },
 
     // Is the tip of the pH probe in solution?
