@@ -58,6 +58,7 @@ define( function( require ) {
     ];
 
     Panel.call( this, new VBox( { align: 'left', children: children } ), {
+      fill: 'rgb(208,212,255)',
       xMargin: 15,
       yMargin: 10
     } );
