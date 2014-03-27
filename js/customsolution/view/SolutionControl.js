@@ -75,7 +75,8 @@ define( function( require ) {
       concentrationTitle,
       concentrationControl,
       strengthTitle,
-      strengthRadioButtons
+      strengthRadioButtons,
+      strengthSlider
     ];
 
     // compute separator width
