@@ -76,7 +76,7 @@ define( function( require ) {
     ]} ) );
 
     // add strength slider
-    vBox.addChild( strengthSlider = new StrengthSlider( solutionMenuModel.strengthProperty ) );
+    vBox.addChild( strengthSlider = new StrengthSlider( solutionMenuModel.strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE ) );
 
     this.addChild( vBox );
     vBox.updateLayout();

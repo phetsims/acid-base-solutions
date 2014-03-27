@@ -11,7 +11,6 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -26,7 +25,6 @@ define( function( require ) {
   var weakerString = require( 'string!ACID_BASE_SOLUTIONS/weaker' );
 
   // constants
-  var WEAK_STRENGTH_RANGE = ABSConstants.WEAK_STRENGTH_RANGE;
   var TICK_LABEL_OPTIONS = { font: new PhetFont( 12 ) };
 
   /**
@@ -35,14 +33,15 @@ define( function( require ) {
    * Implemented as an inner type because this is internal to the slider.
    *
    * @param {Property<Number>} strengthProperty
+   * @param {Range} strengthRange
    * @constructor
    */
-  function Model( strengthProperty ) {
+  function Model( strengthProperty, strengthRange ) {
 
     var self = this;
 
     // range of slider values
-    this.range = new Range( Util.log10( WEAK_STRENGTH_RANGE.min ), Util.log10( WEAK_STRENGTH_RANGE.max ), Util.log10( WEAK_STRENGTH_RANGE.defaultValue ) );
+    this.range = new Range( Util.log10( strengthRange.min ), Util.log10( strengthRange.max ), Util.log10( strengthRange.defaultValue ) );
 
     // slider's value
     this.sliderValueProperty = new Property( Util.log10( strengthProperty.value ) );
@@ -58,11 +57,12 @@ define( function( require ) {
 
   /**
    * @param {Property<Number>} strengthProperty
+   * @param {Range} strengthRange
    * @constructor
    */
-  function StrengthSlider( strengthProperty ) {
+  function StrengthSlider( strengthProperty, strengthRange ) {
 
-    var model = new Model( strengthProperty );
+    var model = new Model( strengthProperty, strengthRange );
 
     HSlider.call( this, model.sliderValueProperty, model.range, {
       trackSize: new Dimension2( 125, 4 ),
