@@ -76,13 +76,11 @@ define( function( require ) {
    */
   function ConcentrationControl( concentrationProperty, concentrationRange ) {
 
-    var model = new SliderModel( concentrationProperty, concentrationRange ),
-      panelContent = new Node(),
-      slider,
-      leftArrowButton,
-      rightArrowButton;
+    var model = new SliderModel( concentrationProperty, concentrationRange );
 
     Node.call( this, {scale: 0.85} );
+
+    var panelContent = new Node();
 
     // add the readout, including the background
     var readoutText = new Text( formatConcentration( concentrationProperty.value ), { font: READOUT_FONT } );
@@ -92,7 +90,7 @@ define( function( require ) {
     panelContent.addChild( readoutText );
 
     // create and add the slider
-    slider = new HSlider( model.sliderValueProperty, model.sliderValueRange, {
+    var slider = new HSlider( model.sliderValueProperty, model.sliderValueRange, {
       thumbSize: new Dimension2( 15, 25 ),
       majorTickLength: 15,
       tickLabelSpacing: 2
@@ -103,11 +101,11 @@ define( function( require ) {
     }
 
     // arrow buttons
-    leftArrowButton = new ArrowButton( 'left', function() {
+    var leftArrowButton = new ArrowButton( 'left', function() {
       concentrationProperty.value = Math.max( concentrationProperty.value - ARROW_STEP, concentrationRange.min );
     }, ARROW_BUTTON_OPTIONS );
     panelContent.addChild( leftArrowButton );
-    rightArrowButton = new ArrowButton( 'right', function() {
+    var rightArrowButton = new ArrowButton( 'right', function() {
       concentrationProperty.value = Math.min( concentrationProperty.value + ARROW_STEP, concentrationRange.max );
     }, ARROW_BUTTON_OPTIONS );
     panelContent.addChild( rightArrowButton );
