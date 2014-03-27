@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var Range = require( 'DOT/Range' );
   var Property = require( 'AXON/Property' ),
     ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
 
@@ -34,6 +35,8 @@ define( function( require ) {
   function ConductivityTestModel( beaker, toolModeProperty, brightnessProperty ) {
     var self = this;
 
+    this.probeDragYRange = new Range( beaker.top, beaker.bottom );
+
     // conductivity test location
     this.location = beaker.location.plusXY( -60, -beaker.size.height - 130 );
 
@@ -42,10 +45,10 @@ define( function( require ) {
     this.waterSurface = beaker.location.y - beaker.size.height - 60;
 
     // positive probe y-coordinate
-    this.positiveProbeYProperty = new Property( WIRE_OPTIONS.positive.end.y );
+    this.positiveProbeYProperty = new Property( this.probeDragYRange.min );
 
     // negative probe y-coordinate
-    this.negativeProbeYProperty = new Property( WIRE_OPTIONS.negative.end.y );
+    this.negativeProbeYProperty = new Property( this.probeDragYRange.min );
 
     // visibility of conductivity test
     this.visibleProperty = new Property( toolModeProperty.value === ToolMode.CONDUCTIVITY );

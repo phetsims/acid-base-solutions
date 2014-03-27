@@ -67,8 +67,8 @@ define( function( require ) {
     this.addChild( positiveWire = new ConductivityTestWire( 'positive', wireOptions.positive.start.x, wireOptions.positive.start.y, wireOptions.positive.end.x, wireOptions.positive.end.y ) );
 
     // add probes
-    this.addChild( new ConductivityTestProbe( 'red', '+', positiveProbeYProperty, {x: 155, y: wireOptions.positive.end.y} ) );
-    this.addChild( new ConductivityTestProbe( 'black', '-', negativeProbeYProperty, {x: -30, y: wireOptions.negative.end.y} ) );
+    this.addChild( new ConductivityTestProbe( positiveProbeYProperty, conductivityTestModel.probeDragYRange, { isPositive: true, x: 155 } ) ); //TODO get x from model
+    this.addChild( new ConductivityTestProbe( negativeProbeYProperty, conductivityTestModel.probeDragYRange, { isPositive: false, x: -30 } ) ); //TODO get x from model
 
     if ( SHOW_ORIGIN ) {
       this.addChild( new Circle( 2, { fill: 'red' } ) );

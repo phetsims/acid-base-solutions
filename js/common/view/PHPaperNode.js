@@ -52,15 +52,16 @@ define( function( require ) {
     indicatorNode.top = 0;
 
     // drag paper to move it
-    var clickOffset;
     this.addInputListener( new SimpleDragHandler( {
 
+      clickOffset: null,
+
       start: function( e ) {
-        clickOffset = self.globalToParentPoint( e.pointer.point ).subtract( e.currentTarget.translation );
+        this.clickOffset = self.globalToParentPoint( e.pointer.point ).subtract( e.currentTarget.translation );
       },
 
       drag: function( e ) {
-        var v = self.globalToParentPoint( e.pointer.point ).subtract( clickOffset );
+        var v = self.globalToParentPoint( e.pointer.point ).subtract( this.clickOffset );
         pHPaper.locationProperty.value = new Vector2(
                 Util.clamp( v.x, pHPaper.dragBounds.minX, pHPaper.dragBounds.maxX ),
                 Util.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) );

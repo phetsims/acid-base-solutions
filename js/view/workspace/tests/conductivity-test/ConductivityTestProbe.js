@@ -10,7 +10,11 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var Dimension2 = require( 'DOT/Dimension2' );
   var Circle = require( 'SCENERY/nodes/Circle' );
+  var MinusNode = require( 'SCENERY_PHET/MinusNode' );
+  var PlusNode = require( 'SCENERY_PHET/PlusNode' );
+  var Util = require( 'DOT/Util' );
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
@@ -18,42 +22,46 @@ define( function( require ) {
 
   // constants
   var SHOW_ORIGIN = true; // draws a red circle at the origin, for debugging
+  var PROBE_SIZE = new Dimension2( 16, 55 );
+  var POSITIVE_FILL = 'red';
+  var NEGATIVE_FILL = 'black';
   var PROBE_MAX_Y_COODINATE = 370,
     PROBE_MIN_Y_COODINATE = 40;
 
-  function ConductivityTestProbe( fill, type, property, options ) {
+  function ConductivityTestProbe( property, dragYRange, options ) {
+
+    options = _.extend( {
+      isPositive: true
+    }, options );
+
     var self = this;
     Node.call( this, options );
-    this.setCursor( 'pointer' );
 
-    this.addChild( new Rectangle( 0, 0, 16, 55, {fill: fill, stroke: 'black', lineWidth: 0.5} ) );
+    var plateNode = new Rectangle( -PROBE_SIZE.width/2, -PROBE_SIZE.height, PROBE_SIZE.width, PROBE_SIZE.height,
+      { fill: ( options.isPositive ? POSITIVE_FILL : NEGATIVE_FILL ), stroke: 'black', lineWidth: 0.5 } );
+    var signNode = options.isPositive ?
+                   new PlusNode( { size: new Dimension2( 6, 2 ), fill: 'white'} ) :
+                   new MinusNode( { size: new Dimension2( 6, 2 ), fill: 'white'} );
+    signNode.centerX = plateNode.centerX;
+    signNode.bottom = plateNode.bottom - 10;
 
-    if ( type === '+' ) {
-      this.addChild( new Rectangle( 5, 45, 6, 2, {fill: 'white'} ) );
-      this.addChild( new Rectangle( 7, 43, 2, 6, {fill: 'white'} ) );
-    }
-    else if ( type === '-' ) {
-      this.addChild( new Rectangle( 6, 45, 4, 2, {fill: 'white'} ) );
-    }
-
+    this.addChild( plateNode );
+    this.addChild( signNode );
     if ( SHOW_ORIGIN ) {
       this.addChild( new Circle( 2, { fill: 'red' } ) );
     }
 
+    this.cursor = 'pointer';
     var clickYOffset;
     this.addInputListener( new SimpleDragHandler( {
+
       start: function( e ) {
         clickYOffset = self.globalToParentPoint( e.pointer.point ).y - e.currentTarget.y;
       },
+
       drag: function( e ) {
-        // new y-coordinate
         var y = self.globalToParentPoint( e.pointer.point ).y - clickYOffset;
-        // check limitation
-        y = Math.min( Math.max( PROBE_MIN_Y_COODINATE, y ), PROBE_MAX_Y_COODINATE );
-        // move to new position
-        self.setY( y );
-        // check contact with surface
-        property.value = y;
+        property.value = Util.clamp( y, dragYRange.min, dragYRange.max );
       }
     } ) );
 
