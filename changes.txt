@@ -1,3 +1,4 @@
+3/27/14 #73 disable concentration arrow buttons, make it possible to get to min value with slider thumb
 3/27/14 pass range to strength slider constructor
 3/27/14 #72 fix arrows for concentration slider so that they increment by 0.1
 3/27/14 #71 make model for concentration slider internal to the control

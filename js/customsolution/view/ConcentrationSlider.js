@@ -34,6 +34,7 @@ define( function( require ) {
   var ARROW_HEIGHT = 15;
   var READOUT_FONT = new PhetFont( 14 );
   var ARROW_BUTTON_OPTIONS = {arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
+  var DECIMAL_PLACES = 3;
 
   /**
    * Model for the concentration slider.
@@ -56,7 +57,7 @@ define( function( require ) {
     this.sliderValueProperty = new Property( Util.log10( concentrationProperty.value ) );
 
     this.sliderValueProperty.link( function( sliderValue ) {
-      self.concentrationProperty.value = Math.pow( 10, sliderValue );
+      self.concentrationProperty.value = Util.toFixedNumber( Math.pow( 10, sliderValue ), 4 * DECIMAL_PLACES ); // see issue#73
     } );
     concentrationProperty.link( function( concentration  ) {
       self.sliderValueProperty.value = Util.log10( concentration );
@@ -71,7 +72,7 @@ define( function( require ) {
   function ConcentrationSlider( concentrationProperty, concentrationRange ) {
 
     var model = new Model( concentrationProperty, concentrationRange ),
-      readoutText = new Text( StringUtils.format( pattern_0value_1concentration, Util.toFixed( concentrationProperty.value, 3 ), molesPerLiterString ), { font: READOUT_FONT } ),
+      readoutText = new Text( StringUtils.format( pattern_0value_1concentration, Util.toFixed( concentrationProperty.value, DECIMAL_PLACES ), molesPerLiterString ), { font: READOUT_FONT } ),
       readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.5 ),
       panelContent = new Node(),
       slider,
@@ -105,6 +106,10 @@ define( function( require ) {
       concentrationProperty.value = Math.min( concentrationProperty.value + ARROW_STEP, concentrationRange.max );
     }, ARROW_BUTTON_OPTIONS );
     panelContent.addChild( rightArrowButton );
+    concentrationProperty.link( function( concentration ) {
+      leftArrowButton.setEnabled( concentration > concentrationRange.min );
+      rightArrowButton.setEnabled( concentration < concentrationRange.max );
+    });
 
     // layout
     readoutBackground.centerX = slider.bounds.width / 2;
