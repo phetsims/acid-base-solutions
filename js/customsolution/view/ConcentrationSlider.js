@@ -11,20 +11,20 @@ define( function( require ) {
   'use strict';
 
   // Imports
-  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' ),
-    ArrowButton = require( 'SCENERY_PHET/ArrowButton' ),
-    Dimension2 = require( 'DOT/Dimension2' ),
-    inherit = require( 'PHET_CORE/inherit' ),
-    Node = require( 'SCENERY/nodes/Node' ),
-    Panel = require( 'SUN/Panel' ),
-    PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    Property = require( 'AXON/Property' ),
-    Range = require( 'DOT/Range' ),
-    Rectangle = require( 'SCENERY/nodes/Rectangle' ),
-    Text = require( 'SCENERY/nodes/Text' ),
-    HSlider = require( 'SUN/HSlider' ),
-    StringUtils = require( 'PHETCOMMON/util/StringUtils' ),
-    Util = require( 'DOT/Util' );
+  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
+  var ArrowButton = require( 'SCENERY_PHET/ArrowButton' );
+  var Dimension2 = require( 'DOT/Dimension2' );
+  var HSlider = require( 'SUN/HSlider' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var Panel = require( 'SUN/Panel' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Property = require( 'AXON/Property' );
+  var Range = require( 'DOT/Range' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var Text = require( 'SCENERY/nodes/Text' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var Util = require( 'DOT/Util' );
 
   // strings
   var molesPerLiterString = require( 'string!ACID_BASE_SOLUTIONS/molesPerLiter' );
