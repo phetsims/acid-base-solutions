@@ -50,11 +50,6 @@ define( function( require ) {
       this.visibleProperty.reset();
     },
 
-    moveY: function( y ) {
-      this.locationProperty.value = new Vector2( this.locationProperty.value.x,
-        Util.clamp( y, this.dragYRange.min, this.dragYRange.max ) );  // constrain to drag bounds
-    },
-
     // Is the tip of the pH probe in solution?
     inSolution: function() {
       return this.beaker.containsPoint( this.locationProperty.value );

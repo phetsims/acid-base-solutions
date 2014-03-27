@@ -22,6 +22,7 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // strings
   var patternLabelValue = require( 'string!ACID_BASE_SOLUTIONS/pattern.0label.1value' );
@@ -101,16 +102,18 @@ define( function( require ) {
       this.addChild( new Circle( 2, { fill: 'red' } ) );
     }
 
-    // init drag
-    var clickYOffset;
+    // Constrained dragging
     this.addInputListener( new SimpleDragHandler( {
+
+      clickYOffset: 0,
+
       start: function( e ) {
-        // get offset
-        clickYOffset = self.globalToParentPoint( e.pointer.point ).y - e.currentTarget.y;
+        this.clickYOffset = self.globalToParentPoint( e.pointer.point ).y - e.currentTarget.y;
       },
+
       drag: function( e ) {
-        // new y-coordinate
-        pHMeter.moveY( self.globalToParentPoint( e.pointer.point ).y - clickYOffset );
+        var y = self.globalToParentPoint( e.pointer.point ).y - this.clickYOffset;
+        pHMeter.locationProperty.value = new Vector2( pHMeter.locationProperty.value.x, Util.clamp( y, pHMeter.dragYRange.min, pHMeter.dragYRange.max ) );
       }
     } ) );
 

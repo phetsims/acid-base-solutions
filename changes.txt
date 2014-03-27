@@ -1,3 +1,4 @@
+3/27/14 move constrained dragging of pH meter to view
 3/27/14 allow pH paper to be dragged anywhere inside beaker, handle drag constraint in view
 3/27/14 #67 add red dot at origin of probes, to show origin problem
 3/27/14 #67 add red dot at origin of conductivity tester, to show origin problem
