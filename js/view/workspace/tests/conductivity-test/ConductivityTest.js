@@ -33,7 +33,7 @@ define( function( require ) {
     BULB_TO_BATTERY_WIRE_LENGTH = 40,
     OPACITY_MAX = 0.15,
   // alpha of the bulb when used against a dark background. This is clamped after evaluation to keep it within the range [0,1]
-    BRIGHTNESS_TO_ALPHA_FUNCTION_AGAINST_DARK_BACKGROUND = new LinearFunction( 0, 1, OPACITY_MAX, 0 );
+    BRIGHTNESS_TO_ALPHA = new LinearFunction( 0, 1, OPACITY_MAX, 0 );
 
   function ConductivityTest( conductivityTestModel ) {
 
@@ -42,35 +42,41 @@ define( function( require ) {
 
     Node.call( this );
 
-    // nodes
-    var lightBulbDarkMask = new Node( {opacity: OPACITY_MAX, children: [new Image( lightBulbGlassMaskImage, {scale: 0.33} )]} );
+    // apparatus (bulb + battery), origin at tip of bulb's base
+    var bulbScale = 0.33;
+    var baseNode = new Image( lightBulbBaseImage,
+      { scale: bulbScale, centerX: 0, bottom: 0 } ); // origin at bottom center
+    var glassNode = new Image( lightBulbGlassImage,
+      { scale: bulbScale, centerX: 0, bottom: baseNode.top } );
+    var lightBulbDarkMask = new Image( lightBulbGlassMaskImage,
+      { scale: bulbScale, opacity: OPACITY_MAX, translation: glassNode.translation } );
     var raysNode = new ConductivityTestLightRays( conductivityTestModel.brightnessProperty, conductivityTestModel.isClosedProperty, lightBulbDarkMask.getGlobalBounds().width / 2,
-      {x: lightBulbDarkMask.getGlobalBounds().width / 2, y: lightBulbDarkMask.getGlobalBounds().height / 2.75} );
+      { centerX: glassNode.centerX, y: glassNode.top + glassNode.width / 2 } );
+    var bulbBatteryWire = new Path( new Shape().moveTo( 0, 0 ).lineTo( BULB_TO_BATTERY_WIRE_LENGTH, 0 ), { stroke: 'black', lineWidth: 1.5 } );
+    var battery = new Image( batteryImage, { scale: 0.6, x: BULB_TO_BATTERY_WIRE_LENGTH, centerY: 0 } )
     var apparatusNode = new Node( {children: [
-      // add light bulb image
-      new Node( {children: [
-        new Image( lightBulbBaseImage, {scale: 0.33, x: 15.5, y: 66} ),
-        new Image( lightBulbGlassImage, {scale: 0.33} ),
-        lightBulbDarkMask
-      ]} ),
-      // add wire from battery to light bulb
-      new Path( new Shape().moveTo( BULB_END_X, BULB_END_Y ).lineTo( BULB_END_X + BULB_TO_BATTERY_WIRE_LENGTH, BULB_END_Y ), {stroke: 'black', lineWidth: 1.5} ),
-      // add battery image
-      new Image( batteryImage, {scale: 0.6, x: BULB_END_X + BULB_TO_BATTERY_WIRE_LENGTH, y: 67} )
+      bulbBatteryWire,
+      battery,
+      raysNode,
+      baseNode,
+      glassNode,
+      lightBulbDarkMask
     ]} );
-    var staticNode = new Node( { children: [ raysNode, apparatusNode ] } );
-    staticNode.translation = conductivityTestModel.location;
+    apparatusNode.translation = conductivityTestModel.location;
     if ( SHOW_ORIGIN ) {
-      staticNode.addChild( new Circle( 2, { fill: 'red' } ) );
+      apparatusNode.addChild( new Circle( 2, { fill: 'red' } ) );
     }
 
+    // wires
     var negativeWire = new ConductivityTestWire( 'negative', wireOptions.negative.start.x, wireOptions.negative.start.y, wireOptions.negative.end.x, wireOptions.negative.end.y );
     var positiveWire = new ConductivityTestWire( 'positive', wireOptions.positive.start.x, wireOptions.positive.start.y, wireOptions.positive.end.x, wireOptions.positive.end.y );
+
+    // probes
     var negativeProbe = new ConductivityTestProbe( conductivityTestModel.negativeProbeLocation, conductivityTestModel.probeDragYRange, { isPositive: false } );
     var positiveProbe = new ConductivityTestProbe( conductivityTestModel.positiveProbeLocation, conductivityTestModel.probeDragYRange, { isPositive: true } );
 
     // rendering order
-    this.addChild( staticNode );
+    this.addChild( apparatusNode );
     this.addChild( negativeWire );
     this.addChild( positiveWire );
     this.addChild( negativeProbe );
@@ -86,7 +92,7 @@ define( function( require ) {
 
     // set brightness of light bulb
     var setBrightness = function() {
-      lightBulbDarkMask.setOpacity( (conductivityTestModel.isClosedProperty.value ? BRIGHTNESS_TO_ALPHA_FUNCTION_AGAINST_DARK_BACKGROUND( conductivityTestModel.brightnessProperty.value ) : OPACITY_MAX) );
+      lightBulbDarkMask.opacity = ( conductivityTestModel.isClosedProperty.value ? BRIGHTNESS_TO_ALPHA( conductivityTestModel.brightnessProperty.value ) : OPACITY_MAX );
     };
     conductivityTestModel.brightnessProperty.link( setBrightness );
     conductivityTestModel.isClosedProperty.link( setBrightness );

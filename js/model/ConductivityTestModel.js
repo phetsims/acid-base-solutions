@@ -42,11 +42,11 @@ define( function( require ) {
     this.probeDragYRange = new Range( beaker.top - 20, beaker.bottom );
 
     // bulb and battery location
-    this.location = new Vector2( beaker.location.x, beaker.top - 40 );
+    this.location = new Vector2( beaker.location.x, beaker.top - 30 );
 
     // probe locations
-    this.positiveProbeLocation = new Property( new Vector2( beaker.left + 40, this.probeDragYRange.min ) );
-    this.negativeProbeLocation = new Property( new Vector2( beaker.right - 40, this.probeDragYRange.min ) );
+    this.negativeProbeLocation = new Property( new Vector2( beaker.left + 40, this.probeDragYRange.min ) );
+    this.positiveProbeLocation = new Property( new Vector2( beaker.right - 40, this.probeDragYRange.min ) );
 
     // visibility of conductivity test
     this.visibleProperty = new Property( toolModeProperty.value === ToolMode.CONDUCTIVITY );
