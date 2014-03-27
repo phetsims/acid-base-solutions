@@ -8,7 +8,8 @@
 define( function( require ) {
   'use strict';
 
-  var Node = require( 'SCENERY/nodes/Node' ),
+  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' ),
+    Node = require( 'SCENERY/nodes/Node' ),
     inherit = require( 'PHET_CORE/inherit' ),
     AquaRadioButton = require( 'SUN/AquaRadioButton' ),
     VBox = require( 'SCENERY/nodes/VBox' ),
@@ -62,7 +63,7 @@ define( function( require ) {
 
     // add concentration slider
     vBox.addChild( new Text( initialConcentrationString, {font: FONT} ) );
-    vBox.addChild( new ConcentrationSlider( solutionMenuModel.concentrationProperty ) );
+    vBox.addChild( new ConcentrationSlider( solutionMenuModel.concentrationProperty, ABSConstants.CONCENTRATION_RANGE ) );
 
     // add black line
     vBox.addChild( new Line( 15, 0, 170, 0, {stroke: 'black', lineWidth: 0.75} ) );
