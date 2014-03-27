@@ -1,8 +1,8 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * This class presents a slider for the user
- * that allows them to change a initial concentration value.
+ * Slider for controlling concentration.
+ * Adapts a linear slider to a logarithmic concentration range.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)

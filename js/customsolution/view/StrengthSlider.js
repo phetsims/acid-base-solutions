@@ -1,7 +1,8 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * 'Strength' slider in 'Solution' control panel.
+ * Slider for controlling strength.
+ * Adapts a linear slider to a logarithmic strength range.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
