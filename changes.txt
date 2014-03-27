@@ -1,3 +1,4 @@
+3/27/14 #67 add red dot at origin of conductivity tester, to show origin problem
 3/27/14 put a very light gray stroke on concentration value background, to make the edges more crips
 3/27/14 #51 replace radio buttons with AB-switch for acid/base choice
 3/27/14 #71 absorb SolutionMenuModel into 'Solution' control panel

@@ -38,6 +38,7 @@ define( function( require ) {
     this.location = beaker.location.plusXY( -60, -beaker.size.height - 130 );
 
     // water surface level
+    //TODO 60 is a fudge factor, see issue #67
     this.waterSurface = beaker.location.y - beaker.size.height - 60;
 
     // positive probe y-coordinate

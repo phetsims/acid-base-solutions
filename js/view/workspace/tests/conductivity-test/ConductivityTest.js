@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var Circle = require( 'SCENERY/nodes/Circle' );
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Image = require( 'SCENERY/nodes/Image' ),
@@ -26,6 +27,7 @@ define( function( require ) {
     lightBulbGlassMaskImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-glass-mask.png' );
 
   // constants
+  var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
   var BULB_END_X = 23,
     BULB_END_Y = 84,
     BULB_TO_BATTERY_WIRE_LENGTH = 40,
@@ -67,6 +69,10 @@ define( function( require ) {
     // add probes
     this.addChild( new ConductivityTestProbe( 'red', '+', positiveProbeYProperty, {x: 155, y: wireOptions.positive.end.y} ) );
     this.addChild( new ConductivityTestProbe( 'black', '-', negativeProbeYProperty, {x: -30, y: wireOptions.negative.end.y} ) );
+
+    if ( SHOW_ORIGIN ) {
+      this.addChild( new Circle( 2, { fill: 'red' } ) );
+    }
 
     this.translation = conductivityTestModel.location;
 
