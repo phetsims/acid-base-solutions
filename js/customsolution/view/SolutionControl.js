@@ -9,14 +9,15 @@ define( function( require ) {
   'use strict';
 
   var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' ),
-    Node = require( 'SCENERY/nodes/Node' ),
     inherit = require( 'PHET_CORE/inherit' ),
     AquaRadioButton = require( 'SUN/AquaRadioButton' ),
     VBox = require( 'SCENERY/nodes/VBox' ),
     HBox = require( 'SCENERY/nodes/HBox' ),
     Text = require( 'SCENERY/nodes/Text' ),
+    HStrut = require( 'SUN/HStrut' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     Line = require( 'SCENERY/nodes/Line' ),
+    HSeparator = require( 'SUN/HSeparator' ),
     StrengthSlider = require( 'ACID_BASE_SOLUTIONS/customsolution/view/StrengthSlider' ),
     ConcentrationControl = require( 'ACID_BASE_SOLUTIONS/customsolution/view/ConcentrationControl' );
 
@@ -31,6 +32,7 @@ define( function( require ) {
 
   // constants
   var FONT = new PhetFont( 12 );
+  var RADIO_BUTTON_OPTIONS = {radius: 7};
 
   /**
    * @param {SolutionMenuModel} solutionMenuModel
@@ -45,46 +47,53 @@ define( function( require ) {
       align: 'left'
     }, options );
 
-    var vBox = new VBox( options ),
-      strengthSlider;
+    // title
+    var solutionTitle = new Text( solutionString, { font: options.titleFont } );
 
-    Node.call( this, options );
+    // type (acid or base) radio buttons
+    var typeControl = new HBox( {spacing: 20, children: [
+      new AquaRadioButton( solutionMenuModel.isAcidProperty, true, new Text( acidString, {font: FONT} ), RADIO_BUTTON_OPTIONS ),
+      new AquaRadioButton( solutionMenuModel.isAcidProperty, false, new Text( baseString, {font: FONT} ), RADIO_BUTTON_OPTIONS )
+    ]} );
 
-    vBox.addChild( new Text( solutionString, { font: options.titleFont } ) );
+    // concentration control
+    var concentrationTitle = new Text( initialConcentrationString, {font: FONT} );
+    var concentrationControl = new ConcentrationControl( solutionMenuModel.concentrationProperty, ABSConstants.CONCENTRATION_RANGE );
 
-    // add type radio buttons menu
-    vBox.addChild( new HBox( {spacing: 5, children: [
-      new AquaRadioButton( solutionMenuModel.isAcidProperty, true, new Text( acidString, {font: FONT} ), {radius: 7} ),
-      new AquaRadioButton( solutionMenuModel.isAcidProperty, false, new Text( baseString, {font: FONT} ), {radius: 7} )
-    ]} ) );
+    // strength control
+    var strengthTitle = new Text( strengthString, {font: FONT} );
+    var strengthRadioButtons = new HBox( { spacing: 10, children: [
+      new HStrut( 10 ), // indent
+      new AquaRadioButton( solutionMenuModel.isWeakProperty, true, new Text( weakString, {font: FONT} ), RADIO_BUTTON_OPTIONS ),
+      new AquaRadioButton( solutionMenuModel.isWeakProperty, false, new Text( strongString, {font: FONT} ), RADIO_BUTTON_OPTIONS )
+    ] } );
+    var strengthSlider = new StrengthSlider( solutionMenuModel.strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE );
 
-    // add black line
-    vBox.addChild( new Line( 15, 0, 170, 0, {stroke: 'black', lineWidth: 0.75} ) );
+    options.children = [
+      solutionTitle,
+      typeControl,
+      concentrationTitle,
+      concentrationControl,
+      strengthTitle,
+      strengthRadioButtons
+    ];
 
-    // add concentration slider
-    vBox.addChild( new Text( initialConcentrationString, {font: FONT} ) );
-    vBox.addChild( new ConcentrationControl( solutionMenuModel.concentrationProperty, ABSConstants.CONCENTRATION_RANGE ) );
+    // compute separator width
+    var separatorWidth = 0;
+    options.children.forEach( function( child ) {
+      separatorWidth = Math.max( child.width, separatorWidth );
+    } );
 
-    // add black line
-    vBox.addChild( new Line( 15, 0, 170, 0, {stroke: 'black', lineWidth: 0.75} ) );
+    // add separators before titles
+    options.children.splice( options.children.indexOf( concentrationTitle ), 0, new HSeparator( separatorWidth ) );
+    options.children.splice( options.children.indexOf( strengthTitle ), 0, new HSeparator( separatorWidth ) );
 
-    // add strength radio button
-    vBox.addChild( new Text( strengthString, {font: FONT} ) );
-    vBox.addChild( new HBox( {spacing: 5, children: [ // strength radio buttons menu
-      new AquaRadioButton( solutionMenuModel.isWeakProperty, true, new Text( weakString, {font: FONT} ), {radius: 7} ),
-      new AquaRadioButton( solutionMenuModel.isWeakProperty, false, new Text( strongString, {font: FONT} ), {radius: 7} )
-    ]} ) );
-
-    // add strength slider
-    vBox.addChild( strengthSlider = new StrengthSlider( solutionMenuModel.strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE ) );
-
-    this.addChild( vBox );
-    vBox.updateLayout();
+    VBox.call( this, options );
 
     solutionMenuModel.isWeakProperty.link( function( isWeak ) {
       strengthSlider.visible = isWeak;
     } );
   }
 
-  return inherit( Node, SolutionControl );
+  return inherit( VBox, SolutionControl );
 } );
