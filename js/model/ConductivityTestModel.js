@@ -1,17 +1,19 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Model for the pH meter in 'Acid-Base Solutions' sim.
+ *  Conductivity tester model.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';
 
   // imports
+  var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
-  var Property = require( 'AXON/Property' ),
-    ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
+  var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var WIRES_INITIAL_Y = 60,
@@ -35,26 +37,22 @@ define( function( require ) {
   function ConductivityTestModel( beaker, toolModeProperty, brightnessProperty ) {
     var self = this;
 
-    this.probeDragYRange = new Range( beaker.top, beaker.bottom );
+    this.beaker = beaker;
 
-    // conductivity test location
-    this.location = beaker.location.plusXY( -60, -beaker.size.height - 130 );
+    this.probeDragYRange = new Range( beaker.top - 20, beaker.bottom );
 
-    // water surface level
-    //TODO 60 is a fudge factor, see issue #67
-    this.waterSurface = beaker.location.y - beaker.size.height - 60;
+    // bulb and battery location
+    this.location = new Vector2( beaker.location.x, beaker.top - 40 );
 
-    // positive probe y-coordinate
-    this.positiveProbeYProperty = new Property( this.probeDragYRange.min );
-
-    // negative probe y-coordinate
-    this.negativeProbeYProperty = new Property( this.probeDragYRange.min );
+    // probe locations
+    this.positiveProbeLocation = new Property( new Vector2( beaker.left + 40, this.probeDragYRange.min ) );
+    this.negativeProbeLocation = new Property( new Vector2( beaker.right - 40, this.probeDragYRange.min ) );
 
     // visibility of conductivity test
     this.visibleProperty = new Property( toolModeProperty.value === ToolMode.CONDUCTIVITY );
 
     // property for indicating closing of electric circuit
-    this.isClosedProperty = new Property( false );
+    this.isClosedProperty = new Property( this.isClosed() );
 
     // brightness property
     this.brightnessProperty = brightnessProperty;
@@ -63,12 +61,11 @@ define( function( require ) {
       self.visibleProperty.value = (toolMode === ToolMode.CONDUCTIVITY);
     } );
 
-    // if both probes in water: isClosedProperty.value === true
-    var checkContact = function() {
-      self.isClosedProperty.value = ( self.positiveProbeYProperty.value > self.waterSurface && self.negativeProbeYProperty.value > self.waterSurface );
+    var updateIsClosed = function() {
+      self.isClosedProperty.value = self.isClosed();
     };
-    this.positiveProbeYProperty.link( checkContact );
-    this.negativeProbeYProperty.link( checkContact );
+    this.positiveProbeLocation.link( updateIsClosed );
+    this.negativeProbeLocation.link( updateIsClosed );
   }
 
   ConductivityTestModel.prototype = {
@@ -76,8 +73,13 @@ define( function( require ) {
     reset: function() {
       this.visibleProperty.reset();
       this.isClosedProperty.reset();
-      this.positiveProbeYProperty.reset();
-      this.negativeProbeYProperty.reset();
+      this.positiveProbeLocation.reset();
+      this.negativeProbeLocation.reset();
+    },
+
+    // the circuit is closed if both probes are in the solution
+    isClosed: function() {
+      return ( this.beaker.containsPoint( this.positiveProbeLocation.value ) &&  this.beaker.containsPoint( this.negativeProbeLocation.value ) );
     },
 
     getWireOptions: function() {
