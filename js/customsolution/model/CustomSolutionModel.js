@@ -35,8 +35,6 @@ define( function( require ) {
       ],
       DEFAULT_SOLUTION_TYPE );
 
-    this.addProperty( 'isAcid', true ); // type of solution. true - acid, false - base
-    this.addProperty( 'isWeak', true ); // type of strength. true - weak, false - strong
     this.addProperty( 'concentration', this.solutions[DEFAULT_SOLUTION_TYPE].concentration ); // concentration of solution
     this.addProperty( 'strength', this.solutions[DEFAULT_SOLUTION_TYPE].strength ); // strength of solution
 

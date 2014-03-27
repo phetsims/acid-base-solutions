@@ -1,3 +1,4 @@
+3/71/14 #71 remove isAcid and isWeak properties from 'Custom Solution' model, move them to model for 'Solution' control panel
 3/27/14 #51 absorb ConcentrationControl into 'Solution' control panel to get desired alignment of titles
 3/27/14 #51 increase length of concentration slider track
 3/27/14 #51 move 'mol/L' label next to 'Initial Concentration'

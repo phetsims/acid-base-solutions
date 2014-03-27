@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var Property = require( 'AXON/Property' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
 
   // strings
@@ -18,26 +19,26 @@ define( function( require ) {
    * @param {Property<SolutionType>} solutionTypeProperty
    * @param {Property<Number>} concentrationProperty
    * @param {Property<Number>} strengthProperty
-   * @param {Property<Boolean>} isAcidProperty
-   * @param {Property<Boolean>} isWeakProperty
    * @constructor
    */
-  function SolutionMenuModel( solutionTypeProperty, concentrationProperty, strengthProperty, isAcidProperty, isWeakProperty ) {
+  function SolutionMenuModel( solutionTypeProperty, concentrationProperty, strengthProperty ) {
+
+    var self = this;
 
     // control panel's title
     this.title = solutionString;
 
     // properties for radio buttons
-    this.isAcidProperty = isAcidProperty; // type of solution. true - acid, false - base
-    this.isWeakProperty = isWeakProperty; // type of strength. true - weak, false - strong
+    this.isAcidProperty = new Property( solutionTypeProperty.value === SolutionType.WEAK_ACID || solutionTypeProperty.value === SolutionType.STRONG_ACID );
+    this.isWeakProperty = new Property( solutionTypeProperty.value === SolutionType.WEAK_ACID || solutionTypeProperty.value === SolutionType.WEAK_ACID );
 
     this.concentrationProperty = concentrationProperty;
     this.strengthProperty = strengthProperty;
 
     // update solution type if it was changed by radio buttons
-    var setSolutionType = function() {
-      var isAcid = isAcidProperty.value,
-        isWeak = isWeakProperty.value;
+    var updateSolutionType = function() {
+      var isAcid = self.isAcidProperty.value,
+        isWeak = self.isWeakProperty.value;
 
       if ( isWeak && isAcid ) {
         solutionTypeProperty.value = SolutionType.WEAK_ACID;
@@ -54,8 +55,8 @@ define( function( require ) {
     };
 
     // add observers
-    isAcidProperty.link( setSolutionType );
-    isWeakProperty.link( setSolutionType );
+    self.isAcidProperty.link( updateSolutionType.bind( this ) );
+    self.isWeakProperty.link( updateSolutionType.bind( this ) );
   }
 
   SolutionMenuModel.prototype = {
