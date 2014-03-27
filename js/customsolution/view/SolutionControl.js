@@ -63,11 +63,14 @@ define( function( require ) {
     // strength control
     var strengthTitle = new Text( strengthString, {font: FONT} );
     var strengthRadioButtons = new HBox( { spacing: 10, children: [
-      new HStrut( 10 ), // indent
       new AquaRadioButton( solutionMenuModel.isWeakProperty, true, new Text( weakString, {font: FONT} ), RADIO_BUTTON_OPTIONS ),
       new AquaRadioButton( solutionMenuModel.isWeakProperty, false, new Text( strongString, {font: FONT} ), RADIO_BUTTON_OPTIONS )
     ] } );
     var strengthSlider = new StrengthSlider( solutionMenuModel.strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE );
+    var strengthControl = new VBox( { children: [
+      strengthRadioButtons,
+      strengthSlider
+    ]});
 
     options.children = [
       solutionTitle,
@@ -75,8 +78,7 @@ define( function( require ) {
       concentrationTitle,
       concentrationControl,
       strengthTitle,
-      strengthRadioButtons,
-      strengthSlider
+      strengthControl
     ];
 
     // compute separator width
