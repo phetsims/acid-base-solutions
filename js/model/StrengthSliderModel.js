@@ -2,6 +2,7 @@
 
 /**
  * Model for the strength slider in 'Acid-Base Solutions' sim.
+ * This model maps between the linear slider and the logarithmic range of strength.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
@@ -43,6 +44,9 @@ define( function( require ) {
 
     this.sliderValueProperty.link( function( value ) {
       self.strengthProperty.value = Math.pow( 10, value );
+    } );
+    this.strengthProperty.link( function( strength ) {
+      self.sliderValueProperty.value = Util.log10( strength );
     } );
   }
 
