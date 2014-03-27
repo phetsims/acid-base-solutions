@@ -45,7 +45,7 @@ define( function( require ) {
    * @param {Range} concentrationRange
    * @constructor
    */
-  function Model( concentrationProperty, concentrationRange ) {
+  function SliderModel( concentrationProperty, concentrationRange ) {
     var self = this;
 
     this.concentrationProperty = concentrationProperty;
@@ -71,7 +71,7 @@ define( function( require ) {
    */
   function ConcentrationControl( concentrationProperty, concentrationRange ) {
 
-    var model = new Model( concentrationProperty, concentrationRange ),
+    var model = new SliderModel( concentrationProperty, concentrationRange ),
       readoutText = new Text( StringUtils.format( pattern_0value_1concentration, Util.toFixed( concentrationProperty.value, DECIMAL_PLACES ), molesPerLiterString ), { font: READOUT_FONT } ),
       readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.5 ),
       panelContent = new Node(),

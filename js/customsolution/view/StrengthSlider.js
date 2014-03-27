@@ -36,12 +36,12 @@ define( function( require ) {
    * @param {Range} strengthRange
    * @constructor
    */
-  function Model( strengthProperty, strengthRange ) {
+  function SliderModel( strengthProperty, strengthRange ) {
 
     var self = this;
 
     // range of slider values
-    this.range = new Range( Util.log10( strengthRange.min ), Util.log10( strengthRange.max ), Util.log10( strengthRange.defaultValue ) );
+    this.sliderValueRange = new Range( Util.log10( strengthRange.min ), Util.log10( strengthRange.max ), Util.log10( strengthRange.defaultValue ) );
 
     // slider's value
     this.sliderValueProperty = new Property( Util.log10( strengthProperty.value ) );
@@ -62,17 +62,17 @@ define( function( require ) {
    */
   function StrengthSlider( strengthProperty, strengthRange ) {
 
-    var model = new Model( strengthProperty, strengthRange );
+    var model = new SliderModel( strengthProperty, strengthRange );
 
-    HSlider.call( this, model.sliderValueProperty, model.range, {
+    HSlider.call( this, model.sliderValueProperty, model.sliderValueRange, {
       trackSize: new Dimension2( 125, 4 ),
       thumbSize: new Dimension2( 12, 24 ),
       majorTickLength: 12
     } );
 
     // add ticks
-    this.addMajorTick( model.range.min, new Text( weakerString, TICK_LABEL_OPTIONS ) );
-    this.addMajorTick( model.range.max, new Text( strongerString, TICK_LABEL_OPTIONS ) );
+    this.addMajorTick( model.sliderValueRange.min, new Text( weakerString, TICK_LABEL_OPTIONS ) );
+    this.addMajorTick( model.sliderValueRange.max, new Text( strongerString, TICK_LABEL_OPTIONS ) );
   }
 
   return inherit( HSlider, StrengthSlider );
