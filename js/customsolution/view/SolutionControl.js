@@ -4,6 +4,7 @@
  * Control for modifying a custom solutions.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';
