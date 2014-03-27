@@ -75,13 +75,13 @@ define( function( require ) {
     ]} ) );
 
     // add strength slider
-    vBox.addChild( strengthSlider = new StrengthSlider( solutionMenuModel.strengthSliderModel.sliderValueProperty, solutionMenuModel.strengthSliderModel.range ) );
+    vBox.addChild( strengthSlider = new StrengthSlider( solutionMenuModel.strengthProperty ) );
 
     this.addChild( vBox );
     vBox.updateLayout();
 
-    solutionMenuModel.strengthSliderModel.visibleProperty.link( function( visible ) {
-      strengthSlider.setVisible( visible );
+    solutionMenuModel.isWeakProperty.link( function( isWeak ) {
+      strengthSlider.visible = isWeak;
     } );
   }
 

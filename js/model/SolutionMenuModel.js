@@ -10,8 +10,7 @@ define( function( require ) {
 
   // imports
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' ),
-    ConcentrationSliderModel = require( 'ACID_BASE_SOLUTIONS/model/ConcentrationSliderModel' ),
-    StrengthSliderModel = require( 'ACID_BASE_SOLUTIONS/model/StrengthSliderModel' );
+    ConcentrationSliderModel = require( 'ACID_BASE_SOLUTIONS/model/ConcentrationSliderModel' );
 
   // strings
   var solutionString = require( 'string!ACID_BASE_SOLUTIONS/solution' );
@@ -33,8 +32,7 @@ define( function( require ) {
     this.isAcidProperty = isAcidProperty; // type of solution. true - acid, false - base
     this.isWeakProperty = isWeakProperty; // type of strength. true - weak, false - strong
 
-    // model for strength slider
-    this.strengthSliderModel = new StrengthSliderModel( strengthProperty, isWeakProperty );
+    this.strengthProperty = strengthProperty;
 
     // model for concentration slider
     this.concentrationSliderModel = new ConcentrationSliderModel( concentrationProperty );
@@ -65,7 +63,6 @@ define( function( require ) {
 
   SolutionMenuModel.prototype = {
     reset: function() {
-      this.strengthSliderModel.reset();
       this.concentrationSliderModel.reset();
     }
   };

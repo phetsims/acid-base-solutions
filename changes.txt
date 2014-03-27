@@ -1,3 +1,4 @@
+3/27/14 #71 make model for strength slider internal to the control
 3/27/14 add missing doc and missing dependency in StrengthSliderModel
 3/27/14 remove model dependencies in StrengthSlider, pass in only the properties needed
 3/27/14 #51 put ticks above strength slider
