@@ -54,7 +54,7 @@ define( function( require ) {
     this.addInputListener( new SimpleDragHandler( {
 
       start: function( e ) {
-        clickOffset = self.globalToParentPoint( e.pointer.point ).subtract( e.currentTarget.translation ); //TODO subtract has bad arg
+        clickOffset = self.globalToParentPoint( e.pointer.point ).subtract( e.currentTarget.translation );
       },
 
       drag: function( e ) {
