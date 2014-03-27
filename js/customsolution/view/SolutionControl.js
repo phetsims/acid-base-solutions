@@ -85,7 +85,7 @@ define( function( require ) {
       separatorWidth = Math.max( child.width, separatorWidth );
     } );
 
-    // add separators before titles
+    // add separators before sub-panels
     options.children.splice( options.children.indexOf( concentrationTitle ), 0, new HSeparator( separatorWidth ) );
     options.children.splice( options.children.indexOf( strengthTitle ), 0, new HSeparator( separatorWidth ) );
 

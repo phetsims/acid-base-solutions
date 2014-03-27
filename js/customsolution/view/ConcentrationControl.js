@@ -12,11 +12,9 @@ define( function( require ) {
   // Imports
   var ArrowButton = require( 'SCENERY_PHET/ArrowButton' );
   var ConcentrationSlider = require( 'ACID_BASE_SOLUTIONS/customsolution/view/ConcentrationSlider' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var HSlider = require( 'SUN/HSlider' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
@@ -24,8 +22,10 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Util = require( 'DOT/Util' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
+  var initialConcentrationString = require( 'string!ACID_BASE_SOLUTIONS/initialConcentration' );
   var molesPerLiterString = require( 'string!ACID_BASE_SOLUTIONS/molesPerLiter' );
   var pattern_0value_1concentration = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1concentration' );
 
@@ -59,15 +59,10 @@ define( function( require ) {
     this.sliderValueProperty.link( function( sliderValue ) {
       self.concentrationProperty.value = Util.toFixedNumber( Math.pow( 10, sliderValue ), 4 * DECIMAL_PLACES ); // see issue#73
     } );
-    concentrationProperty.link( function( concentration  ) {
+    concentrationProperty.link( function( concentration ) {
       self.sliderValueProperty.value = Util.log10( concentration );
     } );
   }
-
-  // Formats a concentration value with units, properly localized.
-  var formatConcentration = function( concentration ) {
-    return StringUtils.format( pattern_0value_1concentration, Util.toFixed( concentration, DECIMAL_PLACES ), molesPerLiterString );
-  };
 
   /**
    * @param {Property<Number>} concentrationProperty
@@ -76,56 +71,45 @@ define( function( require ) {
    */
   function ConcentrationControl( concentrationProperty, concentrationRange ) {
 
-    var model = new SliderModel( concentrationProperty, concentrationRange );
+    // readout
+    var readoutText = new Text( Util.toFixed( concentrationProperty.value, DECIMAL_PLACES ), { font: READOUT_FONT } );
+    var readoutBackground = new Rectangle( 0, 0, 1.25 * readoutText.width, 1.25 * readoutText.height, 4, 4, { fill: 'white' } );
+    var readoutNode = new Node( { children: [ readoutBackground, readoutText ] } );
+    readoutText.center = readoutBackground.center;
 
-    Node.call( this );
-
-    var panelContent = new Node();
-
-    // add the readout, including the background
-    var readoutText = new Text( formatConcentration( concentrationProperty.value ), { font: READOUT_FONT } );
-    var readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.5 );
-    panelContent.addChild( readoutBackground );
-    readoutText.centerY = readoutBackground.centerY - 2;
-    panelContent.addChild( readoutText );
-
-    // create and add the slider
+    // slider
     var slider = new ConcentrationSlider( concentrationProperty, concentrationRange );
-    panelContent.addChild( slider );
 
     // arrow buttons
     var leftArrowButton = new ArrowButton( 'left', function() {
       concentrationProperty.value = Math.max( concentrationProperty.value - ARROW_STEP, concentrationRange.min );
     }, ARROW_BUTTON_OPTIONS );
-    panelContent.addChild( leftArrowButton );
     var rightArrowButton = new ArrowButton( 'right', function() {
       concentrationProperty.value = Math.min( concentrationProperty.value + ARROW_STEP, concentrationRange.max );
     }, ARROW_BUTTON_OPTIONS );
-    panelContent.addChild( rightArrowButton );
     concentrationProperty.link( function( concentration ) {
       leftArrowButton.setEnabled( concentration > concentrationRange.min );
       rightArrowButton.setEnabled( concentration < concentrationRange.max );
-    });
+    } );
 
-    // layout
-    readoutBackground.centerX = slider.bounds.width / 2;
-    readoutBackground.top = 0;
-    slider.left = 0;
-    slider.top = readoutBackground.bottom;
-    leftArrowButton.right = slider.left - 12;
-    leftArrowButton.centerY = slider.centerY;
-    rightArrowButton.left = slider.right + 12;
-    rightArrowButton.centerY = slider.centerY;
-    readoutText.centerX = readoutBackground.centerX;
-
-    // put the contents into a panel
-    this.addChild( new Panel( panelContent, {fill: 'rgba(0,0,0,0)', stroke: 'rgba(0,0,0,0)'} ) );
+    VBox.call( this, {
+      resize: false,
+      align: 'center',
+      spacing: 8,
+      children: [
+        new HBox( {
+          spacing: 8,
+          children: [ leftArrowButton, readoutNode, rightArrowButton ]
+        } ),
+        slider
+      ]
+    } );
 
     // update the readout text when concentration value changes
-    concentrationProperty.link( function( value ) {
-      readoutText.text = formatConcentration( value );
+    concentrationProperty.link( function( concentration ) {
+      readoutText.text = Util.toFixed( concentration, DECIMAL_PLACES );
     } );
   }
 
-  return inherit( Node, ConcentrationControl );
+  return inherit( VBox, ConcentrationControl );
 } );

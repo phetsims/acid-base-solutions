@@ -1,3 +1,7 @@
+3/27/14 #51 increase length of concentration slider track
+3/27/14 #51 move 'mol/L' label next to 'Initial Concentration'
+3/27/14 #51 add white background behind concentration value
+3/27/14 #51 add tick labels to concentration slider
 3/27/14 #51 factor ConcentrationSlider out of ConcentrationControl
 3/27/14 #51 center weak/strong radio buttons above strength slider
 3/27/14 #76 compute length of separators in 'Solution' control panel
