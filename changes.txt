@@ -1,3 +1,4 @@
+3/27/14 remove model dependencies in StrengthSlider, pass in only the properties needed
 3/27/14 #51 put ticks above strength slider
 3/27/14 update all copyright headers to 2014
 3/26/14 #3 disable 'Views' control panel when conductivity tester is selected
