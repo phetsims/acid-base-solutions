@@ -21,10 +21,7 @@ define( function( require ) {
     strongerString = require( 'string!ACID_BASE_SOLUTIONS/stronger' );
 
   // constants
-  var FONT = new PhetFont( 12 ),
-    SLIDER_TICK_LENGTH = 8,
-    SLIDER_TICK_OFFSET = 4,
-    SLIDER_TRACK_WIDTH = 125;
+  var TICK_LABEL_OPTIONS = { font: new PhetFont( 12 ) };
 
   function StrengthSlider( strengthSliderModel, coords ) {
     var range = strengthSliderModel.range,
@@ -34,18 +31,14 @@ define( function( require ) {
 
     // add horizontal part
     this.addChild( slider = new HSlider( sliderValueProperty, range, {
-      trackSize: new Dimension2( SLIDER_TRACK_WIDTH, 4 ),
-      thumbSize: new Dimension2( 12, 21 ),
-      majorTickLength: -12
+      trackSize: new Dimension2( 125, 4 ),
+      thumbSize: new Dimension2( 12, 24 ),
+      majorTickLength: 12
     } ) );
 
     // add ticks
-    slider.addMajorTick( range.min, null );
-    slider.addMajorTick( range.max, null );
-
-    // add text
-    this.addChild( new Text( weakerString, {font: FONT, centerX: 0, centerY: 2 * SLIDER_TICK_OFFSET + SLIDER_TICK_LENGTH} ) );
-    this.addChild( new Text( strongerString, {font: FONT, centerX: SLIDER_TRACK_WIDTH, centerY: 2 * SLIDER_TICK_OFFSET + SLIDER_TICK_LENGTH} ) );
+    slider.addMajorTick( range.min, new Text( weakerString, TICK_LABEL_OPTIONS ) );
+    slider.addMajorTick( range.max, new Text( strongerString, TICK_LABEL_OPTIONS ) );
   }
 
   return inherit( Node, StrengthSlider );
