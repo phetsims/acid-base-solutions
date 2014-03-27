@@ -1,3 +1,4 @@
+3/27/14 #75 remove scaling of concentration control panel
 3/27/14 factor out duplicate code form formatting concentration value
 3/27/14 rename ConcentrationSlider to ConcentrationControl, since it includes more than a slider
 3/27/14 #73 disable concentration arrow buttons, make it possible to get to min value with slider thumb

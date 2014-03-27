@@ -32,7 +32,7 @@ define( function( require ) {
   // constants
   var ARROW_STEP = 0.1; // concentration delta for arrow button
   var ARROW_HEIGHT = 15;
-  var READOUT_FONT = new PhetFont( 14 );
+  var READOUT_FONT = new PhetFont( 12 );
   var ARROW_BUTTON_OPTIONS = {arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
   var DECIMAL_PLACES = 3;
 
@@ -78,7 +78,7 @@ define( function( require ) {
 
     var model = new SliderModel( concentrationProperty, concentrationRange );
 
-    Node.call( this, {scale: 0.85} );
+    Node.call( this );
 
     var panelContent = new Node();
 
@@ -91,7 +91,8 @@ define( function( require ) {
 
     // create and add the slider
     var slider = new HSlider( model.sliderValueProperty, model.sliderValueRange, {
-      thumbSize: new Dimension2( 15, 25 ),
+      trackSize: new Dimension2( 85, 4 ),
+      thumbSize: new Dimension2( 12, 24 ),
       majorTickLength: 15,
       tickLabelSpacing: 2
     } );
