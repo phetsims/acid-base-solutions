@@ -27,7 +27,7 @@ define( function( require ) {
     lightBulbGlassMaskImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-glass-mask.png' );
 
   // constants
-  var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
+  var SHOW_ORIGIN = true; // draws a red circle at the origin, for debugging
   var BULB_END_X = 23,
     BULB_END_Y = 84,
     BULB_TO_BATTERY_WIRE_LENGTH = 40,

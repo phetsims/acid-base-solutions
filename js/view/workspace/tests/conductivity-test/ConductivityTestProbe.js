@@ -10,12 +10,14 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var Circle = require( 'SCENERY/nodes/Circle' );
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
 
   // constants
+  var SHOW_ORIGIN = true; // draws a red circle at the origin, for debugging
   var PROBE_MAX_Y_COODINATE = 370,
     PROBE_MIN_Y_COODINATE = 40;
 
@@ -32,6 +34,10 @@ define( function( require ) {
     }
     else if ( type === '-' ) {
       this.addChild( new Rectangle( 6, 45, 4, 2, {fill: 'white'} ) );
+    }
+
+    if ( SHOW_ORIGIN ) {
+      this.addChild( new Circle( 2, { fill: 'red' } ) );
     }
 
     var clickYOffset;
