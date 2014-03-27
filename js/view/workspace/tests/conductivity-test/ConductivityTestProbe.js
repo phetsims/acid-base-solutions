@@ -37,6 +37,7 @@ define( function( require ) {
     var self = this;
     Node.call( this, options );
 
+    // nodes
     var plateNode = new Rectangle( -PROBE_SIZE.width / 2, -PROBE_SIZE.height, PROBE_SIZE.width, PROBE_SIZE.height,
       { fill: ( options.isPositive ? POSITIVE_FILL : NEGATIVE_FILL ), stroke: 'black', lineWidth: 0.5 } );
     var signNode = options.isPositive ?
@@ -45,12 +46,14 @@ define( function( require ) {
     signNode.centerX = plateNode.centerX;
     signNode.bottom = plateNode.bottom - 10;
 
+    // rendering order
     this.addChild( plateNode );
     this.addChild( signNode );
     if ( SHOW_ORIGIN ) {
       this.addChild( new Circle( 2, { fill: 'red' } ) );
     }
 
+    // constrained dragging
     this.cursor = 'pointer';
     this.addInputListener( new SimpleDragHandler( {
 
