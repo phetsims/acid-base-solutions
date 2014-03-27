@@ -22,6 +22,8 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var HSeparator = require( 'SUN/HSeparator' );
+  var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
+  var Property = require( 'AXON/Property' );
   var StrengthSlider = require( 'ACID_BASE_SOLUTIONS/customsolution/view/StrengthSlider' );
 
   // strings
@@ -44,11 +46,13 @@ define( function( require ) {
   var CONCENTRATION_DECIMALS = 3;
 
   /**
-   * @param {SolutionMenuModel} solutionMenuModel
+   * @param {Property<SolutionType>} solutionTypeProperty
+   * @param {Property<Number>} concentrationProperty
+   * @param {Property<Number>} strengthProperty
    * @param {*} options
    * @constructor
    */
-  function SolutionControl( solutionMenuModel, options ) {
+  function SolutionControl( solutionTypeProperty, concentrationProperty, strengthProperty, options ) {
 
     options = _.extend( {
       titleFont: new PhetFont(),
@@ -56,18 +60,18 @@ define( function( require ) {
       align: 'left'
     }, options );
 
-    var concentrationProperty = solutionMenuModel.concentrationProperty;
     var concentrationRange = ABSConstants.CONCENTRATION_RANGE;
 
     // 'Solution' title
     var solutionTitle = new Text( solutionString, { font: options.titleFont } );
 
     // type (acid or base) radio buttons
+    var isAcidProperty = new Property( solutionTypeProperty.value === SolutionType.WEAK_ACID || solutionTypeProperty.value === SolutionType.STRONG_ACID );
     var typeControl = new HBox( {
       spacing: 20,
       children: [
-        new AquaRadioButton( solutionMenuModel.isAcidProperty, true, new Text( acidString, {font: RADIO_BUTTON_FONT} ), RADIO_BUTTON_OPTIONS ),
-        new AquaRadioButton( solutionMenuModel.isAcidProperty, false, new Text( baseString, {font: RADIO_BUTTON_FONT} ), RADIO_BUTTON_OPTIONS )
+        new AquaRadioButton( isAcidProperty, true, new Text( acidString, {font: RADIO_BUTTON_FONT} ), RADIO_BUTTON_OPTIONS ),
+        new AquaRadioButton( isAcidProperty, false, new Text( baseString, {font: RADIO_BUTTON_FONT} ), RADIO_BUTTON_OPTIONS )
       ]
     } );
 
@@ -75,7 +79,7 @@ define( function( require ) {
     var concentrationTitle = new Text( initialConcentrationString, { font: SUBTITLE_FONT } );
 
     // concentration readout
-    var readoutText = new Text( Util.toFixed( solutionMenuModel.concentrationProperty.value, CONCENTRATION_DECIMALS ), { font: CONCENTRATION_FONT } );
+    var readoutText = new Text( Util.toFixed( concentrationProperty.value, CONCENTRATION_DECIMALS ), { font: CONCENTRATION_FONT } );
     var readoutBackground = new Rectangle( 0, 0, 1.5 * readoutText.width, 1.5 * readoutText.height, 4, 4, { fill: 'white' } );
     var readoutNode = new Node( { children: [ readoutBackground, readoutText ] } );
     readoutText.center = readoutBackground.center;
@@ -99,11 +103,12 @@ define( function( require ) {
 
     // strength control
     var strengthTitle = new Text( strengthString, { font: SUBTITLE_FONT } );
+    var isWeakProperty = new Property( solutionTypeProperty.value === SolutionType.WEAK_ACID || solutionTypeProperty.value === SolutionType.WEAK_ACID );
     var strengthRadioButtons = new HBox( { spacing: 10, children: [
-      new AquaRadioButton( solutionMenuModel.isWeakProperty, true, new Text( weakString, {font: RADIO_BUTTON_FONT} ), RADIO_BUTTON_OPTIONS ),
-      new AquaRadioButton( solutionMenuModel.isWeakProperty, false, new Text( strongString, {font: RADIO_BUTTON_FONT} ), RADIO_BUTTON_OPTIONS )
+      new AquaRadioButton( isWeakProperty, true, new Text( weakString, {font: RADIO_BUTTON_FONT} ), RADIO_BUTTON_OPTIONS ),
+      new AquaRadioButton( isWeakProperty, false, new Text( strongString, {font: RADIO_BUTTON_FONT} ), RADIO_BUTTON_OPTIONS )
     ] } );
-    var strengthSlider = new StrengthSlider( solutionMenuModel.strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE );
+    var strengthSlider = new StrengthSlider( strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE );
 
     options.children = [
       solutionTitle,
@@ -148,11 +153,6 @@ define( function( require ) {
 
     Node.call( this, options );
 
-    // hide strength slider for weak solutions
-    solutionMenuModel.isWeakProperty.link( function( isWeak ) {
-      strengthSlider.visible = isWeak;
-    } );
-
     // update the readout text when concentration value changes
     concentrationProperty.link( function( concentration ) {
       readoutText.text = Util.toFixed( concentration, CONCENTRATION_DECIMALS );
@@ -163,6 +163,33 @@ define( function( require ) {
       leftArrowButton.setEnabled( concentration > concentrationRange.min );
       rightArrowButton.setEnabled( concentration < concentrationRange.max );
     } );
+
+    // hide strength slider for weak solutions
+    isWeakProperty.link( function( isWeak ) {
+      strengthSlider.visible = isWeak;
+    } );
+
+    // update solution type
+    var updateSolutionType = function() {
+
+      var isAcid = isAcidProperty.value;
+      var isWeak = isWeakProperty.value;
+
+      if ( isWeak && isAcid ) {
+        solutionTypeProperty.value = SolutionType.WEAK_ACID;
+      }
+      else if ( isWeak && !isAcid ) {
+        solutionTypeProperty.value = SolutionType.WEAK_BASE;
+      }
+      else if ( !isWeak && isAcid ) {
+        solutionTypeProperty.value = SolutionType.STRONG_ACID;
+      }
+      else if ( !isWeak && !isAcid ) {
+        solutionTypeProperty.value = SolutionType.STRONG_BASE;
+      }
+    };
+    isAcidProperty.link( updateSolutionType.bind( this ) );
+    isWeakProperty.link( updateSolutionType.bind( this ) );
   }
 
   return inherit( Node, SolutionControl );

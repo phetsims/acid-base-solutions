@@ -13,7 +13,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var SolutionMenuModel = require( 'ACID_BASE_SOLUTIONS/model/SolutionMenuModel' );
   var SolutionControl = require( 'ACID_BASE_SOLUTIONS/customsolution/view/SolutionControl' );
   var ToolsControl = require( 'ACID_BASE_SOLUTIONS/common/view/ToolsControl' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -38,7 +37,7 @@ define( function( require ) {
   function CustomSolutionControlPanel( model ) {
 
     // controls
-    var solutionControl = new SolutionControl( new SolutionMenuModel( model.property( 'solutionType' ), model.property( 'concentration' ), model.property( 'strength' ) ), PANEL_OPTIONS );
+    var solutionControl = new SolutionControl( model.property( 'solutionType' ), model.property( 'concentration' ), model.property( 'strength' ), PANEL_OPTIONS );
     var viewsControl = new ViewsControl( model.property( 'viewMode' ), model.property( 'toolMode' ), model.property( 'solventVisible' ), PANEL_OPTIONS );
     var toolsControl = new ToolsControl( model.property( 'toolMode' ), PANEL_OPTIONS );
 
