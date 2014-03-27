@@ -64,6 +64,11 @@ define( function( require ) {
     } );
   }
 
+  // Formats a concentration value with units, properly localized.
+  var formatConcentration = function( concentration ) {
+    return StringUtils.format( pattern_0value_1concentration, Util.toFixed( concentration, DECIMAL_PLACES ), molesPerLiterString );
+  };
+
   /**
    * @param {Property<Number>} concentrationProperty
    * @param {Range} concentrationRange
@@ -72,8 +77,6 @@ define( function( require ) {
   function ConcentrationControl( concentrationProperty, concentrationRange ) {
 
     var model = new SliderModel( concentrationProperty, concentrationRange ),
-      readoutText = new Text( StringUtils.format( pattern_0value_1concentration, Util.toFixed( concentrationProperty.value, DECIMAL_PLACES ), molesPerLiterString ), { font: READOUT_FONT } ),
-      readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.5 ),
       panelContent = new Node(),
       slider,
       leftArrowButton,
@@ -82,6 +85,8 @@ define( function( require ) {
     Node.call( this, {scale: 0.85} );
 
     // add the readout, including the background
+    var readoutText = new Text( formatConcentration( concentrationProperty.value ), { font: READOUT_FONT } );
+    var readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.5 );
     panelContent.addChild( readoutBackground );
     readoutText.centerY = readoutBackground.centerY - 2;
     panelContent.addChild( readoutText );
@@ -127,7 +132,7 @@ define( function( require ) {
 
     // update the readout text when concentration value changes
     concentrationProperty.link( function( value ) {
-      readoutText.text = StringUtils.format( pattern_0value_1concentration, Util.toFixed( value, 3 ), molesPerLiterString );
+      readoutText.text = formatConcentration( value );
     } );
   }
 
