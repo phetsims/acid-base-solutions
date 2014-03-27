@@ -28,6 +28,12 @@ define( function( require ) {
   var POSITIVE_FILL = 'red';
   var NEGATIVE_FILL = 'black';
 
+  /**
+   * @param {{Property<Vector2>} locationProperty
+   * @param {Range} dragYRange
+   * @param {*} options
+   * @constructor
+   */
   function ConductivityTestProbe( locationProperty, dragYRange, options ) {
 
     options = _.extend( {
