@@ -11,9 +11,11 @@ define( function( require ) {
 
   // imports
   var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
+  var ABSwitch = require( 'SUN/ABSwitch' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var ArrowButton = require( 'SCENERY_PHET/ArrowButton' );
   var ConcentrationSlider = require( 'ACID_BASE_SOLUTIONS/customsolution/view/ConcentrationSlider' );
+  var Dimension2 = require( 'DOT/Dimension2' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HSeparator = require( 'SUN/HSeparator' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -38,7 +40,7 @@ define( function( require ) {
 
   // constants
   var SUBTITLE_FONT = new PhetFont( 12 );
-  var RADIO_BUTTON_FONT = new PhetFont( 12 );
+  var CONTROL_FONT = new PhetFont( 12 );
   var RADIO_BUTTON_OPTIONS = { radius: 7 };
   var ARROW_STEP = 0.1; // concentration delta for arrow button
   var ARROW_HEIGHT = 15;
@@ -66,15 +68,12 @@ define( function( require ) {
     // 'Solution' title
     var solutionTitle = new Text( solutionString, { font: options.titleFont } );
 
-    // type (acid or base) radio buttons
+    // acid/base switch
     var isAcidProperty = new Property( solutionTypeProperty.value === SolutionType.WEAK_ACID || solutionTypeProperty.value === SolutionType.STRONG_ACID );
-    var typeControl = new HBox( {
-      spacing: 20,
-      children: [
-        new AquaRadioButton( isAcidProperty, true, new Text( acidString, {font: RADIO_BUTTON_FONT} ), RADIO_BUTTON_OPTIONS ),
-        new AquaRadioButton( isAcidProperty, false, new Text( baseString, {font: RADIO_BUTTON_FONT} ), RADIO_BUTTON_OPTIONS )
-      ]
-    } );
+    var acidBaseSwitch = new ABSwitch( isAcidProperty,
+      true, new Text( acidString, {font: CONTROL_FONT} ),
+      false, new Text( baseString, {font: CONTROL_FONT} ),
+      { switchSize: new Dimension2( 40, 20 ) } );
 
     // concentration title
     var concentrationTitle = new Text( initialConcentrationString, { font: SUBTITLE_FONT } );
@@ -106,14 +105,14 @@ define( function( require ) {
     var strengthTitle = new Text( strengthString, { font: SUBTITLE_FONT } );
     var isWeakProperty = new Property( solutionTypeProperty.value === SolutionType.WEAK_ACID || solutionTypeProperty.value === SolutionType.WEAK_ACID );
     var strengthRadioButtons = new HBox( { spacing: 10, children: [
-      new AquaRadioButton( isWeakProperty, true, new Text( weakString, {font: RADIO_BUTTON_FONT} ), RADIO_BUTTON_OPTIONS ),
-      new AquaRadioButton( isWeakProperty, false, new Text( strongString, {font: RADIO_BUTTON_FONT} ), RADIO_BUTTON_OPTIONS )
+      new AquaRadioButton( isWeakProperty, true, new Text( weakString, {font: CONTROL_FONT} ), RADIO_BUTTON_OPTIONS ),
+      new AquaRadioButton( isWeakProperty, false, new Text( strongString, {font: CONTROL_FONT} ), RADIO_BUTTON_OPTIONS )
     ] } );
     var strengthSlider = new StrengthSlider( strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE );
 
     options.children = [
       solutionTitle,
-      typeControl,
+      acidBaseSwitch,
       concentrationTitle,
       concentrationValueControl,
       concentrationSlider,
@@ -140,10 +139,10 @@ define( function( require ) {
     var separatorYSpacing = 6;
     var controlYSpacing = 6;
     // controls are all center justified
-    typeControl.centerX = concentrationValueControl.centerX = concentrationSlider.centerX = strengthRadioButtons.centerX = strengthSlider.centerX = separatorWidth / 2;
+    acidBaseSwitch.centerX = concentrationValueControl.centerX = concentrationSlider.centerX = strengthRadioButtons.centerX = strengthSlider.centerX = separatorWidth / 2;
     // titles and subtitles are left justified
-    typeControl.top = solutionTitle.bottom + titleYSpacing;
-    concentrationSeparator.top = typeControl.bottom + separatorYSpacing;
+    acidBaseSwitch.top = solutionTitle.bottom + titleYSpacing;
+    concentrationSeparator.top = acidBaseSwitch.bottom + separatorYSpacing;
     concentrationTitle.top = concentrationSeparator.bottom + separatorYSpacing;
     concentrationValueControl.top = concentrationTitle.bottom + subtitleYSpacing;
     concentrationSlider.top = concentrationValueControl.bottom + controlYSpacing;
