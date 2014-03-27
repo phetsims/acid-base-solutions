@@ -1,3 +1,4 @@
+3/27/14 #51 absorb ConcentrationControl into 'Solution' control panel to get desired alignment of titles
 3/27/14 #51 increase length of concentration slider track
 3/27/14 #51 move 'mol/L' label next to 'Initial Concentration'
 3/27/14 #51 add white background behind concentration value
