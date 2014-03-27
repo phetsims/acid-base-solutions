@@ -17,6 +17,8 @@ define( function( require ) {
   var PHColorKeyNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHColorKeyNode' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
+  var Util = require( 'DOT/Util' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
@@ -58,7 +60,10 @@ define( function( require ) {
       },
 
       drag: function( e ) {
-        pHPaper.movePoint( self.globalToParentPoint( e.pointer.point ).subtract( clickOffset ) );
+        var v = self.globalToParentPoint( e.pointer.point ).subtract( clickOffset );
+        pHPaper.locationProperty.value = new Vector2(
+                Util.clamp( v.x, pHPaper.dragBounds.minX, pHPaper.dragBounds.maxX ),
+                Util.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) );
       }
     } ) );
 

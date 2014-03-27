@@ -9,8 +9,8 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var Bounds2 = require( 'DOT/Bounds2' );
   var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
+  var Bounds2 = require( 'DOT/Bounds2' );
   var Property = require( 'AXON/Property' );
   var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
   var Util = require( 'DOT/Util' );
@@ -31,7 +31,9 @@ define( function( require ) {
     this.pHProperty = pHProperty;
 
     // drag bounds
-    this.dragBounds = new Bounds2( beaker.left + 20, beaker.top - 20, beaker.right - 20, beaker.bottom - 20 );
+    this.dragBounds = new Bounds2(
+      beaker.left + ABSConstants.PH_PAPER_SIZE.width/2, beaker.top - 20,
+      beaker.right - ABSConstants.PH_PAPER_SIZE.width/2, beaker.bottom );
 
     // location
     this.locationProperty = new Property( new Vector2( beaker.right - 60, beaker.top - 10 ) );
@@ -62,13 +64,6 @@ define( function( require ) {
       this.locationProperty.reset();
       this.visibleProperty.reset();
       this.indicatorHeightProperty.reset();
-    },
-
-    // move to {Vector2} v, constrained to drag bounds
-    movePoint: function( v ) {
-      this.locationProperty.value = new Vector2(
-        Util.clamp( v.x, this.dragBounds.minX, this.dragBounds.maxX ),
-        Util.clamp( v.y, this.dragBounds.minY, this.dragBounds.maxY ) );
     },
 
     /**
