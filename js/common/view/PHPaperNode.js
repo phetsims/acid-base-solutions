@@ -40,7 +40,7 @@ define( function( require ) {
     this.addChild( paperNode );
     this.addChild( indicatorNode );
     if ( SHOW_ORIGIN ) {
-      this.addChild( new Circle( 4, { fill: 'red' } ) );
+      this.addChild( new Circle( 2, { fill: 'red' } ) );
     }
 
     // origin at bottom-center of paper

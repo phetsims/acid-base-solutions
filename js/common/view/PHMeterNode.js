@@ -98,7 +98,7 @@ define( function( require ) {
     this.addChild( backgroundNode );
     this.addChild( textNode );
     if ( SHOW_ORIGIN ) {
-      this.addChild( new Circle( 4, { fill: 'red' } ) );
+      this.addChild( new Circle( 2, { fill: 'red' } ) );
     }
 
     // init drag
