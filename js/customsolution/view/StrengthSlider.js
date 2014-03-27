@@ -24,13 +24,13 @@ define( function( require ) {
   var TICK_LABEL_OPTIONS = { font: new PhetFont( 12 ) };
 
   /**
-   * @param {Property<Number>} sliderValueProperty
+   * @param {Property<Number>} valueProperty
    * @param {Range} range
    * @constructor
    */
-  function StrengthSlider( sliderValueProperty, range ) {
+  function StrengthSlider( valueProperty, range ) {
 
-    HSlider.call( this, sliderValueProperty, range, {
+    HSlider.call( this, valueProperty, range, {
       trackSize: new Dimension2( 125, 4 ),
       thumbSize: new Dimension2( 12, 24 ),
       majorTickLength: 12
