@@ -80,7 +80,8 @@ define( function( require ) {
 
     // concentration readout
     var readoutText = new Text( Util.toFixed( concentrationProperty.value, CONCENTRATION_DECIMALS ), { font: CONCENTRATION_FONT } );
-    var readoutBackground = new Rectangle( 0, 0, 1.5 * readoutText.width, 1.5 * readoutText.height, 4, 4, { fill: 'white' } );
+    var readoutBackground = new Rectangle( 0, 0, 1.5 * readoutText.width, 1.5 * readoutText.height, 4, 4,
+      { fill: 'white', stroke: 'rgb(200,200,200)' } );
     var readoutNode = new Node( { children: [ readoutBackground, readoutText ] } );
     readoutText.center = readoutBackground.center;
 
