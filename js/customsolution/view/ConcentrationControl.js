@@ -2,7 +2,6 @@
 
 /**
  * Concentration control. Includes a slider, arrow buttons, and value display.
- * Adapts a linear slider to a logarithmic concentration range.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -12,6 +11,7 @@ define( function( require ) {
 
   // Imports
   var ArrowButton = require( 'SCENERY_PHET/ArrowButton' );
+  var ConcentrationSlider = require( 'ACID_BASE_SOLUTIONS/customsolution/view/ConcentrationSlider' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -90,16 +90,8 @@ define( function( require ) {
     panelContent.addChild( readoutText );
 
     // create and add the slider
-    var slider = new HSlider( model.sliderValueProperty, model.sliderValueRange, {
-      trackSize: new Dimension2( 85, 4 ),
-      thumbSize: new Dimension2( 12, 24 ),
-      majorTickLength: 15,
-      tickLabelSpacing: 2
-    } );
+    var slider = new ConcentrationSlider( concentrationProperty, concentrationRange );
     panelContent.addChild( slider );
-    for ( var i = 0, step = model.sliderValueRange.getLength() / 3; i < 4; i++ ) {
-      slider.addMinorTick( model.sliderValueRange.min + step * i, null );
-    }
 
     // arrow buttons
     var leftArrowButton = new ArrowButton( 'left', function() {

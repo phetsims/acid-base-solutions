@@ -1,3 +1,4 @@
+3/27/14 #51 factor ConcentrationSlider out of ConcentrationControl
 3/27/14 #51 center weak/strong radio buttons above strength slider
 3/27/14 #76 compute length of separators in 'Solution' control panel
 3/27/14 #75 remove scaling of concentration control panel

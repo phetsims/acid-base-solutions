@@ -14,9 +14,7 @@ define( function( require ) {
     VBox = require( 'SCENERY/nodes/VBox' ),
     HBox = require( 'SCENERY/nodes/HBox' ),
     Text = require( 'SCENERY/nodes/Text' ),
-    HStrut = require( 'SUN/HStrut' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    Line = require( 'SCENERY/nodes/Line' ),
     HSeparator = require( 'SUN/HSeparator' ),
     StrengthSlider = require( 'ACID_BASE_SOLUTIONS/customsolution/view/StrengthSlider' ),
     ConcentrationControl = require( 'ACID_BASE_SOLUTIONS/customsolution/view/ConcentrationControl' );
