@@ -18,7 +18,7 @@ define( function( require ) {
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     Line = require( 'SCENERY/nodes/Line' ),
     StrengthSlider = require( 'ACID_BASE_SOLUTIONS/customsolution/view/StrengthSlider' ),
-    ConcentrationSlider = require( 'ACID_BASE_SOLUTIONS/customsolution/view/ConcentrationSlider' );
+    ConcentrationControl = require( 'ACID_BASE_SOLUTIONS/customsolution/view/ConcentrationControl' );
 
   // strings
   var acidString = require( 'string!ACID_BASE_SOLUTIONS/acid' ),
@@ -63,7 +63,7 @@ define( function( require ) {
 
     // add concentration slider
     vBox.addChild( new Text( initialConcentrationString, {font: FONT} ) );
-    vBox.addChild( new ConcentrationSlider( solutionMenuModel.concentrationProperty, ABSConstants.CONCENTRATION_RANGE ) );
+    vBox.addChild( new ConcentrationControl( solutionMenuModel.concentrationProperty, ABSConstants.CONCENTRATION_RANGE ) );
 
     // add black line
     vBox.addChild( new Line( 15, 0, 170, 0, {stroke: 'black', lineWidth: 0.75} ) );

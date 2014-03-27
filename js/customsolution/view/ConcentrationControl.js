@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Slider for controlling concentration.
+ * Concentration control. Includes a slider, arrow buttons, and value display.
  * Adapts a linear slider to a logarithmic concentration range.
  *
  * @author Andrey Zelenkov (Mlearner)
@@ -69,7 +69,7 @@ define( function( require ) {
    * @param {Range} concentrationRange
    * @constructor
    */
-  function ConcentrationSlider( concentrationProperty, concentrationRange ) {
+  function ConcentrationControl( concentrationProperty, concentrationRange ) {
 
     var model = new Model( concentrationProperty, concentrationRange ),
       readoutText = new Text( StringUtils.format( pattern_0value_1concentration, Util.toFixed( concentrationProperty.value, DECIMAL_PLACES ), molesPerLiterString ), { font: READOUT_FONT } ),
@@ -131,5 +131,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, ConcentrationSlider );
+  return inherit( Node, ConcentrationControl );
 } );
