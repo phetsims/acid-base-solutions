@@ -47,8 +47,8 @@ define( function( require ) {
     this.sliderValueProperty = new Property( Util.log10( strengthProperty.value ) );
 
     // map between linear and logarithmic
-    this.sliderValueProperty.link( function( value ) {
-      strengthProperty.value = Math.pow( 10, value );
+    this.sliderValueProperty.link( function( sliderValue ) {
+      strengthProperty.value = Math.pow( 10, sliderValue );
     } );
     strengthProperty.link( function( strength ) {
       self.sliderValueProperty.value = Util.log10( strength );

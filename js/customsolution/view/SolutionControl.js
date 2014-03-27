@@ -62,7 +62,7 @@ define( function( require ) {
 
     // add concentration slider
     vBox.addChild( new Text( initialConcentrationString, {font: FONT} ) );
-    vBox.addChild( new ConcentrationSlider( solutionMenuModel.concentrationSliderModel ) );
+    vBox.addChild( new ConcentrationSlider( solutionMenuModel.concentrationProperty ) );
 
     // add black line
     vBox.addChild( new Line( 15, 0, 170, 0, {stroke: 'black', lineWidth: 0.75} ) );
