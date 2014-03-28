@@ -28,12 +28,9 @@ define( function( require ) {
 
   // constants
   var SHOW_ORIGIN = true; // draws a red circle at the origin, for debugging
-  var BULB_END_X = 23,
-    BULB_END_Y = 84,
-    BULB_TO_BATTERY_WIRE_LENGTH = 40,
-    OPACITY_MAX = 0.15,
-  // alpha of the bulb when used against a dark background. This is clamped after evaluation to keep it within the range [0,1]
-    BRIGHTNESS_TO_ALPHA = new LinearFunction( 0, 1, OPACITY_MAX, 0 );
+  var BULB_TO_BATTERY_WIRE_LENGTH = 40;
+  var OPACITY_MAX = 0.15;
+  var BRIGHTNESS_TO_OPACITY = new LinearFunction( 0, 1, OPACITY_MAX, 0 ); // 
 
   function ConductivityTest( conductivityTestModel ) {
 
@@ -92,7 +89,7 @@ define( function( require ) {
 
     // set brightness of light bulb
     var setBrightness = function() {
-      lightBulbDarkMask.opacity = ( conductivityTestModel.isClosedProperty.value ? BRIGHTNESS_TO_ALPHA( conductivityTestModel.brightnessProperty.value ) : OPACITY_MAX );
+      lightBulbDarkMask.opacity = ( conductivityTestModel.isClosedProperty.value ? BRIGHTNESS_TO_OPACITY( conductivityTestModel.brightnessProperty.value ) : OPACITY_MAX );
     };
     conductivityTestModel.brightnessProperty.link( setBrightness );
     conductivityTestModel.isClosedProperty.link( setBrightness );
