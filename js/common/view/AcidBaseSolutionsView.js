@@ -32,7 +32,7 @@ define( function( require ) {
     var graphNode = new EquilibriumConcentrationBarChart( model.barChart );
     var pHMeterNode = new PHMeterNode( model.pHMeter );
     var pHPaperNode = new PHPaperNode( model.pHPaper );
-    var pHColorKeyNode = new PHColorKeyNode( model.pHPaper.visibleProperty, { left: beakerNode.left + 30, bottom: beakerNode.top - 50 } );
+    var pHColorKeyNode = new PHColorKeyNode( model.pHPaper.visibleProperty, model.pHPaper.paperSize, { left: beakerNode.left + 30, bottom: beakerNode.top - 50 } );
     var conductivityTesterNode = new ConductivityTesterNode( model.conductivityTester );
 
     var rootNode = new Node( {

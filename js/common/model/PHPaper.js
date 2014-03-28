@@ -9,9 +9,9 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
+  var Dimension2 = require( 'DOT/Dimension2' );
   var Property = require( 'AXON/Property' );
   var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
   var Util = require( 'DOT/Util' );
@@ -31,10 +31,12 @@ define( function( require ) {
     this.beaker = beaker;
     this.pHProperty = pHProperty;
 
+    this.paperSize = new Dimension2( 14, 110 );
+
     // drag bounds
     this.dragBounds = new Bounds2(
-      beaker.left + ABSConstants.PH_PAPER_SIZE.width/2, beaker.top - 20,
-      beaker.right - ABSConstants.PH_PAPER_SIZE.width/2, beaker.bottom );
+      beaker.left + this.paperSize.width/2, beaker.top - 20,
+      beaker.right - this.paperSize.width/2, beaker.bottom );
 
     // location
     this.locationProperty = new Property( new Vector2( beaker.right - 60, beaker.top - 10 ) );
@@ -72,7 +74,7 @@ define( function( require ) {
     updateIndicatorHeight: function() {
       if ( this.beaker.containsPoint( this.locationProperty.value ) ) {
         this.indicatorHeightProperty.value =
-        Util.clamp( this.locationProperty.value.y - this.beaker.top + 5, this.indicatorHeightProperty.value, ABSConstants.PH_PAPER_SIZE.height );
+        Util.clamp( this.locationProperty.value.y - this.beaker.top + 5, this.indicatorHeightProperty.value, this.paperSize.height );
       }
     }
   };

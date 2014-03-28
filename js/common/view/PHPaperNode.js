@@ -11,7 +11,6 @@ define( function( require ) {
 
   // imports
   var Circle = require( 'SCENERY/nodes/Circle' );
-  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PHColorKeyNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHColorKeyNode' );
@@ -30,12 +29,10 @@ define( function( require ) {
     Node.call( this, { cursor: 'pointer' } );
 
     // blank paper
-    var width = ABSConstants.PH_PAPER_SIZE.width;
-    var height = ABSConstants.PH_PAPER_SIZE.height;
-    var paperNode = new Rectangle( 0, 0, width, height, { fill: PAPER_COLOR, stroke: 'rgb(150, 150, 150)', lineWidth: 0.5 } );
+    var paperNode = new Rectangle( 0, 0, pHPaper.paperSize.width, pHPaper.paperSize.height, { fill: PAPER_COLOR, stroke: 'rgb(150, 150, 150)', lineWidth: 0.5 } );
 
     // portion of the paper that changes color
-    var indicatorNode = new Rectangle( 0, 0, width, 0, { fill: 'red', stroke: 'rgb(150, 150, 150)', lineWidth: 0.5 } );
+    var indicatorNode = new Rectangle( 0, 0, pHPaper.paperSize.width, 0, { fill: 'red', stroke: 'rgb(150, 150, 150)', lineWidth: 0.5 } );
     indicatorNode.rotate( Math.PI ); // so that indicator rectangle expands upward
 
     // rendering order

@@ -42,16 +42,16 @@ define( function( require ) {
   // constants
   var FONT_BIG = new PhetFont( 10 );
   var FONT_SMALL = new PhetFont( 8 );
-  var CHIP_WIDTH = ABSConstants.PH_PAPER_SIZE.width;
   var CHIP_HEIGHT = 28;
   var CHIP_X_SPACING = 1;
 
   /**
    * @param {Property<Boolean>} visibleProperty
+   * @param {Dimension2} paperSize
    * @param {*} options any Node options
    * @constructor
    */
-  function PHColorKeyNode( visibleProperty, options ) {
+  function PHColorKeyNode( visibleProperty, paperSize, options ) {
 
     var self = this;
     Node.call( this );
@@ -60,9 +60,10 @@ define( function( require ) {
     this.addChild( new Text( pHColorKeyString, {font: FONT_BIG, centerY: 0} ) );
 
     // color chips, with a pH value below each one
+    var chipWidth = paperSize.width; // same width as pH paper, to facilitate holding paper up to color key
     for ( var i = 0; i < PH_COLORS.length; i++ ) {
-      this.addChild( new Rectangle( (CHIP_WIDTH + CHIP_X_SPACING) * i, 10, CHIP_WIDTH, CHIP_HEIGHT, {fill: PH_COLORS[i]} ) );
-      this.addChild( new Text( i.toString(), {font: FONT_SMALL, centerX: (CHIP_WIDTH + CHIP_X_SPACING) * (i + 0.5), centerY: 46} ) );
+      this.addChild( new Rectangle( (chipWidth + CHIP_X_SPACING) * i, 10, chipWidth, CHIP_HEIGHT, {fill: PH_COLORS[i]} ) );
+      this.addChild( new Text( i.toString(), {font: FONT_SMALL, centerX: (chipWidth + CHIP_X_SPACING) * (i + 0.5), centerY: 46} ) );
     }
 
     visibleProperty.link( function( visible ) {

@@ -22,7 +22,6 @@ define( function( require ) {
     FORMULAS_FONT_SIZE: 13,
     FORMULAS_HBOX_SPACING: 4,
     FORMULAS_VBOX_SPACING: 2,
-    PH_PAPER_SIZE: new Dimension2( 14, 110 ), // dimensions of pH paper
     STRONG_STRENGTH: STRONG_STRENGTH,
     WATER_EQUILIBRIUM_CONSTANT: 1E-14,
     WATER_CONCENTRATION: 55.6, // water concentration when it's used as a solvent, mol/L
