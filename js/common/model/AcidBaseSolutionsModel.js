@@ -9,16 +9,16 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var inherit = require( 'PHET_CORE/inherit' ),
-    PropertySet = require( 'AXON/PropertySet' ),
-    PHMeter = require( 'ACID_BASE_SOLUTIONS/common/model/PHMeter' ),
-    PHPaper = require( 'ACID_BASE_SOLUTIONS/common/model/PHPaper' ),
-    ConductivityTester = require( 'ACID_BASE_SOLUTIONS/common/model/ConductivityTester' ),
-    Beaker = require( 'ACID_BASE_SOLUTIONS/common/model/Beaker' ),
-    MagnifierModel = require( 'ACID_BASE_SOLUTIONS/model/MagnifierModel' ),
-    ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' ),
-    ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' ),
-    ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
+  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
+  var Beaker = require( 'ACID_BASE_SOLUTIONS/common/model/Beaker' );
+  var ConductivityTester = require( 'ACID_BASE_SOLUTIONS/common/model/ConductivityTester' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var MagnifierModel = require( 'ACID_BASE_SOLUTIONS/model/MagnifierModel' );
+  var PHMeter = require( 'ACID_BASE_SOLUTIONS/common/model/PHMeter' );
+  var PHPaper = require( 'ACID_BASE_SOLUTIONS/common/model/PHPaper' );
+  var PropertySet = require( 'AXON/PropertySet' );
+  var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
+  var ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );
 
   /**
    * @param {Array<AqueousSolution>} solutions
