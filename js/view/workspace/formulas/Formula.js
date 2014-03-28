@@ -19,10 +19,11 @@ define( function( require ) {
     WeakBaseFormula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/WeakBaseFormula' );
 
   /**
-   * @param {FormulaModel} formulaModel
+   * @param {Beaker} beaker
+   * @param {Property<SolutionType>} solutionTypeProperty
    * @constructor
    */
-  function Formula( formulaModel ) {
+  function Formula( beaker, solutionTypeProperty ) {
     var maxWidth,
       formula,
       formulas = {};
@@ -46,10 +47,11 @@ define( function( require ) {
       }
     }
 
-    this.translation = formulaModel.location.plusXY( -maxWidth / 2, 5 );
+    // position below the beaker
+    this.translation = beaker.location.plusXY( -maxWidth / 2, 5 );
 
     // add observer for formulas
-    formulaModel.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
+    solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
       // hide previous formula
       if ( prevSolutionType ) {
         formulas[prevSolutionType].setVisible( false );

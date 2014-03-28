@@ -15,7 +15,6 @@ define( function( require ) {
     PHPaper = require( 'ACID_BASE_SOLUTIONS/common/model/PHPaper' ),
     ConductivityTester = require( 'ACID_BASE_SOLUTIONS/common/model/ConductivityTester' ),
     Beaker = require( 'ACID_BASE_SOLUTIONS/common/model/Beaker' ),
-    FormulaModel = require( 'ACID_BASE_SOLUTIONS/model/FormulaModel' ),
     MagnifierModel = require( 'ACID_BASE_SOLUTIONS/model/MagnifierModel' ),
     ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' ),
     ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' ),
@@ -47,9 +46,6 @@ define( function( require ) {
 
     // beaker model (all elements in workspace have position relative to beaker)
     this.beaker = new Beaker();
-
-    // formula model
-    this.formula = new FormulaModel( this.beaker, this.property( 'solutionType' ) );
 
     // magnifier model
     this.magnifier = new MagnifierModel( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'solventVisible' ), this.property( 'viewMode' ), this.property( 'toolMode' ) );

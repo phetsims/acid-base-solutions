@@ -27,7 +27,7 @@ define( function( require ) {
     ScreenView.call( this, { renderer: 'svg' } );
 
     var beakerNode = new BeakerNode( model.beaker );
-    var formulaNode = new Formula( model.formula );
+    var formulaNode = new Formula( model.beaker, model.property( 'solutionType' ) );
     var magnifierNode = new Magnifier( model.magnifier );
     var graphNode = new EquilibriumConcentrationBarChart( model.barChart );
     var pHMeterNode = new PHMeterNode( model.pHMeter );
