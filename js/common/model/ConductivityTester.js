@@ -32,11 +32,12 @@ define( function( require ) {
     this.probeSize = new Dimension2( 16, 55 );
 
     // bulb and battery location
-    this.location = new Vector2( beaker.location.x, beaker.top - 30 );
+    this.location = new Vector2( beaker.location.x - 45, beaker.top - 30 );
 
     // probe locations
-    this.negativeProbeLocation = new Property( new Vector2( beaker.left + 40, this.probeDragYRange.min ) );
-    this.positiveProbeLocation = new Property( new Vector2( beaker.right - 40, this.probeDragYRange.min ) );
+    var probeXOffset = 0.2 * beaker.size.width; // offset from edge of beaker
+    this.negativeProbeLocation = new Property( new Vector2( beaker.left + probeXOffset, this.probeDragYRange.min + 10 ) );
+    this.positiveProbeLocation = new Property( new Vector2( beaker.right - probeXOffset, this.probeDragYRange.min + 10 ) );
 
     // visibility of conductivity test
     this.visibleProperty = new Property( toolModeProperty.value === ToolMode.CONDUCTIVITY );
