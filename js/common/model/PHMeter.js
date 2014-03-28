@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var DerivedProperty = require( 'AXON/DerivedProperty' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
@@ -35,18 +36,16 @@ define( function( require ) {
     this.locationProperty = new Property( new Vector2( beaker.right - 85, beaker.top - 5 ) );
 
     // visibility
-    this.visibleProperty = new Property( toolModeProperty.value === ToolMode.PH_METER );
-
-    toolModeProperty.link( function( toolMode ) {
-      self.visibleProperty.value = ( toolMode === ToolMode.PH_METER );
-    } );
+    this.visibleProperty = new DerivedProperty( [ toolModeProperty ],
+      function( toolMode ) {
+        return ( toolMode === ToolMode.PH_METER );
+      } );
   }
 
   PHMeter.prototype = {
 
     reset: function() {
       this.locationProperty.reset();
-      this.visibleProperty.reset();
     },
 
     // Is the tip of the pH probe in solution?

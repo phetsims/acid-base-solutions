@@ -11,6 +11,7 @@ define( function( require ) {
   // imports
   var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var Bounds2 = require( 'DOT/Bounds2' );
+  var DerivedProperty = require( 'AXON/DerivedProperty' );
   var Property = require( 'AXON/Property' );
   var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
   var Util = require( 'DOT/Util' );
@@ -38,15 +39,14 @@ define( function( require ) {
     // location
     this.locationProperty = new Property( new Vector2( beaker.right - 60, beaker.top - 10 ) );
 
-    // visibility
-    this.visibleProperty = new Property( toolModeProperty.value === ToolMode.PH_PAPER );
-
     // height of indicator, the portion of the paper that changes color when dipped in solution
     this.indicatorHeightProperty = new Property( 0 );
 
-    toolModeProperty.link( function( toolMode ) {
-      self.visibleProperty.value = (toolMode === ToolMode.PH_PAPER);
-    } );
+    // visibility
+    this.visibleProperty = new DerivedProperty( [ toolModeProperty ],
+      function( toolMode ) {
+        return ( toolMode === ToolMode.PH_PAPER );
+      } );
 
     solutionTypeProperty.link( function() {
       self.indicatorHeightProperty.value = 0; // clear the indicator color from the paper
@@ -62,7 +62,6 @@ define( function( require ) {
 
     reset: function() {
       this.locationProperty.reset();
-      this.visibleProperty.reset();
       this.indicatorHeightProperty.reset();
     },
 
