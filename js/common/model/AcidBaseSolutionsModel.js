@@ -13,7 +13,7 @@ define( function( require ) {
     PropertySet = require( 'AXON/PropertySet' ),
     PHMeter = require( 'ACID_BASE_SOLUTIONS/common/model/PHMeter' ),
     PHPaper = require( 'ACID_BASE_SOLUTIONS/common/model/PHPaper' ),
-    ConductivityTestModel = require( 'ACID_BASE_SOLUTIONS/model/ConductivityTestModel' ),
+    ConductivityTester = require( 'ACID_BASE_SOLUTIONS/common/model/ConductivityTester' ),
     Beaker = require( 'ACID_BASE_SOLUTIONS/common/model/Beaker' ),
     FormulaModel = require( 'ACID_BASE_SOLUTIONS/model/FormulaModel' ),
     MagnifierModel = require( 'ACID_BASE_SOLUTIONS/model/MagnifierModel' ),
@@ -60,8 +60,8 @@ define( function( require ) {
     // pH paper model
     this.pHPaper = new PHPaper( this.beaker, this.property( 'solutionType' ), this.property( 'pH' ), this.property( 'toolMode' ) );
 
-    // conductivity test model
-    this.conductivityTest = new ConductivityTestModel( this.beaker, this.property( 'toolMode' ), this.property( 'brightness' ) );
+    // conductivity tester model
+    this.conductivityTester = new ConductivityTester( this.beaker, this.property( 'toolMode' ), this.property( 'brightness' ) );
 
     // set appropriate pH
     this.property( 'solutionType' ).link( function( newSolution, prevSolution ) {
@@ -89,7 +89,7 @@ define( function( require ) {
 
   return inherit( PropertySet, AcidBaseSolutionsModel, {
     reset: function() {
-      // reset main properties
+      // reset supertype properties
       PropertySet.prototype.reset.call( this );
 
       // reset solutions
@@ -98,14 +98,9 @@ define( function( require ) {
         this.solutions[solutionType].reset();
       }
 
-      // reset pH meter
       this.pHMeter.reset();
-
-      // reset pH paper
       this.pHPaper.reset();
-
-      // reset conductivity test
-      this.conductivityTest.reset();
+      this.conductivityTester.reset();
     }
   } );
 } );

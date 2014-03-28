@@ -40,7 +40,11 @@ define( function( require ) {
   var BRIGHTNESS_TO_OPACITY = new LinearFunction( 0, 1, OPACITY_MAX, 0 ); //
   var BULB_SCALE = 0.33; // scale applied to all bulb images
 
-  function ConductivityTest( conductivityTestModel ) {
+  /**
+   * @param {ConductivityTester} conductivityTester
+   * @constructor
+   */
+  function ConductivityTest( conductivityTester ) {
 
     var self = this;
 
@@ -58,7 +62,7 @@ define( function( require ) {
 
     // light rays centered on the bulb
     var bulbRadius = glassNode.width / 2;
-    var raysNode = new ConductivityTestLightRays( conductivityTestModel.brightnessProperty, conductivityTestModel.isClosedProperty, bulbRadius,
+    var raysNode = new ConductivityTestLightRays( conductivityTester.brightnessProperty, conductivityTester.isClosedProperty, bulbRadius,
       { centerX: glassNode.centerX, y: glassNode.top + bulbRadius } );
 
     // wire from bulb base to battery
@@ -69,7 +73,7 @@ define( function( require ) {
 
     // apparatus (bulb + battery), origin at tip of bulb's base
     var apparatusNode = new Node( {
-      translation: conductivityTestModel.location,
+      translation: conductivityTester.location,
       children: [
         bulbBatteryWire,
         battery,
@@ -84,39 +88,39 @@ define( function( require ) {
 
     // wire from base of bulb (origin) to negative probe
     var negativeWire = new ConductivityTestWire(
-      conductivityTestModel.location.x - 5, conductivityTestModel.location.y - 10,
-      conductivityTestModel.negativeProbeLocation.value.x, conductivityTestModel.negativeProbeLocation.value.y - conductivityTestModel.probeSize.height,
+      conductivityTester.location.x - 5, conductivityTester.location.y - 10,
+      conductivityTester.negativeProbeLocation.value.x, conductivityTester.negativeProbeLocation.value.y - conductivityTester.probeSize.height,
       { endPointOnRight: false } );
 
     // wire from battery terminal to positive probe
     var positiveWire = new ConductivityTestWire(
       battery.getGlobalBounds().right, battery.getGlobalBounds().centerY,
-      conductivityTestModel.positiveProbeLocation.value.x, conductivityTestModel.positiveProbeLocation.value.y - conductivityTestModel.probeSize.height,
+      conductivityTester.positiveProbeLocation.value.x, conductivityTester.positiveProbeLocation.value.y - conductivityTester.probeSize.height,
       { endPointOnRight: true } );
 
     // probes
-    var negativeProbe = new ConductivityTestProbe( conductivityTestModel.negativeProbeLocation, conductivityTestModel.probeDragYRange, conductivityTestModel.probeSize, { isPositive: false } );
-    var positiveProbe = new ConductivityTestProbe( conductivityTestModel.positiveProbeLocation, conductivityTestModel.probeDragYRange, conductivityTestModel.probeSize, { isPositive: true } );
+    var negativeProbe = new ConductivityTestProbe( conductivityTester.negativeProbeLocation, conductivityTester.probeDragYRange, conductivityTester.probeSize, { isPositive: false } );
+    var positiveProbe = new ConductivityTestProbe( conductivityTester.positiveProbeLocation, conductivityTester.probeDragYRange, conductivityTester.probeSize, { isPositive: true } );
 
     Node.call( this, { children: [ negativeWire, positiveWire, negativeProbe, positiveProbe, apparatusNode ] } );
 
     // update wires if end point was changed
-    conductivityTestModel.positiveProbeLocation.link( function( location ) {
-      positiveWire.setEndPoint( location.x, location.y - conductivityTestModel.probeSize.height );
+    conductivityTester.positiveProbeLocation.link( function( location ) {
+      positiveWire.setEndPoint( location.x, location.y - conductivityTester.probeSize.height );
     } );
-    conductivityTestModel.negativeProbeLocation.link( function( location ) {
-      negativeWire.setEndPoint( location.x, location.y - conductivityTestModel.probeSize.height );
+    conductivityTester.negativeProbeLocation.link( function( location ) {
+      negativeWire.setEndPoint( location.x, location.y - conductivityTester.probeSize.height );
     } );
 
     // set brightness of light bulb
     var setBrightness = function() {
-      lightBulbDarkMask.opacity = ( conductivityTestModel.isClosedProperty.value ? BRIGHTNESS_TO_OPACITY( conductivityTestModel.brightnessProperty.value ) : OPACITY_MAX );
+      lightBulbDarkMask.opacity = ( conductivityTester.isClosedProperty.value ? BRIGHTNESS_TO_OPACITY( conductivityTester.brightnessProperty.value ) : OPACITY_MAX );
     };
-    conductivityTestModel.brightnessProperty.link( setBrightness );
-    conductivityTestModel.isClosedProperty.link( setBrightness );
+    conductivityTester.brightnessProperty.link( setBrightness );
+    conductivityTester.isClosedProperty.link( setBrightness );
 
     // visibility observer
-    conductivityTestModel.visibleProperty.link( function( visible ) {
+    conductivityTester.visibleProperty.link( function( visible ) {
       self.setVisible( visible );
     } );
   }

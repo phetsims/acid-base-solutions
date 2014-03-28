@@ -1,3 +1,4 @@
+3/27/14 #63 move ConductivityTestModel to common/model/ConductivityTester
 3/27/14 #67 clean up code related to wires in the conductivity tester
 3/27/14 #67 connect negative wire to left edge of bulb base
 3/27/14 #67 attach wires correctly in conductivity tester, remove hard-coded constants

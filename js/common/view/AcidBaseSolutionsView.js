@@ -33,7 +33,7 @@ define( function( require ) {
     var pHMeterNode = new PHMeterNode( model.pHMeter );
     var pHPaperNode = new PHPaperNode( model.pHPaper );
     var pHColorKeyNode = new PHColorKeyNode( model.pHPaper.visibleProperty, { left: beakerNode.left + 30, bottom: beakerNode.top - 50 } );
-    var conductivityTestNode = new ConductivityTest( model.conductivityTest );
+    var conductivityTestNode = new ConductivityTest( model.conductivityTester );
 
     var rootNode = new Node( {
       children: [

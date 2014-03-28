@@ -22,7 +22,7 @@ define( function( require ) {
    * @param {Property<Number>} brightnessProperty
    * @constructor
    */
-  function ConductivityTestModel( beaker, toolModeProperty, brightnessProperty ) {
+  function ConductivityTester( beaker, toolModeProperty, brightnessProperty ) {
     var self = this;
 
     this.beaker = beaker;
@@ -58,7 +58,7 @@ define( function( require ) {
     this.negativeProbeLocation.link( updateIsClosed );
   }
 
-  ConductivityTestModel.prototype = {
+  ConductivityTester.prototype = {
 
     reset: function() {
       this.visibleProperty.reset();
@@ -73,5 +73,5 @@ define( function( require ) {
     }
   };
 
-  return ConductivityTestModel;
+  return ConductivityTester;
 } );
