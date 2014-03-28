@@ -78,7 +78,7 @@ define( function( require ) {
       { fill: 'rgb(192,192,192)', stroke: 'rgb(160,160,160)', lineWidth: 0.5 } );
 
     // text, initialized with widest value for layout
-    var textNode = new Text( formatText( ABSConstants.MAX_PH ), {font: FONT, centerX: 34, centerY: 0} );
+    var textNode = new Text( formatText( ABSConstants.PH_RANGE.max ), {font: FONT, centerX: 34, centerY: 0} );
 
     // background sized to fit text
     var backgroundNode = new Rectangle( 0, 0, textNode.width + ( 2 * X_MARGIN ), textNode.height + ( 2 * Y_MARGIN ), 5, 5,

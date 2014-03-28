@@ -1,3 +1,4 @@
+3/27/14 replace min/max constants with Range for pH
 3/27/14 #79 move brightness property from main model to ConductivityTester, where it's derived from pH
 3/27/14 #67 add 'Property' suffix on probe location properties
 3/27/14 #79 use DerivedProperty in PHPaper, PHMeter, ConductivityTester

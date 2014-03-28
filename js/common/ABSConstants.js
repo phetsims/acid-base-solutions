@@ -18,11 +18,10 @@ define( function( require ) {
 
   return {
     CONCENTRATION_RANGE: new Range( 1E-3, 1, 1E-2 ),
+    PH_RANGE: new Range( 0, 14 ),
     FORMULAS_FONT_SIZE: 13,
     FORMULAS_HBOX_SPACING: 4,
     FORMULAS_VBOX_SPACING: 2,
-    MAX_PH: 14,
-    MIN_PH: 0,
     PH_PAPER_SIZE: new Dimension2( 14, 110 ), // dimensions of pH paper
     STRONG_STRENGTH: STRONG_STRENGTH,
     WATER_EQUILIBRIUM_CONSTANT: 1E-14,
