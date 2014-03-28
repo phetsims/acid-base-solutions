@@ -1,3 +1,4 @@
+3/27/14 #79 use DerivedProperty in BarChartModel and MagnifierModel
 3/27/14 delete FormulaModel, it adds nothing
 3/27/14 #63 move nodes related to conductivity to common/view/conductivity/
 3/27/14 #78 fix implementation of light bulb 'glow'

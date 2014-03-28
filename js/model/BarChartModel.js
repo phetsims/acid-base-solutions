@@ -9,9 +9,9 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var Property = require( 'AXON/Property' ),
-    ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' ),
-    ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
+  var DerivedProperty = require( 'AXON/DerivedProperty' );
+  var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
+  var ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );
 
   /**
    * @param {Beaker} beaker
@@ -24,6 +24,7 @@ define( function( require ) {
    * @constructor
    */
   function BarChartModel( beaker, solutions, solutionTypeProperty, viewModeProperty, toolModeProperty, concentrationProperty, strengthProperty ) {
+
     // bar chart width
     this.width = beaker.size.width / 2;
 
@@ -52,24 +53,11 @@ define( function( require ) {
     this.concentrationProperty = concentrationProperty;
 
     // visibility of bar charts
-    this.visibleProperty = new Property( this.findVisibility() );
-
-    // add observers
-    var setVisibilityBinded = this.setVisibility.bind( this );
-    viewModeProperty.link( setVisibilityBinded );
-    toolModeProperty.link( setVisibilityBinded );
+    this.visibleProperty = new DerivedProperty( [ viewModeProperty, toolModeProperty ],
+      function( viewMode, toolMode ) {
+        return ( viewMode === ViewMode.GRAPH && toolMode !== ToolMode.CONDUCTIVITY );
+      } );
   }
-
-  BarChartModel.prototype = {
-
-    findVisibility: function() {
-      return (this.viewModeProperty.value === ViewMode.GRAPH && this.toolModeProperty.value !== ToolMode.CONDUCTIVITY);
-    },
-
-    setVisibility: function() {
-      this.visibleProperty.value = this.findVisibility();
-    }
-  };
 
   return BarChartModel;
 } );
