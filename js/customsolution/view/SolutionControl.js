@@ -46,6 +46,7 @@ define( function( require ) {
   var ARROW_BUTTON_OPTIONS = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
   var CONCENTRATION_FONT = new PhetFont( 14 );
   var CONCENTRATION_DECIMALS = 3;
+  var AB_SWITCH_SIZE = new Dimension2( 40, 20 );
 
   /**
    * @param {Property<SolutionType>} solutionTypeProperty
@@ -72,7 +73,7 @@ define( function( require ) {
     var acidBaseSwitch = new ABSwitch( isAcidProperty,
       true, new Text( acidString, {font: CONTROL_FONT} ),
       false, new Text( baseString, {font: CONTROL_FONT} ),
-      { switchSize: new Dimension2( 40, 20 ) } );
+      { switchSize: AB_SWITCH_SIZE } );
 
     // concentration title
     var concentrationTitle = new Text( initialConcentrationString, { font: SUBTITLE_FONT } );
@@ -104,10 +105,11 @@ define( function( require ) {
     // strength control
     var strengthTitle = new Text( strengthString, { font: SUBTITLE_FONT } );
     var isWeakProperty = new Property( solutionTypeProperty.value === SolutionType.WEAK_ACID || solutionTypeProperty.value === SolutionType.WEAK_ACID );
-    var strengthRadioButtons = new HBox( { spacing: 10, children: [
-      new AquaRadioButton( isWeakProperty, true, new Text( weakString, {font: CONTROL_FONT} ), RADIO_BUTTON_OPTIONS ),
-      new AquaRadioButton( isWeakProperty, false, new Text( strongString, {font: CONTROL_FONT} ), RADIO_BUTTON_OPTIONS )
-    ] } );
+    var weakStrongSwitch = new ABSwitch( isWeakProperty,
+      true, new Text( weakString, {font: CONTROL_FONT} ),
+      false, new Text( strongString, {font: CONTROL_FONT} ),
+      { switchSize: AB_SWITCH_SIZE }
+    );
     var strengthSlider = new StrengthSlider( strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE );
 
     options.children = [
@@ -117,7 +119,7 @@ define( function( require ) {
       concentrationValueControl,
       concentrationSlider,
       strengthTitle,
-      strengthRadioButtons,
+      weakStrongSwitch,
       strengthSlider
     ];
 
@@ -139,7 +141,7 @@ define( function( require ) {
     var separatorYSpacing = 6;
     var controlYSpacing = 6;
     // controls are all center justified
-    acidBaseSwitch.centerX = concentrationValueControl.centerX = concentrationSlider.centerX = strengthRadioButtons.centerX = strengthSlider.centerX = separatorWidth / 2;
+    acidBaseSwitch.centerX = concentrationValueControl.centerX = concentrationSlider.centerX = weakStrongSwitch.centerX = strengthSlider.centerX = separatorWidth / 2;
     // titles and subtitles are left justified
     acidBaseSwitch.top = solutionTitle.bottom + titleYSpacing;
     concentrationSeparator.top = acidBaseSwitch.bottom + separatorYSpacing;
@@ -148,8 +150,8 @@ define( function( require ) {
     concentrationSlider.top = concentrationValueControl.bottom + controlYSpacing;
     strengthSeparator.top = concentrationSlider.bottom + separatorYSpacing;
     strengthTitle.top = strengthSeparator.bottom + separatorYSpacing;
-    strengthRadioButtons.top = strengthTitle.bottom + subtitleYSpacing;
-    strengthSlider.top = strengthRadioButtons.bottom + controlYSpacing;
+    weakStrongSwitch.top = strengthTitle.bottom + subtitleYSpacing;
+    strengthSlider.top = weakStrongSwitch.bottom + controlYSpacing;
 
     Node.call( this, options );
 

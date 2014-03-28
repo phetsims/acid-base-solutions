@@ -7,4 +7,3 @@ TODO list for acid-base-solutions
 DESIGN
 - move pH values above color key?
 - black text is difficult to see on blue bars in graph
-- Acid/Base was change to ABSwitch, why not Weak/Strong?
