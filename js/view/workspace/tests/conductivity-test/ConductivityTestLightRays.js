@@ -3,6 +3,7 @@
 /**
  * Visual representation for light rays
  * in the conductivity test in the 'Acid-Base Solutions' sim.
+ * Origin is at the center of the light bulb.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
@@ -41,6 +42,7 @@ define( function( require ) {
   }
 
   return inherit( Node, ConductivityTestLightRays, {
+
     createCacheLines: function( numberOfLines ) {
       this.cachedLines = [];
       for ( var i = numberOfLines; i--; ) {
@@ -48,7 +50,9 @@ define( function( require ) {
         this.addChild( this.cachedLines[i] );
       }
     },
+
     setBrightness: function( brightnessProperty, isCloseProperty, bulbRadius ) {
+
       var isClosed = isCloseProperty.value,
         intensity = BRIGHTNESS_TO_INTENSITY_FUNCTION( brightnessProperty.value ),
         numberOfRays = MIN_RAYS + Math.round( intensity * ( MAX_RAYS - MIN_RAYS ) ), // number of rays is a function of intensity
