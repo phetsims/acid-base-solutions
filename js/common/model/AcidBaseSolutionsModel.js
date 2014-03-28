@@ -26,8 +26,8 @@ define( function( require ) {
    * @constructor
    */
   function AcidBaseSolutionsModel( solutions, defaultSolutionType ) {
-    var self = this,
-      setPH = function( value ) { self.pH = value; }; // observer for pH property
+
+    var self = this;
 
     // convert to an associative array, so we can look up solutions by solutionType
     this.solutions = {};
@@ -40,8 +40,7 @@ define( function( require ) {
       toolMode: ToolMode.PH_METER, // test mode
       viewMode: ViewMode.MOLECULES, // view mode
       solventVisible: false, // solvent visibility
-      pH: this.solutions[defaultSolutionType].pH, // pH level of product
-      brightness: pHToBrightness( this.solutions[defaultSolutionType].pH ) // brightness value
+      pH: this.solutions[defaultSolutionType].pH // pH level of product
     } );
 
     // beaker model (all elements in workspace have position relative to beaker)
@@ -57,9 +56,10 @@ define( function( require ) {
     this.pHPaper = new PHPaper( this.beaker, this.property( 'solutionType' ), this.property( 'pH' ), this.property( 'toolMode' ) );
 
     // conductivity tester model
-    this.conductivityTester = new ConductivityTester( this.beaker, this.property( 'toolMode' ), this.property( 'brightness' ) );
+    this.conductivityTester = new ConductivityTester( this.beaker, this.property( 'pH' ), this.property( 'toolMode' ) );
 
     // set appropriate pH
+    var setPH = function( value ) { self.pH = value; };
     this.property( 'solutionType' ).link( function( newSolution, prevSolution ) {
       // unsubscribe from previous solution pH property
       if ( prevSolution ) {
@@ -68,20 +68,7 @@ define( function( require ) {
       // subscribe to new solution pH property
       self.solutions[newSolution].property( 'pH' ).link( setPH );
     } );
-
-    // set brightness of light rays depend on pH value
-    this.property( 'pH' ).link( function( pHValue ) {
-      self.brightness = pHToBrightness( pHValue );
-    } );
   }
-
-  // private methods
-  var pHToBrightness = function( pH ) {
-    var NEUTRAL_PH = ABSConstants.NEUTRAL_PH,
-      NEUTRAL_BRIGHTNESS = ABSConstants.NEUTRAL_BRIGHTNESS;
-
-    return NEUTRAL_BRIGHTNESS + ( 1 - NEUTRAL_BRIGHTNESS ) * (pH < NEUTRAL_PH ? ( NEUTRAL_PH - pH ) / ( NEUTRAL_PH - ABSConstants.MIN_PH ) : ( pH - NEUTRAL_PH ) / ( ABSConstants.MAX_PH - NEUTRAL_PH ) );
-  };
 
   return inherit( PropertySet, AcidBaseSolutionsModel, {
     reset: function() {

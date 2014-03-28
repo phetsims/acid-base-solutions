@@ -23,8 +23,6 @@ define( function( require ) {
     FORMULAS_VBOX_SPACING: 2,
     MAX_PH: 14,
     MIN_PH: 0,
-    NEUTRAL_BRIGHTNESS: 0.05, // brightness when pH == NEUTRAL_PH
-    NEUTRAL_PH: 7,
     PH_PAPER_SIZE: new Dimension2( 14, 110 ), // dimensions of pH paper
     STRONG_STRENGTH: STRONG_STRENGTH,
     WATER_EQUILIBRIUM_CONSTANT: 1E-14,

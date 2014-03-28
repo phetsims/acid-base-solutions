@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Property = require( 'AXON/Property' );
@@ -17,20 +18,21 @@ define( function( require ) {
   var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
   var Vector2 = require( 'DOT/Vector2' );
 
+  // constants
+  var NEUTRAL_PH = 7;
+  var NEUTRAL_BRIGHTNESS = 0.05;
+
   /**
    * @param {Beaker} beaker
+   * @param {Property<Number>} pHProperty
    * @param {Property<ToolMode>} toolModeProperty
-   * @param {Property<Number>} brightnessProperty
    * @constructor
    */
-  function ConductivityTester( beaker, toolModeProperty, brightnessProperty ) {
+  function ConductivityTester( beaker, pHProperty, toolModeProperty ) {
 
     this.probeDragYRange = new Range( beaker.top - 20, beaker.bottom );
 
     this.probeSize = new Dimension2( 16, 55 );
-
-    // brightness property
-    this.brightnessProperty = brightnessProperty;
 
     // bulb and battery location
     this.location = new Vector2( beaker.location.x - 45, beaker.top - 30 );
@@ -51,13 +53,19 @@ define( function( require ) {
       function( positiveProbeLocation, negativeProbeLocation ) {
         return ( beaker.containsPoint( positiveProbeLocation ) && beaker.containsPoint( negativeProbeLocation ) )
       } );
+
+    // brightness of bulb is derived from pH
+    this.brightnessProperty = new DerivedProperty( [ pHProperty ],
+      function( pH ) {
+        return NEUTRAL_BRIGHTNESS + ( 1 - NEUTRAL_BRIGHTNESS ) * (pH < NEUTRAL_PH ? ( NEUTRAL_PH - pH ) / ( NEUTRAL_PH - ABSConstants.MIN_PH ) : ( pH - NEUTRAL_PH ) / ( ABSConstants.MAX_PH - NEUTRAL_PH ) );
+      } );
   }
 
   ConductivityTester.prototype = {
 
     reset: function() {
-      this.positiveProbeLocation.reset();
-      this.negativeProbeLocation.reset();
+      this.positiveProbeLocationProperty.reset();
+      this.negativeProbeLocationProperty.reset();
     }
   };
 
