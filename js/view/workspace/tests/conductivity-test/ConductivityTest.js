@@ -5,6 +5,9 @@
  * When the probes are both immersed in solution, the circuit is completed at
  * the battery glows and emits light rays. The light bulb is made to 'glow' by
  * modulating the opacity of a mask image.
+ * <p>
+ * This node assumes that it is located at (0,0), and its components are
+ * positioned in the world coordinate frame.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -36,24 +39,10 @@ define( function( require ) {
   var OPACITY_MAX = 0.15;
   var BRIGHTNESS_TO_OPACITY = new LinearFunction( 0, 1, OPACITY_MAX, 0 ); //
   var BULB_SCALE = 0.33; // scale applied to all bulb images
-  var WIRES_INITIAL_Y = 60;
-  var WIRE_OPTIONS = {
-    positive: {
-      start: {x: 125, y: 84},
-      end: {x: 163, y: WIRES_INITIAL_Y}
-    },
-    negative: {
-      start: {x: 16, y: 75},
-      end: {x: -22, y: WIRES_INITIAL_Y}
-    }
-  };
 
   function ConductivityTest( conductivityTestModel ) {
 
     var self = this;
-
-    Node.call( this );
-
 
     // origin at bottom center of bulb's base
     var baseNode = new Image( lightBulbBaseImage,
@@ -93,27 +82,28 @@ define( function( require ) {
       apparatusNode.addChild( new Circle( 2, { fill: 'red' } ) );
     }
 
-    // wires
-    var negativeWire = new ConductivityTestWire( 'negative', WIRE_OPTIONS.negative.start.x, WIRE_OPTIONS.negative.start.y, WIRE_OPTIONS.negative.end.x, WIRE_OPTIONS.negative.end.y );
-    var positiveWire = new ConductivityTestWire( 'positive', WIRE_OPTIONS.positive.start.x, WIRE_OPTIONS.positive.start.y, WIRE_OPTIONS.positive.end.x, WIRE_OPTIONS.positive.end.y );
+    // wire from base of bulb (origin) to negative probe
+    var negativeWire = new ConductivityTestWire( 'negative',
+      conductivityTestModel.location.x, conductivityTestModel.location.y,
+      conductivityTestModel.negativeProbeLocation.value.x, conductivityTestModel.negativeProbeLocation.value.y - conductivityTestModel.probeSize.height );
+
+    // wire from battery terminal to positive probe
+    var positiveWire = new ConductivityTestWire( 'positive',
+      battery.getGlobalBounds().right, battery.getGlobalBounds().centerY,
+      conductivityTestModel.positiveProbeLocation.value.x, conductivityTestModel.positiveProbeLocation.value.y - conductivityTestModel.probeSize.height );
 
     // probes
     var negativeProbe = new ConductivityTestProbe( conductivityTestModel.negativeProbeLocation, conductivityTestModel.probeDragYRange, conductivityTestModel.probeSize, { isPositive: false } );
     var positiveProbe = new ConductivityTestProbe( conductivityTestModel.positiveProbeLocation, conductivityTestModel.probeDragYRange, conductivityTestModel.probeSize, { isPositive: true } );
 
-    // rendering order
-    this.addChild( apparatusNode );
-    this.addChild( negativeWire );
-    this.addChild( positiveWire );
-    this.addChild( negativeProbe );
-    this.addChild( positiveProbe );
+    Node.call( this, { children: [ apparatusNode, negativeWire, positiveWire, negativeProbe, positiveProbe ] } );
 
     // update wires if end point was changed
     conductivityTestModel.positiveProbeLocation.link( function( location ) {
-      positiveWire.setEndPoint( WIRE_OPTIONS.positive.end.x, location.y );
+      positiveWire.setEndPoint( location.x, location.y - conductivityTestModel.probeSize.height );
     } );
     conductivityTestModel.negativeProbeLocation.link( function( location ) {
-      negativeWire.setEndPoint( WIRE_OPTIONS.negative.end.x, location.y );
+      negativeWire.setEndPoint( location.x, location.y - conductivityTestModel.probeSize.height );
     } );
 
     // set brightness of light bulb
