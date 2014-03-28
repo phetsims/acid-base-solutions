@@ -1,3 +1,4 @@
+3/27/14 #78 fix implementation of light bulb 'glow'
 3/27/14 tweak initial location of conductivity tester
 3/27/14 #67 set wire control points based on comparison of startX and endX
 3/27/14 #63 move ConductivityTestModel to common/model/ConductivityTester

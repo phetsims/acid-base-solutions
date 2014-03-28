@@ -4,7 +4,7 @@
  * Conductivity tester. Light bulb connected to a battery, with draggable probes.
  * When the probes are both immersed in solution, the circuit is completed at
  * the battery glows and emits light rays. The light bulb is made to 'glow' by
- * modulating the opacity of a mask image.
+ * modulating the opacity of the bulb.
  * <p>
  * This node assumes that it is located at (0,0), and its components are
  * positioned in the world coordinate frame.
@@ -36,8 +36,8 @@ define( function( require ) {
   // constants
   var SHOW_ORIGIN = true; // draws a red circle at the origin, for debugging
   var BULB_TO_BATTERY_WIRE_LENGTH = 40;
-  var OPACITY_MAX = 0.15;
-  var BRIGHTNESS_TO_OPACITY = new LinearFunction( 0, 1, OPACITY_MAX, 0 ); //
+  var MIN_OPACITY = 0.85;
+  var BRIGHTNESS_TO_OPACITY = new LinearFunction( 0, 1, MIN_OPACITY, 1 );
   var BULB_SCALE = 0.33; // scale applied to all bulb images
 
   /**
@@ -56,9 +56,9 @@ define( function( require ) {
     var glassNode = new Image( lightBulbGlassImage,
       { scale: BULB_SCALE, centerX: 0, bottom: baseNode.top } );
 
-    // mask version of the bulb, used to make the bulb 'glow' by modulating opacity
-    var lightBulbDarkMask = new Image( lightBulbGlassMaskImage,
-      { scale: BULB_SCALE, opacity: OPACITY_MAX, translation: glassNode.translation } );
+    // mask that sits behind the glass
+    var glassMaskNode = new Image( lightBulbGlassMaskImage,
+      { scale: BULB_SCALE, translation: glassNode.translation } );
 
     // light rays centered on the bulb
     var bulbRadius = glassNode.width / 2;
@@ -79,8 +79,8 @@ define( function( require ) {
         battery,
         raysNode,
         baseNode,
-        glassNode,
-        lightBulbDarkMask
+        glassMaskNode,
+        glassNode
       ]} );
     if ( SHOW_ORIGIN ) {
       apparatusNode.addChild( new Circle( 2, { fill: 'red' } ) );
@@ -110,9 +110,9 @@ define( function( require ) {
       negativeWire.setEndPoint( location.x, location.y - conductivityTester.probeSize.height );
     } );
 
-    // set brightness of light bulb
+    // make the glass glow by changing its opacity
     var setBrightness = function() {
-      lightBulbDarkMask.opacity = ( conductivityTester.isClosedProperty.value ? BRIGHTNESS_TO_OPACITY( conductivityTester.brightnessProperty.value ) : OPACITY_MAX );
+      glassNode.opacity = ( conductivityTester.isClosedProperty.value ? BRIGHTNESS_TO_OPACITY( conductivityTester.brightnessProperty.value ) : MIN_OPACITY );
     };
     conductivityTester.brightnessProperty.link( setBrightness );
     conductivityTester.isClosedProperty.link( setBrightness );
