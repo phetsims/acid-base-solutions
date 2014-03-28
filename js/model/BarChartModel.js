@@ -26,12 +26,12 @@ define( function( require ) {
   function BarChartModel( beaker, solutions, solutionTypeProperty, viewModeProperty, toolModeProperty, concentrationProperty, strengthProperty ) {
 
     // bar chart width
-    this.width = beaker.size.width / 2;
+    this.width = 0.5 * beaker.size.width;
 
     // bar chart height
-    this.height = beaker.size.height / 1.125;
+    this.height = 0.9 * beaker.size.height;
 
-    // bar chart location
+    // bar chart location, origin at upper-left corner
     this.location = beaker.location.plusXY( (this.width - beaker.size.width) / 2, -(beaker.size.height + this.height) / 2 );
 
     // solution property

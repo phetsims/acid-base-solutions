@@ -27,7 +27,7 @@ define( function( require ) {
     // magnifier radius
     this.radius = beaker.size.height / 2.15;
 
-    // magnifier location
+    // magnifier location, origin at center of glass
     this.location = beaker.location.plusXY( 0, -beaker.size.height / 2 );
 
     // solution type property
