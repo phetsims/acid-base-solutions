@@ -25,10 +25,8 @@ define( function( require ) {
    */
   function BarChartModel( beaker, solutions, solutionTypeProperty, viewModeProperty, toolModeProperty, concentrationProperty, strengthProperty ) {
 
-    // bar chart width
+    // dimensions of the chart's background
     this.width = 0.5 * beaker.size.width;
-
-    // bar chart height
     this.height = 0.9 * beaker.size.height;
 
     // bar chart location, origin at upper-left corner
