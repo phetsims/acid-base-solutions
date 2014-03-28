@@ -1,9 +1,13 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Visual representation for lightbulb, battery and wires in the conductivity test in the 'Acid-Base Solutions' sim.
+ * Conductivity tester. Light bulb connected to a battery, with draggable probes.
+ * When the probes are both immersed in solution, the circuit is completed at
+ * the battery glows and emits light rays. The light bulb is made to 'glow' by
+ * modulating the opacity of a mask image.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';
@@ -30,7 +34,8 @@ define( function( require ) {
   var SHOW_ORIGIN = true; // draws a red circle at the origin, for debugging
   var BULB_TO_BATTERY_WIRE_LENGTH = 40;
   var OPACITY_MAX = 0.15;
-  var BRIGHTNESS_TO_OPACITY = new LinearFunction( 0, 1, OPACITY_MAX, 0 ); // 
+  var BRIGHTNESS_TO_OPACITY = new LinearFunction( 0, 1, OPACITY_MAX, 0 ); //
+  var BULB_SCALE = 0.33; // scale applied to all bulb images
 
   function ConductivityTest( conductivityTestModel ) {
 
@@ -39,27 +44,41 @@ define( function( require ) {
 
     Node.call( this );
 
-    // apparatus (bulb + battery), origin at tip of bulb's base
-    var bulbScale = 0.33;
+
+    // origin at bottom center of bulb's base
     var baseNode = new Image( lightBulbBaseImage,
-      { scale: bulbScale, centerX: 0, bottom: 0 } ); // origin at bottom center
+      { scale: BULB_SCALE, centerX: 0, bottom: 0 } );
+
+    // glass centered above base
     var glassNode = new Image( lightBulbGlassImage,
-      { scale: bulbScale, centerX: 0, bottom: baseNode.top } );
+      { scale: BULB_SCALE, centerX: 0, bottom: baseNode.top } );
+
+    // mask version of the bulb, used to make the bulb 'glow' by modulating opacity
     var lightBulbDarkMask = new Image( lightBulbGlassMaskImage,
-      { scale: bulbScale, opacity: OPACITY_MAX, translation: glassNode.translation } );
-    var raysNode = new ConductivityTestLightRays( conductivityTestModel.brightnessProperty, conductivityTestModel.isClosedProperty, lightBulbDarkMask.getGlobalBounds().width / 2,
-      { centerX: glassNode.centerX, y: glassNode.top + glassNode.width / 2 } );
+      { scale: BULB_SCALE, opacity: OPACITY_MAX, translation: glassNode.translation } );
+
+    // light rays centered on the bulb
+    var bulbRadius = glassNode.width / 2;
+    var raysNode = new ConductivityTestLightRays( conductivityTestModel.brightnessProperty, conductivityTestModel.isClosedProperty, bulbRadius,
+      { centerX: glassNode.centerX, y: glassNode.top + bulbRadius } );
+
+    // wire from bulb base to battery
     var bulbBatteryWire = new Path( new Shape().moveTo( 0, 0 ).lineTo( BULB_TO_BATTERY_WIRE_LENGTH, 0 ), { stroke: 'black', lineWidth: 1.5 } );
+
+    // battery
     var battery = new Image( batteryImage, { scale: 0.6, x: BULB_TO_BATTERY_WIRE_LENGTH, centerY: 0 } )
-    var apparatusNode = new Node( {children: [
-      bulbBatteryWire,
-      battery,
-      raysNode,
-      baseNode,
-      glassNode,
-      lightBulbDarkMask
-    ]} );
-    apparatusNode.translation = conductivityTestModel.location;
+
+    // apparatus (bulb + battery), origin at tip of bulb's base
+    var apparatusNode = new Node( {
+      translation: conductivityTestModel.location,
+      children: [
+        bulbBatteryWire,
+        battery,
+        raysNode,
+        baseNode,
+        glassNode,
+        lightBulbDarkMask
+      ]} );
     if ( SHOW_ORIGIN ) {
       apparatusNode.addChild( new Circle( 2, { fill: 'red' } ) );
     }
