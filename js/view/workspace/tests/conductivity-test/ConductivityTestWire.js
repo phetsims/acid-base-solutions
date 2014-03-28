@@ -10,35 +10,52 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var inherit = require( 'PHET_CORE/inherit' ),
-    Path = require( 'SCENERY/nodes/Path' ),
-    Shape = require( 'KITE/Shape' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Path = require( 'SCENERY/nodes/Path' );
+  var Shape = require( 'KITE/Shape' );
 
-  // constants
-  var CONTROL_POINT = {
-    positive: {x: 12.5, y: -50},
-    negative: {x: -12.5, y: -50}
-  };
+  /**
+   * @param startX
+   * @param startY
+   * @param endX
+   * @param endY
+   * @param {*} options
+   * @constructor
+   */
+  function ConductivityTestWire( startX, startY, endX, endY, options ) {
 
-  function ConductivityTestWire( type, startX, startY, endX, endY ) {
+    options = _.extend( {
+      endPointOnRight: true, // true if the wire's end point is to the right of its start point
+      stroke: 'black',
+      lineWidth: 1.5
+    }, options );
+
     Path.call( this );
-    this.setStroke( 'black' );
-    this.setLineWidth( 1.5 );
 
-    this.startPoint = {x: startX, y: startY};
-    this.controlPoint = CONTROL_POINT[type];
+    this.startPoint = { x: startX, y: startY }; // @private
+    this.controlPointOffset = { x: 12.5, y: -50 }; // @private
+    if ( options.endPointOnRight ) {
+      this.controlPointOffset.x = -this.controlPointOffset.x;
+    }
 
     this.setEndPoint( endX, endY );
+
+    this.mutate( options );
   }
 
   return inherit( Path, ConductivityTestWire, {
+
     setEndPoint: function( endX, endY ) {
+
       var startX = this.startPoint.x,
         startY = this.startPoint.y,
-        controlPointDX = this.controlPoint.x,
-        controlPointDY = this.controlPoint.y;
+        controlPointXOffset = this.controlPointOffset.x,
+        controlPointYOffset = this.controlPointOffset.y;
 
-      this.setShape( new Shape().moveTo( startX, startY ).cubicCurveTo( startX + controlPointDX, startY, endX, endY + controlPointDY, endX, endY ) );
+      this.setShape( new Shape().
+        moveTo( startX, startY ).
+        cubicCurveTo( startX + controlPointXOffset, startY, endX, endY + controlPointYOffset, endX, endY )
+      );
     }
   } );
 } );
