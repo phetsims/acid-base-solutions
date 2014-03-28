@@ -1,8 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Visual representation for light rays
- * in the conductivity test in the 'Acid-Base Solutions' sim.
+ * Light rays in the conductivity tester.
  * Origin is at the center of the light bulb.
  *
  * @author Andrey Zelenkov (Mlearner)

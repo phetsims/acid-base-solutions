@@ -1,8 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Visual representation for single wire
- * in the conductivity test in the 'Acid-Base Solutions' sim.
+ * A single wire, connected to a probe in the conductivity tester.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
