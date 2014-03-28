@@ -192,6 +192,11 @@ define( function( require ) {
     };
     isAcidProperty.link( updateSolutionType.bind( this ) );
     isWeakProperty.link( updateSolutionType.bind( this ) );
+
+    solutionTypeProperty.link( function( solutionType ) {
+      isAcidProperty.value = ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.STRONG_ACID );
+      isWeakProperty.value = ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE );
+    } );
   }
 
   return inherit( Node, SolutionControl );

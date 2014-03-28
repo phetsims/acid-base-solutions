@@ -1,3 +1,4 @@
+3/27/14 fix 'Reset All' for AB-switches in 'Solution' control panel
 3/27/14 #51 replace weak/strong radio buttons with AB-switch
 3/27/14 move formula-related constants to Formula, since they are used only there
 3/27/14 move pH paper size into model
