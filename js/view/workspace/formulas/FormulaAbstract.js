@@ -36,11 +36,11 @@ define( function( require ) {
     arrowDoubleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_double.png' );
 
   // constants
-  var FONT_SIZE = ABSConstants.FORMULAS_FONT_SIZE,
+  var FONT_SIZE = 13,
     FONT = new PhetFont( FONT_SIZE ),
-    HBOX_SPACING = ABSConstants.FORMULAS_HBOX_SPACING,
+    HBOX_SPACING = 4,
     TEXT_SUB_INDENT = FONT_SIZE / 8,
-    VBOX_SPACING = ABSConstants.FORMULAS_VBOX_SPACING;
+    VBOX_SPACING = 2;
 
   function FormulaAbstract( options ) {
     HBox.call( this, _.extend( {spacing: HBOX_SPACING, align: 'bottom'}, options ) );

@@ -1,3 +1,4 @@
+3/27/14 move formula-related constants to Formula, since they are used only there
 3/27/14 move pH paper size into model
 3/27/14 replace min/max constants with Range for pH
 3/27/14 #79 move brightness property from main model to ConductivityTester, where it's derived from pH

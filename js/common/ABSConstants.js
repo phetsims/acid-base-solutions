@@ -19,9 +19,6 @@ define( function( require ) {
   return {
     CONCENTRATION_RANGE: new Range( 1E-3, 1, 1E-2 ),
     PH_RANGE: new Range( 0, 14 ),
-    FORMULAS_FONT_SIZE: 13,
-    FORMULAS_HBOX_SPACING: 4,
-    FORMULAS_VBOX_SPACING: 2,
     STRONG_STRENGTH: STRONG_STRENGTH,
     WATER_EQUILIBRIUM_CONSTANT: 1E-14,
     WATER_CONCENTRATION: 55.6, // water concentration when it's used as a solvent, mol/L
