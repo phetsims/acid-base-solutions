@@ -11,7 +11,7 @@ define( function( require ) {
 
   // imports
   var BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
-  var ConductivityTest = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/conductivity-test/ConductivityTest' );
+  var ConductivityTesterNode = require( 'ACID_BASE_SOLUTIONS/common/view/conductivity/ConductivityTesterNode' );
   var EquilibriumConcentrationBarChart = require( 'ACID_BASE_SOLUTIONS/view/workspace/equilibrium-concentration-graph/EquilibriumConcentrationBarChart' );
   var Formula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/Formula' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -33,14 +33,14 @@ define( function( require ) {
     var pHMeterNode = new PHMeterNode( model.pHMeter );
     var pHPaperNode = new PHPaperNode( model.pHPaper );
     var pHColorKeyNode = new PHColorKeyNode( model.pHPaper.visibleProperty, { left: beakerNode.left + 30, bottom: beakerNode.top - 50 } );
-    var conductivityTestNode = new ConductivityTest( model.conductivityTester );
+    var conductivityTesterNode = new ConductivityTesterNode( model.conductivityTester );
 
     var rootNode = new Node( {
       children: [
         pHMeterNode,
         pHColorKeyNode,
         pHPaperNode,
-        conductivityTestNode,
+        conductivityTesterNode,
         beakerNode,
         formulaNode,
         magnifierNode,

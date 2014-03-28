@@ -34,7 +34,7 @@ define( function( require ) {
    * @param {*} options
    * @constructor
    */
-  function ConductivityTestProbe( locationProperty, dragYRange, probeSize, options ) {
+  function ProbeNode( locationProperty, dragYRange, probeSize, options ) {
 
     options = _.extend( {
       isPositive: true
@@ -80,5 +80,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, ConductivityTestProbe );
+  return inherit( Node, ProbeNode );
 } );

@@ -21,7 +21,7 @@ define( function( require ) {
    * @param {*} options
    * @constructor
    */
-  function ConductivityTestWire( startX, startY, endX, endY, options ) {
+  function WireNode( startX, startY, endX, endY, options ) {
 
     options = _.extend( {
       stroke: 'black',
@@ -43,7 +43,7 @@ define( function( require ) {
     this.mutate( options );
   }
 
-  return inherit( Path, ConductivityTestWire, {
+  return inherit( Path, WireNode, {
 
     setEndPoint: function( endX, endY ) {
 

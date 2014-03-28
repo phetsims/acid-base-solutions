@@ -17,9 +17,9 @@ define( function( require ) {
 
   // imports
   var Circle = require( 'SCENERY/nodes/Circle' );
-  var ConductivityTestWire = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/conductivity-test/ConductivityTestWire' );
-  var ConductivityTestProbe = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/conductivity-test/ConductivityTestProbe' );
-  var ConductivityTestLightRays = require( 'ACID_BASE_SOLUTIONS/view/workspace/tests/conductivity-test/ConductivityTestLightRays' );
+  var WireNode = require( 'ACID_BASE_SOLUTIONS/common/view/conductivity/WireNode' );
+  var ProbeNode = require( 'ACID_BASE_SOLUTIONS/common/view/conductivity/ProbeNode' );
+  var LightRaysNode = require( 'ACID_BASE_SOLUTIONS/common/view/conductivity/LightRaysNode' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearFunction = require( 'DOT/LinearFunction' );
@@ -44,7 +44,7 @@ define( function( require ) {
    * @param {ConductivityTester} conductivityTester
    * @constructor
    */
-  function ConductivityTest( conductivityTester ) {
+  function ConductivityTesterNode( conductivityTester ) {
 
     var self = this;
 
@@ -62,7 +62,7 @@ define( function( require ) {
 
     // light rays centered on the bulb
     var bulbRadius = glassNode.width / 2;
-    var raysNode = new ConductivityTestLightRays( conductivityTester.brightnessProperty, conductivityTester.isClosedProperty, bulbRadius,
+    var raysNode = new LightRaysNode( conductivityTester.brightnessProperty, conductivityTester.isClosedProperty, bulbRadius,
       { centerX: glassNode.centerX, y: glassNode.top + bulbRadius } );
 
     // wire from bulb base to battery
@@ -87,18 +87,18 @@ define( function( require ) {
     }
 
     // wire from base of bulb (origin) to negative probe
-    var negativeWire = new ConductivityTestWire(
+    var negativeWire = new WireNode(
       conductivityTester.location.x - 5, conductivityTester.location.y - 10,
       conductivityTester.negativeProbeLocation.value.x, conductivityTester.negativeProbeLocation.value.y - conductivityTester.probeSize.height );
 
     // wire from battery terminal to positive probe
-    var positiveWire = new ConductivityTestWire(
+    var positiveWire = new WireNode(
       battery.getGlobalBounds().right, battery.getGlobalBounds().centerY,
       conductivityTester.positiveProbeLocation.value.x, conductivityTester.positiveProbeLocation.value.y - conductivityTester.probeSize.height );
 
     // probes
-    var negativeProbe = new ConductivityTestProbe( conductivityTester.negativeProbeLocation, conductivityTester.probeDragYRange, conductivityTester.probeSize, { isPositive: false } );
-    var positiveProbe = new ConductivityTestProbe( conductivityTester.positiveProbeLocation, conductivityTester.probeDragYRange, conductivityTester.probeSize, { isPositive: true } );
+    var negativeProbe = new ProbeNode( conductivityTester.negativeProbeLocation, conductivityTester.probeDragYRange, conductivityTester.probeSize, { isPositive: false } );
+    var positiveProbe = new ProbeNode( conductivityTester.positiveProbeLocation, conductivityTester.probeDragYRange, conductivityTester.probeSize, { isPositive: true } );
 
     Node.call( this, { children: [ negativeWire, positiveWire, negativeProbe, positiveProbe, apparatusNode ] } );
 
@@ -123,5 +123,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, ConductivityTest );
+  return inherit( Node, ConductivityTesterNode );
 } );

@@ -27,7 +27,7 @@ define( function( require ) {
     RAY_STROKE_MEDIUM = 1,
     RAY_STROKE_SMALL = 0.5;
 
-  function ConductivityTestLightRays( brightnessProperty, isCloseProperty, bulbRadius, options ) {
+  function LightRaysNode( brightnessProperty, isCloseProperty, bulbRadius, options ) {
     var setBrightnessBinded;
     Node.call( this, options );
 
@@ -40,7 +40,7 @@ define( function( require ) {
     brightnessProperty.link( setBrightnessBinded );
   }
 
-  return inherit( Node, ConductivityTestLightRays, {
+  return inherit( Node, LightRaysNode, {
 
     createCacheLines: function( numberOfLines ) {
       this.cachedLines = [];
