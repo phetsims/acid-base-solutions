@@ -6,6 +6,7 @@ TODO list for acid-base-solutions
 - move viewModeProperty and toolModeProperty to ScreenView subtypes?
 - TODO items in code
 - PHPaper.indicatorHeightProperty should be DerivedProperty
+- improve behavior of wires, see Java version
 
 DESIGN
 - move pH values above color key?

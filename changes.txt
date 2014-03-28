@@ -1,3 +1,4 @@
+3/28/14 #67 hide origin debugging for conductivity tester
 3/27/14 fix 'Reset All' for AB-switches in 'Solution' control panel
 3/27/14 #51 replace weak/strong radio buttons with AB-switch
 3/27/14 move formula-related constants to Formula, since they are used only there

@@ -34,7 +34,7 @@ define( function( require ) {
   var lightBulbGlassMaskImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-glass-mask.png' );
 
   // constants
-  var SHOW_ORIGIN = true; // draws a red circle at the origin, for debugging
+  var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
   var BULB_TO_BATTERY_WIRE_LENGTH = 40;
   var MIN_OPACITY = 0.85;
   var BRIGHTNESS_TO_OPACITY = new LinearFunction( 0, 1, MIN_OPACITY, 1 );

@@ -23,7 +23,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var SHOW_ORIGIN = true; // draws a red circle at the origin, for debugging
+  var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
   var POSITIVE_FILL = 'red';
   var NEGATIVE_FILL = 'black';
 
