@@ -5,6 +5,7 @@ TODO list for acid-base-solutions
 - replace solutionTypeProperty with solutionProperty
 - move viewModeProperty and toolModeProperty to ScreenView subtypes?
 - TODO items in code
+- PHPaper.indicatorHeightProperty should be DerivedProperty
 
 DESIGN
 - move pH values above color key?
