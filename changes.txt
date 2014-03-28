@@ -1,3 +1,4 @@
+3/27/14 #67 connect negative wire to left edge of bulb base
 3/27/14 #67 attach wires correctly in conductivity tester, remove hard-coded constants
 3/27/14 #67 add probe size to model, so that wires can be attached properly
 3/27/14 #67 fix origin of conductivity bulb and battery (wires messed up)

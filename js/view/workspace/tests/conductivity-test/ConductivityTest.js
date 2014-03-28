@@ -84,7 +84,7 @@ define( function( require ) {
 
     // wire from base of bulb (origin) to negative probe
     var negativeWire = new ConductivityTestWire( 'negative',
-      conductivityTestModel.location.x, conductivityTestModel.location.y,
+      conductivityTestModel.location.x - 5, conductivityTestModel.location.y - 10,
       conductivityTestModel.negativeProbeLocation.value.x, conductivityTestModel.negativeProbeLocation.value.y - conductivityTestModel.probeSize.height );
 
     // wire from battery terminal to positive probe
@@ -96,7 +96,7 @@ define( function( require ) {
     var negativeProbe = new ConductivityTestProbe( conductivityTestModel.negativeProbeLocation, conductivityTestModel.probeDragYRange, conductivityTestModel.probeSize, { isPositive: false } );
     var positiveProbe = new ConductivityTestProbe( conductivityTestModel.positiveProbeLocation, conductivityTestModel.probeDragYRange, conductivityTestModel.probeSize, { isPositive: true } );
 
-    Node.call( this, { children: [ apparatusNode, negativeWire, positiveWire, negativeProbe, positiveProbe ] } );
+    Node.call( this, { children: [ negativeWire, positiveWire, negativeProbe, positiveProbe, apparatusNode ] } );
 
     // update wires if end point was changed
     conductivityTestModel.positiveProbeLocation.link( function( location ) {
