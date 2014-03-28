@@ -70,10 +70,6 @@ define( function( require ) {
     // the circuit is closed if both probes are in the solution
     isClosed: function() {
       return ( this.beaker.containsPoint( this.positiveProbeLocation.value ) &&  this.beaker.containsPoint( this.negativeProbeLocation.value ) );
-    },
-
-    getWireOptions: function() {
-      return WIRE_OPTIONS;
     }
   };
 

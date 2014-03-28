@@ -27,7 +27,6 @@ define( function( require ) {
   var StrengthSlider = require( 'ACID_BASE_SOLUTIONS/customsolution/view/StrengthSlider' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
   var acidString = require( 'string!ACID_BASE_SOLUTIONS/acid' );
