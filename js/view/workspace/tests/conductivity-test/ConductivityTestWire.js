@@ -24,7 +24,6 @@ define( function( require ) {
   function ConductivityTestWire( startX, startY, endX, endY, options ) {
 
     options = _.extend( {
-      endPointOnRight: true, // true if the wire's end point is to the right of its start point
       stroke: 'black',
       lineWidth: 1.5
     }, options );
@@ -32,8 +31,10 @@ define( function( require ) {
     Path.call( this );
 
     this.startPoint = { x: startX, y: startY }; // @private
+    // control point offsets for when probe is to left of light bulb
     this.controlPointOffset = { x: 12.5, y: -50 }; // @private
-    if ( options.endPointOnRight ) {
+    if ( endX > startX ) {
+      // probe is to right of light bulb, flip sign on control point x-offset
       this.controlPointOffset.x = -this.controlPointOffset.x;
     }
 

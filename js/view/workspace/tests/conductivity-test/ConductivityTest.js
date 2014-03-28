@@ -89,14 +89,12 @@ define( function( require ) {
     // wire from base of bulb (origin) to negative probe
     var negativeWire = new ConductivityTestWire(
       conductivityTester.location.x - 5, conductivityTester.location.y - 10,
-      conductivityTester.negativeProbeLocation.value.x, conductivityTester.negativeProbeLocation.value.y - conductivityTester.probeSize.height,
-      { endPointOnRight: false } );
+      conductivityTester.negativeProbeLocation.value.x, conductivityTester.negativeProbeLocation.value.y - conductivityTester.probeSize.height );
 
     // wire from battery terminal to positive probe
     var positiveWire = new ConductivityTestWire(
       battery.getGlobalBounds().right, battery.getGlobalBounds().centerY,
-      conductivityTester.positiveProbeLocation.value.x, conductivityTester.positiveProbeLocation.value.y - conductivityTester.probeSize.height,
-      { endPointOnRight: true } );
+      conductivityTester.positiveProbeLocation.value.x, conductivityTester.positiveProbeLocation.value.y - conductivityTester.probeSize.height );
 
     // probes
     var negativeProbe = new ConductivityTestProbe( conductivityTester.negativeProbeLocation, conductivityTester.probeDragYRange, conductivityTester.probeSize, { isPositive: false } );
