@@ -42,9 +42,6 @@ define( function( require ) {
     // view mode property
     this.viewModeProperty = viewModeProperty;
 
-    // test mode property
-    this.toolModeProperty = toolModeProperty;
-
     // visibility of magnifier
     this.visibleProperty = new DerivedProperty( [ viewModeProperty, toolModeProperty ],
       function( viewMode, toolMode ) {

@@ -43,9 +43,6 @@ define( function( require ) {
     // view mode property
     this.viewModeProperty = viewModeProperty;
 
-    // test mode property
-    this.toolModeProperty = toolModeProperty;
-
     // strength property
     this.strengthProperty = strengthProperty;
 
