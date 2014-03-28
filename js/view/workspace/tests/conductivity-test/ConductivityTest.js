@@ -36,11 +36,21 @@ define( function( require ) {
   var OPACITY_MAX = 0.15;
   var BRIGHTNESS_TO_OPACITY = new LinearFunction( 0, 1, OPACITY_MAX, 0 ); //
   var BULB_SCALE = 0.33; // scale applied to all bulb images
+  var WIRES_INITIAL_Y = 60;
+  var WIRE_OPTIONS = {
+    positive: {
+      start: {x: 125, y: 84},
+      end: {x: 163, y: WIRES_INITIAL_Y}
+    },
+    negative: {
+      start: {x: 16, y: 75},
+      end: {x: -22, y: WIRES_INITIAL_Y}
+    }
+  };
 
   function ConductivityTest( conductivityTestModel ) {
 
     var self = this;
-    var wireOptions = conductivityTestModel.getWireOptions();
 
     Node.call( this );
 
@@ -84,8 +94,8 @@ define( function( require ) {
     }
 
     // wires
-    var negativeWire = new ConductivityTestWire( 'negative', wireOptions.negative.start.x, wireOptions.negative.start.y, wireOptions.negative.end.x, wireOptions.negative.end.y );
-    var positiveWire = new ConductivityTestWire( 'positive', wireOptions.positive.start.x, wireOptions.positive.start.y, wireOptions.positive.end.x, wireOptions.positive.end.y );
+    var negativeWire = new ConductivityTestWire( 'negative', WIRE_OPTIONS.negative.start.x, WIRE_OPTIONS.negative.start.y, WIRE_OPTIONS.negative.end.x, WIRE_OPTIONS.negative.end.y );
+    var positiveWire = new ConductivityTestWire( 'positive', WIRE_OPTIONS.positive.start.x, WIRE_OPTIONS.positive.start.y, WIRE_OPTIONS.positive.end.x, WIRE_OPTIONS.positive.end.y );
 
     // probes
     var negativeProbe = new ConductivityTestProbe( conductivityTestModel.negativeProbeLocation, conductivityTestModel.probeDragYRange, { isPositive: false } );
@@ -100,10 +110,10 @@ define( function( require ) {
 
     // update wires if end point was changed
     conductivityTestModel.positiveProbeLocation.link( function( location ) {
-      positiveWire.setEndPoint( wireOptions.positive.end.x, location.y );
+      positiveWire.setEndPoint( WIRE_OPTIONS.positive.end.x, location.y );
     } );
     conductivityTestModel.negativeProbeLocation.link( function( location ) {
-      negativeWire.setEndPoint( wireOptions.negative.end.x, location.y );
+      negativeWire.setEndPoint( WIRE_OPTIONS.negative.end.x, location.y );
     } );
 
     // set brightness of light bulb

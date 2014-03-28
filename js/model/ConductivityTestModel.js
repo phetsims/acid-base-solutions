@@ -15,19 +15,6 @@ define( function( require ) {
   var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // constants
-  var WIRES_INITIAL_Y = 60,
-    WIRE_OPTIONS = {
-      positive: {
-        start: {x: 125, y: 84},
-        end: {x: 163, y: WIRES_INITIAL_Y}
-      },
-      negative: {
-        start: {x: 16, y: 75},
-        end: {x: -22, y: WIRES_INITIAL_Y}
-      }
-    };
-
   /**
    * @param {Beaker} beaker
    * @param {Property<ToolMode>} toolModeProperty
