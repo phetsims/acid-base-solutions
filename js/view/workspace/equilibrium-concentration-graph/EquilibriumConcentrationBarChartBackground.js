@@ -34,7 +34,7 @@ define( function( require ) {
     yLabel = new Text( yAxisString, {font: new PhetFont( 13 )} );
     yLabel.rotate( -Math.PI / 2 );
     yLabel.centerY = height / 2;
-    yLabel.centerX = -40;
+    yLabel.centerX = -50;
     this.addChild( yLabel );
 
     for ( var i = 0, y, node; i < 11; i++ ) {
