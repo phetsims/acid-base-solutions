@@ -1,3 +1,4 @@
+3/27/14 #67 add probe size to model, so that wires can be attached properly
 3/27/14 #67 fix origin of conductivity bulb and battery (wires messed up)
 3/27/14 #67 fix origin of conductivity probes in model and view (bulb and battery in wrong location, wires messed up)
 3/27/14 move constrained dragging of pH meter to view

@@ -98,8 +98,8 @@ define( function( require ) {
     var positiveWire = new ConductivityTestWire( 'positive', WIRE_OPTIONS.positive.start.x, WIRE_OPTIONS.positive.start.y, WIRE_OPTIONS.positive.end.x, WIRE_OPTIONS.positive.end.y );
 
     // probes
-    var negativeProbe = new ConductivityTestProbe( conductivityTestModel.negativeProbeLocation, conductivityTestModel.probeDragYRange, { isPositive: false } );
-    var positiveProbe = new ConductivityTestProbe( conductivityTestModel.positiveProbeLocation, conductivityTestModel.probeDragYRange, { isPositive: true } );
+    var negativeProbe = new ConductivityTestProbe( conductivityTestModel.negativeProbeLocation, conductivityTestModel.probeDragYRange, conductivityTestModel.probeSize, { isPositive: false } );
+    var positiveProbe = new ConductivityTestProbe( conductivityTestModel.positiveProbeLocation, conductivityTestModel.probeDragYRange, conductivityTestModel.probeSize, { isPositive: true } );
 
     // rendering order
     this.addChild( apparatusNode );

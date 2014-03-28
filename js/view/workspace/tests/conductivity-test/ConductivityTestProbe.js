@@ -24,17 +24,17 @@ define( function( require ) {
 
   // constants
   var SHOW_ORIGIN = true; // draws a red circle at the origin, for debugging
-  var PROBE_SIZE = new Dimension2( 16, 55 );
   var POSITIVE_FILL = 'red';
   var NEGATIVE_FILL = 'black';
 
   /**
    * @param {{Property<Vector2>} locationProperty
    * @param {Range} dragYRange
+   * @param {Dimension2} probeSize
    * @param {*} options
    * @constructor
    */
-  function ConductivityTestProbe( locationProperty, dragYRange, options ) {
+  function ConductivityTestProbe( locationProperty, dragYRange, probeSize, options ) {
 
     options = _.extend( {
       isPositive: true
@@ -44,7 +44,7 @@ define( function( require ) {
     Node.call( this, options );
 
     // nodes
-    var plateNode = new Rectangle( -PROBE_SIZE.width / 2, -PROBE_SIZE.height, PROBE_SIZE.width, PROBE_SIZE.height,
+    var plateNode = new Rectangle( -probeSize.width / 2, -probeSize.height, probeSize.width, probeSize.height,
       { fill: ( options.isPositive ? POSITIVE_FILL : NEGATIVE_FILL ), stroke: 'black', lineWidth: 0.5 } );
     var signNode = options.isPositive ?
                    new PlusNode( { size: new Dimension2( 6, 2 ), fill: 'white'} ) :

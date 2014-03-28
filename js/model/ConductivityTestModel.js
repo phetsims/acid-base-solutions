@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var Dimension2 = require( 'DOT/Dimension2' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
@@ -27,6 +28,8 @@ define( function( require ) {
     this.beaker = beaker;
 
     this.probeDragYRange = new Range( beaker.top - 20, beaker.bottom );
+
+    this.probeSize = new Dimension2( 16, 55 );
 
     // bulb and battery location
     this.location = new Vector2( beaker.location.x, beaker.top - 30 );
