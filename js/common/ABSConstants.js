@@ -9,7 +9,6 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var Dimension2 = require( 'DOT/Dimension2' );
   var Range = require( 'DOT/Range' );
 
   // constants

@@ -10,7 +10,6 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );

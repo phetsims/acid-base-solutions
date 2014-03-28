@@ -12,7 +12,6 @@ define( function( require ) {
   // imports
   var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var ABSwitch = require( 'SUN/ABSwitch' );
-  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var ArrowButton = require( 'SCENERY_PHET/ArrowButton' );
   var ConcentrationSlider = require( 'ACID_BASE_SOLUTIONS/customsolution/view/ConcentrationSlider' );
   var Dimension2 = require( 'DOT/Dimension2' );
@@ -40,7 +39,6 @@ define( function( require ) {
   // constants
   var SUBTITLE_FONT = new PhetFont( 12 );
   var CONTROL_FONT = new PhetFont( 12 );
-  var RADIO_BUTTON_OPTIONS = { radius: 7 };
   var ARROW_STEP = 0.1; // concentration delta for arrow button
   var ARROW_HEIGHT = 15;
   var ARROW_BUTTON_OPTIONS = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };

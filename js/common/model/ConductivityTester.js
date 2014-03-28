@@ -51,7 +51,7 @@ define( function( require ) {
     // the circuit is closed if both probes are in the solution
     this.isClosedProperty = new DerivedProperty( [ this.positiveProbeLocationProperty, this.negativeProbeLocationProperty ],
       function( positiveProbeLocation, negativeProbeLocation ) {
-        return ( beaker.containsPoint( positiveProbeLocation ) && beaker.containsPoint( negativeProbeLocation ) )
+        return ( beaker.containsPoint( positiveProbeLocation ) && beaker.containsPoint( negativeProbeLocation ) );
       } );
 
     // brightness of bulb is derived from pH

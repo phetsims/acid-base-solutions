@@ -9,7 +9,6 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var Beaker = require( 'ACID_BASE_SOLUTIONS/common/model/Beaker' );
   var ConductivityTester = require( 'ACID_BASE_SOLUTIONS/common/model/ConductivityTester' );
   var inherit = require( 'PHET_CORE/inherit' );

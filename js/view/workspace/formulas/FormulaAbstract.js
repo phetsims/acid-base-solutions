@@ -17,8 +17,7 @@ define( function( require ) {
     SubSupText = require( 'SCENERY_PHET/SubSupText' ),
     ChemUtils = require( 'NITROGLYCERIN/ChemUtils' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    VStrut = require( 'SUN/VStrut' ),
-    ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
+    VStrut = require( 'SUN/VStrut' );
 
   // molecules
   var AMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/AMolecule' ),

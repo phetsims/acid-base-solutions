@@ -24,8 +24,6 @@ define( function( require ) {
    */
   function PHMeter( beaker, pHProperty, toolModeProperty ) {
 
-    var self = this;
-
     this.beaker = beaker;
     this.pHProperty = pHProperty;
 
