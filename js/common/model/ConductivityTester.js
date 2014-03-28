@@ -37,8 +37,8 @@ define( function( require ) {
 
     // probe locations
     var probeXOffset = 0.2 * beaker.size.width; // offset from edge of beaker
-    this.negativeProbeLocation = new Property( new Vector2( beaker.left + probeXOffset, this.probeDragYRange.min + 10 ) );
-    this.positiveProbeLocation = new Property( new Vector2( beaker.right - probeXOffset, this.probeDragYRange.min + 10 ) );
+    this.positiveProbeLocationProperty = new Property( new Vector2( beaker.right - probeXOffset, this.probeDragYRange.min + 10 ) );
+    this.negativeProbeLocationProperty = new Property( new Vector2( beaker.left + probeXOffset, this.probeDragYRange.min + 10 ) );
 
     // visibility
     this.visibleProperty = new DerivedProperty( [ toolModeProperty ],
@@ -47,7 +47,7 @@ define( function( require ) {
       } );
 
     // the circuit is closed if both probes are in the solution
-    this.isClosedProperty = new DerivedProperty( [ this.positiveProbeLocation, this.negativeProbeLocation ],
+    this.isClosedProperty = new DerivedProperty( [ this.positiveProbeLocationProperty, this.negativeProbeLocationProperty ],
       function( positiveProbeLocation, negativeProbeLocation ) {
         return ( beaker.containsPoint( positiveProbeLocation ) && beaker.containsPoint( negativeProbeLocation ) )
       } );

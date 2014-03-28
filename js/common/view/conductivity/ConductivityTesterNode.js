@@ -89,24 +89,24 @@ define( function( require ) {
     // wire from base of bulb (origin) to negative probe
     var negativeWire = new WireNode(
       conductivityTester.location.x - 5, conductivityTester.location.y - 10,
-      conductivityTester.negativeProbeLocation.value.x, conductivityTester.negativeProbeLocation.value.y - conductivityTester.probeSize.height );
+      conductivityTester.negativeProbeLocationProperty.value.x, conductivityTester.negativeProbeLocationProperty.value.y - conductivityTester.probeSize.height );
 
     // wire from battery terminal to positive probe
     var positiveWire = new WireNode(
       battery.getGlobalBounds().right, battery.getGlobalBounds().centerY,
-      conductivityTester.positiveProbeLocation.value.x, conductivityTester.positiveProbeLocation.value.y - conductivityTester.probeSize.height );
+      conductivityTester.positiveProbeLocationProperty.value.x, conductivityTester.positiveProbeLocationProperty.value.y - conductivityTester.probeSize.height );
 
     // probes
-    var negativeProbe = new ProbeNode( conductivityTester.negativeProbeLocation, conductivityTester.probeDragYRange, conductivityTester.probeSize, { isPositive: false } );
-    var positiveProbe = new ProbeNode( conductivityTester.positiveProbeLocation, conductivityTester.probeDragYRange, conductivityTester.probeSize, { isPositive: true } );
+    var negativeProbe = new ProbeNode( conductivityTester.negativeProbeLocationProperty, conductivityTester.probeDragYRange, conductivityTester.probeSize, { isPositive: false } );
+    var positiveProbe = new ProbeNode( conductivityTester.positiveProbeLocationProperty, conductivityTester.probeDragYRange, conductivityTester.probeSize, { isPositive: true } );
 
     Node.call( this, { children: [ negativeWire, positiveWire, negativeProbe, positiveProbe, apparatusNode ] } );
 
     // update wires if end point was changed
-    conductivityTester.positiveProbeLocation.link( function( location ) {
+    conductivityTester.positiveProbeLocationProperty.link( function( location ) {
       positiveWire.setEndPoint( location.x, location.y - conductivityTester.probeSize.height );
     } );
-    conductivityTester.negativeProbeLocation.link( function( location ) {
+    conductivityTester.negativeProbeLocationProperty.link( function( location ) {
       negativeWire.setEndPoint( location.x, location.y - conductivityTester.probeSize.height );
     } );
 
