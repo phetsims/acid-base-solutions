@@ -1,3 +1,6 @@
+3/31/14 move reaction equations to common/view/
+3/31/14 change to factory pattern for reaction equations
+3/31/14 'formula' -> 'reaction equation' throughout, to use proper terminology for this domain
 3/31/14 simplify internal doc for formula nodes
 3/31/14 #62 move formula nodes to common/view/formulas/
 3/31/14 #50 add italics to A,B,M symbols in reaction equations
