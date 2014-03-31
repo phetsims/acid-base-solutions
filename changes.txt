@@ -1,3 +1,4 @@
+3/31/14 #62 move formula nodes to common/view/formulas/
 3/31/14 #50 add italics to A,B,M symbols in reaction equations
 3/31/14 #80 update conductivity tester when it becomes visible by overriding setVisible
 3/31/14 #80 remove model dependencies from LightRaysNode

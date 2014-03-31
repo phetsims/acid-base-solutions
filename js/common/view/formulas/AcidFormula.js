@@ -10,7 +10,7 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
-    FormulaAbstract = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/FormulaAbstract' );
+    FormulaAbstract = require( 'ACID_BASE_SOLUTIONS/common/view/formulas/FormulaAbstract' );
 
   function AcidFormula( isWeak, options ) {
     FormulaAbstract.call( this, options );

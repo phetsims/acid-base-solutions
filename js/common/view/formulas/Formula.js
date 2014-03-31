@@ -13,10 +13,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' ),
-    WaterFormula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/WaterFormula' ),
-    AcidFormula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/AcidFormula' ),
-    StrongBaseFormula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/StrongBaseFormula' ),
-    WeakBaseFormula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/WeakBaseFormula' );
+    WaterFormula = require( 'ACID_BASE_SOLUTIONS/common/view/formulas/WaterFormula' ),
+    AcidFormula = require( 'ACID_BASE_SOLUTIONS/common/view/formulas/AcidFormula' ),
+    StrongBaseFormula = require( 'ACID_BASE_SOLUTIONS/common/view/formulas/StrongBaseFormula' ),
+    WeakBaseFormula = require( 'ACID_BASE_SOLUTIONS/common/view/formulas/WeakBaseFormula' );
 
   /**
    * @param {Beaker} beaker

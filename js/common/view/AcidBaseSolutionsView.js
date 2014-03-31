@@ -13,7 +13,7 @@ define( function( require ) {
   var BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
   var ConductivityTesterNode = require( 'ACID_BASE_SOLUTIONS/common/view/conductivity/ConductivityTesterNode' );
   var EquilibriumConcentrationBarChart = require( 'ACID_BASE_SOLUTIONS/view/workspace/equilibrium-concentration-graph/EquilibriumConcentrationBarChart' );
-  var Formula = require( 'ACID_BASE_SOLUTIONS/view/workspace/formulas/Formula' );
+  var Formula = require( 'ACID_BASE_SOLUTIONS/common/view/formulas/Formula' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Magnifier = require( 'ACID_BASE_SOLUTIONS/view/workspace/magnifier/Magnifier' );
   var Node = require( 'SCENERY/nodes/Node' );
