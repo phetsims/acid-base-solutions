@@ -1,5 +1,11 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
+/**
+ * Factory for creating molecule nodes.
+ *
+ * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
+ */
 define( function( require ) {
   'use strict';
 
@@ -16,7 +22,6 @@ define( function( require ) {
   var FONT = new PhetFont( 8 );
 
   /**
-   * Atoms
    * @param radius
    * @param color
    * @param options
@@ -32,7 +37,7 @@ define( function( require ) {
 
   inherit( Circle, AtomNode );
 
-  // The field names here must correspond to the 'key' fields in AqueousSolution.molecules.
+  // NOTE: The field names here must correspond to the 'key' fields in AqueousSolution.molecules.
   return {
 
     A: function() {
