@@ -11,22 +11,10 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
+    MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Util = require( 'DOT/Util' ),
     ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );
-
-  // molecules. The field names here must correspond to the 'key' fields in AqueousSolution.molecules.
-  var MoleculesConstructors = {
-    A: require( 'ACID_BASE_SOLUTIONS/common/view/molecules/AMolecule' ),
-    B: require( 'ACID_BASE_SOLUTIONS/common/view/molecules/BMolecule' ),
-    BH: require( 'ACID_BASE_SOLUTIONS/common/view/molecules/BHMolecule' ),
-    H2O: require( 'ACID_BASE_SOLUTIONS/common/view/molecules/H2OMolecule' ),
-    H3O: require( 'ACID_BASE_SOLUTIONS/common/view/molecules/H3OMolecule' ),
-    HA: require( 'ACID_BASE_SOLUTIONS/common/view/molecules/HAMolecule' ),
-    M: require( 'ACID_BASE_SOLUTIONS/common/view/molecules/MMolecule' ),
-    MOH: require( 'ACID_BASE_SOLUTIONS/common/view/molecules/MOHMolecule' ),
-    OH: require( 'ACID_BASE_SOLUTIONS/common/view/molecules/OHMolecule' )
-  };
 
   // constants
   var BASE_CONCENTRATION = 1E-7, // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules
@@ -48,7 +36,7 @@ define( function( require ) {
     this._pointer = 0; // last shown molecule's index
 
     // add molecules, reusing one instance
-    var moleculeNode = new MoleculesConstructors[molecule.key]();
+    var moleculeNode = new MoleculeFactory[molecule.key]();
     for ( var i = 0; i < MAX_MOLECULES; i++ ) {
       this.addChild( molecules[i] = new Node( { visible: false, children: [ moleculeNode ] } ) );
     }

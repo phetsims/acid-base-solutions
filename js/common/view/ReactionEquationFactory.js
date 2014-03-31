@@ -14,22 +14,12 @@ define( function( require ) {
     VBox = require( 'SCENERY/nodes/VBox' ),
     Image = require( 'SCENERY/nodes/Image' ),
     Text = require( 'SCENERY/nodes/Text' ),
+    MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' ),
     Node = require( 'SCENERY/nodes/Node' ),
     SubSupText = require( 'SCENERY_PHET/SubSupText' ),
     ChemUtils = require( 'NITROGLYCERIN/ChemUtils' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' ),
     VStrut = require( 'SUN/VStrut' );
-
-  // molecules
-  var AMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/AMolecule' ),
-    BMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/BMolecule' ),
-    BHMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/BHMolecule' ),
-    H2OMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/H2OMolecule' ),
-    H3OMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/H3OMolecule' ),
-    HAMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/HAMolecule' ),
-    MMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/MMolecule' ),
-    MOHMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/MOHMolecule' ),
-    OHMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/OHMolecule' );
 
   // images
   var arrowSingleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_single.png' ),
@@ -54,7 +44,7 @@ define( function( require ) {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
-        new AMolecule(),
+        MoleculeFactory['A'](),
         new Node( { children: [ A, minusNode ] } ),
         new VStrut( TEXT_SUB_INDENT )
       ]
@@ -66,7 +56,7 @@ define( function( require ) {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
-        new BMolecule(),
+        MoleculeFactory['B'](),
         new Text( 'B', {font: FONT, fontStyle: 'italic'} ),
         new VStrut( TEXT_SUB_INDENT )
       ]
@@ -76,7 +66,7 @@ define( function( require ) {
   // BH+ node
   var createBHNode = function() {
     return new VBox( {spacing: VBOX_SPACING, children: [
-      new BHMolecule(),
+      MoleculeFactory['BH'](),
       new HBox( {
         spacing: 1,
         align: 'bottom',
@@ -91,7 +81,7 @@ define( function( require ) {
   // H2O node
   var createH2ONode = function() {
     return new VBox( {spacing: VBOX_SPACING, children: [
-      new H2OMolecule(),
+      MoleculeFactory['H2O'](),
       new SubSupText( ChemUtils.toSubscript( 'H2O' ), SUBSUP_OPTIONS )
     ]} );
   };
@@ -103,8 +93,8 @@ define( function( require ) {
       children: [
         new HBox( {spacing: HBOX_SPACING,
           children: [
-            new H2OMolecule(),
-            new H2OMolecule()
+            MoleculeFactory['H2O'](),
+            MoleculeFactory['H2O']()
           ]
         } ),
         new HBox( {
@@ -124,7 +114,7 @@ define( function( require ) {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
-        new H3OMolecule(),
+        MoleculeFactory['H3O'](),
         new SubSupText( ChemUtils.toSubscript( 'H3O' ) + '<sup>+</sup>', SUBSUP_OPTIONS )
       ]
     } );
@@ -135,7 +125,7 @@ define( function( require ) {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
-        new HAMolecule(),
+        MoleculeFactory['HA'](),
         new HBox( {
           spacing: 1,
           children: [
@@ -155,7 +145,7 @@ define( function( require ) {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
-        new MMolecule(),
+        MoleculeFactory['M'](),
         new Node( { children: [ M, plusNode ] } ),
         new VStrut( TEXT_SUB_INDENT )
       ]
@@ -167,7 +157,7 @@ define( function( require ) {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
-        new MOHMolecule(),
+        MoleculeFactory['MOH'](),
         new HBox( {
           spacing: 1,
           children: [
@@ -184,7 +174,7 @@ define( function( require ) {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
-        new OHMolecule(),
+        MoleculeFactory['OH'](),
         new SubSupText( 'OH<sup>-</sup>', SUBSUP_OPTIONS ),
         new VStrut( TEXT_SUB_INDENT )
       ]

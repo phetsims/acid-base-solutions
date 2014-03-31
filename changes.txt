@@ -1,3 +1,4 @@
+3/31/14 #60 replace molecule node types with factory
 3/31/14 #5, #60 move reuse of molecule nodes into MagnifierMoleculesLayer; delete duplicated caching from molecule subtypes
 3/31/14 #5, #60, #62, move Atom to AtomNode, remove gradient caching
 3/31/14 #62 move molecule nodes to common/view/molecules/

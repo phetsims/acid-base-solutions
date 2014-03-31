@@ -12,12 +12,12 @@ define( function( require ) {
   // imports
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var CheckBox = require( 'SUN/CheckBox' );
-  var H2OMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/H2OMolecule' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SUN/HStrut' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MoleculeColors = require( 'ACID_BASE_SOLUTIONS/common/MoleculeColors' );
+  var MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -85,7 +85,7 @@ define( function( require ) {
       spacing: TEXT_ICON_X_SPACING,
       children: [
         new Text( solventString, TEXT_OPTIONS ),
-        new H2OMolecule()
+        MoleculeFactory['H2O']()
       ]
     } );
     solventLabel.setEnabled = function( enabled ) {

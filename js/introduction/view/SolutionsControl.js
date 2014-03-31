@@ -11,14 +11,11 @@ define( function( require ) {
 
   // imports
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  var BMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/BMolecule' );
   var ChemUtils = require( 'NITROGLYCERIN/ChemUtils' );
-  var H2OMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/H2OMolecule' );
-  var HAMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/HAMolecule' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HTMLText = require( 'SCENERY/nodes/HTMLText' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MOHMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/MOHMolecule' );
+  var MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -57,7 +54,7 @@ define( function( require ) {
         spacing: TEXT_ICON_X_SPACING,
         children: [
           new SubSupText( StringUtils.format( pattern_0solution_1symbol, waterString, ChemUtils.toSubscript( 'H2O' ) ), TEXT_OPTIONS ),
-          new H2OMolecule()
+          new MoleculeFactory['H2O']()
         ]
       } ), RADIO_BUTTON_OPTIONS );
 
@@ -67,7 +64,7 @@ define( function( require ) {
         spacing: TEXT_ICON_X_SPACING,
         children: [
           new HTMLText( StringUtils.format( pattern_0solution_1symbol, strongAcidString, 'H<i>A</i>' ), TEXT_OPTIONS ),
-          new HAMolecule()
+          new MoleculeFactory['HA']()
         ]
       } ), RADIO_BUTTON_OPTIONS );
 
@@ -77,7 +74,7 @@ define( function( require ) {
         spacing: TEXT_ICON_X_SPACING,
         children: [
           new HTMLText( StringUtils.format( pattern_0solution_1symbol, weakAcidString, 'H<i>A</i>' ), TEXT_OPTIONS ),
-          new HAMolecule()
+          new MoleculeFactory['HA']()
         ]
       } ), RADIO_BUTTON_OPTIONS );
 
@@ -87,7 +84,7 @@ define( function( require ) {
         spacing: TEXT_ICON_X_SPACING,
         children: [
           new HTMLText( StringUtils.format( pattern_0solution_1symbol, strongBaseString, '<i>M</i>OH' ), TEXT_OPTIONS ),
-          new MOHMolecule()
+          new MoleculeFactory['MOH']()
         ]
       } ), RADIO_BUTTON_OPTIONS );
 
@@ -97,7 +94,7 @@ define( function( require ) {
         spacing: TEXT_ICON_X_SPACING,
         children: [
           new HTMLText( StringUtils.format( pattern_0solution_1symbol, weakBaseString, '<i>B</i>' ), TEXT_OPTIONS ),
-          new BMolecule()
+          new MoleculeFactory['B']()
         ]
       } ), RADIO_BUTTON_OPTIONS );
 
