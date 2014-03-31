@@ -9,17 +9,17 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var inherit = require( 'PHET_CORE/inherit' ),
-    Node = require( 'SCENERY/nodes/Node' ),
-    SubSupText = require( 'SCENERY_PHET/SubSupText' ),
-    PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    Rectangle = require( 'SCENERY/nodes/Rectangle' ),
-    StringUtils = require( 'PHETCOMMON/util/StringUtils' ),
-    Util = require( 'DOT/Util' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
+  var Util = require( 'DOT/Util' );
 
   // strings
-  var pattern_0value_1power = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1power' ),
-    negligibleString = require( 'string!ACID_BASE_SOLUTIONS/negligible' );
+  var pattern_0value_1power = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1power' );
+  var negligibleString = require( 'string!ACID_BASE_SOLUTIONS/negligible' );
 
   // constants
   var FONT = new PhetFont( 12 );
