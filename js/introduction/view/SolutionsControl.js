@@ -31,7 +31,6 @@ define( function( require ) {
   var pattern_0solution_1symbol = require( 'string!ACID_BASE_SOLUTIONS/pattern.0solution.1symbol' );
   var strongAcidString = require( 'string!ACID_BASE_SOLUTIONS/strongAcid' );
   var strongBaseString = require( 'string!ACID_BASE_SOLUTIONS/strongBase' );
-  var solutionsString = require( 'string!ACID_BASE_SOLUTIONS/solutions' );
   var waterString = require( 'string!ACID_BASE_SOLUTIONS/water' );
   var weakAcidString = require( 'string!ACID_BASE_SOLUTIONS/weakAcid' );
   var weakBaseString = require( 'string!ACID_BASE_SOLUTIONS/weakBase' );
@@ -49,13 +48,9 @@ define( function( require ) {
   function SolutionsControl( solutionTypeProperty, options ) {
 
     options = _.extend( {
-      titleFont: new PhetFont(),
       spacing: 4,
       align: 'left'
     }, options );
-
-    // title
-    var titleNode = new Text( solutionsString, { font: options.titleFont } );
 
     // Water
     var waterRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WATER,
@@ -128,7 +123,6 @@ define( function( require ) {
     } );
 
     options.children = buttons;
-    options.children.unshift( titleNode ); // prepend
     VBox.call( this, options );
   }
 

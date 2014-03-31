@@ -14,14 +14,20 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var SolutionControl = require( 'ACID_BASE_SOLUTIONS/customsolution/view/SolutionControl' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var ToolsControl = require( 'ACID_BASE_SOLUTIONS/common/view/ToolsControl' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var ViewsControl = require( 'ACID_BASE_SOLUTIONS/common/view/ViewsControl' );
 
+  // strings
+  var solutionString = require( 'string!ACID_BASE_SOLUTIONS/solution' );
+  var toolsString = require( 'string!ACID_BASE_SOLUTIONS/tools' );
+  var viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' );
+
   // constants
+  var TITLE_OPTIONS = { font: new PhetFont( { size: 14, weight: 'bold' } ) };
   var PANEL_OPTIONS = {
     fill: 'rgb(208,212,255)',
-    titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
     xMargin: 15,
     yMargin: 8
   };
@@ -36,6 +42,11 @@ define( function( require ) {
    */
   function CustomSolutionControlPanel( model ) {
 
+    // titles
+    var solutionTitle = new Text( solutionString, TITLE_OPTIONS );
+    var viewsTitle = new Text( viewsString, TITLE_OPTIONS );
+    var toolsTitle = new Text( toolsString, TITLE_OPTIONS );
+
     // controls
     var solutionControl = new SolutionControl( model.property( 'solutionType' ), model.property( 'concentration' ), model.property( 'strength' ), PANEL_OPTIONS );
     var viewsControl = new ViewsControl( model.property( 'viewMode' ), model.property( 'toolMode' ), model.property( 'solventVisible' ), PANEL_OPTIONS );
@@ -44,8 +55,11 @@ define( function( require ) {
     // panels with equal widths
     var maxWidth = Math.max( solutionControl.width, Math.max( viewsControl.width, toolsControl.width ) );
     var children = [
+      solutionTitle,
       createPanel( solutionControl, maxWidth ),
+      viewsTitle,
       createPanel( viewsControl, maxWidth ),
+      toolsTitle,
       createPanel( toolsControl, maxWidth )
     ];
 

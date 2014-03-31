@@ -22,9 +22,6 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VStrut = require( 'SUN/VStrut' );
 
-  // strings
-  var toolsString = require( 'string!ACID_BASE_SOLUTIONS/tools' );
-
   // images
   var lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-icon.png' );
   var pHMeterImage = require( 'image!ACID_BASE_SOLUTIONS/pH-meter-icon.png' );
@@ -55,7 +52,6 @@ define( function( require ) {
   function ToolsControl( toolModeProperty, options ) {
 
     options = _.extend( {
-      titleFont: new PhetFont(),
       align: 'left',
       spacing: 4
     }, options );
@@ -69,7 +65,6 @@ define( function( require ) {
     var minHeight = Math.max( pHMeterNode.height, Math.max( pHPaperNode.height, lightBulbNode.height ) );
 
     options.children = [
-      new Text( toolsString, { font: options.titleFont } ),
       new HBox( {
         children: [
           new InOutRadioButton( toolModeProperty, ToolMode.PH_METER, createIcon( pHMeterNode, minWidth, minHeight ), RADIO_BUTTON_OPTIONS ),

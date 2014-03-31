@@ -31,7 +31,6 @@ define( function( require ) {
   var acidString = require( 'string!ACID_BASE_SOLUTIONS/acid' );
   var baseString = require( 'string!ACID_BASE_SOLUTIONS/base' );
   var initialConcentrationString = require( 'string!ACID_BASE_SOLUTIONS/initialConcentration' );
-  var solutionString = require( 'string!ACID_BASE_SOLUTIONS/solution' );
   var strengthString = require( 'string!ACID_BASE_SOLUTIONS/strength' );
   var strongString = require( 'string!ACID_BASE_SOLUTIONS/strong' );
   var weakString = require( 'string!ACID_BASE_SOLUTIONS/weak' );
@@ -56,15 +55,11 @@ define( function( require ) {
   function SolutionControl( solutionTypeProperty, concentrationProperty, strengthProperty, options ) {
 
     options = _.extend( {
-      titleFont: new PhetFont(),
       spacing: 4,
       align: 'left'
     }, options );
 
     var concentrationRange = ABSConstants.CONCENTRATION_RANGE;
-
-    // 'Solution' title
-    var solutionTitle = new Text( solutionString, { font: options.titleFont } );
 
     // acid/base switch
     var isAcidProperty = new Property( solutionTypeProperty.value === SolutionType.WEAK_ACID || solutionTypeProperty.value === SolutionType.STRONG_ACID );
@@ -111,7 +106,6 @@ define( function( require ) {
     var strengthSlider = new StrengthSlider( strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE );
 
     options.children = [
-      solutionTitle,
       acidBaseSwitch,
       concentrationTitle,
       concentrationValueControl,
@@ -134,14 +128,12 @@ define( function( require ) {
     options.children.splice( options.children.indexOf( strengthTitle ), 0, strengthSeparator );
 
     // brute-force layout
-    var titleYSpacing = 8;
     var subtitleYSpacing = 6;
     var separatorYSpacing = 6;
     var controlYSpacing = 6;
     // controls are all center justified
     acidBaseSwitch.centerX = concentrationValueControl.centerX = concentrationSlider.centerX = weakStrongSwitch.centerX = strengthSlider.centerX = separatorWidth / 2;
-    // titles and subtitles are left justified
-    acidBaseSwitch.top = solutionTitle.bottom + titleYSpacing;
+    // subtitles are left justified
     concentrationSeparator.top = acidBaseSwitch.bottom + separatorYSpacing;
     concentrationTitle.top = concentrationSeparator.bottom + separatorYSpacing;
     concentrationValueControl.top = concentrationTitle.bottom + subtitleYSpacing;

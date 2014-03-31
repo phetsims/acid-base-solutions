@@ -31,7 +31,6 @@ define( function( require ) {
   var hideViewsString = require( 'string!ACID_BASE_SOLUTIONS/hideViews' );
   var moleculesString = require( 'string!ACID_BASE_SOLUTIONS/molecules' );
   var solventString = require( 'string!ACID_BASE_SOLUTIONS/solvent' );
-  var viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' );
 
   // images
   var beakerImage = require( 'image!ACID_BASE_SOLUTIONS/beaker.png' );
@@ -67,13 +66,9 @@ define( function( require ) {
     var self = this;
 
     options = _.extend( {
-      titleFont: new PhetFont(),
       spacing: 4,
       align: 'left'
     }, options );
-
-    // title
-    var titleNode = new Text( viewsString, { font: options.titleFont } );
 
     // Molecules
     var moleculesRadioButton = new AquaRadioButton( viewModeProperty, ViewMode.MOLECULES,
@@ -119,7 +114,6 @@ define( function( require ) {
       } ), RADIO_BUTTON_OPTIONS );
 
     options.children = [
-      titleNode,
       moleculesRadioButton,
       new HBox( { children: [ new HStrut( 20 ), solventCheckBox ] } ),
       graphRadioButton,
