@@ -47,9 +47,10 @@ define( function( require ) {
     Node.call( this );
     this._pointer = 0; // last shown molecule's index
 
-    // add molecules
+    // add molecules, reusing one instance
+    var moleculeNode = new MoleculesConstructors[molecule.key]();
     for ( var i = 0; i < MAX_MOLECULES; i++ ) {
-      this.addChild( molecules[i] = new MoleculesConstructors[molecule.key]( { visible: false, fromCache: true } ) );
+      this.addChild( molecules[i] = new Node( { visible: false, children: [ moleculeNode ] } ) );
     }
 
     // update number of molecules only when layer is visible
