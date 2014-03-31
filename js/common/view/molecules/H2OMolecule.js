@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * View for M molecule.
+ * View for H2O molecule.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
@@ -12,13 +12,17 @@ define( function( require ) {
   var MoleculeColors = require( 'ACID_BASE_SOLUTIONS/common/MoleculeColors' );
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    Atom = require( 'ACID_BASE_SOLUTIONS/view/molecules/Atom' );
+    Atom = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/Atom' );
 
   var atomCache, getMolecule = function() {
-    return new Atom( 7, MoleculeColors.M );
+    return new Node( {children: [
+      new Atom( 4, MoleculeColors.H2O, {x: 0, y: -9} ),
+      new Atom( 7, MoleculeColors.H2O, {x: 0, y: 0} ),
+      new Atom( 4, MoleculeColors.H2O, {x: -6, y: 5} )
+    ]} );
   };
 
-  function MMolecule( options ) {
+  function H2OMolecule( options ) {
     options = _.extend( { fromCache: false }, options );
     Node.call( this, options );
 
@@ -26,5 +30,5 @@ define( function( require ) {
     this.addChild( options.fromCache ? (atomCache ? atomCache : atomCache = getMolecule()) : getMolecule() );
   }
 
-  return inherit( Node, MMolecule );
+  return inherit( Node, H2OMolecule );
 } );

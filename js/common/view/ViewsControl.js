@@ -12,7 +12,7 @@ define( function( require ) {
   // imports
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var CheckBox = require( 'SUN/CheckBox' );
-  var H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' );
+  var H2OMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/H2OMolecule' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SUN/HStrut' );
   var Image = require( 'SCENERY/nodes/Image' );

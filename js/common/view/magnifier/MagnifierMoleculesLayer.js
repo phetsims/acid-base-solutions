@@ -17,15 +17,15 @@ define( function( require ) {
 
   // molecules. The field names here must correspond to the 'key' fields in AqueousSolution.molecules.
   var MoleculesConstructors = {
-    A: require( 'ACID_BASE_SOLUTIONS/view/molecules/AMolecule' ),
-    B: require( 'ACID_BASE_SOLUTIONS/view/molecules/BMolecule' ),
-    BH: require( 'ACID_BASE_SOLUTIONS/view/molecules/BHMolecule' ),
-    H2O: require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' ),
-    H3O: require( 'ACID_BASE_SOLUTIONS/view/molecules/H3OMolecule' ),
-    HA: require( 'ACID_BASE_SOLUTIONS/view/molecules/HAMolecule' ),
-    M: require( 'ACID_BASE_SOLUTIONS/view/molecules/MMolecule' ),
-    MOH: require( 'ACID_BASE_SOLUTIONS/view/molecules/MOHMolecule' ),
-    OH: require( 'ACID_BASE_SOLUTIONS/view/molecules/OHMolecule' )
+    A: require( 'ACID_BASE_SOLUTIONS/common/view/molecules/AMolecule' ),
+    B: require( 'ACID_BASE_SOLUTIONS/common/view/molecules/BMolecule' ),
+    BH: require( 'ACID_BASE_SOLUTIONS/common/view/molecules/BHMolecule' ),
+    H2O: require( 'ACID_BASE_SOLUTIONS/common/view/molecules/H2OMolecule' ),
+    H3O: require( 'ACID_BASE_SOLUTIONS/common/view/molecules/H3OMolecule' ),
+    HA: require( 'ACID_BASE_SOLUTIONS/common/view/molecules/HAMolecule' ),
+    M: require( 'ACID_BASE_SOLUTIONS/common/view/molecules/MMolecule' ),
+    MOH: require( 'ACID_BASE_SOLUTIONS/common/view/molecules/MOHMolecule' ),
+    OH: require( 'ACID_BASE_SOLUTIONS/common/view/molecules/OHMolecule' )
   };
 
   // constants

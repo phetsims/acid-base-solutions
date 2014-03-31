@@ -21,15 +21,15 @@ define( function( require ) {
     VStrut = require( 'SUN/VStrut' );
 
   // molecules
-  var AMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/AMolecule' ),
-    BMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/BMolecule' ),
-    BHMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/BHMolecule' ),
-    H2OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H2OMolecule' ),
-    H3OMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/H3OMolecule' ),
-    HAMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/HAMolecule' ),
-    MMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/MMolecule' ),
-    MOHMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/MOHMolecule' ),
-    OHMolecule = require( 'ACID_BASE_SOLUTIONS/view/molecules/OHMolecule' );
+  var AMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/AMolecule' ),
+    BMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/BMolecule' ),
+    BHMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/BHMolecule' ),
+    H2OMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/H2OMolecule' ),
+    H3OMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/H3OMolecule' ),
+    HAMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/HAMolecule' ),
+    MMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/MMolecule' ),
+    MOHMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/MOHMolecule' ),
+    OHMolecule = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/OHMolecule' );
 
   // images
   var arrowSingleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_single.png' ),
