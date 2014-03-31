@@ -22,7 +22,7 @@ define( function( require ) {
   var yAxisString = require( 'string!ACID_BASE_SOLUTIONS/concentrationGraph.yAxis' );
 
   // constants
-  var FONT = new PhetFont( 11 );
+  var TICK_FONT = new PhetFont( 11 );
 
   function ConcentrationGraphBackgroundNode( width, height ) {
 
@@ -43,7 +43,7 @@ define( function( require ) {
       this.addChild( new Node( { y: y, children: ( i > 0 ) ? [ tickNode, dashedLineNode ] : [ tickNode ] } ) );
 
       // add text
-      this.addChild( new SubSupText( '10<sup>' + (i - 8) + '</sup>', {centerY: y, centerX: -16, font: FONT} ) );
+      this.addChild( new SubSupText( '10<sup>' + (i - 8) + '</sup>', {centerY: y, centerX: -16, font: TICK_FONT} ) );
     }
 
     // y-axis label
