@@ -11,11 +11,11 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var ConcentrationGraphBarNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphBarNode' );
+  var ConcentrationGraphBackgroundNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphBackgroundNode' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var MoleculeColors = require( 'ACID_BASE_SOLUTIONS/common/MoleculeColors' );
-  var inherit = require( 'PHET_CORE/inherit' ),
-    Node = require( 'SCENERY/nodes/Node' ),
-    ConcentrationGraphBarNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphBarNode' ),
-    ConcentrationGraphBackgroundNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphBackgroundNode' );
+  var Node = require( 'SCENERY/nodes/Node' );
 
   /**
    * @param {ConcentrationGraph} concentrationGraph
