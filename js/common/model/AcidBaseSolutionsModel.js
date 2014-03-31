@@ -76,7 +76,6 @@ define( function( require ) {
 
       // reset solutions
       for ( var solutionType in this.solutions ) {
-        //TODO reset appears to be undefined for each solution
         this.solutions[solutionType].reset();
       }
 
