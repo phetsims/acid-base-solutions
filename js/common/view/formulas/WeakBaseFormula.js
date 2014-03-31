@@ -15,25 +15,13 @@ define( function( require ) {
   function WeakBaseFormula( options ) {
     FormulaAbstract.call( this, options );
 
-    // left expression: B molecule
+    // B + H2O <-> BH+ + OH-
     this.addChild( this.BNode() );
-
-    // left expression: plus sign
     this.addChild( this.plusSignNode() );
-
-    // left expression: H2O molecule
     this.addChild( this.H2ONode() );
-
-    // reverse sign
     this.addChild( this.reverseSignNode() );
-
-    // right expression: BH molecule
     this.addChild( this.BHNode() );
-
-    // right expression: plus sign
     this.addChild( this.plusSignNode() );
-
-    // right expression: OH molecule
     this.addChild( this.OHNode() );
 
     this.updateLayout();

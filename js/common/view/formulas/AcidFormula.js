@@ -15,25 +15,13 @@ define( function( require ) {
   function AcidFormula( isWeak, options ) {
     FormulaAbstract.call( this, options );
 
-    // left expression: HA molecule
+    // HA + H2O ? A- + H3O+
     this.addChild( this.HANode() );
-
-    // left expression: plus sign
     this.addChild( this.plusSignNode() );
-
-    // left expression: H2O molecule
     this.addChild( this.H2ONode() );
-
-    // straight or reverse sign (depend on flag isWeak)
     this.addChild( (isWeak ? this.reverseSignNode() : this.straightSignNode()) );
-
-    // right expression: A molecule
     this.addChild( this.ANode() );
-
-    // right expression: plus sign
     this.addChild( this.plusSignNode() );
-
-    // right expression: H3O molecule
     this.addChild( this.H3ONode() );
 
     this.updateLayout();

@@ -15,19 +15,11 @@ define( function( require ) {
   function StrongBaseFormula( options ) {
     FormulaAbstract.call( this, options );
 
-    // left expression: MOH molecule
+    // MOH -> M+ + OH-
     this.addChild( this.MOHNode() );
-
-    // straight sign
     this.addChild( this.straightSignNode() );
-
-    // right expression: M molecule
     this.addChild( this.MNode() );
-
-    // right expression: plus sign
     this.addChild( this.plusSignNode() );
-
-    // right expression: OH molecule
     this.addChild( this.OHNode() );
 
     this.updateLayout();

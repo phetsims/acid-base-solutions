@@ -15,19 +15,11 @@ define( function( require ) {
   function WaterFormula( options ) {
     FormulaAbstract.call( this, options );
 
-    // left expression: H2O molecule
+    // 2 H2O <-> H3O+ + OH-
     this.addChild( this.H2ODoubleNode() );
-
-    // reverse sign
     this.addChild( this.reverseSignNode() );
-
-    // right expression: H3O molecule
     this.addChild( this.H3ONode() );
-
-    // right expression: plus sign
     this.addChild( this.plusSignNode() );
-
-    // right expression: OH molecule
     this.addChild( this.OHNode() );
 
     this.updateLayout();
