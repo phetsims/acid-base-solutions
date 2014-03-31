@@ -15,7 +15,7 @@ define( function( require ) {
   var ConcentrationGraphNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphNode' );
   var ReactionEquationNode = require( 'ACID_BASE_SOLUTIONS/common/view/ReactionEquationNode' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Magnifier = require( 'ACID_BASE_SOLUTIONS/view/workspace/magnifier/Magnifier' );
+  var MagnifierNode = require( 'ACID_BASE_SOLUTIONS/common/view/magnifier/MagnifierNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PHColorKeyNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHColorKeyNode' );
   var PHMeterNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHMeterNode' );
@@ -28,7 +28,7 @@ define( function( require ) {
 
     var beakerNode = new BeakerNode( model.beaker );
     var equationNode = new ReactionEquationNode( model.beaker, model.property( 'solutionType' ) );
-    var magnifierNode = new Magnifier( model.magnifier );
+    var magnifierNode = new MagnifierNode( model.magnifier );
     var graphNode = new ConcentrationGraphNode( model.graph );
     var pHMeterNode = new PHMeterNode( model.pHMeter );
     var pHPaperNode = new PHPaperNode( model.pHPaper );

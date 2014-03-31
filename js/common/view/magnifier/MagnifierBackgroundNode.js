@@ -25,7 +25,7 @@ define( function( require ) {
    * @param {Number} radius
    * @constructor
    */
-  function MagnifierBackground( solventVisibleProperty, container, radius ) {
+  function MagnifierBackgroundNode( solventVisibleProperty, container, radius ) {
     var rectangle, solventBackground;
     Node.call( this );
 
@@ -45,5 +45,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, MagnifierBackground );
+  return inherit( Node, MagnifierBackgroundNode );
 } );

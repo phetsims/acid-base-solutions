@@ -1,3 +1,4 @@
+3/31/14 #61 move magnifier-related nodes to common/view/magnifer/
 3/31/14 #61 move graph-related nodes to common/view/graph/, rename to 'ConcentrationGraph' throughout
 3/31/14 #61 move MagnifierModel to common/model/Magnifier
 3/31/14 #61 move BarChartModel to common/model/ConcentrationGraph

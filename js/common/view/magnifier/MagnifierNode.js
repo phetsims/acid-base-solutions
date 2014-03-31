@@ -12,14 +12,14 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
     Shape = require( 'KITE/Shape' ),
-    MagnifierBackground = require( 'ACID_BASE_SOLUTIONS/view/workspace/magnifier/MagnifierBackground' ),
-    MagnifierMoleculesLayer = require( 'ACID_BASE_SOLUTIONS/view/workspace/magnifier/MagnifierMoleculesLayer' );
+    MagnifierBackgroundNode = require( 'ACID_BASE_SOLUTIONS/common/view/magnifier/MagnifierBackgroundNode' ),
+    MagnifierMoleculesLayer = require( 'ACID_BASE_SOLUTIONS/common/view/magnifier/MagnifierMoleculesLayer' );
 
   /**
    * @param {Magnifier} magnifier
    * @constructor
    */
-  function Magnifier( magnifier ) {
+  function MagnifierNode( magnifier ) {
     var self = this,
       RADIUS = magnifier.radius,
       layers = {};
@@ -30,7 +30,7 @@ define( function( require ) {
     this.container.setClipArea( new Shape().circle( 0, 0, RADIUS - 4 ) );
 
     // add background
-    this.addChild( new MagnifierBackground( magnifier.solventVisibleProperty, this.container, RADIUS ) );
+    this.addChild( new MagnifierBackgroundNode( magnifier.solventVisibleProperty, this.container, RADIUS ) );
 
     // add molecules layers for each solution
     for ( var key in magnifier.solutions ) {
@@ -56,5 +56,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, Magnifier );
+  return inherit( Node, MagnifierNode );
 } );
