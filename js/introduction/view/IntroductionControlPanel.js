@@ -30,7 +30,7 @@ define( function( require ) {
   var PANEL_OPTIONS = {
     fill: 'rgb(208,212,255)',
     xMargin: 15,
-    yMargin: 8
+    yMargin: 6
   };
 
   var createPanel = function( node, minWidth ) {
