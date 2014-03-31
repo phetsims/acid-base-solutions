@@ -27,21 +27,24 @@ define( function( require ) {
     RAY_STROKE_MEDIUM = 1,
     RAY_STROKE_SMALL = 0.5;
 
-  function LightRaysNode( brightnessProperty, isCloseProperty, bulbRadius, options ) {
-    var setBrightnessBinded;
+  /**
+   * @param {Number} bulbRadius
+   * @param {*} options
+   * @constructor
+   */
+  function LightRaysNode( bulbRadius, options ) {
+
     Node.call( this, options );
+
+    this.bulbRadius = bulbRadius;
 
     // pre-calculate reusable objects
     this.createCacheLines( MAX_RAYS );
-
-    // add observers
-    setBrightnessBinded = this.setBrightness.bind( this, brightnessProperty, isCloseProperty, bulbRadius );
-    isCloseProperty.link( setBrightnessBinded );
-    brightnessProperty.link( setBrightnessBinded );
   }
 
   return inherit( Node, LightRaysNode, {
 
+    // @private
     createCacheLines: function( numberOfLines ) {
       this.cachedLines = [];
       for ( var i = numberOfLines; i--; ) {
@@ -50,25 +53,19 @@ define( function( require ) {
       }
     },
 
-    setBrightness: function( brightnessProperty, isCloseProperty, bulbRadius ) {
+    // updates light rays based on brightness, which varies from 0 to 1.
+    setBrightness: function( brightness ) {
 
-      var isClosed = isCloseProperty.value,
-        intensity = BRIGHTNESS_TO_INTENSITY_FUNCTION( brightnessProperty.value ),
-        numberOfRays = MIN_RAYS + Math.round( intensity * ( MAX_RAYS - MIN_RAYS ) ), // number of rays is a function of intensity
-        angle = RAYS_START_ANGLE,
-        deltaAngle = RAYS_ARC_ANGLE / ( numberOfRays - 1 ),
-        lineWidth,
-        rayLength; // ray length is a function of intensity
+      var intensity = BRIGHTNESS_TO_INTENSITY_FUNCTION( brightness );
 
-      // if intensity is zero or circuit isn't closed then hide node
-      this.setVisible( (intensity && isClosed) );
+      // number of rays is a function of intensity
+      var numberOfRays = ( brightness === 0 )? 0 : MIN_RAYS + Math.round( intensity * ( MAX_RAYS - MIN_RAYS ) );
+      // ray length is a function of intensity
+      var rayLength = MIN_RAY_LENGTH + ( intensity * ( MAX_RAY_LENGTH - MIN_RAY_LENGTH ) );
 
-      // update node only if it's visible
-      if ( !this.visible ) {
-        return;
-      }
-
-      rayLength = MIN_RAY_LENGTH + ( intensity * ( MAX_RAY_LENGTH - MIN_RAY_LENGTH ) );
+      var angle = RAYS_START_ANGLE;
+      var deltaAngle = RAYS_ARC_ANGLE / ( numberOfRays - 1 );
+      var lineWidth;
 
       // Pick one of 3 pre-allocated ray widths.
       lineWidth = RAY_STROKE_SMALL;
@@ -83,10 +80,10 @@ define( function( require ) {
       for ( var i = 0, x1, x2, y1, y2; i < MAX_RAYS; i++ ) {
         if ( i < numberOfRays ) {
           // determine the end points of the ray
-          x1 = Math.cos( angle ) * bulbRadius;
-          y1 = Math.sin( angle ) * bulbRadius;
-          x2 = Math.cos( angle ) * ( bulbRadius + rayLength );
-          y2 = Math.sin( angle ) * ( bulbRadius + rayLength );
+          x1 = Math.cos( angle ) * this.bulbRadius;
+          y1 = Math.sin( angle ) * this.bulbRadius;
+          x2 = Math.cos( angle ) * ( this.bulbRadius + rayLength );
+          y2 = Math.sin( angle ) * ( this.bulbRadius + rayLength );
 
           // set properties of line from the cache
           this.cachedLines[i].setVisible( true );

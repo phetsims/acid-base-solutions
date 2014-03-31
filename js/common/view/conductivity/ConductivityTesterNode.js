@@ -48,22 +48,24 @@ define( function( require ) {
 
     var self = this;
 
+    this.conductivityTester = conductivityTester; // @private
+
     // origin at bottom center of bulb's base
     var baseNode = new Image( lightBulbBaseImage,
       { scale: BULB_SCALE, centerX: 0, bottom: 0 } );
 
-    // glass centered above base
-    var glassNode = new Image( lightBulbGlassImage,
+    // @private glass centered above base
+    this.glassNode = new Image( lightBulbGlassImage,
       { scale: BULB_SCALE, centerX: 0, bottom: baseNode.top } );
+    var bulbRadius = this.glassNode.width / 2;
 
     // mask that sits behind the glass
     var glassMaskNode = new Image( lightBulbGlassMaskImage,
-      { scale: BULB_SCALE, translation: glassNode.translation } );
+      { scale: BULB_SCALE, translation: this.glassNode.translation } );
 
-    // light rays centered on the bulb
-    var bulbRadius = glassNode.width / 2;
-    var raysNode = new LightRaysNode( conductivityTester.brightnessProperty, conductivityTester.isClosedProperty, bulbRadius,
-      { centerX: glassNode.centerX, y: glassNode.top + bulbRadius } );
+    // @private light rays centered on the bulb
+    this.raysNode = new LightRaysNode( bulbRadius,
+      { centerX: this.glassNode.centerX, y: this.glassNode.top + bulbRadius } );
 
     // wire from bulb base to battery
     var bulbBatteryWire = new Path( new Shape().moveTo( 0, 0 ).lineTo( BULB_TO_BATTERY_WIRE_LENGTH, 0 ), { stroke: 'black', lineWidth: 1.5 } );
@@ -77,10 +79,10 @@ define( function( require ) {
       children: [
         bulbBatteryWire,
         battery,
-        raysNode,
+        this.raysNode,
         baseNode,
         glassMaskNode,
-        glassNode
+        this.glassNode
       ]} );
     if ( SHOW_ORIGIN ) {
       apparatusNode.addChild( new Circle( 2, { fill: 'red' } ) );
@@ -110,12 +112,8 @@ define( function( require ) {
       negativeWire.setEndPoint( location.x, location.y - conductivityTester.probeSize.height );
     } );
 
-    // make the glass glow by changing its opacity
-    var setBrightness = function() {
-      glassNode.opacity = ( conductivityTester.isClosedProperty.value ? BRIGHTNESS_TO_OPACITY( conductivityTester.brightnessProperty.value ) : MIN_OPACITY );
-    };
-    conductivityTester.brightnessProperty.link( setBrightness );
-    conductivityTester.isClosedProperty.link( setBrightness );
+    conductivityTester.brightnessProperty.link( this.updateBrightness.bind( this ) );
+    conductivityTester.isClosedProperty.link( this.updateBrightness.bind( this ) );
 
     // visibility observer
     conductivityTester.visibleProperty.link( function( visible ) {
@@ -123,5 +121,25 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, ConductivityTesterNode );
+  return inherit( Node, ConductivityTesterNode, {
+
+    //@private
+    updateBrightness: function() {
+      if ( this.visible ) {
+        // make the glass glow by changing its opacity
+        this.glassNode.opacity = ( this.conductivityTester.isClosedProperty.value ? BRIGHTNESS_TO_OPACITY( this.conductivityTester.brightnessProperty.value ) : MIN_OPACITY );
+        // adjust light rays
+        this.raysNode.setBrightness( this.conductivityTester.isClosedProperty.value ? this.conductivityTester.brightnessProperty.value : 0 );
+      }
+    },
+
+    //@override update when this node becomes visible
+    setVisible: function( visible ) {
+      var wasVisible = this.visible;
+      Node.prototype.setVisible.call( this, visible );
+      if ( !wasVisible && visible ) {
+          this.updateBrightness();
+      }
+    }
+  } );
 } );
