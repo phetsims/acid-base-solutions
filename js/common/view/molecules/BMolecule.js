@@ -12,10 +12,10 @@ define( function( require ) {
   var MoleculeColors = require( 'ACID_BASE_SOLUTIONS/common/MoleculeColors' );
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    Atom = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/Atom' );
+    AtomNode = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/AtomNode' );
 
   var atomCache, getMolecule = function() {
-    return new Atom( 7, MoleculeColors.B );
+    return new AtomNode( 7, MoleculeColors.B );
   };
 
   function BMolecule( options ) {

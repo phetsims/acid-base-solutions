@@ -12,7 +12,7 @@ define( function( require ) {
   var MoleculeColors = require( 'ACID_BASE_SOLUTIONS/common/MoleculeColors' );
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    Atom = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/Atom' ),
+    AtomNode = require( 'ACID_BASE_SOLUTIONS/common/view/molecules/AtomNode' ),
     Text = require( 'SCENERY/nodes/Text' ),
     PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
@@ -22,11 +22,11 @@ define( function( require ) {
   var getMolecule = function() {
     return new Node( {children: [
       // add M ion
-      new Atom( 6, MoleculeColors.MOH, {x: 0, y: 0} ),
+      new AtomNode( 6, MoleculeColors.MOH, {x: 0, y: 0} ),
       new Text( '+', {centerX: 0, centerY: 8.5, font: FONT} ),
       // add OH ion
-      new Atom( 7, MoleculeColors.MOH, {x: 15, y: 0} ),
-      new Atom( 4, MoleculeColors.MOH, {x: 22, y: -4} ),
+      new AtomNode( 7, MoleculeColors.MOH, {x: 15, y: 0} ),
+      new AtomNode( 4, MoleculeColors.MOH, {x: 22, y: -4} ),
       new Text( '-', {centerX: 15, centerY: 8.5, font: FONT} )
     ]} );
   }, atomCache;
