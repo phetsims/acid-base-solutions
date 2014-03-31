@@ -18,7 +18,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
 
   /**
-   * @param {ConcentrationGraph} concentrationGraph
+   * @param {ConcentrationGraph} graph
    * @constructor
    */
   function ConcentrationGraphNode( graph ) {
