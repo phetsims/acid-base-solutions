@@ -22,7 +22,7 @@ define( function( require ) {
    * @param {Property<ToolMode>} toolModeProperty
    * @constructor
    */
-  function MagnifierModel( beaker, solutions, solutionTypeProperty, solventVisibleProperty, viewModeProperty, toolModeProperty ) {
+  function Magnifier( beaker, solutions, solutionTypeProperty, solventVisibleProperty, viewModeProperty, toolModeProperty ) {
 
     // magnifier radius
     this.radius = beaker.size.height / 2.15;
@@ -49,5 +49,5 @@ define( function( require ) {
       } );
   }
 
-  return MagnifierModel;
+  return Magnifier;
 } );

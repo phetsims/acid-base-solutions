@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Model for the concentration bar chart in 'Acid-Base Solutions' sim.
+ * Model for the concentration graph in 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
@@ -23,13 +23,13 @@ define( function( require ) {
    * @param {Property<Number>} strengthProperty optional, provided for custom solutions
    * @constructor
    */
-  function BarChartModel( beaker, solutions, solutionTypeProperty, viewModeProperty, toolModeProperty, concentrationProperty, strengthProperty ) {
+  function ConcentrationGraph( beaker, solutions, solutionTypeProperty, viewModeProperty, toolModeProperty, concentrationProperty, strengthProperty ) {
 
-    // dimensions of the chart's background
+    // dimensions of the graph's background
     this.width = 0.5 * beaker.size.width;
     this.height = 0.9 * beaker.size.height;
 
-    // bar chart location, origin at upper-left corner
+    // location, origin at upper-left corner
     this.location = beaker.location.plusXY( (this.width - beaker.size.width) / 2, -(beaker.size.height + this.height) / 2 );
 
     // solution property
@@ -47,12 +47,12 @@ define( function( require ) {
     // concentration property
     this.concentrationProperty = concentrationProperty;
 
-    // visibility of bar charts
+    // visibility
     this.visibleProperty = new DerivedProperty( [ viewModeProperty, toolModeProperty ],
       function( viewMode, toolMode ) {
         return ( viewMode === ViewMode.GRAPH && toolMode !== ToolMode.CONDUCTIVITY );
       } );
   }
 
-  return BarChartModel;
+  return ConcentrationGraph;
 } );

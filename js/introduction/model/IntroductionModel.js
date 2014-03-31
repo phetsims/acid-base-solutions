@@ -11,7 +11,7 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' ),
     AcidBaseSolutionsModel = require( 'ACID_BASE_SOLUTIONS/common/model/AcidBaseSolutionsModel' ),
-    BarChartModel = require( 'ACID_BASE_SOLUTIONS/model/BarChartModel' ),
+    ConcentrationGraph = require( 'ACID_BASE_SOLUTIONS/common/model/ConcentrationGraph' ),
     SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' ),
     WaterSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/WaterSolution' ),
     StrongAcidSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/StrongAcidSolution' ),
@@ -30,8 +30,8 @@ define( function( require ) {
       ],
       SolutionType.WATER );
 
-    // concentration bar chart model
-    this.barChart = new BarChartModel( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'viewMode' ), this.property( 'toolMode' ) );
+    // concentration graph
+    this.graph = new ConcentrationGraph( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'viewMode' ), this.property( 'toolMode' ) );
   }
 
   return inherit( AcidBaseSolutionsModel, IntroductionModel );

@@ -16,14 +16,14 @@ define( function( require ) {
     EquilibriumConcentrationBarChartBackground = require( 'ACID_BASE_SOLUTIONS/view/workspace/equilibrium-concentration-graph/EquilibriumConcentrationBarChartBackground' );
 
   /**
-   * @param {BarChartModel} barChartModel
+   * @param {ConcentrationGraph} concentrationGraph
    * @constructor
    */
-  function EquilibriumConcentrationBarChart( barChartModel ) {
+  function EquilibriumConcentrationBarChart( graph ) {
     var self = this,
       maxBars = 0,
-      BAR_CHART_WIDTH = barChartModel.width,
-      BAR_CHART_HEIGHT = barChartModel.height;
+      BAR_CHART_WIDTH = graph.width,
+      BAR_CHART_HEIGHT = graph.height;
     Node.call( this, {pickable: false} );
     this._bars = [];
 
@@ -31,8 +31,8 @@ define( function( require ) {
     this.addChild( new EquilibriumConcentrationBarChartBackground( BAR_CHART_WIDTH, BAR_CHART_HEIGHT ) );
 
     // find max bars value for all solutions
-    for ( var key in barChartModel.solutions ) {
-      var solution = barChartModel.solutions[ key ];
+    for ( var key in graph.solutions ) {
+      var solution = graph.solutions[ key ];
       maxBars = Math.max( maxBars, solution.molecules.length );
     }
 
@@ -42,14 +42,14 @@ define( function( require ) {
     }
 
     // add observers
-    barChartModel.visibleProperty.link( function( visible ) {
+    graph.visibleProperty.link( function( visible ) {
       self.setVisible( visible );
     } );
 
     // show bars for a specific solution type, hide extra bars
-    barChartModel.solutionTypeProperty.link( function( solutionType ) {
+    graph.solutionTypeProperty.link( function( solutionType ) {
 
-      var molecules = barChartModel.solutions[solutionType].molecules;
+      var molecules = graph.solutions[solutionType].molecules;
       var numberOfMolecules = molecules.length;
 
       for ( var i = 0, bar; i < maxBars; i++ ) {
@@ -57,7 +57,7 @@ define( function( require ) {
         if ( i < numberOfMolecules ) {
           // set visibility, color, value and position of new bars
           bar.setVisible( true );
-          bar.setValue( barChartModel.solutions[solutionType].property( molecules[i].concentrationPropertyName ).value );
+          bar.setValue( graph.solutions[solutionType].property( molecules[i].concentrationPropertyName ).value );
           bar.setFill( MoleculeColors[molecules[i].key] );
           bar.setTranslation( (i + 0.75 + (4 - numberOfMolecules) / 2) * BAR_CHART_WIDTH / 4, BAR_CHART_HEIGHT );
         }
@@ -67,15 +67,15 @@ define( function( require ) {
       }
     } );
 
-    this.translation = barChartModel.location;
+    this.translation = graph.location;
 
-    var updateBarValuesBinded = updateBarValues.bind( this, barChartModel, barChartModel.solutions );
-    barChartModel.viewModeProperty.link( updateBarValuesBinded );
+    var updateBarValuesBinded = updateBarValues.bind( this, graph, graph.solutions );
+    graph.viewModeProperty.link( updateBarValuesBinded );
 
     // listeners for 'custom solution' tab
-    if ( barChartModel.strengthProperty && barChartModel.concentrationProperty ) {
-      barChartModel.strengthProperty.link( updateBarValuesBinded );
-      barChartModel.concentrationProperty.link( updateBarValuesBinded );
+    if ( graph.strengthProperty && graph.concentrationProperty ) {
+      graph.strengthProperty.link( updateBarValuesBinded );
+      graph.concentrationProperty.link( updateBarValuesBinded );
     }
   }
 

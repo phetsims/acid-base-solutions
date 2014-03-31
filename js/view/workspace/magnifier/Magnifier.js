@@ -16,12 +16,12 @@ define( function( require ) {
     MagnifierMoleculesLayer = require( 'ACID_BASE_SOLUTIONS/view/workspace/magnifier/MagnifierMoleculesLayer' );
 
   /**
-   * @param {MagnifierModel} magnifierModel
+   * @param {Magnifier} magnifier
    * @constructor
    */
-  function Magnifier( magnifierModel ) {
+  function Magnifier( magnifier ) {
     var self = this,
-      RADIUS = magnifierModel.radius,
+      RADIUS = magnifier.radius,
       layers = {};
     Node.call( this, {pickable: false} );
 
@@ -30,28 +30,28 @@ define( function( require ) {
     this.container.setClipArea( new Shape().circle( 0, 0, RADIUS - 4 ) );
 
     // add background
-    this.addChild( new MagnifierBackground( magnifierModel.solventVisibleProperty, this.container, RADIUS ) );
+    this.addChild( new MagnifierBackground( magnifier.solventVisibleProperty, this.container, RADIUS ) );
 
     // add molecules layers for each solution
-    for ( var key in magnifierModel.solutions ) {
-      var solution = magnifierModel.solutions[ key ];
+    for ( var key in magnifier.solutions ) {
+      var solution = magnifier.solutions[ key ];
       var solutionType = solution.type;
-      if ( solutionType in magnifierModel.solutions ) {
+      if ( solutionType in magnifier.solutions ) {
         layers[solutionType] = new Node();
         solution.molecules.forEach( function( molecule ) {
           // get the property that determines the molecule's concentration
-          var property = magnifierModel.solutions[solutionType].property( molecule.concentrationPropertyName );
+          var property = magnifier.solutions[solutionType].property( molecule.concentrationPropertyName );
           if ( molecule.key !== 'H2O' && property.get() ) {
-            layers[solutionType].addChild( new MagnifierMoleculesLayer( magnifierModel, solutionType, property, molecule, RADIUS ) );
+            layers[solutionType].addChild( new MagnifierMoleculesLayer( magnifier, solutionType, property, molecule, RADIUS ) );
           }
         } );
         self.container.addChild( layers[solutionType] );
       }
     }
 
-    this.translation = magnifierModel.location;
+    this.translation = magnifier.location;
 
-    magnifierModel.visibleProperty.link( function( visible ) {
+    magnifier.visibleProperty.link( function( visible ) {
       self.setVisible( visible );
     } );
   }

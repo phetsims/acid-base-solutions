@@ -29,7 +29,7 @@ define( function( require ) {
     var beakerNode = new BeakerNode( model.beaker );
     var equationNode = new ReactionEquationNode( model.beaker, model.property( 'solutionType' ) );
     var magnifierNode = new Magnifier( model.magnifier );
-    var graphNode = new EquilibriumConcentrationBarChart( model.barChart );
+    var graphNode = new EquilibriumConcentrationBarChart( model.graph );
     var pHMeterNode = new PHMeterNode( model.pHMeter );
     var pHPaperNode = new PHPaperNode( model.pHPaper );
     var pHColorKeyNode = new PHColorKeyNode( model.pHPaper.visibleProperty, model.pHPaper.paperSize, { left: beakerNode.left + 30, bottom: beakerNode.top - 50 } );
