@@ -25,6 +25,7 @@ define( function( require ) {
   var viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' );
 
   // constants
+  var TITLE_Y_SPACING = 1;
   var TITLE_OPTIONS = { font: new PhetFont( { size: 14, weight: 'bold' } ) };
   var PANEL_OPTIONS = {
     fill: 'rgb(208,212,255)',
@@ -55,18 +56,33 @@ define( function( require ) {
     // panels with equal widths
     var maxWidth = Math.max( solutionsControl.width, Math.max( viewsControl.width, toolsControl.width ) );
     var children = [
-      solutionsTitle,
-      createPanel( solutionsControl, maxWidth ),
-      viewsTitle,
-      createPanel( viewsControl, maxWidth ),
-      toolsTitle,
-      createPanel( toolsControl, maxWidth )
+      new VBox( {
+        spacing: TITLE_Y_SPACING,
+        align: 'left',
+        children: [
+          solutionsTitle,
+          createPanel( solutionsControl, maxWidth )
+        ]} ),
+      new VBox( {
+        spacing: TITLE_Y_SPACING,
+        align: 'left',
+        children: [
+          viewsTitle,
+          createPanel( viewsControl, maxWidth ),
+        ]} ),
+      new VBox( {
+        spacing: TITLE_Y_SPACING,
+        align: 'left',
+        children: [
+          toolsTitle,
+          createPanel( toolsControl, maxWidth )
+        ]} )
     ];
 
     // stack panels vertically
     VBox.call( this, {
       align: 'left',
-      spacing: 5,
+      spacing: 6,
       children: children
     } );
   }

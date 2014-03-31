@@ -23,7 +23,6 @@ define( function( require ) {
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
-  var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VStrut = require( 'SUN/VStrut' );
 

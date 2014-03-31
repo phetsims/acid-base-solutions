@@ -1,3 +1,4 @@
+3/31/14 #51 make it possible to adjust vertical spacing for panel titles
 3/31/14 #51 move titles outside of panels, as shown in mockups
 3/31/14 move reaction equations to common/view/
 3/31/14 change to factory pattern for reaction equations
