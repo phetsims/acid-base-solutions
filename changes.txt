@@ -1,3 +1,4 @@
+3/31/14 cleanup of ConcentrationGraphBarNode
 3/31/14 optimize graph background by reusing 1 tick mark and 1 dashed line, instead of 11 of each
 3/31/14 #60 replace molecule node types with factory
 3/31/14 #5, #60 move reuse of molecule nodes into MagnifierMoleculesLayer; delete duplicated caching from molecule subtypes

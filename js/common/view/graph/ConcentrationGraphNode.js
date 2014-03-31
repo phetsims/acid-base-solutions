@@ -58,7 +58,7 @@ define( function( require ) {
           // set visibility, color, value and position of new bars
           bar.setVisible( true );
           bar.setValue( graph.solutions[solutionType].property( molecules[i].concentrationPropertyName ).value );
-          bar.setFill( MoleculeColors[molecules[i].key] );
+          bar.setBarFill( MoleculeColors[molecules[i].key] );
           bar.setTranslation( (i + 0.75 + (4 - numberOfMolecules) / 2) * BAR_CHART_WIDTH / 4, BAR_CHART_HEIGHT );
         }
         else {

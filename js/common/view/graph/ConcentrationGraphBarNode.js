@@ -25,16 +25,18 @@ define( function( require ) {
   var FONT = new PhetFont( 12 );
 
   function ConcentrationGraphBarNode( maxHeight ) {
-    Node.call( this );
-    this._maxHeight = maxHeight;
+
+    this.maxHeight = maxHeight; //@private
 
     // add rectangle to represent concentration
-    this.addChild( this._rectangle = new Rectangle( 0, 0, 25, 0, {fill: 'white'} ) );
-    this._rectangle.rotate( Math.PI );
+    this.bar = new Rectangle( 0, 0, 25, 0, { fill: 'white' } ); //@private
+    this.bar.rotate( Math.PI ); // so that bar grows upward
 
     // add vertical text for concentration (normal text + exponent text)
-    this.addChild( this._text = new SubSupText( '123', {font: FONT, centerX: 2, centerY: -10} ) );
-    this._text.rotate( -Math.PI / 2 );
+    this.text = new SubSupText( '123', { font: FONT, centerX: 2, centerY: -10 } ); //@private
+    this.text.rotate( -Math.PI / 2 );
+
+    Node.call( this, { children: [ this.bar, this.text ] } );
   }
 
 
@@ -42,20 +44,20 @@ define( function( require ) {
 
     // set height and text value of bar
     setValue: function( value ) {
-      var barHeight = Math.abs( Util.log10( value ) + 8 ) * this._maxHeight / 10,
+      var barHeight = Math.abs( Util.log10( value ) + 8 ) * this.maxHeight / 10,
         pow;
 
       // set bar height
       if ( isFinite( barHeight ) ) {
-        this._rectangle.setRectHeight( barHeight );
+        this.bar.setRectHeight( barHeight );
       }
       else {
-        this._rectangle.setRectHeight( 0 );
+        this.bar.setRectHeight( 0 );
       }
 
       // set concentration text
       if ( value < 1e-13 ) {
-        this._text.setText( negligibleString );
+        this.text.setText( negligibleString );
       }
       else if ( value <= 1 ) {
         // find pow
@@ -71,16 +73,16 @@ define( function( require ) {
         }
 
         // set text
-        this._text.setText( StringUtils.format( pattern_0value_1power, Util.toFixed( value, 2 ), pow ) );
+        this.text.setText( StringUtils.format( pattern_0value_1power, Util.toFixed( value, 2 ), pow ) );
       }
       else {
-        this._text.setText( Util.toFixed( value, 1 ) );
+        this.text.setText( Util.toFixed( value, 1 ) );
       }
     },
 
-    // set color of rectangle
-    setFill: function( color ) {
-      this._rectangle.setFill( color );
+    // set color of bar
+    setBarFill: function( color ) {
+      this.bar.setFill( color );
     }
   } );
 } );
