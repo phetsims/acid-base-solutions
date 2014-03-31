@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Visual representation for concentration bar chart in the 'Acid-Base Solutions' sim.
+ * Concentration graph.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
@@ -12,14 +12,14 @@ define( function( require ) {
   var MoleculeColors = require( 'ACID_BASE_SOLUTIONS/common/MoleculeColors' );
   var inherit = require( 'PHET_CORE/inherit' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    EquilibriumConcentrationSingleBar = require( 'ACID_BASE_SOLUTIONS/view/workspace/equilibrium-concentration-graph/EquilibriumConcentrationSingleBar' ),
-    EquilibriumConcentrationBarChartBackground = require( 'ACID_BASE_SOLUTIONS/view/workspace/equilibrium-concentration-graph/EquilibriumConcentrationBarChartBackground' );
+    ConcentrationGraphBarNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphBarNode' ),
+    ConcentrationGraphBackgroundNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphBackgroundNode' );
 
   /**
    * @param {ConcentrationGraph} concentrationGraph
    * @constructor
    */
-  function EquilibriumConcentrationBarChart( graph ) {
+  function ConcentrationGraphNode( graph ) {
     var self = this,
       maxBars = 0,
       BAR_CHART_WIDTH = graph.width,
@@ -28,7 +28,7 @@ define( function( require ) {
     this._bars = [];
 
     // add background
-    this.addChild( new EquilibriumConcentrationBarChartBackground( BAR_CHART_WIDTH, BAR_CHART_HEIGHT ) );
+    this.addChild( new ConcentrationGraphBackgroundNode( BAR_CHART_WIDTH, BAR_CHART_HEIGHT ) );
 
     // find max bars value for all solutions
     for ( var key in graph.solutions ) {
@@ -38,7 +38,7 @@ define( function( require ) {
 
     // create enough bars for all solutions
     for ( var i = 0; i < maxBars; i++ ) {
-      this.addChild( this._bars[i] = new EquilibriumConcentrationSingleBar( BAR_CHART_HEIGHT - 10 ) );
+      this.addChild( this._bars[i] = new ConcentrationGraphBarNode( BAR_CHART_HEIGHT - 10 ) );
     }
 
     // add observers
@@ -81,7 +81,7 @@ define( function( require ) {
 
   /**
    * Update values of bars.
-   * @param {BarChartModel} model
+   * @param {ConcentrationGraph} model
    * @param {Array<AqueousSolutions>} solutions associative array of solutions, indexed by solutionType
    */
   var updateBarValues = function( model, solutions ) {
@@ -97,5 +97,5 @@ define( function( require ) {
     }
   };
 
-  return inherit( Node, EquilibriumConcentrationBarChart );
+  return inherit( Node, ConcentrationGraphNode );
 } );

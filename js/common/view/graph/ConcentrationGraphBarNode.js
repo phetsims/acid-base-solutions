@@ -1,8 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Visual representation for single bar
- * in concentration chart in the 'Acid-Base Solutions' sim.
+ * A bar in the concentration graph.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
@@ -25,7 +24,7 @@ define( function( require ) {
   // constants
   var FONT = new PhetFont( 12 );
 
-  function EquilibriumConcentrationSingleBar( maxHeight ) {
+  function ConcentrationGraphBarNode( maxHeight ) {
     Node.call( this );
     this._maxHeight = maxHeight;
 
@@ -39,7 +38,7 @@ define( function( require ) {
   }
 
 
-  return inherit( Node, EquilibriumConcentrationSingleBar, {
+  return inherit( Node, ConcentrationGraphBarNode, {
 
     // set height and text value of bar
     setValue: function( value ) {

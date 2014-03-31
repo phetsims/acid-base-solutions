@@ -1,8 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Visual representation for background of
- * concentration bar chart in the 'Acid-Base Solutions' sim.
+ * Background of to concentration graph.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
@@ -24,7 +23,7 @@ define( function( require ) {
   // constants
   var FONT = new PhetFont( 11 );
 
-  function EquilibriumConcentrationBarChartBackground( width, height ) {
+  function ConcentrationGraphBackgroundNode( width, height ) {
     var yLabel, dh = height / 10 - 1;
     Node.call( this );
 
@@ -54,5 +53,5 @@ define( function( require ) {
     }
   }
 
-  return inherit( Node, EquilibriumConcentrationBarChartBackground );
+  return inherit( Node, ConcentrationGraphBackgroundNode );
 } );
