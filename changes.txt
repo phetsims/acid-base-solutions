@@ -1,3 +1,4 @@
+3/31/14 #80 update the graph only when it's visible
 3/31/14 cleanup of ConcentrationGraphBarNode
 3/31/14 optimize graph background by reusing 1 tick mark and 1 dashed line, instead of 11 of each
 3/31/14 #60 replace molecule node types with factory
