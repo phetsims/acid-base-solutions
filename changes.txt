@@ -1,8 +1,8 @@
-3/31/14 #61 move molecule nodes to common/view/molecules/
-3/31/14 #61 move magnifier-related nodes to common/view/magnifer/
-3/31/14 #61 move graph-related nodes to common/view/graph/, rename to 'ConcentrationGraph' throughout
-3/31/14 #61 move MagnifierModel to common/model/Magnifier
-3/31/14 #61 move BarChartModel to common/model/ConcentrationGraph
+3/31/14 #62 move molecule nodes to common/view/molecules/
+3/31/14 #62 move magnifier-related nodes to common/view/magnifer/
+3/31/14 #62 move graph-related nodes to common/view/graph/, rename to 'ConcentrationGraph' throughout
+3/31/14 #62 move MagnifierModel to common/model/Magnifier
+3/31/14 #62 move BarChartModel to common/model/ConcentrationGraph
 # 1.0.0-dev.3 3/31/14
 3/31/14 #51 make it possible to adjust vertical spacing for panel titles
 3/31/14 #51 move titles outside of panels, as shown in mockups
