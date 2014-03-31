@@ -54,7 +54,7 @@ define( function( require ) {
         return ( beaker.containsPoint( positiveProbeLocation ) && beaker.containsPoint( negativeProbeLocation ) );
       } );
 
-    // brightness of bulb is derived from pH
+    // brightness of bulb is derived from pH, varies from 0 (off) to 1 (full on)
     this.brightnessProperty = new DerivedProperty( [ pHProperty ],
       function( pH ) {
         return NEUTRAL_BRIGHTNESS + ( 1 - NEUTRAL_BRIGHTNESS ) * (pH < NEUTRAL_PH ? ( NEUTRAL_PH - pH ) / ( NEUTRAL_PH - ABSConstants.PH_RANGE.min ) : ( pH - NEUTRAL_PH ) / ( ABSConstants.PH_RANGE.max - NEUTRAL_PH ) );
