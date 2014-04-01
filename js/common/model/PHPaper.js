@@ -4,7 +4,6 @@
  * Model for the pH paper in 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
- * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';
@@ -41,31 +40,36 @@ define( function( require ) {
     // location
     this.locationProperty = new Property( new Vector2( beaker.right - 60, beaker.top - 10 ) );
 
+    // NOTE: Ideally, indicatorHeight should be a DerivedProperty, but that gets quite messy.
     // height of indicator, the portion of the paper that changes color when dipped in solution
-    var previousSolutionType = null;
-    var previousIndicatorHeight = 0;
-    this.indicatorHeightProperty = new DerivedProperty( [ solutionTypeProperty, this.locationProperty ],
-      function( solutionType, location ) {
+    this.indicatorHeightProperty = new Property( 0 );
 
-        // height will only grow until the solutionType is changed, which clears the paper
-        if ( solutionType !== previousSolutionType ) {
-          previousSolutionType = solutionType;
-          previousIndicatorHeight = 0;
-        }
+    solutionTypeProperty.link( function() {
+      self.indicatorHeightProperty.value = 0; // clear the indicator color from the paper
+      self.updateIndicatorHeight();
+    } );
 
-        var indicatorHeight = previousIndicatorHeight;
-        if ( self.beaker.containsPoint( location ) ) {
-          indicatorHeight = previousIndicatorHeight = Util.clamp( location.y - self.beaker.top + 5, previousIndicatorHeight, self.paperSize.height );
-        }
-
-        return indicatorHeight;
-      } );
+    this.locationProperty.link( function() {
+      self.updateIndicatorHeight();
+    } );
   }
 
   PHPaper.prototype = {
 
     reset: function() {
+      this.indicatorHeightProperty.reset();
       this.locationProperty.reset();
+    },
+
+    /**
+     * Updates the height of the indicator. The indicator height only increases, since we want the
+     * indicator color to be shown on the paper when it is dipped into solution and pulled out.
+     */
+    updateIndicatorHeight: function() {
+      if ( this.beaker.containsPoint( this.locationProperty.value ) ) {
+        this.indicatorHeightProperty.value =
+        Util.clamp( this.locationProperty.value.y - this.beaker.top + 5, this.indicatorHeightProperty.value, this.paperSize.height );
+      }
     }
   };
 
