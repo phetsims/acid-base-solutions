@@ -54,13 +54,13 @@ define( function( require ) {
 
     // set appropriate pH
     var setPH = function( value ) { self.pH = value; };
-    this.property( 'solutionType' ).link( function( newSolution, prevSolution ) {
+    this.property( 'solutionType' ).link( function( newSolutionType, prevSolutionType ) {
       // unsubscribe from previous solution pH property
-      if ( prevSolution ) {
-        self.solutions[prevSolution].property( 'pH' ).unlink( setPH );
+      if ( prevSolutionType ) {
+        self.solutions[prevSolutionType].property( 'pH' ).unlink( setPH );
       }
       // subscribe to new solution pH property
-      self.solutions[newSolution].property( 'pH' ).link( setPH );
+      self.solutions[newSolutionType].property( 'pH' ).link( setPH );
     } );
   }
 
