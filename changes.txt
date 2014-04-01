@@ -1,3 +1,4 @@
+4/1/14 improve behavior of probe wires by adjusting first control point, fix sign
 4/1/14 #5, #80 prevent updates when invisible in new implementation of MagnifierNode
 4/1/14 #82 move view-specific properties out of the model (solventVisible, viewMode, toolMode, visibility)
 3/31/14 #80 update the graph only when it's visible

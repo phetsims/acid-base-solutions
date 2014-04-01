@@ -32,8 +32,8 @@ define( function( require ) {
 
     this.startPoint = { x: startX, y: startY }; // @private
     // control point offsets for when probe is to left of light bulb
-    this.controlPointOffset = { x: 12.5, y: -50 }; // @private
-    if ( endX > startX ) {
+    this.controlPointOffset = { x: 30, y: -50 }; // @private
+    if ( endX < startX ) {
       // probe is to right of light bulb, flip sign on control point x-offset
       this.controlPointOffset.x = -this.controlPointOffset.x;
     }
