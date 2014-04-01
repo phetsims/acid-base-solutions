@@ -1,5 +1,4 @@
 TODO list for acid-base-solutions
 
-- replace solutionTypeProperty with solutionProperty
 - TODO items in code
 - improve behavior of wires, see Java version
