@@ -52,9 +52,9 @@ define( function( require ) {
         controlPointXOffset = this.controlPointOffset.x,
         controlPointYOffset = this.controlPointOffset.y;
 
-      this.setShape( new Shape().
-        moveTo( startX, startY ).
-        cubicCurveTo( startX + controlPointXOffset, startY, endX, endY + controlPointYOffset, endX, endY )
+      this.setShape( new Shape()
+        .moveTo( startX, startY )
+        .cubicCurveTo( startX + controlPointXOffset, startY, endX, endY + controlPointYOffset, endX, endY )
       );
     }
   } );
