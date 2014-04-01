@@ -35,10 +35,10 @@ define( function( require ) {
     } );
 
     PropertySet.call( this, {
-      solutionType: defaultSolutionType, // solution's type
-      toolMode: ToolMode.PH_METER, // test mode
-      viewMode: ViewMode.MOLECULES, // view mode
-      solventVisible: false, // solvent visibility
+      solutionType: defaultSolutionType,
+      toolMode: ToolMode.PH_METER,
+      viewMode: ViewMode.MOLECULES,
+      solventVisible: false,
       pH: this.solutions[defaultSolutionType].pH // pH level of product
     } );
 
