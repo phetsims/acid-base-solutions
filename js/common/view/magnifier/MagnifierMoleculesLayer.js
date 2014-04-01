@@ -42,7 +42,7 @@ define( function( require ) {
     }
 
     // update number of molecules only when layer is visible
-    setMoleculesBinded = setMolecules.bind( this, property, molecules );
+    setMoleculesBinded = setMolecules.bind( this, magnifierModel, layerSolutionType, property, molecules );
     property.lazyLink( setMoleculesBinded );
     magnifierModel.solutionTypeProperty.link( setMoleculesBinded );
 
@@ -72,10 +72,12 @@ define( function( require ) {
   };
 
   // show appropriate number of molecules
-  var setMolecules = function( property, molecules ) {
+  var setMolecules = function( magnifierModel, layerSolutionType, property, molecules ) {
     var numberOfMolecules,
       visibility,
       i;
+
+    this.setVisible( magnifierModel.solutionTypeProperty.value === layerSolutionType );
 
     // update number of molecules only when layer is visible
     if ( this.visible ) {
