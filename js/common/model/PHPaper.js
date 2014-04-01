@@ -40,6 +40,7 @@ define( function( require ) {
     // location
     this.locationProperty = new Property( new Vector2( beaker.right - 60, beaker.top - 10 ) );
 
+    //TODO initial value is bogus and should be a DerivedProperty
     // height of indicator, the portion of the paper that changes color when dipped in solution
     this.indicatorHeightProperty = new Property( 0 );
 
