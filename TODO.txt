@@ -1,6 +1,5 @@
 TODO list for acid-base-solutions
 
-- #5 delete stuff under view/workspace/magnifier when direct-to-Canvas version is completed
 - replace solutionTypeProperty with solutionProperty
 - TODO items in code
 - improve behavior of wires, see Java version

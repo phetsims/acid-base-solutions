@@ -80,8 +80,31 @@ define( function( require ) {
 
   return inherit( Node, MagnifierNode, {
 
+    /*
+     * @override
+     * Update when this node becomes visible.
+     */
+    setVisible: function( visible ) {
+      var wasVisible = this.visible;
+      Node.prototype.setVisible.call( this, visible );
+      if ( !wasVisible && visible ) {
+        this.updateMolecules();
+      }
+    },
+
     setSolventVisible: function( visible ) {
       this.solventNode.visible = visible;
+    },
+
+    /*
+     * @private
+     * Updates the number of molecules visible in the magnifier.
+     * To improve performance, updates only when this node is visible.
+     */
+    updateMolecules: function() {
+      if ( this.visible ) {
+        //TODO
+      }
     }
   } );
 } );
