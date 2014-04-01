@@ -16,7 +16,6 @@ define( function( require ) {
     A: 'rgb(0,170,255)',
     B: GRAY_MOLECULE,
     BH: 'rgb(255,170,0)',
-    //TODO why is this factor applied?
     H2O: 'rgb(164,189,193)',
     H3O: 'rgb(255,85,0)',
     HA: GRAY_MOLECULE,
