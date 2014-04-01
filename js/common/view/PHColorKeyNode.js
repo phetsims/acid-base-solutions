@@ -45,12 +45,11 @@ define( function( require ) {
   var CHIP_X_SPACING = 1;
 
   /**
-   * @param {Property<Boolean>} visibleProperty
    * @param {Dimension2} paperSize
    * @param {*} options any Node options
    * @constructor
    */
-  function PHColorKeyNode( visibleProperty, paperSize, options ) {
+  function PHColorKeyNode( paperSize, options ) {
 
     var self = this;
     Node.call( this );
@@ -64,10 +63,6 @@ define( function( require ) {
       this.addChild( new Rectangle( (chipWidth + CHIP_X_SPACING) * i, 10, chipWidth, CHIP_HEIGHT, {fill: PH_COLORS[i]} ) );
       this.addChild( new Text( i.toString(), {font: FONT_SMALL, centerX: (chipWidth + CHIP_X_SPACING) * (i + 0.5), centerY: 46} ) );
     }
-
-    visibleProperty.link( function( visible ) {
-      self.visible = visible;
-    } );
 
     this.mutate( options );
   }

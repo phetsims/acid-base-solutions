@@ -39,9 +39,10 @@ define( function( require ) {
 
   /**
    * @param {CustomSolutionModel} model
+   * @param {PropertySet} viewProperties properties that are specific to the view
    * @constructor
    */
-  function CustomSolutionControlPanel( model ) {
+  function CustomSolutionControlPanel( model, viewProperties ) {
 
     // titles
     var solutionTitle = new Text( solutionString, TITLE_OPTIONS );
@@ -50,8 +51,8 @@ define( function( require ) {
 
     // controls
     var solutionControl = new SolutionControl( model.property( 'solutionType' ), model.property( 'concentration' ), model.property( 'strength' ), PANEL_OPTIONS );
-    var viewsControl = new ViewsControl( model.property( 'viewMode' ), model.property( 'toolMode' ), model.property( 'solventVisible' ), PANEL_OPTIONS );
-    var toolsControl = new ToolsControl( model.property( 'toolMode' ), PANEL_OPTIONS );
+    var viewsControl = new ViewsControl( viewProperties.property( 'viewMode' ), viewProperties.property( 'toolMode' ), viewProperties.property( 'solventVisible' ), PANEL_OPTIONS );
+    var toolsControl = new ToolsControl( viewProperties.property( 'toolMode' ), PANEL_OPTIONS );
 
     // panels with equal widths
     var maxWidth = Math.max( solutionControl.width, Math.max( viewsControl.width, toolsControl.width ) );

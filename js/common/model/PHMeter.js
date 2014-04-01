@@ -19,10 +19,9 @@ define( function( require ) {
   /**
    * @param {Beaker} beaker
    * @param {Property<Number>} pHProperty
-   * @param {Property<ToolMode>} toolModeProperty
    * @constructor
    */
-  function PHMeter( beaker, pHProperty, toolModeProperty ) {
+  function PHMeter( beaker, pHProperty ) {
 
     this.beaker = beaker;
     this.pHProperty = pHProperty;
@@ -32,12 +31,6 @@ define( function( require ) {
 
     // location, at tip of probe
     this.locationProperty = new Property( new Vector2( beaker.right - 85, beaker.top - 5 ) );
-
-    // visibility
-    this.visibleProperty = new DerivedProperty( [ toolModeProperty ],
-      function( toolMode ) {
-        return ( toolMode === ToolMode.PH_METER );
-      } );
   }
 
   PHMeter.prototype = {

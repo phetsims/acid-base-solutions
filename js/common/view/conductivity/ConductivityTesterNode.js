@@ -114,11 +114,6 @@ define( function( require ) {
 
     conductivityTester.brightnessProperty.link( this.updateBrightness.bind( this ) );
     conductivityTester.isClosedProperty.link( this.updateBrightness.bind( this ) );
-
-    // visibility observer
-    conductivityTester.visibleProperty.link( function( visible ) {
-      self.setVisible( visible );
-    } );
   }
 
   return inherit( Node, ConductivityTesterNode, {

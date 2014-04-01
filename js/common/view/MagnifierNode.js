@@ -61,30 +61,27 @@ define( function( require ) {
     handleNode.rotate( Math.PI / 6 );
 
     // solvent
-    var solventNode = new Image( solventImage, { scale: 0.5, x: -radius * Math.SQRT2, y: -radius * Math.SQRT2 } );
+    this.solventNode = new Image( solventImage, { scale: 0.5, x: -radius * Math.SQRT2, y: -radius * Math.SQRT2 } );
 
     // molecules
     var moleculesNode = new MoleculesNode( new Bounds2( magnifierModel.location.x - radius, magnifierModel.location.y - radius, magnifierModel.location.x + radius, magnifierModel.location.y + radius ) );
     moleculesNode.clipArea = lensShape;
 
     // rendering order
-    this.addChild( solventNode );
+    this.addChild( this.solventNode );
     this.addChild( moleculesNode );
     this.addChild( handleNode );
     this.addChild( lensNode );
 
     this.translation = magnifierModel.location;
 
-    magnifierModel.visibleProperty.link( function( visible ) {
-      self.visible = visible;
-    } );
-
-    magnifierModel.solventVisibleProperty.link( function( solventVisible ) {
-      solventNode.visible = solventVisible;
-    } );
-
     //TODO when solutionType changes, re-wire to concentration properties for each molecule in the solution
   }
 
-  return inherit( Node, MagnifierNode );
+  return inherit( Node, MagnifierNode, {
+
+    setSolventVisible: function( visible ) {
+      this.solventNode.visible = visible;
+    }
+  } );
 } );

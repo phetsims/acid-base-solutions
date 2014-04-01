@@ -16,8 +16,6 @@ define( function( require ) {
   var PHMeter = require( 'ACID_BASE_SOLUTIONS/common/model/PHMeter' );
   var PHPaper = require( 'ACID_BASE_SOLUTIONS/common/model/PHPaper' );
   var PropertySet = require( 'AXON/PropertySet' );
-  var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
-  var ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );
 
   /**
    * @param {Array<AqueousSolution>} solutions
@@ -36,9 +34,6 @@ define( function( require ) {
 
     PropertySet.call( this, {
       solutionType: defaultSolutionType,
-      toolMode: ToolMode.PH_METER,
-      viewMode: ViewMode.MOLECULES,
-      solventVisible: false,
       pH: this.solutions[defaultSolutionType].pH // pH level of product
     } );
 
@@ -46,16 +41,16 @@ define( function( require ) {
     this.beaker = new Beaker();
 
     // magnifier model
-    this.magnifier = new Magnifier( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'solventVisible' ), this.property( 'viewMode' ), this.property( 'toolMode' ) );
+    this.magnifier = new Magnifier( this.beaker, this.solutions, this.property( 'solutionType' ) );
 
     // pH meter model
-    this.pHMeter = new PHMeter( this.beaker, this.property( 'pH' ), this.property( 'toolMode' ) );
+    this.pHMeter = new PHMeter( this.beaker, this.property( 'pH' ) );
 
     // pH paper model
-    this.pHPaper = new PHPaper( this.beaker, this.property( 'solutionType' ), this.property( 'pH' ), this.property( 'toolMode' ) );
+    this.pHPaper = new PHPaper( this.beaker, this.property( 'solutionType' ), this.property( 'pH' ) );
 
     // conductivity tester model
-    this.conductivityTester = new ConductivityTester( this.beaker, this.property( 'pH' ), this.property( 'toolMode' ) );
+    this.conductivityTester = new ConductivityTester( this.beaker, this.property( 'pH' ) );
 
     // set appropriate pH
     var setPH = function( value ) { self.pH = value; };

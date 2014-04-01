@@ -47,11 +47,6 @@ define( function( require ) {
       this.addChild( this.bars[i] = new ConcentrationGraphBarNode( BAR_CHART_HEIGHT - 10 ) );
     }
 
-    // add observers
-    graph.visibleProperty.link( function( visible ) {
-      self.setVisible( visible );
-    } );
-
     graph.solutionTypeProperty.link( this.updateBars.bind( this ) );
     graph.solutionTypeProperty.link( this.updateValues.bind( this ) );
 

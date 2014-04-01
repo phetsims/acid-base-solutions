@@ -74,10 +74,6 @@ define( function( require ) {
       indicatorNode.setRectHeight( height );
     } );
 
-    pHPaper.visibleProperty.link( function( visible ) {
-      self.visible = visible;
-    } );
-
     pHPaper.pHProperty.link( function( pH ) {
       indicatorNode.fill = PHColorKeyNode.pHToColor( pH );
     } );

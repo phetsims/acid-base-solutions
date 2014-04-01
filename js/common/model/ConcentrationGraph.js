@@ -17,13 +17,11 @@ define( function( require ) {
    * @param {Beaker} beaker
    * @param {Array<AqueousSolution>} solutions
    * @param {Property<SolutionType>} solutionTypeProperty
-   * @param {Property<ViewMode>} viewModeProperty
-   * @param {Property<ToolMode>} toolModeProperty
    * @param {Property<Number>} concentrationProperty optional, provided for custom solutions
    * @param {Property<Number>} strengthProperty optional, provided for custom solutions
    * @constructor
    */
-  function ConcentrationGraph( beaker, solutions, solutionTypeProperty, viewModeProperty, toolModeProperty, concentrationProperty, strengthProperty ) {
+  function ConcentrationGraph( beaker, solutions, solutionTypeProperty, concentrationProperty, strengthProperty ) {
 
     // dimensions of the graph's background
     this.width = 0.5 * beaker.size.width;
@@ -38,20 +36,11 @@ define( function( require ) {
     // associative array of possible solutions, indexed by solutionType
     this.solutions = solutions;
 
-    // view mode property
-    this.viewModeProperty = viewModeProperty;
-
     // strength property
     this.strengthProperty = strengthProperty;
 
     // concentration property
     this.concentrationProperty = concentrationProperty;
-
-    // visibility
-    this.visibleProperty = new DerivedProperty( [ viewModeProperty, toolModeProperty ],
-      function( viewMode, toolMode ) {
-        return ( viewMode === ViewMode.GRAPH && toolMode !== ToolMode.CONDUCTIVITY );
-      } );
   }
 
   return ConcentrationGraph;

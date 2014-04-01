@@ -19,7 +19,7 @@ define( function( require ) {
 
     AcidBaseSolutionsView.call( this, model );
 
-    var controlPanel = new CustomSolutionControlPanel( model );
+    var controlPanel = new CustomSolutionControlPanel( model, this.viewProperties );
 
     // below control panel, right justified
     var resetAllButton = new ResetAllButton( function() { model.reset(); }, { scale: 0.75 } );

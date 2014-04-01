@@ -21,10 +21,9 @@ define( function( require ) {
    * @param {Beaker} beaker
    * @param {Property<SolutionType>} solutionTypeProperty
    * @param {Property<Number>} pHProperty
-   * @param {Property<ToolMode>} toolModeProperty
    * @constructor
    */
-  function PHPaper( beaker, solutionTypeProperty, pHProperty, toolModeProperty ) {
+  function PHPaper( beaker, solutionTypeProperty, pHProperty ) {
 
     var self = this;
 
@@ -43,12 +42,6 @@ define( function( require ) {
 
     // height of indicator, the portion of the paper that changes color when dipped in solution
     this.indicatorHeightProperty = new Property( 0 );
-
-    // visibility
-    this.visibleProperty = new DerivedProperty( [ toolModeProperty ],
-      function( toolMode ) {
-        return ( toolMode === ToolMode.PH_PAPER );
-      } );
 
     solutionTypeProperty.link( function() {
       self.indicatorHeightProperty.value = 0; // clear the indicator color from the paper

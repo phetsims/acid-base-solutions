@@ -25,10 +25,9 @@ define( function( require ) {
   /**
    * @param {Beaker} beaker
    * @param {Property<Number>} pHProperty
-   * @param {Property<ToolMode>} toolModeProperty
    * @constructor
    */
-  function ConductivityTester( beaker, pHProperty, toolModeProperty ) {
+  function ConductivityTester( beaker, pHProperty ) {
 
     this.probeDragYRange = new Range( beaker.top - 20, beaker.bottom );
 
@@ -41,12 +40,6 @@ define( function( require ) {
     var probeXOffset = 0.2 * beaker.size.width; // offset from edge of beaker
     this.positiveProbeLocationProperty = new Property( new Vector2( beaker.right - probeXOffset, this.probeDragYRange.min + 10 ) );
     this.negativeProbeLocationProperty = new Property( new Vector2( beaker.left + probeXOffset, this.probeDragYRange.min + 10 ) );
-
-    // visibility
-    this.visibleProperty = new DerivedProperty( [ toolModeProperty ],
-      function( toolMode ) {
-        return ( toolMode === ToolMode.CONDUCTIVITY );
-      } );
 
     // the circuit is closed if both probes are in the solution
     this.isClosedProperty = new DerivedProperty( [ this.positiveProbeLocationProperty, this.negativeProbeLocationProperty ],

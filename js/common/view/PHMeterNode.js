@@ -126,10 +126,6 @@ define( function( require ) {
     pHMeter.locationProperty.link( function( location ) {
       self.translation = location;
     } );
-
-    pHMeter.visibleProperty.link( function( visible ) {
-      self.visible = visible;
-    } );
   }
 
   return inherit( Node, PHMeterNode );

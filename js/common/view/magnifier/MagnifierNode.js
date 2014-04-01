@@ -30,7 +30,8 @@ define( function( require ) {
     this.container.setClipArea( new Shape().circle( 0, 0, RADIUS - 4 ) );
 
     // add background
-    this.addChild( new MagnifierBackgroundNode( magnifier.solventVisibleProperty, this.container, RADIUS ) );
+    this.magnifierBackgroundNode = new MagnifierBackgroundNode( this.container, RADIUS )
+    this.addChild( this.magnifierBackgroundNode );
 
     // add molecules layers for each solution
     for ( var key in magnifier.solutions ) {
@@ -50,11 +51,11 @@ define( function( require ) {
     }
 
     this.translation = magnifier.location;
-
-    magnifier.visibleProperty.link( function( visible ) {
-      self.setVisible( visible );
-    } );
   }
 
-  return inherit( Node, MagnifierNode );
+  return inherit( Node, MagnifierNode, {
+    setSolventVisible: function( visible ) {
+      this.magnifierBackgroundNode.setSolventVisible( visible );
+    }
+  } );
 } );

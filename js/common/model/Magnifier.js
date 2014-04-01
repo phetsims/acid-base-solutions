@@ -17,12 +17,9 @@ define( function( require ) {
    * @param {Beaker} beaker
    * @param {Array<AqueousSolution>} solutions
    * @param {Property<SolutionType>} solutionTypeProperty
-   * @param {Property<Boolean>} solventVisibleProperty
-   * @param {Property<ViewMode>} viewModeProperty
-   * @param {Property<ToolMode>} toolModeProperty
    * @constructor
    */
-  function Magnifier( beaker, solutions, solutionTypeProperty, solventVisibleProperty, viewModeProperty, toolModeProperty ) {
+  function Magnifier( beaker, solutions, solutionTypeProperty ) {
 
     // magnifier radius
     this.radius = beaker.size.height / 2.15;
@@ -35,18 +32,6 @@ define( function( require ) {
 
     // associative array of possible solutions, indexed by solutionType
     this.solutions = solutions;
-
-    // solvent visibility property
-    this.solventVisibleProperty = solventVisibleProperty;
-
-    // view mode property
-    this.viewModeProperty = viewModeProperty;
-
-    // visibility of magnifier
-    this.visibleProperty = new DerivedProperty( [ viewModeProperty, toolModeProperty ],
-      function( viewMode, toolMode ) {
-        return ( viewMode === ViewMode.MOLECULES && toolMode !== ToolMode.CONDUCTIVITY );
-      } );
   }
 
   return Magnifier;
