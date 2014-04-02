@@ -10,9 +10,9 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var CheckBox = require( 'SUN/CheckBox' );
+  var ConcentrationGraphNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SUN/HStrut' );
   var Image = require( 'SCENERY/nodes/Image' );
@@ -20,7 +20,6 @@ define( function( require ) {
   var MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
   var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -42,17 +41,6 @@ define( function( require ) {
   var CHECK_BOX_OPTIONS = { boxWidth: 15 };
   var TEXT_OPTIONS = { font: new PhetFont( 12 ) };
   var ICON_OPTIONS = { scale: 0.75 };
-
-  // Creates an icon of the graph, with 4 bars (similar to weak acid)
-  var createGraphIcon = function() {
-    return new Node( {children: [
-      new Rectangle( 0, 0, 24.5, 18, {fill: 'white', stroke: 'black', lineWidth: 0.5} ),
-      new Rectangle( 2, 6, 3, 12, {fill: ABSColors.MOLECULES.B} ),
-      new Rectangle( 7.5, 3, 3, 15, {fill: ABSColors.MOLECULES.H2O} ),
-      new Rectangle( 13, 9, 3, 9, {fill: ABSColors.MOLECULES.A} ),
-      new Rectangle( 18.5, 9, 3, 9, {fill: ABSColors.MOLECULES.H3O} )
-    ]} );
-  };
 
   /**
    * @param {Property<ViewMode>} viewModeProperty
@@ -99,7 +87,7 @@ define( function( require ) {
         spacing: TEXT_ICON_X_SPACING,
         children: [
           new Text( graphString, TEXT_OPTIONS ),
-          createGraphIcon()
+          ConcentrationGraphNode.createIcon()
         ]
       } ), RADIO_BUTTON_OPTIONS );
 

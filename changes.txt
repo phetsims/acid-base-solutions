@@ -1,3 +1,4 @@
+4/1/14 move creation of graph icon to ConcentrationGraphNode
 4/1/14 move colors to ABSColor
 4/1/14 #81 programmatically create the pH paper icon for the 'Tools' control panel
 4/1/14 #79 revert change to PHPaper.indicatorHeight, making it a derived property is messy and introduces a reset problem

@@ -16,6 +16,7 @@ define( function( require ) {
   var ConcentrationGraphBackgroundNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphBackgroundNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   /**
    * @param {ConcentrationGraph} graph
@@ -118,6 +119,25 @@ define( function( require ) {
           this.bars[i].setValue( solution.property( molecules[i].concentrationPropertyName ).value );
         }
       }
+    }
+  }, {
+
+    /**
+     *  Creates an icon of the graph, with 4 bars (similar to weak acid).
+     *  @static
+     *  @return {Node}
+     */
+    createIcon: function() {
+      return new Node( {
+        children: [
+          new Rectangle( 0, 0, 22, 18, { fill: 'white' } ), // background
+          new Rectangle( 2, 6, 3, 12, { fill: ABSColors.MOLECULES.B } ),
+          new Rectangle( 7, 3, 3, 15, { fill: ABSColors.MOLECULES.H2O } ),
+          new Rectangle( 12, 9, 3, 9, { fill: ABSColors.MOLECULES.A } ),
+          new Rectangle( 17, 9, 3, 9, { fill: ABSColors.MOLECULES.H3O } ),
+          new Rectangle( 0, 0, 22, 18, { stroke: 'black', lineWidth: 0.5 } ) // background stroke on top
+        ]
+      } );
     }
   } );
 } );
