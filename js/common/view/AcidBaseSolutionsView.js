@@ -25,6 +25,10 @@ define( function( require ) {
   var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
   var ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );
 
+  /**
+   * @param {AcidBaseSolutionsModel} model
+   * @constructor
+   */
   function AcidBaseSolutionsView( model ) {
 
     var self = this;

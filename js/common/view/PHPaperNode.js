@@ -23,6 +23,10 @@ define( function( require ) {
   var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
   var PAPER_STROKE = 'rgb(100, 100, 100)';
 
+  /**
+   * @param {PHPaper} pHPaper
+   * @constructor
+   */
   function PHPaperNode( pHPaper ) {
 
     var self = this;
