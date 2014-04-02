@@ -9,11 +9,11 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var inherit = require( 'PHET_CORE/inherit' ),
-    Node = require( 'SCENERY/nodes/Node' ),
-    Shape = require( 'KITE/Shape' ),
-    MagnifierBackgroundNode = require( 'ACID_BASE_SOLUTIONS/common/view/magnifier/MagnifierBackgroundNode' ),
-    MagnifierMoleculesLayer = require( 'ACID_BASE_SOLUTIONS/common/view/magnifier/MagnifierMoleculesLayer' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var MagnifierBackgroundNode = require( 'ACID_BASE_SOLUTIONS/common/view/magnifier/MagnifierBackgroundNode' );
+  var MagnifierMoleculesLayer = require( 'ACID_BASE_SOLUTIONS/common/view/magnifier/MagnifierMoleculesLayer' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var Shape = require( 'KITE/Shape' );
 
   /**
    * @param {Magnifier} magnifier

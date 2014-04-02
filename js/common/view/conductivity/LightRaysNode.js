@@ -10,22 +10,22 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var inherit = require( 'PHET_CORE/inherit' ),
-    Node = require( 'SCENERY/nodes/Node' ),
-    LinearFunction = require( 'DOT/LinearFunction' ),
-    Line = require( 'SCENERY/nodes/Line' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Line = require( 'SCENERY/nodes/Line' );
+  var LinearFunction = require( 'DOT/LinearFunction' );
+  var Node = require( 'SCENERY/nodes/Node' );
 
   // constants
-  var BRIGHTNESS_TO_INTENSITY_FUNCTION = new LinearFunction( 0, 1, 0, 1 ), // intensity of the light rays
-    MIN_RAYS = 8,
-    MAX_RAYS = 60,
-    MIN_RAY_LENGTH = 0,
-    MAX_RAY_LENGTH = 200,
-    RAYS_START_ANGLE = 3 * Math.PI / 4,
-    RAYS_ARC_ANGLE = 3 * Math.PI / 2,
-    RAY_STROKE_BIG = 1.5,
-    RAY_STROKE_MEDIUM = 1,
-    RAY_STROKE_SMALL = 0.5;
+  var BRIGHTNESS_TO_INTENSITY_FUNCTION = new LinearFunction( 0, 1, 0, 1 ); // intensity of the light rays
+  var MIN_RAYS = 8;
+  var MAX_RAYS = 60;
+  var MIN_RAY_LENGTH = 0;
+  var MAX_RAY_LENGTH = 200;
+  var RAYS_START_ANGLE = 3 * Math.PI / 4;
+  var RAYS_ARC_ANGLE = 3 * Math.PI / 2;
+  var RAY_STROKE_BIG = 1.5;
+  var RAY_STROKE_MEDIUM = 1;
+  var RAY_STROKE_SMALL = 0.5;
 
   /**
    * @param {Number} bulbRadius
@@ -59,7 +59,7 @@ define( function( require ) {
       var intensity = BRIGHTNESS_TO_INTENSITY_FUNCTION( brightness );
 
       // number of rays is a function of intensity
-      var numberOfRays = ( brightness === 0 )? 0 : MIN_RAYS + Math.round( intensity * ( MAX_RAYS - MIN_RAYS ) );
+      var numberOfRays = ( brightness === 0 ) ? 0 : MIN_RAYS + Math.round( intensity * ( MAX_RAYS - MIN_RAYS ) );
       // ray length is a function of intensity
       var rayLength = MIN_RAY_LENGTH + ( intensity * ( MAX_RAY_LENGTH - MIN_RAY_LENGTH ) );
 
