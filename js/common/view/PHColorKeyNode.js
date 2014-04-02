@@ -33,7 +33,6 @@ define( function( require ) {
    */
   function PHColorKeyNode( paperSize, options ) {
 
-    var self = this;
     Node.call( this );
 
     // title

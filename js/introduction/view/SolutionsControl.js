@@ -54,7 +54,7 @@ define( function( require ) {
         spacing: TEXT_ICON_X_SPACING,
         children: [
           new SubSupText( StringUtils.format( pattern_0solution_1symbol, waterString, ChemUtils.toSubscript( 'H2O' ) ), TEXT_OPTIONS ),
-          new MoleculeFactory['H2O']()
+          new MoleculeFactory.H2O()
         ]
       } ), RADIO_BUTTON_OPTIONS );
 
@@ -64,7 +64,7 @@ define( function( require ) {
         spacing: TEXT_ICON_X_SPACING,
         children: [
           new HTMLText( StringUtils.format( pattern_0solution_1symbol, strongAcidString, 'H<i>A</i>' ), TEXT_OPTIONS ),
-          new MoleculeFactory['HA']()
+          new MoleculeFactory.HA()
         ]
       } ), RADIO_BUTTON_OPTIONS );
 
@@ -74,7 +74,7 @@ define( function( require ) {
         spacing: TEXT_ICON_X_SPACING,
         children: [
           new HTMLText( StringUtils.format( pattern_0solution_1symbol, weakAcidString, 'H<i>A</i>' ), TEXT_OPTIONS ),
-          new MoleculeFactory['HA']()
+          new MoleculeFactory.HA()
         ]
       } ), RADIO_BUTTON_OPTIONS );
 
@@ -84,7 +84,7 @@ define( function( require ) {
         spacing: TEXT_ICON_X_SPACING,
         children: [
           new HTMLText( StringUtils.format( pattern_0solution_1symbol, strongBaseString, '<i>M</i>OH' ), TEXT_OPTIONS ),
-          new MoleculeFactory['MOH']()
+          new MoleculeFactory.MOH()
         ]
       } ), RADIO_BUTTON_OPTIONS );
 
@@ -94,7 +94,7 @@ define( function( require ) {
         spacing: TEXT_ICON_X_SPACING,
         children: [
           new HTMLText( StringUtils.format( pattern_0solution_1symbol, weakBaseString, '<i>B</i>' ), TEXT_OPTIONS ),
-          new MoleculeFactory['B']()
+          new MoleculeFactory.B()
         ]
       } ), RADIO_BUTTON_OPTIONS );
 

@@ -30,7 +30,7 @@ define( function( require ) {
     this.container.setClipArea( new Shape().circle( 0, 0, RADIUS - 4 ) );
 
     // add background
-    this.magnifierBackgroundNode = new MagnifierBackgroundNode( this.container, RADIUS )
+    this.magnifierBackgroundNode = new MagnifierBackgroundNode( this.container, RADIUS );
     this.addChild( this.magnifierBackgroundNode );
 
     // add molecules layers for each solution

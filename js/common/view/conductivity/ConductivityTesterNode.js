@@ -46,8 +46,6 @@ define( function( require ) {
    */
   function ConductivityTesterNode( conductivityTester ) {
 
-    var self = this;
-
     this.conductivityTester = conductivityTester; // @private
 
     // origin at bottom center of bulb's base
@@ -90,7 +88,7 @@ define( function( require ) {
 
     // wire from base of bulb (origin) to negative probe
     var negativeWire = new WireNode(
-      conductivityTester.location.x - 5, conductivityTester.location.y - 10,
+        conductivityTester.location.x - 5, conductivityTester.location.y - 10,
       conductivityTester.negativeProbeLocationProperty.value.x, conductivityTester.negativeProbeLocationProperty.value.y - conductivityTester.probeSize.height );
 
     // wire from battery terminal to positive probe
@@ -133,7 +131,7 @@ define( function( require ) {
       var wasVisible = this.visible;
       Node.prototype.setVisible.call( this, visible );
       if ( !wasVisible && visible ) {
-          this.updateBrightness();
+        this.updateBrightness();
       }
     }
   } );

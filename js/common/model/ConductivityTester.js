@@ -15,7 +15,6 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
-  var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants

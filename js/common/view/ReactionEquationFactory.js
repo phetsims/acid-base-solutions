@@ -44,7 +44,7 @@ define( function( require ) {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
-        MoleculeFactory['A'](),
+        MoleculeFactory.A(),
         new Node( { children: [ A, minusNode ] } ),
         new VStrut( TEXT_SUB_INDENT )
       ]
@@ -56,7 +56,7 @@ define( function( require ) {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
-        MoleculeFactory['B'](),
+        MoleculeFactory.B(),
         new Text( 'B', {font: FONT, fontStyle: 'italic'} ),
         new VStrut( TEXT_SUB_INDENT )
       ]
@@ -66,7 +66,7 @@ define( function( require ) {
   // BH+ node
   var createBHNode = function() {
     return new VBox( {spacing: VBOX_SPACING, children: [
-      MoleculeFactory['BH'](),
+      MoleculeFactory.BH(),
       new HBox( {
         spacing: 1,
         align: 'bottom',
@@ -81,7 +81,7 @@ define( function( require ) {
   // H2O node
   var createH2ONode = function() {
     return new VBox( {spacing: VBOX_SPACING, children: [
-      MoleculeFactory['H2O'](),
+      MoleculeFactory.H2O(),
       new SubSupText( ChemUtils.toSubscript( 'H2O' ), SUBSUP_OPTIONS )
     ]} );
   };
@@ -93,8 +93,8 @@ define( function( require ) {
       children: [
         new HBox( {spacing: HBOX_SPACING,
           children: [
-            MoleculeFactory['H2O'](),
-            MoleculeFactory['H2O']()
+            MoleculeFactory.H2O(),
+            MoleculeFactory.H2O()
           ]
         } ),
         new HBox( {
@@ -114,7 +114,7 @@ define( function( require ) {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
-        MoleculeFactory['H3O'](),
+        MoleculeFactory.H3O(),
         new SubSupText( ChemUtils.toSubscript( 'H3O' ) + '<sup>+</sup>', SUBSUP_OPTIONS )
       ]
     } );
@@ -125,7 +125,7 @@ define( function( require ) {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
-        MoleculeFactory['HA'](),
+        MoleculeFactory.HA(),
         new HBox( {
           spacing: 1,
           children: [
@@ -145,7 +145,7 @@ define( function( require ) {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
-        MoleculeFactory['M'](),
+        MoleculeFactory.M(),
         new Node( { children: [ M, plusNode ] } ),
         new VStrut( TEXT_SUB_INDENT )
       ]
@@ -157,7 +157,7 @@ define( function( require ) {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
-        MoleculeFactory['MOH'](),
+        MoleculeFactory.MOH(),
         new HBox( {
           spacing: 1,
           children: [
@@ -174,7 +174,7 @@ define( function( require ) {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
-        MoleculeFactory['OH'](),
+        MoleculeFactory.OH(),
         new SubSupText( 'OH<sup>-</sup>', SUBSUP_OPTIONS ),
         new VStrut( TEXT_SUB_INDENT )
       ]

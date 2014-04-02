@@ -85,7 +85,7 @@ define( function( require ) {
       spacing: TEXT_ICON_X_SPACING,
       children: [
         new Text( solventString, TEXT_OPTIONS ),
-        MoleculeFactory['H2O']()
+        MoleculeFactory.H2O()
       ]
     } );
     solventLabel.setEnabled = function( enabled ) {

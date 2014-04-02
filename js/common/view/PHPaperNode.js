@@ -14,7 +14,6 @@ define( function( require ) {
   var Circle = require( 'SCENERY/nodes/Circle' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var PHColorKeyNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHColorKeyNode' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Util = require( 'DOT/Util' );
@@ -96,7 +95,7 @@ define( function( require ) {
         new Rectangle( 0, 0, width, height, { fill: ABSColors.PH_PAPER, stroke: PAPER_STROKE, lineWidth: 0.5 } ),
         // portion of paper that's colored
         new Rectangle( 0, 0.6 * height, 10, 0.4 * height, { fill: ABSColors.PH[2], stroke: PAPER_STROKE, lineWidth: 0.5 } )
-      ] } )
+      ] } );
     }
   } );
 } );

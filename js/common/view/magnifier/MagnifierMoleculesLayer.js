@@ -13,8 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' ),
     MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' ),
     Node = require( 'SCENERY/nodes/Node' ),
-    Util = require( 'DOT/Util' ),
-    ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );
+    Util = require( 'DOT/Util' );
 
   // constants
   var BASE_CONCENTRATION = 1E-7, // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules

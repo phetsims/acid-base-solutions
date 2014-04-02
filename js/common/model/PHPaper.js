@@ -10,10 +10,8 @@ define( function( require ) {
 
   // imports
   var Bounds2 = require( 'DOT/Bounds2' );
-  var DerivedProperty = require( 'AXON/DerivedProperty' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Property = require( 'AXON/Property' );
-  var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -34,8 +32,8 @@ define( function( require ) {
 
     // drag bounds
     this.dragBounds = new Bounds2(
-      beaker.left + this.paperSize.width/2, beaker.top - 20,
-      beaker.right - this.paperSize.width/2, beaker.bottom );
+        beaker.left + this.paperSize.width / 2, beaker.top - 20,
+        beaker.right - this.paperSize.width / 2, beaker.bottom );
 
     // location
     this.locationProperty = new Property( new Vector2( beaker.right - 60, beaker.top - 10 ) );

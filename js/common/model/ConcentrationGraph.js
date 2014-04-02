@@ -5,13 +5,8 @@
  *
  * @author Andrey Zelenkov (Mlearner)
  */
-define( function( require ) {
+define( function() {
   'use strict';
-
-  // imports
-  var DerivedProperty = require( 'AXON/DerivedProperty' );
-  var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
-  var ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );
 
   /**
    * @param {Beaker} beaker

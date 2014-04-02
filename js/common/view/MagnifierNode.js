@@ -105,7 +105,6 @@ define( function( require ) {
    */
   function MagnifierNode( magnifier ) {
 
-    var self = this;
     Node.call( this );
 
     var radius = magnifier.radius;

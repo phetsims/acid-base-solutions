@@ -10,10 +10,8 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var DerivedProperty = require( 'AXON/DerivedProperty' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
-  var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**

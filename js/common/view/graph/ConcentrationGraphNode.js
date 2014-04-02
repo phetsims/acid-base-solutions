@@ -23,20 +23,16 @@ define( function( require ) {
    */
   function ConcentrationGraphNode( graph ) {
 
-    var self = this,
-      maxBars = 0,
-      BAR_CHART_WIDTH = graph.width,
-      BAR_CHART_HEIGHT = graph.height;
-
-    Node.call( this, {pickable: false} );
+    Node.call( this );
 
     this.graph = graph; //@private
     this.bars = []; //@private
 
     // add background
-    this.addChild( new ConcentrationGraphBackgroundNode( BAR_CHART_WIDTH, BAR_CHART_HEIGHT ) );
+    this.addChild( new ConcentrationGraphBackgroundNode( graph.width, graph.height ) );
 
     // find maximum number of bars for all solutions
+    var maxBars = 0;
     for ( var key in graph.solutions ) {
       var solution = graph.solutions[ key ];
       maxBars = Math.max( maxBars, solution.molecules.length );
@@ -44,7 +40,7 @@ define( function( require ) {
 
     // create enough bars for all solutions
     for ( var i = 0; i < maxBars; i++ ) {
-      this.addChild( this.bars[i] = new ConcentrationGraphBarNode( BAR_CHART_HEIGHT - 10 ) );
+      this.addChild( this.bars[i] = new ConcentrationGraphBarNode( graph.height - 10 ) );
     }
 
     graph.solutionTypeProperty.link( this.updateBars.bind( this ) );
