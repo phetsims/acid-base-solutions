@@ -34,6 +34,8 @@ define( function( require ) {
   var FONT = new PhetFont( { size: 15, weight: 'bold' } );
   var X_MARGIN = 12;
   var Y_MARGIN = 8;
+  var BACKGROUND_FILL = 'rgb(192,192,192)';
+  var BACKGROUND_STROKE = 'rgb(64,64,64)';
 
   // format a pH value for display.
   var formatText = function( pH ) {
@@ -98,7 +100,7 @@ define( function( require ) {
 
     // background sized to fit text
     var backgroundNode = new Rectangle( 0, 0, textNode.width + ( 2 * X_MARGIN ), textNode.height + ( 2 * Y_MARGIN ), 5, 5,
-      {fill: 'rgb(192,192,192)', stroke: 'rgb(64,64,64)', lineWidth: 1.5} );
+      {fill: BACKGROUND_FILL, stroke: BACKGROUND_STROKE, lineWidth: 1.5} );
 
     // layout, origin at probe tip
     probeNode.centerX = 0;
@@ -150,9 +152,13 @@ define( function( require ) {
      */
     createIcon: function() {
       var probeNode = new ProbeNode( 2, 10, 5, 12 );
-      var backgroundNode = new Rectangle( 0, 0, 30, 10, 2, 2, { fill: 'rgb(192,192,192)', stroke: 'rgb(64,64,64)', lineWidth: 0.5 } );
-      backgroundNode.left = probeNode.centerX - ( 0.25 * backgroundNode.width );
-      backgroundNode.bottom = probeNode.top + 1;
+      var backgroundNode = new Rectangle( 0, 0, 30, 10, 2, 2, {
+        fill: BACKGROUND_FILL,
+        stroke: BACKGROUND_STROKE,
+        lineWidth: 0.5,
+        left: probeNode.centerX - 7,
+        bottom: probeNode.top + 1
+      } );
       return new Node( { children: [ probeNode, backgroundNode ] } );
     }
   } );
