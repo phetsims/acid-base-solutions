@@ -33,7 +33,7 @@ define( function( require ) {
 
   // images
   var beakerImage = require( 'image!ACID_BASE_SOLUTIONS/beaker-icon.png' );
-  var magnifyingGlassImage = require( 'image!ACID_BASE_SOLUTIONS/magnifying-glass.png' );
+  var magnifierImage = require( 'image!ACID_BASE_SOLUTIONS/magnifier-icon.png' );
 
   // constants
   var TEXT_ICON_X_SPACING = 10;
@@ -64,7 +64,7 @@ define( function( require ) {
         spacing: TEXT_ICON_X_SPACING,
         children: [
           new Text( moleculesString, TEXT_OPTIONS ),
-          new Image( magnifyingGlassImage, ICON_OPTIONS )
+          new Image( magnifierImage, ICON_OPTIONS )
         ]
       } ), RADIO_BUTTON_OPTIONS );
 
