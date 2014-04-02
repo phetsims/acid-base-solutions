@@ -32,10 +32,6 @@ define( function( require ) {
   var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
   var DECIMAL_PLACES = 2;
   var FONT = new PhetFont( { size: 15, weight: 'bold' } );
-  var TIP_WIDTH = 14;
-  var TIP_HEIGHT = 36;
-  var SHAFT_WIDTH = 5;
-  var SHAFT_HEIGHT = 50;
   var X_MARGIN = 12;
   var Y_MARGIN = 8;
 
@@ -81,7 +77,7 @@ define( function( require ) {
     );
 
     Node.call( this, { children: [ shaftNode, tipNode  ] } );
-  };
+  }
 
   inherit( Node, ProbeNode );
 
