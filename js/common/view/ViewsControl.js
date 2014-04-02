@@ -32,7 +32,7 @@ define( function( require ) {
   var solventString = require( 'string!ACID_BASE_SOLUTIONS/solvent' );
 
   // images
-  var beakerImage = require( 'image!ACID_BASE_SOLUTIONS/beaker.png' );
+  var beakerImage = require( 'image!ACID_BASE_SOLUTIONS/beaker-icon.png' );
   var magnifyingGlassImage = require( 'image!ACID_BASE_SOLUTIONS/magnifying-glass.png' );
 
   // constants
