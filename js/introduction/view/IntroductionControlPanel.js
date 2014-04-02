@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
   var HStrut = require( 'SUN/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Panel = require( 'SUN/Panel' );
@@ -28,7 +29,7 @@ define( function( require ) {
   var TITLE_Y_SPACING = 1;
   var TITLE_OPTIONS = { font: new PhetFont( { size: 14, weight: 'bold' } ) };
   var PANEL_OPTIONS = {
-    fill: 'rgb(208,212,255)',
+    fill: ABSColors.CONTROL_PANEL_BACKGROUND,
     xMargin: 15,
     yMargin: 6
   };

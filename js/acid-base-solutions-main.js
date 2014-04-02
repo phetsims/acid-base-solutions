@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
   var CustomSolutionModel = require( 'ACID_BASE_SOLUTIONS/customsolution/model/CustomSolutionModel' );
   var CustomSolutionView = require( 'ACID_BASE_SOLUTIONS/customsolution/view/CustomSolutionView' );
   var Image = require( 'SCENERY/nodes/Image' );
@@ -28,19 +29,16 @@ define( function( require ) {
   var introductionTitleString = require( 'string!ACID_BASE_SOLUTIONS/introductionTitle' );
   var simTitleString = require( 'string!ACID_BASE_SOLUTIONS/acid-base-solutions.name' );
 
-  // constants
-  var SCREEN_BACKGROUND_COLOR = 'white';
-
   var screens = [
     new Screen( introductionTitleString, new Image( introductionIcon ),
       function() { return new IntroductionModel(); },
       function( model ) { return new IntroductionView( model ); },
-      { backgroundColor: SCREEN_BACKGROUND_COLOR }
+      { backgroundColor: ABSColors.SCREEN_BACKGROUND }
     ),
     new Screen( customSolutionTitleString, new Image( customSolutionIcon ),
       function() { return new CustomSolutionModel(); },
       function( model ) { return new CustomSolutionView( model ); },
-      { backgroundColor: SCREEN_BACKGROUND_COLOR }
+      { backgroundColor: ABSColors.SCREEN_BACKGROUND }
     )
   ];
 

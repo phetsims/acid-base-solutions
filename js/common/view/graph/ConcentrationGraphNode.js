@@ -11,10 +11,10 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
   var ConcentrationGraphBarNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphBarNode' );
   var ConcentrationGraphBackgroundNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphBackgroundNode' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MoleculeColors = require( 'ACID_BASE_SOLUTIONS/common/MoleculeColors' );
   var Node = require( 'SCENERY/nodes/Node' );
 
   /**
@@ -95,7 +95,7 @@ define( function( require ) {
             // set visibility, color, value and position of new bars
             bar.setVisible( true );
             bar.setValue( this.graph.solutions[solutionType].property( molecules[i].concentrationPropertyName ).value );
-            bar.setBarFill( MoleculeColors[molecules[i].key] );
+            bar.setBarFill( ABSColors.MOLECULES[molecules[i].key] );
             bar.setTranslation( (i + 0.75 + (4 - numberOfMolecules) / 2) * this.graph.width / 4, this.graph.height );
           }
           else {

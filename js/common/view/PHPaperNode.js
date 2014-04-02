@@ -33,7 +33,7 @@ define( function( require ) {
       { fill: ABSColors.PH_PAPER, stroke: 'rgb(150, 150, 150)', lineWidth: 0.5 } );
 
     // portion of the paper that changes color
-    var indicatorNode = new Rectangle( 0, 0, pHPaper.paperSize.width, 0, { fill: 'red', stroke: 'rgb(150, 150, 150)', lineWidth: 0.5 } );
+    var indicatorNode = new Rectangle( 0, 0, pHPaper.paperSize.width, 0, { stroke: 'rgb(150, 150, 150)', lineWidth: 0.5 } );
     indicatorNode.rotate( Math.PI ); // so that indicator rectangle expands upward
 
     // rendering order
@@ -61,8 +61,8 @@ define( function( require ) {
       drag: function( e ) {
         var v = self.globalToParentPoint( e.pointer.point ).subtract( this.clickOffset );
         pHPaper.locationProperty.value = new Vector2(
-                Util.clamp( v.x, pHPaper.dragBounds.minX, pHPaper.dragBounds.maxX ),
-                Util.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) );
+          Util.clamp( v.x, pHPaper.dragBounds.minX, pHPaper.dragBounds.maxX ),
+          Util.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) );
       }
     } ) );
 
