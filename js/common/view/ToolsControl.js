@@ -55,7 +55,7 @@ define( function( require ) {
     }, options );
 
     var pHMeterNode = new Image( pHMeterImage, ICON_OPTIONS );
-    var pHPaperNode = PHPaperNode.createIcon( 10, 40 );
+    var pHPaperNode = PHPaperNode.createIcon( 8, 30 );
     var lightBulbNode = new Image( lightBulbImage, ICON_OPTIONS );
 
     // determine uniform size for buttons, in case icons have different sizes
