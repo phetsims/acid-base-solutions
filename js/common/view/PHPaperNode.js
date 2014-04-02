@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
   var Circle = require( 'SCENERY/nodes/Circle' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -21,7 +22,6 @@ define( function( require ) {
 
   // constants
   var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
-  var PAPER_COLOR = 'rgb(217,215,154)'; // color of blank pH paper, cream
 
   function PHPaperNode( pHPaper ) {
 
@@ -29,7 +29,8 @@ define( function( require ) {
     Node.call( this, { cursor: 'pointer' } );
 
     // blank paper
-    var paperNode = new Rectangle( 0, 0, pHPaper.paperSize.width, pHPaper.paperSize.height, { fill: PAPER_COLOR, stroke: 'rgb(150, 150, 150)', lineWidth: 0.5 } );
+    var paperNode = new Rectangle( 0, 0, pHPaper.paperSize.width, pHPaper.paperSize.height,
+      { fill: ABSColors.PH_PAPER, stroke: 'rgb(150, 150, 150)', lineWidth: 0.5 } );
 
     // portion of the paper that changes color
     var indicatorNode = new Rectangle( 0, 0, pHPaper.paperSize.width, 0, { fill: 'red', stroke: 'rgb(150, 150, 150)', lineWidth: 0.5 } );
@@ -75,9 +76,26 @@ define( function( require ) {
     } );
 
     pHPaper.pHProperty.link( function( pH ) {
-      indicatorNode.fill = PHColorKeyNode.pHToColor( pH );
+      indicatorNode.fill = ABSColors.PH[ Math.round( pH ) ];
     } );
   }
 
-  return inherit( Node, PHPaperNode );
+  return inherit( Node, PHPaperNode, {}, {
+
+    /**
+     * Creates an icon that represents the pH paper.
+     * @static
+     * @param width
+     * @param height
+     * @returns {Node}
+     */
+    createIcon: function( width, height ) {
+      return new Node( { children: [
+        // full paper
+        new Rectangle( 0, 0, width, height, { fill: ABSColors.PH_PAPER, stroke: 'black', lineWidth: 0.5 } ),
+        // portion of paper that's colored
+        new Rectangle( 0, 0.6 * height, 10, 0.4 * height, { fill: ABSColors.PH[2], stroke: 'black', lineWidth: 0.5 } )
+      ] } )
+    }
+  } );
 } );

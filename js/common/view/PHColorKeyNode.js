@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -18,25 +19,6 @@ define( function( require ) {
 
   // strings
   var pHColorKeyString = require( 'string!ACID_BASE_SOLUTIONS/pHColorKey' );
-
-  // pH paper colors, ordered from pH value 0-14
-  var PH_COLORS = [
-    'rgb(182,70,72)',
-    'rgb(196,80,86)',
-    'rgb(213,83,71)',
-    'rgb(237,123,83)',
-    'rgb(246,152,86)',
-    'rgb(244,158,79)',
-    'rgb(243,160,78)',
-    'rgb(244,182,67)',
-    'rgb(231,201,75)',
-    'rgb(93,118,88)',
-    'rgb(30,92,89)',
-    'rgb(34,90,105)',
-    'rgb(39,87,111)',
-    'rgb(27,67,90)',
-    'rgb(0,34,52)'
-  ];
 
   // constants
   var FONT_BIG = new PhetFont( 10 );
@@ -59,18 +41,13 @@ define( function( require ) {
 
     // color chips, with a pH value below each one
     var chipWidth = paperSize.width; // same width as pH paper, to facilitate holding paper up to color key
-    for ( var i = 0; i < PH_COLORS.length; i++ ) {
-      this.addChild( new Rectangle( (chipWidth + CHIP_X_SPACING) * i, 10, chipWidth, CHIP_HEIGHT, {fill: PH_COLORS[i]} ) );
+    for ( var i = 0; i < ABSColors.PH.length; i++ ) {
+      this.addChild( new Rectangle( (chipWidth + CHIP_X_SPACING) * i, 10, chipWidth, CHIP_HEIGHT, {fill: ABSColors.PH[i]} ) );
       this.addChild( new Text( i.toString(), {font: FONT_SMALL, centerX: (chipWidth + CHIP_X_SPACING) * (i + 0.5), centerY: 46} ) );
     }
 
     this.mutate( options );
   }
-
-  // Maps a {Number} pH value to a {String} color.
-  PHColorKeyNode.pHToColor = function( pH ) {
-    return PH_COLORS[ Math.round( pH ) ];
-  };
 
   return inherit( Node, PHColorKeyNode );
 } );

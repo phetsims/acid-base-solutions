@@ -1,3 +1,4 @@
+4/1/14 #81 programmatically create the pH paper icon for the 'Tools' control panel
 4/1/14 #79 revert change to PHPaper.indicatorHeight, making it a derived property is messy and introduces a reset problem
 4/1/14 #79 make PHPaper.indicatorHeight a derived property
 4/1/14 improve behavior of probe wires by adjusting first control point, fix sign

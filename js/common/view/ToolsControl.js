@@ -16,6 +16,8 @@ define( function( require ) {
   var InOutRadioButton = require( 'SUN/InOutRadioButton' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var PHPaperNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHPaperNode' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VStrut = require( 'SUN/VStrut' );
@@ -23,7 +25,6 @@ define( function( require ) {
   // images
   var lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-icon.png' );
   var pHMeterImage = require( 'image!ACID_BASE_SOLUTIONS/pH-meter-icon.png' );
-  var pHPaperImage = require( 'image!ACID_BASE_SOLUTIONS/pH-paper-icon.png' );
 
   // constants
   var MIN_BUTTON_WIDTH = 40;
@@ -55,7 +56,7 @@ define( function( require ) {
     }, options );
 
     var pHMeterNode = new Image( pHMeterImage, ICON_OPTIONS );
-    var pHPaperNode = new Image( pHPaperImage, ICON_OPTIONS );
+    var pHPaperNode = PHPaperNode.createIcon( 10, 40 );
     var lightBulbNode = new Image( lightBulbImage, ICON_OPTIONS );
 
     // determine uniform size for buttons, in case icons have different sizes
