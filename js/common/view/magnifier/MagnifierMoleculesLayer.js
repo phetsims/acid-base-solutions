@@ -16,9 +16,9 @@ define( function( require ) {
   var Util = require( 'DOT/Util' );
 
   // constants
-  var BASE_CONCENTRATION = 1E-7, // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules
-    BASE_DOTS = 2,
-    MAX_MOLECULES = 50; // TODO: should be 200, but sim will load approximately 30 second
+  var BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules
+  var BASE_DOTS = 2;
+  var MAX_MOLECULES = 50; // TODO: should be 200, but sim will load approximately 30 second
 
   /**
    * @param {MagnifierModel} magnifierModel
