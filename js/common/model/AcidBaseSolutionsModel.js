@@ -33,7 +33,7 @@ define( function( require ) {
     } );
 
     PropertySet.call( this, {
-      solutionType: defaultSolutionType,
+      solutionType: defaultSolutionType, // type of solution that is currently selected
       pH: this.solutions[defaultSolutionType].pH // pH level of product
     } );
 
