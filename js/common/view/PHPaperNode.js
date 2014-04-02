@@ -22,6 +22,7 @@ define( function( require ) {
 
   // constants
   var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
+  var PAPER_STROKE = 'rgb(150, 150, 150)';
 
   function PHPaperNode( pHPaper ) {
 
@@ -30,10 +31,10 @@ define( function( require ) {
 
     // blank paper
     var paperNode = new Rectangle( 0, 0, pHPaper.paperSize.width, pHPaper.paperSize.height,
-      { fill: ABSColors.PH_PAPER, stroke: 'rgb(150, 150, 150)', lineWidth: 0.5 } );
+      { fill: ABSColors.PH_PAPER, stroke: PAPER_STROKE, lineWidth: 0.5 } );
 
     // portion of the paper that changes color
-    var indicatorNode = new Rectangle( 0, 0, pHPaper.paperSize.width, 0, { stroke: 'rgb(150, 150, 150)', lineWidth: 0.5 } );
+    var indicatorNode = new Rectangle( 0, 0, pHPaper.paperSize.width, 0, { stroke: PAPER_STROKE, lineWidth: 0.5 } );
     indicatorNode.rotate( Math.PI ); // so that indicator rectangle expands upward
 
     // rendering order
@@ -92,9 +93,9 @@ define( function( require ) {
     createIcon: function( width, height ) {
       return new Node( { children: [
         // full paper
-        new Rectangle( 0, 0, width, height, { fill: ABSColors.PH_PAPER, stroke: 'black', lineWidth: 0.5 } ),
+        new Rectangle( 0, 0, width, height, { fill: ABSColors.PH_PAPER, stroke: PAPER_STROKE, lineWidth: 0.5 } ),
         // portion of paper that's colored
-        new Rectangle( 0, 0.6 * height, 10, 0.4 * height, { fill: ABSColors.PH[2], stroke: 'black', lineWidth: 0.5 } )
+        new Rectangle( 0, 0.6 * height, 10, 0.4 * height, { fill: ABSColors.PH[2], stroke: PAPER_STROKE, lineWidth: 0.5 } )
       ] } )
     }
   } );
