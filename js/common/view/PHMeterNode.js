@@ -50,6 +50,42 @@ define( function( require ) {
   };
 
   /**
+   * pH Probe, consists of a shaft attached to a tip.
+   * @param {Number} shaftWidth
+   * @param {Number} shaftHeight
+   * @param {Number} tipWidth
+   * @param {Number} tipHeight
+   * @constructor
+   */
+  function ProbeNode( shaftWidth, shaftHeight, tipWidth, tipHeight ) {
+
+    var overlap = 1; // overlap, to hide seam
+
+    // probe shaft
+    var shaftNode = new Rectangle( 0, 0, shaftWidth, shaftHeight + overlap,
+      { fill: 'rgb(192,192,192)', stroke: 'rgb(160,160,160)', lineWidth: 0.5 } );
+
+    // probe tip: clockwise from tip of probe, origin at upper-left of shape
+    var cornerRadius = tipHeight / 9;
+    var tipNode = new Path( new Shape()
+        .moveTo( tipWidth / 2, tipHeight )
+        .lineTo( 0, 0.6 * tipHeight )
+        .lineTo( 0, cornerRadius )
+        .arc( cornerRadius, cornerRadius, cornerRadius, Math.PI, 1.5 * Math.PI )
+        .lineTo( cornerRadius, 0 )
+        .lineTo( tipWidth - cornerRadius, 0 )
+        .arc( tipWidth - cornerRadius, cornerRadius, cornerRadius, -0.5 * Math.PI, 0 )
+        .lineTo( tipWidth, 0.6 * tipHeight )
+        .close(),
+      { fill: 'black', centerX: shaftNode.centerX, top: shaftNode.bottom - overlap }
+    );
+
+    Node.call( this, { children: [ shaftNode, tipNode  ] } );
+  };
+
+  inherit( Node, ProbeNode );
+
+  /**
    * @param {PHMeter} pHMeter
    * @constructor
    */
@@ -58,24 +94,8 @@ define( function( require ) {
     var self = this;
     Node.call( this, {cursor: 'pointer'} );
 
-    // probe tip: clockwise from tip of probe, origin at upper-left of shape
-    var cornerRadius = 4;
-    var tipNode = new Path( new Shape()
-      .moveTo( TIP_WIDTH / 2, TIP_HEIGHT )
-      .lineTo( 0, 0.6 * TIP_HEIGHT )
-      .lineTo( 0, cornerRadius )
-      .arc( cornerRadius, cornerRadius, cornerRadius, Math.PI, 1.5 * Math.PI )
-      .lineTo( cornerRadius, 0 )
-      .lineTo( TIP_WIDTH - cornerRadius, 0 )
-      .arc( TIP_WIDTH - cornerRadius, cornerRadius, cornerRadius, -0.5 * Math.PI, 0 )
-      .lineTo( TIP_WIDTH, 0.6 * TIP_HEIGHT )
-      .close(),
-      { fill: 'black' }
-    );
-
-    // probe shaft
-    var shaftNode = new Rectangle( 0, 0, SHAFT_WIDTH, SHAFT_HEIGHT,
-      { fill: 'rgb(192,192,192)', stroke: 'rgb(160,160,160)', lineWidth: 0.5 } );
+    // probe
+    var probeNode = new ProbeNode( 5, 50, 14, 36 );
 
     // text, initialized with widest value for layout
     var textNode = new Text( formatText( ABSConstants.PH_RANGE.max ), {font: FONT, centerX: 34, centerY: 0} );
@@ -85,17 +105,14 @@ define( function( require ) {
       {fill: 'rgb(192,192,192)', stroke: 'rgb(64,64,64)', lineWidth: 1.5} );
 
     // layout, origin at probe tip
-    var overlap = 1; // to hide seams
-    tipNode.centerX = shaftNode.centerX = 0;
-    tipNode.bottom = 0;
-    shaftNode.bottom = tipNode.top + overlap;
-    backgroundNode.left = shaftNode.centerX - ( 0.25 * backgroundNode.width );
-    backgroundNode.bottom = shaftNode.top + overlap;
+    probeNode.centerX = 0;
+    probeNode.bottom = 0;
+    backgroundNode.left = probeNode.centerX - ( 0.25 * backgroundNode.width );
+    backgroundNode.bottom = probeNode.top + 1; // hide seam
     textNode.center = backgroundNode.center;
 
     // rendering order
-    this.addChild( shaftNode );
-    this.addChild( tipNode );
+    this.addChild( probeNode );
     this.addChild( backgroundNode );
     this.addChild( textNode );
     if ( SHOW_ORIGIN ) {
@@ -128,5 +145,19 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, PHMeterNode );
+  return inherit( Node, PHMeterNode, {}, {
+
+    /**
+     * Creates an icon for the pH meter.
+     * @static
+     * @return {Node}
+     */
+    createIcon: function() {
+      var probeNode = new ProbeNode( 2, 10, 5, 12 );
+      var backgroundNode = new Rectangle( 0, 0, 30, 10, 2, 2, { fill: 'rgb(192,192,192)', stroke: 'rgb(64,64,64)', lineWidth: 0.5 } );
+      backgroundNode.left = probeNode.centerX - ( 0.25 * backgroundNode.width );
+      backgroundNode.bottom = probeNode.top + 1;
+      return new Node( { children: [ probeNode, backgroundNode ] } );
+    }
+  } );
 } );

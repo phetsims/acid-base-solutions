@@ -16,6 +16,7 @@ define( function( require ) {
   var InOutRadioButton = require( 'SUN/InOutRadioButton' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var PHMeterNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHMeterNode' );
   var PHPaperNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHPaperNode' );
   var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -23,7 +24,6 @@ define( function( require ) {
 
   // images
   var lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-icon.png' );
-  var pHMeterImage = require( 'image!ACID_BASE_SOLUTIONS/pH-meter-icon.png' );
 
   // constants
   var MIN_BUTTON_WIDTH = 40;
@@ -54,7 +54,7 @@ define( function( require ) {
       spacing: 4
     }, options );
 
-    var pHMeterNode = new Image( pHMeterImage, ICON_OPTIONS );
+    var pHMeterNode = PHMeterNode.createIcon();
     var pHPaperNode = PHPaperNode.createIcon( 8, 30 );
     var lightBulbNode = new Image( lightBulbImage, ICON_OPTIONS );
 
