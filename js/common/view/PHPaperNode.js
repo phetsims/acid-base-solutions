@@ -22,7 +22,7 @@ define( function( require ) {
 
   // constants
   var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
-  var PAPER_STROKE = 'rgb(150, 150, 150)';
+  var PAPER_STROKE = 'rgb(100, 100, 100)';
 
   function PHPaperNode( pHPaper ) {
 
