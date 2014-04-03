@@ -1,3 +1,4 @@
+4/3/14 make solvent less opaque so that molecules stand out more against it
 # 1.0.0-dev.4 4/2/14
 4/1/14 #81 programmatically create the pH meter icon for the 'Tools' control panel
 4/1/14 move creation of graph icon to ConcentrationGraphNode
