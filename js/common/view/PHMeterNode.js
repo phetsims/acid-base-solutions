@@ -34,7 +34,7 @@ define( function( require ) {
   var FONT = new PhetFont( { size: 15, weight: 'bold' } );
   var X_MARGIN = 12;
   var Y_MARGIN = 8;
-  var BACKGROUND_FILL = 'rgb(192,192,192)';
+  var BACKGROUND_FILL = 'rgb(225,225,225)';
   var BACKGROUND_STROKE = 'rgb(64,64,64)';
 
   // format a pH value for display.
