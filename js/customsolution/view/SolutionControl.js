@@ -36,13 +36,13 @@ define( function( require ) {
   var weakString = require( 'string!ACID_BASE_SOLUTIONS/weak' );
 
   // constants
+  var CONCENTRATION_DECIMALS = 3;
   var SUBTITLE_FONT = new PhetFont( 12 );
   var CONTROL_FONT = new PhetFont( 12 );
-  var ARROW_STEP = 0.1; // concentration delta for arrow button
+  var ARROW_STEP = Math.pow( 10, -CONCENTRATION_DECIMALS ); // concentration delta for arrow button
   var ARROW_HEIGHT = 15;
   var ARROW_BUTTON_OPTIONS = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
   var CONCENTRATION_FONT = new PhetFont( 14 );
-  var CONCENTRATION_DECIMALS = 3;
   var AB_SWITCH_SIZE = new Dimension2( 40, 20 );
 
   /**
