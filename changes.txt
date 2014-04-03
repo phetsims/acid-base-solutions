@@ -1,4 +1,4 @@
-4/3/14 #84 use a lighter gray for pH meter background, rgb(225,225,225)
+4/3/14 #85 use a lighter gray for pH meter background, rgb(225,225,225)
 4/3/14 #77 change delta for concentration arrow buttons to 0.001
 4/3/14 make solvent less opaque so that molecules stand out more against it
 # 1.0.0-dev.4 4/2/14
