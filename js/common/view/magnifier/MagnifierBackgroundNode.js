@@ -37,7 +37,8 @@ define( function( require ) {
     this.addChild( new Circle( radius, {stroke: 'black', lineWidth: 8} ) );
 
     // add solvent background
-    this.solventNode = new Image( solventBackgroundImage, {scale: 0.5, x: -radius * Math.SQRT2, y: -radius * Math.SQRT2} );
+    this.solventNode = new Image( solventBackgroundImage,
+      {opacity: 0.6, scale: 0.5, x: -radius * Math.SQRT2, y: -radius * Math.SQRT2} );
     container.addChild( this.solventNode );
   }
 
