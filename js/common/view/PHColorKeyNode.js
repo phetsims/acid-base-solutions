@@ -21,7 +21,7 @@ define( function( require ) {
   var pHColorKeyString = require( 'string!ACID_BASE_SOLUTIONS/pHColorKey' );
 
   // constants
-  var FONT_BIG = new PhetFont( 10 );
+  var FONT_BIG = new PhetFont( 12 );
   var FONT_SMALL = new PhetFont( 8 );
   var CHIP_HEIGHT = 28;
   var CHIP_X_SPACING = 1;
@@ -36,14 +36,34 @@ define( function( require ) {
     Node.call( this );
 
     // title
-    this.addChild( new Text( pHColorKeyString, {font: FONT_BIG, centerY: 0} ) );
+    var titleNode = new Text( pHColorKeyString, { font: FONT_BIG, centerY: 0 } );
+    this.addChild( titleNode );
 
-    // color chips, with a pH value below each one
-    var chipWidth = paperSize.width; // same width as pH paper, to facilitate holding paper up to color key
+    // color chips, with a pH value above each one
+    var parentNode = new Node();
+    var chipNode, previousChipNode, pHNumberNode;
     for ( var i = 0; i < ABSColors.PH.length; i++ ) {
-      this.addChild( new Rectangle( (chipWidth + CHIP_X_SPACING) * i, 10, chipWidth, CHIP_HEIGHT, {fill: ABSColors.PH[i]} ) );
-      this.addChild( new Text( i.toString(), {font: FONT_SMALL, centerX: (chipWidth + CHIP_X_SPACING) * (i + 0.5), centerY: 46} ) );
+
+      chipNode = new Rectangle( 0, 0, paperSize.width, CHIP_HEIGHT, { fill: ABSColors.PH[i] } );
+      pHNumberNode = new Text( i.toString(), { font: FONT_SMALL } );
+
+      parentNode.addChild( chipNode );
+      parentNode.addChild( pHNumberNode );
+
+      if ( previousChipNode ) {
+        chipNode.left = previousChipNode.right + CHIP_X_SPACING;
+      }
+      // pH number above color chip
+      pHNumberNode.centerX = chipNode.centerX;
+      pHNumberNode.bottom = chipNode.top - 2;
+
+      previousChipNode = chipNode;
     }
+    this.addChild( parentNode );
+
+    // color key above title
+    titleNode.left = parentNode.left;
+    titleNode.top = parentNode.bottom + 2;
 
     this.mutate( options );
   }
