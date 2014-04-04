@@ -1,3 +1,4 @@
+4/3/14 #74 expand touch area of conductivity probes
 4/3/14 #91 constrain probes so that they can only be dragged part-way into the solution
 4/3/14 #90 increase size of conductivity probes
 4/3/14 #74 expand touch area of pH paper

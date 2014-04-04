@@ -59,6 +59,9 @@ define( function( require ) {
       this.addChild( new Circle( 2, { fill: 'red' } ) );
     }
 
+    // expand touch area
+    this.touchArea = this.localBounds.dilatedXY( 10, 10 );
+
     // constrained dragging
     this.cursor = 'pointer';
     this.addInputListener( new SimpleDragHandler( {
