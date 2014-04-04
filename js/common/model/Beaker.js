@@ -18,8 +18,8 @@ define( function( require ) {
   function Beaker( options ) {
 
     options = _.extend( {
-      size: new Dimension2( 400, 300 ),
-      location: new Vector2( 265, 440 )
+      size: new Dimension2( 360, 270 ),
+      location: new Vector2( 250, 410 )
     } );
 
     this.size = options.size;
