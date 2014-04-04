@@ -36,7 +36,7 @@ define( function( require ) {
 
     Node.call( this, options );
 
-    this.bulbRadius = bulbRadius;
+    this.bulbRadius = bulbRadius; //@private
 
     // pre-calculate reusable objects
     this.createCacheLines( MAX_RAYS );
