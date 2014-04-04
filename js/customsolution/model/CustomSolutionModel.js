@@ -50,6 +50,7 @@ define( function( require ) {
         self.solutions[prevSolution].property( 'concentration' ).unlink( setConcentration );
 
         // set concentration and strength of new solution equal to previous solution
+        //TODO issue #94: this is WRONG! When going from weak to strong, this will set the strong solution to an invalid strength
         self.solutions[newSolution].strength = self.solutions[prevSolution].strength;
         self.solutions[newSolution].concentration = self.solutions[prevSolution].concentration;
       }
