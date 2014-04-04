@@ -47,9 +47,7 @@ define( function( require ) {
       H3OConcentration: defaultValues.H3OConcentration || 0, // H3O concentration
       OHConcentration: defaultValues.OHConcentration || 0, // OH concentration
       H2OConcentration: defaultValues.H2OConcentration || 0, // H2O concentration
-      pH: (typeof (defaultValues.H3OConcentration) === 'undefined' ? 0 : getPH( defaultValues.H3OConcentration )), // pH of the solution at equilibrium
-      //TODO issue #94 this is never used!
-      isValidStrength: defaultValues.isValidStrength || false
+      pH: (typeof (defaultValues.H3OConcentration) === 'undefined' ? 0 : getPH( defaultValues.H3OConcentration )) // pH of the solution at equilibrium
     } );
 
     this.property( 'H3OConcentration' ).link( function( H3OConcentrationValue ) {

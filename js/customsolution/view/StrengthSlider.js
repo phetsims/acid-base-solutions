@@ -17,6 +17,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
+  var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
 
@@ -27,16 +28,22 @@ define( function( require ) {
   // constants
   var TICK_LABEL_OPTIONS = { font: new PhetFont( 12 ) };
 
+  // issues #94: strength can be changed only for weak solutions, use this as a guard
+  var strengthIsMutable = function( solutionType ) {
+    return ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE );
+  };
+
   /**
    * Model for the strength slider.
    * Maps between the linear slider and the logarithmic range of strength.
    * Implemented as an inner type because this is internal to the slider.
    *
+   * @param {Property<SolutionType>} solutionTypeProperty
    * @param {Property<Number>} strengthProperty
    * @param {Range} strengthRange
    * @constructor
    */
-  function SliderModel( strengthProperty, strengthRange ) {
+  function SliderModel( solutionTypeProperty, strengthProperty, strengthRange ) {
 
     var self = this;
 
@@ -48,21 +55,26 @@ define( function( require ) {
 
     // map between linear and logarithmic
     this.sliderValueProperty.link( function( sliderValue ) {
-      strengthProperty.value = Math.pow( 10, sliderValue );
+      if ( strengthIsMutable( solutionTypeProperty.value ) ) {
+        strengthProperty.value = Math.pow( 10, sliderValue );
+      }
     } );
     strengthProperty.link( function( strength ) {
-      self.sliderValueProperty.value = Util.log10( strength );
+      if ( strengthIsMutable( solutionTypeProperty.value ) ) {
+        self.sliderValueProperty.value = Util.log10( strength );
+      }
     } );
   }
 
   /**
+   * @param {Property<SolutionType>} solutionTypeProperty
    * @param {Property<Number>} strengthProperty
    * @param {Range} strengthRange
    * @constructor
    */
-  function StrengthSlider( strengthProperty, strengthRange ) {
+  function StrengthSlider( solutionTypeProperty, strengthProperty, strengthRange ) {
 
-    var model = new SliderModel( strengthProperty, strengthRange );
+    var model = new SliderModel( solutionTypeProperty, strengthProperty, strengthRange );
 
     HSlider.call( this, model.sliderValueProperty, model.sliderValueRange, {
       trackSize: new Dimension2( 125, 4 ),

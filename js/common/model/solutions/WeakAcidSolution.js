@@ -39,18 +39,13 @@ define( function( require ) {
     return (concentration - H3OConcentration);
   };
 
-  var isValidStrength = function( strength ) {
-    return ABSConstants.WEAK_STRENGTH_RANGE.contains( strength );
-  };
-
   // constants
   var STRENGTH_DEFAULT = ABSConstants.WEAK_STRENGTH_RANGE.defaultValue,
     CONCENTRATION_DEFAULT = ABSConstants.CONCENTRATION_RANGE.defaultValue,
     H3O_CONCENTRATION_DEFAULT = getH3OConcentration( STRENGTH_DEFAULT, CONCENTRATION_DEFAULT ),
     PRODUCT_CONCENTRATION_DEFAULT = getProductConcentration( H3O_CONCENTRATION_DEFAULT ),
     OH_CONCENTRATION_DEFAULT = getOHConcentration( H3O_CONCENTRATION_DEFAULT ),
-    H2O_CONCENTRATION_DEFAULT = getH2OConcentration( PRODUCT_CONCENTRATION_DEFAULT ),
-    IS_VALID_STRENGTH_DEFAULT = isValidStrength( STRENGTH_DEFAULT );
+    H2O_CONCENTRATION_DEFAULT = getH2OConcentration( PRODUCT_CONCENTRATION_DEFAULT );
 
   var setSoluteConcentration = function() {
     this.soluteConcentration = getSoluteConcentration( this.concentration, this.H3OConcentration );
@@ -79,8 +74,7 @@ define( function( require ) {
         productConcentration: PRODUCT_CONCENTRATION_DEFAULT,
         H3OConcentration: H3O_CONCENTRATION_DEFAULT,
         OHConcentration: OH_CONCENTRATION_DEFAULT,
-        H2OConcentration: H2O_CONCENTRATION_DEFAULT,
-        isValidStrength: IS_VALID_STRENGTH_DEFAULT
+        H2OConcentration: H2O_CONCENTRATION_DEFAULT
       } );
 
     // set links between concentrations
@@ -100,7 +94,10 @@ define( function( require ) {
     } );
 
     this.property( 'strength' ).link( function( strength ) {
-      self.isValidStrength = isValidStrength( strength );
+      // verify that strength is in the weak range
+      if ( !ABSConstants.WEAK_STRENGTH_RANGE.contains( strength ) ) {
+        throw new Error( 'invalid strength for weak acid: ' + strength );
+      }
     } );
   }
 

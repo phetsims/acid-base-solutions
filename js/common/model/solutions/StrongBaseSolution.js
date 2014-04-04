@@ -29,16 +29,11 @@ define( function( require ) {
     return ABSConstants.WATER_EQUILIBRIUM_CONSTANT / OHConcentration;
   };
 
-  var isValidStrength = function( strength ) {
-    return strength > ABSConstants.WEAK_STRENGTH_RANGE.max;
-  };
-
   // constants
   var STRENGTH_DEFAULT = ABSConstants.STRONG_STRENGTH,
     CONCENTRATION_DEFAULT = ABSConstants.CONCENTRATION_RANGE.defaultValue,
     OH_CONCENTRATION_DEFAULT = getOHConcentration( CONCENTRATION_DEFAULT ),
     H3O_CONCENTRATION_DEFAULT = getH3OConcentration( OH_CONCENTRATION_DEFAULT ),
-    IS_VALID_STRENGTH_DEFAULT = isValidStrength( STRENGTH_DEFAULT ),
     PRODUCT_CONCENTRATION_DEFAULT = getProductConcentration( CONCENTRATION_DEFAULT );
 
   function StrongBaseSolution() {
@@ -58,8 +53,7 @@ define( function( require ) {
         concentration: CONCENTRATION_DEFAULT,
         productConcentration: PRODUCT_CONCENTRATION_DEFAULT,
         OHConcentration: OH_CONCENTRATION_DEFAULT,
-        H3OConcentration: H3O_CONCENTRATION_DEFAULT,
-        isValidStrength: IS_VALID_STRENGTH_DEFAULT
+        H3OConcentration: H3O_CONCENTRATION_DEFAULT
       } );
 
     // set links between concentrations
@@ -73,7 +67,10 @@ define( function( require ) {
     } );
 
     this.property( 'strength' ).link( function( strength ) {
-      self.isValidStrength = isValidStrength( strength );
+      // strength must be a constant for strong acids
+      if ( strength !== ABSConstants.STRONG_STRENGTH ) {
+        throw new Error( 'invalid strength for strong base: ' + strength );
+      }
     } );
   }
 

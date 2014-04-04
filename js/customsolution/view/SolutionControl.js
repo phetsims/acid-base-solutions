@@ -103,7 +103,7 @@ define( function( require ) {
       false, new Text( strongString, {font: CONTROL_FONT} ),
       { switchSize: AB_SWITCH_SIZE }
     );
-    var strengthSlider = new StrengthSlider( strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE );
+    var strengthSlider = new StrengthSlider( solutionTypeProperty, strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE );
 
     options.children = [
       acidBaseSwitch,

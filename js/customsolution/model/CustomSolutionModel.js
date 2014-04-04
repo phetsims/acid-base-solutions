@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var AcidBaseSolutionsModel = require( 'ACID_BASE_SOLUTIONS/common/model/AcidBaseSolutionsModel' );
   var ConcentrationGraph = require( 'ACID_BASE_SOLUTIONS/common/model/ConcentrationGraph' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -44,15 +45,11 @@ define( function( require ) {
     var setStrength = function( value ) { self.strength = value; };
     var setConcentration = function( value ) { self.concentration = value; };
     this.property( 'solutionType' ).link( function( newSolution, prevSolution ) {
+
       // unsubscribe from previous solution strength and concentration property
       if ( prevSolution ) {
         self.solutions[prevSolution].property( 'strength' ).unlink( setStrength );
         self.solutions[prevSolution].property( 'concentration' ).unlink( setConcentration );
-
-        // set concentration and strength of new solution equal to previous solution
-        //TODO issue #94: this is WRONG! When going from weak to strong, this will set the strong solution to an invalid strength
-        self.solutions[newSolution].strength = self.solutions[prevSolution].strength;
-        self.solutions[newSolution].concentration = self.solutions[prevSolution].concentration;
       }
 
       // subscribe to new solution strength and concentration property
@@ -61,11 +58,23 @@ define( function( require ) {
     } );
 
     this.property( 'concentration' ).link( function( concentration ) {
-      self.solutions[self.solutionType].concentration = concentration;
+      // set concentration for all solutions
+      for ( var solutionType in self.solutions ) {
+        self.solutions[solutionType].concentration = concentration;
+      }
     } );
 
     this.property( 'strength' ).link( function( strength ) {
-      self.solutions[self.solutionType].strength = strength;
+      /*
+       * issue #94:
+       * Keep strength of all weak solutions synchronized, so that strength slider keeps the
+       * maintains the same value when switching between weak solution types.
+       * Strong solutions have constant strength, so do not synchronize.
+       */
+      var solutionType = self.property( 'solutionType' ).value;
+      if ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE ) {
+        self.solutions[SolutionType.WEAK_ACID].strength = self.solutions[SolutionType.WEAK_BASE].strength = strength;
+      }
     } );
   }
 
