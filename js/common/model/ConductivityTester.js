@@ -30,7 +30,7 @@ define( function( require ) {
 
     this.probeDragYRange = new Range( beaker.top - 20, beaker.bottom );
 
-    this.probeSize = new Dimension2( 16, 55 );
+    this.probeSize = new Dimension2( 20, 68 );
 
     // bulb and battery location
     this.location = new Vector2( beaker.location.x - 45, beaker.top - 30 );
