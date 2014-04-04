@@ -20,7 +20,6 @@ define( function( require ) {
   var MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );
 
@@ -48,8 +47,6 @@ define( function( require ) {
    * @constructor
    */
   function ViewsControl( viewModeProperty, solventVisibleProperty, options ) {
-
-    var self = this;
 
     options = _.extend( {
       spacing: 4,

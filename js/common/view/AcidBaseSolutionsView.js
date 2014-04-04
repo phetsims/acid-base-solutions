@@ -31,7 +31,6 @@ define( function( require ) {
    */
   function AcidBaseSolutionsView( model ) {
 
-    var self = this;
     ScreenView.call( this, { renderer: 'svg' } );
 
     var beakerNode = new BeakerNode( model.beaker );
