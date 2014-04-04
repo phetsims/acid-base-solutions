@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ABSControlPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ABSControlPanel' );
+  var AcidBaseSolutionsControlPanel = require( 'ACID_BASE_SOLUTIONS/common/view/AcidBaseSolutionsControlPanel' );
   var BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
   var ConductivityTesterNode = require( 'ACID_BASE_SOLUTIONS/common/view/conductivity/ConductivityTesterNode' );
   var ConcentrationGraphNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphNode' );
@@ -81,7 +81,7 @@ define( function( require ) {
     } );
 
     // control panel
-    this.addChild( new ABSControlPanel( model, this.viewProperties, solutionControl, {
+    this.addChild( new AcidBaseSolutionsControlPanel( model, this.viewProperties, solutionControl, {
         // vertically centered at right edge of screen
         right: this.layoutBounds.maxX - 20,
         centerY: this.layoutBounds.centerY

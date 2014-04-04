@@ -1,3 +1,4 @@
+4/3/14 rename ABSControlPanel to AcidBaseSolutionsControlPanel
 4/3/14 #51 factor out common stuff for main control panel into ABSControlPanel
 4/3/14 #51 move 'Reset All' button to right of 'Tools' panel
 4/3/14 #74 expand touch areas for all radio buttons and check boxes, increase vertical spacing in 'Solutions' and 'Views' panels
