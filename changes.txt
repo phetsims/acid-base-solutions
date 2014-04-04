@@ -1,3 +1,4 @@
+4/4/14 adjust pH meter location so that it doesn't go behind graph
 4/4/14 clean up ReactionEquationFactory
 # 1.0.0-dev.5 4/3/14
 4/3/14 #92 reset pH paper when strength or concentration are changed in 'Custom Solution' screen

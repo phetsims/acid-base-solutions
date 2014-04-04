@@ -28,7 +28,7 @@ define( function( require ) {
     this.dragYRange = new Range( beaker.top - 15, beaker.top + 70 );
 
     // location, at tip of probe
-    this.locationProperty = new Property( new Vector2( beaker.right - 85, beaker.top - 5 ) );
+    this.locationProperty = new Property( new Vector2( beaker.right - 65, beaker.top - 5 ) );
   }
 
   PHMeter.prototype = {
