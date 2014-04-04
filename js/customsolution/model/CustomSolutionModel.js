@@ -34,6 +34,7 @@ define( function( require ) {
       ],
       DEFAULT_SOLUTION_TYPE );
 
+    // add convenience properties that will synchronize with the concentration and strength of the currently selected solution
     this.addProperty( 'concentration', this.solutions[DEFAULT_SOLUTION_TYPE].concentration ); // concentration of solution
     this.addProperty( 'strength', this.solutions[DEFAULT_SOLUTION_TYPE].strength ); // strength of solution
 
@@ -48,8 +49,7 @@ define( function( require ) {
         self.solutions[prevSolution].property( 'strength' ).unlink( setStrength );
         self.solutions[prevSolution].property( 'concentration' ).unlink( setConcentration );
 
-        // we need set concentration and strength values of new solution
-        // equal to values from previous solution
+        // set concentration and strength of new solution equal to previous solution
         self.solutions[newSolution].strength = self.solutions[prevSolution].strength;
         self.solutions[newSolution].concentration = self.solutions[prevSolution].concentration;
       }
