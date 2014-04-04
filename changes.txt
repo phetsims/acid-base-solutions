@@ -1,6 +1,6 @@
 4/4/14 #94 keep strength of weak solutions synchronized at all times
 4/4/14 #94 make strength slider operate on weak solutions only; never change strength of strong solutions
-4/4/14 #94 ; delete unused isValidStrength property throughout; validate all attempts to change strength
+4/4/14 #94 delete unused isValidStrength property throughout; validate all attempts to change strength
 4/4/14 #94 fix implementation of isValidStrength for strong acid and strong base
 4/4/14 adjust pH meter location so that it doesn't go behind graph
 4/4/14 clean up ReactionEquationFactory
