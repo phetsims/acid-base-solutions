@@ -43,12 +43,11 @@ define( function( require ) {
 
   /**
    * @param {Property<ViewMode>} viewModeProperty
-   * @param {Property<ToolMode>} toolModeProperty
    * @param {Property<Boolean>} solventVisibleProperty
    * @param {*} options
    * @constructor
    */
-  function ViewsControl( viewModeProperty, toolModeProperty, solventVisibleProperty, options ) {
+  function ViewsControl( viewModeProperty, solventVisibleProperty, options ) {
 
     var self = this;
 
@@ -112,13 +111,6 @@ define( function( require ) {
     // disable the 'Solvent' check box unless 'Molecules' is selected
     viewModeProperty.link( function( viewMode ) {
       solventCheckBox.enabled = ( viewMode === ViewMode.MOLECULES );
-    } );
-
-    // disable this control when the conductivity tool is selected
-    toolModeProperty.link( function( toolMode ) {
-      var enabled = ( toolMode !== ToolMode.CONDUCTIVITY );
-      self.opacity = enabled ? 1 : 0.5;
-      self.pickable = enabled;
     } );
   }
 

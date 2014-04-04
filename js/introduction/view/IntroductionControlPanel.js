@@ -52,7 +52,7 @@ define( function( require ) {
 
     // controls
     var solutionsControl = new SolutionsControl( model.property( 'solutionType' ), PANEL_OPTIONS );
-    var viewsControl = new ViewsControl( viewProperties.property( 'viewMode' ), viewProperties.property( 'toolMode' ), viewProperties.property( 'solventVisible' ), PANEL_OPTIONS );
+    var viewsControl = new ViewsControl( viewProperties.property( 'viewMode' ), viewProperties.property( 'solventVisible' ), PANEL_OPTIONS );
     var toolsControl = new ToolsControl( viewProperties.property( 'toolMode' ), PANEL_OPTIONS );
 
     // panels with equal widths

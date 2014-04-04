@@ -68,21 +68,16 @@ define( function( require ) {
       magnifierNode.setSolventVisible( soluteVisible );
     } );
 
-    // viewMode and toolMode are interdependent
-    var updateView = function() {
+    this.viewProperties.property( 'viewMode' ).link( function( viewMode ) {
+      magnifierNode.visible = ( viewMode === ViewMode.MOLECULES  );
+      graphNode.visible = ( viewMode === ViewMode.GRAPH );
+    } );
 
-      var viewMode = self.viewProperties.property( 'viewMode' ).value;
-      var toolMode = self.viewProperties.property( 'toolMode' ).value;
-
-      magnifierNode.visible = ( viewMode === ViewMode.MOLECULES && toolMode !== ToolMode.CONDUCTIVITY );
-      graphNode.visible = ( viewMode === ViewMode.GRAPH && toolMode !== ToolMode.CONDUCTIVITY );
-
+    this.viewProperties.property( 'toolMode' ).link( function( toolMode ) {
       pHMeterNode.visible = ( toolMode === ToolMode.PH_METER );
       pHPaperNode.visible = pHColorKeyNode.visible = ( toolMode === ToolMode.PH_PAPER );
       conductivityTesterNode.visible = ( toolMode === ToolMode.CONDUCTIVITY );
-    };
-    this.viewProperties.property( 'viewMode' ).link( updateView.bind( this ) );
-    this.viewProperties.property( 'toolMode' ).link( updateView.bind( this ) );
+    } );
   }
 
   return inherit( ScreenView, AcidBaseSolutionsView );
