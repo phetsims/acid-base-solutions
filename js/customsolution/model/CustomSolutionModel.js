@@ -58,7 +58,10 @@ define( function( require ) {
     } );
 
     this.property( 'concentration' ).link( function( concentration ) {
-      // set concentration for all solutions
+      /*
+       * Keep concentration of all solutions synchronized, so that concentration slider
+       * maintains the same value when switching between solution types.
+       */
       for ( var solutionType in self.solutions ) {
         self.solutions[solutionType].concentration = concentration;
       }
@@ -67,7 +70,7 @@ define( function( require ) {
     this.property( 'strength' ).link( function( strength ) {
       /*
        * issue #94:
-       * Keep strength of all weak solutions synchronized, so that strength slider keeps the
+       * Keep strength of all weak solutions synchronized, so that strength slider
        * maintains the same value when switching between weak solution types.
        * Strong solutions have constant strength, so do not synchronize.
        */
