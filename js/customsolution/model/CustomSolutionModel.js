@@ -9,7 +9,6 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var AcidBaseSolutionsModel = require( 'ACID_BASE_SOLUTIONS/common/model/AcidBaseSolutionsModel' );
   var ConcentrationGraph = require( 'ACID_BASE_SOLUTIONS/common/model/ConcentrationGraph' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -44,17 +43,17 @@ define( function( require ) {
 
     var setStrength = function( value ) { self.strength = value; };
     var setConcentration = function( value ) { self.concentration = value; };
-    this.property( 'solutionType' ).link( function( newSolution, prevSolution ) {
+    this.property( 'solutionType' ).link( function( newSolutionType, prevSolutionType ) {
 
       // unsubscribe from previous solution strength and concentration property
-      if ( prevSolution ) {
-        self.solutions[prevSolution].property( 'strength' ).unlink( setStrength );
-        self.solutions[prevSolution].property( 'concentration' ).unlink( setConcentration );
+      if ( prevSolutionType ) {
+        self.solutions[prevSolutionType].property( 'strength' ).unlink( setStrength );
+        self.solutions[prevSolutionType].property( 'concentration' ).unlink( setConcentration );
       }
 
       // subscribe to new solution strength and concentration property
-      self.solutions[newSolution].property( 'strength' ).link( setStrength );
-      self.solutions[newSolution].property( 'concentration' ).link( setConcentration );
+      self.solutions[newSolutionType].property( 'strength' ).link( setStrength );
+      self.solutions[newSolutionType].property( 'concentration' ).link( setConcentration );
     } );
 
     /*
