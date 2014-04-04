@@ -13,6 +13,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var SolutionControl = require( 'ACID_BASE_SOLUTIONS/customsolution/view/SolutionControl' );
 
+  /**
+   * @param {CustomSolutionModel} model
+   * @constructor
+   */
   function CustomSolutionView( model ) {
     AcidBaseSolutionsView.call( this, model, new SolutionControl( model.property( 'solutionType' ), model.property( 'concentration' ), model.property( 'strength' ) ) );
   }

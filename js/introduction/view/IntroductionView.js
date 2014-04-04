@@ -13,6 +13,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var SolutionsControl = require( 'ACID_BASE_SOLUTIONS/introduction/view/SolutionsControl' );
 
+  /**
+   * @param {IntroductionModel} model
+   * @constructor
+   */
   function IntroductionView( model ) {
     AcidBaseSolutionsView.call( this, model, new SolutionsControl( model.property( 'solutionType' ) ) );
   }
