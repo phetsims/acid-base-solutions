@@ -231,6 +231,19 @@ define( function( require ) {
     return new HBox( options );
   };
 
+  // Equations for all acids are similar: HA + H2O ? A- + H3O+
+  var createAcidEquation = function( isWeak ) {
+    return createEquation( [
+      createHANode(),
+      plusSignNode(),
+      createH2ONode(),
+      ( isWeak ? reversibleArrowNode() : irreversibleArrowNode() ),
+      createANode(),
+      plusSignNode(),
+      createH3ONode()
+    ] );
+  };
+
   //-------------------------------------------------------------------------------------
   // Public functions for creating reaction equations.
   //-------------------------------------------------------------------------------------
@@ -248,19 +261,15 @@ define( function( require ) {
       ] );
     },
 
-    // HA + H2O ? A- + H3O+
-    createAcidEquation: function( options ) {
-      options = _.extend( { isWeak: true }, options );
-      return createEquation( [
-        createHANode(),
-        plusSignNode(),
-        createH2ONode(),
-        ( options.isWeak ? reversibleArrowNode() : irreversibleArrowNode() ),
-        createANode(),
-        plusSignNode(),
-        createH3ONode()
-      ] );
+    // HA + H2O -> A- + H3O+
+    createStrongAcidEquation: function() {
+      return createAcidEquation( false /* isWeak */ );
     },
+
+    // HA + H2O <-> A- + H3O+
+    createWeakAcidEquation: function() {
+          return createAcidEquation( true /* isWeak */ );
+        },
 
     // MOH -> M+ + OH-
     createStrongBaseEquation: function() {

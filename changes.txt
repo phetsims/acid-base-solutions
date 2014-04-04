@@ -1,3 +1,4 @@
+4/4/14 clean up ReactionEquationFactory
 # 1.0.0-dev.5 4/3/14
 4/3/14 #92 reset pH paper when strength or concentration are changed in 'Custom Solution' screen
 4/3/14 #86 compute color of pH paper by interpolating between colors used in pH color key

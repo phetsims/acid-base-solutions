@@ -27,8 +27,8 @@ define( function( require ) {
 
     var equations = {};
     equations[SolutionType.WATER] = ReactionEquationFactory.createWaterEquation();
-    equations[SolutionType.STRONG_ACID] = ReactionEquationFactory.createAcidEquation( { isWeak: false } );
-    equations[SolutionType.WEAK_ACID] = ReactionEquationFactory.createAcidEquation( { isWeak: true } );
+    equations[SolutionType.STRONG_ACID] = ReactionEquationFactory.createStrongAcidEquation();
+    equations[SolutionType.WEAK_ACID] = ReactionEquationFactory.createWeakAcidEquation();
     equations[SolutionType.STRONG_BASE] = ReactionEquationFactory.createStrongBaseEquation();
     equations[SolutionType.WEAK_BASE] = ReactionEquationFactory.createWeakBaseEquation();
 
