@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Control panel for the 'Custom Solution' screen.
+ * Bae type of main control panel.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -41,12 +41,13 @@ define( function( require ) {
   };
 
   /**
-   * @param {CustomSolutionModel} model
+   * @param {AcidBaseSolutionModel} model
    * @param {PropertySet} viewProperties properties that are specific to the view
+   * @param {Node} solutionControl
    * @param {*} options
    * @constructor
    */
-  function CustomSolutionControlPanel( model, viewProperties, options ) {
+  function ABSControlPanel( model, viewProperties, solutionControl, options ) {
 
     options = _.extend( {
       align: 'left',
@@ -59,9 +60,8 @@ define( function( require ) {
     var toolsTitle = new Text( toolsString, TITLE_OPTIONS );
 
     // controls
-    var solutionControl = new SolutionControl( model.property( 'solutionType' ), model.property( 'concentration' ), model.property( 'strength' ), PANEL_OPTIONS );
-    var viewsControl = new ViewsControl( viewProperties.property( 'viewMode' ), viewProperties.property( 'solventVisible' ), PANEL_OPTIONS );
-    var toolsControl = new ToolsControl( viewProperties.property( 'toolMode' ), PANEL_OPTIONS );
+    var viewsControl = new ViewsControl( viewProperties.property( 'viewMode' ), viewProperties.property( 'solventVisible' ) );
+    var toolsControl = new ToolsControl( viewProperties.property( 'toolMode' ) );
 
     // Reset All button
     var resetAllButton = new ResetAllButton( function() {
@@ -100,5 +100,5 @@ define( function( require ) {
     VBox.call( this, options );
   }
 
-  return inherit( VBox, CustomSolutionControlPanel );
+  return inherit( VBox, ABSControlPanel );
 } );

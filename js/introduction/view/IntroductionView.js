@@ -11,18 +11,10 @@ define( function( require ) {
   // imports
   var AcidBaseSolutionsView = require( 'common/view/AcidBaseSolutionsView' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var IntroductionControlPanel = require( 'ACID_BASE_SOLUTIONS/introduction/view/IntroductionControlPanel' );
+  var SolutionsControl = require( 'ACID_BASE_SOLUTIONS/introduction/view/SolutionsControl' );
 
   function IntroductionView( model ) {
-
-    AcidBaseSolutionsView.call( this, model );
-
-    this.addChild( new IntroductionControlPanel( model, this.viewProperties, {
-        // vertically centered at right edge of screen
-        right: this.layoutBounds.maxX - 20,
-        centerY: this.layoutBounds.centerY
-      }
-    ) );
+    AcidBaseSolutionsView.call( this, model, new SolutionsControl( model.property( 'solutionType' ) ) );
   }
 
   return inherit( AcidBaseSolutionsView, IntroductionView );

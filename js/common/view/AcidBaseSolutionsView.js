@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var ABSControlPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ABSControlPanel' );
   var BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
   var ConductivityTesterNode = require( 'ACID_BASE_SOLUTIONS/common/view/conductivity/ConductivityTesterNode' );
   var ConcentrationGraphNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphNode' );
@@ -27,9 +28,10 @@ define( function( require ) {
 
   /**
    * @param {AcidBaseSolutionsModel} model
+   * @param {Node} solutionControl
    * @constructor
    */
-  function AcidBaseSolutionsView( model ) {
+  function AcidBaseSolutionsView( model, solutionControl ) {
 
     ScreenView.call( this, { renderer: 'svg' } );
 
@@ -77,6 +79,14 @@ define( function( require ) {
       pHPaperNode.visible = pHColorKeyNode.visible = ( toolMode === ToolMode.PH_PAPER );
       conductivityTesterNode.visible = ( toolMode === ToolMode.CONDUCTIVITY );
     } );
+
+    // control panel
+    this.addChild( new ABSControlPanel( model, this.viewProperties, solutionControl, {
+        // vertically centered at right edge of screen
+        right: this.layoutBounds.maxX - 20,
+        centerY: this.layoutBounds.centerY
+      }
+    ) );
   }
 
   return inherit( ScreenView, AcidBaseSolutionsView, {
