@@ -2,7 +2,7 @@
 
 /**
  * Visual representation of a beaker that is filled to the top with a solution.
- * Ticks on the left edge of the beaker. Origin is at the bottom center.
+ * Ticks on the right edge of the beaker. Origin is at the bottom center.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
@@ -35,59 +35,57 @@ define( function( require ) {
    * @constructor
    */
   function BeakerNode( beaker ) {
-    // outline of the beaker, starting from upper left
-    var BEAKER_WIDTH = beaker.size.width,
-      BEAKER_HEIGHT = beaker.size.height,
-      outlineShape = new Shape()
-        .moveTo( -BEAKER_WIDTH / 2 - RIM_OFFSET, -BEAKER_HEIGHT - RIM_OFFSET )
-        .lineTo( -BEAKER_WIDTH / 2, -BEAKER_HEIGHT )
-        .lineTo( -BEAKER_WIDTH / 2, 0 )
-        .lineTo( BEAKER_WIDTH / 2, 0 )
-        .lineTo( BEAKER_WIDTH / 2, -BEAKER_HEIGHT )
-        .lineTo( (BEAKER_WIDTH / 2) + RIM_OFFSET, -BEAKER_HEIGHT - RIM_OFFSET ),
-      fillShape = new Shape().lineTo( -BEAKER_WIDTH / 2, -BEAKER_HEIGHT )
-        .lineTo( -BEAKER_WIDTH / 2, 0 )
-        .lineTo( BEAKER_WIDTH / 2, 0 )
-        .lineTo( BEAKER_WIDTH / 2, -BEAKER_HEIGHT ),
-    // horizontal tick marks, left edge, from bottom up
-      ticksParent,
-      NUMBER_OF_TICKS = Math.round( 1 / MINOR_TICK_SPACING ),
-      deltaY = BEAKER_HEIGHT / NUMBER_OF_TICKS;
 
     Node.call( this, {pickable: false} );
 
-    // add water
-    this.addChild( new Path( fillShape, {
+    var BEAKER_WIDTH = beaker.size.width;
+    var BEAKER_HEIGHT = beaker.size.height;
+
+    // water, starting from upper left
+    var waterShape = new Shape().lineTo( -BEAKER_WIDTH / 2, -BEAKER_HEIGHT )
+      .lineTo( -BEAKER_WIDTH / 2, 0 )
+      .lineTo( BEAKER_WIDTH / 2, 0 )
+      .lineTo( BEAKER_WIDTH / 2, -BEAKER_HEIGHT );
+    this.addChild( new Path( waterShape, {
       fill: 'rgba(193,222,227,0.7)'
     } ) );
 
-    // add beaker
-    this.addChild( new Path( outlineShape, {
+    // beaker, starting from upper left
+    var beakerShape = new Shape()
+      .moveTo( -BEAKER_WIDTH / 2 - RIM_OFFSET, -BEAKER_HEIGHT - RIM_OFFSET )
+      .lineTo( -BEAKER_WIDTH / 2, -BEAKER_HEIGHT )
+      .lineTo( -BEAKER_WIDTH / 2, 0 )
+      .lineTo( BEAKER_WIDTH / 2, 0 )
+      .lineTo( BEAKER_WIDTH / 2, -BEAKER_HEIGHT )
+      .lineTo( (BEAKER_WIDTH / 2) + RIM_OFFSET, -BEAKER_HEIGHT - RIM_OFFSET );
+    this.addChild( new Path( beakerShape, {
       stroke: 'black',
       lineWidth: 3,
       lineCap: 'round',
       lineJoin: 'round'
     } ) );
 
-    this.addChild( ticksParent = new Node() );
+    // horizontal tick marks, left edge, from bottom up
+    var ticksParent = new Node();
+    this.addChild( ticksParent );
 
-    var isMajorTick,
-      y, leftX, rightX, tickShape, tickPath;
+    // tick marks
+    var NUMBER_OF_TICKS = Math.round( 1 / MINOR_TICK_SPACING );
+    var deltaY = BEAKER_HEIGHT / NUMBER_OF_TICKS;
+    var isMajorTick, y, leftX, rightX, tickPath;
     for ( var i = 1; i <= NUMBER_OF_TICKS; i++ ) {
 
-      // tick
       isMajorTick = ( i % MINOR_TICKS_PER_MAJOR_TICK === 0 );
       y = -( i * deltaY );
       leftX = BEAKER_WIDTH / 2;
       rightX = leftX - ( isMajorTick ? MAJOR_TICK_LENGTH : MINOR_TICK_LENGTH );
-      tickShape = new Shape().moveTo( leftX, y ).lineTo( rightX, y );
-      tickPath = new Path( tickShape, {
+
+      tickPath = new Path( new Shape().moveTo( leftX, y ).lineTo( rightX, y ), {
         stroke: 'black',
         lineWidth: 1.5,
         lineCap: 'round',
         lineJoin: 'bevel'
       } );
-
       ticksParent.addChild( tickPath );
     }
 
