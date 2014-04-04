@@ -1,3 +1,4 @@
+4/4/14 #94 fix implementation of isValidStrength for strong acid and strong base
 4/4/14 adjust pH meter location so that it doesn't go behind graph
 4/4/14 clean up ReactionEquationFactory
 # 1.0.0-dev.5 4/3/14

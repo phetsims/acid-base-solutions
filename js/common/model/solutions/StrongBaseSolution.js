@@ -30,7 +30,7 @@ define( function( require ) {
   };
 
   var isValidStrength = function( strength ) {
-    return strength > ABSConstants.CONCENTRATION_RANGE.max;
+    return strength > ABSConstants.WEAK_STRENGTH_RANGE.max;
   };
 
   // constants
