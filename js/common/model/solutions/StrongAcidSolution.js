@@ -10,10 +10,10 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var inherit = require( 'PHET_CORE/inherit' ),
-    SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' ),
-    AqueousSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/AqueousSolution' ),
-    ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
+  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
+  var AqueousSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/AqueousSolution' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
 
   // [A-] = c
   var getProductConcentration = function( concentration ) {

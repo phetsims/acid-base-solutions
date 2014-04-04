@@ -10,11 +10,11 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var inherit = require( 'PHET_CORE/inherit' ),
-    Node = require( 'SCENERY/nodes/Node' ),
-    Circle = require( 'SCENERY/nodes/Circle' ),
-    Rectangle = require( 'SCENERY/nodes/Rectangle' ),
-    Image = require( 'SCENERY/nodes/Image' );
+  var Circle = require( 'SCENERY/nodes/Circle' );
+  var Image = require( 'SCENERY/nodes/Image' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // images
   var solventBackgroundImage = require( 'image!ACID_BASE_SOLUTIONS/../images/solvent.png' );

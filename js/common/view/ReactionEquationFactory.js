@@ -10,20 +10,20 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var HBox = require( 'SCENERY/nodes/HBox' ),
-    VBox = require( 'SCENERY/nodes/VBox' ),
-    Image = require( 'SCENERY/nodes/Image' ),
-    Text = require( 'SCENERY/nodes/Text' ),
-    MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' ),
-    Node = require( 'SCENERY/nodes/Node' ),
-    SubSupText = require( 'SCENERY_PHET/SubSupText' ),
-    ChemUtils = require( 'NITROGLYCERIN/ChemUtils' ),
-    PhetFont = require( 'SCENERY_PHET/PhetFont' ),
-    VStrut = require( 'SUN/VStrut' );
+  var ChemUtils = require( 'NITROGLYCERIN/ChemUtils' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
+  var Image = require( 'SCENERY/nodes/Image' );
+  var MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
+  var Text = require( 'SCENERY/nodes/Text' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
+  var VStrut = require( 'SUN/VStrut' );
 
   // images
-  var arrowSingleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_single.png' ),
-    arrowDoubleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_double.png' );
+  var arrowSingleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_single.png' );
+  var arrowDoubleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_double.png' );
 
   // constants
   var FONT_SIZE = 13;
@@ -268,8 +268,8 @@ define( function( require ) {
 
     // HA + H2O <-> A- + H3O+
     createWeakAcidEquation: function() {
-          return createAcidEquation( true /* isWeak */ );
-        },
+      return createAcidEquation( true /* isWeak */ );
+    },
 
     // MOH -> M+ + OH-
     createStrongBaseEquation: function() {

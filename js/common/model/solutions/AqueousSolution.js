@@ -14,10 +14,10 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var inherit = require( 'PHET_CORE/inherit' ),
-    PropertySet = require( 'AXON/PropertySet' ),
-    Util = require( 'DOT/Util' ),
-    ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
+  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var PropertySet = require( 'AXON/PropertySet' );
+  var Util = require( 'DOT/Util' );
 
   /**
    * @param {SolutionType} solutionType
