@@ -45,6 +45,7 @@ define( function( require ) {
 
   return inherit( Path, WireNode, {
 
+    // Sets the end point coordinates, the point attached to the probe.
     setEndPoint: function( endX, endY ) {
 
       var startX = this.startPoint.x,
