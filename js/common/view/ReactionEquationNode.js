@@ -22,11 +22,10 @@ define( function( require ) {
    * @constructor
    */
   function ReactionEquationNode( beaker, solutionTypeProperty ) {
-    var maxWidth,
-      equation,
-      equations = {};
-    Node.call( this, {pickable: false} );
 
+    Node.call( this );
+
+    var equations = {};
     equations[SolutionType.WATER] = ReactionEquationFactory.createWaterEquation();
     equations[SolutionType.STRONG_ACID] = ReactionEquationFactory.createAcidEquation( { isWeak: false } );
     equations[SolutionType.WEAK_ACID] = ReactionEquationFactory.createAcidEquation( { isWeak: true } );
@@ -34,15 +33,13 @@ define( function( require ) {
     equations[SolutionType.WEAK_BASE] = ReactionEquationFactory.createWeakBaseEquation();
 
     // find max width of equations
-    maxWidth = getMaxWidth( equations );
+    var maxWidth = getMaxWidth( equations );
 
     // add equations with central alignment
-    for ( equation in equations ) {
-      if ( equations.hasOwnProperty( equation ) ) {
-        equations[equation].setX( (maxWidth - equations[equation].getWidth()) / 2 );
-        equations[equation].setVisible( false );
-        this.addChild( equations[equation] );
-      }
+    for ( var equation in equations ) {
+      equations[equation].setX( (maxWidth - equations[equation].getWidth()) / 2 );
+      equations[equation].setVisible( false );
+      this.addChild( equations[equation] );
     }
 
     // position below the beaker
@@ -61,11 +58,9 @@ define( function( require ) {
   }
 
   var getMaxWidth = function( equations ) {
-    var maxWidth = 0, equation;
-    for ( equation in equations ) {
-      if ( equations.hasOwnProperty( equation ) ) {
-        maxWidth = Math.max( maxWidth, equations[equation].getWidth() );
-      }
+    var maxWidth = 0;
+    for ( var equation in equations ) {
+      maxWidth = Math.max( maxWidth, equations[equation].getWidth() );
     }
     return maxWidth;
   };
