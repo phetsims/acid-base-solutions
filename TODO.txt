@@ -1,7 +1,7 @@
 TODO list for acid-base-solutions
 
+- #5 reimplement molecules view, render directly to Canvas using drawImage
 - TODO items in code
-- switching equations causes vertical shift, would be nice if they shared the same baseline location
 
 -----------------------------------------------
 
