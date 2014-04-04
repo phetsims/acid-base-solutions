@@ -28,7 +28,7 @@ define( function( require ) {
    */
   function ConductivityTester( beaker, pHProperty ) {
 
-    this.probeDragYRange = new Range( beaker.top - 20, beaker.bottom );
+    this.probeDragYRange = new Range( beaker.top - 20, beaker.top + 50 );
 
     this.probeSize = new Dimension2( 20, 68 );
 
