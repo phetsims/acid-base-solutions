@@ -1,3 +1,4 @@
+4/3/14 #83 change OH color to rgb(90,90,255), so that text is more visible on graph bars
 4/3/14 #82 reset view properties
 4/3/14 #74 expand touch area of conductivity probes
 4/3/14 #91 constrain probes so that they can only be dragged part-way into the solution

@@ -48,7 +48,7 @@ define( function( require ) {
       HA: GRAY_MOLECULE,
       M: 'rgb(255,170,0)',
       MOH: GRAY_MOLECULE,
-      OH: 'rgb(0,0,255)'
+      OH: 'rgb(90,90,255)'
     }
   };
 } );
