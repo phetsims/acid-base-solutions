@@ -8,6 +8,9 @@
 define( function( require ) {
   'use strict';
 
+  // imports
+  var Color = require( 'SCENERY/util/Color' );
+
   // constants
   var GRAY_MOLECULE = 'rgb(120,120,120)';
 
@@ -19,23 +22,23 @@ define( function( require ) {
 
     PH_PAPER: 'rgb(217,215,154)', // color of blank pH paper, cream
 
-    // pH colors, ordered from pH value 0-14
+    // pH colors, ordered from pH value 0-14, type Color because we'll be interpolating
     PH: [
-      'rgb(182,70,72)',
-      'rgb(196,80,86)',
-      'rgb(213,83,71)',
-      'rgb(237,123,83)',
-      'rgb(246,152,86)',
-      'rgb(244,158,79)',
-      'rgb(243,160,78)',
-      'rgb(244,182,67)',
-      'rgb(231,201,75)',
-      'rgb(93,118,88)',
-      'rgb(30,92,89)',
-      'rgb(34,90,105)',
-      'rgb(39,87,111)',
-      'rgb(27,67,90)',
-      'rgb(0,34,52)'
+      new Color( 182, 70, 72 ),
+      new Color( 196, 80, 86 ),
+      new Color( 213, 83, 71 ),
+      new Color( 237, 123, 83 ),
+      new Color( 246, 152, 86 ),
+      new Color( 244, 158, 79 ),
+      new Color( 243, 160, 78 ),
+      new Color( 244, 182, 67 ),
+      new Color( 231, 201, 75 ),
+      new Color( 93, 118, 88 ),
+      new Color( 30, 92, 89 ),
+      new Color( 34, 90, 105 ),
+      new Color( 39, 87, 111 ),
+      new Color( 27, 67, 90 ),
+      new Color( 0, 34, 52 )
     ],
 
     // The field names here must correspond to the 'key' fields in AqueousSolution.molecules.

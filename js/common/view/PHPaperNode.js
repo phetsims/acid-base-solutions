@@ -12,6 +12,7 @@ define( function( require ) {
   // imports
   var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
   var Circle = require( 'SCENERY/nodes/Circle' );
+  var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -22,6 +23,23 @@ define( function( require ) {
   // constants
   var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
   var PAPER_STROKE = 'rgb(100, 100, 100)';
+
+  // Creates a {Color} color for a given {Number} pH.
+  var pHToColor = function( pH ) {
+    assert && assert( pH >= 0 && pH <= ABSColors.PH.length );
+    var color;
+    if ( Util.isInteger( pH ) ) {
+      // pH value is an integer, look up color
+      color = ABSColors.PH[ pH ];
+    }
+    else {
+      // pH value is not an integer, interpolate between 2 closest colors
+      var lowerPH = Math.floor( pH );
+      var upperPH = lowerPH + 1;
+      color = Color.interpolateRBGA( ABSColors.PH[lowerPH], ABSColors.PH[upperPH], ( pH - lowerPH ) );
+    }
+    return color;
+  };
 
   /**
    * @param {PHPaper} pHPaper
@@ -83,7 +101,7 @@ define( function( require ) {
     } );
 
     pHPaper.pHProperty.link( function( pH ) {
-      indicatorNode.fill = ABSColors.PH[ Math.round( pH ) ];
+      indicatorNode.fill = pHToColor( pH );
     } );
   }
 
