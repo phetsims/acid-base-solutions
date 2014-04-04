@@ -2,3 +2,56 @@ TODO list for acid-base-solutions
 
 - TODO items in code
 - switching equations causes vertical shift, would be nice if they shared the same baseline location
+
+-----------------------------------------------
+
+// AcidBaseSolutionsModel.solutions
+{
+  SolutionType.WATER: {
+    type: SolutionType.WATER,
+    molecules: [
+      {key: 'H2O', concentrationPropertyName: 'H2OConcentration'},
+      {key: 'H3O', concentrationPropertyName: 'H3OConcentration'},
+      {key: 'OH', concentrationPropertyName: 'OHConcentration'}
+    ]
+  },
+
+  SolutionType.STRONG_ACID: {
+    type: SolutionType.STRONG_ACID,
+    molecules: [
+      {key: 'HA', concentrationPropertyName: 'soluteConcentration'},
+      {key: 'H2O', concentrationPropertyName: 'H2OConcentration'},
+      {key: 'A', concentrationPropertyName: 'productConcentration'},
+      {key: 'H3O', concentrationPropertyName: 'H3OConcentration'}
+    ]
+  },
+
+  SolutionType.WEAK_ACID: {
+    type: SolutionType.WEAK_ACID,
+    molecules: [
+      {key: 'HA', concentrationPropertyName: 'soluteConcentration'},
+      {key: 'H2O', concentrationPropertyName: 'H2OConcentration'},
+      {key: 'A', concentrationPropertyName: 'productConcentration'},
+      {key: 'H3O', concentrationPropertyName: 'H3OConcentration'}
+    ]
+  },
+
+  SolutionType.STRONG_BASE: {
+    type: SolutionType.STRONG_BASE,
+    molecules: [
+      {key: 'MOH', concentrationPropertyName: 'soluteConcentration'},
+      {key: 'M', concentrationPropertyName: 'productConcentration'},
+      {key: 'OH', concentrationPropertyName: 'OHConcentration'}
+    ]
+  },
+
+  SolutionType.WEAK_BASE: {
+    type: SolutionType.WEAK_BASE,
+    molecules: [
+      {key: 'B', concentrationPropertyName: 'soluteConcentration'},
+      {key: 'H2O', concentrationPropertyName: 'H2OConcentration'},
+      {key: 'BH', concentrationPropertyName: 'productConcentration'},
+      {key: 'OH', concentrationPropertyName: 'OHConcentration'}
+    ]
+  }
+}
