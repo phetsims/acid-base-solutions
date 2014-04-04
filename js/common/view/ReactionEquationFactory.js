@@ -32,6 +32,7 @@ define( function( require ) {
   var TEXT_SUB_INDENT = FONT_SIZE / 8;
   var VBOX_SPACING = 2;
   var SUBSUP_OPTIONS = {font: FONT, supScale: 1};
+  var EQUATION_SCALE = 1.5;
 
   //-------------------------------------------------------------------------------------
   // Private functions for creating components of reaction equations.
@@ -65,25 +66,31 @@ define( function( require ) {
 
   // BH+ node
   var createBHNode = function() {
-    return new VBox( {spacing: VBOX_SPACING, children: [
-      MoleculeFactory.BH(),
-      new HBox( {
-        spacing: 1,
-        align: 'bottom',
-        children: [
-          new Text( 'B', {font: FONT, fontStyle: 'italic'} ),
-          new SubSupText( 'H<sup>+</sup>', SUBSUP_OPTIONS ) ]
-      } ),
-      new VStrut( TEXT_SUB_INDENT )
-    ]} );
+    return new VBox( {
+      spacing: VBOX_SPACING,
+      children: [
+        MoleculeFactory.BH(),
+        new HBox( {
+          spacing: 1,
+          align: 'bottom',
+          children: [
+            new Text( 'B', {font: FONT, fontStyle: 'italic'} ),
+            new SubSupText( 'H<sup>+</sup>', SUBSUP_OPTIONS ) ]
+        } ),
+        new VStrut( TEXT_SUB_INDENT )
+      ]
+    } );
   };
 
   // H2O node
   var createH2ONode = function() {
-    return new VBox( {spacing: VBOX_SPACING, children: [
-      MoleculeFactory.H2O(),
-      new SubSupText( ChemUtils.toSubscript( 'H2O' ), SUBSUP_OPTIONS )
-    ]} );
+    return new VBox( {
+      spacing: VBOX_SPACING,
+      children: [
+        MoleculeFactory.H2O(),
+        new SubSupText( ChemUtils.toSubscript( 'H2O' ), SUBSUP_OPTIONS )
+      ]
+    } );
   };
 
   // 2H2O node
@@ -215,7 +222,11 @@ define( function( require ) {
 
   // General properties of an equation node
   var createEquation = function( children ) {
-    var options = _.extend( { spacing: HBOX_SPACING, align: 'bottom' }, options );
+    var options = _.extend( {
+      scale: EQUATION_SCALE,
+      spacing: HBOX_SPACING,
+      align: 'bottom'
+    }, options );
     options.children = children;
     return new HBox( options );
   };
