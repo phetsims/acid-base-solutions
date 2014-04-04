@@ -12,30 +12,17 @@ define( function( require ) {
   var AcidBaseSolutionsView = require( 'common/view/AcidBaseSolutionsView' );
   var CustomSolutionControlPanel = require( 'customsolution/view/CustomSolutionControlPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
 
   function CustomSolutionView( model ) {
 
-    var self = this;
     AcidBaseSolutionsView.call( this, model );
 
-    var controlPanel = new CustomSolutionControlPanel( model, this.viewProperties );
-
-    // below control panel, right justified
-    var resetAllButton = new ResetAllButton( function() {
-      model.reset();
-      self.reset();
-    }, { scale: 0.75 } );
-    resetAllButton.right = controlPanel.right;
-    resetAllButton.top = controlPanel.bottom + 5;
-
-    // vertically centered at right side of screen
-    this.addChild( new Node( {
-      children: [ controlPanel, resetAllButton ],
-      right: this.layoutBounds.maxX - 20,
-      centerY: this.layoutBounds.centerY
-    } ) );
+    this.addChild( new CustomSolutionControlPanel( model, this.viewProperties, {
+        // vertically centered at right edge of screen
+        right: this.layoutBounds.maxX - 20,
+        centerY: this.layoutBounds.centerY
+      }
+    ) );
   }
 
   return inherit( AcidBaseSolutionsView, CustomSolutionView );

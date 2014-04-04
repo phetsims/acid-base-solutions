@@ -10,10 +10,12 @@ define( function( require ) {
 
   // imports
   var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SUN/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var SolutionControl = require( 'ACID_BASE_SOLUTIONS/customsolution/view/SolutionControl' );
   var Text = require( 'SCENERY/nodes/Text' );
   var ToolsControl = require( 'ACID_BASE_SOLUTIONS/common/view/ToolsControl' );
@@ -41,9 +43,15 @@ define( function( require ) {
   /**
    * @param {CustomSolutionModel} model
    * @param {PropertySet} viewProperties properties that are specific to the view
+   * @param {*} options
    * @constructor
    */
-  function CustomSolutionControlPanel( model, viewProperties ) {
+  function CustomSolutionControlPanel( model, viewProperties, options ) {
+
+    options = _.extend( {
+      align: 'left',
+      spacing: 5
+    }, options );
 
     // titles
     var solutionTitle = new Text( solutionString, TITLE_OPTIONS );
@@ -55,9 +63,15 @@ define( function( require ) {
     var viewsControl = new ViewsControl( viewProperties.property( 'viewMode' ), viewProperties.property( 'solventVisible' ), PANEL_OPTIONS );
     var toolsControl = new ToolsControl( viewProperties.property( 'toolMode' ), PANEL_OPTIONS );
 
-    // panels with equal widths
-    var maxWidth = Math.max( solutionControl.width, Math.max( viewsControl.width, toolsControl.width ) );
-    var children = [
+    // Reset All button
+    var resetAllButton = new ResetAllButton( function() {
+      model.reset();
+      viewProperties.reset();
+    }, { scale: 0.75 } );
+
+    // 'Solutions' and 'Views' panels have same with, 'Tools' panel does not
+    var maxWidth = Math.max( solutionControl.width, viewsControl.width );
+    options.children = [
       new VBox( {
         spacing: TITLE_Y_SPACING,
         align: 'left',
@@ -77,16 +91,13 @@ define( function( require ) {
         align: 'left',
         children: [
           toolsTitle,
-          createPanel( toolsControl, maxWidth )
+          // Reset All button to right of 'Tools' panel
+          new HBox( { spacing: 10, children: [ new Panel( toolsControl, PANEL_OPTIONS ), resetAllButton ] } )
         ]} )
     ];
 
     // stack panels vertically
-    VBox.call( this, {
-      align: 'left',
-      spacing: 5,
-      children: children
-    } );
+    VBox.call( this, options );
   }
 
   return inherit( VBox, CustomSolutionControlPanel );
