@@ -43,7 +43,7 @@ define( function( require ) {
     }
 
     // position below the beaker
-    this.translation = beaker.location.plusXY( -maxWidth / 2, 5 );
+    this.translation = beaker.location.plusXY( -maxWidth / 2, 10 );
 
     // add observer for equations
     solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
