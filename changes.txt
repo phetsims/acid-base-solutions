@@ -1,3 +1,4 @@
+4/3/14 #92 reset pH paper when strength or concentration are changed in 'Custom Solution' screen
 4/3/14 #86 compute color of pH paper by interpolating between colors used in pH color key
 4/3/14 rename ABSControlPanel to AcidBaseSolutionsControlPanel
 4/3/14 #51 factor out common stuff for main control panel into ABSControlPanel

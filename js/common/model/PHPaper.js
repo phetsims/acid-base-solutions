@@ -42,10 +42,13 @@ define( function( require ) {
     // height of indicator, the portion of the paper that changes color when dipped in solution
     this.indicatorHeightProperty = new Property( 0 );
 
-    solutionTypeProperty.link( function() {
-      self.indicatorHeightProperty.value = 0; // clear the indicator color from the paper
+    // clear the indicator color from the paper and recompute its height
+    var resetIndicator = function() {
+      self.indicatorHeightProperty.value = 0;
       self.updateIndicatorHeight();
-    } );
+    };
+    solutionTypeProperty.link( resetIndicator );
+    pHProperty.link( resetIndicator );
 
     this.locationProperty.link( function() {
       self.updateIndicatorHeight();
