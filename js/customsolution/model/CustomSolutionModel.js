@@ -22,9 +22,8 @@ define( function( require ) {
   var DEFAULT_SOLUTION_TYPE = SolutionType.WEAK_ACID;
 
   function CustomSolutionModel() {
-    var self = this,
-      setStrength = function( value ) { self.strength = value; }, // observer for strength property
-      setConcentration = function( value ) { self.concentration = value; }; // observer for strength property
+
+    var self = this;
 
     AcidBaseSolutionsModel.call( this,
       [
@@ -41,6 +40,8 @@ define( function( require ) {
     // concentration graph
     this.graph = new ConcentrationGraph( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'concentration' ), this.property( 'strength' ) );
 
+    var setStrength = function( value ) { self.strength = value; };
+    var setConcentration = function( value ) { self.concentration = value; };
     this.property( 'solutionType' ).link( function( newSolution, prevSolution ) {
       // unsubscribe from previous solution strength and concentration property
       if ( prevSolution ) {
