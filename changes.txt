@@ -1,3 +1,4 @@
+4/3/14 #74 expand touch area of pH paper
 4/3/14 #89 make pH paper 2 pixels wider, increase font size of pH numbers on color key
 4/3/14 #91 don't disable 'Views' control panel when conductivity tester is selected
 4/3/14 #84 move pH numbers above color chips in color key, title below chips

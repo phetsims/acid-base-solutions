@@ -53,6 +53,9 @@ define( function( require ) {
     indicatorNode.centerX = 0;
     indicatorNode.top = 0;
 
+    // expand touch area
+    this.touchArea = this.localBounds.dilatedXY( 10, 10 );
+
     // drag paper to move it
     this.addInputListener( new SimpleDragHandler( {
 
