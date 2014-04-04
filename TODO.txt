@@ -1,3 +1,5 @@
 TODO list for acid-base-solutions
 
 - TODO items in code
+- reset all is not resetting viewMode and toolsMode
+- graph isn't updating on Custom screen
