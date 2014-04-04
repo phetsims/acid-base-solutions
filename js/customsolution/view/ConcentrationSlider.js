@@ -63,6 +63,8 @@ define( function( require ) {
       majorTickLength: 12,
       tickLabelSpacing: 2
     } );
+
+    // add labels tick marks
     var numberOfTicks = 4;
     for ( var i = 0, step = model.sliderValueRange.getLength() / ( numberOfTicks - 1 ); i < numberOfTicks; i++ ) {
       this.addMajorTick( model.sliderValueRange.min + step * i, new Text( concentrationRange.min * Math.pow( 10, i ), { font: new PhetFont( 10 ) } ) );
