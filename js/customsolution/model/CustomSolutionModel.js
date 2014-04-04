@@ -51,7 +51,7 @@ define( function( require ) {
         self.solutions[prevSolutionType].property( 'concentration' ).unlink( setConcentration );
 
         /*
-         * Set concentration new solution equal to previous solution.
+         * Set concentration of new solution equal to previous solution.
          * Do not do this for strength, see strength observer below.
          */
         self.solutions[newSolutionType].concentration = self.solutions[prevSolutionType].concentration.value;
