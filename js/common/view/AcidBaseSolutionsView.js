@@ -91,6 +91,7 @@ define( function( require ) {
 
   return inherit( ScreenView, AcidBaseSolutionsView, {
 
+    // resets properties that are specific to the view
     reset: function() { this.viewProperties.reset(); }
   } );
 } );
