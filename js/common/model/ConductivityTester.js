@@ -36,7 +36,7 @@ define( function( require ) {
     this.location = new Vector2( beaker.location.x - 45, beaker.top - 30 );
 
     // probe locations
-    var probeXOffset = 0.2 * beaker.size.width; // offset from edge of beaker
+    var probeXOffset = 0.175 * beaker.size.width; // offset from edge of beaker
     this.positiveProbeLocationProperty = new Property( new Vector2( beaker.right - probeXOffset, this.probeDragYRange.min + 10 ) );
     this.negativeProbeLocationProperty = new Property( new Vector2( beaker.left + probeXOffset, this.probeDragYRange.min + 10 ) );
 
