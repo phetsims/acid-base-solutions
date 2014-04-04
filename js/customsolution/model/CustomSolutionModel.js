@@ -49,21 +49,17 @@ define( function( require ) {
       if ( prevSolutionType ) {
         self.solutions[prevSolutionType].property( 'strength' ).unlink( setStrength );
         self.solutions[prevSolutionType].property( 'concentration' ).unlink( setConcentration );
+
+        /*
+         * Set concentration new solution equal to previous solution.
+         * Do not do this for strength, see strength observer below.
+         */
+        self.solutions[newSolutionType].concentration = self.solutions[prevSolutionType].concentration.value;
       }
 
       // subscribe to new solution strength and concentration property
       self.solutions[newSolutionType].property( 'strength' ).link( setStrength );
       self.solutions[newSolutionType].property( 'concentration' ).link( setConcentration );
-    } );
-
-    /*
-     * Keep concentration of all solutions synchronized, so that concentration slider
-     * maintains the same value when switching between solution types.
-     */
-    this.property( 'concentration' ).link( function( concentration ) {
-      for ( var solutionType in self.solutions ) {
-        self.solutions[solutionType].concentration = concentration;
-      }
     } );
 
     /*

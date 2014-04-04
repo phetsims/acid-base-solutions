@@ -1,3 +1,4 @@
+4/4/14 #94 back out change that keeps concentration of all solutions synchronized, since this may have performance implications
 4/4/14 #94 keep strength of weak solutions synchronized at all times
 4/4/14 #94 make strength slider operate on weak solutions only; never change strength of strong solutions
 4/4/14 #94 delete unused isValidStrength property throughout; validate all attempts to change strength
