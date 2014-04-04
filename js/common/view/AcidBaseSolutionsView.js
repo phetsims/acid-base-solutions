@@ -40,7 +40,7 @@ define( function( require ) {
     var graphNode = new ConcentrationGraphNode( model.graph );
     var pHMeterNode = new PHMeterNode( model.pHMeter );
     var pHPaperNode = new PHPaperNode( model.pHPaper );
-    var pHColorKeyNode = new PHColorKeyNode( model.pHPaper.paperSize, { left: beakerNode.left + 30, bottom: beakerNode.top - 50 } );
+    var pHColorKeyNode = new PHColorKeyNode( model.pHPaper.paperSize, { left: model.beaker.left + 3, bottom: model.beaker.top - 50 } );
     var conductivityTesterNode = new ConductivityTesterNode( model.conductivityTester );
 
     var rootNode = new Node( {

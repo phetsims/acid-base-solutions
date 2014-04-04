@@ -22,7 +22,7 @@ define( function( require ) {
 
   // constants
   var FONT_BIG = new PhetFont( 12 );
-  var FONT_SMALL = new PhetFont( 8 );
+  var FONT_SMALL = new PhetFont( 10 );
   var CHIP_HEIGHT = 28;
   var CHIP_X_SPACING = 1;
 

@@ -28,7 +28,7 @@ define( function( require ) {
     this.beaker = beaker;
     this.pHProperty = pHProperty;
 
-    this.paperSize = new Dimension2( 14, 110 );
+    this.paperSize = new Dimension2( 16, 110 );
 
     // drag bounds
     this.dragBounds = new Bounds2(
