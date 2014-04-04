@@ -31,7 +31,7 @@ define( function( require ) {
       SolutionType.WATER );
 
     // concentration graph
-    this.graph = new ConcentrationGraph( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'viewMode' ), this.property( 'toolMode' ) );
+    this.graph = new ConcentrationGraph( this.beaker, this.solutions, this.property( 'solutionType' ) );
   }
 
   return inherit( AcidBaseSolutionsModel, IntroductionModel );

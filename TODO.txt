@@ -1,5 +1,4 @@
 TODO list for acid-base-solutions
 
 - TODO items in code
-- graph isn't updating on Custom screen
 - switching equations causes vertical shift, would be nice if they shared the same baseline location
