@@ -35,6 +35,8 @@ define( function( require ) {
   var RADIO_BUTTON_OPTIONS = { radius: 7 };
   var TEXT_OPTIONS = { font: new PhetFont( 12 ) };
   var TEXT_ICON_X_SPACING = 10;
+  var TOUCH_AREA_EXPAND_X = 10;
+  var TOUCH_AREA_EXPAND_Y = 3;
 
   /**
    * @param {Property<SolutionType>} solutionTypeProperty
@@ -44,7 +46,7 @@ define( function( require ) {
   function SolutionsControl( solutionTypeProperty, options ) {
 
     options = _.extend( {
-      spacing: 4,
+      spacing: 8,
       align: 'left'
     }, options );
 
@@ -116,6 +118,11 @@ define( function( require ) {
       var buttonCenterY = button.centerY;
       button.addChild( vStrut );
       vStrut.centerY = buttonCenterY;
+    } );
+
+    // uniformly expands touch area for buttons
+    buttons.forEach( function( button ) {
+      button.touchArea = button.localBounds.dilatedXY( TOUCH_AREA_EXPAND_X, TOUCH_AREA_EXPAND_Y );
     } );
 
     options.children = buttons;

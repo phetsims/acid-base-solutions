@@ -39,6 +39,13 @@ define( function( require ) {
   var CHECK_BOX_OPTIONS = { boxWidth: 15 };
   var TEXT_OPTIONS = { font: new PhetFont( 12 ) };
   var ICON_OPTIONS = { scale: 0.75 };
+  var TOUCH_AREA_EXPAND_X = 10;
+  var TOUCH_AREA_EXPAND_Y = 3;
+
+  // uniformly expands touch area for controls
+  var expandTouchArea = function( node ) {
+    node.touchArea = node.localBounds.dilatedXY( TOUCH_AREA_EXPAND_X, TOUCH_AREA_EXPAND_Y );
+  };
 
   /**
    * @param {Property<ViewMode>} viewModeProperty
@@ -49,7 +56,7 @@ define( function( require ) {
   function ViewsControl( viewModeProperty, solventVisibleProperty, options ) {
 
     options = _.extend( {
-      spacing: 4,
+      spacing: 8,
       align: 'left'
     }, options );
 
@@ -62,6 +69,7 @@ define( function( require ) {
           new Image( magnifierImage, ICON_OPTIONS )
         ]
       } ), RADIO_BUTTON_OPTIONS );
+    expandTouchArea( moleculesRadioButton );
 
     // Solvent
     var solventLabel = new HBox( {
@@ -75,6 +83,7 @@ define( function( require ) {
       solventLabel.opacity = ( enabled ? 1 : 0.5 ); // gray out when disabled
     };
     var solventCheckBox = new CheckBox( solventLabel, solventVisibleProperty, CHECK_BOX_OPTIONS );
+    expandTouchArea( solventCheckBox );
 
     // Graph
     var graphRadioButton = new AquaRadioButton( viewModeProperty, ViewMode.GRAPH,
@@ -85,6 +94,7 @@ define( function( require ) {
           ConcentrationGraphNode.createIcon()
         ]
       } ), RADIO_BUTTON_OPTIONS );
+    expandTouchArea( graphRadioButton );
 
     // Hide Views
     var hideViewsRadioButton = new AquaRadioButton( viewModeProperty, ViewMode.HIDE_VIEWS,
@@ -95,6 +105,7 @@ define( function( require ) {
           new Image( beakerImage, ICON_OPTIONS )
         ]
       } ), RADIO_BUTTON_OPTIONS );
+    expandTouchArea( hideViewsRadioButton );
 
     options.children = [
       moleculesRadioButton,
