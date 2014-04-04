@@ -17,12 +17,16 @@ define( function( require ) {
 
   function IntroductionView( model ) {
 
+    var self = this;
     AcidBaseSolutionsView.call( this, model );
 
     var controlPanel = new IntroductionControlPanel( model, this.viewProperties );
 
     // below control panel, right justified
-    var resetAllButton = new ResetAllButton( function() { model.reset(); }, { scale: 0.75 } );
+    var resetAllButton = new ResetAllButton( function() {
+      model.reset();
+      self.reset();
+    }, { scale: 0.75 } );
     resetAllButton.right = controlPanel.right;
     resetAllButton.top = controlPanel.bottom + 10;
 

@@ -79,5 +79,8 @@ define( function( require ) {
     } );
   }
 
-  return inherit( ScreenView, AcidBaseSolutionsView );
+  return inherit( ScreenView, AcidBaseSolutionsView, {
+
+    reset: function() { this.viewProperties.reset(); }
+  } );
 } );
