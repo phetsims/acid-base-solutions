@@ -57,23 +57,23 @@ define( function( require ) {
       self.solutions[newSolution].property( 'concentration' ).link( setConcentration );
     } );
 
+    /*
+     * Keep concentration of all solutions synchronized, so that concentration slider
+     * maintains the same value when switching between solution types.
+     */
     this.property( 'concentration' ).link( function( concentration ) {
-      /*
-       * Keep concentration of all solutions synchronized, so that concentration slider
-       * maintains the same value when switching between solution types.
-       */
       for ( var solutionType in self.solutions ) {
         self.solutions[solutionType].concentration = concentration;
       }
     } );
 
+    /*
+     * issue #94:
+     * Keep strength of all weak solutions synchronized, so that strength slider
+     * maintains the same value when switching between weak solution types.
+     * Strong solutions have constant strength, so do not synchronize.
+     */
     this.property( 'strength' ).link( function( strength ) {
-      /*
-       * issue #94:
-       * Keep strength of all weak solutions synchronized, so that strength slider
-       * maintains the same value when switching between weak solution types.
-       * Strong solutions have constant strength, so do not synchronize.
-       */
       var solutionType = self.property( 'solutionType' ).value;
       if ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE ) {
         self.solutions[SolutionType.WEAK_ACID].strength = self.solutions[SolutionType.WEAK_BASE].strength = strength;
