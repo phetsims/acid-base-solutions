@@ -62,6 +62,10 @@ define( function( require ) {
       self.solutions[newSolutionType].property( 'concentration' ).link( setConcentration );
     } );
 
+    this.property( 'concentration' ).link( function( concentration ) {
+      self.solutions[self.solutionType].concentration = concentration;
+    } );
+
     /*
      * issue #94:
      * Keep strength of all weak solutions synchronized, so that strength slider
