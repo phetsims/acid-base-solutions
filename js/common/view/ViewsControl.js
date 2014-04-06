@@ -11,6 +11,7 @@ define( function( require ) {
 
   // imports
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  var BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
   var CheckBox = require( 'SUN/CheckBox' );
   var ConcentrationGraphNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
@@ -30,7 +31,6 @@ define( function( require ) {
   var solventString = require( 'string!ACID_BASE_SOLUTIONS/solvent' );
 
   // images
-  var beakerImage = require( 'image!ACID_BASE_SOLUTIONS/beaker-icon.png' );
   var magnifierImage = require( 'image!ACID_BASE_SOLUTIONS/magnifier-icon.png' );
 
   // constants
@@ -102,7 +102,7 @@ define( function( require ) {
         spacing: TEXT_ICON_X_SPACING,
         children: [
           new Text( hideViewsString, TEXT_OPTIONS ),
-          new Image( beakerImage, ICON_OPTIONS )
+          BeakerNode.createIcon( 20, 15 )
         ]
       } ), RADIO_BUTTON_OPTIONS );
     expandTouchArea( hideViewsRadioButton );

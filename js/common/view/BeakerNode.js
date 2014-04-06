@@ -14,6 +14,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Shape = require( 'KITE/Shape' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -101,5 +102,23 @@ define( function( require ) {
     this.translation = beaker.location;
   }
 
-  return inherit( Node, BeakerNode );
+  return inherit( Node, BeakerNode, {}, {
+
+    createIcon: function( width, height ) {
+      var lipOffset = 0.1 * width;
+      return new Node( { children: [
+        // water
+        new Rectangle( 0, 0, width, height, { fill: 'rgb(213,231,233)' } ),
+        // beaker
+        new Path( new Shape()
+            .moveTo( -lipOffset, -lipOffset )
+            .lineTo( 0, 0 )
+            .lineTo( 0, height )
+            .lineTo( width, height )
+            .lineTo( width, 0 )
+            .lineTo( width + lipOffset, -lipOffset ),
+          { stroke: 'black', lineWidth: 1.5 } )
+      ] } )
+    }
+  } );
 } );

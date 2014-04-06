@@ -1,5 +1,4 @@
 battery.png source=PhET
-beaker-icon.png source=PhET
 custom-solution-icon.png source=PhET
 introduction-icon.png source=PhET
 light-bulb-base.png source=PhET
