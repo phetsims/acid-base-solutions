@@ -1,3 +1,5 @@
+4/6/14 #5 wire up MagnifierNode to the solution that is currently selected
+4/6/14 #5 add clipping for solvent and molecules to MagnifierNode
 4/6/14 draw beaker icon programmatically, delete image file
 4/6/14 #94 restore concentration observer that I accidentally removed from CustomSolutionModel
 4/6/15 #95 draw reaction equation arrows programmatically, so they don't look fuzzy/jagged/shifted

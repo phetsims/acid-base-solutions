@@ -24,9 +24,17 @@ define( function( require ) {
   // images
   var solventImage = require( 'image!ACID_BASE_SOLUTIONS/../images/solvent.png' );
 
-  function MoleculesNode( lensBounds ) {
+  /**
+   * @param {Magnifier} magnifier
+   * @param {Bounds2} lensBounds
+   * @constructor
+   */
+  function MoleculesNode( magnifier, lensBounds ) {
 
+    var self = this;
     CanvasNode.call( this, { canvasBounds: lensBounds } );
+
+    this.magnifier = magnifier; //@private
 
     //TODO are all of these necessary? iterate over solutions to find which ones are needed?
     //@private images for each type of molecule
@@ -44,28 +52,28 @@ define( function( require ) {
     //TODO replace this with iteration over this.moleculeImages properties
     // generate images, this happens asynchronously
     MoleculeFactory.A().toImage( function( image, x, y ) {
-      this.moleculeImages.A = image;
+      self.moleculeImages.A = image;
     } );
     MoleculeFactory.B().toImage( function( image, x, y ) {
-      this.moleculeImages.B = image;
+      self.moleculeImages.B = image;
     } );
     MoleculeFactory.BH().toImage( function( image, x, y ) {
-      this.moleculeImages.BH = image;
+      self.moleculeImages.BH = image;
     } );
     MoleculeFactory.HA().toImage( function( image, x, y ) {
-      this.moleculeImages.HA = image;
+      self.moleculeImages.HA = image;
     } );
     MoleculeFactory.H3O().toImage( function( image, x, y ) {
-      this.moleculeImages.H3O = image;
+      self.moleculeImages.H3O = image;
     } );
     MoleculeFactory.M().toImage( function( image, x, y ) {
-      this.moleculeImages.M = image;
+      self.moleculeImages.M = image;
     } );
     MoleculeFactory.MOH().toImage( function( image, x, y ) {
-      this.moleculeImages.MOH = image;
+      self.moleculeImages.MOH = image;
     } );
     MoleculeFactory.OH().toImage( function( image, x, y ) {
-      this.moleculeImages.OH = image;
+      self.moleculeImages.OH = image;
     } );
   }
 
@@ -100,41 +108,59 @@ define( function( require ) {
   } );
 
   /**
-   * @param {MagnifierModel} magnifierModel
+   * @param {Magnifier} magnifier
    * @constructor
    */
   function MagnifierNode( magnifier ) {
 
+    var self = this;
     Node.call( this );
 
-    var radius = magnifier.radius;
-
     // lens
-    var lensShape = Shape.circle( 0, 0, radius );
+    var RADIUS = magnifier.radius;
+    var lensShape = Shape.circle( 0, 0, RADIUS );
     var lensNode = new Path( lensShape, { stroke: 'black', lineWidth: 8 } );
 
     // handle
-    var handleNode = new Rectangle( radius + 2, -radius / 7, radius * 0.9, radius / 4, 5, 5, { fill: 'rgb(85,55,33)', stroke: 'black', lineWidth: 1 } );
+    var handleNode = new Rectangle( RADIUS + 2, -RADIUS / 7, RADIUS * 0.9, RADIUS / 4, 5, 5, { fill: 'rgb(85,55,33)', stroke: 'black', lineWidth: 1 } );
     handleNode.rotate( Math.PI / 6 );
 
-    // solvent
-    this.solventNode = new Image( solventImage, { scale: 0.5, x: -radius * Math.SQRT2, y: -radius * Math.SQRT2 } );
+    // @private solvent (H2O)
+    this.solventNode = new Image( solventImage, {
+      scale: 0.5,
+      opacity: 0.6,
+      x: -RADIUS * Math.SQRT2,
+      y: -RADIUS * Math.SQRT2
+    } );
 
-    // molecules
-    var moleculesNode = new MoleculesNode( new Bounds2( magnifier.location.x - radius, magnifier.location.y - radius, magnifier.location.x + radius, magnifier.location.y + radius ) );
-    moleculesNode.clipArea = lensShape;
+    // @private molecules
+    this.moleculesNode = new MoleculesNode( magnifier, new Bounds2( magnifier.location.x - RADIUS, magnifier.location.y - RADIUS, magnifier.location.x + RADIUS, magnifier.location.y + RADIUS ) );
+
+    // stuff that's visible through (and therefore clipped to) the lens
+    var viewportNode = new Node( { children: [ this.solventNode, this.moleculesNode ] } );
+    viewportNode.clipArea = lensShape;
 
     // rendering order
-    this.addChild( this.solventNode );
-    this.addChild( moleculesNode );
+    this.addChild( viewportNode );
     this.addChild( handleNode );
     this.addChild( lensNode );
 
+    // move to correct position
     this.translation = magnifier.location;
 
-    // when solutionType changes, re-wire to new solution
-    magnifier.solutionTypeProperty.link( function( newSolutionType, previousSolutionType ) {
-      //TODO
+    // Observe the strength and concentration properties for whichever solution is selected.
+    var updateMoleculesBound = this.updateMolecules.bind( this );
+    magnifier.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
+
+      // unlink from previous solution
+      if ( prevSolutionType ) {
+        magnifier.solutions[prevSolutionType].property( 'strength' ).unlink( updateMoleculesBound );
+        magnifier.solutions[prevSolutionType].property( 'concentration' ).unlink( updateMoleculesBound );
+      }
+
+      // link to new solution
+      magnifier.solutions[newSolutionType].property( 'strength' ).link( updateMoleculesBound );
+      magnifier.solutions[newSolutionType].property( 'concentration' ).link( updateMoleculesBound );
     } );
   }
 
@@ -163,7 +189,7 @@ define( function( require ) {
      */
     updateMolecules: function() {
       if ( this.visible ) {
-        //TODO
+        this.moleculesNode.drawMolecules();
       }
     }
   } );
