@@ -52,7 +52,7 @@ define( function( require ) {
 
         /*
          * Set concentration of new solution equal to previous solution.
-         * Do not do this for strength, see strength observer below.
+         * Do not do this for strength, see strength observer below and issue #94.
          */
         self.solutions[newSolutionType].concentration = self.solutions[prevSolutionType].concentration;
       }
