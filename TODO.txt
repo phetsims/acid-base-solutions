@@ -1,6 +1,7 @@
 TODO list for acid-base-solutions
 
 - #5 reimplement molecules view, render directly to Canvas using drawImage
+- scale solvent.png, it's currently 2x larger than it needs to be and is being scaled to 0.5 in code
 - TODO items in code
 
 -----------------------------------------------
