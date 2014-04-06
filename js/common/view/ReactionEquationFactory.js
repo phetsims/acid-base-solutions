@@ -23,13 +23,17 @@ define( function( require ) {
   var VStrut = require( 'SUN/VStrut' );
 
   // constants
+  var EQUATION_SCALE = 1.5; // applied to all equations, see issue #88
+  var HBOX_SPACING = 4;
+  var VBOX_SPACING = 2;
+
+  // constants related to text
   var FONT_SIZE = 13;
   var FONT = new PhetFont( FONT_SIZE );
-  var HBOX_SPACING = 4;
-  var TEXT_SUB_INDENT = FONT_SIZE / 8;
-  var VBOX_SPACING = 2;
-  var SUBSUP_OPTIONS = {font: FONT, supScale: 1};
-  var EQUATION_SCALE = 1.5;
+  var SUBSCRIPT_Y_OFFSET = FONT_SIZE / 8; // vertical alignment workaround applied to any equation term that doesn't have a subscript
+  var SUBSUP_OPTIONS = {font: FONT, supScale: 1}; // options for all instances of SubSupNode
+
+  // constants related to arrows, issue #95
   var ARROWS_VERTICAL_SPACE = 3; // vertical space between reversible arrows
   var ARROWS_LENGTH = 25;
   var ARROWS_HEAD_RADIUS = 0.72 * ARROWS_LENGTH;
@@ -48,7 +52,7 @@ define( function( require ) {
       children: [
         MoleculeFactory.A(),
         new Node( { children: [ A, minusNode ] } ),
-        new VStrut( TEXT_SUB_INDENT )
+        new VStrut( SUBSCRIPT_Y_OFFSET )
       ]
     } );
   };
@@ -60,7 +64,7 @@ define( function( require ) {
       children: [
         MoleculeFactory.B(),
         new Text( 'B', {font: FONT, fontStyle: 'italic'} ),
-        new VStrut( TEXT_SUB_INDENT )
+        new VStrut( SUBSCRIPT_Y_OFFSET )
       ]
     } );
   };
@@ -78,7 +82,7 @@ define( function( require ) {
             new Text( 'B', {font: FONT, fontStyle: 'italic'} ),
             new SubSupText( 'H<sup>+</sup>', SUBSUP_OPTIONS ) ]
         } ),
-        new VStrut( TEXT_SUB_INDENT )
+        new VStrut( SUBSCRIPT_Y_OFFSET )
       ]
     } );
   };
@@ -141,7 +145,7 @@ define( function( require ) {
             new Text( 'A', {font: FONT, fontStyle: 'italic'} )
           ]
         } ),
-        new VStrut( TEXT_SUB_INDENT )
+        new VStrut( SUBSCRIPT_Y_OFFSET )
       ]
     } );
   };
@@ -155,7 +159,7 @@ define( function( require ) {
       children: [
         MoleculeFactory.M(),
         new Node( { children: [ M, plusNode ] } ),
-        new VStrut( TEXT_SUB_INDENT )
+        new VStrut( SUBSCRIPT_Y_OFFSET )
       ]
     } );
   };
@@ -172,7 +176,7 @@ define( function( require ) {
             new Text( 'M', {font: FONT, fontStyle: 'italic'} ),
             new Text( 'OH', {font: FONT} ) ]
         } ),
-        new VStrut( TEXT_SUB_INDENT )
+        new VStrut( SUBSCRIPT_Y_OFFSET )
       ]
     } );
   };
@@ -184,7 +188,7 @@ define( function( require ) {
       children: [
         MoleculeFactory.OH(),
         new SubSupText( 'OH<sup>-</sup>', SUBSUP_OPTIONS ),
-        new VStrut( TEXT_SUB_INDENT )
+        new VStrut( SUBSCRIPT_Y_OFFSET )
       ]
     } );
   };
@@ -194,7 +198,7 @@ define( function( require ) {
     return new VBox( {
       children: [
         new Text( '+', {font: FONT} ),
-        new VStrut( TEXT_SUB_INDENT + VBOX_SPACING )
+        new VStrut( SUBSCRIPT_Y_OFFSET + VBOX_SPACING )
       ]
     } );
   };
@@ -212,7 +216,7 @@ define( function( require ) {
             .lineTo( 0, ARROWS_VERTICAL_SPACE / 2 )
             .arc( 0, ARROWS_HEAD_RADIUS + ( ARROWS_VERTICAL_SPACE / 2 ), ARROWS_HEAD_RADIUS, -0.5 * Math.PI, -0.5 * Math.PI + ARROWS_HEAD_ANGLE_DELTA ),
           { stroke: 'black' } ),
-        new VStrut( TEXT_SUB_INDENT + FONT_SIZE / 4 - 2 )
+        new VStrut( SUBSCRIPT_Y_OFFSET + FONT_SIZE / 4 - 2 )
       ]
     } );
   };
@@ -229,7 +233,7 @@ define( function( require ) {
             .moveTo( 25, 0 )
             .arc( ARROWS_LENGTH, ARROWS_HEAD_RADIUS, ARROWS_HEAD_RADIUS, -0.5 * Math.PI, -0.5 * Math.PI - ARROWS_HEAD_ANGLE_DELTA, true ),
           { stroke: 'black' } ),
-        new VStrut( TEXT_SUB_INDENT + FONT_SIZE / 4 )
+        new VStrut( SUBSCRIPT_Y_OFFSET + FONT_SIZE / 4 )
       ]
     } );
   };
