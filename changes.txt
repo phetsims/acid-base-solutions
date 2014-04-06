@@ -1,3 +1,4 @@
+4/6/14 #5 first pass at drawing large numbers of molecules directly to canvas (no clipping)
 4/6/14 #5 wire up MagnifierNode to the solution that is currently selected
 4/6/14 #5 add clipping for solvent and molecules to MagnifierNode
 4/6/14 draw beaker icon programmatically, delete image file

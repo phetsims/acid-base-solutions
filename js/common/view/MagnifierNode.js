@@ -20,9 +20,47 @@ define( function( require ) {
   var Path = require( 'SCENERY/nodes/Path' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Shape = require( 'KITE/Shape' );
+  var Util = require( 'DOT/Util' );
 
   // images
   var solventImage = require( 'image!ACID_BASE_SOLUTIONS/../images/solvent.png' );
+
+  // constants
+  var BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules
+  var BASE_DOTS = 2;
+  var MAX_MOLECULES = 200;
+
+  /**
+   * This algorithm was ported from the Java implementation, and is documented in acid-base-solutions/doc/HA_A-_ratio_model.pdf.
+   * @param {Number} concentration
+   * @returns {Number}
+   */
+  var getNumberOfMolecules = function( concentration ) {
+    var raiseFactor = Util.log10( concentration / BASE_CONCENTRATION );
+    var baseFactor = Math.pow( ( MAX_MOLECULES / BASE_DOTS ), ( 1 / Util.log10( 1 / BASE_CONCENTRATION ) ) );
+    return Math.round( BASE_DOTS * Math.pow( baseFactor, raiseFactor ) );
+  };
+
+  /**
+   * Paints one type of molecule to a Canvas.
+   * Use integer coordinates with drawImage to improve performance.
+   *
+   * @param {CanvasContextWrapper} wrapper
+   * @param {Image} image
+   * @param {Number} numberOfMolecules
+   * @param {Number} radius
+   */
+  var paintMolecules = function( wrapper, image, numberOfMolecules, radius ) {
+    if ( image ) { // images are generated asynchronously, so test just in case they aren't available when this is first called
+      var distance, angle;
+      //TODO this is not staying inside the lens
+      for ( var i = 0; i < numberOfMolecules; i++ ) {
+        distance = radius * Math.sqrt( Math.random() ); // random distance from the center of the lens
+        angle = Math.random() * 2 * Math.PI;
+        wrapper.context.drawImage( image, Math.floor( distance * Math.cos( angle ) ), Math.floor( distance * Math.sin( angle ) ) );
+      }
+    }
+  };
 
   /**
    * @param {Magnifier} magnifier
@@ -35,6 +73,7 @@ define( function( require ) {
     CanvasNode.call( this, { canvasBounds: lensBounds } );
 
     this.magnifier = magnifier; //@private
+    this.radius = this.magnifier.radius; //@private
 
     //TODO are all of these necessary? iterate over solutions to find which ones are needed?
     //@private images for each type of molecule
@@ -79,31 +118,23 @@ define( function( require ) {
 
   inherit( CanvasNode, MoleculesNode, {
 
-    drawMolecules: function() {
-      //TODO
-      this.invalidatePaint(); // results in paintCanvas being called
-    },
-
+    //@override
     paintCanvas: function( wrapper ) {
-      //TODO draw using context.drawImage
       console.log( 'MoleculesNode.paintCanvas' );//XXX
-    },
 
-    /**
-     * Paints one species of molecule. Using drawImage is faster than arc.
-     * @private
-     * @param {CanvasContextWrapper} wrapper
-     * @param {Number} numberOfMolecules
-     * @param {Image} image
-     * @param {Array<Number>} xCoords
-     * @param {Array<Number>} yCoords
-     */
-    paintMolecules: function( wrapper, numberOfMolecules, image, xCoords, yCoords ) {
-      if ( image ) { // images are generated asynchronously, so test just in case they aren't available when this is first called
-        for ( var i = 0; i < numberOfMolecules; i++ ) {
-          wrapper.context.drawImage( image, xCoords[i], yCoords[i] );
+      var self = this;
+      var radius = this.magnifier.radius;
+      var solutionType = this.magnifier.solutionTypeProperty.value;
+      var solution = this.magnifier.solutions[ solutionType ];
+
+      solution.molecules.forEach( function( molecule ) {
+        if ( molecule.key !== 'H2O' ) {
+          var concentration = solution.property( molecule.concentrationPropertyName ).value;
+          var numberOfMolecules = getNumberOfMolecules( concentration );
+          console.log( 'key: ' + molecule.key + ' numberOfMolecules: ' + numberOfMolecules );//XXX
+          paintMolecules( wrapper, self.moleculeImages[ molecule.key ], numberOfMolecules, radius );
         }
-      }
+      } );
     }
   } );
 
@@ -127,23 +158,25 @@ define( function( require ) {
 
     // @private solvent (H2O)
     this.solventNode = new Image( solventImage, {
-      scale: 0.5,
+      scale: 0.5, //TODO scale this image file, this is a big image
       opacity: 0.6,
       x: -RADIUS * Math.SQRT2,
       y: -RADIUS * Math.SQRT2
     } );
 
     // @private molecules
-    this.moleculesNode = new MoleculesNode( magnifier, new Bounds2( magnifier.location.x - RADIUS, magnifier.location.y - RADIUS, magnifier.location.x + RADIUS, magnifier.location.y + RADIUS ) );
+    this.moleculesNode = new MoleculesNode( magnifier, new Bounds2( -RADIUS, -RADIUS, RADIUS, RADIUS ) );
 
     // stuff that's visible through (and therefore clipped to) the lens
-    var viewportNode = new Node( { children: [ this.solventNode, this.moleculesNode ] } );
+//    var viewportNode = new Node( { children: [ this.solventNode, this.moleculesNode ] } );
+    var viewportNode = new Node( { children: [ this.solventNode ] } );//XXX delete me, restore clipping above
     viewportNode.clipArea = lensShape;
 
     // rendering order
     this.addChild( viewportNode );
     this.addChild( handleNode );
     this.addChild( lensNode );
+    this.addChild( this.moleculesNode );//XXX delete me
 
     // move to correct position
     this.translation = magnifier.location;
@@ -189,7 +222,7 @@ define( function( require ) {
      */
     updateMolecules: function() {
       if ( this.visible ) {
-        this.moleculesNode.drawMolecules();
+        this.moleculesNode.invalidatePaint(); // results in paintCanvas being called
       }
     }
   } );

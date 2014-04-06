@@ -16,7 +16,7 @@ define( function( require ) {
   var ConcentrationGraphNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphNode' );
   var ReactionEquationNode = require( 'ACID_BASE_SOLUTIONS/common/view/ReactionEquationNode' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MagnifierNode = require( 'ACID_BASE_SOLUTIONS/common/view/magnifier/MagnifierNode' );
+  var MagnifierNode = require( 'ACID_BASE_SOLUTIONS/common/view/MagnifierNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PHColorKeyNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHColorKeyNode' );
   var PHMeterNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHMeterNode' );
