@@ -1,3 +1,4 @@
+4/4/15 #95 draw reaction equation arrows programmatically, so they don't look fuzzy/jagged/shifted
 4/4/14 #94 back out change that keeps concentration of all solutions synchronized, since this may have performance implications
 4/4/14 #94 keep strength of weak solutions synchronized at all times
 4/4/14 #94 make strength slider operate on weak solutions only; never change strength of strong solutions

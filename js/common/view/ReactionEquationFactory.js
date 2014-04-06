@@ -12,18 +12,15 @@ define( function( require ) {
   // imports
   var ChemUtils = require( 'NITROGLYCERIN/ChemUtils' );
   var HBox = require( 'SCENERY/nodes/HBox' );
-  var Image = require( 'SCENERY/nodes/Image' );
   var MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Shape = require( 'KITE/Shape' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VStrut = require( 'SUN/VStrut' );
-
-  // images
-  var arrowSingleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_single.png' );
-  var arrowDoubleImage = require( 'image!ACID_BASE_SOLUTIONS/arrow_double.png' );
 
   // constants
   var FONT_SIZE = 13;
@@ -33,6 +30,10 @@ define( function( require ) {
   var VBOX_SPACING = 2;
   var SUBSUP_OPTIONS = {font: FONT, supScale: 1};
   var EQUATION_SCALE = 1.5;
+  var ARROWS_VERTICAL_SPACE = 3; // vertical space between reversible arrows
+  var ARROWS_LENGTH = 25;
+  var ARROWS_HEAD_RADIUS = 0.72 * ARROWS_LENGTH;
+  var ARROWS_HEAD_ANGLE_DELTA = 0.2 * Math.PI;
 
   //-------------------------------------------------------------------------------------
   // Private functions for creating components of reaction equations.
@@ -203,7 +204,14 @@ define( function( require ) {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
-        new Image( arrowDoubleImage, {scale: 0.75} ),
+        new Path( new Shape()
+            .moveTo( 0, -ARROWS_VERTICAL_SPACE / 2 )
+            .lineTo( ARROWS_LENGTH, -ARROWS_VERTICAL_SPACE / 2 )
+            .arc( ARROWS_LENGTH, -ARROWS_HEAD_RADIUS - ( ARROWS_VERTICAL_SPACE / 2 ), ARROWS_HEAD_RADIUS, 0.5 * Math.PI, 0.5 * Math.PI + ARROWS_HEAD_ANGLE_DELTA )
+            .moveTo( ARROWS_LENGTH, ARROWS_VERTICAL_SPACE / 2 )
+            .lineTo( 0, ARROWS_VERTICAL_SPACE / 2 )
+            .arc( 0, ARROWS_HEAD_RADIUS + ( ARROWS_VERTICAL_SPACE / 2 ), ARROWS_HEAD_RADIUS, -0.5 * Math.PI, -0.5 * Math.PI + ARROWS_HEAD_ANGLE_DELTA ),
+          { stroke: 'black' } ),
         new VStrut( TEXT_SUB_INDENT + FONT_SIZE / 4 - 2 )
       ]
     } );
@@ -214,7 +222,13 @@ define( function( require ) {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
-        new Image( arrowSingleImage, {scale: 0.75} ),
+        new Path( new Shape()
+            .moveTo( 0, 0 )
+            .lineTo( ARROWS_LENGTH, 0 )
+            .arc( ARROWS_LENGTH, -ARROWS_HEAD_RADIUS, ARROWS_HEAD_RADIUS, 0.5 * Math.PI, 0.5 * Math.PI + ARROWS_HEAD_ANGLE_DELTA )
+            .moveTo( 25, 0 )
+            .arc( ARROWS_LENGTH, ARROWS_HEAD_RADIUS, ARROWS_HEAD_RADIUS, -0.5 * Math.PI, -0.5 * Math.PI - ARROWS_HEAD_ANGLE_DELTA, true ),
+          { stroke: 'black' } ),
         new VStrut( TEXT_SUB_INDENT + FONT_SIZE / 4 )
       ]
     } );

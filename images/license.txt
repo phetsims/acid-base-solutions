@@ -1,5 +1,3 @@
-arrow_double.png source=PhET
-arrow_single.png source=PhET
 battery.png source=PhET
 beaker-icon.png source=PhET
 custom-solution-icon.png source=PhET
