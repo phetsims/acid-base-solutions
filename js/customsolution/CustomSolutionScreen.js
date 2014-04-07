@@ -17,14 +17,9 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Screen = require( 'JOIST/Screen' );
-  var Sim = require( 'JOIST/Sim' );
-  var SimLauncher = require( 'JOIST/SimLauncher' );
 
   // strings
   var customSolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/customSolutionTitle' );
-
-  // images
-  var introductionIcon = require( 'image!ACID_BASE_SOLUTIONS/introduction-icon.png' );
 
   /**
    * Create the icon for the 'Custom Solution' screen.
