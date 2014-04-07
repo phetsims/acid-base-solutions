@@ -132,7 +132,6 @@ define( function( require ) {
    */
   function MagnifierNode( magnifier ) {
 
-    var self = this;
     Node.call( this );
 
     // lens

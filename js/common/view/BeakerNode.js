@@ -118,7 +118,7 @@ define( function( require ) {
             .lineTo( width, 0 )
             .lineTo( width + lipOffset, -lipOffset ),
           { stroke: 'black', lineWidth: 1.5 } )
-      ] } )
+      ] } );
     }
   } );
 } );
