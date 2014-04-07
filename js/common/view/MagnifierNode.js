@@ -1,6 +1,5 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
-//TODO remove common/view/magnifier/* when this implementation is completed
 /**
  * Magnifying glass view.
  * For performance, draws molecules directly to Canvas using drawImage.
