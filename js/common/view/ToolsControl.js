@@ -26,7 +26,6 @@ define( function( require ) {
 
   // constants
   var MIN_BUTTON_WIDTH = 40;
-  var ICON_OPTIONS = { scale: 0.75 };
   var RADIO_BUTTON_OPTIONS = {
     //TODO shadow and motion offsets rely on buggy behavior of InOutRadioButton, see sun#50
     shadowXOffset: 2,
@@ -59,7 +58,7 @@ define( function( require ) {
 
     var pHMeterNode = PHMeterNode.createIcon();
     var pHPaperNode = PHPaperNode.createIcon( 8, 30 );
-    var lightBulbNode = new Image( lightBulbImage, ICON_OPTIONS );
+    var lightBulbNode = new Image( lightBulbImage );
 
     // determine uniform size for buttons, in case icons have different sizes
     var minWidth = Math.max( MIN_BUTTON_WIDTH, Math.max( pHMeterNode.width, Math.max( pHPaperNode.width, lightBulbNode.width ) ) );

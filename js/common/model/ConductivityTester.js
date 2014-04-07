@@ -40,16 +40,17 @@ define( function( require ) {
     this.positiveProbeLocationProperty = new Property( new Vector2( beaker.right - probeXOffset, this.probeDragYRange.min + 10 ) );
     this.negativeProbeLocationProperty = new Property( new Vector2( beaker.left + probeXOffset, this.probeDragYRange.min + 10 ) );
 
-    // the circuit is closed if both probes are in the solution
-    this.isClosedProperty = new DerivedProperty( [ this.positiveProbeLocationProperty, this.negativeProbeLocationProperty ],
-      function( positiveProbeLocation, negativeProbeLocation ) {
-        return ( beaker.containsPoint( positiveProbeLocation ) && beaker.containsPoint( negativeProbeLocation ) );
-      } );
-
-    // brightness of bulb is derived from pH, varies from 0 (off) to 1 (full on)
-    this.brightnessProperty = new DerivedProperty( [ pHProperty ],
-      function( pH ) {
-        return NEUTRAL_BRIGHTNESS + ( 1 - NEUTRAL_BRIGHTNESS ) * (pH < NEUTRAL_PH ? ( NEUTRAL_PH - pH ) / ( NEUTRAL_PH - ABSConstants.PH_RANGE.min ) : ( pH - NEUTRAL_PH ) / ( ABSConstants.PH_RANGE.max - NEUTRAL_PH ) );
+    // brightness of bulb varies from 0 (off) to 1 (full on)
+    this.brightnessProperty = new DerivedProperty( [ pHProperty, this.positiveProbeLocationProperty, this.negativeProbeLocationProperty ],
+      function( pH, positiveProbeLocation, negativeProbeLocation ) {
+        if ( beaker.containsPoint( positiveProbeLocation ) && beaker.containsPoint( negativeProbeLocation ) ) {
+          // closed circuit, both probes in solution
+          return NEUTRAL_BRIGHTNESS + ( 1 - NEUTRAL_BRIGHTNESS ) * (pH < NEUTRAL_PH ? ( NEUTRAL_PH - pH ) / ( NEUTRAL_PH - ABSConstants.PH_RANGE.min ) : ( pH - NEUTRAL_PH ) / ( ABSConstants.PH_RANGE.max - NEUTRAL_PH ) );
+        }
+        else {
+          // open circuit
+          return 0;
+        }
       } );
   }
 
