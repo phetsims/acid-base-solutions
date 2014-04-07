@@ -1,6 +1,6 @@
 Implementation notes for "Acid-Base Solutions" (acid-base-solutions)
 
-This is a port of the Java version of acid-base-solutions.
+This is a port of the Java version of acid-base-solutions. It differs greatly from the Java implementation.
 
 For a description of the model, see model.txt.
 
