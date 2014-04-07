@@ -1,0 +1,10 @@
+Implementation notes for "Acid-Base Solutions" (acid-base-solutions)
+
+This is a port of the Java version of acid-base-solutions.
+
+There is no model-view transform between the model and view portions of this sim. 
+The transform is implicitly 1:1, with identical coordinate frames.
+One unit of distance in the model is one unit of distance in the play area.
+Positive x is to the right, positive y is down.
+
+For a description of the model, see model.txt.
