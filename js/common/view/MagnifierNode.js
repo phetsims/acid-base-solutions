@@ -145,10 +145,9 @@ define( function( require ) {
 
     // @private solvent (H2O)
     this.solventNode = new Image( solventImage, {
-      scale: 0.5, //TODO scale this image file, this is a big image
       opacity: 0.6,
-      x: -RADIUS * Math.SQRT2,
-      y: -RADIUS * Math.SQRT2
+      centerX: 0,
+      centerY: 0
     } );
 
     // @private molecules
