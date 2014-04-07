@@ -1,7 +1,8 @@
 TODO list for acid-base-solutions
 
-- #5 reimplement molecules view, render directly to Canvas using drawImage
-- scale solvent.png, it's currently 2x larger than it needs to be and is being scaled to 0.5 in code
+- #5 molecules drawn to canvas are fuzzy
+- #97 HTMLText labels in 'Solutions' control panel don't render on Safari
+- #96 revise icons for home screen and navbar
 - TODO items in code
 
 -----------------------------------------------
