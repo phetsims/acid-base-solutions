@@ -51,7 +51,7 @@ define( function( require ) {
    * @param {Number} radius
    */
   var paintMolecules = function( wrapper, image, numberOfMolecules, radius ) {
-    if ( image ) { // images are generated asynchronously, so test just in case they aren't available when this is first called
+    if ( image ) { // images are generated asynchronously, so test in case they aren't available when this is first called
       var distance, angle;
       //TODO this is not staying inside the lens
       for ( var i = 0; i < numberOfMolecules; i++ ) {
@@ -73,52 +73,42 @@ define( function( require ) {
     CanvasNode.call( this, { canvasBounds: lensBounds } );
 
     this.magnifier = magnifier; //@private
-    this.radius = this.magnifier.radius; //@private
 
-    //TODO are all of these necessary? iterate over solutions to find which ones are needed?
-    //@private images for each type of molecule
-    this.moleculeImages = {
-      A: null,
-      B: null,
-      BH: null,
-      HA: null,
-      H3O: null,
-      M: null,
-      MOH: null,
-      OH: null
+    // Generate images, this happens asynchronously.
+    var createImage = function( moleculeKey ) {
+      MoleculeFactory[ moleculeKey ]().toImage( function( image, x, y ) {
+        self.moleculeImages[ moleculeKey ] = image;
+      } );
     };
 
-    //TODO replace this with iteration over this.moleculeImages properties
-    // generate images, this happens asynchronously
-    MoleculeFactory.A().toImage( function( image, x, y ) {
-      self.moleculeImages.A = image;
-    } );
-    MoleculeFactory.B().toImage( function( image, x, y ) {
-      self.moleculeImages.B = image;
-    } );
-    MoleculeFactory.BH().toImage( function( image, x, y ) {
-      self.moleculeImages.BH = image;
-    } );
-    MoleculeFactory.HA().toImage( function( image, x, y ) {
-      self.moleculeImages.HA = image;
-    } );
-    MoleculeFactory.H3O().toImage( function( image, x, y ) {
-      self.moleculeImages.H3O = image;
-    } );
-    MoleculeFactory.M().toImage( function( image, x, y ) {
-      self.moleculeImages.M = image;
-    } );
-    MoleculeFactory.MOH().toImage( function( image, x, y ) {
-      self.moleculeImages.MOH = image;
-    } );
-    MoleculeFactory.OH().toImage( function( image, x, y ) {
-      self.moleculeImages.OH = image;
-    } );
+    /*
+     * Iterate over all solutions and their molecules. Generate an image for every molecule that we'll need.
+     * Note that the field names of this.moleculeImages will correspond to the 'key' fields in AqueousSolution.molecules.
+     * We skip water because it's displayed elsewhere as a static image file.
+     */
+    var numImages = 0;
+    this.moleculeImages = {};
+    for ( var solutionType in magnifier.solutions ) {
+      var solution = magnifier.solutions[solutionType];
+      solution.molecules.forEach( function( molecule ) {
+        if ( molecule.key !== 'H2O' && !self.moleculeImages.hasOwnProperty( molecule.key ) ) {
+          self.moleculeImages[ molecule.key ] = null;
+          createImage( molecule.key );
+          numImages++;
+        }
+      } );
+    }
+    console.log( 'numImages=' + numImages );//XXX
   }
 
   inherit( CanvasNode, MoleculesNode, {
 
-    //@override
+    /*
+     * Iterates over each of the current solution's molecules, computes the number of molecules
+     * to display, and draws the molecules directly to Canvas.
+     * @override
+     * @param {CanvasContextWrapper} wrapper
+     */
     paintCanvas: function( wrapper ) {
       console.log( 'MoleculesNode.paintCanvas' );//XXX
 
