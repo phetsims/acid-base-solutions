@@ -84,6 +84,7 @@ define( function( require ) {
     // Generate images, this happens asynchronously.
     var createImage = function( moleculeKey ) {
       var moleculeNode = MoleculeFactory[ moleculeKey ]();
+      // Scale up to increase quality. Remember to scale down when drawing to canvas.
       moleculeNode.setScaleMagnitude( IMAGE_SCALE, IMAGE_SCALE );
       moleculeNode.toImage( function( image, x, y ) {
         self.moleculeImages[ moleculeKey ] = image;
