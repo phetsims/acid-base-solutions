@@ -26,7 +26,7 @@ define( function( require ) {
   var solventImage = require( 'image!ACID_BASE_SOLUTIONS/../images/solvent.png' );
 
   // constants
-  var SHOW_ORIGIN = true; // draws a red circle at the origin, for debugging
+  var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
   var CLIPPING_ENABLED = false; // set to false to debug positioning of molecules
   var BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules
   var BASE_DOTS = 2;
