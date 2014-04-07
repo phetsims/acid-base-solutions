@@ -43,7 +43,9 @@ define( function( require ) {
 
     brightnessProperty.link( function( brightness ) {
       onNode.visible = ( brightness > 0 );
-      onNode.opacity = Util.linear( 0, 1, 0.3, 1, brightness );
+      if ( onNode.visible ) {
+        onNode.opacity = Util.linear( 0, 1, 0.3, 1, brightness );
+      }
     } );
   }
 
