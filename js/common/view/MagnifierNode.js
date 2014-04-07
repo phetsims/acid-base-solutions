@@ -26,6 +26,7 @@ define( function( require ) {
   var solventImage = require( 'image!ACID_BASE_SOLUTIONS/../images/solvent.png' );
 
   // constants
+  var CLIPPING_ENABLED = false; // set to false to debug positioning of molecules
   var BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules
   var BASE_DOTS = 2;
   var MAX_MOLECULES = 200;
@@ -86,7 +87,6 @@ define( function( require ) {
      * Note that the field names of this.moleculeImages will correspond to the 'key' fields in AqueousSolution.molecules.
      * We skip water because it's displayed elsewhere as a static image file.
      */
-    var numImages = 0;
     this.moleculeImages = {};
     for ( var solutionType in magnifier.solutions ) {
       var solution = magnifier.solutions[solutionType];
@@ -94,11 +94,9 @@ define( function( require ) {
         if ( molecule.key !== 'H2O' && !self.moleculeImages.hasOwnProperty( molecule.key ) ) {
           self.moleculeImages[ molecule.key ] = null;
           createImage( molecule.key );
-          numImages++;
         }
       } );
     }
-    console.log( 'numImages=' + numImages );//XXX
   }
 
   inherit( CanvasNode, MoleculesNode, {
@@ -121,7 +119,6 @@ define( function( require ) {
         if ( molecule.key !== 'H2O' ) {
           var concentration = solution.property( molecule.concentrationPropertyName ).value;
           var numberOfMolecules = getNumberOfMolecules( concentration );
-          console.log( 'key: ' + molecule.key + ' numberOfMolecules: ' + numberOfMolecules );//XXX
           paintMolecules( wrapper, self.moleculeImages[ molecule.key ], numberOfMolecules, radius );
         }
       } );
@@ -158,15 +155,15 @@ define( function( require ) {
     this.moleculesNode = new MoleculesNode( magnifier, new Bounds2( -RADIUS, -RADIUS, RADIUS, RADIUS ) );
 
     // stuff that's visible through (and therefore clipped to) the lens
-//    var viewportNode = new Node( { children: [ this.solventNode, this.moleculesNode ] } );
-    var viewportNode = new Node( { children: [ this.solventNode ] } );//XXX delete me, restore clipping above
-    viewportNode.clipArea = lensShape;
+    var viewportNode = new Node( { children: [ this.solventNode, this.moleculesNode ] } );
+    if ( CLIPPING_ENABLED ) {
+      viewportNode.clipArea = lensShape;
+    }
 
     // rendering order
     this.addChild( viewportNode );
     this.addChild( handleNode );
     this.addChild( lensNode );
-    this.addChild( this.moleculesNode );//XXX delete me
 
     // move to correct position
     this.translation = magnifier.location;

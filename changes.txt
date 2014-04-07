@@ -1,3 +1,4 @@
+4/6/14 #5 add debug flag to turn off clipping, to see how molecules are being positioned inside lens
 4/6/14 #5 generate the set of molecule images needed by iterating over all solutions and their molecules
 4/6/14 #5 first pass at drawing large numbers of molecules directly to canvas (no clipping)
 4/6/14 #5 wire up MagnifierNode to the solution that is currently selected
