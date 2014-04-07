@@ -32,7 +32,7 @@ define( function( require ) {
     onNode.centerX = offNode.centerX;
     onNode.bottom = offNode.bottom;
 
-    this.glowYOffset = onNode.height - offNode.height;
+    this.glowOffset = onNode.height - offNode.height; // how much glow adds to the bulb dimensions
     this.radius = offNode.width / 2; // use 'off' node, the 'on' node is wider because it has a glow around it.
 
     options.children = [

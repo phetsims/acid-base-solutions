@@ -47,7 +47,7 @@ define( function( require ) {
 
     // @private light rays centered on the bulb
     this.raysNode = new LightRaysNode( lightBulbRadius,
-      { centerX: lightBulbNode.centerX, y: lightBulbNode.top + ( lightBulbNode.glowYOffset * lightBulbScale ) + lightBulbRadius } );
+      { centerX: lightBulbNode.centerX, y: lightBulbNode.top + ( lightBulbNode.glowOffset * lightBulbScale ) + lightBulbRadius } );
 
     // wire from bulb base to battery
     var bulbBatteryWire = new Path( new Shape().moveTo( 0, 0 ).lineTo( BULB_TO_BATTERY_WIRE_LENGTH, 0 ), { stroke: 'black', lineWidth: 1.5 } );
