@@ -12,11 +12,9 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
-  var LinearFunction = require( 'DOT/LinearFunction' );
   var Node = require( 'SCENERY/nodes/Node' );
 
   // constants
-  var BRIGHTNESS_TO_INTENSITY_FUNCTION = new LinearFunction( 0, 1, 0, 1 ); // intensity of the light rays
   var MIN_RAYS = 8;
   var MAX_RAYS = 60;
   var MIN_RAY_LENGTH = 0;
@@ -56,12 +54,10 @@ define( function( require ) {
     // updates light rays based on brightness, which varies from 0 to 1.
     setBrightness: function( brightness ) {
 
-      var intensity = BRIGHTNESS_TO_INTENSITY_FUNCTION( brightness );
-
-      // number of rays is a function of intensity
-      var numberOfRays = ( brightness === 0 ) ? 0 : MIN_RAYS + Math.round( intensity * ( MAX_RAYS - MIN_RAYS ) );
-      // ray length is a function of intensity
-      var rayLength = MIN_RAY_LENGTH + ( intensity * ( MAX_RAY_LENGTH - MIN_RAY_LENGTH ) );
+      // number of rays is a function of brightness
+      var numberOfRays = ( brightness === 0 ) ? 0 : MIN_RAYS + Math.round( brightness * ( MAX_RAYS - MIN_RAYS ) );
+      // ray length is a function of brightness
+      var rayLength = MIN_RAY_LENGTH + ( brightness * ( MAX_RAY_LENGTH - MIN_RAY_LENGTH ) );
 
       var angle = RAYS_START_ANGLE;
       var deltaAngle = RAYS_ARC_ANGLE / ( numberOfRays - 1 );
