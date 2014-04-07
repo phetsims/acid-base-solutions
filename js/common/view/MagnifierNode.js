@@ -27,7 +27,8 @@ define( function( require ) {
 
   // constants
   var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
-  var CLIPPING_ENABLED = false; // set to false to debug positioning of molecules
+  var CLIPPING_ENABLED = true; // set to false to debug positioning of molecules
+  var LENS_LINE_WIDTH = 8;
   var BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules
   var BASE_DOTS = 2;
   var MAX_MOLECULES = 200;
@@ -54,12 +55,15 @@ define( function( require ) {
    */
   var paintMolecules = function( wrapper, image, numberOfMolecules, radius ) {
     if ( image ) { // images are generated asynchronously, so test in case they aren't available when this is first called
+      var imageXOffset = -image.width / 2;
+      var imageYOffset = -image.height / 2;
       var distance, angle;
-      //TODO this is not staying inside the lens
       for ( var i = 0; i < numberOfMolecules; i++ ) {
         distance = radius * Math.sqrt( Math.random() ); // random distance from the center of the lens
         angle = Math.random() * 2 * Math.PI;
-        wrapper.context.drawImage( image, Math.floor( distance * Math.cos( angle ) ), Math.floor( distance * Math.sin( angle ) ) );
+        wrapper.context.drawImage( image,
+          Math.floor( distance * Math.cos( angle ) + imageXOffset ),
+          Math.floor( distance * Math.sin( angle ) + imageYOffset ) );
       }
     }
   };
@@ -109,10 +113,9 @@ define( function( require ) {
      * @param {CanvasContextWrapper} wrapper
      */
     paintCanvas: function( wrapper ) {
-      console.log( 'MoleculesNode.paintCanvas' );//XXX
 
       var self = this;
-      var radius = this.magnifier.radius;
+      var radius = this.magnifier.radius - ( LENS_LINE_WIDTH / 2 );
       var solutionType = this.magnifier.solutionTypeProperty.value;
       var solution = this.magnifier.solutions[ solutionType ];
 
@@ -137,7 +140,7 @@ define( function( require ) {
     // lens
     var RADIUS = magnifier.radius;
     var lensShape = Shape.circle( 0, 0, RADIUS );
-    var lensNode = new Path( lensShape, { stroke: 'black', lineWidth: 8 } );
+    var lensNode = new Path( lensShape, { stroke: 'black', lineWidth: LENS_LINE_WIDTH } );
 
     // handle
     var handleNode = new Rectangle( RADIUS + 2, -RADIUS / 7, RADIUS * 0.9, RADIUS / 4, 5, 5, { fill: 'rgb(85,55,33)', stroke: 'black', lineWidth: 1 } );
