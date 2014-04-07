@@ -1,3 +1,4 @@
+4/7/14 #5 improve quality of molecule images in magnifier; store at 2x their needed size, scale down when drawing to canvas
 # 1.0.0-dev.6 4/6/14
 4/6/14 copy model.txt and implementation-notes.txt from Java version, modify as needed
 4/6/14 #5 position molecules at the centers of their images, reduce drawing region by half the lineWidth used to stroke the lens

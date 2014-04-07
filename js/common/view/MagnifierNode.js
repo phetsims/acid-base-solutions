@@ -32,6 +32,7 @@ define( function( require ) {
   var BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules
   var BASE_DOTS = 2;
   var MAX_MOLECULES = 200;
+  var IMAGE_SCALE = 2; // stored images are scaled this much to improve quality
 
   /**
    * This algorithm was ported from the Java implementation, and is documented in acid-base-solutions/doc/HA_A-_ratio_model.pdf.
@@ -82,7 +83,9 @@ define( function( require ) {
 
     // Generate images, this happens asynchronously.
     var createImage = function( moleculeKey ) {
-      MoleculeFactory[ moleculeKey ]().toImage( function( image, x, y ) {
+      var moleculeNode = MoleculeFactory[ moleculeKey ]();
+      moleculeNode.setScaleMagnitude( IMAGE_SCALE, IMAGE_SCALE );
+      moleculeNode.toImage( function( image, x, y ) {
         self.moleculeImages[ moleculeKey ] = image;
       } );
     };
@@ -115,10 +118,17 @@ define( function( require ) {
     paintCanvas: function( wrapper ) {
 
       var self = this;
-      var radius = this.magnifier.radius - ( LENS_LINE_WIDTH / 2 );
       var solutionType = this.magnifier.solutionTypeProperty.value;
       var solution = this.magnifier.solutions[ solutionType ];
 
+      /*
+       * Images are stored at a higher resolution to improve their quality.
+       * Apply the inverse scale factor to the graphics context, and adjust the radius.
+       */
+      wrapper.context.scale( 1 / IMAGE_SCALE, 1 / IMAGE_SCALE );
+      var radius = IMAGE_SCALE * ( this.magnifier.radius - ( LENS_LINE_WIDTH / 2 ) );
+
+      // Draw each type of molecule.
       solution.molecules.forEach( function( molecule ) {
         if ( molecule.key !== 'H2O' ) {
           var concentration = solution.property( molecule.concentrationPropertyName ).value;
