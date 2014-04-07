@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Magnifying glass view.
+ * Magnifier view.
  * For performance, draws molecules directly to Canvas using drawImage.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -11,6 +11,7 @@ define( function( require ) {
 
   // imports
   var Bounds2 = require( 'DOT/Bounds2' );
+  var Circle = require( 'SCENERY/nodes/Circle' );
   var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -25,6 +26,7 @@ define( function( require ) {
   var solventImage = require( 'image!ACID_BASE_SOLUTIONS/../images/solvent.png' );
 
   // constants
+  var SHOW_ORIGIN = true; // draws a red circle at the origin, for debugging
   var CLIPPING_ENABLED = false; // set to false to debug positioning of molecules
   var BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules
   var BASE_DOTS = 2;
@@ -163,6 +165,9 @@ define( function( require ) {
     this.addChild( viewportNode );
     this.addChild( handleNode );
     this.addChild( lensNode );
+    if ( SHOW_ORIGIN ) {
+      this.addChild( new Circle( 10, { fill: 'red' } ) );
+    }
 
     // move to correct position
     this.translation = magnifier.location;
