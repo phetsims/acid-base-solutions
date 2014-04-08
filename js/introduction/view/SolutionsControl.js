@@ -11,8 +11,8 @@ define( function( require ) {
 
   // imports
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  var ChemUtils = require( 'NITROGLYCERIN/ChemUtils' );
   var HBox = require( 'SCENERY/nodes/HBox' );
+  var HStrut = require( 'SUN/HStrut' );
   var HTMLText = require( 'SCENERY/nodes/HTMLText' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
@@ -20,11 +20,11 @@ define( function( require ) {
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VStrut = require( 'SUN/VStrut' );
 
   // strings
-  var pattern_0solution_1symbol = require( 'string!ACID_BASE_SOLUTIONS/pattern.0solution.1symbol' );
   var strongAcidString = require( 'string!ACID_BASE_SOLUTIONS/strongAcid' );
   var strongBaseString = require( 'string!ACID_BASE_SOLUTIONS/strongBase' );
   var waterString = require( 'string!ACID_BASE_SOLUTIONS/water' );
@@ -34,7 +34,8 @@ define( function( require ) {
   // constants
   var RADIO_BUTTON_OPTIONS = { radius: 7 };
   var TEXT_OPTIONS = { font: new PhetFont( 12 ) };
-  var TEXT_ICON_X_SPACING = 10;
+  var ITALIC_TEXT_OPTIONS = _.extend( { fontStyle: 'italic' }, TEXT_OPTIONS );
+  var TEXT_ICON_SPACING = 10; // space between text and icon
   var TOUCH_AREA_EXPAND_X = 10;
   var TOUCH_AREA_EXPAND_Y = 3;
 
@@ -53,9 +54,11 @@ define( function( require ) {
     // Water
     var waterRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WATER,
       new HBox( {
-        spacing: TEXT_ICON_X_SPACING,
         children: [
-          new SubSupText( StringUtils.format( pattern_0solution_1symbol, waterString, ChemUtils.toSubscript( 'H2O' ) ), TEXT_OPTIONS ),
+          new Text( waterString, TEXT_OPTIONS ),
+          new HStrut( 4 ),
+          new SubSupText( '(H<sub>2</sub>O)', TEXT_OPTIONS ),
+          new HStrut( TEXT_ICON_SPACING ),
           new MoleculeFactory.H2O()
         ]
       } ), RADIO_BUTTON_OPTIONS );
@@ -63,9 +66,17 @@ define( function( require ) {
     // Strong Acid
     var strongAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_ACID,
       new HBox( {
-        spacing: TEXT_ICON_X_SPACING,
         children: [
-          new HTMLText( StringUtils.format( pattern_0solution_1symbol, strongAcidString, 'H<i>A</i>' ), TEXT_OPTIONS ),
+        /**
+         * Notes about this ugly composition of the radio button labels, used throughout.
+         * (1) It would be preferable to use scenery.HTMLText, but that causes out-of-memory issues, see issue #97.
+         * (2) Other proposed approached were not maintainable.
+         * (3) The order of solution 'name' and 'formula' is no longer internationalized.
+         */
+          new Text( strongAcidString + ' (H', TEXT_OPTIONS ),
+          new Text( 'A', ITALIC_TEXT_OPTIONS ),
+          new Text( ')', TEXT_OPTIONS ),
+          new HStrut( TEXT_ICON_SPACING ),
           new MoleculeFactory.HA()
         ]
       } ), RADIO_BUTTON_OPTIONS );
@@ -73,9 +84,11 @@ define( function( require ) {
     // Weak Acid
     var weakAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_ACID,
       new HBox( {
-        spacing: TEXT_ICON_X_SPACING,
         children: [
-          new HTMLText( StringUtils.format( pattern_0solution_1symbol, weakAcidString, 'H<i>A</i>' ), TEXT_OPTIONS ),
+          new Text( weakAcidString + ' (', TEXT_OPTIONS ),
+          new Text( 'A', ITALIC_TEXT_OPTIONS ),
+          new Text( ')', TEXT_OPTIONS ),
+          new HStrut( TEXT_ICON_SPACING ),
           new MoleculeFactory.HA()
         ]
       } ), RADIO_BUTTON_OPTIONS );
@@ -83,9 +96,11 @@ define( function( require ) {
     // Strong Base
     var strongBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_BASE,
       new HBox( {
-        spacing: TEXT_ICON_X_SPACING,
         children: [
-          new HTMLText( StringUtils.format( pattern_0solution_1symbol, strongBaseString, '<i>M</i>OH' ), TEXT_OPTIONS ),
+          new Text( strongBaseString + ' (', TEXT_OPTIONS ),
+          new Text( 'M', ITALIC_TEXT_OPTIONS ),
+          new Text( ')', TEXT_OPTIONS ),
+          new HStrut( TEXT_ICON_SPACING ),
           new MoleculeFactory.MOH()
         ]
       } ), RADIO_BUTTON_OPTIONS );
@@ -93,9 +108,11 @@ define( function( require ) {
     // Weak Base
     var weakBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_BASE,
       new HBox( {
-        spacing: TEXT_ICON_X_SPACING,
         children: [
-          new HTMLText( StringUtils.format( pattern_0solution_1symbol, weakBaseString, '<i>B</i>' ), TEXT_OPTIONS ),
+          new Text( weakBaseString + ' (', TEXT_OPTIONS ),
+          new Text( 'B', ITALIC_TEXT_OPTIONS ),
+          new Text( ')', TEXT_OPTIONS ),
+          new HStrut( TEXT_ICON_SPACING ),
           new MoleculeFactory.B()
         ]
       } ), RADIO_BUTTON_OPTIONS );
