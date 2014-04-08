@@ -70,7 +70,7 @@ define( function( require ) {
         /**
          * Notes about this ugly composition of the radio button labels, used throughout.
          * (1) It would be preferable to use scenery.HTMLText, but that causes out-of-memory issues, see issue #97.
-         * (2) Other proposed approached were not maintainable.
+         * (2) Other proposed approached were not maintainable or requried scenery changes.
          * (3) The order of solution 'name' and 'formula' is no longer internationalized.
          */
           new Text( strongAcidString + ' (H', TEXT_OPTIONS ),
