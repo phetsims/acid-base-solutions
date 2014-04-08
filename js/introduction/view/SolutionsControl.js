@@ -13,12 +13,10 @@ define( function( require ) {
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SUN/HStrut' );
-  var HTMLText = require( 'SCENERY/nodes/HTMLText' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
