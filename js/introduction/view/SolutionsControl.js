@@ -38,6 +38,24 @@ define( function( require ) {
   var TOUCH_AREA_EXPAND_Y = 3;
 
   /**
+   * Notes about this ugly composition of the radio button labels, used throughout.
+   * (1) It would be preferable to use scenery.HTMLText, but that causes out-of-memory issues, see issue #97.
+   * (2) Other proposed approached were not maintainable or required scenery changes.
+   * (3) Order of solution name, formula and molecule is not internationalized.
+   */
+  var createStyledLabel = function( plainString1, italicString, plainString2, moleculeNode ) {
+    return new HBox( {
+      children: [
+        new Text( plainString1, TEXT_OPTIONS ),
+        new Text( italicString, ITALIC_TEXT_OPTIONS ),
+        new Text( plainString2, TEXT_OPTIONS ),
+        new HStrut( TEXT_ICON_SPACING ),
+        moleculeNode
+      ]
+    } );
+  };
+
+  /**
    * @param {Property<SolutionType>} solutionTypeProperty
    * @param options
    * @constructor
@@ -49,7 +67,7 @@ define( function( require ) {
       align: 'left'
     }, options );
 
-    // Water
+    // Water (H20)
     var waterRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WATER,
       new HBox( {
         children: [
@@ -61,59 +79,25 @@ define( function( require ) {
         ]
       } ), RADIO_BUTTON_OPTIONS );
 
-    // Strong Acid
+    // Strong Acid (HA)
     var strongAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_ACID,
-      new HBox( {
-        children: [
-        /**
-         * Notes about this ugly composition of the radio button labels, used throughout.
-         * (1) It would be preferable to use scenery.HTMLText, but that causes out-of-memory issues, see issue #97.
-         * (2) Other proposed approached were not maintainable or requried scenery changes.
-         * (3) The order of solution 'name' and 'formula' is no longer internationalized.
-         */
-          new Text( strongAcidString + ' (H', TEXT_OPTIONS ),
-          new Text( 'A', ITALIC_TEXT_OPTIONS ),
-          new Text( ')', TEXT_OPTIONS ),
-          new HStrut( TEXT_ICON_SPACING ),
-          new MoleculeFactory.HA()
-        ]
-      } ), RADIO_BUTTON_OPTIONS );
+      createStyledLabel( strongAcidString + ' (H', 'A', ')', new MoleculeFactory.HA() ),
+      RADIO_BUTTON_OPTIONS );
 
-    // Weak Acid
+    // Weak Acid (A)
     var weakAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_ACID,
-      new HBox( {
-        children: [
-          new Text( weakAcidString + ' (', TEXT_OPTIONS ),
-          new Text( 'A', ITALIC_TEXT_OPTIONS ),
-          new Text( ')', TEXT_OPTIONS ),
-          new HStrut( TEXT_ICON_SPACING ),
-          new MoleculeFactory.HA()
-        ]
-      } ), RADIO_BUTTON_OPTIONS );
+      createStyledLabel( weakAcidString + ' (', 'A', ')', new MoleculeFactory.A() ),
+      RADIO_BUTTON_OPTIONS );
 
-    // Strong Base
+    // Strong Base (M)
     var strongBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_BASE,
-      new HBox( {
-        children: [
-          new Text( strongBaseString + ' (', TEXT_OPTIONS ),
-          new Text( 'M', ITALIC_TEXT_OPTIONS ),
-          new Text( ')', TEXT_OPTIONS ),
-          new HStrut( TEXT_ICON_SPACING ),
-          new MoleculeFactory.MOH()
-        ]
-      } ), RADIO_BUTTON_OPTIONS );
+      createStyledLabel( strongBaseString + ' (', 'M', ')', new MoleculeFactory.M() ),
+      RADIO_BUTTON_OPTIONS );
 
-    // Weak Base
+    // Weak Base (B)
     var weakBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_BASE,
-      new HBox( {
-        children: [
-          new Text( weakBaseString + ' (', TEXT_OPTIONS ),
-          new Text( 'B', ITALIC_TEXT_OPTIONS ),
-          new Text( ')', TEXT_OPTIONS ),
-          new HStrut( TEXT_ICON_SPACING ),
-          new MoleculeFactory.B()
-        ]
-      } ), RADIO_BUTTON_OPTIONS );
+      createStyledLabel( weakBaseString + ' (', 'B', ')', new MoleculeFactory.B() ),
+      RADIO_BUTTON_OPTIONS );
 
     var buttons = [
       waterRadioButton,
