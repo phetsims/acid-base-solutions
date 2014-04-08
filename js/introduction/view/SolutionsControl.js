@@ -70,11 +70,9 @@ define( function( require ) {
     // Water (H20)
     var waterRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WATER,
       new HBox( {
+        spacing: TEXT_ICON_SPACING,
         children: [
-          new Text( waterString, TEXT_OPTIONS ),
-          new HStrut( 4 ),
-          new SubSupText( '(H<sub>2</sub>O)', TEXT_OPTIONS ),
-          new HStrut( TEXT_ICON_SPACING ),
+          new SubSupText( waterString + ' (H<sub>2</sub>O)', TEXT_OPTIONS ),
           new MoleculeFactory.H2O()
         ]
       } ), RADIO_BUTTON_OPTIONS );
