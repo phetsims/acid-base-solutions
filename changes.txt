@@ -1,3 +1,4 @@
+4/8/14 #97 fix molecule icons that were broken by previous change
 4/8/14 #97 simplify implementation of 'Water (H2O)' label on radio button
 4/8/14 #97 factor out ugly composition of button labels in 'Solutions' control panel
 # 1.0.0-dev.7 4/7/14
