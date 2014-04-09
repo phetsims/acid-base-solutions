@@ -44,6 +44,7 @@ define( function( require ) {
     CONCENTRATION_DEFAULT = ABSConstants.CONCENTRATION_RANGE.defaultValue,
     H3O_CONCENTRATION_DEFAULT = getH3OConcentration( STRENGTH_DEFAULT, CONCENTRATION_DEFAULT ),
     PRODUCT_CONCENTRATION_DEFAULT = getProductConcentration( H3O_CONCENTRATION_DEFAULT ),
+    SOLUTE_CONCENTRATION_DEFAULT = getSoluteConcentration( CONCENTRATION_DEFAULT, PRODUCT_CONCENTRATION_DEFAULT ),
     OH_CONCENTRATION_DEFAULT = getOHConcentration( H3O_CONCENTRATION_DEFAULT ),
     H2O_CONCENTRATION_DEFAULT = getH2OConcentration( PRODUCT_CONCENTRATION_DEFAULT );
 
@@ -71,6 +72,7 @@ define( function( require ) {
         // initial values for solution properties
         strength: STRENGTH_DEFAULT,
         concentration: CONCENTRATION_DEFAULT,
+        soluteConcentration: SOLUTE_CONCENTRATION_DEFAULT,
         productConcentration: PRODUCT_CONCENTRATION_DEFAULT,
         H3OConcentration: H3O_CONCENTRATION_DEFAULT,
         OHConcentration: OH_CONCENTRATION_DEFAULT,
