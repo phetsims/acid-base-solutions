@@ -1,5 +1,3 @@
 TODO list for acid-base-solutions
 
-- #97 HTMLText labels in 'Solutions' control panel don't render on Safari
-- #96 revise icons for home screen and navbar
 - sun#50 buggy shadow on InOutRadioButton
