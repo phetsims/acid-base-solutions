@@ -1,3 +1,7 @@
+4/9/14 #100 add a mask so that pH paper doesn't appear in magnifier
+4/8/14 #97 fix molecule icons that were broken by previous change
+4/8/14 #97 simplify implementation of 'Water (H2O)' label on radio button
+4/8/14 #97 factor out ugly composition of button labels in 'Solutions' control panel
 # 1.0.0-dev.7 4/7/14
 4/7/14 #97 remove all scenery.HTMLText from 'Solutions' control panel, it was causing out-of-memory problems
 4/7/14 #81 new artwork for light bulb, new implementation of LightBulbNode required
