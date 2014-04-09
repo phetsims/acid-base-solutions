@@ -158,7 +158,7 @@ define( function( require ) {
     handleNode.rotate( Math.PI / 6 );
 
     // opaque background, so we don't see things like pH paper in magnifier
-    var waterNode = new Circle( RADIUS, { fill: 'rgb(193,222,227)' } );
+    var waterNode = new Circle( RADIUS, { fill: 'rgb(210,231,235)' } );
 
     // @private solvent (H2O)
     this.solventNode = new Image( solventImage, {
