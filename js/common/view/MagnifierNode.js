@@ -157,6 +157,9 @@ define( function( require ) {
     var handleNode = new Rectangle( RADIUS + 2, -RADIUS / 7, RADIUS * 0.9, RADIUS / 4, 5, 5, { fill: 'rgb(85,55,33)', stroke: 'black', lineWidth: 1 } );
     handleNode.rotate( Math.PI / 6 );
 
+    // opaque background, so we don't see things like pH paper in magnifier
+    var waterNode = new Circle( RADIUS, { fill: 'rgb(193,222,227)' } );
+
     // @private solvent (H2O)
     this.solventNode = new Image( solventImage, {
       opacity: 0.6,
@@ -174,6 +177,7 @@ define( function( require ) {
     }
 
     // rendering order
+    this.addChild( waterNode );
     this.addChild( viewportNode );
     this.addChild( handleNode );
     this.addChild( lensNode );
