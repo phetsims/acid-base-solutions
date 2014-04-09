@@ -19,14 +19,17 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
   var Util = require( 'DOT/Util' );
 
+  var computePH = function( H3OConcentrationValue ) {
+    return -Math.round( 100 * Util.log10( H3OConcentrationValue ) ) / 100;
+  };
+
   /**
    * @param {SolutionType} solutionType
    * @param {Array} molecules see this.molecules below
-   * @param {*} defaultValues initial values for solution properties
+   * @param {*} initialValues initial values for solution properties
    * @constructor
    */
-  function AqueousSolution( solutionType, molecules, defaultValues ) {
-    var self = this;
+  function AqueousSolution( solutionType, molecules, initialValues ) {
 
     this.type = solutionType;
 
@@ -38,26 +41,31 @@ define( function( require ) {
      */
     this.molecules = molecules;
 
+    // all initial values are required! see issue #99
+    assert && assert( initialValues.hasOwnProperty( 'strength' ) );
+    assert && assert( initialValues.hasOwnProperty( 'concentration' ) );
+    assert && assert( initialValues.hasOwnProperty( 'soluteConcentration' ) );
+    assert && assert( initialValues.hasOwnProperty( 'productConcentration' ) );
+    assert && assert( initialValues.hasOwnProperty( 'H3OConcentration' ) );
+    assert && assert( initialValues.hasOwnProperty( 'OHConcentration' ) );
+    assert && assert( initialValues.hasOwnProperty( 'H2OConcentration' ) );
+
     PropertySet.call( this, {
-      strength: defaultValues.strength || 0,
-      // for water concentration is equal to 0, so we should use typeof checking
-      concentration: ( typeof (defaultValues.concentration) === 'undefined' ? ABSConstants.CONCENTRATION_RANGE.defaultValue : defaultValues.concentration ),
-      soluteConcentration: defaultValues.soluteConcentration || 0, // solute concentration
-      productConcentration: defaultValues.productConcentration || 0, // product concentration
-      H3OConcentration: defaultValues.H3OConcentration || 0, // H3O concentration
-      OHConcentration: defaultValues.OHConcentration || 0, // OH concentration
-      H2OConcentration: defaultValues.H2OConcentration || 0, // H2O concentration
-      pH: (typeof (defaultValues.H3OConcentration) === 'undefined' ? 0 : getPH( defaultValues.H3OConcentration )) // pH of the solution at equilibrium
+      strength: initialValues.strength,
+      concentration: initialValues.concentration,
+      soluteConcentration: initialValues.soluteConcentration,
+      productConcentration: initialValues.productConcentration,
+      H3OConcentration: initialValues.H3OConcentration,
+      OHConcentration: initialValues.OHConcentration,
+      H2OConcentration: initialValues.H2OConcentration,
+      pH: computePH( initialValues.H3OConcentration ) // pH of the solution at equilibrium
     } );
 
+    var self = this;
     this.property( 'H3OConcentration' ).link( function( H3OConcentrationValue ) {
-      self.pH = getPH( H3OConcentrationValue );
+      self.pH = computePH( H3OConcentrationValue );
     } );
   }
-
-  var getPH = function( H3OConcentrationValue ) {
-    return -Math.round( 100 * Util.log10( H3OConcentrationValue ) ) / 100;
-  };
 
   return inherit( PropertySet, AqueousSolution );
 } );

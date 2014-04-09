@@ -22,6 +22,7 @@ define( function( require ) {
 
   // [BH+] = ( -Kb + sqrt( Kb*Kb + 4*Kb*c ) ) / 2
   var getProductConcentration = function( Kb, c ) {
+    //  Kb is strength, c is concentration
     return (-Kb + Math.sqrt( ( Kb * Kb ) + ( 4 * Kb * c ) ) ) / 2;
   };
 
@@ -40,7 +41,7 @@ define( function( require ) {
     return (ABSConstants.WATER_CONCENTRATION - productConcentration);
   };
 
-  // constants
+  // initial values for solution properties
   var STRENGTH_DEFAULT = ABSConstants.WEAK_STRENGTH_RANGE.defaultValue,
     CONCENTRATION_DEFAULT = ABSConstants.CONCENTRATION_RANGE.defaultValue,
     PRODUCT_CONCENTRATION_DEFAULT = getProductConcentration( STRENGTH_DEFAULT, CONCENTRATION_DEFAULT ),

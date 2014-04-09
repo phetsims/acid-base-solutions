@@ -1,3 +1,4 @@
+4/9/14 #99 require subtypes to provide initial values for all properties of AqueousSolution supertype
 4/9/14 #99 add missing initializer for 'solute concentration' of 'Weak Acid'
 4/9/14 #100 add a mask so that pH paper doesn't appear in magnifier
 4/8/14 #97 fix molecule icons that were broken by previous change

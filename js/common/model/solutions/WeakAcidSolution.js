@@ -14,14 +14,19 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
 
-  // [H3O+] = ( -Ka + sqrt( Ka*Ka + 4*Ka*c ) ) / 2
-  var getH3OConcentration = function( Ka, c ) {
-    return ( -Ka + Math.sqrt( ( Ka * Ka ) + ( 4 * Ka * c ) ) ) / 2;
+  // [HA] = c - [H3O+]
+  var getSoluteConcentration = function( concentration, H3OConcentration ) {
+    return (concentration - H3OConcentration);
   };
 
   // [A-] = [H3O+]
   var getProductConcentration = function( H3OConcentration ) {
     return H3OConcentration;
+  };
+
+  // [H3O+] = ( -Ka + sqrt( Ka*Ka + 4*Ka*c ) ) / 2
+  var getH3OConcentration = function( Ka, c ) {
+    return ( -Ka + Math.sqrt( ( Ka * Ka ) + ( 4 * Ka * c ) ) ) / 2;
   };
 
   // [OH-] = Kw / [H3O+]
@@ -34,12 +39,7 @@ define( function( require ) {
     return (ABSConstants.WATER_CONCENTRATION - productConcentration);
   };
 
-  // [HA] = c - [H3O+]
-  var getSoluteConcentration = function( concentration, H3OConcentration ) {
-    return (concentration - H3OConcentration);
-  };
-
-  // constants
+  // initial values for solution properties
   var STRENGTH_DEFAULT = ABSConstants.WEAK_STRENGTH_RANGE.defaultValue,
     CONCENTRATION_DEFAULT = ABSConstants.CONCENTRATION_RANGE.defaultValue,
     H3O_CONCENTRATION_DEFAULT = getH3OConcentration( STRENGTH_DEFAULT, CONCENTRATION_DEFAULT ),

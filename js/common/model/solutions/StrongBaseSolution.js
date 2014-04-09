@@ -14,13 +14,13 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
 
-  // [M+] = c
-  var getProductConcentration = function( concentration ) {
-    return concentration;
+  // [MOH] = 0
+  var getSoluteConcentration = function() {
+    return 0;
   };
 
-  // [OH-] = c
-  var getOHConcentration = function( concentration ) {
+  // [M+] = c
+  var getProductConcentration = function( concentration ) {
     return concentration;
   };
 
@@ -29,12 +29,24 @@ define( function( require ) {
     return ABSConstants.WATER_EQUILIBRIUM_CONSTANT / OHConcentration;
   };
 
-  // constants
+  // [OH-] = c
+  var getOHConcentration = function( concentration ) {
+    return concentration;
+  };
+
+  // [H2O] = W
+  var getH2OConcentration = function() {
+    return ABSConstants.WATER_CONCENTRATION;
+  };
+
+  // initial values for solution properties
   var STRENGTH_DEFAULT = ABSConstants.STRONG_STRENGTH,
     CONCENTRATION_DEFAULT = ABSConstants.CONCENTRATION_RANGE.defaultValue,
+    SOLUTE_CONCENTRATION_DEFAULT = getSoluteConcentration(),
+    PRODUCT_CONCENTRATION_DEFAULT = getProductConcentration( CONCENTRATION_DEFAULT ),
     OH_CONCENTRATION_DEFAULT = getOHConcentration( CONCENTRATION_DEFAULT ),
     H3O_CONCENTRATION_DEFAULT = getH3OConcentration( OH_CONCENTRATION_DEFAULT ),
-    PRODUCT_CONCENTRATION_DEFAULT = getProductConcentration( CONCENTRATION_DEFAULT );
+    H2O_CONCENTRATION_DEFAULT = getH2OConcentration();
 
   function StrongBaseSolution() {
     var self = this;
@@ -51,9 +63,11 @@ define( function( require ) {
         // initial values for solution properties
         strength: STRENGTH_DEFAULT,
         concentration: CONCENTRATION_DEFAULT,
+        soluteConcentration: SOLUTE_CONCENTRATION_DEFAULT,
         productConcentration: PRODUCT_CONCENTRATION_DEFAULT,
+        H3OConcentration: H3O_CONCENTRATION_DEFAULT,
         OHConcentration: OH_CONCENTRATION_DEFAULT,
-        H3OConcentration: H3O_CONCENTRATION_DEFAULT
+        H2OConcentration: H2O_CONCENTRATION_DEFAULT
       } );
 
     // set links between concentrations
