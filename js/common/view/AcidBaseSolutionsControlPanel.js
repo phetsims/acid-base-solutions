@@ -68,7 +68,7 @@ define( function( require ) {
       viewProperties.reset();
     }, { scale: 0.75 } );
 
-    // 'Solutions' and 'Views' panels have same with, 'Tools' panel does not
+    // 'Solutions' and 'Views' panels have same width, 'Tools' panel does not
     var maxWidth = Math.max( solutionControl.width, viewsControl.width );
     options.children = [
       new VBox( {
