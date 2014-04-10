@@ -37,19 +37,10 @@ define( function( require ) {
       pH: this.solutions[defaultSolutionType].pH // pH level of product
     } );
 
-    // beaker model (all elements in workspace have position relative to beaker)
     this.beaker = new Beaker();
-
-    // magnifier model
     this.magnifier = new Magnifier( this.beaker, this.solutions, this.property( 'solutionType' ) );
-
-    // pH meter model
     this.pHMeter = new PHMeter( this.beaker, this.property( 'pH' ) );
-
-    // pH paper model
     this.pHPaper = new PHPaper( this.beaker, this.property( 'solutionType' ), this.property( 'pH' ) );
-
-    // conductivity tester model
     this.conductivityTester = new ConductivityTester( this.beaker, this.property( 'pH' ) );
 
     // synchronize with pH of the solution that is currently selected
