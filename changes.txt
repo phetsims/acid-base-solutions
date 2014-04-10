@@ -1,3 +1,4 @@
+4/9/14 remove dependency on proxy concentration and strength properties in graph, wire up directly to selected solution
 # 1.0.0-dev.8 4/9/14
 4/9/14 delete Beaker.containsPoint convenience function
 4/9/14 #101 make conductivity probes move together

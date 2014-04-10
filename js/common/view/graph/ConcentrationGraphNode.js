@@ -24,6 +24,8 @@ define( function( require ) {
    */
   function ConcentrationGraphNode( graph ) {
 
+    var self = this;
+
     Node.call( this );
 
     this.graph = graph; //@private
@@ -46,14 +48,23 @@ define( function( require ) {
 
     this.translation = graph.location;
 
-    graph.solutionTypeProperty.link( this.updateBars.bind( this ) );
-    graph.solutionTypeProperty.link( this.updateValues.bind( this ) );
+    // Observe the strength and concentration properties for whichever solution is selected.
+    var updateValuesBound = this.updateValues.bind( this );
+    graph.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
 
-    // listeners for 'Custom Solution' screen
-    if ( graph.strengthProperty && graph.concentrationProperty ) {
-      graph.strengthProperty.link( this.updateValues.bind( this ) );
-      graph.concentrationProperty.link( this.updateValues.bind( this ) );
-    }
+      // show the correct number of bars
+      self.updateBars();
+
+      // unlink from previous solution
+      if ( prevSolutionType ) {
+        graph.solutions[prevSolutionType].property( 'strength' ).unlink( updateValuesBound );
+        graph.solutions[prevSolutionType].property( 'concentration' ).unlink( updateValuesBound );
+      }
+
+      // link to new solution
+      graph.solutions[newSolutionType].property( 'strength' ).link( updateValuesBound );
+      graph.solutions[newSolutionType].property( 'concentration' ).link( updateValuesBound );
+    } );
   }
 
   return inherit( Node, ConcentrationGraphNode, {

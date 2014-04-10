@@ -10,7 +10,6 @@ define( function( require ) {
 
   // imports
   var AcidBaseSolutionsModel = require( 'ACID_BASE_SOLUTIONS/common/model/AcidBaseSolutionsModel' );
-  var ConcentrationGraph = require( 'ACID_BASE_SOLUTIONS/common/model/ConcentrationGraph' );
   var inherit = require( 'PHET_CORE/inherit' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
   var StrongAcidSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/StrongAcidSolution' );
@@ -29,11 +28,7 @@ define( function( require ) {
         new WeakBaseSolution()
       ],
       SolutionType.WATER );
-
-    // concentration graph
-    this.graph = new ConcentrationGraph( this.beaker, this.solutions, this.property( 'solutionType' ) );
   }
 
   return inherit( AcidBaseSolutionsModel, IntroductionModel );
-
 } );

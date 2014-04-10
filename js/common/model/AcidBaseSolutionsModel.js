@@ -10,6 +10,7 @@ define( function( require ) {
 
   // imports
   var Beaker = require( 'ACID_BASE_SOLUTIONS/common/model/Beaker' );
+  var ConcentrationGraph = require( 'ACID_BASE_SOLUTIONS/common/model/ConcentrationGraph' );
   var ConductivityTester = require( 'ACID_BASE_SOLUTIONS/common/model/ConductivityTester' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Magnifier = require( 'ACID_BASE_SOLUTIONS/common/model/Magnifier' );
@@ -39,6 +40,7 @@ define( function( require ) {
 
     this.beaker = new Beaker();
     this.magnifier = new Magnifier( this.beaker, this.solutions, this.property( 'solutionType' ) );
+    this.graph = new ConcentrationGraph( this.beaker, this.solutions, this.property( 'solutionType' ) );
     this.pHMeter = new PHMeter( this.beaker, this.property( 'pH' ) );
     this.pHPaper = new PHPaper( this.beaker, this.property( 'solutionType' ), this.property( 'pH' ) );
     this.conductivityTester = new ConductivityTester( this.beaker, this.property( 'pH' ) );

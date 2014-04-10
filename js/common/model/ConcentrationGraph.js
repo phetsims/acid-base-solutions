@@ -12,16 +12,12 @@ define( function() {
    * @param {Beaker} beaker
    * @param {Array<AqueousSolution>} solutions
    * @param {Property<SolutionType>} solutionTypeProperty
-   * @param {Property<Number>} concentrationProperty optional, provided for custom solutions
-   * @param {Property<Number>} strengthProperty optional, provided for custom solutions
    * @constructor
    */
-  function ConcentrationGraph( beaker, solutions, solutionTypeProperty, concentrationProperty, strengthProperty ) {
+  function ConcentrationGraph( beaker, solutions, solutionTypeProperty ) {
 
     this.solutions = solutions;
     this.solutionTypeProperty = solutionTypeProperty;
-    this.concentrationProperty = concentrationProperty;
-    this.strengthProperty = strengthProperty;
 
     // dimensions of the graph's background
     this.width = 0.5 * beaker.size.width;

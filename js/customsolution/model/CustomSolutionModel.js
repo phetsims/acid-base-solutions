@@ -10,7 +10,6 @@ define( function( require ) {
 
   // imports
   var AcidBaseSolutionsModel = require( 'ACID_BASE_SOLUTIONS/common/model/AcidBaseSolutionsModel' );
-  var ConcentrationGraph = require( 'ACID_BASE_SOLUTIONS/common/model/ConcentrationGraph' );
   var inherit = require( 'PHET_CORE/inherit' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
   var StrongAcidSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/StrongAcidSolution' );
@@ -37,9 +36,6 @@ define( function( require ) {
     // add convenience properties that will synchronize with the concentration and strength of the currently selected solution
     this.addProperty( 'concentration', this.solutions[DEFAULT_SOLUTION_TYPE].concentration ); // concentration of solution
     this.addProperty( 'strength', this.solutions[DEFAULT_SOLUTION_TYPE].strength ); // strength of solution
-
-    // concentration graph
-    this.graph = new ConcentrationGraph( this.beaker, this.solutions, this.property( 'solutionType' ), this.property( 'concentration' ), this.property( 'strength' ) );
 
     var setStrength = function( value ) { self.strength = value; };
     var setConcentration = function( value ) { self.concentration = value; };
