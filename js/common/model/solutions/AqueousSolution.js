@@ -15,8 +15,6 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
-  var DerivedProperty = require( 'AXON/DerivedProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PropertySet = require( 'AXON/PropertySet' );
   var Util = require( 'DOT/Util' );

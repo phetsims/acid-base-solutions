@@ -59,7 +59,7 @@ define( function( require ) {
 
     //@override @protected Is strength in the weak range?
     isValidStrength: function( strength ) {
-      return ABSConstants.WEAK_STRENGTH_RANGE.contains( strength )
+      return ABSConstants.WEAK_STRENGTH_RANGE.contains( strength );
     }
   } );
 } );
