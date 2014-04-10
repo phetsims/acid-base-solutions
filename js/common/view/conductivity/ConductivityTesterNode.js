@@ -24,6 +24,8 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
+  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
+  var Util = require( 'DOT/Util' );
 
   // images
   var batteryImage = require( 'image!ACID_BASE_SOLUTIONS/battery.png' );
@@ -70,26 +72,39 @@ define( function( require ) {
 
     // wire from base of bulb (origin) to negative probe
     var negativeWire = new WireNode(
-        conductivityTester.location.x - 5, conductivityTester.location.y - 10,
-      conductivityTester.negativeProbeLocationProperty.value.x, conductivityTester.negativeProbeLocationProperty.value.y - conductivityTester.probeSize.height );
+      conductivityTester.location.x - 5, conductivityTester.location.y - 10,
+      conductivityTester.negativeProbeX, conductivityTester.probeYProperty.value - conductivityTester.probeSize.height );
 
     // wire from battery terminal to positive probe
     var positiveWire = new WireNode(
       battery.getGlobalBounds().right, battery.getGlobalBounds().centerY,
-      conductivityTester.positiveProbeLocationProperty.value.x, conductivityTester.positiveProbeLocationProperty.value.y - conductivityTester.probeSize.height );
+      conductivityTester.positiveProbeX, conductivityTester.probeYProperty.value - conductivityTester.probeSize.height );
 
-    // probes
-    var negativeProbe = new ProbeNode( conductivityTester.negativeProbeLocationProperty, conductivityTester.probeDragYRange, conductivityTester.probeSize, { isPositive: false } );
-    var positiveProbe = new ProbeNode( conductivityTester.positiveProbeLocationProperty, conductivityTester.probeDragYRange, conductivityTester.probeSize, { isPositive: true } );
+    // probes, share one drag handler so that both probes can't be dragged simultaneously
+    var probeDragHandler = new SimpleDragHandler( {
+
+      clickYOffset: 0,
+
+      start: function( e ) {
+        this.clickYOffset = e.currentTarget.globalToParentPoint( e.pointer.point ).y - e.currentTarget.y;
+      },
+
+      drag: function( e ) {
+        var y = e.currentTarget.globalToParentPoint( e.pointer.point ).y - this.clickYOffset;
+        conductivityTester.probeYProperty.value = Util.clamp( y, conductivityTester.probeDragYRange.min, conductivityTester.probeDragYRange.max );
+      }
+    } );
+    var negativeProbe = new ProbeNode( conductivityTester.probeSize, conductivityTester.probeYProperty, probeDragHandler,
+      { x: conductivityTester.negativeProbeX, isPositive: false } );
+    var positiveProbe = new ProbeNode( conductivityTester.probeSize, conductivityTester.probeYProperty, probeDragHandler,
+      { x: conductivityTester.positiveProbeX, isPositive: true } );
 
     Node.call( this, { children: [ negativeWire, positiveWire, negativeProbe, positiveProbe, apparatusNode ] } );
 
     // update wires if end point was changed
-    conductivityTester.positiveProbeLocationProperty.link( function( location ) {
-      positiveWire.setEndPoint( location.x, location.y - conductivityTester.probeSize.height );
-    } );
-    conductivityTester.negativeProbeLocationProperty.link( function( location ) {
-      negativeWire.setEndPoint( location.x, location.y - conductivityTester.probeSize.height );
+    conductivityTester.probeYProperty.link( function( probeY ) {
+      positiveWire.setEndPoint( conductivityTester.positiveProbeX, probeY - conductivityTester.probeSize.height );
+      negativeWire.setEndPoint( conductivityTester.negativeProbeX, probeY - conductivityTester.probeSize.height );
     } );
 
     conductivityTester.brightnessProperty.link( this.updateBrightness.bind( this ) );

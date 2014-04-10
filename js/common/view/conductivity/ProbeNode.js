@@ -18,9 +18,6 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var PlusNode = require( 'SCENERY_PHET/PlusNode' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
-  var Util = require( 'DOT/Util' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
@@ -28,13 +25,13 @@ define( function( require ) {
   var NEGATIVE_FILL = 'black';
 
   /**
-   * @param {{Property<Vector2>} locationProperty
-   * @param {Range} dragYRange
    * @param {Dimension2} probeSize
+   * @param {Number} probeYProperty y-coordinate of the probe
+   * @param {SimpleDragHandler} probeDragHandler
    * @param {*} options
    * @constructor
    */
-  function ProbeNode( locationProperty, dragYRange, probeSize, options ) {
+  function ProbeNode( probeSize, probeYProperty, probeDragHandler, options ) {
 
     options = _.extend( {
       isPositive: true
@@ -62,24 +59,12 @@ define( function( require ) {
     // expand touch area
     this.touchArea = this.localBounds.dilatedXY( 10, 10 );
 
-    // constrained dragging
+    // interactivity
     this.cursor = 'pointer';
-    this.addInputListener( new SimpleDragHandler( {
+    this.addInputListener( probeDragHandler );
 
-      clickYOffset: 0,
-
-      start: function( e ) {
-        this.clickYOffset = self.globalToParentPoint( e.pointer.point ).y - e.currentTarget.y;
-      },
-
-      drag: function( e ) {
-        var y = self.globalToParentPoint( e.pointer.point ).y - this.clickYOffset;
-        locationProperty.value = new Vector2( locationProperty.value.x, Util.clamp( y, dragYRange.min, dragYRange.max ) );
-      }
-    } ) );
-
-    locationProperty.link( function( location ) {
-      self.translation = location;
+    probeYProperty.link( function( probeY ) {
+      self.y = probeY;
     } );
   }
 
