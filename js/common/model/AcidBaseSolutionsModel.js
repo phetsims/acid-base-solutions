@@ -52,7 +52,7 @@ define( function( require ) {
     // conductivity tester model
     this.conductivityTester = new ConductivityTester( this.beaker, this.property( 'pH' ) );
 
-    // set appropriate pH
+    // synchronize with pH of the solution that is currently selected
     var setPH = function( value ) { self.pH = value; };
     this.property( 'solutionType' ).link( function( newSolutionType, prevSolutionType ) {
       // unsubscribe from previous solution pH property
