@@ -44,10 +44,10 @@ define( function( require ) {
       this.addChild( this.bars[i] = new ConcentrationGraphBarNode( graph.height - 10 ) );
     }
 
+    this.translation = graph.location;
+
     graph.solutionTypeProperty.link( this.updateBars.bind( this ) );
     graph.solutionTypeProperty.link( this.updateValues.bind( this ) );
-
-    this.translation = graph.location;
 
     // listeners for 'Custom Solution' screen
     if ( graph.strengthProperty && graph.concentrationProperty ) {
