@@ -30,32 +30,32 @@ define( function( require ) {
 
   return inherit( AqueousSolution, StrongAcidSolution, {
 
-    // [HA] = 0
+    //@override [HA] = 0
     getSoluteConcentration: function() {
       return 0;
     },
 
-    // [A-] = c
+    //@override [A-] = c
     getProductConcentration: function() {
       return this.getConcentration();
     },
 
-    // [H3O+] = c
+    //@override [H3O+] = c
     getH3OConcentration: function() {
       return this.getConcentration();
     },
 
-    // [OH-] = Kw / [H3O+]
+    //@override [OH-] = Kw / [H3O+]
     getOHConcentration: function() {
       return ABSConstants.WATER_EQUILIBRIUM_CONSTANT / this.getH3OConcentration();
     },
 
-    // [H2O] = W - c
+    //@override [H2O] = W - c
     getH2OConcentration: function() {
       return ABSConstants.WATER_CONCENTRATION - this.getConcentration();
     },
 
-    // Strong strength is a constant.
+    //@override @protected Strong strength is a constant.
     isValidStrength: function( strength ) {
       return ( strength === ABSConstants.STRONG_STRENGTH );
     }

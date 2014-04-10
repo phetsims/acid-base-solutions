@@ -30,34 +30,34 @@ define( function( require ) {
 
   return inherit( AqueousSolution, WeakBaseSolution, {
 
-    // [B] = c - [BH+]
+    //@override [B] = c - [BH+]
     getSoluteConcentration: function() {
       return ( this.getConcentration() - this.getProductConcentration() );
     },
 
-    // [BH+] = ( -Kb + sqrt( Kb*Kb + 4*Kb*c ) ) / 2
+    //@override [BH+] = ( -Kb + sqrt( Kb*Kb + 4*Kb*c ) ) / 2
     getProductConcentration: function() {
       var Kb = this.getStrength();
       var c = this.getConcentration();
       return (-Kb + Math.sqrt( ( Kb * Kb ) + ( 4 * Kb * c ) ) ) / 2;
     },
 
-    // [H3O+] = Kw / [OH-]
+    //@override [H3O+] = Kw / [OH-]
     getH3OConcentration: function() {
       return ABSConstants.WATER_EQUILIBRIUM_CONSTANT / this.getOHConcentration();
     },
 
-    // [OH-] = [BH+]
+    //@override [OH-] = [BH+]
     getOHConcentration: function() {
       return this.getProductConcentration();
     },
 
-    // [H2O] = W - [BH+]
+    //@override [H2O] = W - [BH+]
     getH2OConcentration: function() {
       return ( ABSConstants.WATER_CONCENTRATION - this.getProductConcentration() );
     },
 
-    // Is strength in the weak range?
+    //@override @protected Is strength in the weak range?
     isValidStrength: function( strength ) {
       return ABSConstants.WEAK_STRENGTH_RANGE.contains( strength )
     }
