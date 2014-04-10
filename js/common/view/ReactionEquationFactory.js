@@ -10,7 +10,6 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ChemUtils = require( 'NITROGLYCERIN/ChemUtils' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -93,7 +92,7 @@ define( function( require ) {
       spacing: VBOX_SPACING,
       children: [
         MoleculeFactory.H2O(),
-        new SubSupText( ChemUtils.toSubscript( 'H2O' ), SUBSUP_OPTIONS )
+        new SubSupText( 'H<sub>2</sub>O', SUBSUP_OPTIONS )
       ]
     } );
   };
@@ -114,7 +113,7 @@ define( function( require ) {
           align: 'top',
           children: [
             new Text( '2', {font: FONT} ),
-            new SubSupText( ChemUtils.toSubscript( 'H2O' ), SUBSUP_OPTIONS )
+            new SubSupText( 'H<sub>2</sub>O', SUBSUP_OPTIONS )
           ]
         } )
       ]
@@ -127,7 +126,7 @@ define( function( require ) {
       spacing: VBOX_SPACING,
       children: [
         MoleculeFactory.H3O(),
-        new SubSupText( ChemUtils.toSubscript( 'H3O' ) + '<sup>+</sup>', SUBSUP_OPTIONS )
+        new SubSupText( 'H<sub>3</sub>O<sup>+</sup>', SUBSUP_OPTIONS )
       ]
     } );
   };
