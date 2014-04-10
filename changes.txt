@@ -1,3 +1,4 @@
+# 1.0.0-dev.8 4/9/14
 4/9/14 delete Beaker.containsPoint convenience function
 4/9/14 #101 make conductivity probes move together
 4/9/14 #102 restructure the 'solution' type hierarchy
