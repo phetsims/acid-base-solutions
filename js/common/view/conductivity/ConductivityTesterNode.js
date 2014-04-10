@@ -59,7 +59,7 @@ define( function( require ) {
 
     // apparatus (bulb + battery), origin at tip of bulb's base
     var apparatusNode = new Node( {
-      translation: conductivityTester.location,
+      translation: conductivityTester.bulbLocation,
       children: [
         bulbBatteryWire,
         battery,
@@ -72,7 +72,7 @@ define( function( require ) {
 
     // wire from base of bulb (origin) to negative probe
     var negativeWire = new WireNode(
-      conductivityTester.location.x - 5, conductivityTester.location.y - 10,
+      conductivityTester.bulbLocation.x - 5, conductivityTester.bulbLocation.y - 10,
       conductivityTester.negativeProbeX, conductivityTester.probeYProperty.value - conductivityTester.probeSize.height );
 
     // wire from battery terminal to positive probe
