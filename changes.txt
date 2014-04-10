@@ -1,3 +1,4 @@
+4/9/14 delete unused strings, remove trailing space in 'Introduction '
 4/9/14 remove dependency on nitroglycerin
 4/9/14 rename ConductivityTester.location to ConductivityTester.bulbLocation
 # 1.0.0-dev.8 4/9/14
