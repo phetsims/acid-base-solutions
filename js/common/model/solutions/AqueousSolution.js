@@ -36,9 +36,15 @@ define( function( require ) {
 
     /*
      * Description of molecules that make up this solution.
-     * This is an array of objects with these fields.
-     * key: string used to identify the molecule, used to look up color or view constructor
-     * concentrationFunctionName: name of function that computes concentration of molecule
+     * Each element in the array has this structure:
+     *
+     * {
+     *   {String} key: string used to identify the molecule, used to look up color or view constructor
+     *   {String} concentrationFunctionName: name of function that computes concentration of the molecule
+     * }
+     *
+     * The order of elements in this array determines the left-to-right order of bars in the graph,
+     * and the front-to-back rendering order of molecules in the magnifier.
      */
     this.molecules = molecules;
 
