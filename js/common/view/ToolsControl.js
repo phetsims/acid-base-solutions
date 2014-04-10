@@ -27,7 +27,6 @@ define( function( require ) {
   // constants
   var MIN_BUTTON_WIDTH = 40;
   var RADIO_BUTTON_OPTIONS = {
-    //TODO shadow and motion offsets rely on buggy behavior of InOutRadioButton, see sun#50
     shadowXOffset: 2,
     shadowYOffset: 2,
     motionXOffset: 2,

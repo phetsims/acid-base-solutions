@@ -1,3 +1,0 @@
-TODO list for acid-base-solutions
-
-- sun#50 buggy shadow on InOutRadioButton
