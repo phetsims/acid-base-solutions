@@ -67,7 +67,7 @@ define( function( require ) {
      * indicator color to be shown on the paper when it is dipped into solution and pulled out.
      */
     updateIndicatorHeight: function() {
-      if ( this.beaker.containsPoint( this.locationProperty.value ) ) {
+      if ( this.beaker.bounds.containsPoint( this.locationProperty.value ) ) {
         this.indicatorHeightProperty.value =
         Util.clamp( this.locationProperty.value.y - this.beaker.top + 5, this.indicatorHeightProperty.value, this.paperSize.height );
       }

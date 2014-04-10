@@ -34,13 +34,5 @@ define( function( require ) {
     this.bounds = new Bounds2( this.left, this.top, this.right, this.bottom );
   }
 
-  Beaker.prototype = {
-
-    // Does the beaker contain {Vector2} point?
-    containsPoint: function( point ) {
-      return this.bounds.containsPoint( point );
-    }
-  };
-
   return Beaker;
 } );
