@@ -9,27 +9,28 @@
  * the result of the solute dissolving is called the product.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';
 
   // imports
   var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
+  var DerivedProperty = require( 'AXON/DerivedProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PropertySet = require( 'AXON/PropertySet' );
   var Util = require( 'DOT/Util' );
 
-  var computePH = function( H3OConcentrationValue ) {
-    return -Math.round( 100 * Util.log10( H3OConcentrationValue ) ) / 100;
-  };
-
   /**
    * @param {SolutionType} solutionType
+   * @param strength the strength of the solute
+   * @param concentration the initial concentration of the solute, at the start of the reaction
    * @param {Array} molecules see this.molecules below
-   * @param {*} initialValues initial values for solution properties
    * @constructor
    */
-  function AqueousSolution( solutionType, molecules, initialValues ) {
+  function AqueousSolution( solutionType, strength, concentration, molecules ) {
+
+    var self = this;
 
     this.type = solutionType;
 
@@ -37,35 +38,39 @@ define( function( require ) {
      * Description of molecules that make up this solution.
      * This is an array of objects with these fields.
      * key: string used to identify the molecule, used to look up color or view constructor
-     * concentrationPropertyName: name of property that determines concentration of molecule
+     * concentrationFunctionName: name of function that computes concentration of molecule
      */
     this.molecules = molecules;
 
-    // all initial values are required! see issue #99
-    assert && assert( initialValues.hasOwnProperty( 'strength' ) );
-    assert && assert( initialValues.hasOwnProperty( 'concentration' ) );
-    assert && assert( initialValues.hasOwnProperty( 'soluteConcentration' ) );
-    assert && assert( initialValues.hasOwnProperty( 'productConcentration' ) );
-    assert && assert( initialValues.hasOwnProperty( 'H3OConcentration' ) );
-    assert && assert( initialValues.hasOwnProperty( 'OHConcentration' ) );
-    assert && assert( initialValues.hasOwnProperty( 'H2OConcentration' ) );
-
     PropertySet.call( this, {
-      strength: initialValues.strength,
-      concentration: initialValues.concentration,
-      soluteConcentration: initialValues.soluteConcentration,
-      productConcentration: initialValues.productConcentration,
-      H3OConcentration: initialValues.H3OConcentration,
-      OHConcentration: initialValues.OHConcentration,
-      H2OConcentration: initialValues.H2OConcentration,
-      pH: computePH( initialValues.H3OConcentration ) // pH of the solution at equilibrium
+      strength: strength,
+      concentration: concentration
     } );
 
-    var self = this;
-    this.property( 'H3OConcentration' ).link( function( H3OConcentrationValue ) {
-      self.pH = computePH( H3OConcentrationValue );
-    } );
+    this.addDerivedProperty( 'pH', [ 'strength', 'concentration' ],
+      function( strength, concentration ) {
+        return -Math.round( 100 * Util.log10( self.getH3OConcentration() ) ) / 100;
+      } );
   }
 
-  return inherit( PropertySet, AqueousSolution );
+  return inherit( PropertySet, AqueousSolution, {
+
+    //@protected convenience function
+    getConcentration: function() {
+      return this.property( 'concentration' ).value;
+    },
+
+    //@protected convenience function
+    getStrength: function() {
+      return this.property( 'strength' ).value;
+    },
+
+    // These functions must be implemented by subtypes.
+    getSoluteConcentration: function() { throw new Error( 'must be implemented by subtype' ); },
+    getProductConcentration: function() { throw new Error( 'must be implemented by subtype' ); },
+    getH3OConcentration: function() { throw new Error( 'must be implemented by subtype' ); },
+    getOHConcentration: function() { throw new Error( 'must be implemented by subtype' ); },
+    getH2OConcentration: function() { throw new Error( 'must be implemented by subtype' ); },
+    isValidStrength: function() { throw new Error( 'must be implemented by subtype' ); }
+  } );
 } );

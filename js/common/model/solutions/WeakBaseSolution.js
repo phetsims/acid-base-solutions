@@ -4,6 +4,7 @@
  *  An aqueous solution whose solute is a weak base.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 define( function( require ) {
@@ -15,95 +16,50 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
 
-  // [B] = c - [BH+]
-  var getSoluteConcentration = function( concentration, productConcentration ) {
-    return (concentration - productConcentration);
-  };
-
-  // [BH+] = ( -Kb + sqrt( Kb*Kb + 4*Kb*c ) ) / 2
-  var getProductConcentration = function( Kb, c ) {
-    //  Kb is strength, c is concentration
-    return (-Kb + Math.sqrt( ( Kb * Kb ) + ( 4 * Kb * c ) ) ) / 2;
-  };
-
-  // [H3O+] = Kw / [OH-]
-  var getH3OConcentration = function( OHConcentration ) {
-    return ABSConstants.WATER_EQUILIBRIUM_CONSTANT / OHConcentration;
-  };
-
-  // [OH-] = [BH+]
-  var getOHConcentration = function( productConcentration ) {
-    return productConcentration;
-  };
-
-  // [H2O] = W - [BH+]
-  var getH2OConcentration = function( productConcentration ) {
-    return (ABSConstants.WATER_CONCENTRATION - productConcentration);
-  };
-
-  // initial values for solution properties
-  var STRENGTH_DEFAULT = ABSConstants.WEAK_STRENGTH_RANGE.defaultValue,
-    CONCENTRATION_DEFAULT = ABSConstants.CONCENTRATION_RANGE.defaultValue,
-    PRODUCT_CONCENTRATION_DEFAULT = getProductConcentration( STRENGTH_DEFAULT, CONCENTRATION_DEFAULT ),
-    SOLUTE_CONCENTRATION_DEFAULT = getSoluteConcentration( CONCENTRATION_DEFAULT, PRODUCT_CONCENTRATION_DEFAULT ),
-    OH_CONCENTRATION_DEFAULT = getOHConcentration( PRODUCT_CONCENTRATION_DEFAULT ),
-    H2O_CONCENTRATION_DEFAULT = getH2OConcentration( PRODUCT_CONCENTRATION_DEFAULT ),
-    H3O_CONCENTRATION_DEFAULT = getH3OConcentration( OH_CONCENTRATION_DEFAULT );
-
-  var setSoluteConcentration = function() {
-    this.soluteConcentration = getSoluteConcentration( this.concentration, this.productConcentration );
-  };
-
-  var setProductConcentration = function() {
-    this.productConcentration = getProductConcentration( this.strength, this.concentration );
-  };
-
   function WeakBaseSolution() {
-    var self = this;
-
-    // set default strength and add common properties
-    AqueousSolution.call( this, SolutionType.WEAK_BASE,
+    AqueousSolution.call( this,
+      SolutionType.WEAK_BASE, ABSConstants.WEAK_STRENGTH_RANGE.defaultValue, ABSConstants.CONCENTRATION_RANGE.defaultValue,
       [
         // molecules found in this solution
-        {key: 'B', concentrationPropertyName: 'soluteConcentration'},
-        {key: 'H2O', concentrationPropertyName: 'H2OConcentration'},
-        {key: 'BH', concentrationPropertyName: 'productConcentration'},
-        {key: 'OH', concentrationPropertyName: 'OHConcentration'}
-      ],
-      {
-        // initial values for solution properties
-        strength: STRENGTH_DEFAULT,
-        concentration: CONCENTRATION_DEFAULT,
-        soluteConcentration: SOLUTE_CONCENTRATION_DEFAULT,
-        productConcentration: PRODUCT_CONCENTRATION_DEFAULT,
-        H2OConcentration: H2O_CONCENTRATION_DEFAULT,
-        H3OConcentration: H3O_CONCENTRATION_DEFAULT,
-        OHConcentration: OH_CONCENTRATION_DEFAULT
-      } );
-
-    // set links between concentrations
-    this.property( 'OHConcentration' ).lazyLink( function( value ) {
-      self.H3OConcentration = getH3OConcentration( value );
-    } );
-
-    this.property( 'productConcentration' ).lazyLink( function( value ) {
-      self.OHConcentration = getOHConcentration( value );
-      self.H2OConcentration = getH2OConcentration( value );
-    } );
-
-    this.property( 'productConcentration' ).lazyLink( setSoluteConcentration.bind( this ) );
-    this.property( 'concentration' ).lazyLink( setSoluteConcentration.bind( this ) );
-
-    this.property( 'strength' ).lazyLink( setProductConcentration.bind( this ) );
-    this.property( 'concentration' ).link( setProductConcentration.bind( this ) );
-
-    this.property( 'strength' ).link( function( strength ) {
-      // verify that strength is in the weak range
-      if ( !ABSConstants.WEAK_STRENGTH_RANGE.contains( strength ) ) {
-        throw new Error( 'invalid strength for weak base: ' + strength );
-      }
-    } );
+        { key: 'B', concentrationFunctionName: 'getSoluteConcentration' },
+        { key: 'H2O', concentrationFunctionName: 'getH2OConcentration' },
+        { key: 'BH', concentrationFunctionName: 'getProductConcentration' },
+        { key: 'OH', concentrationFunctionName: 'getOHConcentration' }
+      ] );
   }
 
-  return inherit( AqueousSolution, WeakBaseSolution );
+  return inherit( AqueousSolution, WeakBaseSolution, {
+
+    // [B] = c - [BH+]
+    getSoluteConcentration: function() {
+      return ( this.getConcentration() - this.getProductConcentration() );
+    },
+
+    // [BH+] = ( -Kb + sqrt( Kb*Kb + 4*Kb*c ) ) / 2
+    getProductConcentration: function() {
+      var Kb = this.getStrength();
+      var c = this.getConcentration();
+      return (-Kb + Math.sqrt( ( Kb * Kb ) + ( 4 * Kb * c ) ) ) / 2;
+    },
+
+    // [H3O+] = Kw / [OH-]
+    getH3OConcentration: function() {
+      return ABSConstants.WATER_EQUILIBRIUM_CONSTANT / this.getOHConcentration();
+    },
+
+    // [OH-] = [BH+]
+    getOHConcentration: function() {
+      return this.getProductConcentration();
+    },
+
+    // [H2O] = W - [BH+]
+    getH2OConcentration: function() {
+      return ( ABSConstants.WATER_CONCENTRATION - this.getProductConcentration() );
+    },
+
+    // Is strength in the weak range?
+    isValidStrength: function( strength ) {
+      return ABSConstants.WEAK_STRENGTH_RANGE.contains( strength )
+    }
+  } );
 } );

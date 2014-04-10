@@ -82,7 +82,8 @@ define( function( require ) {
       if ( this.visible ) {
 
         var solutionType = this.graph.solutionTypeProperty.value;
-        var molecules = this.graph.solutions[ solutionType ].molecules;
+        var solution = this.graph.solutions[ solutionType ];
+        var molecules = solution.molecules;
         var numberOfMolecules = molecules.length;
 
         // show one bar for each molecule in the current solution
@@ -91,7 +92,7 @@ define( function( require ) {
           if ( i < numberOfMolecules ) {
             // set visibility, color, value and position of new bars
             bar.setVisible( true );
-            bar.setValue( this.graph.solutions[solutionType].property( molecules[i].concentrationPropertyName ).value );
+            bar.setValue( solution[ molecules[i].concentrationFunctionName ]() );
             bar.setBarFill( ABSColors.MOLECULES[molecules[i].key] );
             bar.setTranslation( (i + 0.75 + (4 - numberOfMolecules) / 2) * this.graph.width / 4, this.graph.height );
           }
@@ -116,7 +117,7 @@ define( function( require ) {
         var molecules = solution.molecules;
 
         for ( var i = 0; i < molecules.length; i++ ) {
-          this.bars[i].setValue( solution.property( molecules[i].concentrationPropertyName ).value );
+          this.bars[i].setValue( solution[ molecules[i].concentrationFunctionName ]() );
         }
       }
     }

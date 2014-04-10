@@ -132,7 +132,7 @@ define( function( require ) {
       // Draw each type of molecule.
       solution.molecules.forEach( function( molecule ) {
         if ( molecule.key !== 'H2O' ) {
-          var concentration = solution.property( molecule.concentrationPropertyName ).value;
+          var concentration = solution[ molecule.concentrationFunctionName ]();
           var numberOfMolecules = getNumberOfMolecules( concentration );
           paintMolecules( wrapper, self.moleculeImages[ molecule.key ], numberOfMolecules, radius );
         }
