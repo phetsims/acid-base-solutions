@@ -66,7 +66,7 @@ define( function( require ) {
       lineJoin: 'round'
     } ) );
 
-    // horizontal tick marks, left edge, from bottom up
+    // horizontal tick marks, right edge, from bottom up
     var ticksParent = new Node();
     this.addChild( ticksParent );
 
