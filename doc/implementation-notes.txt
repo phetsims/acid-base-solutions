@@ -9,9 +9,6 @@ The transform is implicitly 1:1, with identical coordinate frames.
 One unit of distance in the model is one unit of distance in the play area.
 Positive x is to the right, positive y is down.
 
-The model implementation makes heavy use of associate arrays, resulting in some code
-that is difficult to read, search and refactor.
-
 Below is the main data structure. Understand this thoroughly before attempting to make changes.
 Notice that SolutionType functions both as a property name and a field value, very odd.
 Both SolutionType and the 'key' field in the molecules objects are used as indices into
