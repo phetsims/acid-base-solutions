@@ -74,7 +74,7 @@ define( function( require ) {
     // expand touch area
     this.touchArea = this.localBounds.dilatedXY( 10, 10 );
 
-    // drag paper to move it
+    // Constrained dragging
     this.addInputListener( new SimpleDragHandler( {
 
       clickOffset: null,
