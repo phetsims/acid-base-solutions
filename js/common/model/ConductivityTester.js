@@ -34,7 +34,7 @@ define( function( require ) {
 
     this.probeSize = new Dimension2( 20, 68 );
 
-    // bulb and battery location
+    // bottom-center of bulb's base
     this.location = new Vector2( beaker.location.x - 45, beaker.top - 30 );
 
     // probe locations. x-coordinates are fixed, probes move together vertically.
