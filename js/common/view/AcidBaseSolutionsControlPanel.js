@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Bae type of main control panel.
+ * Base type of main control panel.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
