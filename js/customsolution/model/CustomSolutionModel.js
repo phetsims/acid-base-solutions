@@ -4,6 +4,7 @@
  * Model for the 'Custom solution' screen in 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';
@@ -32,6 +33,14 @@ define( function( require ) {
         new WeakBaseSolution()
       ],
       DEFAULT_SOLUTION_TYPE );
+
+    /**
+     * Everything below here is for the convenience of the 'Solution' control panel, which
+     * allows the user to change concentration and (for weak solutions) strength.
+     * The concentration and strength properties created here are kept synchronized with
+     * whichever solution is currently selected. When the solution changes, the observer
+     * wiring is changed. This may have been more appropriate to handle in SolutionControl.
+     */
 
     // add convenience properties that will synchronize with the concentration and strength of the currently selected solution
     this.addProperty( 'concentration', this.solutions[DEFAULT_SOLUTION_TYPE].concentration ); // concentration of solution
