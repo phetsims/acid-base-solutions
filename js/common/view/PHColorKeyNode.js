@@ -61,7 +61,7 @@ define( function( require ) {
     }
     this.addChild( parentNode );
 
-    // color key above title
+    // title below color chips
     titleNode.left = parentNode.left;
     titleNode.top = parentNode.bottom + 2;
 
