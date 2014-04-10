@@ -2,7 +2,7 @@
 
 /**
  * Light bulb.
- * The bulb is made to 'glow' swapping images and by modulating the opacity of the bulb.
+ * The bulb is made to 'glow' by modulating opacity of the 'on' image.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
