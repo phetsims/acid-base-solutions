@@ -211,10 +211,12 @@ define( function( require ) {
             // top arrow, points right
             .moveTo( 0, -ARROWS_VERTICAL_SPACE / 2 )
             .lineTo( ARROWS_LENGTH, -ARROWS_VERTICAL_SPACE / 2 )
+            .lineTo( ARROWS_LENGTH, -ARROWS_VERTICAL_SPACE / 2 + 0.00001 ) // see issue #104
             .arc( ARROWS_LENGTH, -ARROWS_HEAD_RADIUS - ( ARROWS_VERTICAL_SPACE / 2 ), ARROWS_HEAD_RADIUS, 0.5 * Math.PI, 0.5 * Math.PI + ARROWS_HEAD_ANGLE_DELTA )
             // bottom arrow, points left
             .moveTo( ARROWS_LENGTH, ARROWS_VERTICAL_SPACE / 2 )
             .lineTo( 0, ARROWS_VERTICAL_SPACE / 2 )
+            .lineTo( 0, ARROWS_VERTICAL_SPACE / 2 + 0.00001 ) // see issue #104
             .arc( 0, ARROWS_HEAD_RADIUS + ( ARROWS_VERTICAL_SPACE / 2 ), ARROWS_HEAD_RADIUS, -0.5 * Math.PI, -0.5 * Math.PI + ARROWS_HEAD_ANGLE_DELTA ),
           { stroke: 'black' } ),
         new VStrut( SUBSCRIPT_Y_OFFSET + FONT_SIZE / 4 - 2 )
@@ -230,6 +232,7 @@ define( function( require ) {
         new Path( new Shape()
             .moveTo( 0, 0 )
             .lineTo( ARROWS_LENGTH, 0 )
+            .lineTo( ARROWS_LENGTH, 0.00001 ) // see issue #104
             .arc( ARROWS_LENGTH, -ARROWS_HEAD_RADIUS, ARROWS_HEAD_RADIUS, 0.5 * Math.PI, 0.5 * Math.PI + ARROWS_HEAD_ANGLE_DELTA )
             .moveTo( 25, 0 )
             .arc( ARROWS_LENGTH, ARROWS_HEAD_RADIUS, ARROWS_HEAD_RADIUS, -0.5 * Math.PI, -0.5 * Math.PI - ARROWS_HEAD_ANGLE_DELTA, true ),
