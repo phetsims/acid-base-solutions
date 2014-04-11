@@ -202,15 +202,17 @@ define( function( require ) {
     } );
   };
 
-  // double-headed arrow to indicate reversible reaction
+  // double arrow to indicate reversible reaction
   var reversibleArrowNode = function() {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
         new Path( new Shape()
+            // top arrow, points right
             .moveTo( 0, -ARROWS_VERTICAL_SPACE / 2 )
             .lineTo( ARROWS_LENGTH, -ARROWS_VERTICAL_SPACE / 2 )
             .arc( ARROWS_LENGTH, -ARROWS_HEAD_RADIUS - ( ARROWS_VERTICAL_SPACE / 2 ), ARROWS_HEAD_RADIUS, 0.5 * Math.PI, 0.5 * Math.PI + ARROWS_HEAD_ANGLE_DELTA )
+            // bottom arrow, points left
             .moveTo( ARROWS_LENGTH, ARROWS_VERTICAL_SPACE / 2 )
             .lineTo( 0, ARROWS_VERTICAL_SPACE / 2 )
             .arc( 0, ARROWS_HEAD_RADIUS + ( ARROWS_VERTICAL_SPACE / 2 ), ARROWS_HEAD_RADIUS, -0.5 * Math.PI, -0.5 * Math.PI + ARROWS_HEAD_ANGLE_DELTA ),
@@ -220,7 +222,7 @@ define( function( require ) {
     } );
   };
 
-  // single-headed arrow to indicate irreversible reaction
+  // single arrow to indicate irreversible reaction, points right
   var irreversibleArrowNode = function() {
     return new VBox( {
       spacing: VBOX_SPACING,
