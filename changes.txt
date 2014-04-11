@@ -1,3 +1,4 @@
+4/9/14 #106 increase size of solvent.png and scale it down, so that H2O molecules are the proper size
 4/9/14 delete unused strings, remove trailing space in 'Introduction '
 4/9/14 remove dependency on nitroglycerin
 4/9/14 rename ConductivityTester.location to ConductivityTester.bulbLocation
