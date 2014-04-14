@@ -110,8 +110,8 @@ define( function( require ) {
 
     // Resets all molecule counts to zero.
     reset: function() {
-      for ( var moleculeData in this.moleculesData ) {
-        moleculeData.numberOfMolecules = 0;
+      for ( var key in this.moleculesData ) {
+        this.moleculesData[key].numberOfMolecules = 0;
       }
     },
 
@@ -134,7 +134,7 @@ define( function( require ) {
 
           // add additional molecules as needed
           var currentNumberOfMolecules = moleculesData.numberOfMolecules;
-          for ( var i = currentNumberOfMolecules - 1; i < numberOfMolecules; i++ ) {
+          for ( var i = currentNumberOfMolecules; i < numberOfMolecules; i++ ) {
             var distance = self.positionRadius * Math.sqrt( Math.random() ); // random distance from the center of the lens
             var angle = Math.random() * 2 * Math.PI;
             moleculesData.xCoordinates[i] = distance * Math.cos( angle );

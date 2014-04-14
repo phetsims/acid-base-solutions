@@ -1,3 +1,4 @@
+4/14/14 #105 fixes to magnifier view
 4/14/14 #105 first pass at drawing deltas in magnifier view
 4/11/14 joist#120 added dependency on 'brand' repository
 4/10/14 #106 reduce size of solvent.png file instead of scaling it down, saves 600K, sacrifices a bit of quality but the image is shown with reduced opacity
