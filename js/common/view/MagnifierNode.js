@@ -126,7 +126,7 @@ define( function( require ) {
       solution.molecules.forEach( function( molecule ) {
         var key = molecule.key;
         var moleculesData = self.moleculesData[key];
-        if ( key !== 'H2O' ) {
+        if ( key !== 'H2O' ) { // skip water because it's displayed elsewhere as a static image file
 
           // map concentration to number of molecules
           var concentration = solution[ molecule.concentrationFunctionName ]();
