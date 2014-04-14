@@ -35,6 +35,7 @@ define( function( require ) {
   var IMAGE_SCALE = 2; // stored images are scaled this much to improve quality
 
   /**
+   * Compute the number of molecules that corresponds to some concentration.
    * This algorithm was ported from the Java implementation, and is documented in acid-base-solutions/doc/HA_A-_ratio_model.pdf.
    * @param {Number} concentration
    * @returns {Number}
@@ -43,30 +44,6 @@ define( function( require ) {
     var raiseFactor = Util.log10( concentration / BASE_CONCENTRATION );
     var baseFactor = Math.pow( ( MAX_MOLECULES / BASE_DOTS ), ( 1 / Util.log10( 1 / BASE_CONCENTRATION ) ) );
     return Math.round( BASE_DOTS * Math.pow( baseFactor, raiseFactor ) );
-  };
-
-  /**
-   * Paints one type of molecule to a Canvas.
-   * Use integer coordinates with drawImage to improve performance.
-   *
-   * @param {CanvasContextWrapper} wrapper
-   * @param {Image} image
-   * @param {Number} numberOfMolecules
-   * @param {Number} radius
-   */
-  var paintMolecules = function( wrapper, image, numberOfMolecules, radius ) {
-    if ( image ) { // images are generated asynchronously, so test in case they aren't available when this is first called
-      var imageXOffset = -image.width / 2;
-      var imageYOffset = -image.height / 2;
-      var distance, angle;
-      for ( var i = 0; i < numberOfMolecules; i++ ) {
-        distance = radius * Math.sqrt( Math.random() ); // random distance from the center of the lens
-        angle = Math.random() * 2 * Math.PI;
-        wrapper.context.drawImage( image,
-          Math.floor( distance * Math.cos( angle ) + imageXOffset ),
-          Math.floor( distance * Math.sin( angle ) + imageYOffset ) );
-      }
-    }
   };
 
   /**
@@ -80,6 +57,7 @@ define( function( require ) {
     CanvasNode.call( this, { canvasBounds: lensBounds } );
 
     this.magnifier = magnifier; //@private
+    this.positionRadius = IMAGE_SCALE * ( this.magnifier.radius - ( LENS_LINE_WIDTH / 2 ) );  // radius for computing random positions
 
     // Generate images, this happens asynchronously.
     var createImage = function( moleculeKey ) {
@@ -87,28 +65,88 @@ define( function( require ) {
       // Scale up to increase quality. Remember to scale down when drawing to canvas.
       moleculeNode.setScaleMagnitude( IMAGE_SCALE, IMAGE_SCALE );
       moleculeNode.toImage( function( image, x, y ) {
-        self.moleculeImages[ moleculeKey ] = image;
+        self.moleculesData[ moleculeKey ].image = image;
       } );
     };
 
+    // use typed array if available, it will use less memory and be faster
+    var ArrayConstructor = window.Float32Array || window.Array;
+
     /*
-     * Iterate over all solutions and their molecules. Generate an image for every molecule that we'll need.
-     * Note that the field names of this.moleculeImages will correspond to the 'key' fields in AqueousSolution.molecules.
+     * Iterate over all solutions and their molecules.
+     * Build a data structure that we'll use to store information for each unique type of molecule.
+     * The data structure looks like:
+     *
+     * {
+     *    A:   { image:..., numberOfMolecules:..., xCoordinates: [...], yCoordinates: [...] },
+     *    B:   { image:..., numberOfMolecules:..., xCoordinates: [...], yCoordinates: [...] },
+     *    BH:  { image:..., numberOfMolecules:..., xCoordinates: [...], yCoordinates: [...] },
+     *    H3O: { image:..., numberOfMolecules:..., xCoordinates: [...], yCoordinates: [...] },
+     *    ...
+     * }
+     *
+     * Note that the field names of this.moleculesData will correspond to the 'key' fields in AqueousSolution.molecules.
      * We skip water because it's displayed elsewhere as a static image file.
      */
-    this.moleculeImages = {};
+    this.moleculesData = {};
     for ( var solutionType in magnifier.solutions ) {
       var solution = magnifier.solutions[solutionType];
       solution.molecules.forEach( function( molecule ) {
-        if ( molecule.key !== 'H2O' && !self.moleculeImages.hasOwnProperty( molecule.key ) ) {
-          self.moleculeImages[ molecule.key ] = null;
-          createImage( molecule.key );
+        if ( molecule.key !== 'H2O' && !self.moleculesData.hasOwnProperty( molecule.key ) ) {
+          self.moleculesData[ molecule.key ] = {
+            image: null, // will be populated asynchronously
+            numberOfMolecules: 0,
+            // pre-allocate arrays to improve performance
+            xCoordinates: new ArrayConstructor( MAX_MOLECULES ),
+            yCoordinates: new ArrayConstructor( MAX_MOLECULES )
+          };
+          createImage( molecule.key ); // populate the image field asynchronously
         }
       } );
     }
   }
 
   inherit( CanvasNode, MoleculesNode, {
+
+    // Resets all molecule counts to zero.
+    reset: function() {
+      for ( var moleculeData in this.moleculesData ) {
+        moleculeData.numberOfMolecules = 0;
+      }
+    },
+
+    update: function() {
+
+      var self = this;
+      var solutionType = this.magnifier.solutionTypeProperty.value;
+      var solution = this.magnifier.solutions[ solutionType ];
+
+      // Update the data structure for each molecule that is in the current solution.
+      solution.molecules.forEach( function( molecule ) {
+        var key = molecule.key;
+        var moleculesData = self.moleculesData[key];
+        if ( key !== 'H2O' ) {
+
+          // map concentration to number of molecules
+          var concentration = solution[ molecule.concentrationFunctionName ]();
+          var numberOfMolecules = getNumberOfMolecules( concentration );
+
+          // add additional points as needed
+          var currentNumberOfMolecules = moleculesData.numberOfMolecules;
+          for ( var i = currentNumberOfMolecules - 1; i < numberOfMolecules; i++ ) {
+            var distance = self.positionRadius * Math.sqrt( Math.random() ); // random distance from the center of the lens
+            var angle = Math.random() * 2 * Math.PI;
+            moleculesData.xCoordinates[i] = distance * Math.cos( angle );
+            moleculesData.yCoordinates[i] = distance * Math.sin( angle );
+          }
+
+          moleculesData.numberOfMolecules = numberOfMolecules;
+        }
+      } );
+
+      // This results in paintCanvas being called.
+      this.invalidatePaint();
+    },
 
     /*
      * Iterates over each of the current solution's molecules, computes the number of molecules
@@ -127,14 +165,20 @@ define( function( require ) {
        * Apply the inverse scale factor to the graphics context, and adjust the radius.
        */
       wrapper.context.scale( 1 / IMAGE_SCALE, 1 / IMAGE_SCALE );
-      var radius = IMAGE_SCALE * ( this.magnifier.radius - ( LENS_LINE_WIDTH / 2 ) );
 
-      // Draw each type of molecule.
+      // Draw each type of molecule that is in the current solution.
       solution.molecules.forEach( function( molecule ) {
-        if ( molecule.key !== 'H2O' ) {
-          var concentration = solution[ molecule.concentrationFunctionName ]();
-          var numberOfMolecules = getNumberOfMolecules( concentration );
-          paintMolecules( wrapper, self.moleculeImages[ molecule.key ], numberOfMolecules, radius );
+        var key = molecule.key;
+        if ( key !== 'H2O' ) {
+          var moleculeData = self.moleculesData[ key ];
+          // images are generated asynchronously, so test in case they aren't available when this is first called
+          if ( moleculeData.image ) {
+            for ( var i = 0; i < moleculeData.numberOfMolecules; i++ ) {
+              var x = moleculeData.xCoordinates[i] - moleculeData.image.width / 2;
+              var y = moleculeData.yCoordinates[i] - moleculeData.image.height / 2;
+              wrapper.context.drawImage( moleculeData.image, Math.floor( x ), Math.floor( y ) ); // Use integer coordinates with drawImage to improve performance.
+            }
+          }
         }
       } );
     }
@@ -146,6 +190,7 @@ define( function( require ) {
    */
   function MagnifierNode( magnifier ) {
 
+    var self = this;
     Node.call( this );
 
     // lens
@@ -192,6 +237,8 @@ define( function( require ) {
     var updateMoleculesBound = this.updateMolecules.bind( this );
     magnifier.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
 
+     self.moleculesNode.reset();
+
       // unlink from previous solution
       if ( prevSolutionType ) {
         magnifier.solutions[prevSolutionType].property( 'strength' ).unlink( updateMoleculesBound );
@@ -229,7 +276,7 @@ define( function( require ) {
      */
     updateMolecules: function() {
       if ( this.visible ) {
-        this.moleculesNode.invalidatePaint(); // results in paintCanvas being called
+        this.moleculesNode.update();
       }
     }
   } );
