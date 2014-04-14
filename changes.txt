@@ -1,3 +1,4 @@
+# 1.0.0-dev.9 4/14/14
 4/14/14 #105 fixes to magnifier view
 4/14/14 #105 first pass at drawing deltas in magnifier view
 4/11/14 joist#120 added dependency on 'brand' repository
