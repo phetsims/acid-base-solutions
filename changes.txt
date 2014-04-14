@@ -1,4 +1,5 @@
 4/14/14 #105 first pass at drawing deltas in magnifier view
+4/11/14 joist#120 added dependency on 'brand' repositiory
 4/10/14 #106 reduce size of solvent.png file instead of scaling it down, saves 600K, sacrifices a bit of quality but the image is shown with reduced opacity
 4/10/14 #106 increase size of solvent.png and scale it down, so that H2O molecules are the proper size
 4/10/14 #104 workaround for Firefox graphics acceleration bug that was manifesting itself in reaction equation arrows
