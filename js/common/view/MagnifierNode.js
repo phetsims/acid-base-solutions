@@ -115,6 +115,7 @@ define( function( require ) {
       }
     },
 
+    // Updates the molecules data structure and triggers a paintCanvas.
     update: function() {
 
       var self = this;
@@ -149,8 +150,7 @@ define( function( require ) {
     },
 
     /*
-     * Iterates over each of the current solution's molecules, computes the number of molecules
-     * to display, and draws the molecules directly to Canvas.
+     * Iterates over each of the current solution's molecules and draws the molecules directly to Canvas.
      * @override
      * @param {CanvasContextWrapper} wrapper
      */
