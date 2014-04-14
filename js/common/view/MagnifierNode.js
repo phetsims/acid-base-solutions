@@ -132,7 +132,7 @@ define( function( require ) {
           var concentration = solution[ molecule.concentrationFunctionName ]();
           var numberOfMolecules = getNumberOfMolecules( concentration );
 
-          // add additional points as needed
+          // add additional molecules as needed
           var currentNumberOfMolecules = moleculesData.numberOfMolecules;
           for ( var i = currentNumberOfMolecules - 1; i < numberOfMolecules; i++ ) {
             var distance = self.positionRadius * Math.sqrt( Math.random() ); // random distance from the center of the lens
