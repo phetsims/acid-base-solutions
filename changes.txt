@@ -1,3 +1,4 @@
+4/15/14 remove nitroglycerin from package.json, not used
 # 1.0.0-dev.9 4/14/14
 4/14/14 #105 fixes to magnifier view
 4/14/14 #105 first pass at drawing deltas in magnifier view
