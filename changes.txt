@@ -1,3 +1,4 @@
+# 1.0.0-rc.1 4/15/14
 # 1.0 branched 4/15/14
 4/15/14 remove nitroglycerin from package.json, not used
 # 1.0.0-dev.9 4/14/14
