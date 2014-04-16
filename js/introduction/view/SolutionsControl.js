@@ -89,7 +89,7 @@ define( function( require ) {
 
     // Strong Base (M)
     var strongBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_BASE,
-      createStyledLabel( strongBaseString + ' (', 'M', ')', new MoleculeFactory.MOH() ),
+      createStyledLabel( strongBaseString + ' (', 'M', 'OH)', new MoleculeFactory.MOH() ),
       RADIO_BUTTON_OPTIONS );
 
     // Weak Base (B)

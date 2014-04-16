@@ -1,3 +1,4 @@
+4/16/14 #113 fix 'Strong Base (MOH)' label on radio button in 'Solutions' control panel
 4/16/14 #114 increase size of '+' and '-' on MOH molecule icon
 # 1.0 branched 4/15/14
 4/15/14 remove nitroglycerin from package.json, not used
