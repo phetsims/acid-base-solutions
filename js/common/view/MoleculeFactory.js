@@ -19,7 +19,6 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // constants
-  var FONT = new PhetFont( 8 );
   var MOLECULE_COLORS = ABSColors.MOLECULES;
 
   /**
@@ -94,11 +93,11 @@ define( function( require ) {
       return new Node( { children: [
         // add M ion
         new AtomNode( 6, MOLECULE_COLORS.MOH, { x: 0, y: 0 } ),
-        new Text( '+', { centerX: 0, centerY: 8.5, font: FONT } ),
+        new Text( '+', { centerX: 0, centerY: 10, font: new PhetFont( 12 ) } ),
         // add OH ion
         new AtomNode( 7, MOLECULE_COLORS.MOH, { x: 15, y: 0 } ),
         new AtomNode( 4, MOLECULE_COLORS.MOH, { x: 22, y: -4 } ),
-        new Text( '-', { centerX: 15, centerY: 8.5, font: FONT } )
+        new Text( '-', { centerX: 15, centerY: 8, font: new PhetFont( 15 ) } )
       ] } );
     },
 

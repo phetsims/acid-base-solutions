@@ -1,4 +1,5 @@
-4/5/14 check in dependencies.json for 1.0.0-rc.1
+4/16/15 #114 increase size of '+' and '-' on MOH molecule icon
+4/15/14 check in dependencies.json for 1.0.0-rc.1
 # 1.0.0-rc.1 4/15/14
 # 1.0 branched 4/15/14
 4/15/14 remove nitroglycerin from package.json, not used
