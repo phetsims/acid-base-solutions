@@ -73,7 +73,13 @@ define( function( require ) {
         }
 
         // set text
-        this.text.setText( StringUtils.format( pattern_0value_1power, Util.toFixed( value, 2 ), pow ) );
+        if ( pow === 0 ) {
+          // issue #109, show 'N.NN x 10^0' as 'N.NN'
+          this.text.setText( Util.toFixed( value, 2 ) );
+        }
+        else {
+          this.text.setText( StringUtils.format( pattern_0value_1power, Util.toFixed( value, 2 ), pow ) );
+        }
       }
       else {
         this.text.setText( Util.toFixed( value, 1 ) );
