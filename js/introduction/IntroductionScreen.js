@@ -38,8 +38,6 @@ define( function( require ) {
     var beakerHeight = 0.75 * height;
     var lipOffset = 0.05 * width;
 
-
-
     var beakerNode = new Path( new Shape()
       .moveTo( -lipOffset, -lipOffset )
       .lineTo( 0, 0 )
