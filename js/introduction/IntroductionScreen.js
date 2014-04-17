@@ -11,7 +11,6 @@ define( function( require ) {
   // imports
   var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
   var Circle = require( 'SCENERY/nodes/Circle' );
-  var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var IntroductionModel = require( 'ACID_BASE_SOLUTIONS/introduction/model/IntroductionModel' );
   var IntroductionView = require( 'ACID_BASE_SOLUTIONS/introduction/view/IntroductionView' );
