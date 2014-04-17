@@ -8,7 +8,7 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "50c9dacdb768f6703c6600a64b7400dda90606b1",
+    "sha": "31d2e2ee09f8ed85b705b6f7ba3f9dcfc36aa087",
     "branch": "master"
   },
   "scenery-phet": {
@@ -16,7 +16,7 @@
     "branch": "master"
   },
   "scenery": {
-    "sha": "5aea96fea62c7040835eb700da494c1a3bf5d84a",
+    "sha": "8bd0ccfb52be49de06b591b6ea88b3a51cfd72e4",
     "branch": "master"
   },
   "phetcommon": {
@@ -44,7 +44,7 @@
     "branch": "phet"
   },
   "axon": {
-    "sha": "e333336921bd305ea7a1ec5c548b00e41e7acda1",
+    "sha": "1175e1f2d0c164469eb1d87c1b1a9ad889713947",
     "branch": "master"
   },
   "assert": {
@@ -52,8 +52,8 @@
     "branch": "master"
   },
   "acid-base-solutions": {
-    "sha": "b627e815b72b1a16acb60099980005e3309d04bf",
+    "sha": "ce5a69884b0863ad9f95ee63ca03c8a457e0546f",
     "branch": "1.0"
   },
-  "comment": "# acid-base-solutions 1.0.0-rc.1 Tue Apr 15 2014 18:12:11 GMT-0600 (MDT)"
+  "comment": "# acid-base-solutions 1.0.0-rc.2 Thu Apr 17 2014 13:08:27 GMT-0600 (MDT)"
 }

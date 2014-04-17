@@ -1,3 +1,4 @@
+4/17/14 check in dependencies.json for 1.0.0-rc.2
 # 1.0.0-rc.2 4/17/14
 4/17/14 #119 create icon for Introduction screen programmatically, so that it looks good at all sizes
 4/16/14 #111 don't show 'hand' cursor over disabled 'Solvent' check box (sun#65)
