@@ -1,5 +1,4 @@
 battery.png source=PhET
-introduction-icon.png source=PhET
 light-bulb-icon.png source=PhET author=Bryce Gruneich
 light-bulb-off.png source=PhET author=Bryce Gruneich
 light-bulb-on.png source=PhET author=Bryce Gruneich
