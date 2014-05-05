@@ -15,7 +15,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var ResetAllButtonDeprecated = require( 'SCENERY_PHET/ResetAllButtonDeprecated' );
+  var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var Text = require( 'SCENERY/nodes/Text' );
   var ToolsControl = require( 'ACID_BASE_SOLUTIONS/common/view/ToolsControl' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -63,10 +63,12 @@ define( function( require ) {
     var toolsControl = new ToolsControl( viewProperties.property( 'toolMode' ) );
 
     // Reset All button
-    var resetAllButton = new ResetAllButtonDeprecated( function() {
-      model.reset();
-      viewProperties.reset();
-    }, { scale: 0.75 } );
+    var resetAllButton = new ResetAllButton( {
+      listener: function() {
+        model.reset();
+        viewProperties.reset();
+      },
+      scale: 0.75 } );
 
     // 'Solution' and 'Views' panels have same width, 'Tools' panel does not
     var maxWidth = Math.max( solutionControl.width, viewsControl.width );
