@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var Range = require( 'DOT/Range' );
 
   // constants

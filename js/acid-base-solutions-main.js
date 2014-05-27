@@ -9,7 +9,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var CustomSolutionScreen = require( 'ACID_BASE_SOLUTIONS/customsolution/CustomSolutionScreen' );
   var IntroductionScreen = require( 'ACID_BASE_SOLUTIONS/introduction/IntroductionScreen' );
   var Sim = require( 'JOIST/Sim' );

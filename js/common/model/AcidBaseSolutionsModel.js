@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var Beaker = require( 'ACID_BASE_SOLUTIONS/common/model/Beaker' );
   var ConcentrationGraph = require( 'ACID_BASE_SOLUTIONS/common/model/ConcentrationGraph' );
   var ConductivityTester = require( 'ACID_BASE_SOLUTIONS/common/model/ConductivityTester' );

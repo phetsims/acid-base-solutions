@@ -9,7 +9,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var ABSwitch = require( 'SUN/ABSwitch' );
   var ArrowButton = require( 'SCENERY_PHET/ArrowButton' );

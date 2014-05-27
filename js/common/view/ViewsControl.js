@@ -9,7 +9,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
   var CheckBox = require( 'SUN/CheckBox' );

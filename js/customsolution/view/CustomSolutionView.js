@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var AcidBaseSolutionsView = require( 'common/view/AcidBaseSolutionsView' );
   var inherit = require( 'PHET_CORE/inherit' );
   var SolutionControl = require( 'ACID_BASE_SOLUTIONS/customsolution/view/SolutionControl' );

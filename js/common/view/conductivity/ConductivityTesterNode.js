@@ -13,7 +13,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var Circle = require( 'SCENERY/nodes/Circle' );
   var WireNode = require( 'ACID_BASE_SOLUTIONS/common/view/conductivity/WireNode' );
   var ProbeNode = require( 'ACID_BASE_SOLUTIONS/common/view/conductivity/ProbeNode' );
