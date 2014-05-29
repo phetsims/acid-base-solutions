@@ -23,7 +23,7 @@ define( function( require ) {
   var Util = require( 'DOT/Util' );
 
   // images
-  var solventImage = require( 'image!ACID_BASE_SOLUTIONS/../images/solvent.png' );
+  var solventImage = require( 'image!ACID_BASE_SOLUTIONS/solvent.png' );
 
   // constants
   var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
