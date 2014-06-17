@@ -13,7 +13,7 @@ define( function( require ) {
   var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var ABSwitch = require( 'SUN/ABSwitch' );
   var ArrowButton = require( 'SCENERY_PHET/ArrowButton' );
-  var ConcentrationSlider = require( 'ACID_BASE_SOLUTIONS/customsolution/view/ConcentrationSlider' );
+  var ConcentrationSlider = require( 'ACID_BASE_SOLUTIONS/mysolution/view/ConcentrationSlider' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HSeparator = require( 'SUN/HSeparator' );
@@ -23,7 +23,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
-  var StrengthSlider = require( 'ACID_BASE_SOLUTIONS/customsolution/view/StrengthSlider' );
+  var StrengthSlider = require( 'ACID_BASE_SOLUTIONS/mysolution/view/StrengthSlider' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
 

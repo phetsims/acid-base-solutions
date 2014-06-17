@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * View for the 'Custom Solution' screen.
+ * View for the 'My Solution' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -11,15 +11,15 @@ define( function( require ) {
   // modules
   var AcidBaseSolutionsView = require( 'common/view/AcidBaseSolutionsView' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var SolutionControl = require( 'ACID_BASE_SOLUTIONS/customsolution/view/SolutionControl' );
+  var SolutionControl = require( 'ACID_BASE_SOLUTIONS/mysolution/view/SolutionControl' );
 
   /**
-   * @param {CustomSolutionModel} model
+   * @param {MySolutionModel} model
    * @constructor
    */
-  function CustomSolutionView( model ) {
+  function MySolutionView( model ) {
     AcidBaseSolutionsView.call( this, model, new SolutionControl( model.property( 'solutionType' ), model.property( 'concentration' ), model.property( 'strength' ) ) );
   }
 
-  return inherit( AcidBaseSolutionsView, CustomSolutionView );
+  return inherit( AcidBaseSolutionsView, MySolutionView );
 } );

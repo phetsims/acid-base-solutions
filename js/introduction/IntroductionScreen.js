@@ -24,12 +24,13 @@ define( function( require ) {
   var introductionTitleString = require( 'string!ACID_BASE_SOLUTIONS/introductionTitle' );
 
   /**
-   * Create the icon for the 'Introduction' screen.
-   * @param width
-   * @param height
+   * Creates the icon for this screen.
    * @returns {Node}
    */
-  var createIntroductionIcon = function( width, height ) {
+  var createScreenIcon = function() {
+
+    var width = Screen.HOME_SCREEN_ICON_SIZE.width;
+    var height = Screen.HOME_SCREEN_ICON_SIZE.height;
 
     var background = new Rectangle( 0, 0, width, height, { fill: 'white' } );
 
@@ -63,7 +64,7 @@ define( function( require ) {
   function IntroductionScreen() {
     Screen.call( this,
       introductionTitleString,
-      createIntroductionIcon( 548, 373 ),
+      createScreenIcon(),
       function() { return new IntroductionModel(); },
       function( model ) { return new IntroductionView( model ); },
       { backgroundColor: ABSColors.SCREEN_BACKGROUND }

@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Model for the 'Custom solution' screen in 'Acid-Base Solutions' sim.
+ * Model for the 'My Solution' screen in 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -21,7 +21,7 @@ define( function( require ) {
   // constants
   var DEFAULT_SOLUTION_TYPE = SolutionType.WEAK_ACID;
 
-  function CustomSolutionModel() {
+  function MySolutionModel() {
 
     var self = this;
 
@@ -85,5 +85,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( AcidBaseSolutionsModel, CustomSolutionModel );
+  return inherit( AcidBaseSolutionsModel, MySolutionModel );
 } );

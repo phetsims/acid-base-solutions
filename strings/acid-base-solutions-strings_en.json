@@ -3,7 +3,7 @@
   "acid-base-solutions.name": "Acid-Base Solutions",
   "base": "Base",
   "concentrationGraph.yAxis": "Equilibrium Concentration (mol/L)",
-  "customSolutionTitle": "Custom Solution",
+  "mySolutionTitle": "My Solution",
   "graph": "Graph",
   "hideViews": "Hide Views",
   "initialConcentration": "Initial Concentration (mol/L):",

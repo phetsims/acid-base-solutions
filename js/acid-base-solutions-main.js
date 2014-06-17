@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var CustomSolutionScreen = require( 'ACID_BASE_SOLUTIONS/customsolution/CustomSolutionScreen' );
+  var MySolutionScreen = require( 'ACID_BASE_SOLUTIONS/mysolution/MySolutionScreen' );
   var IntroductionScreen = require( 'ACID_BASE_SOLUTIONS/introduction/IntroductionScreen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
@@ -20,7 +20,7 @@ define( function( require ) {
 
   var screens = [
     new IntroductionScreen(),
-    new CustomSolutionScreen()
+    new MySolutionScreen()
   ];
 
   var simOptions = {

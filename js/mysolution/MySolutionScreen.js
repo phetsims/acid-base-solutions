@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * The 'Custom Solution' screen.
+ * The 'My Solution' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -10,8 +10,8 @@ define( function( require ) {
 
   // modules
   var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
-  var CustomSolutionModel = require( 'ACID_BASE_SOLUTIONS/customsolution/model/CustomSolutionModel' );
-  var CustomSolutionView = require( 'ACID_BASE_SOLUTIONS/customsolution/view/CustomSolutionView' );
+  var MySolutionModel = require( 'ACID_BASE_SOLUTIONS/mysolution/model/MySolutionModel' );
+  var MySolutionView = require( 'ACID_BASE_SOLUTIONS/mysolution/view/MySolutionView' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -19,15 +19,16 @@ define( function( require ) {
   var Screen = require( 'JOIST/Screen' );
 
   // strings
-  var customSolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/customSolutionTitle' );
+  var mySolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/mySolutionTitle' );
 
   /**
-   * Create the icon for the 'Custom Solution' screen.
-   * @param width
-   * @param height
+   * Creates the icon for this screen.
    * @returns {Node}
    */
-  var createCustomSolutionsIcon = function( width, height ) {
+  var createScreenIcon = function() {
+
+    var width = Screen.HOME_SCREEN_ICON_SIZE.width;
+    var height = Screen.HOME_SCREEN_ICON_SIZE.height;
 
     var h3oNode = MoleculeFactory.H3O();
     var ohNode = MoleculeFactory.OH();
@@ -50,15 +51,15 @@ define( function( require ) {
   };
 
 
-  function IntroductionScreen() {
+  function MySolutionScreen() {
     Screen.call( this,
-      customSolutionTitleString,
-      createCustomSolutionsIcon( 548, 373 ),
-      function() { return new CustomSolutionModel(); },
-      function( model ) { return new CustomSolutionView( model ); },
+      mySolutionTitleString,
+      createScreenIcon(),
+      function() { return new MySolutionModel(); },
+      function( model ) { return new MySolutionView( model ); },
       { backgroundColor: ABSColors.SCREEN_BACKGROUND }
     );
   }
 
-  return inherit( Screen, IntroductionScreen );
+  return inherit( Screen, MySolutionScreen );
 } );
