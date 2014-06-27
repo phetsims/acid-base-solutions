@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -55,7 +56,7 @@ define( function( require ) {
     } );
   }
 
-  PHPaper.prototype = {
+  return inherit( Object, PHPaper, {
 
     reset: function() {
       this.indicatorHeightProperty.reset();
@@ -72,7 +73,5 @@ define( function( require ) {
         Util.clamp( this.locationProperty.value.y - this.beaker.top + 5, this.indicatorHeightProperty.value, this.paperSize.height );
       }
     }
-  };
-
-  return PHPaper;
+  } );
 } );

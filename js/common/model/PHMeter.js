@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -31,7 +32,7 @@ define( function( require ) {
     this.locationProperty = new Property( new Vector2( beaker.right - 65, beaker.top - 5 ) );
   }
 
-  PHMeter.prototype = {
+  return inherit( Object, PHMeter, {
 
     reset: function() {
       this.locationProperty.reset();
@@ -41,7 +42,5 @@ define( function( require ) {
     inSolution: function() {
       return this.beaker.bounds.containsPoint( this.locationProperty.value );
     }
-  };
-
-  return PHMeter;
+  } );
 } );

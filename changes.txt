@@ -1,3 +1,4 @@
+6/26/14 #125 replace explicit prototype assignment with inherit(Object,...)
 # 1.1 branched 6/19/14
 # 1.1.0-dev.1 6/17/14
 6/17/14 #122 rename 'Custom Solution' screen to 'My Solution'

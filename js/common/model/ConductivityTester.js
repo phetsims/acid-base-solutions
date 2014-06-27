@@ -13,6 +13,7 @@ define( function( require ) {
   var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -60,12 +61,10 @@ define( function( require ) {
       } );
   }
 
-  ConductivityTester.prototype = {
+  return inherit( Object, ConductivityTester, {
 
     reset: function() {
       this.probeYProperty.reset();
     }
-  };
-
-  return ConductivityTester;
+  } );
 } );
