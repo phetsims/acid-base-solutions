@@ -1,4 +1,5 @@
 # 1.1.0 8/1/14
+8/1/14 restore CM in credits
 6/19/14 check in dependencies.json for 1.1.0-rc.1
 # 1.1.0-rc.1 6/19/14
 # 1.1 branched 6/19/14
