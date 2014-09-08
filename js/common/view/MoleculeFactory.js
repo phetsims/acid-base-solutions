@@ -22,9 +22,9 @@ define( function( require ) {
   var MOLECULE_COLORS = ABSColors.MOLECULES;
 
   /**
-   * @param radius
-   * @param color
-   * @param options
+   * @param {number} radius
+   * @param {Color|String} color
+   * @param {Object} options
    * @constructor
    */
   function AtomNode( radius, color, options ) {
