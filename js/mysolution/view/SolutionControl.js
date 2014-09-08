@@ -49,7 +49,7 @@ define( function( require ) {
    * @param {Property<SolutionType>} solutionTypeProperty
    * @param {Property<Number>} concentrationProperty
    * @param {Property<Number>} strengthProperty
-   * @param {*} options
+   * @param {Object} options
    * @constructor
    */
   function SolutionControl( solutionTypeProperty, concentrationProperty, strengthProperty, options ) {

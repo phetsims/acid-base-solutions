@@ -18,7 +18,7 @@ define( function( require ) {
    * @param startY
    * @param endX
    * @param endY
-   * @param {*} options
+   * @param {Object} options
    * @constructor
    */
   function WireNode( startX, startY, endX, endY, options ) {

@@ -27,7 +27,7 @@ define( function( require ) {
 
   /**
    * @param {Number} bulbRadius
-   * @param {*} options
+   * @param {Object} options
    * @constructor
    */
   function LightRaysNode( bulbRadius, options ) {

@@ -1,3 +1,4 @@
+9/8/14 use {Object} instead of {*} as type expression for options param
 8/1/14 restore CM in credits
 6/26/14 #125 replace explicit prototype assignment with inherit(Object,...)
 # 1.1 branched 6/19/14
