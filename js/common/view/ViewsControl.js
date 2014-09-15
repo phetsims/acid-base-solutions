@@ -50,7 +50,7 @@ define( function( require ) {
   /**
    * @param {Property<ViewMode>} viewModeProperty
    * @param {Property<Boolean>} solventVisibleProperty
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function ViewsControl( viewModeProperty, solventVisibleProperty, options ) {

@@ -24,7 +24,7 @@ define( function( require ) {
   /**
    * @param {number} radius
    * @param {Color|String} color
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function AtomNode( radius, color, options ) {

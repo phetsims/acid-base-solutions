@@ -28,7 +28,7 @@ define( function( require ) {
    * @param {Dimension2} probeSize
    * @param {Number} probeYProperty y-coordinate of the probe
    * @param {SimpleDragHandler} probeDragHandler
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function ProbeNode( probeSize, probeYProperty, probeDragHandler, options ) {

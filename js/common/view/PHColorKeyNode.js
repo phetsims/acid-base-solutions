@@ -28,7 +28,7 @@ define( function( require ) {
 
   /**
    * @param {Dimension2} paperSize
-   * @param {Object} options any Node options
+   * @param {Object} [options] any Node options
    * @constructor
    */
   function PHColorKeyNode( paperSize, options ) {

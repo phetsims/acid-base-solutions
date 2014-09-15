@@ -43,7 +43,7 @@ define( function( require ) {
    * @param {AcidBaseSolutionModel} model
    * @param {PropertySet} viewProperties properties that are specific to the view
    * @param {Node} solutionControl
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function AcidBaseSolutionsControlPanel( model, viewProperties, solutionControl, options ) {

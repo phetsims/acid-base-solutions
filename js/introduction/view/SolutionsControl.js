@@ -57,7 +57,7 @@ define( function( require ) {
 
   /**
    * @param {Property<SolutionType>} solutionTypeProperty
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function SolutionsControl( solutionTypeProperty, options ) {
