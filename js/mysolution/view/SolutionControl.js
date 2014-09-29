@@ -152,8 +152,8 @@ define( function( require ) {
 
     // disable arrow buttons
     concentrationProperty.link( function( concentration ) {
-      leftArrowButton.setEnabled( concentration > concentrationRange.min );
-      rightArrowButton.setEnabled( concentration < concentrationRange.max );
+      leftArrowButton.enabled = ( concentration > concentrationRange.min );
+      rightArrowButton.enabled = ( concentration < concentrationRange.max );
     } );
 
     // hide strength slider for weak solutions
