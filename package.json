@@ -15,6 +15,5 @@
     "uglify-js": "~2.4.0",
     "requirejs": "~2.1.8"
   },
-  "requirejsNamespace": "ACID_BASE_SOLUTIONS",
   "simTitleStringKey": "ACID_BASE_SOLUTIONS/acid-base-solutions.name"
 }
