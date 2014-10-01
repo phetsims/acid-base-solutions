@@ -46,7 +46,7 @@ define( function( require ) {
   };
 
   /**
-   * @param {Property<ToolMode>} toolModeProperty
+   * @param {Property.<ToolMode>} toolModeProperty
    * @param {Object} [options]
    * @constructor
    */

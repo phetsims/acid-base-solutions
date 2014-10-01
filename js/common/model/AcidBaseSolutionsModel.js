@@ -19,7 +19,7 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
 
   /**
-   * @param {Array<AqueousSolution>} solutions
+   * @param {AqueousSolution[]} solutions
    * @param {SolutionType} defaultSolutionType
    * @constructor
    */

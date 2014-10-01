@@ -18,7 +18,7 @@ define( function( require ) {
 
   /**
    * @param {Beaker} beaker
-   * @param {Property<SolutionType>} solutionTypeProperty
+   * @param {Property.<SolutionType>} solutionTypeProperty
    * @constructor
    */
   function ReactionEquationNode( beaker, solutionTypeProperty ) {

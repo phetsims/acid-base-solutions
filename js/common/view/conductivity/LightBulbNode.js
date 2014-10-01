@@ -20,7 +20,7 @@ define( function( require ) {
   var offImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-off.png' );
 
   /**
-   * @param {Property<Number>} brightnessProperty 0 (off) to 1 (full brightness)
+   * @param {Property.<number>} brightnessProperty 0 (off) to 1 (full brightness)
    * @constructor
    */
   function LightBulbNode( brightnessProperty, options ) {

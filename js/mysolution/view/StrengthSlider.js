@@ -38,8 +38,8 @@ define( function( require ) {
    * Maps between the linear slider and the logarithmic range of strength.
    * Implemented as an inner type because this is internal to the slider.
    *
-   * @param {Property<SolutionType>} solutionTypeProperty
-   * @param {Property<Number>} strengthProperty
+   * @param {Property.<SolutionType>} solutionTypeProperty
+   * @param {Property.<number>} strengthProperty
    * @param {Range} strengthRange
    * @constructor
    */
@@ -67,8 +67,8 @@ define( function( require ) {
   }
 
   /**
-   * @param {Property<SolutionType>} solutionTypeProperty
-   * @param {Property<Number>} strengthProperty
+   * @param {Property.<SolutionType>} solutionTypeProperty
+   * @param {Property.<number>} strengthProperty
    * @param {Range} strengthRange
    * @constructor
    */

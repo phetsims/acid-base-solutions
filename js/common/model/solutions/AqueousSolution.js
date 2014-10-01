@@ -37,8 +37,8 @@ define( function( require ) {
      * Each element in the array has this structure:
      *
      * {
-     *   {String} key: string used to identify the molecule, used to look up color or view constructor
-     *   {String} concentrationFunctionName: name of function that computes concentration of the molecule
+     *   {string} key: string used to identify the molecule, used to look up color or view constructor
+     *   {string} concentrationFunctionName: name of function that computes concentration of the molecule
      * }
      *
      * The order of elements in this array determines the left-to-right order of bars in the graph,

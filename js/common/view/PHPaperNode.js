@@ -24,7 +24,7 @@ define( function( require ) {
   var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
   var PAPER_STROKE = 'rgb(100, 100, 100)';
 
-  // Creates a {Color} color for a given {Number} pH.
+  // Creates a {Color} color for a given {number} pH.
   var pHToColor = function( pH ) {
     assert && assert( pH >= 0 && pH <= ABSColors.PH.length );
     var color;

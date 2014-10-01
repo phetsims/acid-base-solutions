@@ -37,8 +37,8 @@ define( function( require ) {
   /**
    * Compute the number of molecules that corresponds to some concentration.
    * This algorithm was ported from the Java implementation, and is documented in acid-base-solutions/doc/HA_A-_ratio_model.pdf.
-   * @param {Number} concentration
-   * @returns {Number}
+   * @param {number} concentration
+   * @returns {number}
    */
   var getNumberOfMolecules = function( concentration ) {
     var raiseFactor = Util.log10( concentration / BASE_CONCENTRATION );

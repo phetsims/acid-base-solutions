@@ -10,8 +10,8 @@ define( function() {
 
   /**
    * @param {Beaker} beaker
-   * @param {Array<AqueousSolution>} solutions
-   * @param {Property<SolutionType>} solutionTypeProperty
+   * @param {AqueousSolution[]} solutions
+   * @param {Property.<SolutionType>} solutionTypeProperty
    * @constructor
    */
   function ConcentrationGraph( beaker, solutions, solutionTypeProperty ) {

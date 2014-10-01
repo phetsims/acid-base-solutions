@@ -18,8 +18,8 @@ define( function( require ) {
 
   /**
    * @param {Beaker} beaker
-   * @param {Property<SolutionType>} solutionTypeProperty
-   * @param {Property<Number>} pHProperty
+   * @param {Property.<SolutionType>} solutionTypeProperty
+   * @param {Property.<number>} pHProperty
    * @constructor
    */
   function PHPaper( beaker, solutionTypeProperty, pHProperty ) {

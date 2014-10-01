@@ -46,9 +46,9 @@ define( function( require ) {
   var AB_SWITCH_SIZE = new Dimension2( 40, 20 );
 
   /**
-   * @param {Property<SolutionType>} solutionTypeProperty
-   * @param {Property<Number>} concentrationProperty
-   * @param {Property<Number>} strengthProperty
+   * @param {Property.<SolutionType>} solutionTypeProperty
+   * @param {Property.<number>} concentrationProperty
+   * @param {Property.<number>} strengthProperty
    * @param {Object} [options]
    * @constructor
    */

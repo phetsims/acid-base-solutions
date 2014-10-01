@@ -26,7 +26,7 @@ define( function( require ) {
   var RAY_STROKE_SMALL = 0.5;
 
   /**
-   * @param {Number} bulbRadius
+   * @param {number} bulbRadius
    * @param {Object} [options]
    * @constructor
    */

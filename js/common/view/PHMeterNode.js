@@ -49,10 +49,10 @@ define( function( require ) {
 
   /**
    * pH Probe, consists of a shaft attached to a tip.
-   * @param {Number} shaftWidth
-   * @param {Number} shaftHeight
-   * @param {Number} tipWidth
-   * @param {Number} tipHeight
+   * @param {number} shaftWidth
+   * @param {number} shaftHeight
+   * @param {number} tipWidth
+   * @param {number} tipHeight
    * @constructor
    */
   function ProbeNode( shaftWidth, shaftHeight, tipWidth, tipHeight ) {

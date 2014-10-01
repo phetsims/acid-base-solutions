@@ -17,7 +17,7 @@ define( function( require ) {
 
   /**
    * @param {Beaker} beaker
-   * @param {Property<Number>} pHProperty
+   * @param {Property.<number>} pHProperty
    * @constructor
    */
   function PHMeter( beaker, pHProperty ) {

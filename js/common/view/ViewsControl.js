@@ -48,8 +48,8 @@ define( function( require ) {
   };
 
   /**
-   * @param {Property<ViewMode>} viewModeProperty
-   * @param {Property<Boolean>} solventVisibleProperty
+   * @param {Property.<ViewMode>} viewModeProperty
+   * @param {Property.<boolean>} solventVisibleProperty
    * @param {Object} [options]
    * @constructor
    */
