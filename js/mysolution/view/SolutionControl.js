@@ -12,7 +12,7 @@ define( function( require ) {
   // modules
   var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   var ABSwitch = require( 'SUN/ABSwitch' );
-  var ArrowButton = require( 'SCENERY_PHET/ArrowButton' );
+  var ArrowButton = require( 'SCENERY_PHET/buttons/ArrowButton' );
   var ConcentrationSlider = require( 'ACID_BASE_SOLUTIONS/mysolution/view/ConcentrationSlider' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var HBox = require( 'SCENERY/nodes/HBox' );
