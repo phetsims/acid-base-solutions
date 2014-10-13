@@ -36,7 +36,7 @@ define( function( require ) {
       // pH value is not an integer, interpolate between 2 closest colors
       var lowerPH = Math.floor( pH );
       var upperPH = lowerPH + 1;
-      color = Color.interpolateRBGA( ABSColors.PH[lowerPH], ABSColors.PH[upperPH], ( pH - lowerPH ) );
+      color = Color.interpolateRGBA( ABSColors.PH[lowerPH], ABSColors.PH[upperPH], ( pH - lowerPH ) );
     }
     return color;
   };
