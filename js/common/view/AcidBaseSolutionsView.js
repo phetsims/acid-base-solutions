@@ -12,6 +12,7 @@ define( function( require ) {
   // modules
   var AcidBaseSolutionsControlPanel = require( 'ACID_BASE_SOLUTIONS/common/view/AcidBaseSolutionsControlPanel' );
   var BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
+  var Bounds2 = require( 'DOT/Bounds2' );
   var ConductivityTesterNode = require( 'ACID_BASE_SOLUTIONS/common/view/conductivity/ConductivityTesterNode' );
   var ConcentrationGraphNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphNode' );
   var ReactionEquationNode = require( 'ACID_BASE_SOLUTIONS/common/view/ReactionEquationNode' );
@@ -33,7 +34,7 @@ define( function( require ) {
    */
   function AcidBaseSolutionsView( model, solutionControl ) {
 
-    ScreenView.call( this, { renderer: 'svg' } );
+    ScreenView.call( this, { renderer: 'svg', layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
 
     var beakerNode = new BeakerNode( model.beaker );
     var equationNode = new ReactionEquationNode( model.beaker, model.property( 'solutionType' ) );
