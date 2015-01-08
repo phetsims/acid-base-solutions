@@ -18,7 +18,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var LightBulbNode = require( 'ACID_BASE_SOLUTIONS/common/view/conductivity/LightBulbNode' );
+  var LightBulbNode = require( 'SCENERY_PHET/LightBulbNode' );
   var MinusNode = require( 'SCENERY_PHET/MinusNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
