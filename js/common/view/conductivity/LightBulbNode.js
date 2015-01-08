@@ -20,6 +20,7 @@ define( function( require ) {
   var offImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-off.png' );
 
   // constants
+  var BULB_IMAGE_SCALE = 0.33;
   var MIN_RAYS = 8;
   var MAX_RAYS = 60;
   var MIN_RAY_LENGTH = 0;
@@ -32,6 +33,7 @@ define( function( require ) {
 
   /**
    * @param {Property.<number>} brightnessProperty 0 (off) to 1 (full brightness)
+   * @param {Object} [options]
    * @constructor
    */
   function LightBulbNode( brightnessProperty, options ) {
@@ -42,9 +44,10 @@ define( function( require ) {
 
     var thisNode = this;
 
-    thisNode.onNode = new Image( onImage );
+    thisNode.onNode = new Image( onImage, { scale: BULB_IMAGE_SCALE } );
 
     var offNode = new Image( offImage, {
+      scale: BULB_IMAGE_SCALE,
       centerX: thisNode.onNode.centerX,
       bottom: thisNode.onNode.bottom
     } );
@@ -60,9 +63,7 @@ define( function( require ) {
     options.children = [ thisNode.raysNode, offNode, thisNode.onNode ];
     Node.call( thisNode, options );
 
-    thisNode.brightnessObserver = function( brightness ) {
-      thisNode.updateBrightness( brightness );
-    };
+    thisNode.brightnessObserver = function( brightness ) { thisNode.update(); };
     thisNode.brightnessProperty = brightnessProperty; // @private
     thisNode.brightnessProperty.link( this.brightnessObserver );
   }
@@ -74,21 +75,24 @@ define( function( require ) {
       this.brightnessProperty.unlink( this.brightnessObserver );
     },
 
-    // @private updates the brightness
-    updateBrightness: function( brightness ) {
-      this.onNode.visible = ( brightness > 0 );
-      if ( this.onNode.visible ) {
-        this.onNode.opacity = Util.linear( 0, 1, 0.3, 1, brightness );
+    // @private
+    update: function() {
+      if ( this.visible ) {
+        var brightness = this.brightnessProperty.value;
+        this.onNode.visible = ( brightness > 0 );
+        if ( this.onNode.visible ) {
+          this.onNode.opacity = Util.linear( 0, 1, 0.3, 1, brightness );
+        }
+        this.raysNode.setBrightness( brightness );
       }
-      this.raysNode.setBrightness( brightness );
     },
 
-    //@override update when this node becomes visible
+    // @override update when this node becomes visible
     setVisible: function( visible ) {
       var wasVisible = this.visible;
       Node.prototype.setVisible.call( this, visible );
       if ( !wasVisible && visible ) {
-        this.updateBrightness();
+        this.update();
       }
     }
   } );

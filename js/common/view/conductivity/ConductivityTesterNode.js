@@ -35,7 +35,6 @@ define( function( require ) {
   var SHOW_TESTER_ORIGIN = false; // draws a red circle at the tester's origin, for debugging
   var SHOW_PROBE_ORIGIN = false; // draws a red circle at the origin of probes, for debugging
   var BULB_TO_BATTERY_WIRE_LENGTH = 40;
-  var LIGHT_BULB_SCALE = 0.33;
   var POSITIVE_PROBE_FILL = 'red';
   var NEGATIVE_PROBE_FILL = 'black';
 
@@ -43,13 +42,16 @@ define( function( require ) {
    * @param {ConductivityTester} conductivityTester
    * @constructor
    */
-  function ConductivityTesterNode( conductivityTester ) {
+  function ConductivityTesterNode( conductivityTester, options ) {
+
+    options = _.extend( {
+      //TODO
+    }, options );
 
     this.conductivityTester = conductivityTester; // @private
 
     // @private origin at bottom center of bulb's base
     this.lightBulbNode = new LightBulbNode( conductivityTester.brightnessProperty, {
-      scale: LIGHT_BULB_SCALE,
       centerX: 0,
       bottom: 0
     } );
@@ -103,17 +105,22 @@ define( function( require ) {
         conductivityTester.probeYProperty.value = Util.clamp( y, conductivityTester.probeDragYRange.min, conductivityTester.probeDragYRange.max );
       }
     } );
-    this.negativeProbe = new ProbeNode( conductivityTester.probeSize, conductivityTester.probeYProperty, probeDragHandler,
-      { x: conductivityTester.negativeProbeX, isPositive: false } );
-    this.positiveProbe = new ProbeNode( conductivityTester.probeSize, conductivityTester.probeYProperty, probeDragHandler,
-      { x: conductivityTester.positiveProbeX, isPositive: true } );
+    var negativeProbe = new ProbeNode( conductivityTester.probeSize, probeDragHandler, {
+      isPositive: false,
+      x: conductivityTester.negativeProbeX
+    } );
+    var positiveProbe = new ProbeNode( conductivityTester.probeSize, probeDragHandler, {
+      isPositive: true,
+      x: conductivityTester.positiveProbeX
+    } );
 
-    Node.call( this, { children: [ negativeWire, positiveWire, this.negativeProbe, this.positiveProbe, apparatusNode ] } );
+    Node.call( this, { children: [ negativeWire, positiveWire, negativeProbe, positiveProbe, apparatusNode ] } );
 
     // @private update wires if end point was changed
     this.probeYObserver = function( probeY ) {
-      positiveWire.setEndPoint( conductivityTester.positiveProbeX, probeY - conductivityTester.probeSize.height );
+      negativeProbe.y = positiveProbe.y = probeY;
       negativeWire.setEndPoint( conductivityTester.negativeProbeX, probeY - conductivityTester.probeSize.height );
+      positiveWire.setEndPoint( conductivityTester.positiveProbeX, probeY - conductivityTester.probeSize.height );
     };
     this.probeYProperty = conductivityTester.probeYProperty; // @private
     this.probeYProperty.link( this.probeYObserver );
@@ -130,10 +137,6 @@ define( function( require ) {
       // dispose of sub-components
       this.lightBulbNode.dispose();
       this.lightBulbNode = null;
-      this.negativeProbe.dispose();
-      this.negativeProbe = null;
-      this.positiveProbe.dispose();
-      this.positiveProbe = null;
     },
 
     // @override
@@ -147,18 +150,17 @@ define( function( require ) {
    * Conductivity probe.
    *
    * @param {Dimension2} probeSize
-   * @param {number} probeYProperty y-coordinate of the probe
    * @param {SimpleDragHandler} probeDragHandler
    * @param {Object} [options]
    * @constructor
    */
-  function ProbeNode( probeSize, probeYProperty, probeDragHandler, options ) {
+  function ProbeNode( probeSize, probeDragHandler, options ) {
 
     options = _.extend( {
       isPositive: true
     }, options );
 
-    var self = this;
+    var thisNode = this;
     Node.call( this, options );
 
     // nodes
@@ -183,19 +185,9 @@ define( function( require ) {
     // interactivity
     this.cursor = 'pointer';
     this.addInputListener( probeDragHandler );
-
-    this.probeYObserver = function( probeY ) { self.y = probeY; }; // @private
-    this.probeYProperty = probeYProperty; // @private
-    this.probeYProperty.link( this.probeYObserver );
   }
 
-  inherit( Node, ProbeNode, {
-
-    // Ensures that this object is eligible for GC
-    dispose: function() {
-      this.probeYProperty.unlink( this.probeYObserver );
-    }
-  } );
+  inherit( Node, ProbeNode );
 
   /**
    * Wires that connect to the probes.
