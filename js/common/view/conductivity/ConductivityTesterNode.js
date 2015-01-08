@@ -43,6 +43,9 @@ define( function( require ) {
   var WIRE_STROKE = 'black';
   var WIRE_LINE_WIDTH = 1.5;
   var PROBE_CURSOR = 'pointer';
+  var PLUS_FILL = 'white';
+  var MINUS_FILL = 'white';
+  var PLUS_MINUS_SIZE = new Dimension2( 6, 2 );
 
   /**
    * @param {ConductivityTester} conductivityTester
@@ -185,8 +188,8 @@ define( function( require ) {
     var plateNode = new Rectangle( -probeSize.width / 2, -probeSize.height, probeSize.width, probeSize.height,
       { fill: ( options.isPositive ? POSITIVE_PROBE_FILL : NEGATIVE_PROBE_FILL ), stroke: options.stroke, lineWidth: options.lineWidth } );
     var signNode = options.isPositive ?
-                   new PlusNode( { size: new Dimension2( 6, 2 ), fill: 'white'} ) :
-                   new MinusNode( { size: new Dimension2( 6, 2 ), fill: 'white'} );
+                   new PlusNode( { size: PLUS_MINUS_SIZE, fill: PLUS_FILL} ) :
+                   new MinusNode( { size: PLUS_MINUS_SIZE, fill: MINUS_FILL } );
     signNode.centerX = plateNode.centerX;
     signNode.bottom = plateNode.bottom - 10;
 
