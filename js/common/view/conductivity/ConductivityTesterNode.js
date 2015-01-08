@@ -37,6 +37,12 @@ define( function( require ) {
   var BULB_TO_BATTERY_WIRE_LENGTH = 40;
   var POSITIVE_PROBE_FILL = 'red';
   var NEGATIVE_PROBE_FILL = 'black';
+  var POSITIVE_PROBE_STROKE = 'black';
+  var NEGATIVE_PROBE_STROKE = 'black';
+  var PROBE_LINE_WIDTH = 0.5;
+  var WIRE_STROKE = 'black';
+  var WIRE_LINE_WIDTH = 1.5;
+  var PROBE_CURSOR = 'pointer';
 
   /**
    * @param {ConductivityTester} conductivityTester
@@ -50,16 +56,10 @@ define( function( require ) {
 
     this.conductivityTester = conductivityTester; // @private
 
-    // @private origin at bottom center of bulb's base
+    // @private bulb, origin at bottom center of base
     this.lightBulbNode = new LightBulbNode( conductivityTester.brightnessProperty, {
       centerX: 0,
       bottom: 0
-    } );
-
-    // wire from bulb base to battery
-    var bulbBatteryWire = new Path( new Shape().moveTo( 0, 0 ).lineTo( BULB_TO_BATTERY_WIRE_LENGTH, 0 ), {
-      stroke: 'black',
-      lineWidth: 1.5
     } );
 
     // battery
@@ -67,6 +67,12 @@ define( function( require ) {
       scale: 0.6,
       x: BULB_TO_BATTERY_WIRE_LENGTH,
       centerY: 0
+    } );
+
+    // wire from bulb base to battery
+    var bulbBatteryWire = new Path( new Shape().moveTo( 0, 0 ).lineTo( BULB_TO_BATTERY_WIRE_LENGTH, 0 ), {
+      stroke: WIRE_STROKE,
+      lineWidth: WIRE_LINE_WIDTH
     } );
 
     // apparatus (bulb + battery), origin at tip of bulb's base
@@ -84,14 +90,16 @@ define( function( require ) {
     // wire from base of bulb (origin) to negative probe
     var negativeWire = new WireNode(
         conductivityTester.bulbLocation.x - 5, conductivityTester.bulbLocation.y - 10,
-      conductivityTester.negativeProbeX, conductivityTester.probeYProperty.value - conductivityTester.probeSize.height );
+      conductivityTester.negativeProbeX, conductivityTester.probeYProperty.value - conductivityTester.probeSize.height,
+      { stroke: WIRE_STROKE, lineWidth: WIRE_LINE_WIDTH } );
 
     // wire from battery terminal to positive probe
     var positiveWire = new WireNode(
       battery.getGlobalBounds().right, battery.getGlobalBounds().centerY,
-      conductivityTester.positiveProbeX, conductivityTester.probeYProperty.value - conductivityTester.probeSize.height );
+      conductivityTester.positiveProbeX, conductivityTester.probeYProperty.value - conductivityTester.probeSize.height,
+      { stroke: WIRE_STROKE, lineWidth: WIRE_LINE_WIDTH });
 
-    // probes, share one drag handler so that both probes can't be dragged simultaneously
+    // drag handler for probes, so that both probes can't be dragged simultaneously
     var probeDragHandler = new SimpleDragHandler( {
 
       clickYOffset: 0,
@@ -105,12 +113,20 @@ define( function( require ) {
         conductivityTester.probeYProperty.value = Util.clamp( y, conductivityTester.probeDragYRange.min, conductivityTester.probeDragYRange.max );
       }
     } );
+
+    // probes
     var negativeProbe = new ProbeNode( conductivityTester.probeSize, probeDragHandler, {
       isPositive: false,
+      stroke: POSITIVE_PROBE_STROKE,
+      lineWidth: PROBE_LINE_WIDTH,
+      cursor: PROBE_CURSOR,
       x: conductivityTester.negativeProbeX
     } );
     var positiveProbe = new ProbeNode( conductivityTester.probeSize, probeDragHandler, {
       isPositive: true,
+      stroke: NEGATIVE_PROBE_STROKE,
+      lineWidth: PROBE_LINE_WIDTH,
+      cursor: PROBE_CURSOR,
       x: conductivityTester.positiveProbeX
     } );
 
@@ -157,15 +173,17 @@ define( function( require ) {
   function ProbeNode( probeSize, probeDragHandler, options ) {
 
     options = _.extend( {
-      isPositive: true
+      isPositive: true,
+      stroke: 'black',
+      lineWidth: 1.5,
+      cursor: 'pointer'
     }, options );
 
-    var thisNode = this;
-    Node.call( this, options );
+    Node.call( this );
 
     // nodes
     var plateNode = new Rectangle( -probeSize.width / 2, -probeSize.height, probeSize.width, probeSize.height,
-      { fill: ( options.isPositive ? POSITIVE_PROBE_FILL : NEGATIVE_PROBE_FILL ), stroke: 'black', lineWidth: 0.5 } );
+      { fill: ( options.isPositive ? POSITIVE_PROBE_FILL : NEGATIVE_PROBE_FILL ), stroke: options.stroke, lineWidth: options.lineWidth } );
     var signNode = options.isPositive ?
                    new PlusNode( { size: new Dimension2( 6, 2 ), fill: 'white'} ) :
                    new MinusNode( { size: new Dimension2( 6, 2 ), fill: 'white'} );
@@ -183,8 +201,9 @@ define( function( require ) {
     this.touchArea = this.localBounds.dilatedXY( 10, 10 );
 
     // interactivity
-    this.cursor = 'pointer';
     this.addInputListener( probeDragHandler );
+
+    this.mutate( options );
   }
 
   inherit( Node, ProbeNode );
@@ -200,11 +219,6 @@ define( function( require ) {
    * @constructor
    */
   function WireNode( startX, startY, endX, endY, options ) {
-
-    options = _.extend( {
-      stroke: 'black',
-      lineWidth: 1.5
-    }, options );
 
     Path.call( this );
 
@@ -226,10 +240,10 @@ define( function( require ) {
     // Sets the end point coordinates, the point attached to the probe.
     setEndPoint: function( endX, endY ) {
 
-      var startX = this.startPoint.x,
-        startY = this.startPoint.y,
-        controlPointXOffset = this.controlPointOffset.x,
-        controlPointYOffset = this.controlPointOffset.y;
+      var startX = this.startPoint.x;
+      var startY = this.startPoint.y;
+      var controlPointXOffset = this.controlPointOffset.x;
+      var controlPointYOffset = this.controlPointOffset.y;
 
       this.setShape( new Shape()
           .moveTo( startX, startY )

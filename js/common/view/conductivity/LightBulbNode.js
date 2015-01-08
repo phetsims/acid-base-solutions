@@ -25,6 +25,7 @@ define( function( require ) {
   var MAX_RAYS = 60;
   var MIN_RAY_LENGTH = 0;
   var MAX_RAY_LENGTH = 200;
+  var RAY_STROKE = 'yellow';
   var RAYS_START_ANGLE = 3 * Math.PI / 4;
   var RAYS_ARC_ANGLE = 3 * Math.PI / 2;
   var RAYS_LONG_LINE_WIDTH = 1.5; // for long rays
@@ -110,9 +111,9 @@ define( function( require ) {
     this.bulbRadius = bulbRadius; //@private
 
     // @private pre-calculate reusable rays (lines)
-    this.cachedLines = [];
+    this.cachedLines = []; // {Line}
     for ( var i = MAX_RAYS; i--; ) {
-      this.cachedLines[i] = new Line( 0, 0, 0, 0, { stroke: 'yellow', lineWidth: 1 } );
+      this.cachedLines[i] = new Line( 0, 0, 0, 0, { stroke: RAY_STROKE } );
       this.addChild( this.cachedLines[i] );
     }
   }
@@ -150,9 +151,9 @@ define( function( require ) {
           y2 = Math.sin( angle ) * ( this.bulbRadius + rayLength );
 
           // set properties of line from the cache
-          this.cachedLines[i].setVisible( true );
+          this.cachedLines[i].visible = true;
           this.cachedLines[i].setLine( x1, y1, x2, y2 );
-          this.cachedLines[i].setLineWidth( lineWidth );
+          this.cachedLines[i].lineWidth = lineWidth;
 
           // increment the angle
           angle += deltaAngle;
