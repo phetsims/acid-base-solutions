@@ -18,7 +18,6 @@ define( function( require ) {
   var WireNode = require( 'ACID_BASE_SOLUTIONS/common/view/conductivity/WireNode' );
   var ProbeNode = require( 'ACID_BASE_SOLUTIONS/common/view/conductivity/ProbeNode' );
   var LightBulbNode = require( 'ACID_BASE_SOLUTIONS/common/view/conductivity/LightBulbNode' );
-  var LightRaysNode = require( 'ACID_BASE_SOLUTIONS/common/view/conductivity/LightRaysNode' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -33,6 +32,7 @@ define( function( require ) {
   // constants
   var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
   var BULB_TO_BATTERY_WIRE_LENGTH = 40;
+  var LIGHT_BULB_SCALE = 0.33;
 
   /**
    * @param {ConductivityTester} conductivityTester
@@ -42,20 +42,25 @@ define( function( require ) {
 
     this.conductivityTester = conductivityTester; // @private
 
-    // origin at bottom center of bulb's base
-    var lightBulbScale = 0.33;
-    var lightBulbNode = new LightBulbNode( conductivityTester.brightnessProperty, { scale: lightBulbScale, centerX: 0, bottom: 0 } );
-    var lightBulbRadius = lightBulbNode.radius * lightBulbScale;
-
-    // @private light rays centered on the bulb
-    this.raysNode = new LightRaysNode( lightBulbRadius,
-      { centerX: lightBulbNode.centerX, y: lightBulbNode.top + ( lightBulbNode.glowOffset * lightBulbScale ) + lightBulbRadius } );
+    // @private origin at bottom center of bulb's base
+    this.lightBulbNode = new LightBulbNode( conductivityTester.brightnessProperty, {
+      scale: LIGHT_BULB_SCALE,
+      centerX: 0,
+      bottom: 0
+    } );
 
     // wire from bulb base to battery
-    var bulbBatteryWire = new Path( new Shape().moveTo( 0, 0 ).lineTo( BULB_TO_BATTERY_WIRE_LENGTH, 0 ), { stroke: 'black', lineWidth: 1.5 } );
+    var bulbBatteryWire = new Path( new Shape().moveTo( 0, 0 ).lineTo( BULB_TO_BATTERY_WIRE_LENGTH, 0 ), {
+      stroke: 'black',
+      lineWidth: 1.5
+    } );
 
     // battery
-    var battery = new Image( batteryImage, { scale: 0.6, x: BULB_TO_BATTERY_WIRE_LENGTH, centerY: 0 } );
+    var battery = new Image( batteryImage, {
+      scale: 0.6,
+      x: BULB_TO_BATTERY_WIRE_LENGTH,
+      centerY: 0
+    } );
 
     // apparatus (bulb + battery), origin at tip of bulb's base
     var apparatusNode = new Node( {
@@ -63,8 +68,7 @@ define( function( require ) {
       children: [
         bulbBatteryWire,
         battery,
-        this.raysNode,
-        lightBulbNode
+        this.lightBulbNode
       ]} );
     if ( SHOW_ORIGIN ) {
       apparatusNode.addChild( new Circle( 2, { fill: 'red' } ) );
@@ -101,31 +105,28 @@ define( function( require ) {
 
     Node.call( this, { children: [ negativeWire, positiveWire, negativeProbe, positiveProbe, apparatusNode ] } );
 
-    // update wires if end point was changed
-    conductivityTester.probeYProperty.link( function( probeY ) {
+    // @private update wires if end point was changed
+    this.probeYObserver = function( probeY ) {
       positiveWire.setEndPoint( conductivityTester.positiveProbeX, probeY - conductivityTester.probeSize.height );
       negativeWire.setEndPoint( conductivityTester.negativeProbeX, probeY - conductivityTester.probeSize.height );
-    } );
-
-    conductivityTester.brightnessProperty.link( this.updateBrightness.bind( this ) );
+    };
+    this.probeYProperty = conductivityTester.probeYProperty; // @private
+    this.probeYProperty.link( this.probeYObserver );
   }
 
   return inherit( Node, ConductivityTesterNode, {
 
-    //@private
-    updateBrightness: function() {
-      if ( this.visible ) {
-        this.raysNode.setBrightness( this.conductivityTester.brightnessProperty.value );
-      }
+    // Ensures that this object is eligible for GC
+    dispose: function() {
+      this.probeYProperty.unlink( this.probeYObserver );
+      this.lightBulbNode.dispose();
+      this.lightBulbNode = null;
     },
 
-    //@override update when this node becomes visible
+    // @override
     setVisible: function( visible ) {
-      var wasVisible = this.visible;
       Node.prototype.setVisible.call( this, visible );
-      if ( !wasVisible && visible ) {
-        this.updateBrightness();
-      }
+      this.lightBulbNode.visible = visible; // to prevent light from updating when invisible
     }
   } );
 } );
