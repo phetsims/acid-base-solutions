@@ -27,9 +27,9 @@ define( function( require ) {
   var MAX_RAY_LENGTH = 200;
   var RAYS_START_ANGLE = 3 * Math.PI / 4;
   var RAYS_ARC_ANGLE = 3 * Math.PI / 2;
-  var RAY_STROKE_BIG = 1.5;
-  var RAY_STROKE_MEDIUM = 1;
-  var RAY_STROKE_SMALL = 0.5;
+  var RAYS_LONG_LINE_WIDTH = 1.5; // for long rays
+  var RAYS_MEDIUM_LINE_WIDTH = 1; // for medium-length rays
+  var RAYS_SHORT_LINE_WIDTH = 0.5; // for short rays
 
   /**
    * @param {Property.<number>} brightnessProperty 0 (off) to 1 (full brightness)
@@ -132,12 +132,12 @@ define( function( require ) {
       var lineWidth;
 
       // Pick one of 3 pre-allocated ray widths.
-      lineWidth = RAY_STROKE_SMALL;
+      lineWidth = RAYS_SHORT_LINE_WIDTH;
       if ( rayLength > ( MAX_RAY_LENGTH * 0.6 ) ) {
-        lineWidth = RAY_STROKE_BIG;
+        lineWidth = RAYS_LONG_LINE_WIDTH;
       }
       else if ( rayLength > ( MAX_RAY_LENGTH * 0.3 ) ) {
-        lineWidth = RAY_STROKE_MEDIUM;
+        lineWidth = RAYS_MEDIUM_LINE_WIDTH;
       }
 
       // rays fill part of a circle, incrementing clockwise
