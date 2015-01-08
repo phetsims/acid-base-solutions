@@ -19,18 +19,22 @@ define( function( require ) {
   var onImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-on.png' );
   var offImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-off.png' );
 
-  // constants
+  // constants, these are specific to bulb images
   var BULB_IMAGE_SCALE = 0.33;
-  var MIN_RAYS = 8;
-  var MAX_RAYS = 60;
-  var MIN_RAY_LENGTH = 0;
-  var MAX_RAY_LENGTH = 200;
-  var RAY_STROKE = 'yellow';
   var RAYS_START_ANGLE = 3 * Math.PI / 4;
   var RAYS_ARC_ANGLE = 3 * Math.PI / 2;
-  var RAYS_LONG_LINE_WIDTH = 1.5; // for long rays
-  var RAYS_MEDIUM_LINE_WIDTH = 1; // for medium-length rays
-  var RAYS_SHORT_LINE_WIDTH = 0.5; // for short rays
+
+  // default options for LightBulbNode constructor
+  var DEFAULT_OPTIONS = {
+    rayStroke: 'yellow',
+    minRays: 8,
+    maxRays: 60,
+    minRayLength: 0,
+    maxRayLength: 200,
+    longRayLineWidth: 1.5, // for long rays
+    mediumRayLineWidth: 1, // for medium-length rays
+    shortRayLineWidth: 0.5 // for short rays
+  };
 
   /**
    * @param {Property.<number>} brightnessProperty 0 (off) to 1 (full brightness)
@@ -39,9 +43,7 @@ define( function( require ) {
    */
   function LightBulbNode( brightnessProperty, options ) {
 
-    options = _.extend( {
-      //TODO
-    }, options );
+    options = _.extend( DEFAULT_OPTIONS, options );
 
     var thisNode = this;
 
@@ -53,13 +55,12 @@ define( function( require ) {
       bottom: thisNode.onNode.bottom
     } );
 
+    // rays
     var bulbRadius = offNode.width / 2; // use 'off' node, the 'on' node is wider because it has a glow around it.
-
-    // @private
-    thisNode.raysNode = new LightRaysNode( bulbRadius, {
-      x: this.onNode.centerX,
-      y: offNode.top + bulbRadius
-    } );
+    var rayOptions = _.pick( options, _.keys( DEFAULT_OPTIONS ) ); // cherry-pick options that are specific to rays
+    rayOptions.x = this.onNode.centerX;
+    rayOptions.y = offNode.top + bulbRadius;
+    thisNode.raysNode = new LightRaysNode( bulbRadius, rayOptions ); // @private
 
     options.children = [ thisNode.raysNode, offNode, thisNode.onNode ];
     Node.call( thisNode, options );
@@ -80,6 +81,7 @@ define( function( require ) {
     update: function() {
       if ( this.visible ) {
         var brightness = this.brightnessProperty.value;
+        assert && assert( brightness >= 0 && brightness <= 1 );
         this.onNode.visible = ( brightness > 0 );
         if ( this.onNode.visible ) {
           this.onNode.opacity = Util.linear( 0, 1, 0.3, 1, brightness );
@@ -106,14 +108,18 @@ define( function( require ) {
    */
   function LightRaysNode( bulbRadius, options ) {
 
-    Node.call( this, options );
+    assert && assert( bulbRadius > 0 );
+    assert && assert( options ); // assumes that options are properly populated by LightBulbNode
 
     this.bulbRadius = bulbRadius; //@private
+    this.options = options; // @private
+
+    Node.call( this, options );
 
     // @private pre-calculate reusable rays (lines)
     this.cachedLines = []; // {Line}
-    for ( var i = MAX_RAYS; i--; ) {
-      this.cachedLines[i] = new Line( 0, 0, 0, 0, { stroke: RAY_STROKE } );
+    for ( var i = options.maxRays; i--; ) {
+      this.cachedLines[i] = new Line( 0, 0, 0, 0, { stroke: options.rayStroke } );
       this.addChild( this.cachedLines[i] );
     }
   }
@@ -123,27 +129,35 @@ define( function( require ) {
     // updates light rays based on brightness, which varies from 0 to 1.
     setBrightness: function( brightness ) {
 
+      assert && assert( brightness >= 0 && brightness <= 1 );
+
+      // local vars to improve readability
+      var minRays = this.options.minRays;
+      var maxRays = this.options.maxRays;
+      var minRayLength = this.options.minRayLength;
+      var maxRayLength = this.options.maxRayLength;
+
       // number of rays is a function of brightness
-      var numberOfRays = ( brightness === 0 ) ? 0 : MIN_RAYS + Math.round( brightness * ( MAX_RAYS - MIN_RAYS ) );
+      var numberOfRays = ( brightness === 0 ) ? 0 : minRays + Math.round( brightness * ( maxRays - minRays ) );
       // ray length is a function of brightness
-      var rayLength = MIN_RAY_LENGTH + ( brightness * ( MAX_RAY_LENGTH - MIN_RAY_LENGTH ) );
+      var rayLength = minRayLength + ( brightness * ( maxRayLength - minRayLength ) );
 
       var angle = RAYS_START_ANGLE;
       var deltaAngle = RAYS_ARC_ANGLE / ( numberOfRays - 1 );
-      var lineWidth;
 
       // Pick one of 3 pre-allocated ray widths.
-      lineWidth = RAYS_SHORT_LINE_WIDTH;
-      if ( rayLength > ( MAX_RAY_LENGTH * 0.6 ) ) {
-        lineWidth = RAYS_LONG_LINE_WIDTH;
+      var lineWidth = this.options.shortRayLineWidth;
+      if ( rayLength > ( 0.6 * maxRayLength ) ) {
+        lineWidth = this.options.longRayLineWidth;
       }
-      else if ( rayLength > ( MAX_RAY_LENGTH * 0.3 ) ) {
-        lineWidth = RAYS_MEDIUM_LINE_WIDTH;
+      else if ( rayLength > ( 0.3 * maxRayLength ) ) {
+        lineWidth = this.options.shortRayLineWidth;
       }
 
       // rays fill part of a circle, incrementing clockwise
-      for ( var i = 0, x1, x2, y1, y2; i < MAX_RAYS; i++ ) {
+      for ( var i = 0, x1, x2, y1, y2; i < maxRays; i++ ) {
         if ( i < numberOfRays ) {
+
           // determine the end points of the ray
           x1 = Math.cos( angle ) * this.bulbRadius;
           y1 = Math.sin( angle ) * this.bulbRadius;
@@ -152,15 +166,15 @@ define( function( require ) {
 
           // set properties of line from the cache
           this.cachedLines[i].visible = true;
-          this.cachedLines[i].setLine( x1, y1, x2, y2 );
           this.cachedLines[i].lineWidth = lineWidth;
+          this.cachedLines[i].setLine( x1, y1, x2, y2 );
 
           // increment the angle
           angle += deltaAngle;
         }
         else {
           // hide unusable lined
-          this.cachedLines[i].setVisible( false );
+          this.cachedLines[i].visible = false;
         }
       }
     }
