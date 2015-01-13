@@ -188,12 +188,14 @@ define( function( require ) {
 
     Node.call( this );
 
-    // nodes
+    // plate
     var plateNode = new Rectangle( -probeSize.width / 2, -probeSize.height, probeSize.width, probeSize.height, {
       fill: options.fill,
       stroke: options.stroke,
       lineWidth: options.lineWidth
     } );
+
+    // scale the label to fix, place it towards bottom center
     labelNode.setScaleMagnitude( 0.5 * probeSize.width / labelNode.width );
     labelNode.centerX = plateNode.centerX;
     labelNode.bottom = plateNode.bottom - 10;
