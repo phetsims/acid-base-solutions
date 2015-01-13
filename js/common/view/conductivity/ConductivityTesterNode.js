@@ -33,7 +33,7 @@ define( function( require ) {
   var SHOW_PROBE_ORIGIN = false; // draws a red circle at the origin of probes, for debugging
   var BULB_TO_BATTERY_WIRE_LENGTH = 40;
 
-  // options and their default values
+  // constructor options and their default values
   var DEFAULT_OPTIONS = {
     // wires
     wireStroke: 'black',
