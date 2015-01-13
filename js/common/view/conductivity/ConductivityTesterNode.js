@@ -3,9 +3,7 @@
 /**
  * Conductivity tester. Light bulb connected to a battery, with draggable probes.
  * When the probes are both immersed in solution, the circuit is completed, and the bulb glows.
- * <p>
- * This node assumes that it is located at (0,0), and its components are
- * positioned in the world coordinate frame.
+ * This node assumes that it is located at (0,0), and its components are positioned in the world coordinate frame.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -35,17 +33,24 @@ define( function( require ) {
   var SHOW_TESTER_ORIGIN = false; // draws a red circle at the tester's origin, for debugging
   var SHOW_PROBE_ORIGIN = false; // draws a red circle at the origin of probes, for debugging
   var BULB_TO_BATTERY_WIRE_LENGTH = 40;
-  var POSITIVE_PROBE_FILL = 'red';
-  var NEGATIVE_PROBE_FILL = 'black';
-  var POSITIVE_PROBE_STROKE = 'black';
-  var NEGATIVE_PROBE_STROKE = 'black';
-  var PROBE_LINE_WIDTH = 0.5;
-  var WIRE_STROKE = 'black';
-  var WIRE_LINE_WIDTH = 1.5;
-  var PROBE_CURSOR = 'pointer';
-  var PLUS_FILL = 'white';
-  var MINUS_FILL = 'white';
-  var PLUS_MINUS_SIZE = new Dimension2( 6, 2 );
+
+  // options and their default values
+  var DEFAULT_OPTIONS = {
+    // wires
+    wireStroke: 'black',
+    wireLineWidth: 1.5,
+    // common to both probes
+    probeCursor: 'pointer',
+    probeLineWidth: 0.5,
+    // positive probe
+    positiveProbeFill: 'red',
+    positiveProbeStroke: 'black',
+    positiveLabelFill: 'white',
+    // negative probe
+    negativeProbeFill: 'black',
+    negativeProbeStroke: 'black',
+    negativeLabelFill: 'white'
+  };
 
   /**
    * @param {ConductivityTester} conductivityTester
@@ -53,9 +58,7 @@ define( function( require ) {
    */
   function ConductivityTesterNode( conductivityTester, options ) {
 
-    options = _.extend( {
-      //TODO
-    }, options );
+    options = _.extend( DEFAULT_OPTIONS, options );
 
     this.conductivityTester = conductivityTester; // @private
 
@@ -74,8 +77,8 @@ define( function( require ) {
 
     // wire from bulb base to battery
     var bulbBatteryWire = new Path( new Shape().moveTo( 0, 0 ).lineTo( BULB_TO_BATTERY_WIRE_LENGTH, 0 ), {
-      stroke: WIRE_STROKE,
-      lineWidth: WIRE_LINE_WIDTH
+      stroke: options.wireStroke,
+      lineWidth: options.wireLineWidth
     } );
 
     // apparatus (bulb + battery), origin at tip of bulb's base
@@ -94,13 +97,13 @@ define( function( require ) {
     var negativeWire = new WireNode(
         conductivityTester.bulbLocation.x - 5, conductivityTester.bulbLocation.y - 10,
       conductivityTester.negativeProbeX, conductivityTester.probeYProperty.value - conductivityTester.probeSize.height,
-      { stroke: WIRE_STROKE, lineWidth: WIRE_LINE_WIDTH } );
+      { stroke: options.wireStroke, lineWidth: options.wireLineWidth } );
 
     // wire from battery terminal to positive probe
     var positiveWire = new WireNode(
       battery.getGlobalBounds().right, battery.getGlobalBounds().centerY,
       conductivityTester.positiveProbeX, conductivityTester.probeYProperty.value - conductivityTester.probeSize.height,
-      { stroke: WIRE_STROKE, lineWidth: WIRE_LINE_WIDTH });
+      { stroke: options.wireStroke, lineWidth: options.wireLineWidth });
 
     // drag handler for probes, so that both probes can't be dragged simultaneously
     var probeDragHandler = new SimpleDragHandler( {
@@ -118,18 +121,18 @@ define( function( require ) {
     } );
 
     // probes
-    var negativeProbe = new ProbeNode( conductivityTester.probeSize, probeDragHandler, {
-      isPositive: false,
-      stroke: POSITIVE_PROBE_STROKE,
-      lineWidth: PROBE_LINE_WIDTH,
-      cursor: PROBE_CURSOR,
+    var negativeProbe = new ProbeNode( conductivityTester.probeSize, probeDragHandler, new MinusNode( { fill: options.negativeLabelFill } ), {
+      fill: options.negativeProbeFill,
+      stroke: options.negativeProbeStroke,
+      lineWidth: options.probeLineWidth,
+      cursor: options.probeCursor,
       x: conductivityTester.negativeProbeX
     } );
-    var positiveProbe = new ProbeNode( conductivityTester.probeSize, probeDragHandler, {
-      isPositive: true,
-      stroke: NEGATIVE_PROBE_STROKE,
-      lineWidth: PROBE_LINE_WIDTH,
-      cursor: PROBE_CURSOR,
+    var positiveProbe = new ProbeNode( conductivityTester.probeSize, probeDragHandler, new PlusNode( { fill: options.positiveLabelFill } ), {
+      fill: options.positiveProbeFill,
+      stroke: options.positiveProbeStroke,
+      lineWidth: options.probeLineWidth,
+      cursor: options.probeCursor,
       x: conductivityTester.positiveProbeX
     } );
 
@@ -170,13 +173,15 @@ define( function( require ) {
    *
    * @param {Dimension2} probeSize
    * @param {SimpleDragHandler} probeDragHandler
+   * @param {Node} labelNode
    * @param {Object} [options]
    * @constructor
    */
-  function ProbeNode( probeSize, probeDragHandler, options ) {
+  function ProbeNode( probeSize, probeDragHandler, labelNode, options ) {
 
     options = _.extend( {
       isPositive: true,
+      fill: 'white',
       stroke: 'black',
       lineWidth: 1.5,
       cursor: 'pointer'
@@ -185,17 +190,18 @@ define( function( require ) {
     Node.call( this );
 
     // nodes
-    var plateNode = new Rectangle( -probeSize.width / 2, -probeSize.height, probeSize.width, probeSize.height,
-      { fill: ( options.isPositive ? POSITIVE_PROBE_FILL : NEGATIVE_PROBE_FILL ), stroke: options.stroke, lineWidth: options.lineWidth } );
-    var signNode = options.isPositive ?
-                   new PlusNode( { size: PLUS_MINUS_SIZE, fill: PLUS_FILL} ) :
-                   new MinusNode( { size: PLUS_MINUS_SIZE, fill: MINUS_FILL } );
-    signNode.centerX = plateNode.centerX;
-    signNode.bottom = plateNode.bottom - 10;
+    var plateNode = new Rectangle( -probeSize.width / 2, -probeSize.height, probeSize.width, probeSize.height, {
+      fill: options.fill,
+      stroke: options.stroke,
+      lineWidth: options.lineWidth
+    } );
+    labelNode.setScaleMagnitude( 0.5 * probeSize.width / labelNode.width );
+    labelNode.centerX = plateNode.centerX;
+    labelNode.bottom = plateNode.bottom - 10;
 
     // rendering order
     this.addChild( plateNode );
-    this.addChild( signNode );
+    this.addChild( labelNode );
     if ( SHOW_PROBE_ORIGIN ) {
       this.addChild( new Circle( 2, { fill: 'red' } ) );
     }
