@@ -13,6 +13,7 @@ define( function( require ) {
 
   // modules
   var Circle = require( 'SCENERY/nodes/Circle' );
+  var Dimension2 = require( 'DOT/Dimension2' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LightBulbNode = require( 'SCENERY_PHET/LightBulbNode' );
@@ -118,14 +119,16 @@ define( function( require ) {
     } );
 
     // probes
-    var negativeProbe = new ProbeNode( conductivityTester.probeSize, probeDragHandler, new MinusNode( { fill: options.negativeLabelFill } ), {
+    var negativeProbe = new ProbeNode( probeDragHandler, new MinusNode( { fill: options.negativeLabelFill } ), {
+      size: conductivityTester.probeSize,
       fill: options.negativeProbeFill,
       stroke: options.negativeProbeStroke,
       lineWidth: options.probeLineWidth,
       cursor: options.probeCursor,
       x: conductivityTester.negativeProbeX
     } );
-    var positiveProbe = new ProbeNode( conductivityTester.probeSize, probeDragHandler, new PlusNode( { fill: options.positiveLabelFill } ), {
+    var positiveProbe = new ProbeNode( probeDragHandler, new PlusNode( { fill: options.positiveLabelFill } ), {
+      size: conductivityTester.probeSize,
       fill: options.positiveProbeFill,
       stroke: options.positiveProbeStroke,
       lineWidth: options.probeLineWidth,
@@ -168,16 +171,15 @@ define( function( require ) {
   /**
    * Conductivity probe.
    *
-   * @param {Dimension2} probeSize
    * @param {SimpleDragHandler} probeDragHandler
    * @param {Node} labelNode
    * @param {Object} [options]
    * @constructor
    */
-  function ProbeNode( probeSize, probeDragHandler, labelNode, options ) {
+  function ProbeNode( probeDragHandler, labelNode, options ) {
 
     options = _.extend( {
-      isPositive: true,
+      size: new Dimension2( 20, 60 ),
       fill: 'white',
       stroke: 'black',
       lineWidth: 1.5,
@@ -187,14 +189,14 @@ define( function( require ) {
     Node.call( this );
 
     // plate
-    var plateNode = new Rectangle( -probeSize.width / 2, -probeSize.height, probeSize.width, probeSize.height, {
+    var plateNode = new Rectangle( -options.size.width / 2, -options.size.height, options.size.width, options.size.height, {
       fill: options.fill,
       stroke: options.stroke,
       lineWidth: options.lineWidth
     } );
 
     // scale the label to fix, place it towards bottom center
-    labelNode.setScaleMagnitude( 0.5 * probeSize.width / labelNode.width );
+    labelNode.setScaleMagnitude( 0.5 * options.size.width / labelNode.width );
     labelNode.centerX = plateNode.centerX;
     labelNode.bottom = plateNode.bottom - 10;
 
