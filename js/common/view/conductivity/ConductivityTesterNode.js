@@ -33,31 +33,28 @@ define( function( require ) {
   var SHOW_PROBE_ORIGIN = false; // draws a red circle at the origin of probes, for debugging
   var BULB_TO_BATTERY_WIRE_LENGTH = 40;
 
-  // constructor options and their default values
-  var DEFAULT_OPTIONS = {
-    // wires
-    wireStroke: 'black',
-    wireLineWidth: 1.5,
-    // common to both probes
-    probeCursor: 'pointer',
-    probeLineWidth: 0.5,
-    // positive probe
-    positiveProbeFill: 'red',
-    positiveProbeStroke: 'black',
-    positiveLabelFill: 'white',
-    // negative probe
-    negativeProbeFill: 'black',
-    negativeProbeStroke: 'black',
-    negativeLabelFill: 'white'
-  };
-
   /**
    * @param {ConductivityTester} conductivityTester
    * @constructor
    */
   function ConductivityTesterNode( conductivityTester, options ) {
 
-    options = _.extend( DEFAULT_OPTIONS, options );
+    options = _.extend( {
+      // wires
+      wireStroke: 'black',
+      wireLineWidth: 1.5,
+      // common to both probes
+      probeCursor: 'pointer',
+      probeLineWidth: 0.5,
+      // positive probe
+      positiveProbeFill: 'red',
+      positiveProbeStroke: 'black',
+      positiveLabelFill: 'white',
+      // negative probe
+      negativeProbeFill: 'black',
+      negativeProbeStroke: 'black',
+      negativeLabelFill: 'white'
+    }, options );
 
     this.conductivityTester = conductivityTester; // @private
 
