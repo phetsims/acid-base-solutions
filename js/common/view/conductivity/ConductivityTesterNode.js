@@ -13,7 +13,6 @@ define( function( require ) {
 
   // modules
   var Circle = require( 'SCENERY/nodes/Circle' );
-  var Dimension2 = require( 'DOT/Dimension2' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LightBulbNode = require( 'SCENERY_PHET/LightBulbNode' );
