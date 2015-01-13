@@ -33,8 +33,8 @@ define( function( require ) {
 
     // drag bounds
     this.dragBounds = new Bounds2(
-        beaker.left + this.paperSize.width / 2, beaker.top - 20,
-        beaker.right - this.paperSize.width / 2, beaker.bottom );
+      beaker.left + this.paperSize.width / 2, beaker.top - 20,
+      beaker.right - this.paperSize.width / 2, beaker.bottom );
 
     // location
     this.locationProperty = new Property( new Vector2( beaker.right - 60, beaker.top - 10 ) );

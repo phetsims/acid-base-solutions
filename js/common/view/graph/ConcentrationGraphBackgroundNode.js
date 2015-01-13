@@ -29,12 +29,12 @@ define( function( require ) {
     Node.call( this );
 
     // rectangular background
-    this.addChild( new Rectangle( 0, 0, width, height, {fill: 'white', stroke: 'black', lineWidth: 0.5} ) );
+    this.addChild( new Rectangle( 0, 0, width, height, { fill: 'white', stroke: 'black', lineWidth: 0.5 } ) );
 
     // tick marks and horizontal dashed lines. This reuses one tick and one dashed line.
     var dh = ( height / 10 ) - 1;
-    var tickNode = new Line( -2, 0, 2, 0, {stroke: 'black', lineWidth: 0.5} );
-    var dashedLineNode = new Line( 0, 0, width, 0, { stroke: 'gray', lineWidth: 0.5, lineDash: [2, 1] } );
+    var tickNode = new Line( -2, 0, 2, 0, { stroke: 'black', lineWidth: 0.5 } );
+    var dashedLineNode = new Line( 0, 0, width, 0, { stroke: 'gray', lineWidth: 0.5, lineDash: [ 2, 1 ] } );
     for ( var i = 0, y; i < 11; i++ ) {
 
       y = height - ( dh * i );
@@ -43,7 +43,7 @@ define( function( require ) {
       this.addChild( new Node( { y: y, children: ( i > 0 ) ? [ tickNode, dashedLineNode ] : [ tickNode ] } ) );
 
       // add text
-      this.addChild( new SubSupText( '10<sup>' + (i - 8) + '</sup>', {centerY: y, centerX: -16, font: TICK_FONT} ) );
+      this.addChild( new SubSupText( '10<sup>' + (i - 8) + '</sup>', { centerY: y, centerX: -16, font: TICK_FONT } ) );
     }
 
     // y-axis label

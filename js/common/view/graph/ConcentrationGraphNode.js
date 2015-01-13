@@ -43,7 +43,7 @@ define( function( require ) {
 
     // create enough bars for all solutions
     for ( var i = 0; i < maxBars; i++ ) {
-      this.addChild( this.bars[i] = new ConcentrationGraphBarNode( graph.height - 10 ) );
+      this.addChild( this.bars[ i ] = new ConcentrationGraphBarNode( graph.height - 10 ) );
     }
 
     this.translation = graph.location;
@@ -57,13 +57,13 @@ define( function( require ) {
 
       // unlink from previous solution
       if ( prevSolutionType ) {
-        graph.solutions[prevSolutionType].property( 'strength' ).unlink( updateValuesBound );
-        graph.solutions[prevSolutionType].property( 'concentration' ).unlink( updateValuesBound );
+        graph.solutions[ prevSolutionType ].property( 'strength' ).unlink( updateValuesBound );
+        graph.solutions[ prevSolutionType ].property( 'concentration' ).unlink( updateValuesBound );
       }
 
       // link to new solution
-      graph.solutions[newSolutionType].property( 'strength' ).link( updateValuesBound );
-      graph.solutions[newSolutionType].property( 'concentration' ).link( updateValuesBound );
+      graph.solutions[ newSolutionType ].property( 'strength' ).link( updateValuesBound );
+      graph.solutions[ newSolutionType ].property( 'concentration' ).link( updateValuesBound );
     } );
   }
 
@@ -99,12 +99,12 @@ define( function( require ) {
 
         // show one bar for each molecule in the current solution
         for ( var i = 0, bar; i < this.bars.length; i++ ) {
-          bar = this.bars[i];
+          bar = this.bars[ i ];
           if ( i < numberOfMolecules ) {
             // set visibility, color, value and position of new bars
             bar.setVisible( true );
-            bar.setValue( solution[ molecules[i].concentrationFunctionName ]() );
-            bar.setBarFill( ABSColors.MOLECULES[molecules[i].key] );
+            bar.setValue( solution[ molecules[ i ].concentrationFunctionName ]() );
+            bar.setBarFill( ABSColors.MOLECULES[ molecules[ i ].key ] );
             bar.setTranslation( (i + 0.75 + (4 - numberOfMolecules) / 2) * this.graph.width / 4, this.graph.height );
           }
           else {
@@ -124,11 +124,11 @@ define( function( require ) {
       if ( this.visible ) {
 
         var solutionType = this.graph.solutionTypeProperty.value;
-        var solution = this.graph.solutions[solutionType];
+        var solution = this.graph.solutions[ solutionType ];
         var molecules = solution.molecules;
 
         for ( var i = 0; i < molecules.length; i++ ) {
-          this.bars[i].setValue( solution[ molecules[i].concentrationFunctionName ]() );
+          this.bars[ i ].setValue( solution[ molecules[ i ].concentrationFunctionName ]() );
         }
       }
     }

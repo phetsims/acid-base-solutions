@@ -8,7 +8,7 @@
  */
 require.config( {
 
-  deps: ['acid-base-solutions-main'],
+  deps: [ 'acid-base-solutions-main' ],
 
   paths: {
 

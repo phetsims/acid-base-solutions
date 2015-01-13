@@ -44,7 +44,7 @@ define( function( require ) {
     var chipNode, previousChipNode, pHNumberNode;
     for ( var i = 0; i < ABSColors.PH.length; i++ ) {
 
-      chipNode = new Rectangle( 0, 0, paperSize.width, CHIP_HEIGHT, { fill: ABSColors.PH[i] } );
+      chipNode = new Rectangle( 0, 0, paperSize.width, CHIP_HEIGHT, { fill: ABSColors.PH[ i ] } );
       pHNumberNode = new Text( i.toString(), { font: FONT_SMALL } );
 
       parentNode.addChild( chipNode );

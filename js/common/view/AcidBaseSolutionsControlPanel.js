@@ -68,7 +68,8 @@ define( function( require ) {
         model.reset();
         viewProperties.reset();
       },
-      scale: 0.75 } );
+      scale: 0.75
+    } );
 
     // 'Solution' and 'Views' panels have same width, 'Tools' panel does not
     var maxWidth = Math.max( solutionControl.width, viewsControl.width );
@@ -79,14 +80,16 @@ define( function( require ) {
         children: [
           solutionTitle,
           createPanel( solutionControl, maxWidth )
-        ]} ),
+        ]
+      } ),
       new VBox( {
         spacing: TITLE_Y_SPACING,
         align: 'left',
         children: [
           viewsTitle,
           createPanel( viewsControl, maxWidth )
-        ]} ),
+        ]
+      } ),
       new VBox( {
         spacing: TITLE_Y_SPACING,
         align: 'left',
@@ -94,7 +97,8 @@ define( function( require ) {
           toolsTitle,
           // Reset All button to right of 'Tools' panel
           new HBox( { spacing: 10, children: [ new Panel( toolsControl, PANEL_OPTIONS ), resetAllButton ] } )
-        ]} )
+        ]
+      } )
     ];
 
     // stack panels vertically

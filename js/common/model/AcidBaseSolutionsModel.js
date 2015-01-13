@@ -30,12 +30,12 @@ define( function( require ) {
     // convert to an associative array, so we can look up solutions by solutionType
     this.solutions = {};
     solutions.forEach( function( solution ) {
-      self.solutions[solution.type] = solution;
+      self.solutions[ solution.type ] = solution;
     } );
 
     PropertySet.call( this, {
       solutionType: defaultSolutionType, // type of solution that is currently selected
-      pH: this.solutions[defaultSolutionType].pH // pH level of product
+      pH: this.solutions[ defaultSolutionType ].pH // pH level of product
     } );
 
     this.beaker = new Beaker();
@@ -50,10 +50,10 @@ define( function( require ) {
     this.property( 'solutionType' ).link( function( newSolutionType, prevSolutionType ) {
       // unsubscribe from previous solution pH property
       if ( prevSolutionType ) {
-        self.solutions[prevSolutionType].property( 'pH' ).unlink( setPH );
+        self.solutions[ prevSolutionType ].property( 'pH' ).unlink( setPH );
       }
       // subscribe to new solution pH property
-      self.solutions[newSolutionType].property( 'pH' ).link( setPH );
+      self.solutions[ newSolutionType ].property( 'pH' ).link( setPH );
     } );
   }
 
@@ -64,7 +64,7 @@ define( function( require ) {
 
       // reset solutions
       for ( var solutionType in this.solutions ) {
-        this.solutions[solutionType].reset();
+        this.solutions[ solutionType ].reset();
       }
 
       this.pHMeter.reset();

@@ -30,7 +30,7 @@ define( function( require ) {
   var FONT_SIZE = 13;
   var FONT = new PhetFont( FONT_SIZE );
   var SUBSCRIPT_Y_OFFSET = FONT_SIZE / 8; // vertical alignment workaround applied to any equation term that doesn't have a subscript
-  var SUBSUP_OPTIONS = {font: FONT, supScale: 1}; // options for all instances of SubSupNode
+  var SUBSUP_OPTIONS = { font: FONT, supScale: 1 }; // options for all instances of SubSupNode
 
   // constants related to arrows, issue #95
   var ARROWS_VERTICAL_SPACE = 3; // vertical space between reversible arrows
@@ -44,8 +44,8 @@ define( function( require ) {
 
   // A- node
   var createANode = function() {
-    var A = new Text( 'A', {font: FONT, fontStyle: 'italic'} );
-    var minusNode = new Text( '-', {font: FONT, left: A.right, centerY: A.top + ( 0.2 * A.height )} );
+    var A = new Text( 'A', { font: FONT, fontStyle: 'italic' } );
+    var minusNode = new Text( '-', { font: FONT, left: A.right, centerY: A.top + ( 0.2 * A.height ) } );
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
@@ -62,7 +62,7 @@ define( function( require ) {
       spacing: VBOX_SPACING,
       children: [
         MoleculeFactory.B(),
-        new Text( 'B', {font: FONT, fontStyle: 'italic'} ),
+        new Text( 'B', { font: FONT, fontStyle: 'italic' } ),
         new VStrut( SUBSCRIPT_Y_OFFSET )
       ]
     } );
@@ -78,7 +78,7 @@ define( function( require ) {
           spacing: 1,
           align: 'bottom',
           children: [
-            new Text( 'B', {font: FONT, fontStyle: 'italic'} ),
+            new Text( 'B', { font: FONT, fontStyle: 'italic' } ),
             new SubSupText( 'H<sup>+</sup>', SUBSUP_OPTIONS ) ]
         } ),
         new VStrut( SUBSCRIPT_Y_OFFSET )
@@ -102,7 +102,8 @@ define( function( require ) {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
-        new HBox( {spacing: HBOX_SPACING,
+        new HBox( {
+          spacing: HBOX_SPACING,
           children: [
             MoleculeFactory.H2O(),
             MoleculeFactory.H2O()
@@ -112,7 +113,7 @@ define( function( require ) {
           spacing: 3,
           align: 'top',
           children: [
-            new Text( '2', {font: FONT} ),
+            new Text( '2', { font: FONT } ),
             new SubSupText( 'H<sub>2</sub>O', SUBSUP_OPTIONS )
           ]
         } )
@@ -140,8 +141,8 @@ define( function( require ) {
         new HBox( {
           spacing: 1,
           children: [
-            new Text( 'H', {font: FONT} ),
-            new Text( 'A', {font: FONT, fontStyle: 'italic'} )
+            new Text( 'H', { font: FONT } ),
+            new Text( 'A', { font: FONT, fontStyle: 'italic' } )
           ]
         } ),
         new VStrut( SUBSCRIPT_Y_OFFSET )
@@ -151,8 +152,8 @@ define( function( require ) {
 
   // M+ node
   var createMNode = function() {
-    var M = new Text( 'M', {font: FONT, fontStyle: 'italic'} );
-    var plusNode = new Text( '+', {font: FONT, left: M.right, centerY: M.top + ( 0.2 * M.height )} );
+    var M = new Text( 'M', { font: FONT, fontStyle: 'italic' } );
+    var plusNode = new Text( '+', { font: FONT, left: M.right, centerY: M.top + ( 0.2 * M.height ) } );
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
@@ -172,8 +173,8 @@ define( function( require ) {
         new HBox( {
           spacing: 1,
           children: [
-            new Text( 'M', {font: FONT, fontStyle: 'italic'} ),
-            new Text( 'OH', {font: FONT} ) ]
+            new Text( 'M', { font: FONT, fontStyle: 'italic' } ),
+            new Text( 'OH', { font: FONT } ) ]
         } ),
         new VStrut( SUBSCRIPT_Y_OFFSET )
       ]
@@ -196,7 +197,7 @@ define( function( require ) {
   var plusSignNode = function() {
     return new VBox( {
       children: [
-        new Text( '+', {font: FONT} ),
+        new Text( '+', { font: FONT } ),
         new VStrut( SUBSCRIPT_Y_OFFSET + VBOX_SPACING )
       ]
     } );

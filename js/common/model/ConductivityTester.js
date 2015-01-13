@@ -47,7 +47,7 @@ define( function( require ) {
     // brightness of bulb varies from 0 (off) to 1 (full on)
     this.brightnessProperty = new DerivedProperty( [ pHProperty, this.probeYProperty ],
       function( pH, probeY ) {
-        if ( beaker.bounds.containsCoordinates( self.positiveProbeX, probeY ) &&  beaker.bounds.containsCoordinates( self.negativeProbeX, probeY ) ) {
+        if ( beaker.bounds.containsCoordinates( self.positiveProbeX, probeY ) && beaker.bounds.containsCoordinates( self.negativeProbeX, probeY ) ) {
           // closed circuit, probes are in solution
           return NEUTRAL_BRIGHTNESS + ( 1 - NEUTRAL_BRIGHTNESS ) *
                                       ( pH < NEUTRAL_PH ?

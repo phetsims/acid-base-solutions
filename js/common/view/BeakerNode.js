@@ -37,7 +37,7 @@ define( function( require ) {
    */
   function BeakerNode( beaker ) {
 
-    Node.call( this, {pickable: false} );
+    Node.call( this, { pickable: false } );
 
     var BEAKER_WIDTH = beaker.size.width;
     var BEAKER_HEIGHT = beaker.size.height;
@@ -95,7 +95,7 @@ define( function( require ) {
     ticksParent.addChild( new Text( label, {
       font: new PhetFont( 18 ),
       fill: 'black',
-      x: BEAKER_WIDTH / 2 - MAJOR_TICK_LENGTH - TICK_LABEL_X_SPACING,
+      x:       BEAKER_WIDTH / 2 - MAJOR_TICK_LENGTH - TICK_LABEL_X_SPACING,
       centerY: -deltaY * NUMBER_OF_TICKS
     } ) );
 
@@ -106,19 +106,21 @@ define( function( require ) {
 
     createIcon: function( width, height ) {
       var lipOffset = 0.1 * width;
-      return new Node( { children: [
-        // water
-        new Rectangle( 0, 0, width, height, { fill: 'rgb(213,231,233)' } ),
-        // beaker
-        new Path( new Shape()
-            .moveTo( -lipOffset, -lipOffset )
-            .lineTo( 0, 0 )
-            .lineTo( 0, height )
-            .lineTo( width, height )
-            .lineTo( width, 0 )
-            .lineTo( width + lipOffset, -lipOffset ),
-          { stroke: 'black', lineWidth: 1.5 } )
-      ] } );
+      return new Node( {
+        children: [
+          // water
+          new Rectangle( 0, 0, width, height, { fill: 'rgb(213,231,233)' } ),
+          // beaker
+          new Path( new Shape()
+              .moveTo( -lipOffset, -lipOffset )
+              .lineTo( 0, 0 )
+              .lineTo( 0, height )
+              .lineTo( width, height )
+              .lineTo( width, 0 )
+              .lineTo( width + lipOffset, -lipOffset ),
+            { stroke: 'black', lineWidth: 1.5 } )
+        ]
+      } );
     }
   } );
 } );

@@ -36,7 +36,7 @@ define( function( require ) {
       // pH value is not an integer, interpolate between 2 closest colors
       var lowerPH = Math.floor( pH );
       var upperPH = lowerPH + 1;
-      color = Color.interpolateRGBA( ABSColors.PH[lowerPH], ABSColors.PH[upperPH], ( pH - lowerPH ) );
+      color = Color.interpolateRGBA( ABSColors.PH[ lowerPH ], ABSColors.PH[ upperPH ], ( pH - lowerPH ) );
     }
     return color;
   };
@@ -115,12 +115,14 @@ define( function( require ) {
      * @returns {Node}
      */
     createIcon: function( width, height ) {
-      return new Node( { children: [
-        // full paper
-        new Rectangle( 0, 0, width, height, { fill: ABSColors.PH_PAPER, stroke: PAPER_STROKE, lineWidth: 0.5 } ),
-        // portion of paper that's colored
-        new Rectangle( 0, 0.6 * height, width, 0.4 * height, { fill: ABSColors.PH[2], stroke: PAPER_STROKE, lineWidth: 0.5 } )
-      ] } );
+      return new Node( {
+        children: [
+          // full paper
+          new Rectangle( 0, 0, width, height, { fill: ABSColors.PH_PAPER, stroke: PAPER_STROKE, lineWidth: 0.5 } ),
+          // portion of paper that's colored
+          new Rectangle( 0, 0.6 * height, width, 0.4 * height, { fill: ABSColors.PH[ 2 ], stroke: PAPER_STROKE, lineWidth: 0.5 } )
+        ]
+      } );
     }
   } );
 } );

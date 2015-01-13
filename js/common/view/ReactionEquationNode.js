@@ -26,20 +26,20 @@ define( function( require ) {
     Node.call( this );
 
     var equations = {};
-    equations[SolutionType.WATER] = ReactionEquationFactory.createWaterEquation();
-    equations[SolutionType.STRONG_ACID] = ReactionEquationFactory.createStrongAcidEquation();
-    equations[SolutionType.WEAK_ACID] = ReactionEquationFactory.createWeakAcidEquation();
-    equations[SolutionType.STRONG_BASE] = ReactionEquationFactory.createStrongBaseEquation();
-    equations[SolutionType.WEAK_BASE] = ReactionEquationFactory.createWeakBaseEquation();
+    equations[ SolutionType.WATER ] = ReactionEquationFactory.createWaterEquation();
+    equations[ SolutionType.STRONG_ACID ] = ReactionEquationFactory.createStrongAcidEquation();
+    equations[ SolutionType.WEAK_ACID ] = ReactionEquationFactory.createWeakAcidEquation();
+    equations[ SolutionType.STRONG_BASE ] = ReactionEquationFactory.createStrongBaseEquation();
+    equations[ SolutionType.WEAK_BASE ] = ReactionEquationFactory.createWeakBaseEquation();
 
     // find max width of equations
     var maxWidth = getMaxWidth( equations );
 
     // add equations with central alignment
     for ( var equation in equations ) {
-      equations[equation].setX( (maxWidth - equations[equation].getWidth()) / 2 );
-      equations[equation].setVisible( false );
-      this.addChild( equations[equation] );
+      equations[ equation ].setX( (maxWidth - equations[ equation ].getWidth()) / 2 );
+      equations[ equation ].setVisible( false );
+      this.addChild( equations[ equation ] );
     }
 
     // position below the beaker
@@ -49,18 +49,18 @@ define( function( require ) {
     solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
       // hide previous equation
       if ( prevSolutionType ) {
-        equations[prevSolutionType].setVisible( false );
+        equations[ prevSolutionType ].setVisible( false );
       }
 
       // show new equation
-      equations[newSolutionType].setVisible( true );
+      equations[ newSolutionType ].setVisible( true );
     } );
   }
 
   var getMaxWidth = function( equations ) {
     var maxWidth = 0;
     for ( var equation in equations ) {
-      maxWidth = Math.max( maxWidth, equations[equation].getWidth() );
+      maxWidth = Math.max( maxWidth, equations[ equation ].getWidth() );
     }
     return maxWidth;
   };

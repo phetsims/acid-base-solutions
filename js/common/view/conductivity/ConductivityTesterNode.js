@@ -87,14 +87,15 @@ define( function( require ) {
         bulbBatteryWire,
         battery,
         this.lightBulbNode
-      ]} );
+      ]
+    } );
     if ( SHOW_TESTER_ORIGIN ) {
       apparatusNode.addChild( new Circle( 2, { fill: 'red' } ) );
     }
 
     // wire from base of bulb (origin) to negative probe
     var negativeWire = new WireNode(
-        conductivityTester.bulbLocation.x - 5, conductivityTester.bulbLocation.y - 10,
+      conductivityTester.bulbLocation.x - 5, conductivityTester.bulbLocation.y - 10,
       conductivityTester.negativeProbeX, conductivityTester.probeYProperty.value - conductivityTester.probeSize.height,
       { stroke: options.wireStroke, lineWidth: options.wireLineWidth } );
 
@@ -102,7 +103,7 @@ define( function( require ) {
     var positiveWire = new WireNode(
       battery.getGlobalBounds().right, battery.getGlobalBounds().centerY,
       conductivityTester.positiveProbeX, conductivityTester.probeYProperty.value - conductivityTester.probeSize.height,
-      { stroke: options.wireStroke, lineWidth: options.wireLineWidth });
+      { stroke: options.wireStroke, lineWidth: options.wireLineWidth } );
 
     // drag handler for probes, so that both probes can't be dragged simultaneously
     var probeDragHandler = new SimpleDragHandler( {

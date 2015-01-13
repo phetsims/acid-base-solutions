@@ -78,7 +78,7 @@ define( function( require ) {
       { fill: 'black', centerX: shaftNode.centerX, top: shaftNode.bottom - overlap }
     );
 
-    Node.call( this, { children: [ shaftNode, tipNode  ] } );
+    Node.call( this, { children: [ shaftNode, tipNode ] } );
   }
 
   inherit( Node, ProbeNode );
@@ -90,17 +90,17 @@ define( function( require ) {
   function PHMeterNode( pHMeter ) {
 
     var self = this;
-    Node.call( this, {cursor: 'pointer'} );
+    Node.call( this, { cursor: 'pointer' } );
 
     // probe
     var probeNode = new ProbeNode( 5, 50, 14, 36 );
 
     // text, initialized with widest value for layout
-    var textNode = new Text( formatText( ABSConstants.PH_RANGE.max ), {font: FONT, centerX: 34, centerY: 0} );
+    var textNode = new Text( formatText( ABSConstants.PH_RANGE.max ), { font: FONT, centerX: 34, centerY: 0 } );
 
     // background sized to fit text
     var backgroundNode = new Rectangle( 0, 0, textNode.width + ( 2 * X_MARGIN ), textNode.height + ( 2 * Y_MARGIN ), 5, 5,
-      {fill: BACKGROUND_FILL, stroke: BACKGROUND_STROKE, lineWidth: 1.5} );
+      { fill: BACKGROUND_FILL, stroke: BACKGROUND_STROKE, lineWidth: 1.5 } );
 
     // layout, origin at probe tip
     probeNode.centerX = 0;
@@ -156,7 +156,7 @@ define( function( require ) {
         fill: BACKGROUND_FILL,
         stroke: BACKGROUND_STROKE,
         lineWidth: 0.5,
-        left: probeNode.centerX - 7,
+        left:   probeNode.centerX - 7,
         bottom: probeNode.top + 1
       } );
       return new Node( { children: [ probeNode, backgroundNode ] } );

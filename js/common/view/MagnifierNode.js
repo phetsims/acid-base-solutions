@@ -90,7 +90,7 @@ define( function( require ) {
      */
     this.moleculesData = {};
     for ( var solutionType in magnifier.solutions ) {
-      var solution = magnifier.solutions[solutionType];
+      var solution = magnifier.solutions[ solutionType ];
       solution.molecules.forEach( function( molecule ) {
         if ( molecule.key !== 'H2O' && !self.moleculesData.hasOwnProperty( molecule.key ) ) {
           self.moleculesData[ molecule.key ] = {
@@ -111,7 +111,7 @@ define( function( require ) {
     // Resets all molecule counts to zero.
     reset: function() {
       for ( var key in this.moleculesData ) {
-        this.moleculesData[key].numberOfMolecules = 0;
+        this.moleculesData[ key ].numberOfMolecules = 0;
       }
     },
 
@@ -125,7 +125,7 @@ define( function( require ) {
       // Update the data structure for each molecule that is in the current solution.
       solution.molecules.forEach( function( molecule ) {
         var key = molecule.key;
-        var moleculesData = self.moleculesData[key];
+        var moleculesData = self.moleculesData[ key ];
         if ( key !== 'H2O' ) { // skip water because it's displayed elsewhere as a static image file
 
           // map concentration to number of molecules
@@ -137,8 +137,8 @@ define( function( require ) {
           for ( var i = currentNumberOfMolecules; i < numberOfMolecules; i++ ) {
             var distance = self.positionRadius * Math.sqrt( Math.random() ); // random distance from the center of the lens
             var angle = Math.random() * 2 * Math.PI;
-            moleculesData.xCoordinates[i] = distance * Math.cos( angle );
-            moleculesData.yCoordinates[i] = distance * Math.sin( angle );
+            moleculesData.xCoordinates[ i ] = distance * Math.cos( angle );
+            moleculesData.yCoordinates[ i ] = distance * Math.sin( angle );
           }
 
           moleculesData.numberOfMolecules = numberOfMolecules;
@@ -174,8 +174,8 @@ define( function( require ) {
           // images are generated asynchronously, so test in case they aren't available when this is first called
           if ( moleculeData.image ) {
             for ( var i = 0; i < moleculeData.numberOfMolecules; i++ ) {
-              var x = moleculeData.xCoordinates[i] - moleculeData.image.width / 2;
-              var y = moleculeData.yCoordinates[i] - moleculeData.image.height / 2;
+              var x = moleculeData.xCoordinates[ i ] - moleculeData.image.width / 2;
+              var y = moleculeData.yCoordinates[ i ] - moleculeData.image.height / 2;
               wrapper.context.drawImage( moleculeData.image, Math.floor( x ), Math.floor( y ) ); // Use integer coordinates with drawImage to improve performance.
             }
           }
@@ -199,7 +199,11 @@ define( function( require ) {
     var lensNode = new Path( lensShape, { stroke: 'black', lineWidth: LENS_LINE_WIDTH } );
 
     // handle
-    var handleNode = new Rectangle( RADIUS + 2, -RADIUS / 7, RADIUS * 0.9, RADIUS / 4, 5, 5, { fill: 'rgb(85,55,33)', stroke: 'black', lineWidth: 1 } );
+    var handleNode = new Rectangle( RADIUS + 2, -RADIUS / 7, RADIUS * 0.9, RADIUS / 4, 5, 5, {
+      fill: 'rgb(85,55,33)',
+      stroke: 'black',
+      lineWidth: 1
+    } );
     handleNode.rotate( Math.PI / 6 );
 
     // opaque background, so we don't see things like pH paper in magnifier
@@ -237,17 +241,17 @@ define( function( require ) {
     var updateMoleculesBound = this.updateMolecules.bind( this );
     magnifier.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
 
-     self.moleculesNode.reset();
+      self.moleculesNode.reset();
 
       // unlink from previous solution
       if ( prevSolutionType ) {
-        magnifier.solutions[prevSolutionType].property( 'strength' ).unlink( updateMoleculesBound );
-        magnifier.solutions[prevSolutionType].property( 'concentration' ).unlink( updateMoleculesBound );
+        magnifier.solutions[ prevSolutionType ].property( 'strength' ).unlink( updateMoleculesBound );
+        magnifier.solutions[ prevSolutionType ].property( 'concentration' ).unlink( updateMoleculesBound );
       }
 
       // link to new solution
-      magnifier.solutions[newSolutionType].property( 'strength' ).link( updateMoleculesBound );
-      magnifier.solutions[newSolutionType].property( 'concentration' ).link( updateMoleculesBound );
+      magnifier.solutions[ newSolutionType ].property( 'strength' ).link( updateMoleculesBound );
+      magnifier.solutions[ newSolutionType ].property( 'concentration' ).link( updateMoleculesBound );
     } );
   }
 

@@ -29,7 +29,7 @@ define( function( require ) {
       softwareDevelopment: 'Chris Malley',
       team: 'Bryce Gruneich, Patricia Loeblein, Emily B. Moore,\nRobert Parson, Kathy Perkins',
       thanks: '\u2022 Conversion of this simulation to HTML5 was funded in part by the Royal Society of Chemistry.\n' +
-        '\u2022 Thanks to Mobile Learner Labs for working with the PhET development team to convert this\nsimulation to HTML5.'
+              '\u2022 Thanks to Mobile Learner Labs for working with the PhET development team to convert this\nsimulation to HTML5.'
     }
   };
 

@@ -42,9 +42,9 @@ define( function( require ) {
      * wiring is changed. This may have been more appropriate to handle in SolutionControl.
      */
 
-    // add convenience properties that will synchronize with the concentration and strength of the currently selected solution
-    this.addProperty( 'concentration', this.solutions[DEFAULT_SOLUTION_TYPE].concentration ); // concentration of solution
-    this.addProperty( 'strength', this.solutions[DEFAULT_SOLUTION_TYPE].strength ); // strength of solution
+      // add convenience properties that will synchronize with the concentration and strength of the currently selected solution
+    this.addProperty( 'concentration', this.solutions[ DEFAULT_SOLUTION_TYPE ].concentration ); // concentration of solution
+    this.addProperty( 'strength', this.solutions[ DEFAULT_SOLUTION_TYPE ].strength ); // strength of solution
 
     var setStrength = function( value ) { self.strength = value; };
     var setConcentration = function( value ) { self.concentration = value; };
@@ -52,23 +52,23 @@ define( function( require ) {
 
       // unsubscribe from previous solution strength and concentration property
       if ( prevSolutionType ) {
-        self.solutions[prevSolutionType].property( 'strength' ).unlink( setStrength );
-        self.solutions[prevSolutionType].property( 'concentration' ).unlink( setConcentration );
+        self.solutions[ prevSolutionType ].property( 'strength' ).unlink( setStrength );
+        self.solutions[ prevSolutionType ].property( 'concentration' ).unlink( setConcentration );
 
         /*
          * Set concentration of new solution equal to previous solution.
          * Do not do this for strength, see strength observer below and issue #94.
          */
-        self.solutions[newSolutionType].concentration = self.solutions[prevSolutionType].concentration;
+        self.solutions[ newSolutionType ].concentration = self.solutions[ prevSolutionType ].concentration;
       }
 
       // subscribe to new solution strength and concentration property
-      self.solutions[newSolutionType].property( 'strength' ).link( setStrength );
-      self.solutions[newSolutionType].property( 'concentration' ).link( setConcentration );
+      self.solutions[ newSolutionType ].property( 'strength' ).link( setStrength );
+      self.solutions[ newSolutionType ].property( 'concentration' ).link( setConcentration );
     } );
 
     this.property( 'concentration' ).link( function( concentration ) {
-      self.solutions[self.solutionType].concentration = concentration;
+      self.solutions[ self.solutionType ].concentration = concentration;
     } );
 
     /*
@@ -80,7 +80,7 @@ define( function( require ) {
     this.property( 'strength' ).link( function( strength ) {
       var solutionType = self.property( 'solutionType' ).value;
       if ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE ) {
-        self.solutions[SolutionType.WEAK_ACID].strength = self.solutions[SolutionType.WEAK_BASE].strength = strength;
+        self.solutions[ SolutionType.WEAK_ACID ].strength = self.solutions[ SolutionType.WEAK_BASE ].strength = strength;
       }
     } );
   }

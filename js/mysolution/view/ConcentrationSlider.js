@@ -43,7 +43,7 @@ define( function( require ) {
     this.sliderValueProperty.link( function( sliderValue ) {
       self.concentrationProperty.value = Util.toFixedNumber( Math.pow( 10, sliderValue ), 10 ); // see issue#73
     } );
-    concentrationProperty.link( function( concentration  ) {
+    concentrationProperty.link( function( concentration ) {
       self.sliderValueProperty.value = Util.log10( concentration );
     } );
   }
