@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ConductivityTesterNode = require( 'ACID_BASE_SOLUTIONS/common/view/conductivity/ConductivityTesterNode' );
+  var ConductivityTesterNode = require( 'SCENERY_PHET/ConductivityTesterNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
 
