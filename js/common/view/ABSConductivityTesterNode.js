@@ -1,7 +1,7 @@
 // Copyright 2002-2015, University of Colorado Boulder
 
 /**
- * Conductivity tester.
+ * Conductivity tester, adapts the model to scenery-phet.ConductivityTesterNode.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
