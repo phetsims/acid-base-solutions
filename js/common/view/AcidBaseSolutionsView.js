@@ -13,7 +13,7 @@ define( function( require ) {
   var AcidBaseSolutionsControlPanel = require( 'ACID_BASE_SOLUTIONS/common/view/AcidBaseSolutionsControlPanel' );
   var BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
   var Bounds2 = require( 'DOT/Bounds2' );
-  var ConductivityTesterNode = require( 'ACID_BASE_SOLUTIONS/common/view/conductivity/ConductivityTesterNode' );
+  var ABSConductivityTesterNode = require( 'ACID_BASE_SOLUTIONS/common/view/ABSConductivityTesterNode' );
   var ConcentrationGraphNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphNode' );
   var ReactionEquationNode = require( 'ACID_BASE_SOLUTIONS/common/view/ReactionEquationNode' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -43,7 +43,7 @@ define( function( require ) {
     var pHMeterNode = new PHMeterNode( model.pHMeter );
     var pHPaperNode = new PHPaperNode( model.pHPaper );
     var pHColorKeyNode = new PHColorKeyNode( model.pHPaper.paperSize, { left: model.beaker.left + 3, bottom: model.beaker.top - 50 } );
-    var conductivityTesterNode = new ConductivityTesterNode( model.conductivityTester );
+    var conductivityTesterNode = new ABSConductivityTesterNode( model.conductivityTester );
 
     var rootNode = new Node( {
       children: [

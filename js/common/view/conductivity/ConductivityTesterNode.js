@@ -36,18 +36,21 @@ define( function( require ) {
   var BULB_TO_BATTERY_WIRE_LENGTH = 40;
 
   /**
-   * @param {ConductivityTester} conductivityTester
+   * @param {Property.<number>} brightnessProperty brightness of bulb varies from 0 (off) to 1 (full on)
+   * @param {Property.<Vector2>} bulbLocationProperty location of the bulb's tip
+   * @param {Property.<Vector2>} positiveProbeLocationProperty location of bottom-center of the positive probe
+   * @param {Property.<Vector2>} negativeProbeLocationProperty location of bottom-center of the negative probe
+   * @param {Object} [options]
    * @constructor
    */
-  function ConductivityTesterNode( conductivityTester, options ) {
+  function ConductivityTesterNode( brightnessProperty, bulbLocationProperty, positiveProbeLocationProperty, negativeProbeLocationProperty, options ) {
 
     options = _.extend( {
-      // wires
-      wireStroke: 'black',
-      wireLineWidth: 1.5,
       // common to both probes
-      probeCursor: 'pointer',
+      probeSize: new Dimension2( 20, 68 ),
       probeLineWidth: 0.5,
+      probeDragYRange: null, // {DOT.Range} no constraint on vertical dragging
+      probeCursor: 'pointer',
       // positive probe
       positiveProbeFill: 'red',
       positiveProbeStroke: 'black',
@@ -55,13 +58,14 @@ define( function( require ) {
       // negative probe
       negativeProbeFill: 'black',
       negativeProbeStroke: 'black',
-      negativeLabelFill: 'white'
+      negativeLabelFill: 'white',
+      // wires
+      wireStroke: 'black',
+      wireLineWidth: 1.5
     }, options );
 
-    this.conductivityTester = conductivityTester; // @private
-
     // @private bulb, origin at bottom center of base
-    this.lightBulbNode = new LightBulbNode( conductivityTester.brightnessProperty, {
+    this.lightBulbNode = new LightBulbNode( brightnessProperty, {
       centerX: 0,
       bottom: 0
     } );
@@ -81,7 +85,7 @@ define( function( require ) {
 
     // apparatus (bulb + battery), origin at tip of bulb's base
     var apparatusNode = new Node( {
-      translation: conductivityTester.bulbLocation,
+      translation: bulbLocationProperty.get(),
       children: [
         bulbBatteryWire,
         battery,
@@ -92,21 +96,21 @@ define( function( require ) {
       apparatusNode.addChild( new Circle( 2, { fill: 'red' } ) );
     }
 
-    // wire from base of bulb (origin) to negative probe
-    var negativeWire = new WireNode(
-      conductivityTester.bulbLocation.x - 5,
-      conductivityTester.bulbLocation.y - 10,
-      conductivityTester.negativeProbeLocationProperty.get().x,
-      conductivityTester.negativeProbeLocationProperty.get().y - conductivityTester.probeSize.height,
-      { stroke: options.wireStroke, lineWidth: options.wireLineWidth }
-    );
-
     // wire from battery terminal to positive probe
     var positiveWire = new WireNode(
       battery.getGlobalBounds().right,
       battery.getGlobalBounds().centerY,
-      conductivityTester.positiveProbeLocationProperty.get().x,
-      conductivityTester.positiveProbeLocationProperty.get().y - conductivityTester.probeSize.height,
+      positiveProbeLocationProperty.get().x,
+      positiveProbeLocationProperty.get().y - options.probeSize.height,
+      { stroke: options.wireStroke, lineWidth: options.wireLineWidth }
+    );
+
+    // wire from base of bulb (origin) to negative probe
+    var negativeWire = new WireNode(
+      bulbLocationProperty.get().x - 5,
+      bulbLocationProperty.get().y - 10,
+      negativeProbeLocationProperty.get().x,
+      negativeProbeLocationProperty.get().y - options.probeSize.height,
       { stroke: options.wireStroke, lineWidth: options.wireLineWidth }
     );
 
@@ -122,47 +126,49 @@ define( function( require ) {
       // probes move together
       drag: function( e ) {
         var y = e.currentTarget.globalToParentPoint( e.pointer.point ).y - this.clickYOffset;
-        var probeY = Util.clamp( y, conductivityTester.probeDragYRange.min, conductivityTester.probeDragYRange.max );
-        conductivityTester.positiveProbeLocationProperty.set( new Vector2( conductivityTester.positiveProbeLocationProperty.get().x, probeY ) );
-        conductivityTester.negativeProbeLocationProperty.set( new Vector2( conductivityTester.negativeProbeLocationProperty.get().x, probeY ) );
+        if ( options.probeDragYRange ) {
+          y = Util.clamp( y, options.probeDragYRange.min, options.probeDragYRange.max );
+        }
+        positiveProbeLocationProperty.set( new Vector2( positiveProbeLocationProperty.get().x, y ) );
+        negativeProbeLocationProperty.set( new Vector2( negativeProbeLocationProperty.get().x, y ) );
       }
     } );
 
     // probes
-    var negativeProbe = new ProbeNode( probeDragHandler, new MinusNode( { fill: options.negativeLabelFill } ), {
-      size: conductivityTester.probeSize,
-      fill: options.negativeProbeFill,
-      stroke: options.negativeProbeStroke,
-      lineWidth: options.probeLineWidth,
-      cursor: options.probeCursor
-    } );
     var positiveProbe = new ProbeNode( probeDragHandler, new PlusNode( { fill: options.positiveLabelFill } ), {
-      size: conductivityTester.probeSize,
+      size: options.probeSize,
       fill: options.positiveProbeFill,
       stroke: options.positiveProbeStroke,
       lineWidth: options.probeLineWidth,
       cursor: options.probeCursor
     } );
+    var negativeProbe = new ProbeNode( probeDragHandler, new MinusNode( { fill: options.negativeLabelFill } ), {
+      size: options.probeSize,
+      fill: options.negativeProbeFill,
+      stroke: options.negativeProbeStroke,
+      lineWidth: options.probeLineWidth,
+      cursor: options.probeCursor
+    } );
 
-    Node.call( this, { children: [ negativeWire, positiveWire, negativeProbe, positiveProbe, apparatusNode ] } );
-
-    // @private update negative wire if end point was changed
-    this.negativeProbeObserver = function( negativeProbeLocation ) {
-      negativeProbe.x = negativeProbeLocation.x;
-      negativeProbe.y = negativeProbeLocation.y;
-      negativeWire.setEndPoint( negativeProbeLocation.x, negativeProbeLocation.y - conductivityTester.probeSize.height );
-    };
-    this.negativePropertyLocationProperty = conductivityTester.negativeProbeLocationProperty; // @private
-    this.negativePropertyLocationProperty.link( this.negativeProbeObserver );
+    Node.call( this, { children: [ positiveWire, negativeWire, positiveProbe, negativeProbe, apparatusNode ] } );
 
     // @private update positive wire if end point was changed
     this.positiveProbeObserver = function( positiveProbeLocation ) {
       positiveProbe.x = positiveProbeLocation.x;
       positiveProbe.y = positiveProbeLocation.y;
-      positiveWire.setEndPoint( positiveProbeLocation.x, positiveProbeLocation.y - conductivityTester.probeSize.height );
+      positiveWire.setEndPoint( positiveProbeLocation.x, positiveProbeLocation.y - options.probeSize.height );
     };
-    this.positivePropertyLocationProperty = conductivityTester.positiveProbeLocationProperty; // @private
+    this.positivePropertyLocationProperty = positiveProbeLocationProperty; // @private
     this.positivePropertyLocationProperty.link( this.positiveProbeObserver );
+
+    // @private update negative wire if end point was changed
+    this.negativeProbeObserver = function( negativeProbeLocation ) {
+      negativeProbe.x = negativeProbeLocation.x;
+      negativeProbe.y = negativeProbeLocation.y;
+      negativeWire.setEndPoint( negativeProbeLocation.x, negativeProbeLocation.y - options.probeSize.height );
+    };
+    this.negativePropertyLocationProperty = negativeProbeLocationProperty; // @private
+    this.negativePropertyLocationProperty.link( this.negativeProbeObserver );
   }
 
   inherit( Node, ConductivityTesterNode, {
