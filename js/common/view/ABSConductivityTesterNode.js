@@ -11,8 +11,6 @@ define( function( require ) {
   // modules
   var ConductivityTesterNode = require( 'SCENERY_PHET/ConductivityTesterNode' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
 
