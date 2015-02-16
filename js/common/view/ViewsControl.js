@@ -68,7 +68,7 @@ define( function( require ) {
           new Text( moleculesString, TEXT_OPTIONS ),
           new Image( magnifierImage, ICON_OPTIONS )
         ]
-      } ), RADIO_BUTTON_OPTIONS );
+      } ), _.extend( { componentID: 'moleculesRadioButton' }, RADIO_BUTTON_OPTIONS ) );
     expandTouchArea( moleculesRadioButton );
 
     // Solvent
@@ -93,7 +93,7 @@ define( function( require ) {
           new Text( graphString, TEXT_OPTIONS ),
           ConcentrationGraphNode.createIcon()
         ]
-      } ), RADIO_BUTTON_OPTIONS );
+      } ), _.extend( { componentID: 'graphRadioButton' }, RADIO_BUTTON_OPTIONS ) );
     expandTouchArea( graphRadioButton );
 
     // Hide Views
@@ -104,7 +104,7 @@ define( function( require ) {
           new Text( hideViewsString, TEXT_OPTIONS ),
           BeakerNode.createIcon( 20, 15 )
         ]
-      } ), RADIO_BUTTON_OPTIONS );
+      } ), _.extend( { componentID: 'hideViewsRadioButton' }, RADIO_BUTTON_OPTIONS ) );
     expandTouchArea( hideViewsRadioButton );
 
     options.children = [

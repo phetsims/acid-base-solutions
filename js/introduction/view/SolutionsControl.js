@@ -75,27 +75,27 @@ define( function( require ) {
           new SubSupText( waterString + ' (H<sub>2</sub>O)', TEXT_OPTIONS ),
           new MoleculeFactory.H2O()
         ]
-      } ), RADIO_BUTTON_OPTIONS );
+      } ), _.extend( { componentID: 'waterRadioButton' }, RADIO_BUTTON_OPTIONS ) );
 
     // Strong Acid (HA)
     var strongAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_ACID,
       createStyledLabel( strongAcidString + ' (H', 'A', ')', new MoleculeFactory.HA() ),
-      RADIO_BUTTON_OPTIONS );
+      _.extend( { componentID: 'strongAcidRadioButton' }, RADIO_BUTTON_OPTIONS ) );
 
     // Weak Acid (A)
     var weakAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_ACID,
       createStyledLabel( weakAcidString + ' (', 'A', ')', new MoleculeFactory.HA() ),
-      RADIO_BUTTON_OPTIONS );
+      _.extend( { componentID: 'weakAcidRadioButton' }, RADIO_BUTTON_OPTIONS ) );
 
     // Strong Base (M)
     var strongBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_BASE,
       createStyledLabel( strongBaseString + ' (', 'M', 'OH)', new MoleculeFactory.MOH() ),
-      RADIO_BUTTON_OPTIONS );
+      _.extend( { componentID: 'strongBaseRadioButton' }, RADIO_BUTTON_OPTIONS ) );
 
     // Weak Base (B)
     var weakBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_BASE,
       createStyledLabel( weakBaseString + ' (', 'B', ')', new MoleculeFactory.B() ),
-      RADIO_BUTTON_OPTIONS );
+      _.extend( { componentID: 'weakBaseRadioButton' }, RADIO_BUTTON_OPTIONS ) );
 
     var buttons = [
       waterRadioButton,
