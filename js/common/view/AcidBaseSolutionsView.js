@@ -34,7 +34,7 @@ define( function( require ) {
    */
   function AcidBaseSolutionsView( model, solutionControl ) {
 
-    ScreenView.call( this, { renderer: 'svg', layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
+    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
 
     var beakerNode = new BeakerNode( model.beaker );
     var equationNode = new ReactionEquationNode( model.beaker, model.property( 'solutionType' ) );
