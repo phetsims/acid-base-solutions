@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var Color = require( 'SCENERY/util/Color' );
+  var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
 
   // constants
   var GRAY_MOLECULE = 'rgb(120,120,120)';
@@ -47,7 +48,7 @@ define( function( require ) {
       B: GRAY_MOLECULE,
       BH: 'rgb(255,170,0)',
       H2O: 'rgb(164,189,193)',
-      H3O: 'rgb(255,85,0)',
+      H3O: PhetColorScheme.RED_COLORBLIND,
       HA: GRAY_MOLECULE,
       M: 'rgb(255,170,0)',
       MOH: GRAY_MOLECULE,
