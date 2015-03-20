@@ -58,13 +58,7 @@ define( function( require ) {
       { fill: 'rgb(85,55,33)', stroke: 'black', lineWidth: 1, translation: lensNode.translation } );
     handleNode.rotate( Math.PI / 6 );
 
-    return new Node( {
-
-      // Having individual children be pickable interferes with the listeners in the HomeScreen
-      pickable: false,
-
-      children: [ background, waterNode, beakerNode, handleNode, lensNode ]
-    } );
+    return new Node( { children: [ background, waterNode, beakerNode, handleNode, lensNode ] } );
   };
 
   function IntroductionScreen() {

@@ -47,10 +47,7 @@ define( function( require ) {
 
     var background = new Rectangle( 0, 0, width, height, { fill: 'white' } );
 
-    return new Node( {
-      pickable: false,
-      children: [ background, h3oNode, ohNode ]
-    } );
+    return new Node( { children: [ background, h3oNode, ohNode ] } );
   };
 
 
