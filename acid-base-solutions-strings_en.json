@@ -1,0 +1,98 @@
+{
+  "acid": {
+    "value": "Acid"
+  },
+  "acid-base-solutions.name": {
+    "value": "Acid-Base Solutions"
+  },
+  "base": {
+    "value": "Base"
+  },
+  "concentrationGraph.yAxis": {
+    "value": "Equilibrium Concentration (mol/L)"
+  },
+  "mySolutionTitle": {
+    "value": "My Solution"
+  },
+  "graph": {
+    "value": "Graph"
+  },
+  "hideViews": {
+    "value": "Hide Views"
+  },
+  "initialConcentration": {
+    "value": "Initial Concentration (mol/L):"
+  },
+  "introductionTitle": {
+    "value": "Introduction"
+  },
+  "liters": {
+    "value": "L"
+  },
+  "molecules": {
+    "value": "Molecules"
+  },
+  "negligible": {
+    "value": "negligible"
+  },
+  "pattern.0value.1power": {
+    "value": "{0} x 10<sup>{1}</sup>"
+  },
+  "pattern.0value.1units": {
+    "value": "{0}{1}"
+  },
+  "pattern.0label.1value": {
+    "value": "{0}: {1}"
+  },
+  "pH": {
+    "value": "pH"
+  },
+  "pHColorKey": {
+    "value": "pH Color Key"
+  },
+  "solution": {
+    "value": "Solution"
+  },
+  "solutions": {
+    "value": "Solutions"
+  },
+  "solvent": {
+    "value": "Solvent"
+  },
+  "strength": {
+    "value": "Strength:"
+  },
+  "strong": {
+    "value": "strong"
+  },
+  "strongAcid": {
+    "value": "Strong Acid"
+  },
+  "strongBase": {
+    "value": "Strong Base"
+  },
+  "stronger": {
+    "value": "stronger"
+  },
+  "tools": {
+    "value": "Tools"
+  },
+  "views": {
+    "value": "Views"
+  },
+  "water": {
+    "value": "Water"
+  },
+  "weak": {
+    "value": "weak"
+  },
+  "weakAcid": {
+    "value": "Weak Acid"
+  },
+  "weakBase": {
+    "value": "Weak Base"
+  },
+  "weaker": {
+    "value": "weaker"
+  }
+}
