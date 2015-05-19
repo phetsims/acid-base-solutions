@@ -4,21 +4,7 @@
   "license": "GPLv3",
   "simTitleStringKey": "ACID_BASE_SOLUTIONS/acid-base-solutions.name",
   "phetLibs": [
-    "acid-base-solutions",
-    "assert",
-    "axon",
-    "babel",
-    "brand",
-    "chipper",
-    "dot",
-    "joist",
-    "kite",
-    "phet-core",
-    "phetcommon",
-    "scenery",
-    "scenery-phet",
-    "sherpa",
-    "sun"
+    "acid-base-solutions"
   ],
   "repository": {
     "type": "git",
