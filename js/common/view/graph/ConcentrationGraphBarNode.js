@@ -26,7 +26,7 @@ define( function( require ) {
 
   function ConcentrationGraphBarNode( maxHeight ) {
 
-    this.maxHeight = maxHeight; //@private
+    this.maxBarHeight = maxHeight; //@private
 
     // add rectangle to represent concentration
     this.bar = new Rectangle( 0, 0, 25, 0, { fill: 'white' } ); //@private
@@ -44,7 +44,7 @@ define( function( require ) {
 
     // set height and text value of bar
     setValue: function( value ) {
-      var barHeight = Math.abs( Util.log10( value ) + 8 ) * this.maxHeight / 10,
+      var barHeight = Math.abs( Util.log10( value ) + 8 ) * this.maxBarHeight / 10,
         pow;
 
       // set bar height
