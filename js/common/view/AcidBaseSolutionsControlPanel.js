@@ -29,15 +29,6 @@ define( function( require ) {
   // constants
   var TITLE_Y_SPACING = 1;
   var TITLE_OPTIONS = { font: new PhetFont( { size: 14, weight: 'bold' } ) };
-  var PANEL_OPTIONS = {
-    fill: ABSColors.CONTROL_PANEL_BACKGROUND,
-    xMargin: 15,
-    yMargin: 6
-  };
-
-  var createPanel = function( node, minWidth ) {
-    return new Panel( new VBox( { children: [ new HStrut( minWidth ), node ], align: 'left', spacing: 0 } ), PANEL_OPTIONS );
-  };
 
   /**
    * @param {AcidBaseSolutionModel} model
@@ -72,14 +63,21 @@ define( function( require ) {
     } );
 
     // 'Solution' and 'Views' panels have same width, 'Tools' panel does not
-    var maxWidth = Math.max( solutionControl.width, viewsControl.width );
+    var xMargin = 15;
+    var panelOptions = {
+      minWidth: Math.max( solutionControl.width, Math.max( viewsControl.width, toolsControl.width ) ) + ( 2 * xMargin ),
+      fill: ABSColors.CONTROL_PANEL_BACKGROUND,
+      xMargin: xMargin,
+      yMargin: 6,
+      align: 'left'
+    };
     options.children = [
       new VBox( {
         spacing: TITLE_Y_SPACING,
         align: 'left',
         children: [
           solutionTitle,
-          createPanel( solutionControl, maxWidth )
+          new Panel( solutionControl, panelOptions )
         ]
       } ),
       new VBox( {
@@ -87,7 +85,7 @@ define( function( require ) {
         align: 'left',
         children: [
           viewsTitle,
-          createPanel( viewsControl, maxWidth )
+          new Panel( viewsControl, panelOptions )
         ]
       } ),
       new VBox( {
@@ -96,7 +94,7 @@ define( function( require ) {
         children: [
           toolsTitle,
           // Reset All button to right of 'Tools' panel
-          new HBox( { spacing: 10, children: [ new Panel( toolsControl, PANEL_OPTIONS ), resetAllButton ] } )
+          new HBox( { children: [ new Panel( toolsControl, panelOptions ), resetAllButton ], spacing: 10 } )
         ]
       } )
     ];
