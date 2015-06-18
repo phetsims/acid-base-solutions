@@ -36,7 +36,7 @@ define( function( require ) {
   // constants
   var TEXT_ICON_X_SPACING = 10;
   var RADIO_BUTTON_OPTIONS = { radius: 7 };
-  var CHECK_BOX_OPTIONS = { boxWidth: 15 };
+  var CHECK_BOX_OPTIONS = { boxWidth: 15, checkBoxColor: 'pink' };
   var TEXT_OPTIONS = { font: new PhetFont( 12 ) };
   var ICON_OPTIONS = { scale: 0.75 };
   var TOUCH_AREA_EXPAND_X = 10;
