@@ -53,8 +53,9 @@ define( function( require ) {
     var conductivityTesterNode = new ABSConductivityTesterNode( model.conductivityTester );
     var controlPanel = new AcidBaseSolutionsControlPanel( model, this.viewProperties, solutionControl, {
       // vertically centered at right edge of screen
-      right: this.layoutBounds.maxX - 20,
-      centerY: this.layoutBounds.centerY
+      right: this.layoutBounds.right - 20,
+      centerY: this.layoutBounds.centerY,
+      maxWidth: 0.75 * ( this.layoutBounds.width - beakerNode.width ) // constrain width for i18n
     } );
 
     var rootNode = new Node( {

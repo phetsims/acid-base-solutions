@@ -33,7 +33,7 @@ define( function( require ) {
     this.bar.rotate( Math.PI ); // so that bar grows upward
 
     // add vertical text for concentration (normal text + exponent text)
-    this.text = new SubSupText( '123', { font: FONT, centerX: 2, centerY: -10 } ); //@private
+    this.text = new SubSupText( '123', { font: FONT, centerX: 2, centerY: -10, maxWidth: 0.85 * maxHeight } ); //@private
     this.text.rotate( -Math.PI / 2 );
 
     Node.call( this, { children: [ this.bar, this.text ] } );

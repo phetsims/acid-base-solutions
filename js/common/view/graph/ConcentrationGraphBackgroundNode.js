@@ -47,7 +47,7 @@ define( function( require ) {
     }
 
     // y-axis label
-    var yLabel = new Text( yAxisString, { font: new PhetFont( 13 ) } );
+    var yLabel = new Text( yAxisString, { font: new PhetFont( 13 ), maxWidth: height } );
     yLabel.rotate( -Math.PI / 2 );
     yLabel.centerY = height / 2;
     yLabel.centerX = -50;

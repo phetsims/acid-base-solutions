@@ -29,7 +29,7 @@ define( function( require ) {
   var MINOR_TICKS_PER_MAJOR_TICK = 5;
   var MINOR_TICK_SPACING = 0.1; // L
   var RIM_OFFSET = 10;
-  var TICK_LABEL_X_SPACING = 20;
+  var TICK_LABEL_X_SPACING = 5;
 
   /**
    * @param {Beaker} beaker
@@ -95,8 +95,9 @@ define( function( require ) {
     ticksParent.addChild( new Text( label, {
       font: new PhetFont( 18 ),
       fill: 'black',
-      x:       BEAKER_WIDTH / 2 - MAJOR_TICK_LENGTH - TICK_LABEL_X_SPACING,
-      centerY: -deltaY * NUMBER_OF_TICKS
+      right: BEAKER_WIDTH / 2 - MAJOR_TICK_LENGTH - TICK_LABEL_X_SPACING,
+      centerY: -deltaY * NUMBER_OF_TICKS,
+      maxWidth: 65 // constrain width for i18n
     } ) );
 
     this.translation = beaker.location;

@@ -35,14 +35,12 @@ define( function( require ) {
 
     Node.call( this );
 
-    // title
-    var titleNode = new Text( pHColorKeyString, { font: FONT_BIG, centerY: 0 } );
-    this.addChild( titleNode );
+    var numberOfChips = ABSColors.PH.length;
 
     // color chips, with a pH value above each one
     var parentNode = new Node();
     var chipNode, previousChipNode, pHNumberNode;
-    for ( var i = 0; i < ABSColors.PH.length; i++ ) {
+    for ( var i = 0; i < numberOfChips; i++ ) {
 
       chipNode = new Rectangle( 0, 0, paperSize.width, CHIP_HEIGHT, { fill: ABSColors.PH[ i ] } );
       pHNumberNode = new Text( i.toString(), { font: FONT_SMALL } );
@@ -61,9 +59,14 @@ define( function( require ) {
     }
     this.addChild( parentNode );
 
-    // title below color chips
-    titleNode.left = parentNode.left;
-    titleNode.top = parentNode.bottom + 2;
+    // title, below color chips
+    var titleNode = new Text( pHColorKeyString, {
+      font: FONT_BIG,
+      maxWidth: parentNode.width,
+      left: parentNode.left,
+      top: parentNode.bottom + 2
+    } );
+    this.addChild( titleNode );
 
     this.mutate( options );
   }
