@@ -36,6 +36,13 @@ define( function( require ) {
 
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
 
+    // properties that are specific to the view
+    this.viewProperties = new PropertySet( {
+      solventVisible: false,
+      viewMode: ViewMode.MOLECULES,
+      toolMode: ToolMode.PH_METER
+    } );
+
     var beakerNode = new BeakerNode( model.beaker );
     var equationNode = new ReactionEquationNode( model.beaker, model.property( 'solutionType' ) );
     var magnifierNode = new MagnifierNode( model.magnifier );
@@ -44,6 +51,11 @@ define( function( require ) {
     var pHPaperNode = new PHPaperNode( model.pHPaper );
     var pHColorKeyNode = new PHColorKeyNode( model.pHPaper.paperSize, { left: model.beaker.left + 3, bottom: model.beaker.top - 50 } );
     var conductivityTesterNode = new ABSConductivityTesterNode( model.conductivityTester );
+    var controlPanel = new AcidBaseSolutionsControlPanel( model, this.viewProperties, solutionControl, {
+      // vertically centered at right edge of screen
+      right: this.layoutBounds.maxX - 20,
+      centerY: this.layoutBounds.centerY
+    } );
 
     var rootNode = new Node( {
       children: [
@@ -54,17 +66,11 @@ define( function( require ) {
         beakerNode,
         equationNode,
         magnifierNode,
-        graphNode
+        graphNode,
+        controlPanel
       ]
     } );
     this.addChild( rootNode );
-
-    // properties that are specific to the view
-    this.viewProperties = new PropertySet( {
-      solventVisible: false,
-      viewMode: ViewMode.MOLECULES,
-      toolMode: ToolMode.PH_METER
-    } );
 
     this.viewProperties.property( 'solventVisible' ).link( function( soluteVisible ) {
       magnifierNode.setSolventVisible( soluteVisible );
@@ -80,14 +86,6 @@ define( function( require ) {
       pHPaperNode.visible = pHColorKeyNode.visible = ( toolMode === ToolMode.PH_PAPER );
       conductivityTesterNode.visible = ( toolMode === ToolMode.CONDUCTIVITY );
     } );
-
-    // control panel
-    this.addChild( new AcidBaseSolutionsControlPanel( model, this.viewProperties, solutionControl, {
-        // vertically centered at right edge of screen
-        right: this.layoutBounds.maxX - 20,
-        centerY: this.layoutBounds.centerY
-      }
-    ) );
   }
 
   return inherit( ScreenView, AcidBaseSolutionsView, {
