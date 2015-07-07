@@ -100,7 +100,7 @@ define( function( require ) {
       font: FONT,
       centerX: 34,
       centerY: 0,
-      maxWidth: 200 // constrain width for i18n
+      maxWidth: 100 // constrain width for i18n, determined empirically
     } );
 
     // background sized to fit text
