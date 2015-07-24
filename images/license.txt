@@ -1,3 +1,0 @@
-light-bulb-icon.png source=PhET author=Bryce Gruneich
-magnifier-icon.png source=PhET
-solvent.png source=PhET notes=screenshot from Java sim
