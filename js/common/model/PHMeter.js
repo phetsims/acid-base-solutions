@@ -22,23 +22,25 @@ define( function( require ) {
    */
   function PHMeter( beaker, pHProperty ) {
 
+    // @public
     this.beaker = beaker;
     this.pHProperty = pHProperty;
 
-    // drag range (y coordinate)
+    // @public drag range (y coordinate)
     this.dragYRange = new Range( beaker.top - 15, beaker.top + 70 );
 
-    // location, at tip of probe
+    // @public location, at tip of probe
     this.locationProperty = new Property( new Vector2( beaker.right - 65, beaker.top - 5 ) );
   }
 
   return inherit( Object, PHMeter, {
 
+    // @public
     reset: function() {
       this.locationProperty.reset();
     },
 
-    // Is the tip of the pH probe in solution?
+    // @public Is the tip of the pH probe in solution?
     inSolution: function() {
       return this.beaker.bounds.containsPoint( this.locationProperty.value );
     }

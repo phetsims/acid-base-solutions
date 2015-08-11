@@ -50,14 +50,15 @@ define( function( require ) {
    * @param {Magnifier} magnifier
    * @param {Bounds2} lensBounds
    * @constructor
+   * @private
    */
   function MoleculesNode( magnifier, lensBounds ) {
 
     var self = this;
     CanvasNode.call( this, { canvasBounds: lensBounds } );
 
-    this.magnifier = magnifier; //@private
-    this.positionRadius = IMAGE_SCALE * ( this.magnifier.radius - ( LENS_LINE_WIDTH / 2 ) );  // radius for computing random positions
+    this.magnifier = magnifier; // @private
+    this.positionRadius = IMAGE_SCALE * ( this.magnifier.radius - ( LENS_LINE_WIDTH / 2 ) );  // @private radius for computing random positions
 
     // Generate images, this happens asynchronously.
     var createImage = function( moleculeKey ) {
@@ -108,14 +109,14 @@ define( function( require ) {
 
   inherit( CanvasNode, MoleculesNode, {
 
-    // Resets all molecule counts to zero.
+    // @public Resets all molecule counts to zero.
     reset: function() {
       for ( var key in this.moleculesData ) {
         this.moleculesData[ key ].numberOfMolecules = 0;
       }
     },
 
-    // Updates the molecules data structure and triggers a paintCanvas.
+    // @public Updates the molecules data structure and triggers a paintCanvas.
     update: function() {
 
       var self = this;
@@ -152,6 +153,7 @@ define( function( require ) {
     /*
      * Iterates over each of the current solution's molecules and draws the molecules directly to Canvas.
      * @override
+     * @public
      * @param {CanvasContextWrapper} wrapper
      */
     paintCanvas: function( wrapper ) {
@@ -258,7 +260,7 @@ define( function( require ) {
   return inherit( Node, MagnifierNode, {
 
     /*
-     * @override
+     * @override @public
      * Update when this node becomes visible.
      */
     setVisible: function( visible ) {
@@ -269,6 +271,7 @@ define( function( require ) {
       }
     },
 
+    // @public
     setSolventVisible: function( visible ) {
       this.solventNode.visible = visible;
     },

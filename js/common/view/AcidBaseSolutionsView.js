@@ -36,8 +36,9 @@ define( function( require ) {
 
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
 
-    // properties that are specific to the view
+    // @public properties that are specific to the view
     this.viewProperties = new PropertySet( {
+      // @public
       solventVisible: false,
       viewMode: ViewMode.MOLECULES,
       toolMode: ToolMode.PH_METER
@@ -91,7 +92,7 @@ define( function( require ) {
 
   return inherit( ScreenView, AcidBaseSolutionsView, {
 
-    // resets properties that are specific to the view
+    // @public resets properties that are specific to the view
     reset: function() { this.viewProperties.reset(); }
   } );
 } );

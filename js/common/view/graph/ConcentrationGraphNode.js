@@ -28,8 +28,8 @@ define( function( require ) {
 
     Node.call( this );
 
-    this.graph = graph; //@private
-    this.bars = []; //@private
+    this.graph = graph; // @private
+    this.bars = []; // @private
 
     // add background
     this.addChild( new ConcentrationGraphBackgroundNode( graph.width, graph.height ) );
@@ -70,7 +70,7 @@ define( function( require ) {
   return inherit( Node, ConcentrationGraphNode, {
 
     /*
-     * @override
+     * @override @public
      * Update when this node becomes visible.
      */
     setVisible: function( visible ) {

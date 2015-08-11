@@ -30,7 +30,7 @@ define( function( require ) {
 
     var self = this;
 
-    this.type = solutionType;
+    this.type = solutionType; // @public
 
     /*
      * Description of molecules that make up this solution.
@@ -44,13 +44,15 @@ define( function( require ) {
      * The order of elements in this array determines the left-to-right order of bars in the graph,
      * and the front-to-back rendering order of molecules in the magnifier.
      */
-    this.molecules = molecules;
+    this.molecules = molecules; // @public
 
     PropertySet.call( this, {
+      // @public
       strength: strength,
       concentration: concentration
     } );
 
+    // @public
     this.addDerivedProperty( 'pH', [ 'strength', 'concentration' ],
       function( strength, concentration ) {
         return -Math.round( 100 * Util.log10( self.getH3OConcentration() ) ) / 100;
@@ -59,17 +61,17 @@ define( function( require ) {
 
   return inherit( PropertySet, AqueousSolution, {
 
-    //@protected convenience function
+    // @protected convenience function
     getConcentration: function() {
       return this.property( 'concentration' ).value;
     },
 
-    //@protected convenience function
+    // @protected convenience function
     getStrength: function() {
       return this.property( 'strength' ).value;
     },
 
-    // These functions must be implemented by subtypes.
+    // @public These functions must be implemented by subtypes.
     getSoluteConcentration: function() { throw new Error( 'must be implemented by subtype' ); },
     getProductConcentration: function() { throw new Error( 'must be implemented by subtype' ); },
     getH3OConcentration: function() { throw new Error( 'must be implemented by subtype' ); },

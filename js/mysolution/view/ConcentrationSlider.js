@@ -32,12 +32,12 @@ define( function( require ) {
   function SliderModel( concentrationProperty, concentrationRange ) {
     var self = this;
 
-    this.concentrationProperty = concentrationProperty;
+    this.concentrationProperty = concentrationProperty; // @private
 
-    // range of slider
+    // @public range of slider
     this.sliderValueRange = new Range( Util.log10( concentrationRange.min ), Util.log10( concentrationRange.max ), Util.log10( concentrationRange.defaultValue ) );
 
-    // property for slider value
+    // @public property for slider value
     this.sliderValueProperty = new Property( Util.log10( concentrationProperty.value ) );
 
     this.sliderValueProperty.link( function( sliderValue ) {

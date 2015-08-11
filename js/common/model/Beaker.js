@@ -22,16 +22,16 @@ define( function( require ) {
       location: new Vector2( 230, 410 )
     } );
 
-    this.size = options.size;
-    this.location = options.location;
+    this.size = options.size; // @public
+    this.location = options.location; // @public
 
-    // convenience coordinates
+    // @public convenience coordinates
     this.left = this.location.x - this.size.width / 2;
     this.right = this.left + this.size.width;
     this.bottom = this.location.y;
     this.top = this.bottom - this.size.height;
 
-    this.bounds = new Bounds2( this.left, this.top, this.right, this.bottom );
+    this.bounds = new Bounds2( this.left, this.top, this.right, this.bottom ); // @public
   }
 
   return Beaker;

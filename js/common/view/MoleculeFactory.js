@@ -26,6 +26,7 @@ define( function( require ) {
    * @param {Color|String} color
    * @param {Object} [options]
    * @constructor
+   * @private
    */
   function AtomNode( radius, color, options ) {
     var gradient = new RadialGradient( -radius * 0.2, -radius * 0.3, 0.25, -radius * 0.2, -radius * 0.3, radius * 2 )

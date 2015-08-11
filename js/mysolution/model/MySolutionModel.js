@@ -42,7 +42,7 @@ define( function( require ) {
      * wiring is changed. This may have been more appropriate to handle in SolutionControl.
      */
 
-      // add convenience properties that will synchronize with the concentration and strength of the currently selected solution
+      // @pubic add convenience properties that will synchronize with the concentration and strength of the currently selected solution
     this.addProperty( 'concentration', this.solutions[ DEFAULT_SOLUTION_TYPE ].concentration ); // concentration of solution
     this.addProperty( 'strength', this.solutions[ DEFAULT_SOLUTION_TYPE ].strength ); // strength of solution
 

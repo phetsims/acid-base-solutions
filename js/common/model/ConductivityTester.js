@@ -29,20 +29,20 @@ define( function( require ) {
    */
   function ConductivityTester( beaker, pHProperty ) {
 
-    this.probeDragYRange = new Range( beaker.top - 20, beaker.top + 50 );
+    this.probeDragYRange = new Range( beaker.top - 20, beaker.top + 50 ); // @public
 
-    this.probeSize = new Dimension2( 20, 68 );
+    this.probeSize = new Dimension2( 20, 68 ); // @public
 
-    // bottom-center of bulb's base
+    // @public bottom-center of bulb's base
     this.bulbLocation = new Vector2( beaker.location.x - 45, beaker.top - 30 );
 
     // probe locations
     var probeXOffset = 0.175 * beaker.size.width; // offset from edge of beaker
     var probeY = this.probeDragYRange.min + 10;
-    this.positiveProbeLocationProperty = new Property( new Vector2( beaker.right - probeXOffset, probeY ) );
-    this.negativeProbeLocationProperty = new Property( new Vector2( beaker.left + probeXOffset, probeY ) );
+    this.positiveProbeLocationProperty = new Property( new Vector2( beaker.right - probeXOffset, probeY ) ); // @public
+    this.negativeProbeLocationProperty = new Property( new Vector2( beaker.left + probeXOffset, probeY ) ); // @public
 
-    // brightness of bulb varies from 0 (off) to 1 (full on)
+    // @public brightness of bulb varies from 0 (off) to 1 (full on)
     this.brightnessProperty = new DerivedProperty( [ pHProperty, this.positiveProbeLocationProperty, this.negativeProbeLocationProperty ],
       function( pH, positiveProbeLocation, negativeProbeLocation ) {
         if ( beaker.bounds.containsPoint( positiveProbeLocation ) && beaker.bounds.containsPoint( negativeProbeLocation ) ) {
@@ -61,6 +61,7 @@ define( function( require ) {
 
   return inherit( Object, ConductivityTester, {
 
+    // @public
     reset: function() {
       this.positiveProbeLocationProperty.reset();
       this.negativeProbeLocationProperty.reset();

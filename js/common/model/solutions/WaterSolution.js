@@ -29,32 +29,32 @@ define( function( require ) {
 
   return inherit( AqueousSolution, WaterSolution, {
 
-    //@override
+    // @override @public
     getSoluteConcentration: function() {
       return 0;
     },
 
-    //@override
+    // @override @public
     getProductConcentration: function() {
       return 0;
     },
 
-    //@override [H3O] = sqrt(Kw)
+    // @override @public [H3O] = sqrt(Kw)
     getH3OConcentration: function() {
       return Math.sqrt( ABSConstants.WATER_EQUILIBRIUM_CONSTANT ); // Kw = [H30] * [OH-]
     },
 
-    //@override [OH] = [H3O]
+    // @override @public [OH] = [H3O]
     getOHConcentration: function() {
       return this.getH3OConcentration();
     },
 
-    //@override [H2O] = W
+    // @override @public [H2O] = W
     getH2OConcentration: function() {
       return ABSConstants.WATER_CONCENTRATION;
     },
 
-    //@override @protected Should never be setting the strength of water.
+    // @override @protected Should never be setting the strength of water.
     isValidStrength: function() { return false; }
   } );
 } );

@@ -16,13 +16,14 @@ define( function() {
    */
   function Magnifier( beaker, solutions, solutionTypeProperty ) {
 
+    // @public
     this.solutions = solutions;
     this.solutionTypeProperty = solutionTypeProperty;
 
-    // magnifier radius
+    // @public magnifier radius
     this.radius = 0.465 * beaker.size.height;
 
-    // magnifier location, origin at center of glass
+    // @public magnifier location, origin at center of glass
     this.location = beaker.location.plusXY( 0, -beaker.size.height / 2 );
   }
 

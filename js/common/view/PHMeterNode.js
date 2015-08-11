@@ -152,6 +152,7 @@ define( function( require ) {
 
     /**
      * Creates an icon for the pH meter.
+     * @public
      * @static
      * @return {Node}
      */

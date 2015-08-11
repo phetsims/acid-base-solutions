@@ -26,19 +26,20 @@ define( function( require ) {
 
     var self = this;
 
+    // @public
     this.beaker = beaker;
     this.pHProperty = pHProperty;
-
     this.paperSize = new Dimension2( 16, 110 );
 
-    // drag bounds
+    // @public drag bounds
     this.dragBounds = new Bounds2(
       beaker.left + this.paperSize.width / 2, beaker.top - 20,
       beaker.right - this.paperSize.width / 2, beaker.bottom );
 
-    // location
+    // @public location
     this.locationProperty = new Property( new Vector2( beaker.right - 60, beaker.top - 10 ) );
 
+    // @public
     // NOTE: Ideally, indicatorHeight should be a DerivedProperty, but that gets quite messy.
     // height of indicator, the portion of the paper that changes color when dipped in solution
     this.indicatorHeightProperty = new Property( 0 );
@@ -58,6 +59,7 @@ define( function( require ) {
 
   return inherit( Object, PHPaper, {
 
+    // @public
     reset: function() {
       this.indicatorHeightProperty.reset();
       this.locationProperty.reset();
@@ -66,6 +68,7 @@ define( function( require ) {
     /**
      * Updates the height of the indicator. The indicator height only increases, since we want the
      * indicator color to be shown on the paper when it is dipped into solution and pulled out.
+     * @private
      */
     updateIndicatorHeight: function() {
       if ( this.beaker.bounds.containsPoint( this.locationProperty.value ) ) {

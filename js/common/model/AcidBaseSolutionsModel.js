@@ -27,17 +27,19 @@ define( function( require ) {
 
     var self = this;
 
-    // convert to an associative array, so we can look up solutions by solutionType
+    // @public convert to an associative array, so we can look up solutions by solutionType
     this.solutions = {};
     solutions.forEach( function( solution ) {
       self.solutions[ solution.type ] = solution;
     } );
 
     PropertySet.call( this, {
+      // @public
       solutionType: defaultSolutionType, // type of solution that is currently selected
       pH: this.solutions[ defaultSolutionType ].pH // pH level of product
     } );
 
+    // @public
     this.beaker = new Beaker();
     this.magnifier = new Magnifier( this.beaker, this.solutions, this.property( 'solutionType' ) );
     this.graph = new ConcentrationGraph( this.beaker, this.solutions, this.property( 'solutionType' ) );
@@ -58,6 +60,8 @@ define( function( require ) {
   }
 
   return inherit( PropertySet, AcidBaseSolutionsModel, {
+
+    // @override @public
     reset: function() {
       // reset supertype properties
       PropertySet.prototype.reset.call( this );

@@ -109,6 +109,7 @@ define( function( require ) {
 
     /**
      * Creates an icon that represents the pH paper.
+     * @public
      * @static
      * @param width
      * @param height

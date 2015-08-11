@@ -47,10 +47,10 @@ define( function( require ) {
 
     var self = this;
 
-    // range of slider values
+    // @public range of slider values
     this.sliderValueRange = new Range( Util.log10( strengthRange.min ), Util.log10( strengthRange.max ), Util.log10( strengthRange.defaultValue ) );
 
-    // slider's value
+    // @public slider's value
     this.sliderValueProperty = new Property( Util.log10( strengthProperty.value ) );
 
     // map between linear and logarithmic

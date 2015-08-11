@@ -26,14 +26,14 @@ define( function( require ) {
 
   function ConcentrationGraphBarNode( maxHeight ) {
 
-    this.maxBarHeight = maxHeight; //@private
+    this.maxBarHeight = maxHeight; // @private
 
-    // add rectangle to represent concentration
-    this.bar = new Rectangle( 0, 0, 25, 0, { fill: 'white' } ); //@private
+    // @private add rectangle to represent concentration
+    this.bar = new Rectangle( 0, 0, 25, 0, { fill: 'white' } );
     this.bar.rotate( Math.PI ); // so that bar grows upward
 
-    // add vertical text for concentration (normal text + exponent text)
-    this.text = new SubSupText( '123', { font: FONT, centerX: 2, centerY: -10, maxWidth: 0.85 * maxHeight } ); //@private
+    // @private add vertical text for concentration (normal text + exponent text)
+    this.text = new SubSupText( '123', { font: FONT, centerX: 2, centerY: -10, maxWidth: 0.85 * maxHeight } );
     this.text.rotate( -Math.PI / 2 );
 
     Node.call( this, { children: [ this.bar, this.text ] } );
@@ -42,7 +42,7 @@ define( function( require ) {
 
   return inherit( Node, ConcentrationGraphBarNode, {
 
-    // set height and text value of bar
+    // @public set height and text value of bar
     setValue: function( value ) {
       var barHeight = Math.abs( Util.log10( value ) + 8 ) * this.maxBarHeight / 10,
         pow;
@@ -86,7 +86,7 @@ define( function( require ) {
       }
     },
 
-    // set color of bar
+    // @public set color of bar
     setBarFill: function( color ) {
       this.bar.setFill( color );
     }
