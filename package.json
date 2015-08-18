@@ -15,9 +15,6 @@
   },
   "phet": {
     "requirejsNamespace": "ACID_BASE_SOLUTIONS",
-    "simTitleStringKey": "ACID_BASE_SOLUTIONS/acid-base-solutions.name",
-    "phetLibs": [
-      "acid-base-solutions"
-    ]
+    "simTitleStringKey": "ACID_BASE_SOLUTIONS/acid-base-solutions.name"
   }
 }
