@@ -2,11 +2,6 @@
   "name": "acid-base-solutions",
   "version": "1.2.0-dev.1",
   "license": "GPLv3",
-  "requirejsNamespace": "ACID_BASE_SOLUTIONS",
-  "simTitleStringKey": "ACID_BASE_SOLUTIONS/acid-base-solutions.name",
-  "phetLibs": [
-    "acid-base-solutions"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/phetsims/acid-base-solutions.git"
@@ -17,5 +12,12 @@
     "grunt-contrib-jshint": "~0.6.4",
     "uglify-js": "~2.4.0",
     "requirejs": "~2.1.8"
+  },
+  "phet": {
+    "requirejsNamespace": "ACID_BASE_SOLUTIONS",
+    "simTitleStringKey": "ACID_BASE_SOLUTIONS/acid-base-solutions.name",
+    "phetLibs": [
+      "acid-base-solutions"
+    ]
   }
 }
