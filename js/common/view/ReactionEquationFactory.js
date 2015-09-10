@@ -243,15 +243,14 @@ define( function( require ) {
     } );
   };
 
-  // General properties of an equation node
+  // Creates an equation by horizontally laying out a set of elements (children).
   var createEquation = function( children ) {
-    var options = _.extend( {
+    return new HBox( {
+      children: children,
       scale: EQUATION_SCALE,
       spacing: HBOX_SPACING,
       align: 'bottom'
-    }, options );
-    options.children = children;
-    return new HBox( options );
+    } );
   };
 
   // Equations for all acids are similar: HA + H2O ? A- + H3O+
