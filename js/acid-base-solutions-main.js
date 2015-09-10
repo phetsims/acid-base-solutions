@@ -16,7 +16,7 @@ define( function( require ) {
   var SimLauncher = require( 'JOIST/SimLauncher' );
 
   // strings
-  var simTitleString = require( 'string!ACID_BASE_SOLUTIONS/acid-base-solutions.name' );
+  var simTitleString = require( 'string!ACID_BASE_SOLUTIONS/acid-base-solutions.title' );
 
   var screens = [
     new IntroductionScreen(),
