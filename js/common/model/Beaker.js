@@ -20,7 +20,7 @@ define( function( require ) {
     options = _.extend( {
       size: new Dimension2( 360, 270 ),
       location: new Vector2( 230, 410 )
-    } );
+    }, options );
 
     this.size = options.size; // @public
     this.location = options.location; // @public
