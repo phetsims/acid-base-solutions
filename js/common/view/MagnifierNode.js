@@ -154,9 +154,9 @@ define( function( require ) {
      * Iterates over each of the current solution's molecules and draws the molecules directly to Canvas.
      * @override
      * @public
-     * @param {CanvasContextWrapper} wrapper
+     * @param {CanvasRenderingContext2D} context
      */
-    paintCanvas: function( wrapper ) {
+    paintCanvas: function( context ) {
 
       var self = this;
       var solutionType = this.magnifier.solutionTypeProperty.value;
@@ -166,7 +166,7 @@ define( function( require ) {
        * Images are stored at a higher resolution to improve their quality.
        * Apply the inverse scale factor to the graphics context, and adjust the radius.
        */
-      wrapper.context.scale( 1 / IMAGE_SCALE, 1 / IMAGE_SCALE );
+      context.scale( 1 / IMAGE_SCALE, 1 / IMAGE_SCALE );
 
       // Draw each type of molecule that is in the current solution.
       solution.molecules.forEach( function( molecule ) {
@@ -178,7 +178,7 @@ define( function( require ) {
             for ( var i = 0; i < moleculeData.numberOfMolecules; i++ ) {
               var x = moleculeData.xCoordinates[ i ] - moleculeData.image.width / 2;
               var y = moleculeData.yCoordinates[ i ] - moleculeData.image.height / 2;
-              wrapper.context.drawImage( moleculeData.image, Math.floor( x ), Math.floor( y ) ); // Use integer coordinates with drawImage to improve performance.
+              context.drawImage( moleculeData.image, Math.floor( x ), Math.floor( y ) ); // Use integer coordinates with drawImage to improve performance.
             }
           }
         }
