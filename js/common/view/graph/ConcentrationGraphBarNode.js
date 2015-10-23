@@ -44,8 +44,8 @@ define( function( require ) {
 
     // @public set height and text value of bar
     setValue: function( value ) {
-      var barHeight = Math.abs( Util.log10( value ) + 8 ) * this.maxBarHeight / 10,
-        pow;
+      var barHeight = Math.abs( Util.log10( value ) + 8 ) * this.maxBarHeight / 10;
+      var pow;
 
       // set bar height
       if ( isFinite( barHeight ) ) {

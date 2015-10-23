@@ -39,7 +39,9 @@ define( function( require ) {
 
     // color chips, with a pH value above each one
     var parentNode = new Node();
-    var chipNode, previousChipNode, pHNumberNode;
+    var chipNode;
+    var previousChipNode;
+    var pHNumberNode;
     for ( var i = 0; i < numberOfChips; i++ ) {
 
       chipNode = new Rectangle( 0, 0, paperSize.width, CHIP_HEIGHT, { fill: ABSColors.PH[ i ] } );

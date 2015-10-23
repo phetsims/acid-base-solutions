@@ -73,7 +73,11 @@ define( function( require ) {
     // tick marks
     var NUMBER_OF_TICKS = Math.round( 1 / MINOR_TICK_SPACING );
     var deltaY = BEAKER_HEIGHT / NUMBER_OF_TICKS;
-    var isMajorTick, y, leftX, rightX, tickPath;
+    var isMajorTick;
+    var y;
+    var leftX;
+    var rightX;
+    var tickPath;
     for ( var i = 1; i <= NUMBER_OF_TICKS; i++ ) {
 
       isMajorTick = ( i % MINOR_TICKS_PER_MAJOR_TICK === 0 );
@@ -113,12 +117,12 @@ define( function( require ) {
           new Rectangle( 0, 0, width, height, { fill: 'rgb(213,231,233)' } ),
           // beaker
           new Path( new Shape()
-              .moveTo( -lipOffset, -lipOffset )
-              .lineTo( 0, 0 )
-              .lineTo( 0, height )
-              .lineTo( width, height )
-              .lineTo( width, 0 )
-              .lineTo( width + lipOffset, -lipOffset ),
+            .moveTo( -lipOffset, -lipOffset )
+            .lineTo( 0, 0 )
+            .lineTo( 0, height )
+            .lineTo( width, height )
+            .lineTo( width, 0 )
+            .lineTo( width + lipOffset, -lipOffset ),
             { stroke: 'black', lineWidth: 1.5 } )
         ]
       } );
