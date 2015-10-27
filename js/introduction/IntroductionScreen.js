@@ -21,7 +21,7 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
 
   // strings
-  var introductionTitleString = require( 'string!ACID_BASE_SOLUTIONS/introductionTitle' );
+  var introductionTitleString = require( 'string!ACID_BASE_SOLUTIONS/screen.introduction' );
 
   /**
    * Creates the icon for this screen.

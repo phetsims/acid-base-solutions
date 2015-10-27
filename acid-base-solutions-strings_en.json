@@ -11,7 +11,7 @@
   "concentrationGraph.yAxis": {
     "value": "Equilibrium Concentration (mol/L)"
   },
-  "mySolutionTitle": {
+  "screen.mySolution": {
     "value": "My Solution"
   },
   "graph": {
@@ -23,7 +23,7 @@
   "initialConcentration": {
     "value": "Initial Concentration (mol/L):"
   },
-  "introductionTitle": {
+  "screen.introduction": {
     "value": "Introduction"
   },
   "liters": {

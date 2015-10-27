@@ -19,7 +19,7 @@ define( function( require ) {
   var Screen = require( 'JOIST/Screen' );
 
   // strings
-  var mySolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/mySolutionTitle' );
+  var mySolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/screen.mySolution' );
 
   /**
    * Creates the icon for this screen.
