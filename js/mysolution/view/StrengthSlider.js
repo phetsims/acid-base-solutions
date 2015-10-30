@@ -26,7 +26,10 @@ define( function( require ) {
   var weakerString = require( 'string!ACID_BASE_SOLUTIONS/weaker' );
 
   // constants
-  var TICK_LABEL_OPTIONS = { font: new PhetFont( 12 ) };
+  var TICK_LABEL_OPTIONS = {
+    font: new PhetFont( 12 ),
+    maxWidth: 100 // constrain for i18n, determined empirically
+  };
 
   // issues #94: strength can be changed only for weak solutions, use this as a guard
   var strengthIsMutable = function( solutionType ) {
