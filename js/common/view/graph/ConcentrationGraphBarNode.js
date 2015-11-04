@@ -18,7 +18,7 @@ define( function( require ) {
   var Util = require( 'DOT/Util' );
 
   // strings
-  var pattern_0value_1power = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1power' );
+  var pattern0Value1PowerString = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1power' );
   var negligibleString = require( 'string!ACID_BASE_SOLUTIONS/negligible' );
 
   // constants
@@ -78,7 +78,7 @@ define( function( require ) {
           this.text.setText( Util.toFixed( value, 2 ) );
         }
         else {
-          this.text.setText( StringUtils.format( pattern_0value_1power, Util.toFixed( value, 2 ), pow ) );
+          this.text.setText( StringUtils.format( pattern0Value1PowerString, Util.toFixed( value, 2 ), pow ) );
         }
       }
       else {

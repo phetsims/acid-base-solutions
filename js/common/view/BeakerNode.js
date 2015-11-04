@@ -20,7 +20,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var pattern_0value_1units = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1units' );
+  var pattern0Value1UnitsString = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1units' );
   var units_litersString = require( 'string!ACID_BASE_SOLUTIONS/liters' );
 
   // constants
@@ -95,7 +95,7 @@ define( function( require ) {
     }
 
     // major tick label
-    var label = StringUtils.format( pattern_0value_1units, '1', units_litersString );
+    var label = StringUtils.format( pattern0Value1UnitsString, '1', units_litersString );
     ticksParent.addChild( new Text( label, {
       font: new PhetFont( 18 ),
       fill: 'black',

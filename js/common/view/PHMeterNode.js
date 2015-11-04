@@ -25,7 +25,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
-  var patternLabelValue = require( 'string!ACID_BASE_SOLUTIONS/pattern.0label.1value' );
+  var pattern0Label1ValueString = require( 'string!ACID_BASE_SOLUTIONS/pattern.0label.1value' );
   var pHString = require( 'string!ACID_BASE_SOLUTIONS/pH' );
 
   // constants
@@ -40,10 +40,10 @@ define( function( require ) {
   // format a pH value for display.
   var formatText = function( pH ) {
     if ( pH === null ) {
-      return StringUtils.format( patternLabelValue, pHString, '' );
+      return StringUtils.format( pattern0Label1ValueString, pHString, '' );
     }
     else {
-      return StringUtils.format( patternLabelValue, pHString, Util.toFixed( pH, DECIMAL_PLACES ) );
+      return StringUtils.format( pattern0Label1ValueString, pHString, Util.toFixed( pH, DECIMAL_PLACES ) );
     }
   };
 
