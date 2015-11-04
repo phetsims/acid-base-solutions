@@ -19,7 +19,7 @@ define( function( require ) {
   var Screen = require( 'JOIST/Screen' );
 
   // strings
-  var mySolutionTitleString = require( 'string!ACID_BASE_SOLUTIONS/screen.mySolution' );
+  var screenMySolutionString = require( 'string!ACID_BASE_SOLUTIONS/screen.mySolution' );
 
   /**
    * Creates the icon for this screen.
@@ -53,7 +53,7 @@ define( function( require ) {
 
   function MySolutionScreen() {
     Screen.call( this,
-      mySolutionTitleString,
+      screenMySolutionString,
       createScreenIcon(),
       function() { return new MySolutionModel(); },
       function( model ) { return new MySolutionView( model ); },

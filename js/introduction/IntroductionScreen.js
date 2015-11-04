@@ -21,7 +21,7 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
 
   // strings
-  var introductionTitleString = require( 'string!ACID_BASE_SOLUTIONS/screen.introduction' );
+  var screenIntroductionString = require( 'string!ACID_BASE_SOLUTIONS/screen.introduction' );
 
   /**
    * Creates the icon for this screen.
@@ -63,7 +63,7 @@ define( function( require ) {
 
   function IntroductionScreen() {
     Screen.call( this,
-      introductionTitleString,
+      screenIntroductionString,
       createScreenIcon(),
       function() { return new IntroductionModel(); },
       function( model ) { return new IntroductionView( model ); },

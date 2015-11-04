@@ -19,7 +19,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var yAxisString = require( 'string!ACID_BASE_SOLUTIONS/concentrationGraph.yAxis' );
+  var concentrationGraphYAxisString = require( 'string!ACID_BASE_SOLUTIONS/concentrationGraph.yAxis' );
 
   // constants
   var TICK_FONT = new PhetFont( 11 );
@@ -47,7 +47,7 @@ define( function( require ) {
     }
 
     // y-axis label
-    var yLabel = new Text( yAxisString, { font: new PhetFont( 13 ), maxWidth: height } );
+    var yLabel = new Text( concentrationGraphYAxisString, { font: new PhetFont( 13 ), maxWidth: height } );
     yLabel.rotate( -Math.PI / 2 );
     yLabel.centerY = height / 2;
     yLabel.centerX = -50;
