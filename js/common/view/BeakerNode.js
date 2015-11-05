@@ -21,7 +21,7 @@ define( function( require ) {
 
   // strings
   var pattern0Value1UnitsString = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1units' );
-  var units_litersString = require( 'string!ACID_BASE_SOLUTIONS/liters' );
+  var litersString = require( 'string!ACID_BASE_SOLUTIONS/liters' );
 
   // constants
   var MAJOR_TICK_LENGTH = 25;
@@ -95,7 +95,7 @@ define( function( require ) {
     }
 
     // major tick label
-    var label = StringUtils.format( pattern0Value1UnitsString, '1', units_litersString );
+    var label = StringUtils.format( pattern0Value1UnitsString, '1', litersString );
     ticksParent.addChild( new Text( label, {
       font: new PhetFont( 18 ),
       fill: 'black',
