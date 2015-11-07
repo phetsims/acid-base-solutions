@@ -1,4 +1,4 @@
-// Copyright 2014, University of Colorado Boulder
+// Copyright 2014-2015, University of Colorado Boulder
 
 /**
  * Constants for simulation 'Acid-Base Solutions'.
