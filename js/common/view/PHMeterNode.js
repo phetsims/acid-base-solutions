@@ -137,18 +137,36 @@ define( function( require ) {
       }
     } ) );
 
-    var updateText = function() {
-      textNode.text = pHMeter.inSolution() ? formatText( pHMeter.pHProperty.value ) : formatText( null );
+    // @private
+    this.updateText = function() {
+      if ( self.visible ) {
+        textNode.text = pHMeter.inSolution() ? formatText( pHMeter.pHProperty.value ) : formatText( null );
+      }
     };
-    pHMeter.pHProperty.link( updateText.bind( this ) );
-    pHMeter.locationProperty.link( updateText.bind( this ) );
+    pHMeter.pHProperty.link( this.updateText );
+    pHMeter.locationProperty.link( this.updateText );
 
     pHMeter.locationProperty.link( function( location ) {
       self.translation = location;
     } );
   }
 
-  return inherit( Node, PHMeterNode, {}, {
+  return inherit( Node, PHMeterNode, {
+
+    /**
+     * Update value displayed when this node becomes visible.
+     * @param visible
+     * @public
+     * @override
+     */
+    setVisible: function( visible ) {
+      var wasVisible = this.visible;
+      Node.prototype.setVisible.call( this, visible );
+      if ( !wasVisible && visible ) {
+        this.updateText();
+      }
+    }
+  }, {
 
     /**
      * Creates an icon for the pH meter.
@@ -162,7 +180,7 @@ define( function( require ) {
         fill: BACKGROUND_FILL,
         stroke: BACKGROUND_STROKE,
         lineWidth: 0.5,
-        left:   probeNode.centerX - 7,
+        left: probeNode.centerX - 7,
         bottom: probeNode.top + 1
       } );
       return new Node( { children: [ probeNode, backgroundNode ] } );
