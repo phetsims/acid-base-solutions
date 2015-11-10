@@ -100,12 +100,29 @@ define( function( require ) {
       indicatorNode.setRectHeight( height );
     } );
 
-    pHPaper.pHProperty.link( function( pH ) {
-      indicatorNode.fill = pHToColor( pH );
-    } );
+    // @private
+    this.updateColor = function() {
+      indicatorNode.fill = pHToColor( pHPaper.pHProperty.get() );
+    };
+    pHPaper.pHProperty.link( this.updateColor );
   }
 
-  return inherit( Node, PHPaperNode, {}, {
+  return inherit( Node, PHPaperNode, {
+
+    /**
+     * Update paper color when this node becomes visible.
+     * @param visible
+     * @public
+     * @override
+     */
+    setVisible: function( visible ) {
+      var wasVisible = this.visible;
+      Node.prototype.setVisible.call( this, visible );
+      if ( !wasVisible && visible ) {
+        this.updateColor();
+      }
+    }
+  }, {
 
     /**
      * Creates an icon that represents the pH paper.
@@ -121,7 +138,11 @@ define( function( require ) {
           // full paper
           new Rectangle( 0, 0, width, height, { fill: ABSColors.PH_PAPER, stroke: PAPER_STROKE, lineWidth: 0.5 } ),
           // portion of paper that's colored
-          new Rectangle( 0, 0.6 * height, width, 0.4 * height, { fill: ABSColors.PH[ 2 ], stroke: PAPER_STROKE, lineWidth: 0.5 } )
+          new Rectangle( 0, 0.6 * height, width, 0.4 * height, {
+            fill: ABSColors.PH[ 2 ],
+            stroke: PAPER_STROKE,
+            lineWidth: 0.5
+          } )
         ]
       } );
     }
