@@ -100,12 +100,29 @@ define( function( require ) {
       indicatorNode.setRectHeight( height );
     } );
 
-    pHPaper.pHProperty.link( function( pH ) {
-      indicatorNode.fill = pHToColor( pH );
-    } );
+    // @private
+    this.updateColor = function() {
+      indicatorNode.fill = pHToColor( pHPaper.pHProperty.get() );
+    };
+    pHPaper.pHProperty.link( this.updateColor );
   }
 
-  return inherit( Node, PHPaperNode, {}, {
+  return inherit( Node, PHPaperNode, {
+
+    /**
+     * Update when this node's visibility transitions from invisible to visible.
+     * @param visible
+     * @public
+     * @override
+     */
+    setVisible: function( visible ) {
+      var wasVisible = this.visible;
+      Node.prototype.setVisible.call( this, visible );
+      if ( !wasVisible && visible ) {
+        this.updateColor();
+      }
+    }
+  }, {
 
     /**
      * Creates an icon that represents the pH paper.
