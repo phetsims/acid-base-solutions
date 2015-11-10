@@ -110,7 +110,7 @@ define( function( require ) {
   return inherit( Node, PHPaperNode, {
 
     /**
-     * Update when this node's visibility transitions from invisible to visible.
+     * Update paper color when this node becomes visible.
      * @param visible
      * @public
      * @override

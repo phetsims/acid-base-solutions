@@ -154,7 +154,7 @@ define( function( require ) {
   return inherit( Node, PHMeterNode, {
 
     /**
-     * Update when this node's visibility transitions from invisible to visible.
+     * Update value displayed when this node becomes visible.
      * @param visible
      * @public
      * @override
