@@ -102,7 +102,9 @@ define( function( require ) {
 
     // @private
     this.updateColor = function() {
-      indicatorNode.fill = pHToColor( pHPaper.pHProperty.get() );
+      if ( self.visible ) {
+        indicatorNode.fill = pHToColor( pHPaper.pHProperty.get() );
+      }
     };
     pHPaper.pHProperty.link( this.updateColor );
   }
