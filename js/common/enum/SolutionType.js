@@ -5,14 +5,21 @@
  *
  * @author Andrey Zelenkov (Mlearner)
  */
-define( function() {
+define( function( require ) {
   'use strict';
 
-  return Object.freeze( {
+  // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+
+  var SolutionType = Object.freeze( {
     WATER: 'water',
     STRONG_ACID: 'strongAcid',
     WEAK_ACID: 'weakAcid',
     STRONG_BASE: 'strongBase',
     WEAK_BASE: 'weakBase'
   } );
+
+  acidBaseSolutions.register( 'SolutionType', SolutionType );
+
+  return SolutionType;
 } );

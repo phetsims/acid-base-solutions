@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -72,6 +73,8 @@ define( function( require ) {
 
     this.mutate( options );
   }
+
+  acidBaseSolutions.register( 'PHColorKeyNode', PHColorKeyNode );
 
   return inherit( Node, PHColorKeyNode );
 } );

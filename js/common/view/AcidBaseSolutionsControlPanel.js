@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Panel = require( 'SUN/Panel' );
@@ -101,6 +102,8 @@ define( function( require ) {
     // stack panels vertically
     VBox.call( this, options );
   }
+
+  acidBaseSolutions.register( 'AcidBaseSolutionsControlPanel', AcidBaseSolutionsControlPanel );
 
   return inherit( VBox, AcidBaseSolutionsControlPanel );
 } );

@@ -9,13 +9,14 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var Color = require( 'SCENERY/util/Color' );
   var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
 
   // constants
   var GRAY_MOLECULE = 'rgb(120,120,120)';
 
-  return {
+  var ABSColors = {
 
     SCREEN_BACKGROUND: 'white',
 
@@ -55,4 +56,8 @@ define( function( require ) {
       OH: 'rgb(90,90,255)'
     }
   };
+
+  acidBaseSolutions.register( 'ABSColors', ABSColors );
+
+  return ABSColors;
 } );

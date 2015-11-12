@@ -5,8 +5,11 @@
  *
  * @author Andrey Zelenkov (Mlearner)
  */
-define( function() {
+define( function( require ) {
   'use strict';
+
+  // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
 
   /**
    * @param {Beaker} beaker
@@ -27,6 +30,8 @@ define( function() {
     // @public location, origin at upper-left corner
     this.location = beaker.location.plusXY( (this.width - beaker.size.width) / 2, -(beaker.size.height + this.height) / 2 );
   }
+
+  acidBaseSolutions.register( 'ConcentrationGraph', ConcentrationGraph );
 
   return ConcentrationGraph;
 } );

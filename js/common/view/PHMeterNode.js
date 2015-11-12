@@ -10,8 +10,9 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Circle = require( 'SCENERY/nodes/Circle' );
   var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+  var Circle = require( 'SCENERY/nodes/Circle' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
@@ -36,52 +37,6 @@ define( function( require ) {
   var Y_MARGIN = 8;
   var BACKGROUND_FILL = 'rgb(225,225,225)';
   var BACKGROUND_STROKE = 'rgb(64,64,64)';
-
-  // format a pH value for display.
-  var formatText = function( pH ) {
-    if ( pH === null ) {
-      return StringUtils.format( pattern0Label1ValueString, pHString, '' );
-    }
-    else {
-      return StringUtils.format( pattern0Label1ValueString, pHString, Util.toFixed( pH, DECIMAL_PLACES ) );
-    }
-  };
-
-  /**
-   * pH Probe, consists of a shaft attached to a tip.
-   * @param {number} shaftWidth
-   * @param {number} shaftHeight
-   * @param {number} tipWidth
-   * @param {number} tipHeight
-   * @constructor
-   */
-  function ProbeNode( shaftWidth, shaftHeight, tipWidth, tipHeight ) {
-
-    var overlap = 1; // overlap, to hide seam
-
-    // probe shaft
-    var shaftNode = new Rectangle( 0, 0, shaftWidth, shaftHeight + overlap,
-      { fill: 'rgb(192,192,192)', stroke: 'rgb(160,160,160)', lineWidth: 0.5 } );
-
-    // probe tip: clockwise from tip of probe, origin at upper-left of shape
-    var cornerRadius = tipHeight / 9;
-    var tipNode = new Path( new Shape()
-        .moveTo( tipWidth / 2, tipHeight )
-        .lineTo( 0, 0.6 * tipHeight )
-        .lineTo( 0, cornerRadius )
-        .arc( cornerRadius, cornerRadius, cornerRadius, Math.PI, 1.5 * Math.PI )
-        .lineTo( cornerRadius, 0 )
-        .lineTo( tipWidth - cornerRadius, 0 )
-        .arc( tipWidth - cornerRadius, cornerRadius, cornerRadius, -0.5 * Math.PI, 0 )
-        .lineTo( tipWidth, 0.6 * tipHeight )
-        .close(),
-      { fill: 'black', centerX: shaftNode.centerX, top: shaftNode.bottom - overlap }
-    );
-
-    Node.call( this, { children: [ shaftNode, tipNode ] } );
-  }
-
-  inherit( Node, ProbeNode );
 
   /**
    * @param {PHMeter} pHMeter
@@ -150,6 +105,56 @@ define( function( require ) {
       self.translation = location;
     } );
   }
+
+  acidBaseSolutions.register( 'PHMeterNode', PHMeterNode );
+
+  // format a pH value for display.
+  var formatText = function( pH ) {
+    if ( pH === null ) {
+      return StringUtils.format( pattern0Label1ValueString, pHString, '' );
+    }
+    else {
+      return StringUtils.format( pattern0Label1ValueString, pHString, Util.toFixed( pH, DECIMAL_PLACES ) );
+    }
+  };
+
+  /**
+   * pH Probe, consists of a shaft attached to a tip.
+   * @param {number} shaftWidth
+   * @param {number} shaftHeight
+   * @param {number} tipWidth
+   * @param {number} tipHeight
+   * @constructor
+   */
+  function ProbeNode( shaftWidth, shaftHeight, tipWidth, tipHeight ) {
+
+    var overlap = 1; // overlap, to hide seam
+
+    // probe shaft
+    var shaftNode = new Rectangle( 0, 0, shaftWidth, shaftHeight + overlap,
+      { fill: 'rgb(192,192,192)', stroke: 'rgb(160,160,160)', lineWidth: 0.5 } );
+
+    // probe tip: clockwise from tip of probe, origin at upper-left of shape
+    var cornerRadius = tipHeight / 9;
+    var tipNode = new Path( new Shape()
+        .moveTo( tipWidth / 2, tipHeight )
+        .lineTo( 0, 0.6 * tipHeight )
+        .lineTo( 0, cornerRadius )
+        .arc( cornerRadius, cornerRadius, cornerRadius, Math.PI, 1.5 * Math.PI )
+        .lineTo( cornerRadius, 0 )
+        .lineTo( tipWidth - cornerRadius, 0 )
+        .arc( tipWidth - cornerRadius, cornerRadius, cornerRadius, -0.5 * Math.PI, 0 )
+        .lineTo( tipWidth, 0.6 * tipHeight )
+        .close(),
+      { fill: 'black', centerX: shaftNode.centerX, top: shaftNode.bottom - overlap }
+    );
+
+    Node.call( this, { children: [ shaftNode, tipNode ] } );
+  }
+
+  acidBaseSolutions.register( 'PHMeterNode.ProbeNode', ProbeNode );
+
+  inherit( Node, ProbeNode );
 
   return inherit( Node, PHMeterNode, {
 

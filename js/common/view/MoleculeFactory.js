@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var Circle = require( 'SCENERY/nodes/Circle' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -21,25 +22,8 @@ define( function( require ) {
   // constants
   var MOLECULE_COLORS = ABSColors.MOLECULES;
 
-  /**
-   * @param {number} radius
-   * @param {Color|String} color
-   * @param {Object} [options]
-   * @constructor
-   * @private
-   */
-  function AtomNode( radius, color, options ) {
-    var gradient = new RadialGradient( -radius * 0.2, -radius * 0.3, 0.25, -radius * 0.2, -radius * 0.3, radius * 2 )
-      .addColorStop( 0, 'white' )
-      .addColorStop( 0.33, color )
-      .addColorStop( 1, 'black' );
-    Circle.call( this, radius, _.extend( { fill: gradient }, options ) );
-  }
-
-  inherit( Circle, AtomNode );
-
   // NOTE: The field names here must correspond to the 'key' fields in AqueousSolution.molecules.
-  return {
+  var MoleculeFactory = {
 
     A: function() {
       return new Node( {
@@ -127,4 +111,27 @@ define( function( require ) {
       } );
     }
   };
+
+  acidBaseSolutions.register( 'MoleculeFactory', MoleculeFactory );
+
+  /**
+   * @param {number} radius
+   * @param {Color|String} color
+   * @param {Object} [options]
+   * @constructor
+   * @private
+   */
+  function AtomNode( radius, color, options ) {
+    var gradient = new RadialGradient( -radius * 0.2, -radius * 0.3, 0.25, -radius * 0.2, -radius * 0.3, radius * 2 )
+      .addColorStop( 0, 'white' )
+      .addColorStop( 0.33, color )
+      .addColorStop( 1, 'black' );
+    Circle.call( this, radius, _.extend( { fill: gradient }, options ) );
+  }
+
+  acidBaseSolutions.register( 'MoleculeFactory.AtomNode', AtomNode );
+
+  inherit( Circle, AtomNode );
+
+  return MoleculeFactory;
 } );

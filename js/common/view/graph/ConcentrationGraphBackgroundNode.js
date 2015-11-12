@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -24,6 +25,11 @@ define( function( require ) {
   // constants
   var TICK_FONT = new PhetFont( 11 );
 
+  /**
+   * @param {number} width
+   * @param {number} height
+   * @constructor
+   */
   function ConcentrationGraphBackgroundNode( width, height ) {
 
     Node.call( this );
@@ -53,6 +59,8 @@ define( function( require ) {
     yLabel.centerX = -50;
     this.addChild( yLabel );
   }
+
+  acidBaseSolutions.register( 'ConcentrationGraphBackgroundNode', ConcentrationGraphBackgroundNode );
 
   return inherit( Node, ConcentrationGraphBackgroundNode );
 } );

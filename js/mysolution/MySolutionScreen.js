@@ -10,16 +10,32 @@ define( function( require ) {
 
   // modules
   var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
-  var MySolutionModel = require( 'ACID_BASE_SOLUTIONS/mysolution/model/MySolutionModel' );
-  var MySolutionView = require( 'ACID_BASE_SOLUTIONS/mysolution/view/MySolutionView' );
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
+  var MySolutionModel = require( 'ACID_BASE_SOLUTIONS/mysolution/model/MySolutionModel' );
+  var MySolutionView = require( 'ACID_BASE_SOLUTIONS/mysolution/view/MySolutionView' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Screen = require( 'JOIST/Screen' );
 
   // strings
   var screenMySolutionString = require( 'string!ACID_BASE_SOLUTIONS/screen.mySolution' );
+
+  /**
+   * @constructor
+   */
+  function MySolutionScreen() {
+    Screen.call( this,
+      screenMySolutionString,
+      createScreenIcon(),
+      function() { return new MySolutionModel(); },
+      function( model ) { return new MySolutionView( model ); },
+      { backgroundColor: ABSColors.SCREEN_BACKGROUND }
+    );
+  }
+
+  acidBaseSolutions.register( 'MySolutionScreen', MySolutionScreen );
 
   /**
    * Creates the icon for this screen.
@@ -49,17 +65,6 @@ define( function( require ) {
 
     return new Node( { children: [ background, h3oNode, ohNode ] } );
   };
-
-
-  function MySolutionScreen() {
-    Screen.call( this,
-      screenMySolutionString,
-      createScreenIcon(),
-      function() { return new MySolutionModel(); },
-      function( model ) { return new MySolutionView( model ); },
-      { backgroundColor: ABSColors.SCREEN_BACKGROUND }
-    );
-  }
 
   return inherit( Screen, MySolutionScreen );
 } );

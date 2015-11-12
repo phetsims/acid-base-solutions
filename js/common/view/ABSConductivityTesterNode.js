@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var ConductivityTesterNode = require( 'SCENERY_PHET/ConductivityTesterNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
@@ -32,6 +33,8 @@ define( function( require ) {
       }
     );
   }
+
+  acidBaseSolutions.register( 'ABSConductivityTesterNode', ABSConductivityTesterNode );
 
   return inherit( ConductivityTesterNode, ABSConductivityTesterNode );
 } );

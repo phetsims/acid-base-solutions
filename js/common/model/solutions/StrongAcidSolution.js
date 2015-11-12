@@ -12,10 +12,14 @@ define( function( require ) {
 
   // modules
   var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var AqueousSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/AqueousSolution' );
   var inherit = require( 'PHET_CORE/inherit' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
 
+  /**
+   * @constructor
+   */
   function StrongAcidSolution() {
     AqueousSolution.call( this,
       SolutionType.STRONG_ACID, ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue,
@@ -27,6 +31,8 @@ define( function( require ) {
         { key: 'H3O', concentrationFunctionName: 'getH3OConcentration' }
       ] );
   }
+
+  acidBaseSolutions.register( 'StrongAcidSolution', StrongAcidSolution );
 
   return inherit( AqueousSolution, StrongAcidSolution, {
 

@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Circle = require( 'SCENERY/nodes/Circle' );
   var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
@@ -35,16 +36,77 @@ define( function( require ) {
   var IMAGE_SCALE = 2; // stored images are scaled this much to improve quality
 
   /**
-   * Compute the number of molecules that corresponds to some concentration.
-   * This algorithm was ported from the Java implementation, and is documented in acid-base-solutions/doc/HA_A-_ratio_model.pdf.
-   * @param {number} concentration
-   * @returns {number}
+   * @param {Magnifier} magnifier
+   * @constructor
    */
-  var getNumberOfMolecules = function( concentration ) {
-    var raiseFactor = Util.log10( concentration / BASE_CONCENTRATION );
-    var baseFactor = Math.pow( ( MAX_MOLECULES / BASE_DOTS ), ( 1 / Util.log10( 1 / BASE_CONCENTRATION ) ) );
-    return Math.round( BASE_DOTS * Math.pow( baseFactor, raiseFactor ) );
-  };
+  function MagnifierNode( magnifier ) {
+
+    var self = this;
+    Node.call( this );
+
+    // lens
+    var RADIUS = magnifier.radius;
+    var lensShape = Shape.circle( 0, 0, RADIUS );
+    var lensNode = new Path( lensShape, { stroke: 'black', lineWidth: LENS_LINE_WIDTH } );
+
+    // handle
+    var handleNode = new Rectangle( RADIUS + 2, -RADIUS / 7, RADIUS * 0.9, RADIUS / 4, 5, 5, {
+      fill: 'rgb(85,55,33)',
+      stroke: 'black',
+      lineWidth: 1
+    } );
+    handleNode.rotate( Math.PI / 6 );
+
+    // opaque background, so we don't see things like pH paper in magnifier
+    var waterNode = new Circle( RADIUS, { fill: 'rgb(210,231,235)' } );
+
+    // @private solvent (H2O)
+    this.solventNode = new Image( solventImage, {
+      opacity: 0.6,  // reduce opacity so that other molecules stand out more
+      centerX: 0,
+      centerY: 0
+    } );
+
+    // @private molecules
+    this.moleculesNode = new MoleculesNode( magnifier, new Bounds2( -RADIUS, -RADIUS, RADIUS, RADIUS ) );
+
+    // stuff that's visible through (and therefore clipped to) the lens
+    var viewportNode = new Node( { children: [ this.solventNode, this.moleculesNode ] } );
+    if ( CLIPPING_ENABLED ) {
+      viewportNode.clipArea = lensShape;
+    }
+
+    // rendering order
+    this.addChild( waterNode );
+    this.addChild( viewportNode );
+    this.addChild( handleNode );
+    this.addChild( lensNode );
+    if ( SHOW_ORIGIN ) {
+      this.addChild( new Circle( 10, { fill: 'red' } ) );
+    }
+
+    // move to correct position
+    this.translation = magnifier.location;
+
+    // Observe the strength and concentration properties for whichever solution is selected.
+    var updateMoleculesBound = this.updateMolecules.bind( this );
+    magnifier.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
+
+      self.moleculesNode.reset();
+
+      // unlink from previous solution
+      if ( prevSolutionType ) {
+        magnifier.solutions[ prevSolutionType ].property( 'strength' ).unlink( updateMoleculesBound );
+        magnifier.solutions[ prevSolutionType ].property( 'concentration' ).unlink( updateMoleculesBound );
+      }
+
+      // link to new solution
+      magnifier.solutions[ newSolutionType ].property( 'strength' ).link( updateMoleculesBound );
+      magnifier.solutions[ newSolutionType ].property( 'concentration' ).link( updateMoleculesBound );
+    } );
+  }
+
+  acidBaseSolutions.register( 'MagnifierNode', MagnifierNode );
 
   /**
    * @param {Magnifier} magnifier
@@ -106,6 +168,8 @@ define( function( require ) {
       } );
     }
   }
+
+  acidBaseSolutions.register( 'MagnifierNode.MoleculesNode', MoleculesNode );
 
   inherit( CanvasNode, MoleculesNode, {
 
@@ -187,75 +251,16 @@ define( function( require ) {
   } );
 
   /**
-   * @param {Magnifier} magnifier
-   * @constructor
+   * Compute the number of molecules that corresponds to some concentration.
+   * This algorithm was ported from the Java implementation, and is documented in acid-base-solutions/doc/HA_A-_ratio_model.pdf.
+   * @param {number} concentration
+   * @returns {number}
    */
-  function MagnifierNode( magnifier ) {
-
-    var self = this;
-    Node.call( this );
-
-    // lens
-    var RADIUS = magnifier.radius;
-    var lensShape = Shape.circle( 0, 0, RADIUS );
-    var lensNode = new Path( lensShape, { stroke: 'black', lineWidth: LENS_LINE_WIDTH } );
-
-    // handle
-    var handleNode = new Rectangle( RADIUS + 2, -RADIUS / 7, RADIUS * 0.9, RADIUS / 4, 5, 5, {
-      fill: 'rgb(85,55,33)',
-      stroke: 'black',
-      lineWidth: 1
-    } );
-    handleNode.rotate( Math.PI / 6 );
-
-    // opaque background, so we don't see things like pH paper in magnifier
-    var waterNode = new Circle( RADIUS, { fill: 'rgb(210,231,235)' } );
-
-    // @private solvent (H2O)
-    this.solventNode = new Image( solventImage, {
-      opacity: 0.6,  // reduce opacity so that other molecules stand out more
-      centerX: 0,
-      centerY: 0
-    } );
-
-    // @private molecules
-    this.moleculesNode = new MoleculesNode( magnifier, new Bounds2( -RADIUS, -RADIUS, RADIUS, RADIUS ) );
-
-    // stuff that's visible through (and therefore clipped to) the lens
-    var viewportNode = new Node( { children: [ this.solventNode, this.moleculesNode ] } );
-    if ( CLIPPING_ENABLED ) {
-      viewportNode.clipArea = lensShape;
-    }
-
-    // rendering order
-    this.addChild( waterNode );
-    this.addChild( viewportNode );
-    this.addChild( handleNode );
-    this.addChild( lensNode );
-    if ( SHOW_ORIGIN ) {
-      this.addChild( new Circle( 10, { fill: 'red' } ) );
-    }
-
-    // move to correct position
-    this.translation = magnifier.location;
-
-    // Observe the strength and concentration properties for whichever solution is selected.
-    var updateMoleculesBound = this.updateMolecules.bind( this );
-    magnifier.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
-
-      self.moleculesNode.reset();
-
-      // unlink from previous solution
-      if ( prevSolutionType ) {
-        magnifier.solutions[ prevSolutionType ].property( 'strength' ).unlink( updateMoleculesBound );
-        magnifier.solutions[ prevSolutionType ].property( 'concentration' ).unlink( updateMoleculesBound );
-      }
-
-      // link to new solution
-      magnifier.solutions[ newSolutionType ].property( 'strength' ).link( updateMoleculesBound );
-      magnifier.solutions[ newSolutionType ].property( 'concentration' ).link( updateMoleculesBound );
-    } );
-  }
+  var getNumberOfMolecules = function( concentration ) {
+    var raiseFactor = Util.log10( concentration / BASE_CONCENTRATION );
+    var baseFactor = Math.pow( ( MAX_MOLECULES / BASE_DOTS ), ( 1 / Util.log10( 1 / BASE_CONCENTRATION ) ) );
+    return Math.round( BASE_DOTS * Math.pow( baseFactor, raiseFactor ) );
+  };
 
   return inherit( Node, MagnifierNode, {
 

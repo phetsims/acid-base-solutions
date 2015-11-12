@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -24,6 +25,10 @@ define( function( require ) {
   // constants
   var FONT = new PhetFont( 12 );
 
+  /**
+   * @param {number} maxHeight
+   * @constructor
+   */
   function ConcentrationGraphBarNode( maxHeight ) {
 
     this.maxBarHeight = maxHeight; // @private
@@ -39,6 +44,7 @@ define( function( require ) {
     Node.call( this, { children: [ this.bar, this.text ] } );
   }
 
+  acidBaseSolutions.register( 'ConcentrationGraphBarNode', ConcentrationGraphBarNode );
 
   return inherit( Node, ConcentrationGraphBarNode, {
 

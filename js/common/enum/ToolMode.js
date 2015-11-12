@@ -5,12 +5,19 @@
  *
  * @author Andrey Zelenkov (Mlearner)
  */
-define( function() {
+define( function( require ) {
   'use strict';
 
-  return Object.freeze( {
+  // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+
+  var ToolMode = Object.freeze( {
     PH_METER: 'pHMeter',
     PH_PAPER: 'pHPaper',
     CONDUCTIVITY: 'conductivity'
   } );
+
+  acidBaseSolutions.register( 'ToolMode', ToolMode );
+
+  return ToolMode;
 } );

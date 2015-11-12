@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -37,6 +38,60 @@ define( function( require ) {
   var ARROWS_LENGTH = 25;
   var ARROWS_HEAD_RADIUS = 0.72 * ARROWS_LENGTH;
   var ARROWS_HEAD_ANGLE_DELTA = 0.2 * Math.PI;
+
+  //-------------------------------------------------------------------------------------
+  // Public functions for creating reaction equations.
+  //-------------------------------------------------------------------------------------
+
+  var ReactionEquationFactory = {
+
+    // 2 H2O <-> H3O+ + OH-
+    createWaterEquation: function() {
+      return createEquation( [
+        create2H2ONode(),
+        reversibleArrowNode(),
+        createH3ONode(),
+        plusSignNode(),
+        createOHNode()
+      ] );
+    },
+
+    // HA + H2O -> A- + H3O+
+    createStrongAcidEquation: function() {
+      return createAcidEquation( false /* isWeak */ );
+    },
+
+    // HA + H2O <-> A- + H3O+
+    createWeakAcidEquation: function() {
+      return createAcidEquation( true /* isWeak */ );
+    },
+
+    // MOH -> M+ + OH-
+    createStrongBaseEquation: function() {
+      return createEquation( [
+        createMOHNode(),
+        irreversibleArrowNode(),
+        createMNode(),
+        plusSignNode(),
+        createOHNode()
+      ] );
+    },
+
+    // B + H2O <-> BH+ + OH-
+    createWeakBaseEquation: function() {
+      return createEquation( [
+        createBNode(),
+        plusSignNode(),
+        createH2ONode(),
+        reversibleArrowNode(),
+        createBHNode(),
+        plusSignNode(),
+        createOHNode()
+      ] );
+    }
+  };
+
+  acidBaseSolutions.register( 'ReactionEquationFactory', ReactionEquationFactory );
 
   //-------------------------------------------------------------------------------------
   // Private functions for creating components of reaction equations.
@@ -266,55 +321,5 @@ define( function( require ) {
     ] );
   };
 
-  //-------------------------------------------------------------------------------------
-  // Public functions for creating reaction equations.
-  //-------------------------------------------------------------------------------------
-
-  return {
-
-    // 2 H2O <-> H3O+ + OH-
-    createWaterEquation: function() {
-      return createEquation( [
-        create2H2ONode(),
-        reversibleArrowNode(),
-        createH3ONode(),
-        plusSignNode(),
-        createOHNode()
-      ] );
-    },
-
-    // HA + H2O -> A- + H3O+
-    createStrongAcidEquation: function() {
-      return createAcidEquation( false /* isWeak */ );
-    },
-
-    // HA + H2O <-> A- + H3O+
-    createWeakAcidEquation: function() {
-      return createAcidEquation( true /* isWeak */ );
-    },
-
-    // MOH -> M+ + OH-
-    createStrongBaseEquation: function() {
-      return createEquation( [
-        createMOHNode(),
-        irreversibleArrowNode(),
-        createMNode(),
-        plusSignNode(),
-        createOHNode()
-      ] );
-    },
-
-    // B + H2O <-> BH+ + OH-
-    createWeakBaseEquation: function() {
-      return createEquation( [
-        createBNode(),
-        plusSignNode(),
-        createH2ONode(),
-        reversibleArrowNode(),
-        createBHNode(),
-        plusSignNode(),
-        createOHNode()
-      ] );
-    }
-  };
+  return ReactionEquationFactory;
 } );

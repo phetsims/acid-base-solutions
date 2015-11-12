@@ -5,12 +5,19 @@
  *
  * @author Andrey Zelenkov (Mlearner)
  */
-define( function() {
+define( function( require ) {
   'use strict';
 
-  return Object.freeze( {
+  // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+
+  var ViewMode = Object.freeze( {
     MOLECULES: 'molecules',
     GRAPH: 'graph',
     HIDE_VIEWS: 'hideViews'
   } );
+
+  acidBaseSolutions.register( 'ViewMode', ViewMode );
+
+  return ViewMode;
 } );

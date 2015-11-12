@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -31,10 +32,28 @@ define( function( require ) {
     maxWidth: 100 // constrain for i18n, determined empirically
   };
 
-  // issues #94: strength can be changed only for weak solutions, use this as a guard
-  var strengthIsMutable = function( solutionType ) {
-    return ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE );
-  };
+  /**
+   * @param {Property.<SolutionType>} solutionTypeProperty
+   * @param {Property.<number>} strengthProperty
+   * @param {Range} strengthRange
+   * @constructor
+   */
+  function StrengthSlider( solutionTypeProperty, strengthProperty, strengthRange ) {
+
+    var model = new SliderModel( solutionTypeProperty, strengthProperty, strengthRange );
+
+    HSlider.call( this, model.sliderValueProperty, model.sliderValueRange, {
+      trackSize: new Dimension2( 125, 4 ),
+      thumbSize: new Dimension2( 12, 24 ),
+      majorTickLength: 12
+    } );
+
+    // add ticks
+    this.addMajorTick( model.sliderValueRange.min, new Text( weakerString, TICK_LABEL_OPTIONS ) );
+    this.addMajorTick( model.sliderValueRange.max, new Text( strongerString, TICK_LABEL_OPTIONS ) );
+  }
+
+  acidBaseSolutions.register( 'StrengthSlider', StrengthSlider );
 
   /**
    * Model for the strength slider.
@@ -69,26 +88,12 @@ define( function( require ) {
     } );
   }
 
-  /**
-   * @param {Property.<SolutionType>} solutionTypeProperty
-   * @param {Property.<number>} strengthProperty
-   * @param {Range} strengthRange
-   * @constructor
-   */
-  function StrengthSlider( solutionTypeProperty, strengthProperty, strengthRange ) {
+  acidBaseSolutions.register( 'StrengthSlider.SliderModel', SliderModel );
 
-    var model = new SliderModel( solutionTypeProperty, strengthProperty, strengthRange );
-
-    HSlider.call( this, model.sliderValueProperty, model.sliderValueRange, {
-      trackSize: new Dimension2( 125, 4 ),
-      thumbSize: new Dimension2( 12, 24 ),
-      majorTickLength: 12
-    } );
-
-    // add ticks
-    this.addMajorTick( model.sliderValueRange.min, new Text( weakerString, TICK_LABEL_OPTIONS ) );
-    this.addMajorTick( model.sliderValueRange.max, new Text( strongerString, TICK_LABEL_OPTIONS ) );
-  }
+  // issues #94: strength can be changed only for weak solutions, use this as a guard
+  var strengthIsMutable = function( solutionType ) {
+    return ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE );
+  };
 
   return inherit( HSlider, StrengthSlider );
 } );

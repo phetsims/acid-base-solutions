@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var Circle = require( 'SCENERY/nodes/Circle' );
   var inherit = require( 'PHET_CORE/inherit' );
   var IntroductionModel = require( 'ACID_BASE_SOLUTIONS/introduction/model/IntroductionModel' );
@@ -22,6 +23,21 @@ define( function( require ) {
 
   // strings
   var screenIntroductionString = require( 'string!ACID_BASE_SOLUTIONS/screen.introduction' );
+
+  /**
+   * @constructor
+   */
+  function IntroductionScreen() {
+    Screen.call( this,
+      screenIntroductionString,
+      createScreenIcon(),
+      function() { return new IntroductionModel(); },
+      function( model ) { return new IntroductionView( model ); },
+      { backgroundColor: ABSColors.SCREEN_BACKGROUND }
+    );
+  }
+
+  acidBaseSolutions.register( 'IntroductionScreen', IntroductionScreen );
 
   /**
    * Creates the icon for this screen.
@@ -60,16 +76,6 @@ define( function( require ) {
 
     return new Node( { children: [ background, waterNode, beakerNode, handleNode, lensNode ] } );
   };
-
-  function IntroductionScreen() {
-    Screen.call( this,
-      screenIntroductionString,
-      createScreenIcon(),
-      function() { return new IntroductionModel(); },
-      function( model ) { return new IntroductionView( model ); },
-      { backgroundColor: ABSColors.SCREEN_BACKGROUND }
-    );
-  }
 
   return inherit( Screen, IntroductionScreen );
 } );

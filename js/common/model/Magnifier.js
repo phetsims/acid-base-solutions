@@ -5,8 +5,11 @@
  *
  * @author Andrey Zelenkov (Mlearner)
  */
-define( function() {
+define( function( require ) {
   'use strict';
+
+  // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
 
   /**
    * @param {Beaker} beaker
@@ -26,6 +29,8 @@ define( function() {
     // @public magnifier location, origin at center of glass
     this.location = beaker.location.plusXY( 0, -beaker.size.height / 2 );
   }
+
+  acidBaseSolutions.register( 'Magnifier', Magnifier );
 
   return Magnifier;
 } );

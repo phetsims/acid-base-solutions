@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
@@ -32,6 +33,8 @@ define( function( require ) {
     // @public location, at tip of probe
     this.locationProperty = new Property( new Vector2( beaker.right - 65, beaker.top - 5 ) );
   }
+
+  acidBaseSolutions.register( 'PHMeter', PHMeter );
 
   return inherit( Object, PHMeter, {
 

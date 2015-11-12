@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -58,6 +59,8 @@ define( function( require ) {
         }
       } );
   }
+
+  acidBaseSolutions.register( 'ConductivityTester', ConductivityTester );
 
   return inherit( Object, ConductivityTester, {
 

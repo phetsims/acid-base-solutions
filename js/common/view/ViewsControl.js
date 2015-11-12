@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
   var CheckBox = require( 'SUN/CheckBox' );
@@ -41,11 +42,6 @@ define( function( require ) {
   var ICON_OPTIONS = { scale: 0.75 };
   var TOUCH_AREA_EXPAND_X = 10;
   var TOUCH_AREA_EXPAND_Y = 3;
-
-  // uniformly expands touch area for controls
-  var expandTouchArea = function( node ) {
-    node.touchArea = node.localBounds.dilatedXY( TOUCH_AREA_EXPAND_X, TOUCH_AREA_EXPAND_Y );
-  };
 
   /**
    * @param {Property.<ViewMode>} viewModeProperty
@@ -121,6 +117,13 @@ define( function( require ) {
       solventCheckBox.enabled = ( viewMode === ViewMode.MOLECULES );
     } );
   }
+
+  acidBaseSolutions.register( 'ViewsControl', ViewsControl );
+
+  // uniformly expands touch area for controls
+  var expandTouchArea = function( node ) {
+    node.touchArea = node.localBounds.dilatedXY( TOUCH_AREA_EXPAND_X, TOUCH_AREA_EXPAND_Y );
+  };
 
   return inherit( VBox, ViewsControl );
 } );

@@ -11,10 +11,15 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Vector2 = require( 'DOT/Vector2' );
 
+  /**
+   * @param {Object} [options]
+   * @constructor
+   */
   function Beaker( options ) {
 
     options = _.extend( {
@@ -33,6 +38,8 @@ define( function( require ) {
 
     this.bounds = new Bounds2( this.left, this.top, this.right, this.bottom ); // @public
   }
+
+  acidBaseSolutions.register( 'Beaker', Beaker );
 
   return Beaker;
 } );

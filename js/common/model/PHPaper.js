@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -56,6 +57,8 @@ define( function( require ) {
       self.updateIndicatorHeight();
     } );
   }
+
+  acidBaseSolutions.register( 'PHPaper', PHPaper );
 
   return inherit( Object, PHPaper, {
 

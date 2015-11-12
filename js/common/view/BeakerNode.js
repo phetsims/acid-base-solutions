@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
@@ -107,8 +108,11 @@ define( function( require ) {
     this.translation = beaker.location;
   }
 
+  acidBaseSolutions.register( 'BeakerNode', BeakerNode );
+
   return inherit( Node, BeakerNode, {}, {
 
+    // @public @static
     createIcon: function( width, height ) {
       var lipOffset = 0.1 * width;
       return new Node( {

@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var AcidBaseSolutionsControlPanel = require( 'ACID_BASE_SOLUTIONS/common/view/AcidBaseSolutionsControlPanel' );
   var BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
   var Bounds2 = require( 'DOT/Bounds2' );
@@ -89,6 +90,8 @@ define( function( require ) {
       conductivityTesterNode.visible = ( toolMode === ToolMode.CONDUCTIVITY );
     } );
   }
+
+  acidBaseSolutions.register( 'AcidBaseSolutionsView', AcidBaseSolutionsView );
 
   return inherit( ScreenView, AcidBaseSolutionsView, {
 

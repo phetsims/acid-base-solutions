@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var Beaker = require( 'ACID_BASE_SOLUTIONS/common/model/Beaker' );
   var ConcentrationGraph = require( 'ACID_BASE_SOLUTIONS/common/model/ConcentrationGraph' );
   var ConductivityTester = require( 'ACID_BASE_SOLUTIONS/common/model/ConductivityTester' );
@@ -58,6 +59,8 @@ define( function( require ) {
       self.solutions[ newSolutionType ].property( 'pH' ).link( setPH );
     } );
   }
+
+  acidBaseSolutions.register( 'AcidBaseSolutionsModel', AcidBaseSolutionsModel );
 
   return inherit( PropertySet, AcidBaseSolutionsModel, {
 

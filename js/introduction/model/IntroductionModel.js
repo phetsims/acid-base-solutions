@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var AcidBaseSolutionsModel = require( 'ACID_BASE_SOLUTIONS/common/model/AcidBaseSolutionsModel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
@@ -18,6 +19,9 @@ define( function( require ) {
   var WeakAcidSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/WeakAcidSolution' );
   var WeakBaseSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/WeakBaseSolution' );
 
+  /**
+   * @constructor
+   */
   function IntroductionModel() {
     AcidBaseSolutionsModel.call( this,
       [
@@ -29,6 +33,8 @@ define( function( require ) {
       ],
       SolutionType.WATER );
   }
+
+  acidBaseSolutions.register( 'IntroductionModel', IntroductionModel );
 
   return inherit( AcidBaseSolutionsModel, IntroductionModel );
 } );

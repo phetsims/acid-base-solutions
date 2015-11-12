@@ -15,6 +15,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PropertySet = require( 'AXON/PropertySet' );
   var Util = require( 'DOT/Util' );
@@ -58,6 +59,8 @@ define( function( require ) {
         return -Math.round( 100 * Util.log10( self.getH3OConcentration() ) ) / 100;
       } );
   }
+
+  acidBaseSolutions.register( 'AqueousSolution', AqueousSolution );
 
   return inherit( PropertySet, AqueousSolution, {
 

@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PHMeterNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHMeterNode' );
@@ -40,6 +41,8 @@ define( function( require ) {
       { value: ToolMode.CONDUCTIVITY, node: new Image( lightBulbImage ) }
     ], options );
   }
+
+  acidBaseSolutions.register( 'ToolsControl', ToolsControl );
 
   return inherit( RadioButtonGroup, ToolsControl );
 } );

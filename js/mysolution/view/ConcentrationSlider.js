@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -19,6 +20,31 @@ define( function( require ) {
   var Range = require( 'DOT/Range' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
+
+  /**
+   * @param {Property.<number>} concentrationProperty
+   * @param {Range} concentrationRange
+   * @constructor
+   */
+  function ConcentrationSlider( concentrationProperty, concentrationRange ) {
+
+    var model = new SliderModel( concentrationProperty, concentrationRange );
+
+    HSlider.call( this, model.sliderValueProperty, model.sliderValueRange, {
+      trackSize: new Dimension2( 125, 4 ),
+      thumbSize: new Dimension2( 12, 24 ),
+      majorTickLength: 12,
+      tickLabelSpacing: 2
+    } );
+
+    // add labels tick marks
+    var numberOfTicks = 4;
+    for ( var i = 0, step = model.sliderValueRange.getLength() / ( numberOfTicks - 1 ); i < numberOfTicks; i++ ) {
+      this.addMajorTick( model.sliderValueRange.min + step * i, new Text( concentrationRange.min * Math.pow( 10, i ), { font: new PhetFont( 10 ) } ) );
+    }
+  }
+
+  acidBaseSolutions.register( 'ConcentrationSlider', ConcentrationSlider );
 
   /**
    * Model for the concentration slider.
@@ -48,28 +74,7 @@ define( function( require ) {
     } );
   }
 
-  /**
-   * @param {Property.<number>} concentrationProperty
-   * @param {Range} concentrationRange
-   * @constructor
-   */
-  function ConcentrationSlider( concentrationProperty, concentrationRange ) {
-
-    var model = new SliderModel( concentrationProperty, concentrationRange );
-
-    HSlider.call( this, model.sliderValueProperty, model.sliderValueRange, {
-      trackSize: new Dimension2( 125, 4 ),
-      thumbSize: new Dimension2( 12, 24 ),
-      majorTickLength: 12,
-      tickLabelSpacing: 2
-    } );
-
-    // add labels tick marks
-    var numberOfTicks = 4;
-    for ( var i = 0, step = model.sliderValueRange.getLength() / ( numberOfTicks - 1 ); i < numberOfTicks; i++ ) {
-      this.addMajorTick( model.sliderValueRange.min + step * i, new Text( concentrationRange.min * Math.pow( 10, i ), { font: new PhetFont( 10 ) } ) );
-    }
-  }
+  acidBaseSolutions.register( 'ConcentrationSlider.SliderModel', SliderModel );
 
   return inherit( HSlider, ConcentrationSlider );
 } );

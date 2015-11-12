@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
@@ -36,24 +37,6 @@ define( function( require ) {
   var TEXT_ICON_SPACING = 10; // space between text and icon
   var TOUCH_AREA_EXPAND_X = 10;
   var TOUCH_AREA_EXPAND_Y = 3;
-
-  /**
-   * Notes about this ugly composition of the radio button labels, used throughout.
-   * (1) It would be preferable to use scenery.HTMLText, but that causes out-of-memory issues, see issue #97.
-   * (2) Other proposed approached were not maintainable or required scenery changes.
-   * (3) Order of solution name, formula and molecule is not internationalized.
-   */
-  var createStyledLabel = function( plainString1, italicString, plainString2, moleculeNode ) {
-    return new HBox( {
-      children: [
-        new Text( plainString1, TEXT_OPTIONS ),
-        new Text( italicString, ITALIC_TEXT_OPTIONS ),
-        new Text( plainString2, TEXT_OPTIONS ),
-        new HStrut( TEXT_ICON_SPACING ),
-        moleculeNode
-      ]
-    } );
-  };
 
   /**
    * @param {Property.<SolutionType>} solutionTypeProperty
@@ -125,6 +108,26 @@ define( function( require ) {
     options.children = buttons;
     VBox.call( this, options );
   }
+
+  acidBaseSolutions.register( 'SolutionsControl', SolutionsControl );
+
+  /**
+   * Notes about this ugly composition of the radio button labels, used throughout.
+   * (1) It would be preferable to use scenery.HTMLText, but that causes out-of-memory issues, see issue #97.
+   * (2) Other proposed approached were not maintainable or required scenery changes.
+   * (3) Order of solution name, formula and molecule is not internationalized.
+   */
+  var createStyledLabel = function( plainString1, italicString, plainString2, moleculeNode ) {
+    return new HBox( {
+      children: [
+        new Text( plainString1, TEXT_OPTIONS ),
+        new Text( italicString, ITALIC_TEXT_OPTIONS ),
+        new Text( plainString2, TEXT_OPTIONS ),
+        new HStrut( TEXT_ICON_SPACING ),
+        moleculeNode
+      ]
+    } );
+  };
 
   return inherit( VBox, SolutionsControl );
 } );

@@ -11,9 +11,10 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ReactionEquationFactory = require( 'ACID_BASE_SOLUTIONS/common/view/ReactionEquationFactory' );
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var ReactionEquationFactory = require( 'ACID_BASE_SOLUTIONS/common/view/ReactionEquationFactory' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
 
   /**
@@ -56,6 +57,8 @@ define( function( require ) {
       equations[ newSolutionType ].setVisible( true );
     } );
   }
+
+  acidBaseSolutions.register( 'ReactionEquationNode', ReactionEquationNode );
 
   var getMaxWidth = function( equations ) {
     var maxWidth = 0;
