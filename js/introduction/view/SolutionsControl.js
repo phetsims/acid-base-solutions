@@ -35,8 +35,8 @@ define( function( require ) {
   var TEXT_OPTIONS = { font: new PhetFont( 12 ) };
   var ITALIC_TEXT_OPTIONS = _.extend( { fontStyle: 'italic' }, TEXT_OPTIONS );
   var TEXT_ICON_SPACING = 10; // space between text and icon
-  var TOUCH_AREA_EXPAND_X = 10;
-  var TOUCH_AREA_EXPAND_Y = 3;
+  var TOUCH_AREA_X_DILATION = 10;
+  var TOUCH_AREA_Y_DILATION = 3;
 
   /**
    * @param {Property.<SolutionType>} solutionTypeProperty
@@ -102,7 +102,7 @@ define( function( require ) {
 
     // uniformly expands touch area for buttons
     buttons.forEach( function( button ) {
-      button.touchArea = button.localBounds.dilatedXY( TOUCH_AREA_EXPAND_X, TOUCH_AREA_EXPAND_Y );
+      button.touchArea = button.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
     } );
 
     options.children = buttons;
