@@ -1,7 +1,7 @@
 {
-  "comment": "# acid-base-solutions 1.2.0 Thu Feb 11 2016 14:50:58 GMT-0700 (MST)",
+  "comment": "# acid-base-solutions 1.2.1 Thu Feb 11 2016 14:58:45 GMT-0700 (MST)",
   "acid-base-solutions": {
-    "sha": "85c1961664943f9e3a226f2cfb77eb09d070fefc",
+    "sha": "82dc4a19f9570a745766d4dc773d0d2190150f02",
     "branch": "1.2"
   },
   "assert": {
