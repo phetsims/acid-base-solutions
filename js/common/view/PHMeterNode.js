@@ -78,16 +78,15 @@ define( function( require ) {
     }
 
     // Constrained dragging
+    var clickYOffset = 0;
     this.addInputListener( new SimpleDragHandler( {
 
-      clickYOffset: 0,
-
       start: function( e ) {
-        this.clickYOffset = self.globalToParentPoint( e.pointer.point ).y - e.currentTarget.y;
+        clickYOffset = self.globalToParentPoint( e.pointer.point ).y - e.currentTarget.y;
       },
 
       drag: function( e ) {
-        var y = self.globalToParentPoint( e.pointer.point ).y - this.clickYOffset;
+        var y = self.globalToParentPoint( e.pointer.point ).y - clickYOffset;
         pHMeter.locationProperty.value = new Vector2( pHMeter.locationProperty.value.x, Util.clamp( y, pHMeter.dragYRange.min, pHMeter.dragYRange.max ) );
       }
     } ) );

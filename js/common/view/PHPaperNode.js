@@ -59,16 +59,15 @@ define( function( require ) {
     this.touchArea = this.localBounds.dilatedXY( 10, 10 );
 
     // Constrained dragging
+    var clickOffset = null;
     this.addInputListener( new SimpleDragHandler( {
 
-      clickOffset: null,
-
       start: function( e ) {
-        this.clickOffset = self.globalToParentPoint( e.pointer.point ).subtract( e.currentTarget.translation );
+        clickOffset = self.globalToParentPoint( e.pointer.point ).subtract( e.currentTarget.translation );
       },
 
       drag: function( e ) {
-        var v = self.globalToParentPoint( e.pointer.point ).subtract( this.clickOffset );
+        var v = self.globalToParentPoint( e.pointer.point ).subtract( clickOffset );
         pHPaper.locationProperty.value = new Vector2(
           Util.clamp( v.x, pHPaper.dragBounds.minX, pHPaper.dragBounds.maxX ),
           Util.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) );
