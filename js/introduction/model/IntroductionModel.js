@@ -10,7 +10,7 @@ define( function( require ) {
 
   // modules
   var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  var AcidBaseSolutionsModel = require( 'ACID_BASE_SOLUTIONS/common/model/AcidBaseSolutionsModel' );
+  var ABSModel = require( 'ACID_BASE_SOLUTIONS/common/model/ABSModel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
   var StrongAcidSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/StrongAcidSolution' );
@@ -23,7 +23,7 @@ define( function( require ) {
    * @constructor
    */
   function IntroductionModel() {
-    AcidBaseSolutionsModel.call( this,
+    ABSModel.call( this,
       [
         new WaterSolution(),
         new StrongAcidSolution(),
@@ -36,5 +36,5 @@ define( function( require ) {
 
   acidBaseSolutions.register( 'IntroductionModel', IntroductionModel );
 
-  return inherit( AcidBaseSolutionsModel, IntroductionModel );
+  return inherit( ABSModel, IntroductionModel );
 } );

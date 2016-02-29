@@ -24,7 +24,7 @@ define( function( require ) {
    * @param {SolutionType} defaultSolutionType
    * @constructor
    */
-  function AcidBaseSolutionsModel( solutions, defaultSolutionType ) {
+  function ABSModel( solutions, defaultSolutionType ) {
 
     var self = this;
 
@@ -60,9 +60,9 @@ define( function( require ) {
     } );
   }
 
-  acidBaseSolutions.register( 'AcidBaseSolutionsModel', AcidBaseSolutionsModel );
+  acidBaseSolutions.register( 'ABSModel', ABSModel );
 
-  return inherit( PropertySet, AcidBaseSolutionsModel, {
+  return inherit( PropertySet, ABSModel, {
 
     // @override @public
     reset: function() {

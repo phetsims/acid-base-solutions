@@ -10,7 +10,7 @@ define( function( require ) {
 
   // modules
   var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  var AcidBaseSolutionsView = require( 'common/view/AcidBaseSolutionsView' );
+  var ABSView = require( 'common/view/ABSView' );
   var inherit = require( 'PHET_CORE/inherit' );
   var SolutionControl = require( 'ACID_BASE_SOLUTIONS/mysolution/view/SolutionControl' );
 
@@ -19,10 +19,10 @@ define( function( require ) {
    * @constructor
    */
   function MySolutionView( model ) {
-    AcidBaseSolutionsView.call( this, model, new SolutionControl( model.property( 'solutionType' ), model.property( 'concentration' ), model.property( 'strength' ) ) );
+    ABSView.call( this, model, new SolutionControl( model.property( 'solutionType' ), model.property( 'concentration' ), model.property( 'strength' ) ) );
   }
 
   acidBaseSolutions.register( 'MySolutionView', MySolutionView );
 
-  return inherit( AcidBaseSolutionsView, MySolutionView );
+  return inherit( ABSView, MySolutionView );
 } );

@@ -11,7 +11,7 @@ define( function( require ) {
 
   // modules
   var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  var AcidBaseSolutionsControlPanel = require( 'ACID_BASE_SOLUTIONS/common/view/AcidBaseSolutionsControlPanel' );
+  var ABSControlPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ABSControlPanel' );
   var BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var ABSConductivityTesterNode = require( 'ACID_BASE_SOLUTIONS/common/view/ABSConductivityTesterNode' );
@@ -29,11 +29,11 @@ define( function( require ) {
   var ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );
 
   /**
-   * @param {AcidBaseSolutionsModel} model
+   * @param {ABSModel} model
    * @param {Node} solutionControl
    * @constructor
    */
-  function AcidBaseSolutionsView( model, solutionControl ) {
+  function ABSView( model, solutionControl ) {
 
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
 
@@ -53,7 +53,7 @@ define( function( require ) {
     var pHPaperNode = new PHPaperNode( model.pHPaper );
     var pHColorKeyNode = new PHColorKeyNode( model.pHPaper.paperSize, { left: model.beaker.left + 3, bottom: model.beaker.top - 50 } );
     var conductivityTesterNode = new ABSConductivityTesterNode( model.conductivityTester );
-    var controlPanel = new AcidBaseSolutionsControlPanel( model, this.viewProperties, solutionControl, {
+    var controlPanel = new ABSControlPanel( model, this.viewProperties, solutionControl, {
       // vertically centered at right edge of screen
       right: this.layoutBounds.right - 20,
       centerY: this.layoutBounds.centerY,
@@ -91,9 +91,9 @@ define( function( require ) {
     } );
   }
 
-  acidBaseSolutions.register( 'AcidBaseSolutionsView', AcidBaseSolutionsView );
+  acidBaseSolutions.register( 'ABSView', ABSView );
 
-  return inherit( ScreenView, AcidBaseSolutionsView, {
+  return inherit( ScreenView, ABSView, {
 
     // @public resets properties that are specific to the view
     reset: function() { this.viewProperties.reset(); }

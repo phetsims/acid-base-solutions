@@ -37,7 +37,7 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function AcidBaseSolutionsControlPanel( model, viewProperties, solutionControl, options ) {
+  function ABSControlPanel( model, viewProperties, solutionControl, options ) {
 
     options = _.extend( {
       align: 'left',
@@ -103,7 +103,7 @@ define( function( require ) {
     VBox.call( this, options );
   }
 
-  acidBaseSolutions.register( 'AcidBaseSolutionsControlPanel', AcidBaseSolutionsControlPanel );
+  acidBaseSolutions.register( 'ABSControlPanel', ABSControlPanel );
 
-  return inherit( VBox, AcidBaseSolutionsControlPanel );
+  return inherit( VBox, ABSControlPanel );
 } );
