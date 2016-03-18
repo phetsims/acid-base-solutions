@@ -25,13 +25,15 @@ define( function( require ) {
   /**
    * @constructor
    */
-  function MySolutionScreen() {
+  function MySolutionScreen( tandem ) {
     Screen.call( this,
       screenMySolutionString,
       createScreenIcon(),
       function() { return new MySolutionModel(); },
-      function( model ) { return new MySolutionView( model ); },
-      { backgroundColor: ABSColors.SCREEN_BACKGROUND }
+      function( model ) { return new MySolutionView( model ); }, {
+        backgroundColor: ABSColors.SCREEN_BACKGROUND,
+        tandem: tandem
+      }
     );
   }
 

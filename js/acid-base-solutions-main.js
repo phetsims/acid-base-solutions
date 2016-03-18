@@ -14,13 +14,17 @@ define( function( require ) {
   var MySolutionScreen = require( 'ACID_BASE_SOLUTIONS/mysolution/MySolutionScreen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
+  var Tandem = require( 'TANDEM/Tandem' );
 
   // strings
   var acidBaseSolutionsTitleString = require( 'string!ACID_BASE_SOLUTIONS/acid-base-solutions.title' );
 
+  // constants
+  var tandem = Tandem.createRootTandem();
+
   var screens = [
-    new IntroductionScreen(),
-    new MySolutionScreen()
+    new IntroductionScreen( tandem.createTandem( 'introductionScreen' ) ),
+    new MySolutionScreen( tandem.createTandem( 'mySolutionScreen' ) )
   ];
 
   var simOptions = {
@@ -31,7 +35,8 @@ define( function( require ) {
       qualityAssurance: 'Steele Dalton, Bryce Griebenow, Elise Morgan, Oliver Orejola,\nBenjamin Roberts, Bryan Yoelin',
       thanks: '\u2022 Conversion of this simulation to HTML5 was funded in part by the Royal Society of Chemistry.\n' +
               '\u2022 Thanks to Mobile Learner Labs for working with the PhET development team to convert this\nsimulation to HTML5.'
-    }
+    },
+    tandem: tandem
   };
 
   SimLauncher.launch( function() {
