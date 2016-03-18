@@ -22,11 +22,6 @@ define( function( require ) {
   // constants
   var tandem = Tandem.createRootTandem();
 
-  var screens = [
-    new IntroductionScreen( tandem.createTandem( 'introductionScreen' ) ),
-    new MySolutionScreen( tandem.createTandem( 'mySolutionScreen' ) )
-  ];
-
   var simOptions = {
     credits: {
       leadDesign: 'Kelly Lancaster',
@@ -40,6 +35,10 @@ define( function( require ) {
   };
 
   SimLauncher.launch( function() {
+    var screens = [
+      new IntroductionScreen( tandem.createTandem( 'introductionScreen' ) ),
+      new MySolutionScreen( tandem.createTandem( 'mySolutionScreen' ) )
+    ];
     new Sim( acidBaseSolutionsTitleString, screens, simOptions ).start();
   } );
 } );
