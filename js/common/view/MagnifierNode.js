@@ -62,7 +62,7 @@ define( function( require ) {
 
     // @private solvent (H2O)
     this.solventNode = new Image( solventImage, {
-      opacity: 0.6,  // reduce opacity so that other molecules stand out more
+      imageOpacity: 0.6,  // reduce opacity so that other molecules stand out more
       centerX: 0,
       centerY: 0
     } );
