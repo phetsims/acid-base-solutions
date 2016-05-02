@@ -10,7 +10,7 @@ define( function( require ) {
 
   // modules
   var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  var ABSView = require( 'common/view/ABSView' );
+  var ABSView = require( 'ACID_BASE_SOLUTIONS/common/view/ABSView' );
   var inherit = require( 'PHET_CORE/inherit' );
   var SolutionsControl = require( 'ACID_BASE_SOLUTIONS/introduction/view/SolutionsControl' );
 
