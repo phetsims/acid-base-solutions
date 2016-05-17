@@ -114,7 +114,7 @@ define( function( require ) {
   /**
    * Notes about this ugly composition of the radio button labels, used throughout.
    * (1) It would be preferable to use scenery.HTMLText, but that causes out-of-memory issues, see issue #97.
-   * (2) Other proposed approached were not maintainable or required scenery changes.
+   * (2) Other proposed approaches were not maintainable or required scenery changes.
    * (3) Order of solution name, formula and molecule is not internationalized.
    */
   var createStyledLabel = function( plainString1, italicString, plainString2, moleculeNode ) {
