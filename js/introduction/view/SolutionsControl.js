@@ -65,9 +65,9 @@ define( function( require ) {
       createStyledLabel( strongAcidString + ' (H', 'A', ')', new MoleculeFactory.HA() ),
       RADIO_BUTTON_OPTIONS );
 
-    // Weak Acid (A)
+    // Weak Acid (HA)
     var weakAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_ACID,
-      createStyledLabel( weakAcidString + ' (', 'A', ')', new MoleculeFactory.HA() ),
+      createStyledLabel( weakAcidString + ' (H', 'A', ')', new MoleculeFactory.HA() ),
       RADIO_BUTTON_OPTIONS );
 
     // Strong Base (M)
