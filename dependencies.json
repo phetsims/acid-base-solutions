@@ -1,7 +1,7 @@
 {
-  "comment": "# acid-base-solutions 1.2.3 Mon Mar 07 2016 16:34:12 GMT-0700 (MST)",
+  "comment": "# acid-base-solutions 1.2.4 Tue Apr 05 2016 13:35:08 GMT-0600 (MDT)",
   "acid-base-solutions": {
-    "sha": "2836f8c501e09ca6dd350381d6a688a0628ababd",
+    "sha": "c5af0915fb53d110fc857b19dcae686665aa279f",
     "branch": "1.2"
   },
   "assert": {
@@ -13,7 +13,7 @@
     "branch": "HEAD"
   },
   "brand": {
-    "sha": "8a756e53f976c89cf091350b67f880fc9b521096",
+    "sha": "96015b47316df413027776ed7e2f4bf2637f49bf",
     "branch": "HEAD"
   },
   "chipper": {
@@ -25,7 +25,7 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "7061760a44a07821a03dbce8a4d522151c118fda",
+    "sha": "f12690d4d9de3b8aa9d5c316ba2b3c5b6afdf28f",
     "branch": "HEAD"
   },
   "kite": {
@@ -37,7 +37,7 @@
     "branch": "HEAD"
   },
   "phetcommon": {
-    "sha": "eff6a3ded6bcb498d544da6133f594c1d06abe5b",
+    "sha": "de21f644ec7701e6d8597b0aefcdb3742a5c27ed",
     "branch": "HEAD"
   },
   "scenery": {
