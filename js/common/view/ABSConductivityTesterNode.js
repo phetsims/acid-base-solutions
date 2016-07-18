@@ -13,7 +13,7 @@ define( function( require ) {
   var ConductivityTesterNode = require( 'SCENERY_PHET/ConductivityTesterNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
-  var Range = require( 'DOT/Range' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
 
   /**
    * @param {ConductivityTester} conductivityTester
@@ -26,7 +26,7 @@ define( function( require ) {
       conductivityTester.positiveProbeLocationProperty,
       conductivityTester.negativeProbeLocationProperty, {
         probeSize: conductivityTester.probeSize,
-        probeDragYRange: new Range(
+        probeDragYRange: new RangeWithValue(
           conductivityTester.probeDragYRange.min - conductivityTester.bulbLocation.y,
           conductivityTester.probeDragYRange.max - conductivityTester.bulbLocation.y
         )

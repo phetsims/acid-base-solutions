@@ -17,7 +17,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
-  var Range = require( 'DOT/Range' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
 
@@ -61,7 +61,7 @@ define( function( require ) {
     this.concentrationProperty = concentrationProperty; // @private
 
     // @public range of slider
-    this.sliderValueRange = new Range( Util.log10( concentrationRange.min ), Util.log10( concentrationRange.max ), Util.log10( concentrationRange.defaultValue ) );
+    this.sliderValueRange = new RangeWithValue( Util.log10( concentrationRange.min ), Util.log10( concentrationRange.max ), Util.log10( concentrationRange.defaultValue ) );
 
     // @public property for slider value
     this.sliderValueProperty = new Property( Util.log10( concentrationProperty.value ) );
