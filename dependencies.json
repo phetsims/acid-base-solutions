@@ -1,7 +1,7 @@
 {
-  "comment": "# acid-base-solutions 1.2.6 Fri Jun 10 2016 16:12:27 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# acid-base-solutions 1.2.6 Wed Aug 03 2016 13:18:32 GMT-0600 (Mountain Daylight Time)",
   "acid-base-solutions": {
-    "sha": "aa6f1fb55be5a6f0dcd3f98264778ae64c4085bd",
+    "sha": "2d33f527a0d6b116d260236cc995d747df4d341f",
     "branch": "1.2"
   },
   "assert": {
@@ -25,8 +25,8 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "f12690d4d9de3b8aa9d5c316ba2b3c5b6afdf28f",
-    "branch": "HEAD"
+    "sha": "d43d47bfa8418603d4db29b2282775b3f930aa45",
+    "branch": "acid-base-solutions-1.2"
   },
   "kite": {
     "sha": "7f2df7e9ec52ed32d8c0fe0c1fe6bfa8c043c510",
