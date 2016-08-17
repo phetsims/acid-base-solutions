@@ -14,11 +14,6 @@
     "requirejs": "~2.1.8"
   },
   "phet": {
-    "requirejsNamespace": "ACID_BASE_SOLUTIONS",
-    "phet-io": {
-      "preload": [
-        "../phet-io/js/api/acid-base-solutions-api.js"
-      ]
-    }
+    "requirejsNamespace": "ACID_BASE_SOLUTIONS"
   }
 }
