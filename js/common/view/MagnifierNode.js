@@ -200,8 +200,10 @@ define( function( require ) {
           // add additional molecules as needed
           var currentNumberOfMolecules = moleculesData.numberOfMolecules;
           for ( var i = currentNumberOfMolecules; i < numberOfMolecules; i++ ) {
-            var distance = self.positionRadius * Math.sqrt( Math.random() ); // random distance from the center of the lens
-            var angle = Math.random() * 2 * Math.PI;
+
+            // random distance from the center of the lens
+            var distance = self.positionRadius * Math.sqrt( phet.joist.random.nextDouble() );
+            var angle = phet.joist.random.nextDouble() * 2 * Math.PI;
             moleculesData.xCoordinates[ i ] = distance * Math.cos( angle );
             moleculesData.yCoordinates[ i ] = distance * Math.sin( angle );
           }
