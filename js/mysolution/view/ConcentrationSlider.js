@@ -33,6 +33,8 @@ define( function( require ) {
     HSlider.call( this, model.sliderValueProperty, model.sliderValueRange, {
       trackSize: new Dimension2( 125, 4 ),
       thumbSize: new Dimension2( 12, 24 ),
+      thumbTouchAreaXDilation: 6,
+      thumbTouchAreaYDilation: 6,
       majorTickLength: 12,
       tickLabelSpacing: 2
     } );
