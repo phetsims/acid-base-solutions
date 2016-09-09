@@ -26,15 +26,18 @@ define( function( require ) {
    * @constructor
    */
   function MySolutionScreen( tandem ) {
+
+    var options = {
+      name: screenMySolutionString,
+      backgroundColor: ABSColors.SCREEN_BACKGROUND,
+      homeScreenIcon: createScreenIcon(),
+      tandem: tandem
+    };
+
     Screen.call( this,
-      screenMySolutionString,
-      createScreenIcon(),
       function() { return new MySolutionModel(); },
-      function( model ) { return new MySolutionView( model ); }, {
-        backgroundColor: ABSColors.SCREEN_BACKGROUND,
-        tandem: tandem
-      }
-    );
+      function( model ) { return new MySolutionView( model ); },
+      options );
   }
 
   acidBaseSolutions.register( 'MySolutionScreen', MySolutionScreen );

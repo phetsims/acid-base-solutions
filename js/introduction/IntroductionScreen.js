@@ -28,15 +28,18 @@ define( function( require ) {
    * @constructor
    */
   function IntroductionScreen( tandem ) {
+
+    var options = {
+      name: screenIntroductionString,
+      backgroundColor: ABSColors.SCREEN_BACKGROUND,
+      homeScreenIcon: createScreenIcon(),
+      tandem: tandem
+    };
+
     Screen.call( this,
-      screenIntroductionString,
-      createScreenIcon(),
       function() { return new IntroductionModel(); },
-      function( model ) { return new IntroductionView( model ); }, {
-        backgroundColor: ABSColors.SCREEN_BACKGROUND,
-        tandem: tandem
-      }
-    );
+      function( model ) { return new IntroductionView( model ); },
+      options );
   }
 
   acidBaseSolutions.register( 'IntroductionScreen', IntroductionScreen );
@@ -57,12 +60,12 @@ define( function( require ) {
     var lipOffset = 0.05 * width;
 
     var beakerNode = new Path( new Shape()
-      .moveTo( -lipOffset, -lipOffset )
-      .lineTo( 0, 0 )
-      .lineTo( 0, beakerHeight )
-      .lineTo( beakerWidth, beakerHeight )
-      .lineTo( beakerWidth, 0 )
-      .lineTo( beakerWidth + lipOffset, -lipOffset ),
+        .moveTo( -lipOffset, -lipOffset )
+        .lineTo( 0, 0 )
+        .lineTo( 0, beakerHeight )
+        .lineTo( beakerWidth, beakerHeight )
+        .lineTo( beakerWidth, 0 )
+        .lineTo( beakerWidth + lipOffset, -lipOffset ),
       { stroke: 'black', lineWidth: Math.max( 1, beakerHeight / 40 ), center: background.center } );
 
     var waterNode = new Rectangle( 0, 0, beakerWidth, beakerHeight,
