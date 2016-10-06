@@ -17,7 +17,7 @@ define( function( require ) {
   var Magnifier = require( 'ACID_BASE_SOLUTIONS/common/model/Magnifier' );
   var PHMeter = require( 'ACID_BASE_SOLUTIONS/common/model/PHMeter' );
   var PHPaper = require( 'ACID_BASE_SOLUTIONS/common/model/PHPaper' );
-  var PropertySet = require( 'AXON/PropertySet' );
+  var Property = require( 'AXON/Property' );
 
   /**
    * @param {AqueousSolution[]} solutions
@@ -34,11 +34,11 @@ define( function( require ) {
       self.solutions[ solution.type ] = solution;
     } );
 
-    PropertySet.call( this, {
-      // @public
-      solutionType: defaultSolutionType, // type of solution that is currently selected
-      pH: this.solutions[ defaultSolutionType ].pH // pH level of product
-    } );
+    // @public type of solution that is currently selected
+    this.solutionTypeProperty = new Property( defaultSolutionType );
+
+    // @public pH level of product
+    this.pHProperty = new Property( this.solutions[ defaultSolutionType ].pHProperty.get() );
 
     // @public
     this.beaker = new Beaker();
@@ -49,7 +49,7 @@ define( function( require ) {
     this.conductivityTester = new ConductivityTester( this.beaker, this.pHProperty );
 
     // synchronize with pH of the solution that is currently selected
-    var setPH = function( value ) { self.pH = value; };
+    var setPH = function( value ) { self.pHProperty.set( value ); };
     this.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
       // unsubscribe from previous solution pH property
       if ( prevSolutionType ) {
@@ -62,12 +62,14 @@ define( function( require ) {
 
   acidBaseSolutions.register( 'ABSModel', ABSModel );
 
-  return inherit( PropertySet, ABSModel, {
+  return inherit( Object, ABSModel, {
 
-    // @override @public
+    // @public
     reset: function() {
-      // reset supertype properties
-      PropertySet.prototype.reset.call( this );
+
+      // reset Properties
+      this.solutionTypeProperty.reset();
+      this.pHProperty.reset();
 
       // reset solutions
       for ( var solutionType in this.solutions ) {

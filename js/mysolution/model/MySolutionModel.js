@@ -75,7 +75,7 @@ define( function( require ) {
     } );
 
     this.concentrationProperty.link( function( concentration ) {
-      self.solutions[ self.solutionType ].concentrationProperty.set( concentration );
+      self.solutions[ self.solutionTypeProperty.get() ].concentrationProperty.set( concentration );
     } );
 
     /*
