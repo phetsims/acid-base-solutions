@@ -47,7 +47,7 @@ define( function( require ) {
      */
 
       // @pubic add convenience properties that will synchronize with the concentration and strength of the currently selected solution
-    this.addProperty( 'concentration', this.solutions[ DEFAULT_SOLUTION_TYPE ].concentration ); // concentration of solution
+    this.addProperty( 'concentration', this.solutions[ DEFAULT_SOLUTION_TYPE ].concentrationProperty.get() ); // concentration of solution
     this.addProperty( 'strength', this.solutions[ DEFAULT_SOLUTION_TYPE ].strengthProperty.get() ); // strength of solution
 
     var setStrength = function( value ) { self.strength = value; };
