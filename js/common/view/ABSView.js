@@ -12,6 +12,7 @@ define( function( require ) {
   // modules
   var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var ABSControlPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ABSControlPanel' );
+  var ABSViewProperties = require( 'ACID_BASE_SOLUTIONS/common/view/ABSViewProperties' );
   var BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var ABSConductivityTesterNode = require( 'ACID_BASE_SOLUTIONS/common/view/ABSConductivityTesterNode' );
@@ -23,7 +24,6 @@ define( function( require ) {
   var PHColorKeyNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHColorKeyNode' );
   var PHMeterNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHMeterNode' );
   var PHPaperNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHPaperNode' );
-  var PropertySet = require( 'AXON/PropertySet' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
   var ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );
@@ -38,12 +38,7 @@ define( function( require ) {
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
 
     // @public properties that are specific to the view
-    this.viewProperties = new PropertySet( {
-      // @public
-      solventVisible: false,
-      viewMode: ViewMode.MOLECULES,
-      toolMode: ToolMode.PH_METER
-    } );
+    this.viewProperties = new ABSViewProperties();
 
     var beakerNode = new BeakerNode( model.beaker );
     var equationNode = new ReactionEquationNode( model.beaker, model.solutionTypeProperty );
