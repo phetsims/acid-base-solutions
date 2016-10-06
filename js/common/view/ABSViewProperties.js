@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
   var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
@@ -24,6 +25,8 @@ define( function( require ) {
     this.viewModeProperty = new Property( ViewMode.MOLECULES );
     this.toolModeProperty = new Property( ToolMode.PH_METER );
   }
+
+  acidBaseSolutions.register( 'ABSViewProperties', ABSViewProperties );
 
   return inherit( Object, ABSViewProperties, {
 
