@@ -95,7 +95,7 @@ define( function( require ) {
 
       if ( this.visible ) {
 
-        var solutionType = this.graph.solutionTypeProperty.value;
+        var solutionType = this.graph.solutionTypeProperty.get();
         var solution = this.graph.solutions[ solutionType ];
         var molecules = solution.molecules;
         var numberOfMolecules = molecules.length;
@@ -126,7 +126,7 @@ define( function( require ) {
 
       if ( this.visible ) {
 
-        var solutionType = this.graph.solutionTypeProperty.value;
+        var solutionType = this.graph.solutionTypeProperty.get();
         var solution = this.graph.solutions[ solutionType ];
         var molecules = solution.molecules;
 

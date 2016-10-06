@@ -66,12 +66,12 @@ define( function( require ) {
 
     // @protected convenience function
     getConcentration: function() {
-      return this.concentrationProperty.value;
+      return this.concentrationProperty.get();
     },
 
     // @protected convenience function
     getStrength: function() {
-      return this.strengthProperty.value;
+      return this.strengthProperty.get();
     },
 
     // @public These functions must be implemented by subtypes.

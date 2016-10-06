@@ -47,7 +47,7 @@ define( function( require ) {
 
     // clear the indicator color from the paper and recompute its height
     var resetIndicator = function() {
-      self.indicatorHeightProperty.value = 0;
+      self.indicatorHeightProperty.set( 0 );
       self.updateIndicatorHeight();
     };
     solutionTypeProperty.link( resetIndicator );
@@ -74,9 +74,9 @@ define( function( require ) {
      * @private
      */
     updateIndicatorHeight: function() {
-      if ( this.beaker.bounds.containsPoint( this.locationProperty.value ) ) {
-        this.indicatorHeightProperty.value =
-        Util.clamp( this.locationProperty.value.y - this.beaker.top + 5, this.indicatorHeightProperty.value, this.paperSize.height );
+      if ( this.beaker.bounds.containsPoint( this.locationProperty.get() ) ) {
+        var height = Util.clamp( this.locationProperty.get().y - this.beaker.top + 5, this.indicatorHeightProperty.get(), this.paperSize.height );
+        this.indicatorHeightProperty.set( height );
       }
     }
   } );

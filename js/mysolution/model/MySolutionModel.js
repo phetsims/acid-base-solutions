@@ -82,7 +82,7 @@ define( function( require ) {
      * Strong solutions have constant strength, so do not synchronize.
      */
     this.strengthProperty.link( function( strength ) {
-      var solutionType = self.solutionTypeProperty.value;
+      var solutionType = self.solutionTypeProperty.get();
       if ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE ) {
         self.solutions[ SolutionType.WEAK_ACID ].strength = self.solutions[ SolutionType.WEAK_BASE ].strength = strength;
       }

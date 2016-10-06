@@ -184,7 +184,7 @@ define( function( require ) {
     update: function() {
 
       var self = this;
-      var solutionType = this.magnifier.solutionTypeProperty.value;
+      var solutionType = this.magnifier.solutionTypeProperty.get();
       var solution = this.magnifier.solutions[ solutionType ];
 
       // Update the data structure for each molecule that is in the current solution.
@@ -225,7 +225,7 @@ define( function( require ) {
     paintCanvas: function( context ) {
 
       var self = this;
-      var solutionType = this.magnifier.solutionTypeProperty.value;
+      var solutionType = this.magnifier.solutionTypeProperty.get();
       var solution = this.magnifier.solutions[ solutionType ];
 
       /*

@@ -87,14 +87,14 @@ define( function( require ) {
 
       drag: function( e ) {
         var y = self.globalToParentPoint( e.pointer.point ).y - clickYOffset;
-        pHMeter.locationProperty.value = new Vector2( pHMeter.locationProperty.value.x, Util.clamp( y, pHMeter.dragYRange.min, pHMeter.dragYRange.max ) );
+        pHMeter.locationProperty.set( new Vector2( pHMeter.locationProperty.get().x, Util.clamp( y, pHMeter.dragYRange.min, pHMeter.dragYRange.max ) ) );
       }
     } ) );
 
     // @private
     this.updateText = function() {
       if ( self.visible ) {
-        textNode.text = pHMeter.inSolution() ? formatText( pHMeter.pHProperty.value ) : formatText( null );
+        textNode.text = pHMeter.inSolution() ? formatText( pHMeter.pHProperty.get() ) : formatText( null );
       }
     };
     pHMeter.pHProperty.link( this.updateText );

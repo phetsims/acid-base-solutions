@@ -68,9 +68,9 @@ define( function( require ) {
 
       drag: function( e ) {
         var v = self.globalToParentPoint( e.pointer.point ).subtract( clickOffset );
-        pHPaper.locationProperty.value = new Vector2(
+        pHPaper.locationProperty.set( new Vector2(
           Util.clamp( v.x, pHPaper.dragBounds.minX, pHPaper.dragBounds.maxX ),
-          Util.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) );
+          Util.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) ) );
       }
     } ) );
 

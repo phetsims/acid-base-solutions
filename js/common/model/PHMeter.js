@@ -45,7 +45,7 @@ define( function( require ) {
 
     // @public Is the tip of the pH probe in solution?
     inSolution: function() {
-      return this.beaker.bounds.containsPoint( this.locationProperty.value );
+      return this.beaker.bounds.containsPoint( this.locationProperty.get() );
     }
   } );
 } );

@@ -63,7 +63,7 @@ define( function( require ) {
     var concentrationRange = ABSConstants.CONCENTRATION_RANGE;
 
     // acid/base switch
-    var isAcidProperty = new Property( solutionTypeProperty.value === SolutionType.WEAK_ACID || solutionTypeProperty.value === SolutionType.STRONG_ACID );
+    var isAcidProperty = new Property( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.STRONG_ACID );
     var acidBaseSwitch = new ABSwitch( isAcidProperty,
       true, new Text( acidString, { font: CONTROL_FONT } ),
       false, new Text( baseString, { font: CONTROL_FONT } ),
@@ -73,7 +73,7 @@ define( function( require ) {
     var concentrationTitle = new Text( initialConcentrationString, { font: SUBTITLE_FONT } );
 
     // concentration readout
-    var readoutText = new Text( Util.toFixed( concentrationProperty.value, CONCENTRATION_DECIMALS ), { font: CONCENTRATION_FONT } );
+    var readoutText = new Text( Util.toFixed( concentrationProperty.get(), CONCENTRATION_DECIMALS ), { font: CONCENTRATION_FONT } );
     var readoutBackground = new Rectangle( 0, 0, 1.5 * readoutText.width, 1.5 * readoutText.height, 4, 4,
       { fill: 'white', stroke: 'rgb(200,200,200)' } );
     var readoutNode = new Node( { children: [ readoutBackground, readoutText ] } );
@@ -81,10 +81,10 @@ define( function( require ) {
 
     // arrow buttons
     var leftArrowButton = new ArrowButton( 'left', function() {
-      concentrationProperty.value = Math.max( concentrationProperty.value - ARROW_STEP, concentrationRange.min );
+      concentrationProperty.set( Math.max( concentrationProperty.get() - ARROW_STEP, concentrationRange.min ) );
     }, ARROW_BUTTON_OPTIONS );
     var rightArrowButton = new ArrowButton( 'right', function() {
-      concentrationProperty.value = Math.min( concentrationProperty.value + ARROW_STEP, concentrationRange.max );
+      concentrationProperty.set( Math.min( concentrationProperty.get() + ARROW_STEP, concentrationRange.max ) );
     }, ARROW_BUTTON_OPTIONS );
 
     // concentration value control
@@ -98,7 +98,7 @@ define( function( require ) {
 
     // strength control
     var strengthTitle = new Text( strengthString, { font: SUBTITLE_FONT } );
-    var isWeakProperty = new Property( solutionTypeProperty.value === SolutionType.WEAK_ACID || solutionTypeProperty.value === SolutionType.WEAK_ACID );
+    var isWeakProperty = new Property( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.WEAK_ACID );
     var weakStrongSwitch = new ABSwitch( isWeakProperty,
       true, new Text( weakString, { font: CONTROL_FONT } ),
       false, new Text( strongString, { font: CONTROL_FONT } ),
@@ -165,28 +165,28 @@ define( function( require ) {
     // update solution type
     var updateSolutionType = function() {
 
-      var isAcid = isAcidProperty.value;
-      var isWeak = isWeakProperty.value;
+      var isAcid = isAcidProperty.get();
+      var isWeak = isWeakProperty.get();
 
       if ( isWeak && isAcid ) {
-        solutionTypeProperty.value = SolutionType.WEAK_ACID;
+        solutionTypeProperty.set( SolutionType.WEAK_ACID );
       }
       else if ( isWeak && !isAcid ) {
-        solutionTypeProperty.value = SolutionType.WEAK_BASE;
+        solutionTypeProperty.set( SolutionType.WEAK_BASE );
       }
       else if ( !isWeak && isAcid ) {
-        solutionTypeProperty.value = SolutionType.STRONG_ACID;
+        solutionTypeProperty.set( SolutionType.STRONG_ACID );
       }
       else if ( !isWeak && !isAcid ) {
-        solutionTypeProperty.value = SolutionType.STRONG_BASE;
+        solutionTypeProperty.set( SolutionType.STRONG_BASE );
       }
     };
     isAcidProperty.link( updateSolutionType.bind( this ) );
     isWeakProperty.link( updateSolutionType.bind( this ) );
 
     solutionTypeProperty.link( function( solutionType ) {
-      isAcidProperty.value = ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.STRONG_ACID );
-      isWeakProperty.value = ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE );
+      isAcidProperty.set( ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.STRONG_ACID ) );
+      isWeakProperty.set( ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE ) );
     } );
   }
 

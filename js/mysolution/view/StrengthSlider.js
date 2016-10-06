@@ -73,17 +73,17 @@ define( function( require ) {
     this.sliderValueRange = new RangeWithValue( Util.log10( strengthRange.min ), Util.log10( strengthRange.max ), Util.log10( strengthRange.defaultValue ) );
 
     // @public slider's value
-    this.sliderValueProperty = new Property( Util.log10( strengthProperty.value ) );
+    this.sliderValueProperty = new Property( Util.log10( strengthProperty.get() ) );
 
     // map between linear and logarithmic
     this.sliderValueProperty.link( function( sliderValue ) {
-      if ( strengthIsMutable( solutionTypeProperty.value ) ) {
-        strengthProperty.value = Math.pow( 10, sliderValue );
+      if ( strengthIsMutable( solutionTypeProperty.get() ) ) {
+        strengthProperty.set( Math.pow( 10, sliderValue ) );
       }
     } );
     strengthProperty.link( function( strength ) {
-      if ( strengthIsMutable( solutionTypeProperty.value ) ) {
-        self.sliderValueProperty.value = Util.log10( strength );
+      if ( strengthIsMutable( solutionTypeProperty.get() ) ) {
+        self.sliderValueProperty.set( Util.log10( strength ) );
       }
     } );
   }

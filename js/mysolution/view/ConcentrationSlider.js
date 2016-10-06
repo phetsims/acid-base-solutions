@@ -66,13 +66,13 @@ define( function( require ) {
     this.sliderValueRange = new RangeWithValue( Util.log10( concentrationRange.min ), Util.log10( concentrationRange.max ), Util.log10( concentrationRange.defaultValue ) );
 
     // @public property for slider value
-    this.sliderValueProperty = new Property( Util.log10( concentrationProperty.value ) );
+    this.sliderValueProperty = new Property( Util.log10( concentrationProperty.get() ) );
 
     this.sliderValueProperty.link( function( sliderValue ) {
-      self.concentrationProperty.value = Util.toFixedNumber( Math.pow( 10, sliderValue ), 10 ); // see issue#73
+      self.concentrationProperty.set( Util.toFixedNumber( Math.pow( 10, sliderValue ), 10 ) ); // see issue#73
     } );
     concentrationProperty.link( function( concentration ) {
-      self.sliderValueProperty.value = Util.log10( concentration );
+      self.sliderValueProperty.set( Util.log10( concentration ) );
     } );
   }
 
