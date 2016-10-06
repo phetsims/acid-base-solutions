@@ -32,7 +32,7 @@ define( function( require ) {
 
   /**
    * @param {AcidBaseSolutionModel} model
-   * @param {PropertySet} viewProperties properties that are specific to the view
+   * @param {ABSViewProperties} viewProperties properties that are specific to the view
    * @param {Node} solutionControl
    * @param {Object} [options]
    * @constructor
