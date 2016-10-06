@@ -13,6 +13,7 @@ define( function( require ) {
   var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var ABSModel = require( 'ACID_BASE_SOLUTIONS/common/model/ABSModel' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Property = require( 'AXON/Property' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
   var StrongAcidSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/StrongAcidSolution' );
   var StrongBaseSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/StrongBaseSolution' );
@@ -46,12 +47,14 @@ define( function( require ) {
      * wiring is changed. This may have been more appropriate to handle in SolutionControl.
      */
 
-      // @pubic add convenience properties that will synchronize with the concentration and strength of the currently selected solution
-    this.addProperty( 'concentration', this.solutions[ DEFAULT_SOLUTION_TYPE ].concentrationProperty.get() ); // concentration of solution
-    this.addProperty( 'strength', this.solutions[ DEFAULT_SOLUTION_TYPE ].strengthProperty.get() ); // strength of solution
+    // @pubic convenience Property that will synchronize with the concentration the currently selected solution
+    this.concentrationProperty = new Property( this.solutions[ DEFAULT_SOLUTION_TYPE ].concentrationProperty.get() );
 
-    var setStrength = function( value ) { self.strength = value; };
-    var setConcentration = function( value ) { self.concentration = value; };
+    // @pubic convenience Property that will synchronize with the strength of the currently selected solution
+    this.strengthProperty = new Property( this.solutions[ DEFAULT_SOLUTION_TYPE ].strengthProperty.get() );
+
+    var setStrength = function( value ) { self.strengthProperty.set( value ); };
+    var setConcentration = function( value ) { self.concentrationProperty.set( value ); };
     this.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
 
       // unsubscribe from previous solution strength and concentration property
@@ -92,5 +95,13 @@ define( function( require ) {
 
   acidBaseSolutions.register( 'MySolutionModel', MySolutionModel );
 
-  return inherit( ABSModel, MySolutionModel );
+  return inherit( ABSModel, MySolutionModel, {
+
+    // @public
+    reset: function() {
+      ABSModel.prototype.reset.call( this );
+      this.concentrationProperty.reset();
+      this.strengthProperty.reset();
+    }
+  } );
 } );
