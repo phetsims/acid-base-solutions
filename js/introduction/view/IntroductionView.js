@@ -19,7 +19,7 @@ define( function( require ) {
    * @constructor
    */
   function IntroductionView( model ) {
-    ABSView.call( this, model, new SolutionsControl( model.property( 'solutionType' ) ) );
+    ABSView.call( this, model, new SolutionsControl( model.solutionTypeProperty ) );
   }
 
   acidBaseSolutions.register( 'IntroductionView', IntroductionView );

@@ -58,13 +58,13 @@ define( function( require ) {
 
       // unlink from previous solution
       if ( prevSolutionType ) {
-        graph.solutions[ prevSolutionType ].property( 'strength' ).unlink( updateValuesBound );
-        graph.solutions[ prevSolutionType ].property( 'concentration' ).unlink( updateValuesBound );
+        graph.solutions[ prevSolutionType ].strengthProperty.unlink( updateValuesBound );
+        graph.solutions[ prevSolutionType ].concentrationProperty.unlink( updateValuesBound );
       }
 
       // link to new solution
-      graph.solutions[ newSolutionType ].property( 'strength' ).link( updateValuesBound );
-      graph.solutions[ newSolutionType ].property( 'concentration' ).link( updateValuesBound );
+      graph.solutions[ newSolutionType ].strengthProperty.link( updateValuesBound );
+      graph.solutions[ newSolutionType ].concentrationProperty.link( updateValuesBound );
     } );
   }
 

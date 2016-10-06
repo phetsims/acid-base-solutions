@@ -19,7 +19,8 @@ define( function( require ) {
    * @constructor
    */
   function MySolutionView( model ) {
-    ABSView.call( this, model, new SolutionControl( model.property( 'solutionType' ), model.property( 'concentration' ), model.property( 'strength' ) ) );
+    ABSView.call( this, model,
+      new SolutionControl( model.solutionTypeProperty, model.concentrationProperty, model.strengthProperty ) );
   }
 
   acidBaseSolutions.register( 'MySolutionView', MySolutionView );

@@ -52,12 +52,12 @@ define( function( require ) {
 
     var setStrength = function( value ) { self.strength = value; };
     var setConcentration = function( value ) { self.concentration = value; };
-    this.property( 'solutionType' ).link( function( newSolutionType, prevSolutionType ) {
+    this.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
 
       // unsubscribe from previous solution strength and concentration property
       if ( prevSolutionType ) {
-        self.solutions[ prevSolutionType ].property( 'strength' ).unlink( setStrength );
-        self.solutions[ prevSolutionType ].property( 'concentration' ).unlink( setConcentration );
+        self.solutions[ prevSolutionType ].strengthProperty.unlink( setStrength );
+        self.solutions[ prevSolutionType ].concentrationProperty.unlink( setConcentration );
 
         /*
          * Set concentration of new solution equal to previous solution.
@@ -67,11 +67,11 @@ define( function( require ) {
       }
 
       // subscribe to new solution strength and concentration property
-      self.solutions[ newSolutionType ].property( 'strength' ).link( setStrength );
-      self.solutions[ newSolutionType ].property( 'concentration' ).link( setConcentration );
+      self.solutions[ newSolutionType ].strengthProperty.link( setStrength );
+      self.solutions[ newSolutionType ].concentrationProperty.link( setConcentration );
     } );
 
-    this.property( 'concentration' ).link( function( concentration ) {
+    this.concentrationProperty.link( function( concentration ) {
       self.solutions[ self.solutionType ].concentration = concentration;
     } );
 
@@ -81,8 +81,8 @@ define( function( require ) {
      * maintains the same value when switching between weak solution types.
      * Strong solutions have constant strength, so do not synchronize.
      */
-    this.property( 'strength' ).link( function( strength ) {
-      var solutionType = self.property( 'solutionType' ).value;
+    this.strengthProperty.link( function( strength ) {
+      var solutionType = self.solutionTypeProperty.value;
       if ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE ) {
         self.solutions[ SolutionType.WEAK_ACID ].strength = self.solutions[ SolutionType.WEAK_BASE ].strength = strength;
       }

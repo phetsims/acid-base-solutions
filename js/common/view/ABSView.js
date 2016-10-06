@@ -46,7 +46,7 @@ define( function( require ) {
     } );
 
     var beakerNode = new BeakerNode( model.beaker );
-    var equationNode = new ReactionEquationNode( model.beaker, model.property( 'solutionType' ) );
+    var equationNode = new ReactionEquationNode( model.beaker, model.solutionTypeProperty );
     var magnifierNode = new MagnifierNode( model.magnifier );
     var graphNode = new ConcentrationGraphNode( model.graph );
     var pHMeterNode = new PHMeterNode( model.pHMeter );
@@ -75,16 +75,16 @@ define( function( require ) {
     } );
     this.addChild( rootNode );
 
-    this.viewProperties.property( 'solventVisible' ).link( function( soluteVisible ) {
+    this.viewProperties.solventVisibleProperty.link( function( soluteVisible ) {
       magnifierNode.setSolventVisible( soluteVisible );
     } );
 
-    this.viewProperties.property( 'viewMode' ).link( function( viewMode ) {
+    this.viewProperties.viewModeProperty.link( function( viewMode ) {
       magnifierNode.visible = ( viewMode === ViewMode.MOLECULES  );
       graphNode.visible = ( viewMode === ViewMode.GRAPH );
     } );
 
-    this.viewProperties.property( 'toolMode' ).link( function( toolMode ) {
+    this.viewProperties.toolModeProperty.link( function( toolMode ) {
       pHMeterNode.visible = ( toolMode === ToolMode.PH_METER );
       pHPaperNode.visible = pHColorKeyNode.visible = ( toolMode === ToolMode.PH_PAPER );
       conductivityTesterNode.visible = ( toolMode === ToolMode.CONDUCTIVITY );

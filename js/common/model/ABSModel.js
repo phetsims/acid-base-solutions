@@ -42,21 +42,21 @@ define( function( require ) {
 
     // @public
     this.beaker = new Beaker();
-    this.magnifier = new Magnifier( this.beaker, this.solutions, this.property( 'solutionType' ) );
-    this.graph = new ConcentrationGraph( this.beaker, this.solutions, this.property( 'solutionType' ) );
-    this.pHMeter = new PHMeter( this.beaker, this.property( 'pH' ) );
-    this.pHPaper = new PHPaper( this.beaker, this.property( 'solutionType' ), this.property( 'pH' ) );
-    this.conductivityTester = new ConductivityTester( this.beaker, this.property( 'pH' ) );
+    this.magnifier = new Magnifier( this.beaker, this.solutions, this.solutionTypeProperty );
+    this.graph = new ConcentrationGraph( this.beaker, this.solutions, this.solutionTypeProperty );
+    this.pHMeter = new PHMeter( this.beaker, this.pHProperty );
+    this.pHPaper = new PHPaper( this.beaker, this.solutionTypeProperty, this.pHProperty );
+    this.conductivityTester = new ConductivityTester( this.beaker, this.pHProperty );
 
     // synchronize with pH of the solution that is currently selected
     var setPH = function( value ) { self.pH = value; };
-    this.property( 'solutionType' ).link( function( newSolutionType, prevSolutionType ) {
+    this.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
       // unsubscribe from previous solution pH property
       if ( prevSolutionType ) {
-        self.solutions[ prevSolutionType ].property( 'pH' ).unlink( setPH );
+        self.solutions[ prevSolutionType ].pHProperty.unlink( setPH );
       }
       // subscribe to new solution pH property
-      self.solutions[ newSolutionType ].property( 'pH' ).link( setPH );
+      self.solutions[ newSolutionType ].pHProperty.link( setPH );
     } );
   }
 

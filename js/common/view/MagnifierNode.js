@@ -96,13 +96,13 @@ define( function( require ) {
 
       // unlink from previous solution
       if ( prevSolutionType ) {
-        magnifier.solutions[ prevSolutionType ].property( 'strength' ).unlink( updateMoleculesBound );
-        magnifier.solutions[ prevSolutionType ].property( 'concentration' ).unlink( updateMoleculesBound );
+        magnifier.solutions[ prevSolutionType ].strengthProperty.unlink( updateMoleculesBound );
+        magnifier.solutions[ prevSolutionType ].concentrationProperty.unlink( updateMoleculesBound );
       }
 
       // link to new solution
-      magnifier.solutions[ newSolutionType ].property( 'strength' ).link( updateMoleculesBound );
-      magnifier.solutions[ newSolutionType ].property( 'concentration' ).link( updateMoleculesBound );
+      magnifier.solutions[ newSolutionType ].strengthProperty.link( updateMoleculesBound );
+      magnifier.solutions[ newSolutionType ].concentrationProperty.link( updateMoleculesBound );
     } );
   }
 

@@ -50,8 +50,8 @@ define( function( require ) {
     var toolsTitle = new Text( toolsString, TITLE_OPTIONS );
 
     // controls
-    var viewsControl = new ViewsControl( viewProperties.property( 'viewMode' ), viewProperties.property( 'solventVisible' ) );
-    var toolsControl = new ToolsControl( viewProperties.property( 'toolMode' ) );
+    var viewsControl = new ViewsControl( viewProperties.viewModeProperty, viewProperties.solventVisibleProperty );
+    var toolsControl = new ToolsControl( viewProperties.toolModeProperty );
 
     // Reset All button
     var resetAllButton = new ResetAllButton( {
