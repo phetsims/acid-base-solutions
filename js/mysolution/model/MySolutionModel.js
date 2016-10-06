@@ -48,7 +48,7 @@ define( function( require ) {
 
       // @pubic add convenience properties that will synchronize with the concentration and strength of the currently selected solution
     this.addProperty( 'concentration', this.solutions[ DEFAULT_SOLUTION_TYPE ].concentration ); // concentration of solution
-    this.addProperty( 'strength', this.solutions[ DEFAULT_SOLUTION_TYPE ].strength ); // strength of solution
+    this.addProperty( 'strength', this.solutions[ DEFAULT_SOLUTION_TYPE ].strengthProperty.get() ); // strength of solution
 
     var setStrength = function( value ) { self.strength = value; };
     var setConcentration = function( value ) { self.concentration = value; };
@@ -63,7 +63,7 @@ define( function( require ) {
          * Set concentration of new solution equal to previous solution.
          * Do not do this for strength, see strength observer below and issue #94.
          */
-        self.solutions[ newSolutionType ].concentration = self.solutions[ prevSolutionType ].concentration;
+        self.solutions[ newSolutionType ].concentrationProperty.set( self.solutions[ prevSolutionType ].concentrationProperty.get() );
       }
 
       // subscribe to new solution strength and concentration property
@@ -72,7 +72,7 @@ define( function( require ) {
     } );
 
     this.concentrationProperty.link( function( concentration ) {
-      self.solutions[ self.solutionType ].concentration = concentration;
+      self.solutions[ self.solutionType ].concentrationProperty.set( concentration );
     } );
 
     /*
@@ -84,7 +84,8 @@ define( function( require ) {
     this.strengthProperty.link( function( strength ) {
       var solutionType = self.solutionTypeProperty.get();
       if ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE ) {
-        self.solutions[ SolutionType.WEAK_ACID ].strength = self.solutions[ SolutionType.WEAK_BASE ].strength = strength;
+        self.solutions[ SolutionType.WEAK_ACID ].strengthProperty.set( strength );
+        self.solutions[ SolutionType.WEAK_BASE ].strengthProperty.set( strength );
       }
     } );
   }

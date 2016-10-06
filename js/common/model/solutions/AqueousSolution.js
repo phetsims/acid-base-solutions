@@ -2,7 +2,7 @@
 
 /**
  * Base type for solutions.
- * <p>
+ *
  * A solution is a homogeneous mixture composed of two or more substances.
  * In such a mixture, a solute is dissolved in another substance, known as a solvent.
  * In an aqueous solution, the solvent is water. The substance that is produced as
@@ -16,8 +16,9 @@ define( function( require ) {
 
   // modules
   var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+  var DerivedProperty = require( 'AXON/DerivedProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var PropertySet = require( 'AXON/PropertySet' );
+  var Property = require( 'AXON/Property' );
   var Util = require( 'DOT/Util' );
 
   /**
@@ -47,14 +48,11 @@ define( function( require ) {
      */
     this.molecules = molecules; // @public
 
-    PropertySet.call( this, {
-      // @public
-      strength: strength,
-      concentration: concentration
-    } );
+    this.strengthProperty = new Property( strength ); // @public
+    this.concentrationProperty = new Property( concentration ); // @public
 
     // @public
-    this.addDerivedProperty( 'pH', [ 'strength', 'concentration' ],
+    this.pHProperty = new DerivedProperty( [ this.strengthProperty, this.concentrationProperty ],
       function( strength, concentration ) {
         return -Math.round( 100 * Util.log10( self.getH3OConcentration() ) ) / 100;
       } );
@@ -62,7 +60,13 @@ define( function( require ) {
 
   acidBaseSolutions.register( 'AqueousSolution', AqueousSolution );
 
-  return inherit( PropertySet, AqueousSolution, {
+  return inherit( Object, AqueousSolution, {
+
+    // @public
+    reset: function() {
+      this.strengthProperty.reset();
+      this.concentrationProperty.reset();
+    },
 
     // @protected convenience function
     getConcentration: function() {
