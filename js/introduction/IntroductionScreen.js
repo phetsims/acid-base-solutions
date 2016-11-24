@@ -20,6 +20,8 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Screen = require( 'JOIST/Screen' );
   var Shape = require( 'KITE/Shape' );
+  var Property = require( 'AXON/Property' );
+  var Color = require( 'SCENERY/util/Color' );
 
   // strings
   var screenIntroductionString = require( 'string!ACID_BASE_SOLUTIONS/screen.introduction' );
@@ -31,7 +33,7 @@ define( function( require ) {
 
     var options = {
       name: screenIntroductionString,
-      backgroundColor: ABSColors.SCREEN_BACKGROUND,
+      backgroundColorProperty: new Property( Color.toColor( ABSColors.SCREEN_BACKGROUND ) ),
       homeScreenIcon: createScreenIcon(),
       tandem: tandem
     };
