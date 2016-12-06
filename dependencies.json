@@ -1,7 +1,7 @@
 {
-  "comment": "# acid-base-solutions 1.2.7 Tue Dec 06 2016 12:25:46 GMT-0700 (Mountain Standard Time)",
+  "comment": "# acid-base-solutions 1.2.8-rc.2 Tue Dec 06 2016 14:59:32 GMT-0700 (Mountain Standard Time)",
   "acid-base-solutions": {
-    "sha": "501d5ca5b791c9b959fd69c8c3e1db0d47c93ba7",
+    "sha": "d9b0ed331dc9fd8a3339fdb5df450636dbae296b",
     "branch": "1.2"
   },
   "assert": {
@@ -38,7 +38,7 @@
   },
   "phetcommon": {
     "sha": "d86e8b32788d1780527ee2f1e2033674ae42d53b",
-    "branch": "acid-base-solutions-1.2"
+    "branch": "HEAD"
   },
   "scenery": {
     "sha": "8ba7beb31b1007bb1c692afedc391f9141e6bb5c",
