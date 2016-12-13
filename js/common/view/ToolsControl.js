@@ -36,9 +36,9 @@ define( function( require ) {
     }, options );
 
     RadioButtonGroup.call( this, toolModeProperty, [
-      { value: ToolMode.PH_METER, node: PHMeterNode.createIcon() },
-      { value: ToolMode.PH_PAPER, node: PHPaperNode.createIcon( 8, 30 ) },
-      { value: ToolMode.CONDUCTIVITY, node: new Image( lightBulbImage ) }
+      { value: ToolMode.PH_METER, node: PHMeterNode.createIcon(), tandemName: 'phMeterRadioButton' },
+      { value: ToolMode.PH_PAPER, node: PHPaperNode.createIcon( 8, 30 ), tandemName: 'phPaperRadioButton' },
+      { value: ToolMode.CONDUCTIVITY, node: new Image( lightBulbImage ), tandemName: 'conductivityRadioButton' }
     ], options );
   }
 
