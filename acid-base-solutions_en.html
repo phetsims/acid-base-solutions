@@ -26,15 +26,6 @@ Additionally, move the entire image up by a bit.  This is done by changing the t
 
 The logo dimensions are given in splash.svg, currently at width="273.172px" height="130.05px"
 -->
-<img id="splash" style="position: absolute;top: 45%;left: 50%;margin-left: -137px;margin-top: -65px;">
-<div id="progressBar"
-     style="position:absolute;top:50%;left:50%;margin-left:-147px;margin-top:50px;width:273px;height:10px">
-  <svg>
-    <rect id="progressBarBackground" x="10" y="10" width="273" height="10" rx="3" ry="3"
-          style="stroke: white;stroke-width:1"></rect>
-    <rect id="progressBarForeground" x="10" y="10" width="0" height="10" rx="3" ry="3" style="fill:#6acef5;"></rect>
-  </svg>
-</div>
 
 <script type="text/javascript">
   ( function() {
@@ -42,11 +33,9 @@ The logo dimensions are given in splash.svg, currently at width="273.172px" heig
     var brandMatch = location.search.match( /brand=([^&]+)/ );
     var brand = brandMatch ? decodeURIComponent( brandMatch[ 1 ] ) : 'adapted-from-phet';
 
-    // Load the desired splash screen image
-    document.getElementById( 'splash' ).src = '../brand/' + brand + '/images/splash.svg';
-
     // Preloads, with more included for phet-io brand
     var preloads = ( brand === 'phet-io' ) ? [
+      '../joist/js/splash.js', 
       '../sherpa/lib/jquery-2.1.0.js', 
       '../sherpa/lib/lodash-2.4.1.js', 
       '../sherpa/lib/FileSaver-b8054a2.js', 
@@ -60,6 +49,7 @@ The logo dimensions are given in splash.svg, currently at width="273.172px" heig
       '../sherpa/lib/TextEncoderLite-3c9f6f0.js', 
       '../sherpa/lib/jsondiffpatch-0.1.31.js'
     ] : [
+      '../joist/js/splash.js', 
       '../sherpa/lib/jquery-2.1.0.js', 
       '../sherpa/lib/lodash-2.4.1.js', 
       '../sherpa/lib/FileSaver-b8054a2.js', 
