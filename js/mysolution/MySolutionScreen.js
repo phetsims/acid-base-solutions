@@ -16,10 +16,9 @@ define( function( require ) {
   var MySolutionModel = require( 'ACID_BASE_SOLUTIONS/mysolution/model/MySolutionModel' );
   var MySolutionView = require( 'ACID_BASE_SOLUTIONS/mysolution/view/MySolutionView' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var Property = require( 'AXON/Property' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Screen = require( 'JOIST/Screen' );
-  var Property = require( 'AXON/Property' );
-  var Color = require( 'SCENERY/util/Color' );
 
   // strings
   var screenMySolutionString = require( 'string!ACID_BASE_SOLUTIONS/screen.mySolution' );
@@ -31,7 +30,7 @@ define( function( require ) {
 
     var options = {
       name: screenMySolutionString,
-      backgroundColorProperty: new Property( Color.toColor( ABSColors.SCREEN_BACKGROUND ) ),
+      backgroundColorProperty: new Property( ABSColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon(),
       tandem: tandem
     };

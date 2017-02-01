@@ -17,11 +17,10 @@ define( function( require ) {
   var IntroductionView = require( 'ACID_BASE_SOLUTIONS/introduction/view/IntroductionView' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
+  var Property = require( 'AXON/Property' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Screen = require( 'JOIST/Screen' );
   var Shape = require( 'KITE/Shape' );
-  var Property = require( 'AXON/Property' );
-  var Color = require( 'SCENERY/util/Color' );
 
   // strings
   var screenIntroductionString = require( 'string!ACID_BASE_SOLUTIONS/screen.introduction' );
@@ -33,7 +32,7 @@ define( function( require ) {
 
     var options = {
       name: screenIntroductionString,
-      backgroundColorProperty: new Property( Color.toColor( ABSColors.SCREEN_BACKGROUND ) ),
+      backgroundColorProperty: new Property( ABSColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon(),
       tandem: tandem
     };
