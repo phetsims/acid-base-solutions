@@ -31,7 +31,7 @@ define( function( require ) {
   var TITLE_OPTIONS = { font: new PhetFont( { size: 14, weight: 'bold' } ) };
 
   /**
-   * @param {AcidBaseSolutionModel} model
+   * @param {ABSModel} model
    * @param {ABSViewProperties} viewProperties properties that are specific to the view
    * @param {Node} solutionControl
    * @param {Object} [options]
