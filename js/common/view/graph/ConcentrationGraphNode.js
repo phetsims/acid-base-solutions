@@ -140,7 +140,7 @@ define( function( require ) {
     /**
      *  Creates an icon of the graph, with 4 bars (similar to weak acid).
      *  @static
-     *  @return {Node}
+     *  @returns {Node}
      */
     createIcon: function() {
       return new Node( {

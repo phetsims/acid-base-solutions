@@ -176,7 +176,7 @@ define( function( require ) {
      * Creates an icon for the pH meter.
      * @public
      * @static
-     * @return {Node}
+     * @returns {Node}
      */
     createIcon: function() {
       var probeNode = new ProbeNode( 2, 10, 5, 12 );
