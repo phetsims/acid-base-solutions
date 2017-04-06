@@ -1,7 +1,7 @@
 {
-  "comment": "# acid-base-solutions 1.2.9-rc.1 Thu Apr 06 2017 11:21:58 GMT-0600 (MDT)",
+  "comment": "# acid-base-solutions 1.2.9-rc.2 Thu Apr 06 2017 11:26:46 GMT-0600 (MDT)",
   "acid-base-solutions": {
-    "sha": "a9d5be8a830c90607021e61ea61e756311bcdff8",
+    "sha": "8ec7b035df7c73863124cca5864319a4f7385656",
     "branch": "1.2"
   },
   "assert": {
@@ -38,7 +38,7 @@
   },
   "phetcommon": {
     "sha": "290468164c47ce05f2d3e937caa7004fd074845a",
-    "branch": "acid-base-solutions-1.2"
+    "branch": "HEAD"
   },
   "scenery": {
     "sha": "d96bbaa5b1d19bec20d049576f53d1192ec54432",
@@ -46,7 +46,7 @@
   },
   "scenery-phet": {
     "sha": "172d9e1e501d04ad2a01676ae6d1a741462c0431",
-    "branch": "acid-base-solutions-1.2"
+    "branch": "HEAD"
   },
   "sherpa": {
     "sha": "f3cf6285fe2e85ce9b8998db4f3361837fc8d9ce",
