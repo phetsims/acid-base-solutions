@@ -1,7 +1,7 @@
 {
-  "comment": "# acid-base-solutions 1.2.10-rc.1 Thu Apr 13 2017 17:21:58 GMT-0600 (MDT)",
+  "comment": "# acid-base-solutions 1.2.10-rc.1 Thu Apr 13 2017 20:31:21 GMT-0600 (MDT)",
   "acid-base-solutions": {
-    "sha": "f97d09771f85fbfa3f77a134d8a5cb33bc8eceed",
+    "sha": "ef4a0bd57ccec1d68a7547995ac6fd68cea4325b",
     "branch": "1.2"
   },
   "assert": {
@@ -26,7 +26,7 @@
   },
   "joist": {
     "sha": "31d26ceb4b208b6b481a624c77fe7f7465abab94",
-    "branch": "acid-base-solutions-1.2"
+    "branch": "HEAD"
   },
   "kite": {
     "sha": "7f2df7e9ec52ed32d8c0fe0c1fe6bfa8c043c510",
@@ -37,8 +37,8 @@
     "branch": "HEAD"
   },
   "phetcommon": {
-    "sha": "99b1ceb6bd126fac3e067c7cca0dfa620f6e326e",
-    "branch": "HEAD"
+    "sha": "4f2a293183a9a644834332dd969c3824a09c3b3c",
+    "branch": "acid-base-solutions-1.2"
   },
   "scenery": {
     "sha": "d96bbaa5b1d19bec20d049576f53d1192ec54432",
