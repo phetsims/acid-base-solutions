@@ -16,7 +16,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
+  var RichText = require( 'SCENERY_PHET/RichText' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
@@ -49,7 +49,7 @@ define( function( require ) {
       this.addChild( new Node( { y: y, children: ( i > 0 ) ? [ tickNode, dashedLineNode ] : [ tickNode ] } ) );
 
       // add text
-      this.addChild( new SubSupText( '10<sup>' + (i - 8) + '</sup>', { centerY: y, centerX: -16, font: TICK_FONT } ) );
+      this.addChild( new RichText( '10<sup>' + (i - 8) + '</sup>', { centerY: y, centerX: -16, font: TICK_FONT } ) );
     }
 
     // y-axis label

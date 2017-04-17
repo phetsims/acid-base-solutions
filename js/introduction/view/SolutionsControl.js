@@ -18,7 +18,7 @@ define( function( require ) {
   var MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
-  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
+  var RichText = require( 'SCENERY_PHET/RichText' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VStrut = require( 'SCENERY/nodes/VStrut' );
@@ -55,7 +55,7 @@ define( function( require ) {
       new HBox( {
         spacing: TEXT_ICON_SPACING,
         children: [
-          new SubSupText( waterString + ' (H<sub>2</sub>O)', TEXT_OPTIONS ),
+          new RichText( waterString + ' (H<sub>2</sub>O)', TEXT_OPTIONS ),
           new MoleculeFactory.H2O()
         ]
       } ), RADIO_BUTTON_OPTIONS );

@@ -17,7 +17,7 @@ define( function( require ) {
   var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Shape = require( 'KITE/Shape' );
-  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
+  var RichText = require( 'SCENERY_PHET/RichText' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VStrut = require( 'SCENERY/nodes/VStrut' );
@@ -134,7 +134,7 @@ define( function( require ) {
           align: 'bottom',
           children: [
             new Text( 'B', { font: FONT, fontStyle: 'italic' } ),
-            new SubSupText( 'H<sup>+</sup>', SUBSUP_OPTIONS ) ]
+            new RichText( 'H<sup>+</sup>', SUBSUP_OPTIONS ) ]
         } ),
         new VStrut( SUBSCRIPT_Y_OFFSET )
       ]
@@ -147,7 +147,7 @@ define( function( require ) {
       spacing: VBOX_SPACING,
       children: [
         MoleculeFactory.H2O(),
-        new SubSupText( 'H<sub>2</sub>O', SUBSUP_OPTIONS )
+        new RichText( 'H<sub>2</sub>O', SUBSUP_OPTIONS )
       ]
     } );
   };
@@ -169,7 +169,7 @@ define( function( require ) {
           align: 'top',
           children: [
             new Text( '2', { font: FONT } ),
-            new SubSupText( 'H<sub>2</sub>O', SUBSUP_OPTIONS )
+            new RichText( 'H<sub>2</sub>O', SUBSUP_OPTIONS )
           ]
         } )
       ]
@@ -182,7 +182,7 @@ define( function( require ) {
       spacing: VBOX_SPACING,
       children: [
         MoleculeFactory.H3O(),
-        new SubSupText( 'H<sub>3</sub>O<sup>+</sup>', SUBSUP_OPTIONS )
+        new RichText( 'H<sub>3</sub>O<sup>+</sup>', SUBSUP_OPTIONS )
       ]
     } );
   };
@@ -242,7 +242,7 @@ define( function( require ) {
       spacing: VBOX_SPACING,
       children: [
         MoleculeFactory.OH(),
-        new SubSupText( 'OH<sup>-</sup>', SUBSUP_OPTIONS ),
+        new RichText( 'OH<sup>-</sup>', SUBSUP_OPTIONS ),
         new VStrut( SUBSCRIPT_Y_OFFSET )
       ]
     } );

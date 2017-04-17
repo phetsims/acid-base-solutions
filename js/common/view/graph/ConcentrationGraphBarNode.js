@@ -15,7 +15,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
+  var RichText = require( 'SCENERY_PHET/RichText' );
   var Util = require( 'DOT/Util' );
 
   // strings
@@ -38,7 +38,7 @@ define( function( require ) {
     this.bar.rotate( Math.PI ); // so that bar grows upward
 
     // @private add vertical text for concentration (normal text + exponent text)
-    this.text = new SubSupText( '123', { font: FONT, centerX: 2, centerY: -10, maxWidth: 0.85 * maxHeight } );
+    this.text = new RichText( '123', { font: FONT, centerX: 2, centerY: -10, maxWidth: 0.85 * maxHeight } );
     this.text.rotate( -Math.PI / 2 );
 
     Node.call( this, { children: [ this.bar, this.text ] } );
