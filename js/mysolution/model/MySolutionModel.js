@@ -47,10 +47,10 @@ define( function( require ) {
      * wiring is changed. This may have been more appropriate to handle in SolutionControl.
      */
 
-    // @pubic convenience Property that will synchronize with the concentration the currently selected solution
+    // @public convenience Property that will synchronize with the concentration the currently selected solution
     this.concentrationProperty = new Property( this.solutions[ DEFAULT_SOLUTION_TYPE ].concentrationProperty.get() );
 
-    // @pubic convenience Property that will synchronize with the strength of the currently selected solution
+    // @public convenience Property that will synchronize with the strength of the currently selected solution
     this.strengthProperty = new Property( this.solutions[ DEFAULT_SOLUTION_TYPE ].strengthProperty.get() );
 
     var setStrength = function( value ) { self.strengthProperty.set( value ); };
