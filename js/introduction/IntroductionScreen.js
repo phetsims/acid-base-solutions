@@ -14,7 +14,7 @@ define( function( require ) {
   var Circle = require( 'SCENERY/nodes/Circle' );
   var inherit = require( 'PHET_CORE/inherit' );
   var IntroductionModel = require( 'ACID_BASE_SOLUTIONS/introduction/model/IntroductionModel' );
-  var IntroductionView = require( 'ACID_BASE_SOLUTIONS/introduction/view/IntroductionView' );
+  var IntroductionScreenView = require( 'ACID_BASE_SOLUTIONS/introduction/view/IntroductionScreenView' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Property = require( 'AXON/Property' );
@@ -39,7 +39,7 @@ define( function( require ) {
 
     Screen.call( this,
       function() { return new IntroductionModel(); },
-      function( model ) { return new IntroductionView( model ); },
+      function( model ) { return new IntroductionScreenView( model ); },
       options );
   }
 

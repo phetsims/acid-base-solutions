@@ -14,7 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
   var MySolutionModel = require( 'ACID_BASE_SOLUTIONS/mysolution/model/MySolutionModel' );
-  var MySolutionView = require( 'ACID_BASE_SOLUTIONS/mysolution/view/MySolutionView' );
+  var MySolutionScreenView = require( 'ACID_BASE_SOLUTIONS/mysolution/view/MySolutionScreenView' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -37,7 +37,7 @@ define( function( require ) {
 
     Screen.call( this,
       function() { return new MySolutionModel(); },
-      function( model ) { return new MySolutionView( model ); },
+      function( model ) { return new MySolutionScreenView( model ); },
       options );
   }
 

@@ -18,12 +18,12 @@ define( function( require ) {
    * @param {MySolutionModel} model
    * @constructor
    */
-  function MySolutionView( model ) {
+  function MySolutionScreenView( model ) {
     ABSView.call( this, model,
       new SolutionControl( model.solutionTypeProperty, model.concentrationProperty, model.strengthProperty ) );
   }
 
-  acidBaseSolutions.register( 'MySolutionView', MySolutionView );
+  acidBaseSolutions.register( 'MySolutionScreenView', MySolutionScreenView );
 
-  return inherit( ABSView, MySolutionView );
+  return inherit( ABSView, MySolutionScreenView );
 } );
