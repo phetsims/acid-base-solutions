@@ -162,31 +162,39 @@ define( function( require ) {
       strengthSlider.visible = isWeak;
     } );
 
+    // flag to prevent circular update of related Properties, see #152
+    var updateSolutionTypeEnabled = true;
+
     // update solution type
     var updateSolutionType = function() {
 
-      var isAcid = isAcidProperty.get();
-      var isWeak = isWeakProperty.get();
+      if ( updateSolutionTypeEnabled ) {
 
-      if ( isWeak && isAcid ) {
-        solutionTypeProperty.set( SolutionType.WEAK_ACID );
-      }
-      else if ( isWeak && !isAcid ) {
-        solutionTypeProperty.set( SolutionType.WEAK_BASE );
-      }
-      else if ( !isWeak && isAcid ) {
-        solutionTypeProperty.set( SolutionType.STRONG_ACID );
-      }
-      else if ( !isWeak && !isAcid ) {
-        solutionTypeProperty.set( SolutionType.STRONG_BASE );
+        var isAcid = isAcidProperty.get();
+        var isWeak = isWeakProperty.get();
+
+        if ( isWeak && isAcid ) {
+          solutionTypeProperty.set( SolutionType.WEAK_ACID );
+        }
+        else if ( isWeak && !isAcid ) {
+          solutionTypeProperty.set( SolutionType.WEAK_BASE );
+        }
+        else if ( !isWeak && isAcid ) {
+          solutionTypeProperty.set( SolutionType.STRONG_ACID );
+        }
+        else if ( !isWeak && !isAcid ) {
+          solutionTypeProperty.set( SolutionType.STRONG_BASE );
+        }
       }
     };
     isAcidProperty.link( updateSolutionType.bind( this ) );
     isWeakProperty.link( updateSolutionType.bind( this ) );
 
     solutionTypeProperty.link( function( solutionType ) {
+      updateSolutionTypeEnabled = false;
       isAcidProperty.set( ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.STRONG_ACID ) );
       isWeakProperty.set( ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE ) );
+      updateSolutionTypeEnabled = true;
     } );
   }
 
