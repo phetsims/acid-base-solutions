@@ -92,7 +92,6 @@ define( function( require ) {
     var updateMoleculesBound = this.updateMolecules.bind( this );
     magnifier.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
 
-      console.log( 'MagnifierNode newSolutionType=' + newSolutionType + ' prevSolutionType=' + prevSolutionType );//XXX
       self.moleculesNode.reset();
 
       // unlink from previous solution

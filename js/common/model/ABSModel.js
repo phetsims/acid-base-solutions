@@ -51,7 +51,6 @@ define( function( require ) {
     // synchronize with pH of the solution that is currently selected
     var setPH = function( value ) { self.pHProperty.set( value ); };
     this.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
-      console.log( 'ABSModel newSolutionType=' + newSolutionType + ' prevSolutionType=' + prevSolutionType );//XXX
       // unsubscribe from previous solution pH property
       if ( prevSolutionType ) {
         self.solutions[ prevSolutionType ].pHProperty.unlink( setPH );
