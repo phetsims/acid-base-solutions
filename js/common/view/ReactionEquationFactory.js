@@ -17,7 +17,7 @@ define( function( require ) {
   var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Shape = require( 'KITE/Shape' );
-  var RichText = require( 'SCENERY_PHET/RichText' );
+  var RichText = require( 'SCENERY/nodes/RichText' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VStrut = require( 'SCENERY/nodes/VStrut' );

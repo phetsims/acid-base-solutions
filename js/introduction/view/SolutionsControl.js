@@ -18,7 +18,7 @@ define( function( require ) {
   var MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
-  var RichText = require( 'SCENERY_PHET/RichText' );
+  var RichText = require( 'SCENERY/nodes/RichText' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VStrut = require( 'SCENERY/nodes/VStrut' );
