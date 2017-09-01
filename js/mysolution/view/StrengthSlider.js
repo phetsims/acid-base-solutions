@@ -62,7 +62,7 @@ define( function( require ) {
    *
    * @param {Property.<SolutionType>} solutionTypeProperty
    * @param {Property.<number>} strengthProperty
-   * @param {Range} strengthRange
+   * @param {RangeWithValue} strengthRange
    * @constructor
    */
   function SliderModel( solutionTypeProperty, strengthProperty, strengthRange ) {

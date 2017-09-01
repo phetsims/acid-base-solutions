@@ -54,7 +54,7 @@ define( function( require ) {
    * Implemented as an inner type because this is internal to the slider.
    *
    * @param {Property.<number>} concentrationProperty
-   * @param {Range} concentrationRange
+   * @param {RangeWithValue} concentrationRange
    * @constructor
    */
   function SliderModel( concentrationProperty, concentrationRange ) {
