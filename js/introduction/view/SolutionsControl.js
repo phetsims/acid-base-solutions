@@ -17,8 +17,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
   var RichText = require( 'SCENERY/nodes/RichText' );
+  var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VStrut = require( 'SCENERY/nodes/VStrut' );

@@ -10,8 +10,8 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var ABSModel = require( 'ACID_BASE_SOLUTIONS/common/model/ABSModel' );
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );

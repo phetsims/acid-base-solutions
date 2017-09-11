@@ -10,20 +10,20 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+  var ABSConductivityTesterNode = require( 'ACID_BASE_SOLUTIONS/common/view/ABSConductivityTesterNode' );
   var ABSControlPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ABSControlPanel' );
   var ABSViewProperties = require( 'ACID_BASE_SOLUTIONS/common/view/ABSViewProperties' );
+  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
   var Bounds2 = require( 'DOT/Bounds2' );
-  var ABSConductivityTesterNode = require( 'ACID_BASE_SOLUTIONS/common/view/ABSConductivityTesterNode' );
   var ConcentrationGraphNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphNode' );
-  var ReactionEquationNode = require( 'ACID_BASE_SOLUTIONS/common/view/ReactionEquationNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MagnifierNode = require( 'ACID_BASE_SOLUTIONS/common/view/MagnifierNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PHColorKeyNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHColorKeyNode' );
   var PHMeterNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHMeterNode' );
   var PHPaperNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHPaperNode' );
+  var ReactionEquationNode = require( 'ACID_BASE_SOLUTIONS/common/view/ReactionEquationNode' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
   var ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );

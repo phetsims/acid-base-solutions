@@ -13,8 +13,8 @@ define( function( require ) {
   // modules
   var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
   var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  var ConcentrationGraphBarNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphBarNode' );
   var ConcentrationGraphBackgroundNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphBackgroundNode' );
+  var ConcentrationGraphBarNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphBarNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );

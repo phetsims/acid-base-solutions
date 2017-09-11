@@ -21,8 +21,8 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var pattern0Value1UnitsString = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1units' );
   var litersString = require( 'string!ACID_BASE_SOLUTIONS/liters' );
+  var pattern0Value1UnitsString = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1units' );
 
   // constants
   var MAJOR_TICK_LENGTH = 25;
