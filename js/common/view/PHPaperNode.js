@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2016, University of Colorado Boulder
 
 /**
  * Visual representation for pH paper in the 'Acid-Base Solutions' sim.
