@@ -13,7 +13,8 @@
     "requirejsNamespace": "ACID_BASE_SOLUTIONS",
     "runnable": true,
     "supportedBrands": [
-      "phet"
+      "phet",
+      "adapted-from-phet"
     ],
     "simulation": true
   }
