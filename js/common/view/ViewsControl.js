@@ -112,7 +112,7 @@ define( function( require ) {
 
     VBox.call( this, options );
 
-    // disable the 'Solvent' check box unless 'Molecules' is selected
+    // disable the 'Solvent' checkbox unless 'Molecules' is selected
     viewModeProperty.link( function( viewMode ) {
       solventCheckbox.enabled = ( viewMode === ViewMode.MOLECULES );
     } );
