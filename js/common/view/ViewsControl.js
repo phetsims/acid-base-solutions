@@ -13,7 +13,7 @@ define( function( require ) {
   var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
-  var CheckBox = require( 'SUN/CheckBox' );
+  var Checkbox = require( 'SUN/Checkbox' );
   var ConcentrationGraphNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
@@ -78,8 +78,8 @@ define( function( require ) {
     solventLabel.setEnabled = function( enabled ) {
       solventLabel.opacity = ( enabled ? 1 : 0.5 ); // gray out when disabled
     };
-    var solventCheckBox = new CheckBox( solventLabel, solventVisibleProperty, CHECK_BOX_OPTIONS );
-    dilateTouchArea( solventCheckBox );
+    var solventCheckbox = new Checkbox( solventLabel, solventVisibleProperty, CHECK_BOX_OPTIONS );
+    dilateTouchArea( solventCheckbox );
 
     // Graph
     var graphRadioButton = new AquaRadioButton( viewModeProperty, ViewMode.GRAPH,
@@ -105,7 +105,7 @@ define( function( require ) {
 
     options.children = [
       moleculesRadioButton,
-      new HBox( { children: [ new HStrut( 20 ), solventCheckBox ] } ),
+      new HBox( { children: [ new HStrut( 20 ), solventCheckbox ] } ),
       graphRadioButton,
       hideViewsRadioButton
     ];
@@ -114,7 +114,7 @@ define( function( require ) {
 
     // disable the 'Solvent' check box unless 'Molecules' is selected
     viewModeProperty.link( function( viewMode ) {
-      solventCheckBox.enabled = ( viewMode === ViewMode.MOLECULES );
+      solventCheckbox.enabled = ( viewMode === ViewMode.MOLECULES );
     } );
   }
 
