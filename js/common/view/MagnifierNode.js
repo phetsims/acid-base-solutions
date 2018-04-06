@@ -127,8 +127,8 @@ define( function( require ) {
       var moleculeNode = MoleculeFactory[ moleculeKey ]();
       // Scale up to increase quality. Remember to scale down when drawing to canvas.
       moleculeNode.setScaleMagnitude( IMAGE_SCALE, IMAGE_SCALE );
-      moleculeNode.toImage( function( image, x, y ) {
-        self.moleculesData[ moleculeKey ].image = image;
+      moleculeNode.toCanvas( function( canvas ) {
+        self.moleculesData[ moleculeKey ].canvas = canvas;
       } );
     };
 
@@ -141,10 +141,10 @@ define( function( require ) {
      * The data structure looks like:
      *
      * {
-     *    A:   { image:..., numberOfMolecules:..., xCoordinates: [...], yCoordinates: [...] },
-     *    B:   { image:..., numberOfMolecules:..., xCoordinates: [...], yCoordinates: [...] },
-     *    BH:  { image:..., numberOfMolecules:..., xCoordinates: [...], yCoordinates: [...] },
-     *    H3O: { image:..., numberOfMolecules:..., xCoordinates: [...], yCoordinates: [...] },
+     *    A:   { canvas:..., numberOfMolecules:..., xCoordinates: [...], yCoordinates: [...] },
+     *    B:   { canvas:..., numberOfMolecules:..., xCoordinates: [...], yCoordinates: [...] },
+     *    BH:  { canvas:..., numberOfMolecules:..., xCoordinates: [...], yCoordinates: [...] },
+     *    H3O: { canvas:..., numberOfMolecules:..., xCoordinates: [...], yCoordinates: [...] },
      *    ...
      * }
      *
@@ -157,11 +157,11 @@ define( function( require ) {
       solution.molecules.forEach( function( molecule ) {
         if ( molecule.key !== 'H2O' && !self.moleculesData.hasOwnProperty( molecule.key ) ) {
           self.moleculesData[ molecule.key ] = {
-            image: null, // will be populated asynchronously
-            numberOfMolecules: 0,
+            canvas: null, // {HTMLCanvasElement}
+            numberOfMolecules: 0, // {number}
             // pre-allocate arrays to improve performance
-            xCoordinates: new ArrayConstructor( MAX_MOLECULES ),
-            yCoordinates: new ArrayConstructor( MAX_MOLECULES )
+            xCoordinates: new ArrayConstructor( MAX_MOLECULES ), // {number[]}
+            yCoordinates: new ArrayConstructor( MAX_MOLECULES ) // {number[]}
           };
           createImage( molecule.key ); // populate the image field asynchronously
         }
@@ -240,11 +240,11 @@ define( function( require ) {
         if ( key !== 'H2O' ) {
           var moleculeData = self.moleculesData[ key ];
           // images are generated asynchronously, so test in case they aren't available when this is first called
-          if ( moleculeData.image ) {
+          if ( moleculeData.canvas ) {
             for ( var i = 0; i < moleculeData.numberOfMolecules; i++ ) {
-              var x = moleculeData.xCoordinates[ i ] - moleculeData.image.width / 2;
-              var y = moleculeData.yCoordinates[ i ] - moleculeData.image.height / 2;
-              context.drawImage( moleculeData.image, Math.floor( x ), Math.floor( y ) ); // Use integer coordinates with drawImage to improve performance.
+              var x = moleculeData.xCoordinates[ i ] - moleculeData.canvas.width / 2;
+              var y = moleculeData.yCoordinates[ i ] - moleculeData.canvas.height / 2;
+              context.drawImage( moleculeData.canvas, Math.floor( x ), Math.floor( y ) ); // Use integer coordinates with drawImage to improve performance.
             }
           }
         }
