@@ -127,7 +127,7 @@ define( function( require ) {
       var moleculeNode = MoleculeFactory[ moleculeKey ]();
       // Scale up to increase quality. Remember to scale down when drawing to canvas.
       moleculeNode.setScaleMagnitude( IMAGE_SCALE, IMAGE_SCALE );
-      moleculeNode.toCanvas( function( canvas ) {
+      moleculeNode.toCanvas( function( canvas, x, y, width, height ) {
         self.moleculesData[ moleculeKey ].canvas = canvas;
       } );
     };
