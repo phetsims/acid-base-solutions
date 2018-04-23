@@ -1,7 +1,7 @@
 {
-  "comment": "# acid-base-solutions 1.2.11 Tue Dec 05 2017 01:10:55 GMT-0700 (MST)",
+  "comment": "# acid-base-solutions 1.2.11 Mon Apr 23 2018 10:15:42 GMT-0600 (MDT)",
   "acid-base-solutions": {
-    "sha": "6aafa7244586ee937fde1ffde78fa988451b3188",
+    "sha": "75900b1734172f36665335e76be1e4cd44f7423b",
     "branch": "1.2"
   },
   "assert": {
@@ -41,8 +41,8 @@
     "branch": "HEAD"
   },
   "scenery": {
-    "sha": "d96bbaa5b1d19bec20d049576f53d1192ec54432",
-    "branch": "HEAD"
+    "sha": "f7d0b8103340934d31b4da137e81677e2a0f9b78",
+    "branch": "acid-base-solutions-1.2"
   },
   "scenery-phet": {
     "sha": "172d9e1e501d04ad2a01676ae6d1a741462c0431",
