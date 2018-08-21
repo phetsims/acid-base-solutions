@@ -73,7 +73,9 @@ define( function( require ) {
     this.sliderValueRange = new RangeWithValue( Util.log10( strengthRange.min ), Util.log10( strengthRange.max ), Util.log10( strengthRange.defaultValue ) );
 
     // @public slider's value
-    this.sliderValueProperty = new Property( Util.log10( strengthProperty.get() ) );
+    this.sliderValueProperty = new Property( Util.log10( strengthProperty.get() ), {
+      reentrant: true
+    } );
 
     // map between linear and logarithmic
     this.sliderValueProperty.link( function( sliderValue ) {

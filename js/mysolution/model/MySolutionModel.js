@@ -48,10 +48,14 @@ define( function( require ) {
      */
 
     // @public convenience Property that will synchronize with the concentration the currently selected solution
-    this.concentrationProperty = new Property( this.solutions[ DEFAULT_SOLUTION_TYPE ].concentrationProperty.get() );
+    this.concentrationProperty = new Property( this.solutions[ DEFAULT_SOLUTION_TYPE ].concentrationProperty.get(), {
+      reentrant: true
+    } );
 
     // @public convenience Property that will synchronize with the strength of the currently selected solution
-    this.strengthProperty = new Property( this.solutions[ DEFAULT_SOLUTION_TYPE ].strengthProperty.get() );
+    this.strengthProperty = new Property( this.solutions[ DEFAULT_SOLUTION_TYPE ].strengthProperty.get(), {
+      reentrant: true
+    } );
 
     var setStrength = function( value ) { self.strengthProperty.set( value ); };
     var setConcentration = function( value ) { self.concentrationProperty.set( value ); };
