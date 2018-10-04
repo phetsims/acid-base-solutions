@@ -16,7 +16,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var Range = require( 'DOT/Range' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -30,7 +30,7 @@ define( function( require ) {
    */
   function ConductivityTester( beaker, pHProperty ) {
 
-    this.probeDragYRange = new RangeWithValue( beaker.top - 20, beaker.top + 50 ); // @public
+    this.probeDragYRange = new Range( beaker.top - 20, beaker.top + 50 ); // @public
 
     this.probeSize = new Dimension2( 20, 68 ); // @public
 

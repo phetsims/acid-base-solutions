@@ -70,7 +70,10 @@ define( function( require ) {
     var self = this;
 
     // @public range of slider values
-    this.sliderValueRange = new RangeWithValue( Util.log10( strengthRange.min ), Util.log10( strengthRange.max ), Util.log10( strengthRange.defaultValue ) );
+    this.sliderValueRange = new RangeWithValue(
+      Util.log10( strengthRange.min ),
+      Util.log10( strengthRange.max ),
+      Util.log10( strengthRange.defaultValue ) );
 
     // @public slider's value
     this.sliderValueProperty = new Property( Util.log10( strengthProperty.get() ), {

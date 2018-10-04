@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+  var Range = require( 'DOT/Range' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
 
   // constants
@@ -17,7 +18,7 @@ define( function( require ) {
 
   var ABSConstants = {
     CONCENTRATION_RANGE: new RangeWithValue( 1E-3, 1, 1E-2 ),
-    PH_RANGE: new RangeWithValue( 0, 14 ),
+    PH_RANGE: new Range( 0, 14 ),
     WATER_EQUILIBRIUM_CONSTANT: 1E-14,
     WATER_CONCENTRATION: 55.6, // water concentration when it's used as a solvent, mol/L
     WEAK_STRENGTH_RANGE: new RangeWithValue( 1E-10, WEAK_STRENGTH_MAX, 1E-7 ),

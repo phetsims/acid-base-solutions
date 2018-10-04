@@ -13,7 +13,7 @@ define( function( require ) {
   var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var Range = require( 'DOT/Range' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -28,7 +28,7 @@ define( function( require ) {
     this.pHProperty = pHProperty;
 
     // @public drag range (y coordinate)
-    this.dragYRange = new RangeWithValue( beaker.top - 15, beaker.top + 70 );
+    this.dragYRange = new Range( beaker.top - 15, beaker.top + 70 );
 
     // @public location, at tip of probe
     this.locationProperty = new Property( new Vector2( beaker.right - 65, beaker.top - 5 ) );

@@ -63,7 +63,10 @@ define( function( require ) {
     this.concentrationProperty = concentrationProperty; // @private
 
     // @public range of slider
-    this.sliderValueRange = new RangeWithValue( Util.log10( concentrationRange.min ), Util.log10( concentrationRange.max ), Util.log10( concentrationRange.defaultValue ) );
+    this.sliderValueRange = new RangeWithValue(
+      Util.log10( concentrationRange.min ),
+      Util.log10( concentrationRange.max ),
+      Util.log10( concentrationRange.defaultValue ) );
 
     // @public property for slider value
     this.sliderValueProperty = new Property( Util.log10( concentrationProperty.get() ), {
