@@ -14,6 +14,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -43,7 +44,7 @@ define( function( require ) {
     // @public
     // NOTE: Ideally, indicatorHeight should be a DerivedProperty, but that gets quite messy.
     // height of indicator, the portion of the paper that changes color when dipped in solution
-    this.indicatorHeightProperty = new Property( 0 );
+    this.indicatorHeightProperty = new NumberProperty( 0 );
 
     // clear the indicator color from the paper and recompute its height
     var resetIndicator = function() {

@@ -18,7 +18,7 @@ define( function( require ) {
   var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var Util = require( 'DOT/Util' );
 
   /**
@@ -48,8 +48,8 @@ define( function( require ) {
      */
     this.molecules = molecules; // @public
 
-    this.strengthProperty = new Property( strength ); // @public
-    this.concentrationProperty = new Property( concentration ); // @public
+    this.strengthProperty = new NumberProperty( strength ); // @public
+    this.concentrationProperty = new NumberProperty( concentration ); // @public
 
     // @public
     this.pHProperty = new DerivedProperty( [ this.strengthProperty, this.concentrationProperty ],

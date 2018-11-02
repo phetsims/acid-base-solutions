@@ -15,8 +15,8 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Property = require( 'AXON/Property' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
@@ -69,7 +69,7 @@ define( function( require ) {
       Util.log10( concentrationRange.defaultValue ) );
 
     // @public property for slider value
-    this.sliderValueProperty = new Property( Util.log10( concentrationProperty.get() ), {
+    this.sliderValueProperty = new NumberProperty( Util.log10( concentrationProperty.get() ), {
       reentrant: true
     } );
 

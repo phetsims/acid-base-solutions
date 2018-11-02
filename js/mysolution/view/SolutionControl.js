@@ -14,6 +14,7 @@ define( function( require ) {
   var ABSwitch = require( 'SUN/ABSwitch' );
   var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var ArrowButton = require( 'SUN/buttons/ArrowButton' );
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var ConcentrationSlider = require( 'ACID_BASE_SOLUTIONS/mysolution/view/ConcentrationSlider' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var HBox = require( 'SCENERY/nodes/HBox' );
@@ -21,7 +22,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Property = require( 'AXON/Property' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
   var StrengthSlider = require( 'ACID_BASE_SOLUTIONS/mysolution/view/StrengthSlider' );
@@ -63,7 +63,7 @@ define( function( require ) {
     var concentrationRange = ABSConstants.CONCENTRATION_RANGE;
 
     // acid/base switch
-    var isAcidProperty = new Property( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.STRONG_ACID );
+    var isAcidProperty = new BooleanProperty( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.STRONG_ACID );
     var acidBaseSwitch = new ABSwitch( isAcidProperty,
       true, new Text( acidString, { font: CONTROL_FONT } ),
       false, new Text( baseString, { font: CONTROL_FONT } ),
@@ -98,7 +98,7 @@ define( function( require ) {
 
     // strength control
     var strengthTitle = new Text( strengthString, { font: SUBTITLE_FONT } );
-    var isWeakProperty = new Property( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.WEAK_ACID );
+    var isWeakProperty = new BooleanProperty( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.WEAK_ACID );
     var weakStrongSwitch = new ABSwitch( isWeakProperty,
       true, new Text( weakString, { font: CONTROL_FONT } ),
       false, new Text( strongString, { font: CONTROL_FONT } ),

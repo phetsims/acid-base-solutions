@@ -13,7 +13,7 @@ define( function( require ) {
   var ABSModel = require( 'ACID_BASE_SOLUTIONS/common/model/ABSModel' );
   var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
   var StrongAcidSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/StrongAcidSolution' );
   var StrongBaseSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/StrongBaseSolution' );
@@ -48,12 +48,12 @@ define( function( require ) {
      */
 
     // @public convenience Property that will synchronize with the concentration the currently selected solution
-    this.concentrationProperty = new Property( this.solutions[ DEFAULT_SOLUTION_TYPE ].concentrationProperty.get(), {
+    this.concentrationProperty = new NumberProperty( this.solutions[ DEFAULT_SOLUTION_TYPE ].concentrationProperty.get(), {
       reentrant: true
     } );
 
     // @public convenience Property that will synchronize with the strength of the currently selected solution
-    this.strengthProperty = new Property( this.solutions[ DEFAULT_SOLUTION_TYPE ].strengthProperty.get(), {
+    this.strengthProperty = new NumberProperty( this.solutions[ DEFAULT_SOLUTION_TYPE ].strengthProperty.get(), {
       reentrant: true
     } );
 

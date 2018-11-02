@@ -15,8 +15,8 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Property = require( 'AXON/Property' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -76,7 +76,7 @@ define( function( require ) {
       Util.log10( strengthRange.defaultValue ) );
 
     // @public slider's value
-    this.sliderValueProperty = new Property( Util.log10( strengthProperty.get() ), {
+    this.sliderValueProperty = new NumberProperty( Util.log10( strengthProperty.get() ), {
       reentrant: true
     } );
 

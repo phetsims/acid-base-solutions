@@ -18,6 +18,7 @@ define( function( require ) {
   var PHMeter = require( 'ACID_BASE_SOLUTIONS/common/model/PHMeter' );
   var PHPaper = require( 'ACID_BASE_SOLUTIONS/common/model/PHPaper' );
   var Property = require( 'AXON/Property' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
 
   /**
    * @param {AqueousSolution[]} solutions
@@ -38,7 +39,7 @@ define( function( require ) {
     this.solutionTypeProperty = new Property( defaultSolutionType );
 
     // @public pH level of product
-    this.pHProperty = new Property( this.solutions[ defaultSolutionType ].pHProperty.get() );
+    this.pHProperty = new NumberProperty( this.solutions[ defaultSolutionType ].pHProperty.get() );
 
     // @public
     this.beaker = new Beaker();
