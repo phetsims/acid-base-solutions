@@ -38,7 +38,7 @@ define( function( require ) {
       beaker.left + this.paperSize.width / 2, beaker.top - 20,
       beaker.right - this.paperSize.width / 2, beaker.bottom );
 
-    // @public location
+    // @public location of the bottom-center of the paper
     this.locationProperty = new Property( new Vector2( beaker.right - 60, beaker.top - 10 ) );
 
     // @public
