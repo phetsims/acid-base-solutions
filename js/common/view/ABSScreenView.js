@@ -84,6 +84,9 @@ define( function( require ) {
       pHPaperNode.visible = pHColorKeyNode.visible = ( toolMode === ToolMode.PH_PAPER );
       conductivityTesterNode.visible = ( toolMode === ToolMode.CONDUCTIVITY );
     } );
+
+    // @private needed by methods
+    this.pHPaperNode = pHPaperNode;
   }
 
   acidBaseSolutions.register( 'ABSScreenView', ABSScreenView );
@@ -91,6 +94,11 @@ define( function( require ) {
   return inherit( ScreenView, ABSScreenView, {
 
     // @public resets properties that are specific to the view
-    reset: function() { this.viewProperties.reset(); }
+    reset: function() { this.viewProperties.reset(); },
+
+    // @public
+    step: function( dt ) {
+      this.pHPaperNode.step( dt );
+    }
   } );
 } );

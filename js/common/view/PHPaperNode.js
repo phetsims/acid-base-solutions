@@ -58,9 +58,9 @@ define( function( require ) {
     // expand touch area
     this.touchArea = this.localBounds.dilatedXY( 10, 10 );
 
-    // Constrained dragging
+    // @private Constrained dragging
     var clickOffset = null;
-    this.addInputListener( new SimpleDragHandler( {
+    this.dragHandler = new SimpleDragHandler( {
 
       start: function( e ) {
         clickOffset = self.globalToParentPoint( e.pointer.point ).subtract( e.currentTarget.translation );
@@ -72,7 +72,8 @@ define( function( require ) {
           Util.clamp( v.x, pHPaper.dragBounds.minX, pHPaper.dragBounds.maxX ),
           Util.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) ) );
       }
-    } ) );
+    } );
+    this.addInputListener( this.dragHandler );
 
     // add observers
     pHPaper.locationProperty.link( function( location ) {
@@ -90,6 +91,9 @@ define( function( require ) {
       }
     };
     pHPaper.pHProperty.link( this.updateColor );
+
+    // @private needed by methods
+    this.pHPaper = pHPaper;
   }
 
   acidBaseSolutions.register( 'PHPaperNode', PHPaperNode );
@@ -112,6 +116,19 @@ define( function( require ) {
   };
 
   return inherit( Node, PHPaperNode, {
+
+    // @public
+    step: function( dt ) {
+      if ( !this.dragHandler.dragging ) {
+        var minY = this.pHPaper.beaker.top + ( 0.6 * this.pHPaper.paperSize.height );
+        var location = this.pHPaper.locationProperty.value;
+        if ( location.y > minY ) {
+          var dy = dt * 250; // move at a constant speed of 250 pixels per second
+          var y = Math.max( minY, location.y - dy );
+          this.pHPaper.locationProperty.value = new Vector2( location.x, y );
+        }
+      }
+    },
 
     /**
      * Update paper color when this node becomes visible.
