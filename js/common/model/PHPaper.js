@@ -70,6 +70,13 @@ define( function( require ) {
     },
 
     /**
+     * Gets the y coordinate of the top of the pH paper. Origin is at bottom center.
+     * @returns {number}
+     */
+    getTop: function() { return this.locationProperty.value.y - this.paperSize.height; },
+    get top() { return this.getTop(); },
+
+    /**
      * Updates the height of the indicator. The indicator height only increases, since we want the
      * indicator color to be shown on the paper when it is dipped into solution and pulled out.
      * @private
