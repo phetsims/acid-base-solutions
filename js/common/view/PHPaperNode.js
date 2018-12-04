@@ -2,6 +2,7 @@
 
 /**
  * Visual representation for pH paper in the 'Acid-Base Solutions' sim.
+ * Origin is at the bottom-center of the paper.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -92,6 +93,9 @@ define( function( require ) {
     };
     pHPaper.pHProperty.link( this.updateColor );
 
+    // @private is the paper animating?
+    this.animating = false;
+
     // @private needed by methods
     this.pHPaper = pHPaper;
   }
@@ -120,13 +124,22 @@ define( function( require ) {
     // @public
     step: function( dt ) {
       if ( !this.dragHandler.dragging ) {
-        var minY = this.pHPaper.beaker.top + ( 0.6 * this.pHPaper.paperSize.height );
+
         var location = this.pHPaper.locationProperty.value;
-        if ( location.y > minY ) {
+        var minY = this.pHPaper.beaker.top + ( 0.6 * this.pHPaper.paperSize.height );
+
+        // if the paper is fully submerged in the solution ...
+        if ( ( this.animating && location.y > minY ) || ( this.pHPaper.top > this.pHPaper.beaker.top ) ) {
+
+          // float to the top of the beaker, with part of the paper above the surface
+          this.animating = true;
           var dy = dt * 250; // move at a constant speed of 250 pixels per second
           var y = Math.max( minY, location.y - dy );
           this.pHPaper.locationProperty.value = new Vector2( location.x, y );
         }
+      }
+      else {
+        this.animating = false;
       }
     },
 
