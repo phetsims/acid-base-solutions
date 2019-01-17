@@ -54,7 +54,7 @@ define( function( require ) {
     // @public
     this.pHProperty = new DerivedProperty( [ this.strengthProperty, this.concentrationProperty ],
       function( strength, concentration ) {
-        return -Math.round( 100 * Util.log10( self.getH3OConcentration() ) ) / 100;
+        return -Util.roundSymmetric( 100 * Util.log10( self.getH3OConcentration() ) ) / 100;
       } );
   }
 

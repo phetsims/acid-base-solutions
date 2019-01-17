@@ -261,7 +261,7 @@ define( function( require ) {
   var getNumberOfMolecules = function( concentration ) {
     var raiseFactor = Util.log10( concentration / BASE_CONCENTRATION );
     var baseFactor = Math.pow( ( MAX_MOLECULES / BASE_DOTS ), ( 1 / Util.log10( 1 / BASE_CONCENTRATION ) ) );
-    return Math.round( BASE_DOTS * Math.pow( baseFactor, raiseFactor ) );
+    return Util.roundSymmetric( BASE_DOTS * Math.pow( baseFactor, raiseFactor ) );
   };
 
   return inherit( Node, MagnifierNode, {

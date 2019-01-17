@@ -19,6 +19,7 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var Util = require( 'DOT/Util' );
 
   // strings
   var litersString = require( 'string!ACID_BASE_SOLUTIONS/liters' );
@@ -72,7 +73,7 @@ define( function( require ) {
     this.addChild( ticksParent );
 
     // tick marks
-    var NUMBER_OF_TICKS = Math.round( 1 / MINOR_TICK_SPACING );
+    var NUMBER_OF_TICKS = Util.roundSymmetric( 1 / MINOR_TICK_SPACING );
     var deltaY = BEAKER_HEIGHT / NUMBER_OF_TICKS;
     var isMajorTick;
     var y;
