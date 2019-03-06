@@ -12,9 +12,9 @@ define( function( require ) {
   // modules
   var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Vector2Property = require( 'DOT/Vector2Property' );
 
   /**
    * @param {Beaker} beaker
@@ -31,7 +31,7 @@ define( function( require ) {
     this.dragYRange = new Range( beaker.top - 15, beaker.top + 70 );
 
     // @public location, at tip of probe
-    this.locationProperty = new Property( new Vector2( beaker.right - 65, beaker.top - 5 ) );
+    this.locationProperty = new Vector2Property( new Vector2( beaker.right - 65, beaker.top - 5 ) );
   }
 
   acidBaseSolutions.register( 'PHMeter', PHMeter );

@@ -15,9 +15,9 @@ define( function( require ) {
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Vector2Property = require( 'DOT/Vector2Property' );
 
   // constants
   var NEUTRAL_PH = 7;
@@ -37,11 +37,11 @@ define( function( require ) {
     // @public bottom-center of bulb's base
     this.bulbLocation = new Vector2( beaker.location.x - 45, beaker.top - 30 );
 
-    // probe locations
+    // @public probe locations
     var probeXOffset = 0.175 * beaker.size.width; // offset from edge of beaker
     var probeY = this.probeDragYRange.min + 10;
-    this.positiveProbeLocationProperty = new Property( new Vector2( beaker.right - probeXOffset, probeY ) ); // @public
-    this.negativeProbeLocationProperty = new Property( new Vector2( beaker.left + probeXOffset, probeY ) ); // @public
+    this.positiveProbeLocationProperty = new Vector2Property( new Vector2( beaker.right - probeXOffset, probeY ) );
+    this.negativeProbeLocationProperty = new Vector2Property( new Vector2( beaker.left + probeXOffset, probeY ) );
 
     // @public brightness of bulb varies from 0 (off) to 1 (full on)
     this.brightnessProperty = new DerivedProperty( [ pHProperty, this.positiveProbeLocationProperty, this.negativeProbeLocationProperty ],

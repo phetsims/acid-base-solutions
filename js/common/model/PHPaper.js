@@ -13,10 +13,10 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Vector2Property = require( 'DOT/Vector2Property' );
 
   /**
    * @param {Beaker} beaker
@@ -39,7 +39,7 @@ define( function( require ) {
       beaker.right - this.paperSize.width / 2, beaker.bottom );
 
     // @public location of the bottom-center of the paper
-    this.locationProperty = new Property( new Vector2( beaker.right - 60, beaker.top - 10 ) );
+    this.locationProperty = new Vector2Property( new Vector2( beaker.right - 60, beaker.top - 10 ) );
 
     // @public
     // NOTE: Ideally, indicatorHeight should be a DerivedProperty, but that gets quite messy.
