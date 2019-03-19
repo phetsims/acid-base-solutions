@@ -1,7 +1,7 @@
 {
-  "comment": "# acid-base-solutions 1.2.16 Tue Mar 05 2019 14:13:27 GMT-0500 (EST)",
+  "comment": "# acid-base-solutions 1.2.16 Tue Mar 19 2019 15:29:50 GMT-0400 (EDT)",
   "acid-base-solutions": {
-    "sha": "9f41504a37331c1c9c37f0159a6b8338e811667e",
+    "sha": "8f0272b3cbcc94cb1db0105fb995f409a5952e19",
     "branch": "1.2"
   },
   "assert": {
@@ -14,11 +14,11 @@
   },
   "brand": {
     "sha": "d0cce6a3e30f2addc09854891ec9408d64cbf368",
-    "branch": "acid-base-solutions-1.2"
+    "branch": "HEAD"
   },
   "chipper": {
-    "sha": "a256dbb64cb6dc329eaca7c9ed8ce2139b56d442",
-    "branch": "HEAD"
+    "sha": "9205bef46fdbfc9b8abe2fc14c234373fa6578c8",
+    "branch": "acid-base-solutions-1.2"
   },
   "dot": {
     "sha": "b9e3c1e07271b8b4fee91fca360f51563fe479cb",
@@ -26,7 +26,7 @@
   },
   "joist": {
     "sha": "f3e2cfe167b870603cfdde6ed51f1489227d8a31",
-    "branch": "acid-base-solutions-1.2"
+    "branch": "HEAD"
   },
   "kite": {
     "sha": "7f2df7e9ec52ed32d8c0fe0c1fe6bfa8c043c510",
@@ -38,6 +38,10 @@
   },
   "phetcommon": {
     "sha": "c11ef106f8189004812b464d2781dbd7ac5b4a2d",
+    "branch": "HEAD"
+  },
+  "phetmarks": {
+    "sha": "fe43b1cbadd83e554e5de715e8bfd39ec5566087",
     "branch": "HEAD"
   },
   "scenery": {
@@ -59,9 +63,5 @@
   "tandem": {
     "sha": "210ece84c1dfdce1aedb77e451cd0ddc376db313",
     "branch": "HEAD"
-  },
-  "phetmarks": {
-    "branch": "master",
-    "sha": "fe43b1cbadd83e554e5de715e8bfd39ec5566087"
   }
 }
