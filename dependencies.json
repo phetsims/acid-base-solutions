@@ -1,7 +1,7 @@
 {
-  "comment": "# acid-base-solutions 1.2.17-rc.4 Fri Mar 29 2019 12:33:30 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# acid-base-solutions 1.2.17 Thu Apr 04 2019 09:14:57 GMT-0600 (Mountain Daylight Time)",
   "acid-base-solutions": {
-    "sha": "3431e74219174726b9d4e09f0eb37ee8ccc7b49e",
+    "sha": "66a535d480530b84ccedb41b5e6e8f96247e8bf6",
     "branch": "1.2"
   },
   "assert": {
