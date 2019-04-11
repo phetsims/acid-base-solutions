@@ -1,7 +1,7 @@
 {
-  "comment": "# acid-base-solutions 1.2.17 Thu Apr 04 2019 09:14:57 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# acid-base-solutions 1.2.17 Thu Apr 11 2019 16:26:37 GMT-0600 (Mountain Daylight Time)",
   "acid-base-solutions": {
-    "sha": "66a535d480530b84ccedb41b5e6e8f96247e8bf6",
+    "sha": "0a988e834d3399b6ccbd57fe7b09c305b5d3d00e",
     "branch": "1.2"
   },
   "assert": {
@@ -17,8 +17,8 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "9205bef46fdbfc9b8abe2fc14c234373fa6578c8",
-    "branch": "HEAD"
+    "sha": "b988a2707c9ccf016deeb029023b70a64b2be830",
+    "branch": "acid-base-solutions-1.2"
   },
   "dot": {
     "sha": "b9e3c1e07271b8b4fee91fca360f51563fe479cb",
