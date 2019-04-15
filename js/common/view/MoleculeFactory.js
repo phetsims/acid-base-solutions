@@ -129,8 +129,6 @@ define( function( require ) {
     Circle.call( this, radius, _.extend( { fill: gradient }, options ) );
   }
 
-  acidBaseSolutions.register( 'MoleculeFactory.AtomNode', AtomNode );
-
   inherit( Circle, AtomNode );
 
   return MoleculeFactory;

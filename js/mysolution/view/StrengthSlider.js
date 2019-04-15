@@ -93,8 +93,6 @@ define( function( require ) {
     } );
   }
 
-  acidBaseSolutions.register( 'StrengthSlider.SliderModel', SliderModel );
-
   // issues #94: strength can be changed only for weak solutions, use this as a guard
   var strengthIsMutable = function( solutionType ) {
     return ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE );

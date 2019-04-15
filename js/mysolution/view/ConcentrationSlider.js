@@ -81,7 +81,5 @@ define( function( require ) {
     } );
   }
 
-  acidBaseSolutions.register( 'ConcentrationSlider.SliderModel', SliderModel );
-
   return inherit( HSlider, ConcentrationSlider );
 } );

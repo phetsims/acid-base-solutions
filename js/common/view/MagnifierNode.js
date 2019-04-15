@@ -169,8 +169,6 @@ define( function( require ) {
     }
   }
 
-  acidBaseSolutions.register( 'MagnifierNode.MoleculesNode', MoleculesNode );
-
   inherit( CanvasNode, MoleculesNode, {
 
     // @public Resets all molecule counts to zero.

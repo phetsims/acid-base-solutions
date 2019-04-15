@@ -151,8 +151,6 @@ define( function( require ) {
     Node.call( this, { children: [ shaftNode, tipNode ] } );
   }
 
-  acidBaseSolutions.register( 'PHMeterNode.ProbeNode', ProbeNode );
-
   inherit( Node, ProbeNode );
 
   return inherit( Node, PHMeterNode, {
