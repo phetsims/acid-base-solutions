@@ -28,7 +28,7 @@ define( function( require ) {
     this.pHProperty = pHProperty;
 
     // @public drag range (y coordinate)
-    this.dragYRange = new Range( beaker.top - 15, beaker.top + 70 );
+    this.dragYRange = new Range( beaker.top - 5, beaker.top + 60 );
 
     // @public location, at tip of probe
     this.locationProperty = new Vector2Property( new Vector2( beaker.right - 65, beaker.top - 5 ) );

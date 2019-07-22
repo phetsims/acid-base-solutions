@@ -48,7 +48,7 @@ define( function( require ) {
     Node.call( this, { cursor: 'pointer' } );
 
     // probe
-    var probeNode = new ProbeNode( 5, 50, 14, 36 );
+    var probeNode = new ProbeNode( 5, 40, 14, 36 );
 
     // text, initialized with widest value for layout
     var textNode = new Text( formatText( ABSConstants.PH_RANGE.max ), {
