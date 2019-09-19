@@ -6,20 +6,20 @@
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
-  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  const ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
+  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var pHColorKeyString = require( 'string!ACID_BASE_SOLUTIONS/pHColorKey' );
+  const pHColorKeyString = require( 'string!ACID_BASE_SOLUTIONS/pHColorKey' );
 
   // constants
   var FONT_BIG = new PhetFont( 12 );

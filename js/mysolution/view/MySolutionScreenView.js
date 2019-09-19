@@ -5,14 +5,14 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ABSScreenView = require( 'ACID_BASE_SOLUTIONS/common/view/ABSScreenView' );
-  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var SolutionControl = require( 'ACID_BASE_SOLUTIONS/mysolution/view/SolutionControl' );
+  const ABSScreenView = require( 'ACID_BASE_SOLUTIONS/common/view/ABSScreenView' );
+  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const SolutionControl = require( 'ACID_BASE_SOLUTIONS/mysolution/view/SolutionControl' );
 
   /**
    * @param {MySolutionModel} model

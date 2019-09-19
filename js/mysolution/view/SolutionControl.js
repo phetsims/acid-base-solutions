@@ -6,35 +6,35 @@
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
-  var ABSwitch = require( 'SUN/ABSwitch' );
-  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  var ArrowButton = require( 'SUN/buttons/ArrowButton' );
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var ConcentrationSlider = require( 'ACID_BASE_SOLUTIONS/mysolution/view/ConcentrationSlider' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var HSeparator = require( 'SUN/HSeparator' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
-  var StrengthSlider = require( 'ACID_BASE_SOLUTIONS/mysolution/view/StrengthSlider' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var Util = require( 'DOT/Util' );
+  const ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
+  const ABSwitch = require( 'SUN/ABSwitch' );
+  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+  const ArrowButton = require( 'SUN/buttons/ArrowButton' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const ConcentrationSlider = require( 'ACID_BASE_SOLUTIONS/mysolution/view/ConcentrationSlider' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const HSeparator = require( 'SUN/HSeparator' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
+  const StrengthSlider = require( 'ACID_BASE_SOLUTIONS/mysolution/view/StrengthSlider' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const Util = require( 'DOT/Util' );
 
   // strings
-  var acidString = require( 'string!ACID_BASE_SOLUTIONS/acid' );
-  var baseString = require( 'string!ACID_BASE_SOLUTIONS/base' );
-  var initialConcentrationString = require( 'string!ACID_BASE_SOLUTIONS/initialConcentration' );
-  var strengthString = require( 'string!ACID_BASE_SOLUTIONS/strength' );
-  var strongString = require( 'string!ACID_BASE_SOLUTIONS/strong' );
-  var weakString = require( 'string!ACID_BASE_SOLUTIONS/weak' );
+  const acidString = require( 'string!ACID_BASE_SOLUTIONS/acid' );
+  const baseString = require( 'string!ACID_BASE_SOLUTIONS/base' );
+  const initialConcentrationString = require( 'string!ACID_BASE_SOLUTIONS/initialConcentration' );
+  const strengthString = require( 'string!ACID_BASE_SOLUTIONS/strength' );
+  const strongString = require( 'string!ACID_BASE_SOLUTIONS/strong' );
+  const weakString = require( 'string!ACID_BASE_SOLUTIONS/weak' );
 
   // constants
   var CONCENTRATION_DECIMALS = 3;

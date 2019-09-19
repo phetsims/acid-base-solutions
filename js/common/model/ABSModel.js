@@ -5,20 +5,20 @@
  *
  * @author Andrey Zelenkov (Mlearner)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  var Beaker = require( 'ACID_BASE_SOLUTIONS/common/model/Beaker' );
-  var ConcentrationGraph = require( 'ACID_BASE_SOLUTIONS/common/model/ConcentrationGraph' );
-  var ConductivityTester = require( 'ACID_BASE_SOLUTIONS/common/model/ConductivityTester' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Magnifier = require( 'ACID_BASE_SOLUTIONS/common/model/Magnifier' );
-  var PHMeter = require( 'ACID_BASE_SOLUTIONS/common/model/PHMeter' );
-  var PHPaper = require( 'ACID_BASE_SOLUTIONS/common/model/PHPaper' );
-  var Property = require( 'AXON/Property' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
+  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+  const Beaker = require( 'ACID_BASE_SOLUTIONS/common/model/Beaker' );
+  const ConcentrationGraph = require( 'ACID_BASE_SOLUTIONS/common/model/ConcentrationGraph' );
+  const ConductivityTester = require( 'ACID_BASE_SOLUTIONS/common/model/ConductivityTester' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Magnifier = require( 'ACID_BASE_SOLUTIONS/common/model/Magnifier' );
+  const PHMeter = require( 'ACID_BASE_SOLUTIONS/common/model/PHMeter' );
+  const PHPaper = require( 'ACID_BASE_SOLUTIONS/common/model/PHPaper' );
+  const Property = require( 'AXON/Property' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
 
   /**
    * @param {AqueousSolution[]} solutions

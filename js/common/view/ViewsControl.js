@@ -6,33 +6,33 @@
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  var BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
-  var Checkbox = require( 'SUN/Checkbox' );
-  var ConcentrationGraphNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphNode' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
-  var ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );
+  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+  const AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  const BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
+  const Checkbox = require( 'SUN/Checkbox' );
+  const ConcentrationGraphNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphNode' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const HStrut = require( 'SCENERY/nodes/HStrut' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
+  const ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );
 
   // strings
-  var graphString = require( 'string!ACID_BASE_SOLUTIONS/graph' );
-  var hideViewsString = require( 'string!ACID_BASE_SOLUTIONS/hideViews' );
-  var moleculesString = require( 'string!ACID_BASE_SOLUTIONS/molecules' );
-  var solventString = require( 'string!ACID_BASE_SOLUTIONS/solvent' );
+  const graphString = require( 'string!ACID_BASE_SOLUTIONS/graph' );
+  const hideViewsString = require( 'string!ACID_BASE_SOLUTIONS/hideViews' );
+  const moleculesString = require( 'string!ACID_BASE_SOLUTIONS/molecules' );
+  const solventString = require( 'string!ACID_BASE_SOLUTIONS/solvent' );
 
   // images
-  var magnifierImage = require( 'image!ACID_BASE_SOLUTIONS/magnifier-icon.png' );
+  const magnifierImage = require( 'image!ACID_BASE_SOLUTIONS/magnifier-icon.png' );
 
   // constants
   var TEXT_ICON_X_SPACING = 10;

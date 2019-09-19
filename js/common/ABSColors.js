@@ -5,13 +5,13 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  var Color = require( 'SCENERY/util/Color' );
-  var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
+  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+  const Color = require( 'SCENERY/util/Color' );
+  const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
 
   // constants
   var GRAY_MOLECULE = 'rgb(120,120,120)';

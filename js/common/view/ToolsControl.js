@@ -6,20 +6,20 @@
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var PHMeterNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHMeterNode' );
-  var PHPaperNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHPaperNode' );
-  var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
-  var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
+  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const PHMeterNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHMeterNode' );
+  const PHPaperNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHPaperNode' );
+  const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
+  const ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
 
   // images
-  var lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-icon.png' );
+  const lightBulbImage = require( 'image!ACID_BASE_SOLUTIONS/light-bulb-icon.png' );
 
   /**
    * @param {Property.<ToolMode>} toolModeProperty

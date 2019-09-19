@@ -6,18 +6,18 @@
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
-  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  var Circle = require( 'SCENERY/nodes/Circle' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var RadialGradient = require( 'SCENERY/util/RadialGradient' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  const ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
+  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+  const Circle = require( 'SCENERY/nodes/Circle' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const RadialGradient = require( 'SCENERY/util/RadialGradient' );
+  const Text = require( 'SCENERY/nodes/Text' );
 
   // constants
   var MOLECULE_COLORS = ABSColors.MOLECULES;

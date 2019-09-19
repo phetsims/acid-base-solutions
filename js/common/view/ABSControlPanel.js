@@ -5,26 +5,26 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
-  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Panel = require( 'SUN/Panel' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var ToolsControl = require( 'ACID_BASE_SOLUTIONS/common/view/ToolsControl' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
-  var ViewsControl = require( 'ACID_BASE_SOLUTIONS/common/view/ViewsControl' );
+  const ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
+  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Panel = require( 'SUN/Panel' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const ToolsControl = require( 'ACID_BASE_SOLUTIONS/common/view/ToolsControl' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
+  const ViewsControl = require( 'ACID_BASE_SOLUTIONS/common/view/ViewsControl' );
 
   // strings
-  var solutionString = require( 'string!ACID_BASE_SOLUTIONS/solution' );
-  var toolsString = require( 'string!ACID_BASE_SOLUTIONS/tools' );
-  var viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' );
+  const solutionString = require( 'string!ACID_BASE_SOLUTIONS/solution' );
+  const toolsString = require( 'string!ACID_BASE_SOLUTIONS/tools' );
+  const viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' );
 
   // constants
   var TITLE_Y_SPACING = 1;

@@ -7,15 +7,15 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
-  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  var AqueousSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/AqueousSolution' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
+  const ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
+  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+  const AqueousSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/AqueousSolution' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
 
   /**
    * @constructor

@@ -7,24 +7,24 @@
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var HSlider = require( 'SUN/HSlider' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
-  var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var Util = require( 'DOT/Util' );
+  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const HSlider = require( 'SUN/HSlider' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const RangeWithValue = require( 'DOT/RangeWithValue' );
+  const SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const Util = require( 'DOT/Util' );
 
   // strings
-  var strongerString = require( 'string!ACID_BASE_SOLUTIONS/stronger' );
-  var weakerString = require( 'string!ACID_BASE_SOLUTIONS/weaker' );
+  const strongerString = require( 'string!ACID_BASE_SOLUTIONS/stronger' );
+  const weakerString = require( 'string!ACID_BASE_SOLUTIONS/weaker' );
 
   // constants
   var TICK_LABEL_OPTIONS = {

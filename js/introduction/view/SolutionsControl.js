@@ -6,29 +6,29 @@
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var RichText = require( 'SCENERY/nodes/RichText' );
-  var SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
-  var VStrut = require( 'SCENERY/nodes/VStrut' );
+  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+  const AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const HStrut = require( 'SCENERY/nodes/HStrut' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const RichText = require( 'SCENERY/nodes/RichText' );
+  const SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
+  const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
-  var strongAcidString = require( 'string!ACID_BASE_SOLUTIONS/strongAcid' );
-  var strongBaseString = require( 'string!ACID_BASE_SOLUTIONS/strongBase' );
-  var waterString = require( 'string!ACID_BASE_SOLUTIONS/water' );
-  var weakAcidString = require( 'string!ACID_BASE_SOLUTIONS/weakAcid' );
-  var weakBaseString = require( 'string!ACID_BASE_SOLUTIONS/weakBase' );
+  const strongAcidString = require( 'string!ACID_BASE_SOLUTIONS/strongAcid' );
+  const strongBaseString = require( 'string!ACID_BASE_SOLUTIONS/strongBase' );
+  const waterString = require( 'string!ACID_BASE_SOLUTIONS/water' );
+  const weakAcidString = require( 'string!ACID_BASE_SOLUTIONS/weakAcid' );
+  const weakBaseString = require( 'string!ACID_BASE_SOLUTIONS/weakBase' );
 
   // constants
   var RADIO_BUTTON_OPTIONS = { radius: 7 };

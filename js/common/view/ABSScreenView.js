@@ -6,27 +6,27 @@
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ABSConductivityTesterNode = require( 'ACID_BASE_SOLUTIONS/common/view/ABSConductivityTesterNode' );
-  var ABSControlPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ABSControlPanel' );
-  var ABSViewProperties = require( 'ACID_BASE_SOLUTIONS/common/view/ABSViewProperties' );
-  var acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  var BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
-  var Bounds2 = require( 'DOT/Bounds2' );
-  var ConcentrationGraphNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphNode' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var MagnifierNode = require( 'ACID_BASE_SOLUTIONS/common/view/MagnifierNode' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var PHColorKeyNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHColorKeyNode' );
-  var PHMeterNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHMeterNode' );
-  var PHPaperNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHPaperNode' );
-  var ReactionEquationNode = require( 'ACID_BASE_SOLUTIONS/common/view/ReactionEquationNode' );
-  var ScreenView = require( 'JOIST/ScreenView' );
-  var ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
-  var ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );
+  const ABSConductivityTesterNode = require( 'ACID_BASE_SOLUTIONS/common/view/ABSConductivityTesterNode' );
+  const ABSControlPanel = require( 'ACID_BASE_SOLUTIONS/common/view/ABSControlPanel' );
+  const ABSViewProperties = require( 'ACID_BASE_SOLUTIONS/common/view/ABSViewProperties' );
+  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+  const BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
+  const Bounds2 = require( 'DOT/Bounds2' );
+  const ConcentrationGraphNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphNode' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const MagnifierNode = require( 'ACID_BASE_SOLUTIONS/common/view/MagnifierNode' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const PHColorKeyNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHColorKeyNode' );
+  const PHMeterNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHMeterNode' );
+  const PHPaperNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHPaperNode' );
+  const ReactionEquationNode = require( 'ACID_BASE_SOLUTIONS/common/view/ReactionEquationNode' );
+  const ScreenView = require( 'JOIST/ScreenView' );
+  const ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
+  const ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );
 
   /**
    * @param {ABSModel} model
