@@ -25,7 +25,7 @@ define( require => {
    */
   function ConcentrationGraphNode( graph ) {
 
-    var self = this;
+    const self = this;
 
     Node.call( this );
 
@@ -36,21 +36,21 @@ define( require => {
     this.addChild( new ConcentrationGraphBackgroundNode( graph.width, graph.height ) );
 
     // find maximum number of bars for all solutions
-    var maxBars = 0;
-    for ( var key in graph.solutions ) {
-      var solution = graph.solutions[ key ];
+    let maxBars = 0;
+    for ( const key in graph.solutions ) {
+      const solution = graph.solutions[ key ];
       maxBars = Math.max( maxBars, solution.molecules.length );
     }
 
     // create enough bars for all solutions
-    for ( var i = 0; i < maxBars; i++ ) {
+    for ( let i = 0; i < maxBars; i++ ) {
       this.addChild( this.bars[ i ] = new ConcentrationGraphBarNode( graph.height - 10 ) );
     }
 
     this.translation = graph.location;
 
     // Observe the strength and concentration properties for whichever solution is selected.
-    var updateValuesBound = this.updateValues.bind( this );
+    const updateValuesBound = this.updateValues.bind( this );
     graph.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
 
       // show the correct number of bars
@@ -77,7 +77,7 @@ define( require => {
      * Update when this node becomes visible.
      */
     setVisible: function( visible ) {
-      var wasVisible = this.visible;
+      const wasVisible = this.visible;
       Node.prototype.setVisible.call( this, visible );
       if ( !wasVisible && visible ) {
         this.updateBars();
@@ -95,10 +95,10 @@ define( require => {
 
       if ( this.visible ) {
 
-        var solutionType = this.graph.solutionTypeProperty.get();
-        var solution = this.graph.solutions[ solutionType ];
-        var molecules = solution.molecules;
-        var numberOfMolecules = molecules.length;
+        const solutionType = this.graph.solutionTypeProperty.get();
+        const solution = this.graph.solutions[ solutionType ];
+        const molecules = solution.molecules;
+        const numberOfMolecules = molecules.length;
 
         // show one bar for each molecule in the current solution
         for ( var i = 0, bar; i < this.bars.length; i++ ) {
@@ -126,11 +126,11 @@ define( require => {
 
       if ( this.visible ) {
 
-        var solutionType = this.graph.solutionTypeProperty.get();
-        var solution = this.graph.solutions[ solutionType ];
-        var molecules = solution.molecules;
+        const solutionType = this.graph.solutionTypeProperty.get();
+        const solution = this.graph.solutions[ solutionType ];
+        const molecules = solution.molecules;
 
-        for ( var i = 0; i < molecules.length; i++ ) {
+        for ( let i = 0; i < molecules.length; i++ ) {
           this.bars[ i ].setValue( solution[ molecules[ i ].concentrationFunctionName ]() );
         }
       }

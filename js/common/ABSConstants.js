@@ -14,9 +14,9 @@ define( require => {
   const RangeWithValue = require( 'DOT/RangeWithValue' );
 
   // constants
-  var WEAK_STRENGTH_MAX = 1E2;
+  const WEAK_STRENGTH_MAX = 1E2;
 
-  var ABSConstants = {
+  const ABSConstants = {
     CONCENTRATION_RANGE: new RangeWithValue( 1E-3, 1, 1E-2 ),
     PH_RANGE: new Range( 0, 14 ),
     WATER_EQUILIBRIUM_CONSTANT: 1E-14,

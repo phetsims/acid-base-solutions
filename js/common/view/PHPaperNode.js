@@ -23,8 +23,8 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
-  var PAPER_STROKE = 'rgb(100, 100, 100)';
+  const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
+  const PAPER_STROKE = 'rgb(100, 100, 100)';
 
   /**
    * @param {PHPaper} pHPaper
@@ -32,15 +32,15 @@ define( require => {
    */
   function PHPaperNode( pHPaper ) {
 
-    var self = this;
+    const self = this;
     Node.call( this, { cursor: 'pointer' } );
 
     // blank paper
-    var paperNode = new Rectangle( 0, 0, pHPaper.paperSize.width, pHPaper.paperSize.height,
+    const paperNode = new Rectangle( 0, 0, pHPaper.paperSize.width, pHPaper.paperSize.height,
       { fill: ABSColors.PH_PAPER, stroke: PAPER_STROKE, lineWidth: 0.5 } );
 
     // portion of the paper that changes color
-    var indicatorNode = new Rectangle( 0, 0, pHPaper.paperSize.width, 0, { stroke: PAPER_STROKE, lineWidth: 0.5 } );
+    const indicatorNode = new Rectangle( 0, 0, pHPaper.paperSize.width, 0, { stroke: PAPER_STROKE, lineWidth: 0.5 } );
     indicatorNode.rotate( Math.PI ); // so that indicator rectangle expands upward
 
     // rendering order
@@ -60,7 +60,7 @@ define( require => {
     this.touchArea = this.localBounds.dilatedXY( 10, 10 );
 
     // @private Constrained dragging
-    var clickOffset = null;
+    let clickOffset = null;
     this.dragHandler = new SimpleDragHandler( {
 
       start: function( e ) {
@@ -68,7 +68,7 @@ define( require => {
       },
 
       drag: function( e ) {
-        var v = self.globalToParentPoint( e.pointer.point ).subtract( clickOffset );
+        const v = self.globalToParentPoint( e.pointer.point ).subtract( clickOffset );
         pHPaper.locationProperty.set( new Vector2(
           Util.clamp( v.x, pHPaper.dragBounds.minX, pHPaper.dragBounds.maxX ),
           Util.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) ) );
@@ -105,15 +105,15 @@ define( require => {
   // Creates a {Color} color for a given {number} pH.
   var pHToColor = function( pH ) {
     assert && assert( pH >= 0 && pH <= ABSColors.PH.length );
-    var color;
+    let color;
     if ( Util.isInteger( pH ) ) {
       // pH value is an integer, look up color
       color = ABSColors.PH[ pH ];
     }
     else {
       // pH value is not an integer, interpolate between 2 closest colors
-      var lowerPH = Math.floor( pH );
-      var upperPH = lowerPH + 1;
+      const lowerPH = Math.floor( pH );
+      const upperPH = lowerPH + 1;
       color = Color.interpolateRGBA( ABSColors.PH[ lowerPH ], ABSColors.PH[ upperPH ], ( pH - lowerPH ) );
     }
     return color;
@@ -125,16 +125,16 @@ define( require => {
     step: function( dt ) {
       if ( !this.dragHandler.dragging ) {
 
-        var location = this.pHPaper.locationProperty.value;
-        var minY = this.pHPaper.beaker.top + ( 0.6 * this.pHPaper.paperSize.height );
+        const location = this.pHPaper.locationProperty.value;
+        const minY = this.pHPaper.beaker.top + ( 0.6 * this.pHPaper.paperSize.height );
 
         // if the paper is fully submerged in the solution ...
         if ( ( this.animating && location.y > minY ) || ( this.pHPaper.top > this.pHPaper.beaker.top ) ) {
 
           // float to the top of the beaker, with part of the paper above the surface
           this.animating = true;
-          var dy = dt * 250; // move at a constant speed of 250 pixels per second
-          var y = Math.max( minY, location.y - dy );
+          const dy = dt * 250; // move at a constant speed of 250 pixels per second
+          const y = Math.max( minY, location.y - dy );
           this.pHPaper.locationProperty.value = new Vector2( location.x, y );
         }
       }
@@ -150,7 +150,7 @@ define( require => {
      * @override
      */
     setVisible: function( visible ) {
-      var wasVisible = this.visible;
+      const wasVisible = this.visible;
       Node.prototype.setVisible.call( this, visible );
       if ( !wasVisible && visible ) {
         this.updateColor();

@@ -26,7 +26,7 @@ define( require => {
 
     Node.call( this );
 
-    var equations = {};
+    const equations = {};
     equations[ SolutionType.WATER ] = ReactionEquationFactory.createWaterEquation();
     equations[ SolutionType.STRONG_ACID ] = ReactionEquationFactory.createStrongAcidEquation();
     equations[ SolutionType.WEAK_ACID ] = ReactionEquationFactory.createWeakAcidEquation();
@@ -34,10 +34,10 @@ define( require => {
     equations[ SolutionType.WEAK_BASE ] = ReactionEquationFactory.createWeakBaseEquation();
 
     // find max width of equations
-    var maxWidth = getMaxWidth( equations );
+    const maxWidth = getMaxWidth( equations );
 
     // add equations with central alignment
-    for ( var equation in equations ) {
+    for ( const equation in equations ) {
       equations[ equation ].setX( (maxWidth - equations[ equation ].getWidth()) / 2 );
       equations[ equation ].setVisible( false );
       this.addChild( equations[ equation ] );
@@ -61,8 +61,8 @@ define( require => {
   acidBaseSolutions.register( 'ReactionEquationNode', ReactionEquationNode );
 
   var getMaxWidth = function( equations ) {
-    var maxWidth = 0;
-    for ( var equation in equations ) {
+    let maxWidth = 0;
+    for ( const equation in equations ) {
       maxWidth = Math.max( maxWidth, equations[ equation ].getWidth() );
     }
     return maxWidth;

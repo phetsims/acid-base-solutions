@@ -23,7 +23,7 @@ define( require => {
   const concentrationGraphYAxisString = require( 'string!ACID_BASE_SOLUTIONS/concentrationGraph.yAxis' );
 
   // constants
-  var TICK_FONT = new PhetFont( 11 );
+  const TICK_FONT = new PhetFont( 11 );
 
   /**
    * @param {number} width
@@ -38,9 +38,9 @@ define( require => {
     this.addChild( new Rectangle( 0, 0, width, height, { fill: 'white', stroke: 'black', lineWidth: 0.5 } ) );
 
     // tick marks and horizontal dashed lines. This reuses one tick and one dashed line.
-    var dh = ( height / 10 ) - 1;
-    var tickNode = new Line( -2, 0, 2, 0, { stroke: 'black', lineWidth: 0.5 } );
-    var dashedLineNode = new Line( 0, 0, width, 0, { stroke: 'gray', lineWidth: 0.5, lineDash: [ 2, 1 ] } );
+    const dh = ( height / 10 ) - 1;
+    const tickNode = new Line( -2, 0, 2, 0, { stroke: 'black', lineWidth: 0.5 } );
+    const dashedLineNode = new Line( 0, 0, width, 0, { stroke: 'gray', lineWidth: 0.5, lineDash: [ 2, 1 ] } );
     for ( var i = 0, y; i < 11; i++ ) {
 
       y = height - ( dh * i );
@@ -53,7 +53,7 @@ define( require => {
     }
 
     // y-axis label
-    var yLabel = new Text( concentrationGraphYAxisString, { font: new PhetFont( 13 ), maxWidth: height } );
+    const yLabel = new Text( concentrationGraphYAxisString, { font: new PhetFont( 13 ), maxWidth: height } );
     yLabel.rotate( -Math.PI / 2 );
     yLabel.centerY = height / 2;
     yLabel.centerX = -50;

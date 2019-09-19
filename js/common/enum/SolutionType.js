@@ -11,7 +11,7 @@ define( require => {
   // modules
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
 
-  var SolutionType = Object.freeze( {
+  const SolutionType = Object.freeze( {
     WATER: 'water',
     STRONG_ACID: 'strongAcid',
     WEAK_ACID: 'weakAcid',

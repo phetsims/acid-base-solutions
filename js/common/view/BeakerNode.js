@@ -26,12 +26,12 @@ define( require => {
   const pattern0Value1UnitsString = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1units' );
 
   // constants
-  var MAJOR_TICK_LENGTH = 25;
-  var MINOR_TICK_LENGTH = 10;
-  var MINOR_TICKS_PER_MAJOR_TICK = 5;
-  var MINOR_TICK_SPACING = 0.1; // L
-  var RIM_OFFSET = 10;
-  var TICK_LABEL_X_SPACING = 5;
+  const MAJOR_TICK_LENGTH = 25;
+  const MINOR_TICK_LENGTH = 10;
+  const MINOR_TICKS_PER_MAJOR_TICK = 5;
+  const MINOR_TICK_SPACING = 0.1; // L
+  const RIM_OFFSET = 10;
+  const TICK_LABEL_X_SPACING = 5;
 
   /**
    * @param {Beaker} beaker
@@ -41,11 +41,11 @@ define( require => {
 
     Node.call( this, { pickable: false } );
 
-    var BEAKER_WIDTH = beaker.size.width;
-    var BEAKER_HEIGHT = beaker.size.height;
+    const BEAKER_WIDTH = beaker.size.width;
+    const BEAKER_HEIGHT = beaker.size.height;
 
     // water, starting from upper left
-    var waterShape = new Shape().lineTo( -BEAKER_WIDTH / 2, -BEAKER_HEIGHT )
+    const waterShape = new Shape().lineTo( -BEAKER_WIDTH / 2, -BEAKER_HEIGHT )
       .lineTo( -BEAKER_WIDTH / 2, 0 )
       .lineTo( BEAKER_WIDTH / 2, 0 )
       .lineTo( BEAKER_WIDTH / 2, -BEAKER_HEIGHT );
@@ -54,7 +54,7 @@ define( require => {
     } ) );
 
     // beaker, starting from upper left
-    var beakerShape = new Shape()
+    const beakerShape = new Shape()
       .moveTo( -BEAKER_WIDTH / 2 - RIM_OFFSET, -BEAKER_HEIGHT - RIM_OFFSET )
       .lineTo( -BEAKER_WIDTH / 2, -BEAKER_HEIGHT )
       .lineTo( -BEAKER_WIDTH / 2, 0 )
@@ -69,18 +69,18 @@ define( require => {
     } ) );
 
     // horizontal tick marks, right edge, from bottom up
-    var ticksParent = new Node();
+    const ticksParent = new Node();
     this.addChild( ticksParent );
 
     // tick marks
-    var NUMBER_OF_TICKS = Util.roundSymmetric( 1 / MINOR_TICK_SPACING );
-    var deltaY = BEAKER_HEIGHT / NUMBER_OF_TICKS;
-    var isMajorTick;
-    var y;
-    var leftX;
-    var rightX;
-    var tickPath;
-    for ( var i = 1; i <= NUMBER_OF_TICKS; i++ ) {
+    const NUMBER_OF_TICKS = Util.roundSymmetric( 1 / MINOR_TICK_SPACING );
+    const deltaY = BEAKER_HEIGHT / NUMBER_OF_TICKS;
+    let isMajorTick;
+    let y;
+    let leftX;
+    let rightX;
+    let tickPath;
+    for ( let i = 1; i <= NUMBER_OF_TICKS; i++ ) {
 
       isMajorTick = ( i % MINOR_TICKS_PER_MAJOR_TICK === 0 );
       y = -( i * deltaY );
@@ -97,7 +97,7 @@ define( require => {
     }
 
     // major tick label
-    var label = StringUtils.format( pattern0Value1UnitsString, '1', litersString );
+    const label = StringUtils.format( pattern0Value1UnitsString, '1', litersString );
     ticksParent.addChild( new Text( label, {
       font: new PhetFont( 18 ),
       fill: 'black',
@@ -115,7 +115,7 @@ define( require => {
 
     // @public @static
     createIcon: function( width, height ) {
-      var lipOffset = 0.1 * width;
+      const lipOffset = 0.1 * width;
       return new Node( {
         children: [
           // water

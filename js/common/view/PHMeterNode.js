@@ -30,13 +30,13 @@ define( require => {
   const pHString = require( 'string!ACID_BASE_SOLUTIONS/pH' );
 
   // constants
-  var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
-  var DECIMAL_PLACES = 2;
-  var FONT = new PhetFont( { size: 15, weight: 'bold' } );
-  var X_MARGIN = 12;
-  var Y_MARGIN = 8;
-  var BACKGROUND_FILL = 'rgb(225,225,225)';
-  var BACKGROUND_STROKE = 'rgb(64,64,64)';
+  const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
+  const DECIMAL_PLACES = 2;
+  const FONT = new PhetFont( { size: 15, weight: 'bold' } );
+  const X_MARGIN = 12;
+  const Y_MARGIN = 8;
+  const BACKGROUND_FILL = 'rgb(225,225,225)';
+  const BACKGROUND_STROKE = 'rgb(64,64,64)';
 
   /**
    * @param {PHMeter} pHMeter
@@ -44,14 +44,14 @@ define( require => {
    */
   function PHMeterNode( pHMeter ) {
 
-    var self = this;
+    const self = this;
     Node.call( this, { cursor: 'pointer' } );
 
     // probe
-    var probeNode = new ProbeNode( 5, 40, 14, 36 );
+    const probeNode = new ProbeNode( 5, 40, 14, 36 );
 
     // text, initialized with widest value for layout
-    var textNode = new Text( formatText( ABSConstants.PH_RANGE.max ), {
+    const textNode = new Text( formatText( ABSConstants.PH_RANGE.max ), {
       font: FONT,
       centerX: 34,
       centerY: 0,
@@ -59,7 +59,7 @@ define( require => {
     } );
 
     // background sized to fit text
-    var backgroundNode = new Rectangle( 0, 0, textNode.width + ( 2 * X_MARGIN ), textNode.height + ( 2 * Y_MARGIN ), 5, 5,
+    const backgroundNode = new Rectangle( 0, 0, textNode.width + ( 2 * X_MARGIN ), textNode.height + ( 2 * Y_MARGIN ), 5, 5,
       { fill: BACKGROUND_FILL, stroke: BACKGROUND_STROKE, lineWidth: 1.5 } );
 
     // layout, origin at probe tip
@@ -78,7 +78,7 @@ define( require => {
     }
 
     // Constrained dragging
-    var clickYOffset = 0;
+    let clickYOffset = 0;
     this.addInputListener( new SimpleDragHandler( {
 
       start: function( e ) {
@@ -86,7 +86,7 @@ define( require => {
       },
 
       drag: function( e ) {
-        var y = self.globalToParentPoint( e.pointer.point ).y - clickYOffset;
+        const y = self.globalToParentPoint( e.pointer.point ).y - clickYOffset;
         pHMeter.locationProperty.set( new Vector2( pHMeter.locationProperty.get().x, Util.clamp( y, pHMeter.dragYRange.min, pHMeter.dragYRange.max ) ) );
       }
     } ) );
@@ -127,15 +127,15 @@ define( require => {
    */
   function ProbeNode( shaftWidth, shaftHeight, tipWidth, tipHeight ) {
 
-    var overlap = 1; // overlap, to hide seam
+    const overlap = 1; // overlap, to hide seam
 
     // probe shaft
-    var shaftNode = new Rectangle( 0, 0, shaftWidth, shaftHeight + overlap,
+    const shaftNode = new Rectangle( 0, 0, shaftWidth, shaftHeight + overlap,
       { fill: 'rgb(192,192,192)', stroke: 'rgb(160,160,160)', lineWidth: 0.5 } );
 
     // probe tip: clockwise from tip of probe, origin at upper-left of shape
-    var cornerRadius = tipHeight / 9;
-    var tipNode = new Path( new Shape()
+    const cornerRadius = tipHeight / 9;
+    const tipNode = new Path( new Shape()
         .moveTo( tipWidth / 2, tipHeight )
         .lineTo( 0, 0.6 * tipHeight )
         .lineTo( 0, cornerRadius )
@@ -162,7 +162,7 @@ define( require => {
      * @override
      */
     setVisible: function( visible ) {
-      var wasVisible = this.visible;
+      const wasVisible = this.visible;
       Node.prototype.setVisible.call( this, visible );
       if ( !wasVisible && visible ) {
         this.updateText();
@@ -177,8 +177,8 @@ define( require => {
      * @returns {Node}
      */
     createIcon: function() {
-      var probeNode = new ProbeNode( 2, 10, 5, 12 );
-      var backgroundNode = new Rectangle( 0, 0, 30, 10, 2, 2, {
+      const probeNode = new ProbeNode( 2, 10, 5, 12 );
+      const backgroundNode = new Rectangle( 0, 0, 30, 10, 2, 2, {
         fill: BACKGROUND_FILL,
         stroke: BACKGROUND_STROKE,
         lineWidth: 0.5,

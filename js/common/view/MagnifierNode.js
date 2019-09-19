@@ -27,13 +27,13 @@ define( require => {
   const solventImage = require( 'image!ACID_BASE_SOLUTIONS/solvent.png' );
 
   // constants
-  var SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
-  var CLIPPING_ENABLED = true; // set to false to debug positioning of molecules
-  var LENS_LINE_WIDTH = 8;
-  var BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules
-  var BASE_DOTS = 2;
-  var MAX_MOLECULES = 200;
-  var IMAGE_SCALE = 2; // stored images are scaled this much to improve quality
+  const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
+  const CLIPPING_ENABLED = true; // set to false to debug positioning of molecules
+  const LENS_LINE_WIDTH = 8;
+  const BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules
+  const BASE_DOTS = 2;
+  const MAX_MOLECULES = 200;
+  const IMAGE_SCALE = 2; // stored images are scaled this much to improve quality
 
   /**
    * @param {Magnifier} magnifier
@@ -41,16 +41,16 @@ define( require => {
    */
   function MagnifierNode( magnifier ) {
 
-    var self = this;
+    const self = this;
     Node.call( this );
 
     // lens
-    var RADIUS = magnifier.radius;
-    var lensShape = Shape.circle( 0, 0, RADIUS );
-    var lensNode = new Path( lensShape, { stroke: 'black', lineWidth: LENS_LINE_WIDTH } );
+    const RADIUS = magnifier.radius;
+    const lensShape = Shape.circle( 0, 0, RADIUS );
+    const lensNode = new Path( lensShape, { stroke: 'black', lineWidth: LENS_LINE_WIDTH } );
 
     // handle
-    var handleNode = new Rectangle( RADIUS + 2, -RADIUS / 7, RADIUS * 0.9, RADIUS / 4, 5, 5, {
+    const handleNode = new Rectangle( RADIUS + 2, -RADIUS / 7, RADIUS * 0.9, RADIUS / 4, 5, 5, {
       fill: 'rgb(85,55,33)',
       stroke: 'black',
       lineWidth: 1
@@ -58,7 +58,7 @@ define( require => {
     handleNode.rotate( Math.PI / 6 );
 
     // opaque background, so we don't see things like pH paper in magnifier
-    var waterNode = new Circle( RADIUS, { fill: 'rgb(210,231,235)' } );
+    const waterNode = new Circle( RADIUS, { fill: 'rgb(210,231,235)' } );
 
     // @private solvent (H2O)
     this.solventNode = new Image( solventImage, {
@@ -71,7 +71,7 @@ define( require => {
     this.moleculesNode = new MoleculesNode( magnifier, new Bounds2( -RADIUS, -RADIUS, RADIUS, RADIUS ) );
 
     // stuff that's visible through (and therefore clipped to) the lens
-    var viewportNode = new Node( { children: [ this.solventNode, this.moleculesNode ] } );
+    const viewportNode = new Node( { children: [ this.solventNode, this.moleculesNode ] } );
     if ( CLIPPING_ENABLED ) {
       viewportNode.clipArea = lensShape;
     }
@@ -89,7 +89,7 @@ define( require => {
     this.translation = magnifier.location;
 
     // Observe the strength and concentration properties for whichever solution is selected.
-    var updateMoleculesBound = this.updateMolecules.bind( this );
+    const updateMoleculesBound = this.updateMolecules.bind( this );
     magnifier.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
 
       self.moleculesNode.reset();
@@ -116,15 +116,15 @@ define( require => {
    */
   function MoleculesNode( magnifier, lensBounds ) {
 
-    var self = this;
+    const self = this;
     CanvasNode.call( this, { canvasBounds: lensBounds } );
 
     this.magnifier = magnifier; // @private
     this.positionRadius = IMAGE_SCALE * ( this.magnifier.radius - ( LENS_LINE_WIDTH / 2 ) );  // @private radius for computing random positions
 
     // Generate images, this happens asynchronously.
-    var createImage = function( moleculeKey ) {
-      var moleculeNode = MoleculeFactory[ moleculeKey ]();
+    const createImage = function( moleculeKey ) {
+      const moleculeNode = MoleculeFactory[ moleculeKey ]();
       // Scale up to increase quality. Remember to scale down when drawing to canvas.
       moleculeNode.setScaleMagnitude( IMAGE_SCALE, IMAGE_SCALE );
       moleculeNode.toCanvas( function( canvas, x, y, width, height ) {
@@ -133,7 +133,7 @@ define( require => {
     };
 
     // use typed array if available, it will use less memory and be faster
-    var ArrayConstructor = window.Float32Array || window.Array;
+    const ArrayConstructor = window.Float32Array || window.Array;
 
     /*
      * Iterate over all solutions and their molecules.
@@ -152,8 +152,8 @@ define( require => {
      * We skip water because it's displayed elsewhere as a static image file.
      */
     this.moleculesData = {};
-    for ( var solutionType in magnifier.solutions ) {
-      var solution = magnifier.solutions[ solutionType ];
+    for ( const solutionType in magnifier.solutions ) {
+      const solution = magnifier.solutions[ solutionType ];
       solution.molecules.forEach( function( molecule ) {
         if ( molecule.key !== 'H2O' && !self.moleculesData.hasOwnProperty( molecule.key ) ) {
           self.moleculesData[ molecule.key ] = {
@@ -173,7 +173,7 @@ define( require => {
 
     // @public Resets all molecule counts to zero.
     reset: function() {
-      for ( var key in this.moleculesData ) {
+      for ( const key in this.moleculesData ) {
         this.moleculesData[ key ].numberOfMolecules = 0;
       }
     },
@@ -181,27 +181,27 @@ define( require => {
     // @public Updates the molecules data structure and triggers a paintCanvas.
     update: function() {
 
-      var self = this;
-      var solutionType = this.magnifier.solutionTypeProperty.get();
-      var solution = this.magnifier.solutions[ solutionType ];
+      const self = this;
+      const solutionType = this.magnifier.solutionTypeProperty.get();
+      const solution = this.magnifier.solutions[ solutionType ];
 
       // Update the data structure for each molecule that is in the current solution.
       solution.molecules.forEach( function( molecule ) {
-        var key = molecule.key;
-        var moleculesData = self.moleculesData[ key ];
+        const key = molecule.key;
+        const moleculesData = self.moleculesData[ key ];
         if ( key !== 'H2O' ) { // skip water because it's displayed elsewhere as a static image file
 
           // map concentration to number of molecules
-          var concentration = solution[ molecule.concentrationFunctionName ]();
-          var numberOfMolecules = getNumberOfMolecules( concentration );
+          const concentration = solution[ molecule.concentrationFunctionName ]();
+          const numberOfMolecules = getNumberOfMolecules( concentration );
 
           // add additional molecules as needed
-          var currentNumberOfMolecules = moleculesData.numberOfMolecules;
-          for ( var i = currentNumberOfMolecules; i < numberOfMolecules; i++ ) {
+          const currentNumberOfMolecules = moleculesData.numberOfMolecules;
+          for ( let i = currentNumberOfMolecules; i < numberOfMolecules; i++ ) {
 
             // random distance from the center of the lens
-            var distance = self.positionRadius * Math.sqrt( phet.joist.random.nextDouble() );
-            var angle = phet.joist.random.nextDouble() * 2 * Math.PI;
+            const distance = self.positionRadius * Math.sqrt( phet.joist.random.nextDouble() );
+            const angle = phet.joist.random.nextDouble() * 2 * Math.PI;
             moleculesData.xCoordinates[ i ] = distance * Math.cos( angle );
             moleculesData.yCoordinates[ i ] = distance * Math.sin( angle );
           }
@@ -222,9 +222,9 @@ define( require => {
      */
     paintCanvas: function( context ) {
 
-      var self = this;
-      var solutionType = this.magnifier.solutionTypeProperty.get();
-      var solution = this.magnifier.solutions[ solutionType ];
+      const self = this;
+      const solutionType = this.magnifier.solutionTypeProperty.get();
+      const solution = this.magnifier.solutions[ solutionType ];
 
       /*
        * Images are stored at a higher resolution to improve their quality.
@@ -234,14 +234,14 @@ define( require => {
 
       // Draw each type of molecule that is in the current solution.
       solution.molecules.forEach( function( molecule ) {
-        var key = molecule.key;
+        const key = molecule.key;
         if ( key !== 'H2O' ) {
-          var moleculeData = self.moleculesData[ key ];
+          const moleculeData = self.moleculesData[ key ];
           // images are generated asynchronously, so test in case they aren't available when this is first called
           if ( moleculeData.canvas ) {
-            for ( var i = 0; i < moleculeData.numberOfMolecules; i++ ) {
-              var x = moleculeData.xCoordinates[ i ] - moleculeData.canvas.width / 2;
-              var y = moleculeData.yCoordinates[ i ] - moleculeData.canvas.height / 2;
+            for ( let i = 0; i < moleculeData.numberOfMolecules; i++ ) {
+              const x = moleculeData.xCoordinates[ i ] - moleculeData.canvas.width / 2;
+              const y = moleculeData.yCoordinates[ i ] - moleculeData.canvas.height / 2;
               context.drawImage( moleculeData.canvas, Math.floor( x ), Math.floor( y ) ); // Use integer coordinates with drawImage to improve performance.
             }
           }
@@ -257,8 +257,8 @@ define( require => {
    * @returns {number}
    */
   var getNumberOfMolecules = function( concentration ) {
-    var raiseFactor = Util.log10( concentration / BASE_CONCENTRATION );
-    var baseFactor = Math.pow( ( MAX_MOLECULES / BASE_DOTS ), ( 1 / Util.log10( 1 / BASE_CONCENTRATION ) ) );
+    const raiseFactor = Util.log10( concentration / BASE_CONCENTRATION );
+    const baseFactor = Math.pow( ( MAX_MOLECULES / BASE_DOTS ), ( 1 / Util.log10( 1 / BASE_CONCENTRATION ) ) );
     return Util.roundSymmetric( BASE_DOTS * Math.pow( baseFactor, raiseFactor ) );
   };
 
@@ -269,7 +269,7 @@ define( require => {
      * Update when this node becomes visible.
      */
     setVisible: function( visible ) {
-      var wasVisible = this.visible;
+      const wasVisible = this.visible;
       Node.prototype.setVisible.call( this, visible );
       if ( !wasVisible && visible ) {
         this.updateMolecules();

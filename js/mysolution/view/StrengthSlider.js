@@ -27,7 +27,7 @@ define( require => {
   const weakerString = require( 'string!ACID_BASE_SOLUTIONS/weaker' );
 
   // constants
-  var TICK_LABEL_OPTIONS = {
+  const TICK_LABEL_OPTIONS = {
     font: new PhetFont( 12 ),
     maxWidth: 100 // constrain for i18n, determined empirically
   };
@@ -40,7 +40,7 @@ define( require => {
    */
   function StrengthSlider( solutionTypeProperty, strengthProperty, strengthRange ) {
 
-    var model = new SliderModel( solutionTypeProperty, strengthProperty, strengthRange );
+    const model = new SliderModel( solutionTypeProperty, strengthProperty, strengthRange );
 
     HSlider.call( this, model.sliderValueProperty, model.sliderValueRange, {
       trackSize: new Dimension2( 125, 4 ),
@@ -67,7 +67,7 @@ define( require => {
    */
   function SliderModel( solutionTypeProperty, strengthProperty, strengthRange ) {
 
-    var self = this;
+    const self = this;
 
     // @public range of slider values
     this.sliderValueRange = new RangeWithValue(

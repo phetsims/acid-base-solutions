@@ -23,7 +23,7 @@ define( require => {
   const pattern0Value1PowerString = require( 'string!ACID_BASE_SOLUTIONS/pattern.0value.1power' );
 
   // constants
-  var FONT = new PhetFont( 12 );
+  const FONT = new PhetFont( 12 );
 
   /**
    * @param {number} maxHeight
@@ -50,8 +50,8 @@ define( require => {
 
     // @public set height and text value of bar
     setValue: function( value ) {
-      var barHeight = Math.abs( Util.log10( value ) + 8 ) * this.maxBarHeight / 10;
-      var pow;
+      const barHeight = Math.abs( Util.log10( value ) + 8 ) * this.maxBarHeight / 10;
+      let pow;
 
       // set bar height
       if ( isFinite( barHeight ) ) {

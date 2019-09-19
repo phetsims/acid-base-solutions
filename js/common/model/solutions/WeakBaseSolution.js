@@ -43,8 +43,8 @@ define( require => {
 
     // @override @public [BH+] = ( -Kb + sqrt( Kb*Kb + 4*Kb*c ) ) / 2
     getProductConcentration: function() {
-      var Kb = this.getStrength();
-      var c = this.getConcentration();
+      const Kb = this.getStrength();
+      const c = this.getConcentration();
       return (-Kb + Math.sqrt( ( Kb * Kb ) + ( 4 * Kb * c ) ) ) / 2;
     },
 

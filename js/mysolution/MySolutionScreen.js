@@ -28,7 +28,7 @@ define( require => {
    */
   function MySolutionScreen( tandem ) {
 
-    var options = {
+    const options = {
       name: screenMySolutionString,
       backgroundColorProperty: new Property( ABSColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon(),
@@ -49,16 +49,16 @@ define( require => {
    */
   var createScreenIcon = function() {
 
-    var width = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.width;
-    var height = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.height;
+    const width = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.width;
+    const height = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.height;
 
-    var h3oNode = MoleculeFactory.H3O();
-    var ohNode = MoleculeFactory.OH();
+    const h3oNode = MoleculeFactory.H3O();
+    const ohNode = MoleculeFactory.OH();
 
     // Uniformly scale the molecules to make them fill the available space.
-    var xSpace = 0.06 * width; // horizontal space around the molecules
-    var maxWidth = Math.max( h3oNode.width, ohNode.width );
-    var moleculeScale = 0.5 * ( width - 3 * xSpace ) / maxWidth;
+    const xSpace = 0.06 * width; // horizontal space around the molecules
+    const maxWidth = Math.max( h3oNode.width, ohNode.width );
+    const moleculeScale = 0.5 * ( width - 3 * xSpace ) / maxWidth;
     h3oNode.setScaleMagnitude( moleculeScale, moleculeScale );
     ohNode.setScaleMagnitude( moleculeScale, moleculeScale );
 
@@ -67,7 +67,7 @@ define( require => {
     ohNode.right = width - xSpace;
     h3oNode.centerY = ohNode.centerY = height / 2;
 
-    var background = new Rectangle( 0, 0, width, height, { fill: 'white' } );
+    const background = new Rectangle( 0, 0, width, height, { fill: 'white' } );
 
     return new Node( { children: [ background, h3oNode, ohNode ] } );
   };

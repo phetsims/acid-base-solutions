@@ -30,7 +30,7 @@ define( require => {
    */
   function IntroductionScreen( tandem ) {
 
-    var options = {
+    const options = {
       name: screenIntroductionString,
       backgroundColorProperty: new Property( ABSColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon(),
@@ -51,16 +51,16 @@ define( require => {
    */
   var createScreenIcon = function() {
 
-    var width = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.width;
-    var height = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.height;
+    const width = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.width;
+    const height = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.height;
 
-    var background = new Rectangle( 0, 0, width, height, { fill: 'white' } );
+    const background = new Rectangle( 0, 0, width, height, { fill: 'white' } );
 
-    var beakerWidth = 0.6 * width;
-    var beakerHeight = 0.75 * height;
-    var lipOffset = 0.05 * width;
+    const beakerWidth = 0.6 * width;
+    const beakerHeight = 0.75 * height;
+    const lipOffset = 0.05 * width;
 
-    var beakerNode = new Path( new Shape()
+    const beakerNode = new Path( new Shape()
         .moveTo( -lipOffset, -lipOffset )
         .lineTo( 0, 0 )
         .lineTo( 0, beakerHeight )
@@ -69,14 +69,14 @@ define( require => {
         .lineTo( beakerWidth + lipOffset, -lipOffset ),
       { stroke: 'black', lineWidth: Math.max( 1, beakerHeight / 40 ), center: background.center } );
 
-    var waterNode = new Rectangle( 0, 0, beakerWidth, beakerHeight,
+    const waterNode = new Rectangle( 0, 0, beakerWidth, beakerHeight,
       { fill: 'rgb(213,231,233)', translation: beakerNode.translation } );
 
-    var lensRadius = 0.4 * beakerHeight;
-    var lensNode = new Circle( lensRadius,
+    const lensRadius = 0.4 * beakerHeight;
+    const lensNode = new Circle( lensRadius,
       { stroke: 'black', lineWidth: lensRadius / 6, center: waterNode.center } );
 
-    var handleNode = new Rectangle( lensRadius + 2, -lensRadius / 7, lensRadius, lensRadius / 3, 8, 8,
+    const handleNode = new Rectangle( lensRadius + 2, -lensRadius / 7, lensRadius, lensRadius / 3, 8, 8,
       { fill: 'rgb(85,55,33)', stroke: 'black', lineWidth: 1, translation: lensNode.translation } );
     handleNode.rotate( Math.PI / 6 );
 

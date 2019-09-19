@@ -22,10 +22,10 @@ define( require => {
   const pHColorKeyString = require( 'string!ACID_BASE_SOLUTIONS/pHColorKey' );
 
   // constants
-  var FONT_BIG = new PhetFont( 12 );
-  var FONT_SMALL = new PhetFont( 10 );
-  var CHIP_HEIGHT = 28;
-  var CHIP_X_SPACING = 1;
+  const FONT_BIG = new PhetFont( 12 );
+  const FONT_SMALL = new PhetFont( 10 );
+  const CHIP_HEIGHT = 28;
+  const CHIP_X_SPACING = 1;
 
   /**
    * @param {Dimension2} paperSize
@@ -36,14 +36,14 @@ define( require => {
 
     Node.call( this );
 
-    var numberOfChips = ABSColors.PH.length;
+    const numberOfChips = ABSColors.PH.length;
 
     // color chips, with a pH value above each one
-    var parentNode = new Node();
-    var chipNode;
-    var previousChipNode;
-    var pHNumberNode;
-    for ( var i = 0; i < numberOfChips; i++ ) {
+    const parentNode = new Node();
+    let chipNode;
+    let previousChipNode;
+    let pHNumberNode;
+    for ( let i = 0; i < numberOfChips; i++ ) {
 
       chipNode = new Rectangle( 0, 0, paperSize.width, CHIP_HEIGHT, { fill: ABSColors.PH[ i ] } );
       pHNumberNode = new Text( i.toString(), { font: FONT_SMALL } );
@@ -63,7 +63,7 @@ define( require => {
     this.addChild( parentNode );
 
     // title, below color chips
-    var titleNode = new Text( pHColorKeyString, {
+    const titleNode = new Text( pHColorKeyString, {
       font: FONT_BIG,
       maxWidth: parentNode.width,
       left: parentNode.left,

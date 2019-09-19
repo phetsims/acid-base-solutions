@@ -31,12 +31,12 @@ define( require => {
   const weakBaseString = require( 'string!ACID_BASE_SOLUTIONS/weakBase' );
 
   // constants
-  var RADIO_BUTTON_OPTIONS = { radius: 7 };
-  var TEXT_OPTIONS = { font: new PhetFont( 12 ) };
-  var ITALIC_TEXT_OPTIONS = _.extend( { fontStyle: 'italic' }, TEXT_OPTIONS );
-  var TEXT_ICON_SPACING = 10; // space between text and icon
-  var TOUCH_AREA_X_DILATION = 10;
-  var TOUCH_AREA_Y_DILATION = 3;
+  const RADIO_BUTTON_OPTIONS = { radius: 7 };
+  const TEXT_OPTIONS = { font: new PhetFont( 12 ) };
+  const ITALIC_TEXT_OPTIONS = _.extend( { fontStyle: 'italic' }, TEXT_OPTIONS );
+  const TEXT_ICON_SPACING = 10; // space between text and icon
+  const TOUCH_AREA_X_DILATION = 10;
+  const TOUCH_AREA_Y_DILATION = 3;
 
   /**
    * @param {Property.<SolutionType>} solutionTypeProperty
@@ -51,7 +51,7 @@ define( require => {
     }, options );
 
     // Water (H20)
-    var waterRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WATER,
+    const waterRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WATER,
       new HBox( {
         spacing: TEXT_ICON_SPACING,
         children: [
@@ -61,26 +61,26 @@ define( require => {
       } ), RADIO_BUTTON_OPTIONS );
 
     // Strong Acid (HA)
-    var strongAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_ACID,
+    const strongAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_ACID,
       createStyledLabel( strongAcidString + ' (H', 'A', ')', new MoleculeFactory.HA() ),
       RADIO_BUTTON_OPTIONS );
 
     // Weak Acid (HA)
-    var weakAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_ACID,
+    const weakAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_ACID,
       createStyledLabel( weakAcidString + ' (H', 'A', ')', new MoleculeFactory.HA() ),
       RADIO_BUTTON_OPTIONS );
 
     // Strong Base (M)
-    var strongBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_BASE,
+    const strongBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_BASE,
       createStyledLabel( strongBaseString + ' (', 'M', 'OH)', new MoleculeFactory.MOH() ),
       RADIO_BUTTON_OPTIONS );
 
     // Weak Base (B)
-    var weakBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_BASE,
+    const weakBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_BASE,
       createStyledLabel( weakBaseString + ' (', 'B', ')', new MoleculeFactory.B() ),
       RADIO_BUTTON_OPTIONS );
 
-    var buttons = [
+    const buttons = [
       waterRadioButton,
       strongAcidRadioButton,
       weakAcidRadioButton,
@@ -89,13 +89,13 @@ define( require => {
     ];
 
     // Make all buttons have the same height
-    var maxHeight = 0;
+    let maxHeight = 0;
     buttons.forEach( function( button ) {
       maxHeight = Math.max( button.height, maxHeight );
     } );
-    var vStrut = new VStrut( maxHeight );
+    const vStrut = new VStrut( maxHeight );
     buttons.forEach( function( button ) {
-      var buttonCenterY = button.centerY;
+      const buttonCenterY = button.centerY;
       button.addChild( vStrut );
       vStrut.centerY = buttonCenterY;
     } );

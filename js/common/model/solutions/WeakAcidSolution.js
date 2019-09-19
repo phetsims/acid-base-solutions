@@ -47,8 +47,8 @@ define( require => {
 
     // @override @public [H3O+] = ( -Ka + sqrt( Ka*Ka + 4*Ka*c ) ) / 2
     getH3OConcentration: function() {
-      var Ka = this.getStrength();
-      var c = this.getConcentration();
+      const Ka = this.getStrength();
+      const c = this.getConcentration();
       return ( -Ka + Math.sqrt( ( Ka * Ka ) + ( 4 * Ka * c ) ) ) / 2;
     },
 

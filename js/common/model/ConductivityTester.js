@@ -20,8 +20,8 @@ define( require => {
   const Vector2Property = require( 'DOT/Vector2Property' );
 
   // constants
-  var NEUTRAL_PH = 7;
-  var NEUTRAL_BRIGHTNESS = 0.05;
+  const NEUTRAL_PH = 7;
+  const NEUTRAL_BRIGHTNESS = 0.05;
 
   /**
    * @param {Beaker} beaker
@@ -38,8 +38,8 @@ define( require => {
     this.bulbLocation = new Vector2( beaker.location.x - 45, beaker.top - 30 );
 
     // @public probe locations
-    var probeXOffset = 0.175 * beaker.size.width; // offset from edge of beaker
-    var probeY = this.probeDragYRange.min + 10;
+    const probeXOffset = 0.175 * beaker.size.width; // offset from edge of beaker
+    const probeY = this.probeDragYRange.min + 10;
     this.positiveProbeLocationProperty = new Vector2Property( new Vector2( beaker.right - probeXOffset, probeY ) );
     this.negativeProbeLocationProperty = new Vector2Property( new Vector2( beaker.left + probeXOffset, probeY ) );
 

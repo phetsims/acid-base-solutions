@@ -27,8 +27,8 @@ define( require => {
   const viewsString = require( 'string!ACID_BASE_SOLUTIONS/views' );
 
   // constants
-  var TITLE_Y_SPACING = 1;
-  var TITLE_OPTIONS = { font: new PhetFont( { size: 14, weight: 'bold' } ) };
+  const TITLE_Y_SPACING = 1;
+  const TITLE_OPTIONS = { font: new PhetFont( { size: 14, weight: 'bold' } ) };
 
   /**
    * @param {ABSModel} model
@@ -45,16 +45,16 @@ define( require => {
     }, options );
 
     // titles
-    var solutionTitle = new Text( solutionString, TITLE_OPTIONS );
-    var viewsTitle = new Text( viewsString, TITLE_OPTIONS );
-    var toolsTitle = new Text( toolsString, TITLE_OPTIONS );
+    const solutionTitle = new Text( solutionString, TITLE_OPTIONS );
+    const viewsTitle = new Text( viewsString, TITLE_OPTIONS );
+    const toolsTitle = new Text( toolsString, TITLE_OPTIONS );
 
     // controls
-    var viewsControl = new ViewsControl( viewProperties.viewModeProperty, viewProperties.solventVisibleProperty );
-    var toolsControl = new ToolsControl( viewProperties.toolModeProperty );
+    const viewsControl = new ViewsControl( viewProperties.viewModeProperty, viewProperties.solventVisibleProperty );
+    const toolsControl = new ToolsControl( viewProperties.toolModeProperty );
 
     // Reset All button
-    var resetAllButton = new ResetAllButton( {
+    const resetAllButton = new ResetAllButton( {
       listener: function() {
         model.reset();
         viewProperties.reset();
@@ -63,8 +63,8 @@ define( require => {
     } );
 
     // 'Solution' and 'Views' panels have same width, 'Tools' panel does not
-    var xMargin = 15;
-    var panelOptions = {
+    const xMargin = 15;
+    const panelOptions = {
       minWidth: Math.max( solutionControl.width, Math.max( viewsControl.width, toolsControl.width ) ) + ( 2 * xMargin ),
       fill: ABSColors.CONTROL_PANEL_BACKGROUND,
       xMargin: xMargin,

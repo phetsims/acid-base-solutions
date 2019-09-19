@@ -30,7 +30,7 @@ define( require => {
    */
   function AqueousSolution( solutionType, strength, concentration, molecules ) {
 
-    var self = this;
+    const self = this;
 
     this.type = solutionType; // @public
 

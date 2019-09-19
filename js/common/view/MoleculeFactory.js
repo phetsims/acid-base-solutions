@@ -20,10 +20,10 @@ define( require => {
   const Text = require( 'SCENERY/nodes/Text' );
 
   // constants
-  var MOLECULE_COLORS = ABSColors.MOLECULES;
+  const MOLECULE_COLORS = ABSColors.MOLECULES;
 
   // NOTE: The field names here must correspond to the 'key' fields in AqueousSolution.molecules.
-  var MoleculeFactory = {
+  const MoleculeFactory = {
 
     A: function() {
       return new Node( {
@@ -122,7 +122,7 @@ define( require => {
    * @private
    */
   function AtomNode( radius, color, options ) {
-    var gradient = new RadialGradient( -radius * 0.2, -radius * 0.3, 0.25, -radius * 0.2, -radius * 0.3, radius * 2 )
+    const gradient = new RadialGradient( -radius * 0.2, -radius * 0.3, 0.25, -radius * 0.2, -radius * 0.3, radius * 2 )
       .addColorStop( 0, 'white' )
       .addColorStop( 0.33, color )
       .addColorStop( 1, 'black' );

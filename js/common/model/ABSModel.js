@@ -27,7 +27,7 @@ define( require => {
    */
   function ABSModel( solutions, defaultSolutionType ) {
 
-    var self = this;
+    const self = this;
 
     // @public convert to an associative array, so we can look up solutions by solutionType
     this.solutions = {};
@@ -50,7 +50,7 @@ define( require => {
     this.conductivityTester = new ConductivityTester( this.beaker, this.pHProperty );
 
     // synchronize with pH of the solution that is currently selected
-    var setPH = function( value ) { self.pHProperty.set( value ); };
+    const setPH = function( value ) { self.pHProperty.set( value ); };
     this.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
       // unsubscribe from previous solution pH property
       if ( prevSolutionType ) {
@@ -73,7 +73,7 @@ define( require => {
       this.pHProperty.reset();
 
       // reset solutions
-      for ( var solutionType in this.solutions ) {
+      for ( const solutionType in this.solutions ) {
         this.solutions[ solutionType ].reset();
       }
 

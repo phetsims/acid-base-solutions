@@ -40,22 +40,22 @@ define( require => {
     // @public properties that are specific to the view
     this.viewProperties = new ABSViewProperties();
 
-    var beakerNode = new BeakerNode( model.beaker );
-    var equationNode = new ReactionEquationNode( model.beaker, model.solutionTypeProperty );
-    var magnifierNode = new MagnifierNode( model.magnifier );
-    var graphNode = new ConcentrationGraphNode( model.graph );
-    var pHMeterNode = new PHMeterNode( model.pHMeter );
-    var pHPaperNode = new PHPaperNode( model.pHPaper );
-    var pHColorKeyNode = new PHColorKeyNode( model.pHPaper.paperSize, { left: model.beaker.left + 3, bottom: model.beaker.top - 50 } );
-    var conductivityTesterNode = new ABSConductivityTesterNode( model.conductivityTester );
-    var controlPanel = new ABSControlPanel( model, this.viewProperties, solutionControl, {
+    const beakerNode = new BeakerNode( model.beaker );
+    const equationNode = new ReactionEquationNode( model.beaker, model.solutionTypeProperty );
+    const magnifierNode = new MagnifierNode( model.magnifier );
+    const graphNode = new ConcentrationGraphNode( model.graph );
+    const pHMeterNode = new PHMeterNode( model.pHMeter );
+    const pHPaperNode = new PHPaperNode( model.pHPaper );
+    const pHColorKeyNode = new PHColorKeyNode( model.pHPaper.paperSize, { left: model.beaker.left + 3, bottom: model.beaker.top - 50 } );
+    const conductivityTesterNode = new ABSConductivityTesterNode( model.conductivityTester );
+    const controlPanel = new ABSControlPanel( model, this.viewProperties, solutionControl, {
       // vertically centered at right edge of screen
       right: this.layoutBounds.right - 20,
       centerY: this.layoutBounds.centerY,
       maxWidth: 0.75 * ( this.layoutBounds.width - beakerNode.width ) // constrain width for i18n
     } );
 
-    var rootNode = new Node( {
+    const rootNode = new Node( {
       children: [
         pHMeterNode,
         pHColorKeyNode,

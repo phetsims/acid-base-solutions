@@ -20,9 +20,9 @@ define( require => {
   const acidBaseSolutionsTitleString = require( 'string!ACID_BASE_SOLUTIONS/acid-base-solutions.title' );
 
   // constants
-  var tandem = Tandem.rootTandem;
+  const tandem = Tandem.rootTandem;
 
-  var simOptions = {
+  const simOptions = {
     credits: {
       leadDesign: 'Kelly Lancaster',
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
@@ -34,7 +34,7 @@ define( require => {
   };
 
   SimLauncher.launch( function() {
-    var screens = [
+    const screens = [
       new IntroductionScreen( tandem.createTandem( 'introductionScreen' ) ),
       new MySolutionScreen( tandem.createTandem( 'mySolutionScreen' ) )
     ];

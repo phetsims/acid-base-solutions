@@ -35,13 +35,13 @@ define( require => {
   const magnifierImage = require( 'image!ACID_BASE_SOLUTIONS/magnifier-icon.png' );
 
   // constants
-  var TEXT_ICON_X_SPACING = 10;
-  var RADIO_BUTTON_OPTIONS = { radius: 7 };
-  var CHECK_BOX_OPTIONS = { boxWidth: 15 };
-  var TEXT_OPTIONS = { font: new PhetFont( 12 ) };
-  var ICON_OPTIONS = { scale: 0.75 };
-  var TOUCH_AREA_X_DILATION = 10;
-  var TOUCH_AREA_Y_DILATION = 3;
+  const TEXT_ICON_X_SPACING = 10;
+  const RADIO_BUTTON_OPTIONS = { radius: 7 };
+  const CHECK_BOX_OPTIONS = { boxWidth: 15 };
+  const TEXT_OPTIONS = { font: new PhetFont( 12 ) };
+  const ICON_OPTIONS = { scale: 0.75 };
+  const TOUCH_AREA_X_DILATION = 10;
+  const TOUCH_AREA_Y_DILATION = 3;
 
   /**
    * @param {Property.<ViewMode>} viewModeProperty
@@ -57,7 +57,7 @@ define( require => {
     }, options );
 
     // Molecules
-    var moleculesRadioButton = new AquaRadioButton( viewModeProperty, ViewMode.MOLECULES,
+    const moleculesRadioButton = new AquaRadioButton( viewModeProperty, ViewMode.MOLECULES,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
@@ -68,7 +68,7 @@ define( require => {
     dilateTouchArea( moleculesRadioButton );
 
     // Solvent
-    var solventLabel = new HBox( {
+    const solventLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
         new Text( solventString, TEXT_OPTIONS ),
@@ -78,11 +78,11 @@ define( require => {
     solventLabel.setEnabled = function( enabled ) {
       solventLabel.opacity = ( enabled ? 1 : 0.5 ); // gray out when disabled
     };
-    var solventCheckbox = new Checkbox( solventLabel, solventVisibleProperty, CHECK_BOX_OPTIONS );
+    const solventCheckbox = new Checkbox( solventLabel, solventVisibleProperty, CHECK_BOX_OPTIONS );
     dilateTouchArea( solventCheckbox );
 
     // Graph
-    var graphRadioButton = new AquaRadioButton( viewModeProperty, ViewMode.GRAPH,
+    const graphRadioButton = new AquaRadioButton( viewModeProperty, ViewMode.GRAPH,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [
@@ -93,7 +93,7 @@ define( require => {
     dilateTouchArea( graphRadioButton );
 
     // Hide Views
-    var hideViewsRadioButton = new AquaRadioButton( viewModeProperty, ViewMode.HIDE_VIEWS,
+    const hideViewsRadioButton = new AquaRadioButton( viewModeProperty, ViewMode.HIDE_VIEWS,
       new HBox( {
         spacing: TEXT_ICON_X_SPACING,
         children: [

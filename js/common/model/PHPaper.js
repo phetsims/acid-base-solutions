@@ -26,7 +26,7 @@ define( require => {
    */
   function PHPaper( beaker, solutionTypeProperty, pHProperty ) {
 
-    var self = this;
+    const self = this;
 
     // @public
     this.beaker = beaker;
@@ -47,7 +47,7 @@ define( require => {
     this.indicatorHeightProperty = new NumberProperty( 0 );
 
     // clear the indicator color from the paper and recompute its height
-    var resetIndicator = function() {
+    const resetIndicator = function() {
       self.indicatorHeightProperty.set( 0 );
       self.updateIndicatorHeight();
     };
@@ -83,7 +83,7 @@ define( require => {
      */
     updateIndicatorHeight: function() {
       if ( this.beaker.bounds.containsPoint( this.locationProperty.get() ) ) {
-        var height = Util.clamp( this.locationProperty.get().y - this.beaker.top + 5, this.indicatorHeightProperty.get(), this.paperSize.height );
+        const height = Util.clamp( this.locationProperty.get().y - this.beaker.top + 5, this.indicatorHeightProperty.get(), this.paperSize.height );
         this.indicatorHeightProperty.set( height );
       }
     }

@@ -11,7 +11,7 @@ define( require => {
   // modules
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
 
-  var ToolMode = Object.freeze( {
+  const ToolMode = Object.freeze( {
     PH_METER: 'pHMeter',
     PH_PAPER: 'pHPaper',
     CONDUCTIVITY: 'conductivity'

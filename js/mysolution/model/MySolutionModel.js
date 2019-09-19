@@ -21,14 +21,14 @@ define( require => {
   const WeakBaseSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/WeakBaseSolution' );
 
   // constants
-  var DEFAULT_SOLUTION_TYPE = SolutionType.WEAK_ACID;
+  const DEFAULT_SOLUTION_TYPE = SolutionType.WEAK_ACID;
 
   /**
    * @constructor
    */
   function MySolutionModel() {
 
-    var self = this;
+    const self = this;
 
     ABSModel.call( this,
       [
@@ -57,8 +57,8 @@ define( require => {
       reentrant: true
     } );
 
-    var setStrength = function( value ) { self.strengthProperty.set( value ); };
-    var setConcentration = function( value ) { self.concentrationProperty.set( value ); };
+    const setStrength = function( value ) { self.strengthProperty.set( value ); };
+    const setConcentration = function( value ) { self.concentrationProperty.set( value ); };
     this.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
 
       // unsubscribe from previous solution strength and concentration property
@@ -89,7 +89,7 @@ define( require => {
      * Strong solutions have constant strength, so do not synchronize.
      */
     this.strengthProperty.link( function( strength ) {
-      var solutionType = self.solutionTypeProperty.get();
+      const solutionType = self.solutionTypeProperty.get();
       if ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE ) {
         self.solutions[ SolutionType.WEAK_ACID ].strengthProperty.set( strength );
         self.solutions[ SolutionType.WEAK_BASE ].strengthProperty.set( strength );

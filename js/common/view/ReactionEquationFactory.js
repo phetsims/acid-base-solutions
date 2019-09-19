@@ -23,27 +23,27 @@ define( require => {
   const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // constants
-  var EQUATION_SCALE = 1.5; // applied to all equations, see issue #88
-  var HBOX_SPACING = 4;
-  var VBOX_SPACING = 2;
+  const EQUATION_SCALE = 1.5; // applied to all equations, see issue #88
+  const HBOX_SPACING = 4;
+  const VBOX_SPACING = 2;
 
   // constants related to text
-  var FONT_SIZE = 13;
-  var FONT = new PhetFont( FONT_SIZE );
-  var SUBSCRIPT_Y_OFFSET = FONT_SIZE / 8; // vertical alignment workaround applied to any equation term that doesn't have a subscript
-  var SUBSUP_OPTIONS = { font: FONT, supScale: 1 }; // options for all instances of SubSupNode
+  const FONT_SIZE = 13;
+  const FONT = new PhetFont( FONT_SIZE );
+  const SUBSCRIPT_Y_OFFSET = FONT_SIZE / 8; // vertical alignment workaround applied to any equation term that doesn't have a subscript
+  const SUBSUP_OPTIONS = { font: FONT, supScale: 1 }; // options for all instances of SubSupNode
 
   // constants related to arrows, issue #95
-  var ARROWS_VERTICAL_SPACE = 3; // vertical space between reversible arrows
-  var ARROWS_LENGTH = 25;
-  var ARROWS_HEAD_RADIUS = 0.72 * ARROWS_LENGTH;
-  var ARROWS_HEAD_ANGLE_DELTA = 0.2 * Math.PI;
+  const ARROWS_VERTICAL_SPACE = 3; // vertical space between reversible arrows
+  const ARROWS_LENGTH = 25;
+  const ARROWS_HEAD_RADIUS = 0.72 * ARROWS_LENGTH;
+  const ARROWS_HEAD_ANGLE_DELTA = 0.2 * Math.PI;
 
   //-------------------------------------------------------------------------------------
   // Public functions for creating reaction equations.
   //-------------------------------------------------------------------------------------
 
-  var ReactionEquationFactory = {
+  const ReactionEquationFactory = {
 
     // 2 H2O <-> H3O+ + OH-
     createWaterEquation: function() {
@@ -98,9 +98,9 @@ define( require => {
   //-------------------------------------------------------------------------------------
 
   // A- node
-  var createANode = function() {
-    var A = new Text( 'A', { font: FONT, fontStyle: 'italic' } );
-    var minusNode = new Text( '-', { font: FONT, left: A.right, centerY: A.top + ( 0.2 * A.height ) } );
+  const createANode = function() {
+    const A = new Text( 'A', { font: FONT, fontStyle: 'italic' } );
+    const minusNode = new Text( '-', { font: FONT, left: A.right, centerY: A.top + ( 0.2 * A.height ) } );
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
@@ -188,7 +188,7 @@ define( require => {
   };
 
   // HA node
-  var createHANode = function() {
+  const createHANode = function() {
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [
@@ -207,8 +207,8 @@ define( require => {
 
   // M+ node
   var createMNode = function() {
-    var M = new Text( 'M', { font: FONT, fontStyle: 'italic' } );
-    var plusNode = new Text( '+', { font: FONT, left: M.right, centerY: M.top + ( 0.2 * M.height ) } );
+    const M = new Text( 'M', { font: FONT, fontStyle: 'italic' } );
+    const plusNode = new Text( '+', { font: FONT, left: M.right, centerY: M.top + ( 0.2 * M.height ) } );
     return new VBox( {
       spacing: VBOX_SPACING,
       children: [

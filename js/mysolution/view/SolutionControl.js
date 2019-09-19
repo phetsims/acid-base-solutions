@@ -37,14 +37,14 @@ define( require => {
   const weakString = require( 'string!ACID_BASE_SOLUTIONS/weak' );
 
   // constants
-  var CONCENTRATION_DECIMALS = 3;
-  var SUBTITLE_FONT = new PhetFont( 12 );
-  var CONTROL_FONT = new PhetFont( 12 );
-  var ARROW_STEP = Math.pow( 10, -CONCENTRATION_DECIMALS ); // concentration delta for arrow button
-  var ARROW_HEIGHT = 15;
-  var ARROW_BUTTON_OPTIONS = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
-  var CONCENTRATION_FONT = new PhetFont( 14 );
-  var AB_SWITCH_SIZE = new Dimension2( 40, 20 );
+  const CONCENTRATION_DECIMALS = 3;
+  const SUBTITLE_FONT = new PhetFont( 12 );
+  const CONTROL_FONT = new PhetFont( 12 );
+  const ARROW_STEP = Math.pow( 10, -CONCENTRATION_DECIMALS ); // concentration delta for arrow button
+  const ARROW_HEIGHT = 15;
+  const ARROW_BUTTON_OPTIONS = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
+  const CONCENTRATION_FONT = new PhetFont( 14 );
+  const AB_SWITCH_SIZE = new Dimension2( 40, 20 );
 
   /**
    * @param {Property.<SolutionType>} solutionTypeProperty
@@ -60,51 +60,51 @@ define( require => {
       align: 'left'
     }, options );
 
-    var concentrationRange = ABSConstants.CONCENTRATION_RANGE;
+    const concentrationRange = ABSConstants.CONCENTRATION_RANGE;
 
     // acid/base switch
-    var isAcidProperty = new BooleanProperty( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.STRONG_ACID );
-    var acidBaseSwitch = new ABSwitch( isAcidProperty,
+    const isAcidProperty = new BooleanProperty( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.STRONG_ACID );
+    const acidBaseSwitch = new ABSwitch( isAcidProperty,
       true, new Text( acidString, { font: CONTROL_FONT } ),
       false, new Text( baseString, { font: CONTROL_FONT } ),
       { switchSize: AB_SWITCH_SIZE } );
 
     // concentration title
-    var concentrationTitle = new Text( initialConcentrationString, { font: SUBTITLE_FONT } );
+    const concentrationTitle = new Text( initialConcentrationString, { font: SUBTITLE_FONT } );
 
     // concentration readout
-    var readoutText = new Text( Util.toFixed( concentrationProperty.get(), CONCENTRATION_DECIMALS ), { font: CONCENTRATION_FONT } );
-    var readoutBackground = new Rectangle( 0, 0, 1.5 * readoutText.width, 1.5 * readoutText.height, 4, 4,
+    const readoutText = new Text( Util.toFixed( concentrationProperty.get(), CONCENTRATION_DECIMALS ), { font: CONCENTRATION_FONT } );
+    const readoutBackground = new Rectangle( 0, 0, 1.5 * readoutText.width, 1.5 * readoutText.height, 4, 4,
       { fill: 'white', stroke: 'rgb(200,200,200)' } );
-    var readoutNode = new Node( { children: [ readoutBackground, readoutText ] } );
+    const readoutNode = new Node( { children: [ readoutBackground, readoutText ] } );
     readoutText.center = readoutBackground.center;
 
     // arrow buttons
-    var leftArrowButton = new ArrowButton( 'left', function() {
+    const leftArrowButton = new ArrowButton( 'left', function() {
       concentrationProperty.set( Math.max( concentrationProperty.get() - ARROW_STEP, concentrationRange.min ) );
     }, ARROW_BUTTON_OPTIONS );
-    var rightArrowButton = new ArrowButton( 'right', function() {
+    const rightArrowButton = new ArrowButton( 'right', function() {
       concentrationProperty.set( Math.min( concentrationProperty.get() + ARROW_STEP, concentrationRange.max ) );
     }, ARROW_BUTTON_OPTIONS );
 
     // concentration value control
-    var concentrationValueControl = new HBox( {
+    const concentrationValueControl = new HBox( {
       spacing: 8,
       children: [ leftArrowButton, readoutNode, rightArrowButton ]
     } );
 
     // concentration slider
-    var concentrationSlider = new ConcentrationSlider( concentrationProperty, concentrationRange );
+    const concentrationSlider = new ConcentrationSlider( concentrationProperty, concentrationRange );
 
     // strength control
-    var strengthTitle = new Text( strengthString, { font: SUBTITLE_FONT } );
-    var isWeakProperty = new BooleanProperty( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.WEAK_ACID );
-    var weakStrongSwitch = new ABSwitch( isWeakProperty,
+    const strengthTitle = new Text( strengthString, { font: SUBTITLE_FONT } );
+    const isWeakProperty = new BooleanProperty( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.WEAK_ACID );
+    const weakStrongSwitch = new ABSwitch( isWeakProperty,
       true, new Text( weakString, { font: CONTROL_FONT } ),
       false, new Text( strongString, { font: CONTROL_FONT } ),
       { switchSize: AB_SWITCH_SIZE }
     );
-    var strengthSlider = new StrengthSlider( solutionTypeProperty, strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE );
+    const strengthSlider = new StrengthSlider( solutionTypeProperty, strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE );
 
     options.children = [
       acidBaseSwitch,
@@ -117,21 +117,21 @@ define( require => {
     ];
 
     // compute separator width
-    var separatorWidth = 0;
+    let separatorWidth = 0;
     options.children.forEach( function( child ) {
       separatorWidth = Math.max( child.width, separatorWidth );
     } );
 
     // separators for sub-panels
-    var concentrationSeparator = new HSeparator( separatorWidth );
-    var strengthSeparator = new HSeparator( separatorWidth );
+    const concentrationSeparator = new HSeparator( separatorWidth );
+    const strengthSeparator = new HSeparator( separatorWidth );
     options.children.splice( options.children.indexOf( concentrationTitle ), 0, concentrationSeparator );
     options.children.splice( options.children.indexOf( strengthTitle ), 0, strengthSeparator );
 
     // brute-force layout
-    var subtitleYSpacing = 6;
-    var separatorYSpacing = 6;
-    var controlYSpacing = 6;
+    const subtitleYSpacing = 6;
+    const separatorYSpacing = 6;
+    const controlYSpacing = 6;
     // controls are all center justified
     acidBaseSwitch.centerX = concentrationValueControl.centerX = concentrationSlider.centerX = weakStrongSwitch.centerX = strengthSlider.centerX = separatorWidth / 2;
     // subtitles are left justified
@@ -163,15 +163,15 @@ define( require => {
     } );
 
     // flag to prevent circular update of related Properties, see #152
-    var updateSolutionTypeEnabled = true;
+    let updateSolutionTypeEnabled = true;
 
     // update solution type
-    var updateSolutionType = function() {
+    const updateSolutionType = function() {
 
       if ( updateSolutionTypeEnabled ) {
 
-        var isAcid = isAcidProperty.get();
-        var isWeak = isWeakProperty.get();
+        const isAcid = isAcidProperty.get();
+        const isWeak = isWeakProperty.get();
 
         if ( isWeak && isAcid ) {
           solutionTypeProperty.set( SolutionType.WEAK_ACID );

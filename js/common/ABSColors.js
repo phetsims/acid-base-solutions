@@ -14,9 +14,9 @@ define( require => {
   const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
 
   // constants
-  var GRAY_MOLECULE = 'rgb(120,120,120)';
+  const GRAY_MOLECULE = 'rgb(120,120,120)';
 
-  var ABSColors = {
+  const ABSColors = {
 
     SCREEN_BACKGROUND: 'white',
 
