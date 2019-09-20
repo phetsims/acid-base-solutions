@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2019, University of Colorado Boulder
 
 /**
  *  A solution of pure water, contains no solute.
