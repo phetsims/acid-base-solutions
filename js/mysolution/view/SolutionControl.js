@@ -132,8 +132,15 @@ define( require => {
     const subtitleYSpacing = 6;
     const separatorYSpacing = 6;
     const controlYSpacing = 6;
+
     // controls are all center justified
-    acidBaseSwitch.centerX = concentrationValueControl.centerX = concentrationSlider.centerX = weakStrongSwitch.centerX = strengthSlider.centerX = separatorWidth / 2;
+    const centerX = separatorWidth / 2;
+    acidBaseSwitch.centerX = centerX;
+    concentrationValueControl.centerX = centerX;
+    concentrationSlider.centerX = centerX;
+    weakStrongSwitch.centerX = centerX;
+    strengthSlider.centerX = centerX;
+
     // subtitles are left justified
     concentrationSeparator.top = acidBaseSwitch.bottom + separatorYSpacing;
     concentrationTitle.top = concentrationSeparator.bottom + separatorYSpacing;

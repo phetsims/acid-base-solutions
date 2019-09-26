@@ -65,7 +65,8 @@ define( require => {
     // position the molecules
     h3oNode.left = xSpace;
     ohNode.right = width - xSpace;
-    h3oNode.centerY = ohNode.centerY = height / 2;
+    h3oNode.centerY = height / 2;
+    ohNode.centerY = h3oNode.centerY;
 
     const background = new Rectangle( 0, 0, width, height, { fill: 'white' } );
 

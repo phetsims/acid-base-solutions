@@ -80,8 +80,13 @@ define( require => {
     } );
 
     this.viewProperties.toolModeProperty.link( function( toolMode ) {
+
       pHMeterNode.visible = ( toolMode === ToolMode.PH_METER );
-      pHPaperNode.visible = pHColorKeyNode.visible = ( toolMode === ToolMode.PH_PAPER );
+
+      const pHPaperVisible = ( toolMode === ToolMode.PH_PAPER );
+      pHPaperNode.visible = pHPaperVisible;
+      pHColorKeyNode.visible = pHPaperVisible;
+
       conductivityTesterNode.visible = ( toolMode === ToolMode.CONDUCTIVITY );
     } );
 
