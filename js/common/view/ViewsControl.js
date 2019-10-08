@@ -37,7 +37,7 @@ define( require => {
   // constants
   const TEXT_ICON_X_SPACING = 10;
   const RADIO_BUTTON_OPTIONS = { radius: 7 };
-  const CHECK_BOX_OPTIONS = { boxWidth: 15 };
+  const CHECKBOX_OPTIONS = { boxWidth: 15 };
   const TEXT_OPTIONS = { font: new PhetFont( 12 ) };
   const ICON_OPTIONS = { scale: 0.75 };
   const TOUCH_AREA_X_DILATION = 10;
@@ -78,7 +78,7 @@ define( require => {
     solventLabel.setEnabled = function( enabled ) {
       solventLabel.opacity = ( enabled ? 1 : 0.5 ); // gray out when disabled
     };
-    const solventCheckbox = new Checkbox( solventLabel, solventVisibleProperty, CHECK_BOX_OPTIONS );
+    const solventCheckbox = new Checkbox( solventLabel, solventVisibleProperty, CHECKBOX_OPTIONS );
     dilateTouchArea( solventCheckbox );
 
     // Graph
