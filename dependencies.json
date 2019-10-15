@@ -1,7 +1,7 @@
 {
-  "comment": "# acid-base-solutions 1.2.23 Mon Oct 14 2019 12:07:27 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# acid-base-solutions 1.2.23 Tue Oct 15 2019 12:08:36 GMT-0600 (Mountain Daylight Time)",
   "acid-base-solutions": {
-    "sha": "9eb058abec7d925ede54257469f354a0e706579c",
+    "sha": "3ec8b8760c44384f917cc4ed2581f6e1d65a0897",
     "branch": "1.2"
   },
   "assert": {
@@ -33,7 +33,7 @@
     "branch": "HEAD"
   },
   "phet-core": {
-    "sha": "2850431972773537bc783902b582c5e0f6fe2c0d",
+    "sha": "15b76d2d658339ee51868f22805807f34253994e",
     "branch": "acid-base-solutions-1.2"
   },
   "phetcommon": {
