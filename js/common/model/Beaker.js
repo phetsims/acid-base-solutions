@@ -14,6 +14,7 @@ define( require => {
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const Dimension2 = require( 'DOT/Dimension2' );
+  const merge = require( 'PHET_CORE/merge' );
   const Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -22,7 +23,7 @@ define( require => {
    */
   function Beaker( options ) {
 
-    options = _.extend( {
+    options = merge( {
       size: new Dimension2( 360, 270 ),
       location: new Vector2( 230, 410 )
     }, options );

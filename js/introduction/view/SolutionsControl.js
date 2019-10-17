@@ -15,6 +15,7 @@ define( require => {
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const RichText = require( 'SCENERY/nodes/RichText' );
@@ -33,7 +34,7 @@ define( require => {
   // constants
   const RADIO_BUTTON_OPTIONS = { radius: 7 };
   const TEXT_OPTIONS = { font: new PhetFont( 12 ) };
-  const ITALIC_TEXT_OPTIONS = _.extend( { fontStyle: 'italic' }, TEXT_OPTIONS );
+  const ITALIC_TEXT_OPTIONS = merge( { fontStyle: 'italic' }, TEXT_OPTIONS );
   const TEXT_ICON_SPACING = 10; // space between text and icon
   const TOUCH_AREA_X_DILATION = 10;
   const TOUCH_AREA_Y_DILATION = 3;
@@ -45,7 +46,7 @@ define( require => {
    */
   function SolutionsControl( solutionTypeProperty, options ) {
 
-    options = _.extend( {
+    options = merge( {
       spacing: 8,
       align: 'left'
     }, options );

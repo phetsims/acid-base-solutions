@@ -13,6 +13,7 @@ define( require => {
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Panel = require( 'SUN/Panel' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -39,7 +40,7 @@ define( require => {
    */
   function ABSControlPanel( model, viewProperties, solutionControl, options ) {
 
-    options = _.extend( {
+    options = merge( {
       align: 'left',
       spacing: 5
     }, options );

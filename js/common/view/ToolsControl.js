@@ -13,6 +13,7 @@ define( require => {
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   const Image = require( 'SCENERY/nodes/Image' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const PHMeterNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHMeterNode' );
   const PHPaperNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHPaperNode' );
   const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
@@ -28,7 +29,7 @@ define( require => {
    */
   function ToolsControl( toolModeProperty, options ) {
 
-    options = _.extend( {
+    options = merge( {
       orientation: 'horizontal',
       baseColor: 'white',
       spacing: 5,

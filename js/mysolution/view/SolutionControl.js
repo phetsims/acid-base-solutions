@@ -20,6 +20,7 @@ define( require => {
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HSeparator = require( 'SUN/HSeparator' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -55,7 +56,7 @@ define( require => {
    */
   function SolutionControl( solutionTypeProperty, concentrationProperty, strengthProperty, options ) {
 
-    options = _.extend( {
+    options = merge( {
       spacing: 4,
       align: 'left'
     }, options );

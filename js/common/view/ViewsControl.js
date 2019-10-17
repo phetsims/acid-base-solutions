@@ -19,6 +19,7 @@ define( require => {
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const Image = require( 'SCENERY/nodes/Image' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -51,7 +52,7 @@ define( require => {
    */
   function ViewsControl( viewModeProperty, solventVisibleProperty, options ) {
 
-    options = _.extend( {
+    options = merge( {
       spacing: 8,
       align: 'left'
     }, options );

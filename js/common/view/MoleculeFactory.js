@@ -14,6 +14,7 @@ define( require => {
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   const Circle = require( 'SCENERY/nodes/Circle' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const RadialGradient = require( 'SCENERY/util/RadialGradient' );
@@ -126,7 +127,7 @@ define( require => {
       .addColorStop( 0, 'white' )
       .addColorStop( 0.33, color )
       .addColorStop( 1, 'black' );
-    Circle.call( this, radius, _.extend( { fill: gradient }, options ) );
+    Circle.call( this, radius, merge( { fill: gradient }, options ) );
   }
 
   inherit( Circle, AtomNode );
