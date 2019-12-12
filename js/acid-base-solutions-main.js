@@ -20,7 +20,7 @@ define( require => {
   const acidBaseSolutionsTitleString = require( 'string!ACID_BASE_SOLUTIONS/acid-base-solutions.title' );
 
   // constants
-  const tandem = Tandem.rootTandem;
+  const tandem = Tandem.ROOT;
 
   const simOptions = {
     credits: {
