@@ -19,7 +19,7 @@ define( require => {
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   /**
    * @param {Property.<number>} concentrationProperty
@@ -64,20 +64,20 @@ define( require => {
 
     // @public range of slider
     this.sliderValueRange = new RangeWithValue(
-      Util.log10( concentrationRange.min ),
-      Util.log10( concentrationRange.max ),
-      Util.log10( concentrationRange.defaultValue ) );
+      Utils.log10( concentrationRange.min ),
+      Utils.log10( concentrationRange.max ),
+      Utils.log10( concentrationRange.defaultValue ) );
 
     // @public property for slider value
-    this.sliderValueProperty = new NumberProperty( Util.log10( concentrationProperty.get() ), {
+    this.sliderValueProperty = new NumberProperty( Utils.log10( concentrationProperty.get() ), {
       reentrant: true
     } );
 
     this.sliderValueProperty.link( function( sliderValue ) {
-      self.concentrationProperty.set( Util.toFixedNumber( Math.pow( 10, sliderValue ), 10 ) ); // see issue#73
+      self.concentrationProperty.set( Utils.toFixedNumber( Math.pow( 10, sliderValue ), 10 ) ); // see issue#73
     } );
     concentrationProperty.link( function( concentration ) {
-      self.sliderValueProperty.set( Util.log10( concentration ) );
+      self.sliderValueProperty.set( Utils.log10( concentration ) );
     } );
   }
 

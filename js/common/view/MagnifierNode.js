@@ -21,7 +21,7 @@ define( require => {
   const Path = require( 'SCENERY/nodes/Path' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // images
   const solventImage = require( 'image!ACID_BASE_SOLUTIONS/solvent.png' );
@@ -257,9 +257,9 @@ define( require => {
    * @returns {number}
    */
   var getNumberOfMolecules = function( concentration ) {
-    const raiseFactor = Util.log10( concentration / BASE_CONCENTRATION );
-    const baseFactor = Math.pow( ( MAX_MOLECULES / BASE_DOTS ), ( 1 / Util.log10( 1 / BASE_CONCENTRATION ) ) );
-    return Util.roundSymmetric( BASE_DOTS * Math.pow( baseFactor, raiseFactor ) );
+    const raiseFactor = Utils.log10( concentration / BASE_CONCENTRATION );
+    const baseFactor = Math.pow( ( MAX_MOLECULES / BASE_DOTS ), ( 1 / Utils.log10( 1 / BASE_CONCENTRATION ) ) );
+    return Utils.roundSymmetric( BASE_DOTS * Math.pow( baseFactor, raiseFactor ) );
   };
 
   return inherit( Node, MagnifierNode, {

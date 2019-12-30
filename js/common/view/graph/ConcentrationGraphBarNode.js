@@ -16,7 +16,7 @@ define( require => {
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const RichText = require( 'SCENERY/nodes/RichText' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // strings
   const negligibleString = require( 'string!ACID_BASE_SOLUTIONS/negligible' );
@@ -50,7 +50,7 @@ define( require => {
 
     // @public set height and text value of bar
     setValue: function( value ) {
-      const barHeight = Math.abs( Util.log10( value ) + 8 ) * this.maxBarHeight / 10;
+      const barHeight = Math.abs( Utils.log10( value ) + 8 ) * this.maxBarHeight / 10;
       let pow;
 
       // set bar height
@@ -67,7 +67,7 @@ define( require => {
       }
       else if ( value <= 1 ) {
         // find pow
-        pow = Math.floor( Util.log10( value ) );
+        pow = Math.floor( Utils.log10( value ) );
 
         // find value
         value = (value * Math.pow( 10, -pow ));
@@ -81,14 +81,14 @@ define( require => {
         // set text
         if ( pow === 0 ) {
           // issue #109, show 'N.NN x 10^0' as 'N.NN'
-          this.text.setText( Util.toFixed( value, 2 ) );
+          this.text.setText( Utils.toFixed( value, 2 ) );
         }
         else {
-          this.text.setText( StringUtils.format( pattern0Value1PowerString, Util.toFixed( value, 2 ), pow ) );
+          this.text.setText( StringUtils.format( pattern0Value1PowerString, Utils.toFixed( value, 2 ), pow ) );
         }
       }
       else {
-        this.text.setText( Util.toFixed( value, 1 ) );
+        this.text.setText( Utils.toFixed( value, 1 ) );
       }
     },
 

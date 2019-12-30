@@ -19,7 +19,7 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -70,8 +70,8 @@ define( require => {
       drag: function( e ) {
         const v = self.globalToParentPoint( e.pointer.point ).subtract( clickOffset );
         pHPaper.locationProperty.set( new Vector2(
-          Util.clamp( v.x, pHPaper.dragBounds.minX, pHPaper.dragBounds.maxX ),
-          Util.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) ) );
+          Utils.clamp( v.x, pHPaper.dragBounds.minX, pHPaper.dragBounds.maxX ),
+          Utils.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) ) );
       }
     } );
     this.addInputListener( this.dragHandler );
@@ -106,7 +106,7 @@ define( require => {
   var pHToColor = function( pH ) {
     assert && assert( pH >= 0 && pH <= ABSColors.PH.length );
     let color;
-    if ( Util.isInteger( pH ) ) {
+    if ( Utils.isInteger( pH ) ) {
       // pH value is an integer, look up color
       color = ABSColors.PH[ pH ];
     }

@@ -19,7 +19,7 @@ define( require => {
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const inherit = require( 'PHET_CORE/inherit' );
   const NumberProperty = require( 'AXON/NumberProperty' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   /**
    * @param {SolutionType} solutionType
@@ -54,7 +54,7 @@ define( require => {
     // @public
     this.pHProperty = new DerivedProperty( [ this.strengthProperty, this.concentrationProperty ],
       function( strength, concentration ) {
-        return -Util.roundSymmetric( 100 * Util.log10( self.getH3OConcentration() ) ) / 100;
+        return -Utils.roundSymmetric( 100 * Utils.log10( self.getH3OConcentration() ) ) / 100;
       } );
   }
 

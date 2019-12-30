@@ -27,7 +27,7 @@ define( require => {
   const SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
   const StrengthSlider = require( 'ACID_BASE_SOLUTIONS/mysolution/view/StrengthSlider' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // strings
   const acidString = require( 'string!ACID_BASE_SOLUTIONS/acid' );
@@ -74,7 +74,7 @@ define( require => {
     const concentrationTitle = new Text( initialConcentrationString, { font: SUBTITLE_FONT } );
 
     // concentration readout
-    const readoutText = new Text( Util.toFixed( concentrationProperty.get(), CONCENTRATION_DECIMALS ), { font: CONCENTRATION_FONT } );
+    const readoutText = new Text( Utils.toFixed( concentrationProperty.get(), CONCENTRATION_DECIMALS ), { font: CONCENTRATION_FONT } );
     const readoutBackground = new Rectangle( 0, 0, 1.5 * readoutText.width, 1.5 * readoutText.height, 4, 4,
       { fill: 'white', stroke: 'rgb(200,200,200)' } );
     const readoutNode = new Node( { children: [ readoutBackground, readoutText ] } );
@@ -156,7 +156,7 @@ define( require => {
 
     // update the readout text when concentration value changes
     concentrationProperty.link( function( concentration ) {
-      readoutText.text = Util.toFixed( concentration, CONCENTRATION_DECIMALS );
+      readoutText.text = Utils.toFixed( concentration, CONCENTRATION_DECIMALS );
     } );
 
     // disable arrow buttons

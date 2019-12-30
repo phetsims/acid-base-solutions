@@ -20,7 +20,7 @@ define( require => {
   const RangeWithValue = require( 'DOT/RangeWithValue' );
   const SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // strings
   const strongerString = require( 'string!ACID_BASE_SOLUTIONS/stronger' );
@@ -71,12 +71,12 @@ define( require => {
 
     // @public range of slider values
     this.sliderValueRange = new RangeWithValue(
-      Util.log10( strengthRange.min ),
-      Util.log10( strengthRange.max ),
-      Util.log10( strengthRange.defaultValue ) );
+      Utils.log10( strengthRange.min ),
+      Utils.log10( strengthRange.max ),
+      Utils.log10( strengthRange.defaultValue ) );
 
     // @public slider's value
-    this.sliderValueProperty = new NumberProperty( Util.log10( strengthProperty.get() ), {
+    this.sliderValueProperty = new NumberProperty( Utils.log10( strengthProperty.get() ), {
       reentrant: true
     } );
 
@@ -88,7 +88,7 @@ define( require => {
     } );
     strengthProperty.link( function( strength ) {
       if ( strengthIsMutable( solutionTypeProperty.get() ) ) {
-        self.sliderValueProperty.set( Util.log10( strength ) );
+        self.sliderValueProperty.set( Utils.log10( strength ) );
       }
     } );
   }

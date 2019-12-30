@@ -22,7 +22,7 @@ define( require => {
   const SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // strings
@@ -87,7 +87,7 @@ define( require => {
 
       drag: function( e ) {
         const y = self.globalToParentPoint( e.pointer.point ).y - clickYOffset;
-        pHMeter.locationProperty.set( new Vector2( pHMeter.locationProperty.get().x, Util.clamp( y, pHMeter.dragYRange.min, pHMeter.dragYRange.max ) ) );
+        pHMeter.locationProperty.set( new Vector2( pHMeter.locationProperty.get().x, Utils.clamp( y, pHMeter.dragYRange.min, pHMeter.dragYRange.max ) ) );
       }
     } ) );
 
@@ -113,7 +113,7 @@ define( require => {
       return StringUtils.format( pattern0Label1ValueString, pHString, '' );
     }
     else {
-      return StringUtils.format( pattern0Label1ValueString, pHString, Util.toFixed( pH, DECIMAL_PLACES ) );
+      return StringUtils.format( pattern0Label1ValueString, pHString, Utils.toFixed( pH, DECIMAL_PLACES ) );
     }
   };
 

@@ -19,7 +19,7 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // strings
   const litersString = require( 'string!ACID_BASE_SOLUTIONS/liters' );
@@ -73,7 +73,7 @@ define( require => {
     this.addChild( ticksParent );
 
     // tick marks
-    const NUMBER_OF_TICKS = Util.roundSymmetric( 1 / MINOR_TICK_SPACING );
+    const NUMBER_OF_TICKS = Utils.roundSymmetric( 1 / MINOR_TICK_SPACING );
     const deltaY = BEAKER_HEIGHT / NUMBER_OF_TICKS;
     let isMajorTick;
     let y;
