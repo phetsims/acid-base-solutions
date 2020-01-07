@@ -25,16 +25,16 @@ define( require => {
 
     options = merge( {
       size: new Dimension2( 360, 270 ),
-      location: new Vector2( 230, 410 )
+      position: new Vector2( 230, 410 )
     }, options );
 
     this.size = options.size; // @public
-    this.location = options.location; // @public
+    this.position = options.position; // @public
 
     // @public convenience coordinates
-    this.left = this.location.x - this.size.width / 2;
+    this.left = this.position.x - this.size.width / 2;
     this.right = this.left + this.size.width;
-    this.bottom = this.location.y;
+    this.bottom = this.position.y;
     this.top = this.bottom - this.size.height;
 
     this.bounds = new Bounds2( this.left, this.top, this.right, this.bottom ); // @public

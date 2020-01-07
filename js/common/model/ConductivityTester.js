@@ -35,18 +35,18 @@ define( require => {
     this.probeSize = new Dimension2( 20, 68 ); // @public
 
     // @public bottom-center of bulb's base
-    this.bulbLocation = new Vector2( beaker.location.x - 45, beaker.top - 30 );
+    this.bulbPosition = new Vector2( beaker.position.x - 45, beaker.top - 30 );
 
-    // @public probe locations
+    // @public probe positions
     const probeXOffset = 0.175 * beaker.size.width; // offset from edge of beaker
     const probeY = this.probeDragYRange.min + 10;
-    this.positiveProbeLocationProperty = new Vector2Property( new Vector2( beaker.right - probeXOffset, probeY ) );
-    this.negativeProbeLocationProperty = new Vector2Property( new Vector2( beaker.left + probeXOffset, probeY ) );
+    this.positiveProbePositionProperty = new Vector2Property( new Vector2( beaker.right - probeXOffset, probeY ) );
+    this.negativeProbePositionProperty = new Vector2Property( new Vector2( beaker.left + probeXOffset, probeY ) );
 
     // @public brightness of bulb varies from 0 (off) to 1 (full on)
-    this.brightnessProperty = new DerivedProperty( [ pHProperty, this.positiveProbeLocationProperty, this.negativeProbeLocationProperty ],
-      function( pH, positiveProbeLocation, negativeProbeLocation ) {
-        if ( beaker.bounds.containsPoint( positiveProbeLocation ) && beaker.bounds.containsPoint( negativeProbeLocation ) ) {
+    this.brightnessProperty = new DerivedProperty( [ pHProperty, this.positiveProbePositionProperty, this.negativeProbePositionProperty ],
+      function( pH, positiveProbePosition, negativeProbePosition ) {
+        if ( beaker.bounds.containsPoint( positiveProbePosition ) && beaker.bounds.containsPoint( negativeProbePosition ) ) {
           // closed circuit, probes are in solution
           return NEUTRAL_BRIGHTNESS + ( 1 - NEUTRAL_BRIGHTNESS ) *
                                       ( pH < NEUTRAL_PH ?
@@ -66,8 +66,8 @@ define( require => {
 
     // @public
     reset: function() {
-      this.positiveProbeLocationProperty.reset();
-      this.negativeProbeLocationProperty.reset();
+      this.positiveProbePositionProperty.reset();
+      this.negativeProbePositionProperty.reset();
     }
   } );
 } );

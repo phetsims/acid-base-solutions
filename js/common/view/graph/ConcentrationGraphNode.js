@@ -47,7 +47,7 @@ define( require => {
       this.addChild( this.bars[ i ] = new ConcentrationGraphBarNode( graph.height - 10 ) );
     }
 
-    this.translation = graph.location;
+    this.translation = graph.position;
 
     // Observe the strength and concentration properties for whichever solution is selected.
     const updateValuesBound = this.updateValues.bind( this );
@@ -88,7 +88,7 @@ define( require => {
     /*
      * @private
      * Makes the correct number of bars visible for the selected solution,
-     * and sets the bars colors and locations to match the molecules in the solution.
+     * and sets the bars colors and positions to match the molecules in the solution.
      * To improve performance, updates only when this node is visible.
      */
     updateBars: function() {

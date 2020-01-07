@@ -86,7 +86,7 @@ define( require => {
     }
 
     // move to correct position
-    this.translation = magnifier.location;
+    this.translation = magnifier.position;
 
     // Observe the strength and concentration properties for whichever solution is selected.
     const updateMoleculesBound = this.updateMolecules.bind( this );

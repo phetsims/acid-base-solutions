@@ -87,7 +87,7 @@ define( require => {
 
       drag: function( e ) {
         const y = self.globalToParentPoint( e.pointer.point ).y - clickYOffset;
-        pHMeter.locationProperty.set( new Vector2( pHMeter.locationProperty.get().x, Utils.clamp( y, pHMeter.dragYRange.min, pHMeter.dragYRange.max ) ) );
+        pHMeter.positionProperty.set( new Vector2( pHMeter.positionProperty.get().x, Utils.clamp( y, pHMeter.dragYRange.min, pHMeter.dragYRange.max ) ) );
       }
     } ) );
 
@@ -98,10 +98,10 @@ define( require => {
       }
     };
     pHMeter.pHProperty.link( this.updateText );
-    pHMeter.locationProperty.link( this.updateText );
+    pHMeter.positionProperty.link( this.updateText );
 
-    pHMeter.locationProperty.link( function( location ) {
-      self.translation = location;
+    pHMeter.positionProperty.link( function( position ) {
+      self.translation = position;
     } );
   }
 

@@ -106,7 +106,7 @@ define( require => {
       maxWidth: 65 // constrain width for i18n
     } ) );
 
-    this.translation = beaker.location;
+    this.translation = beaker.position;
   }
 
   acidBaseSolutions.register( 'BeakerNode', BeakerNode );

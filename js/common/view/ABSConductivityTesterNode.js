@@ -22,13 +22,13 @@ define( require => {
   function ABSConductivityTesterNode( conductivityTester ) {
     ConductivityTesterNode.call( this,
       conductivityTester.brightnessProperty,
-      new Property( conductivityTester.bulbLocation ),
-      conductivityTester.positiveProbeLocationProperty,
-      conductivityTester.negativeProbeLocationProperty, {
+      new Property( conductivityTester.bulbPosition ),
+      conductivityTester.positiveProbePositionProperty,
+      conductivityTester.negativeProbePositionProperty, {
         probeSize: conductivityTester.probeSize,
         probeDragYRange: new Range(
-          conductivityTester.probeDragYRange.min - conductivityTester.bulbLocation.y,
-          conductivityTester.probeDragYRange.max - conductivityTester.bulbLocation.y
+          conductivityTester.probeDragYRange.min - conductivityTester.bulbPosition.y,
+          conductivityTester.probeDragYRange.max - conductivityTester.bulbPosition.y
         )
       }
     );

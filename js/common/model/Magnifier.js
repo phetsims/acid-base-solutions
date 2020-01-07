@@ -26,8 +26,8 @@ define( require => {
     // @public magnifier radius
     this.radius = 0.465 * beaker.size.height;
 
-    // @public magnifier location, origin at center of glass
-    this.location = beaker.location.plusXY( 0, -beaker.size.height / 2 );
+    // @public magnifier position, origin at center of glass
+    this.position = beaker.position.plusXY( 0, -beaker.size.height / 2 );
   }
 
   acidBaseSolutions.register( 'Magnifier', Magnifier );

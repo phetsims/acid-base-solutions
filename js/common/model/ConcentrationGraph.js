@@ -27,8 +27,8 @@ define( require => {
     this.width = 0.5 * beaker.size.width;
     this.height = 0.9 * beaker.size.height;
 
-    // @public location, origin at upper-left corner
-    this.location = beaker.location.plusXY( (this.width - beaker.size.width) / 2, -(beaker.size.height + this.height) / 2 );
+    // @public position, origin at upper-left corner
+    this.position = beaker.position.plusXY( (this.width - beaker.size.width) / 2, -(beaker.size.height + this.height) / 2 );
   }
 
   acidBaseSolutions.register( 'ConcentrationGraph', ConcentrationGraph );

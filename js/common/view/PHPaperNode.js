@@ -69,7 +69,7 @@ define( require => {
 
       drag: function( e ) {
         const v = self.globalToParentPoint( e.pointer.point ).subtract( clickOffset );
-        pHPaper.locationProperty.set( new Vector2(
+        pHPaper.positionProperty.set( new Vector2(
           Utils.clamp( v.x, pHPaper.dragBounds.minX, pHPaper.dragBounds.maxX ),
           Utils.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) ) );
       }
@@ -77,8 +77,8 @@ define( require => {
     this.addInputListener( this.dragHandler );
 
     // add observers
-    pHPaper.locationProperty.link( function( location ) {
-      self.translation = location;
+    pHPaper.positionProperty.link( function( position ) {
+      self.translation = position;
     } );
 
     pHPaper.indicatorHeightProperty.link( function( height ) {
@@ -125,17 +125,17 @@ define( require => {
     step: function( dt ) {
       if ( !this.dragHandler.dragging ) {
 
-        const location = this.pHPaper.locationProperty.value;
+        const position = this.pHPaper.positionProperty.value;
         const minY = this.pHPaper.beaker.top + ( 0.6 * this.pHPaper.paperSize.height );
 
         // if the paper is fully submerged in the solution ...
-        if ( ( this.animating && location.y > minY ) || ( this.pHPaper.top > this.pHPaper.beaker.top ) ) {
+        if ( ( this.animating && position.y > minY ) || ( this.pHPaper.top > this.pHPaper.beaker.top ) ) {
 
           // float to the top of the beaker, with part of the paper above the surface
           this.animating = true;
           const dy = dt * 250; // move at a constant speed of 250 pixels per second
-          const y = Math.max( minY, location.y - dy );
-          this.pHPaper.locationProperty.value = new Vector2( location.x, y );
+          const y = Math.max( minY, position.y - dy );
+          this.pHPaper.positionProperty.value = new Vector2( position.x, y );
         }
       }
       else {

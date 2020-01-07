@@ -38,8 +38,8 @@ define( require => {
       beaker.left + this.paperSize.width / 2, beaker.top - 20,
       beaker.right - this.paperSize.width / 2, beaker.bottom );
 
-    // @public location of the bottom-center of the paper
-    this.locationProperty = new Vector2Property( new Vector2( beaker.right - 60, beaker.top - 10 ) );
+    // @public position of the bottom-center of the paper
+    this.positionProperty = new Vector2Property( new Vector2( beaker.right - 60, beaker.top - 10 ) );
 
     // @public
     // NOTE: Ideally, indicatorHeight should be a DerivedProperty, but that gets quite messy.
@@ -54,7 +54,7 @@ define( require => {
     solutionTypeProperty.link( resetIndicator );
     pHProperty.link( resetIndicator );
 
-    this.locationProperty.link( function() {
+    this.positionProperty.link( function() {
       self.updateIndicatorHeight();
     } );
   }
@@ -66,14 +66,14 @@ define( require => {
     // @public
     reset: function() {
       this.indicatorHeightProperty.reset();
-      this.locationProperty.reset();
+      this.positionProperty.reset();
     },
 
     /**
      * Gets the y coordinate of the top of the pH paper. Origin is at bottom center.
      * @returns {number}
      */
-    getTop: function() { return this.locationProperty.value.y - this.paperSize.height; },
+    getTop: function() { return this.positionProperty.value.y - this.paperSize.height; },
     get top() { return this.getTop(); },
 
     /**
@@ -82,8 +82,8 @@ define( require => {
      * @private
      */
     updateIndicatorHeight: function() {
-      if ( this.beaker.bounds.containsPoint( this.locationProperty.get() ) ) {
-        const height = Utils.clamp( this.locationProperty.get().y - this.beaker.top + 5, this.indicatorHeightProperty.get(), this.paperSize.height );
+      if ( this.beaker.bounds.containsPoint( this.positionProperty.get() ) ) {
+        const height = Utils.clamp( this.positionProperty.get().y - this.beaker.top + 5, this.indicatorHeightProperty.get(), this.paperSize.height );
         this.indicatorHeightProperty.set( height );
       }
     }

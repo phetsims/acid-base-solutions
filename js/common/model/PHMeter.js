@@ -1,8 +1,7 @@
 // Copyright 2014-2019, University of Colorado Boulder
 
 /**
- * pH meter model.
- * Location is at the tip of the probe.
+ * pH meter model. Position is at the tip of the probe.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
@@ -30,8 +29,8 @@ define( require => {
     // @public drag range (y coordinate)
     this.dragYRange = new Range( beaker.top - 5, beaker.top + 60 );
 
-    // @public location, at tip of probe
-    this.locationProperty = new Vector2Property( new Vector2( beaker.right - 65, beaker.top - 5 ) );
+    // @public position, at tip of probe
+    this.positionProperty = new Vector2Property( new Vector2( beaker.right - 65, beaker.top - 5 ) );
   }
 
   acidBaseSolutions.register( 'PHMeter', PHMeter );
@@ -40,12 +39,12 @@ define( require => {
 
     // @public
     reset: function() {
-      this.locationProperty.reset();
+      this.positionProperty.reset();
     },
 
     // @public Is the tip of the pH probe in solution?
     inSolution: function() {
-      return this.beaker.bounds.containsPoint( this.locationProperty.get() );
+      return this.beaker.bounds.containsPoint( this.positionProperty.get() );
     }
   } );
 } );
