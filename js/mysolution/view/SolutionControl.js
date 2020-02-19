@@ -67,8 +67,11 @@ define( require => {
     const isAcidProperty = new BooleanProperty( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.STRONG_ACID );
     const acidBaseSwitch = new ABSwitch( isAcidProperty,
       true, new Text( acidString, { font: CONTROL_FONT } ),
-      false, new Text( baseString, { font: CONTROL_FONT } ),
-      { switchSize: AB_SWITCH_SIZE } );
+      false, new Text( baseString, { font: CONTROL_FONT } ), {
+      toggleSwitchOptions: {
+        size: AB_SWITCH_SIZE
+      }
+    } );
 
     // concentration title
     const concentrationTitle = new Text( initialConcentrationString, { font: SUBTITLE_FONT } );
@@ -102,9 +105,11 @@ define( require => {
     const isWeakProperty = new BooleanProperty( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.WEAK_ACID );
     const weakStrongSwitch = new ABSwitch( isWeakProperty,
       true, new Text( weakString, { font: CONTROL_FONT } ),
-      false, new Text( strongString, { font: CONTROL_FONT } ),
-      { switchSize: AB_SWITCH_SIZE }
-    );
+      false, new Text( strongString, { font: CONTROL_FONT } ), {
+        toggleSwitchOptions: {
+          size: AB_SWITCH_SIZE
+        }
+      } );
     const strengthSlider = new StrengthSlider( solutionTypeProperty, strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE );
 
     options.children = [
