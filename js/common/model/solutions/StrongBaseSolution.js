@@ -13,55 +13,51 @@ define( require => {
   const ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   const AqueousSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/AqueousSolution' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
 
-  /**
-   * @constructor
-   */
-  function StrongBaseSolution() {
-    AqueousSolution.call( this,
-      SolutionType.STRONG_BASE, ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue,
-      [
-        // molecules found in this solution
-        { key: 'MOH', concentrationFunctionName: 'getSoluteConcentration' },
-        { key: 'M', concentrationFunctionName: 'getProductConcentration' },
-        { key: 'OH', concentrationFunctionName: 'getOHConcentration' }
-      ] );
-  }
+  class StrongBaseSolution extends AqueousSolution {
 
-  acidBaseSolutions.register( 'StrongBaseSolution', StrongBaseSolution );
-
-  return inherit( AqueousSolution, StrongBaseSolution, {
+    constructor() {
+      super( SolutionType.STRONG_BASE, ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue,
+        [
+          // molecules found in this solution
+          { key: 'MOH', concentrationFunctionName: 'getSoluteConcentration' },
+          { key: 'M', concentrationFunctionName: 'getProductConcentration' },
+          { key: 'OH', concentrationFunctionName: 'getOHConcentration' }
+        ]
+      );
+    }
 
     // @override @public [MOH] = 0
-    getSoluteConcentration: function() {
+    getSoluteConcentration() {
       return 0;
-    },
+    }
 
     // @override @public [M+] = c
-    getProductConcentration: function() {
+    getProductConcentration() {
       return this.getConcentration();
-    },
+    }
 
     // @override @public [H3O+] = Kw / [OH-]
-    getH3OConcentration: function() {
+    getH3OConcentration() {
       return ABSConstants.WATER_EQUILIBRIUM_CONSTANT / this.getOHConcentration();
-    },
+    }
 
     // @override @public [OH-] = c
-    getOHConcentration: function() {
+    getOHConcentration() {
       return this.getConcentration();
-    },
+    }
 
-    //@override [H2O] = W
-    getH2OConcentration: function() {
+    // @override @public [H2O] = W
+    getH2OConcentration() {
       return ABSConstants.WATER_CONCENTRATION;
-    },
+    }
 
     // @override @protected Strong strength is a constant.
-    isValidStrength: function( strength ) {
+    isValidStrength( strength ) {
       return ( strength === ABSConstants.STRONG_STRENGTH );
     }
-  } );
+  }
+
+  return acidBaseSolutions.register( 'StrongBaseSolution', StrongBaseSolution );
 } );

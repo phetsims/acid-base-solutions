@@ -6,7 +6,6 @@
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
  */
-
 define( require => {
   'use strict';
 
@@ -14,56 +13,52 @@ define( require => {
   const ABSConstants = require( 'ACID_BASE_SOLUTIONS/common/ABSConstants' );
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   const AqueousSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/AqueousSolution' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
 
-  /**
-   * @constructor
-   */
-  function StrongAcidSolution() {
-    AqueousSolution.call( this,
-      SolutionType.STRONG_ACID, ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue,
-      [
-        // molecules found in this solution
-        { key: 'HA', concentrationFunctionName: 'getSoluteConcentration' },
-        { key: 'H2O', concentrationFunctionName: 'getH2OConcentration' },
-        { key: 'A', concentrationFunctionName: 'getProductConcentration' },
-        { key: 'H3O', concentrationFunctionName: 'getH3OConcentration' }
-      ] );
-  }
+  class StrongAcidSolution extends AqueousSolution {
 
-  acidBaseSolutions.register( 'StrongAcidSolution', StrongAcidSolution );
-
-  return inherit( AqueousSolution, StrongAcidSolution, {
+    constructor() {
+      super( SolutionType.STRONG_ACID, ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue,
+        [
+          // molecules found in this solution
+          { key: 'HA', concentrationFunctionName: 'getSoluteConcentration' },
+          { key: 'H2O', concentrationFunctionName: 'getH2OConcentration' },
+          { key: 'A', concentrationFunctionName: 'getProductConcentration' },
+          { key: 'H3O', concentrationFunctionName: 'getH3OConcentration' }
+        ]
+      );
+    }
 
     // @override @public [HA] = 0
-    getSoluteConcentration: function() {
+    getSoluteConcentration() {
       return 0;
-    },
+    }
 
     // @override @public [A-] = c
-    getProductConcentration: function() {
+    getProductConcentration() {
       return this.getConcentration();
-    },
+    }
 
     // @override @public [H3O+] = c
-    getH3OConcentration: function() {
+    getH3OConcentration() {
       return this.getConcentration();
-    },
+    }
 
     // @override @public [OH-] = Kw / [H3O+]
-    getOHConcentration: function() {
+    getOHConcentration() {
       return ABSConstants.WATER_EQUILIBRIUM_CONSTANT / this.getH3OConcentration();
-    },
+    }
 
     // @override @public [H2O] = W - c
-    getH2OConcentration: function() {
+    getH2OConcentration() {
       return ABSConstants.WATER_CONCENTRATION - this.getConcentration();
-    },
+    }
 
     // @override @protected Strong strength is a constant.
-    isValidStrength: function( strength ) {
+    isValidStrength( strength ) {
       return ( strength === ABSConstants.STRONG_STRENGTH );
     }
-  } );
+  }
+
+  return acidBaseSolutions.register( 'StrongAcidSolution', StrongAcidSolution );
 } );
