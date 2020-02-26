@@ -1,4 +1,4 @@
-// Copyright 2014-2019, University of Colorado Boulder
+// Copyright 2014-2020, University of Colorado Boulder
 
 /**
  * The 'My Solution' screen.
@@ -11,7 +11,6 @@ define( require => {
   // modules
   const ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
   const MySolutionModel = require( 'ACID_BASE_SOLUTIONS/mysolution/model/MySolutionModel' );
   const MySolutionScreenView = require( 'ACID_BASE_SOLUTIONS/mysolution/view/MySolutionScreenView' );
@@ -23,31 +22,30 @@ define( require => {
   // strings
   const screenMySolutionString = require( 'string!ACID_BASE_SOLUTIONS/screen.mySolution' );
 
-  /**
-   * @constructor
-   */
-  function MySolutionScreen( tandem ) {
+  class MySolutionScreen extends Screen {
 
-    const options = {
-      name: screenMySolutionString,
-      backgroundColorProperty: new Property( ABSColors.SCREEN_BACKGROUND ),
-      homeScreenIcon: createScreenIcon(),
-      tandem: tandem
-    };
+    constructor( tandem ) {
 
-    Screen.call( this,
-      function() { return new MySolutionModel(); },
-      function( model ) { return new MySolutionScreenView( model ); },
-      options );
+      const options = {
+        name: screenMySolutionString,
+        backgroundColorProperty: new Property( ABSColors.SCREEN_BACKGROUND ),
+        homeScreenIcon: createScreenIcon(),
+        tandem: tandem
+      };
+
+      super(
+        () => new MySolutionModel(),
+        model => new MySolutionScreenView( model ),
+        options
+      );
+    }
   }
-
-  acidBaseSolutions.register( 'MySolutionScreen', MySolutionScreen );
 
   /**
    * Creates the icon for this screen.
    * @returns {Node}
    */
-  var createScreenIcon = function() {
+  function createScreenIcon() {
 
     const width = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.width;
     const height = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.height;
@@ -71,7 +69,7 @@ define( require => {
     const background = new Rectangle( 0, 0, width, height, { fill: 'white' } );
 
     return new Node( { children: [ background, h3oNode, ohNode ] } );
-  };
+  }
 
-  return inherit( Screen, MySolutionScreen );
+  return acidBaseSolutions.register( 'MySolutionScreen', MySolutionScreen );
 } );

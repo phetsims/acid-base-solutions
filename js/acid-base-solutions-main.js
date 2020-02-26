@@ -1,4 +1,4 @@
-// Copyright 2014-2019, University of Colorado Boulder
+// Copyright 2014-2020, University of Colorado Boulder
 
 /**
  * Main entry point for the 'Acid-Base Solutions' sim.
@@ -33,7 +33,7 @@ define( require => {
     }
   };
 
-  SimLauncher.launch( function() {
+  SimLauncher.launch( () => {
     const screens = [
       new IntroductionScreen( tandem.createTandem( 'introductionScreen' ) ),
       new MySolutionScreen( tandem.createTandem( 'mySolutionScreen' ) )
