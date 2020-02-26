@@ -14,7 +14,6 @@ define( require => {
   const AquaRadioButton = require( 'SUN/AquaRadioButton' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const merge = require( 'PHET_CORE/merge' );
   const MoleculeFactory = require( 'ACID_BASE_SOLUTIONS/common/view/MoleculeFactory' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -39,78 +38,78 @@ define( require => {
   const TOUCH_AREA_X_DILATION = 10;
   const TOUCH_AREA_Y_DILATION = 3;
 
-  /**
-   * @param {Property.<SolutionType>} solutionTypeProperty
-   * @param {Object} [options]
-   * @constructor
-   */
-  function SolutionsControl( solutionTypeProperty, options ) {
+  class SolutionsControl extends VBox {
 
-    options = merge( {
-      spacing: 8,
-      align: 'left'
-    }, options );
+    /**
+     * @param {Property.<SolutionType>} solutionTypeProperty
+     * @param {Object} [options]
+     */
+    constructor( solutionTypeProperty, options ) {
 
-    // Water (H20)
-    const waterRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WATER,
-      new HBox( {
-        spacing: TEXT_ICON_SPACING,
-        children: [
-          new RichText( waterString + ' (H<sub>2</sub>O)', TEXT_OPTIONS ),
-          new MoleculeFactory.H2O()
-        ]
-      } ), RADIO_BUTTON_OPTIONS );
+      options = merge( {
+        spacing: 8,
+        align: 'left'
+      }, options );
 
-    // Strong Acid (HA)
-    const strongAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_ACID,
-      createStyledLabel( strongAcidString + ' (H', 'A', ')', new MoleculeFactory.HA() ),
-      RADIO_BUTTON_OPTIONS );
+      // Water (H20)
+      const waterRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WATER,
+        new HBox( {
+          spacing: TEXT_ICON_SPACING,
+          children: [
+            new RichText( waterString + ' (H<sub>2</sub>O)', TEXT_OPTIONS ),
+            new MoleculeFactory.H2O()
+          ]
+        } ), RADIO_BUTTON_OPTIONS );
 
-    // Weak Acid (HA)
-    const weakAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_ACID,
-      createStyledLabel( weakAcidString + ' (H', 'A', ')', new MoleculeFactory.HA() ),
-      RADIO_BUTTON_OPTIONS );
+      // Strong Acid (HA)
+      const strongAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_ACID,
+        createStyledLabel( strongAcidString + ' (H', 'A', ')', new MoleculeFactory.HA() ),
+        RADIO_BUTTON_OPTIONS );
 
-    // Strong Base (M)
-    const strongBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_BASE,
-      createStyledLabel( strongBaseString + ' (', 'M', 'OH)', new MoleculeFactory.MOH() ),
-      RADIO_BUTTON_OPTIONS );
+      // Weak Acid (HA)
+      const weakAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_ACID,
+        createStyledLabel( weakAcidString + ' (H', 'A', ')', new MoleculeFactory.HA() ),
+        RADIO_BUTTON_OPTIONS );
 
-    // Weak Base (B)
-    const weakBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_BASE,
-      createStyledLabel( weakBaseString + ' (', 'B', ')', new MoleculeFactory.B() ),
-      RADIO_BUTTON_OPTIONS );
+      // Strong Base (M)
+      const strongBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_BASE,
+        createStyledLabel( strongBaseString + ' (', 'M', 'OH)', new MoleculeFactory.MOH() ),
+        RADIO_BUTTON_OPTIONS );
 
-    const buttons = [
-      waterRadioButton,
-      strongAcidRadioButton,
-      weakAcidRadioButton,
-      strongBaseRadioButton,
-      weakBaseRadioButton
-    ];
+      // Weak Base (B)
+      const weakBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_BASE,
+        createStyledLabel( weakBaseString + ' (', 'B', ')', new MoleculeFactory.B() ),
+        RADIO_BUTTON_OPTIONS );
 
-    // Make all buttons have the same height
-    let maxHeight = 0;
-    buttons.forEach( function( button ) {
-      maxHeight = Math.max( button.height, maxHeight );
-    } );
-    const vStrut = new VStrut( maxHeight );
-    buttons.forEach( function( button ) {
-      const buttonCenterY = button.centerY;
-      button.addChild( vStrut );
-      vStrut.centerY = buttonCenterY;
-    } );
+      const buttons = [
+        waterRadioButton,
+        strongAcidRadioButton,
+        weakAcidRadioButton,
+        strongBaseRadioButton,
+        weakBaseRadioButton
+      ];
 
-    // uniformly expands touch area for buttons
-    buttons.forEach( function( button ) {
-      button.touchArea = button.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
-    } );
+      // Make all buttons have the same height
+      let maxHeight = 0;
+      buttons.forEach( button => {
+        maxHeight = Math.max( button.height, maxHeight );
+      } );
+      const vStrut = new VStrut( maxHeight );
+      buttons.forEach( button => {
+        const buttonCenterY = button.centerY;
+        button.addChild( vStrut );
+        vStrut.centerY = buttonCenterY;
+      } );
 
-    options.children = buttons;
-    VBox.call( this, options );
+      // uniformly expands touch area for buttons
+      buttons.forEach( button => {
+        button.touchArea = button.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
+      } );
+
+      options.children = buttons;
+      super( options );
+    }
   }
-
-  acidBaseSolutions.register( 'SolutionsControl', SolutionsControl );
 
   /**
    * Notes about this ugly composition of the radio button labels, used throughout.
@@ -118,7 +117,7 @@ define( require => {
    * (2) Other proposed approaches were not maintainable or required scenery changes.
    * (3) Order of solution name, formula and molecule is not internationalized.
    */
-  var createStyledLabel = function( plainString1, italicString, plainString2, moleculeNode ) {
+  function createStyledLabel( plainString1, italicString, plainString2, moleculeNode ) {
     return new HBox( {
       children: [
         new Text( plainString1, TEXT_OPTIONS ),
@@ -128,7 +127,7 @@ define( require => {
         moleculeNode
       ]
     } );
-  };
+  }
 
-  return inherit( VBox, SolutionsControl );
+  return acidBaseSolutions.register( 'SolutionsControl', SolutionsControl );
 } );
