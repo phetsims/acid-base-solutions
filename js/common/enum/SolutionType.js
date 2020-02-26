@@ -19,7 +19,5 @@ define( require => {
     WEAK_BASE: 'weakBase'
   } );
 
-  acidBaseSolutions.register( 'SolutionType', SolutionType );
-
-  return SolutionType;
+  return acidBaseSolutions.register( 'SolutionType', SolutionType );
 } );

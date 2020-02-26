@@ -17,7 +17,5 @@ define( require => {
     CONDUCTIVITY: 'conductivity'
   } );
 
-  acidBaseSolutions.register( 'ToolMode', ToolMode );
-
-  return ToolMode;
+  return acidBaseSolutions.register( 'ToolMode', ToolMode );
 } );

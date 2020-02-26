@@ -17,7 +17,5 @@ define( require => {
     HIDE_VIEWS: 'hideViews'
   } );
 
-  acidBaseSolutions.register( 'ViewMode', ViewMode );
-
-  return ViewMode;
+  return acidBaseSolutions.register( 'ViewMode', ViewMode );
 } );
