@@ -15,75 +15,71 @@ define( require => {
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   const ConcentrationGraphBackgroundNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphBackgroundNode' );
   const ConcentrationGraphBarNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphBarNode' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
-  /**
-   * @param {ConcentrationGraph} graph
-   * @constructor
-   */
-  function ConcentrationGraphNode( graph ) {
+  class ConcentrationGraphNode extends Node {
 
-    const self = this;
+    /**
+     * @param {ConcentrationGraph} graph
+     */
+    constructor( graph ) {
 
-    Node.call( this );
+      super();
 
-    this.graph = graph; // @private
-    this.bars = []; // @private
+      this.graph = graph; // @private
+      this.bars = []; // @private
 
-    // add background
-    this.addChild( new ConcentrationGraphBackgroundNode( graph.width, graph.height ) );
+      // add background
+      this.addChild( new ConcentrationGraphBackgroundNode( graph.width, graph.height ) );
 
-    // find maximum number of bars for all solutions
-    let maxBars = 0;
-    for ( const key in graph.solutions ) {
-      const solution = graph.solutions[ key ];
-      maxBars = Math.max( maxBars, solution.molecules.length );
-    }
-
-    // create enough bars for all solutions
-    for ( let i = 0; i < maxBars; i++ ) {
-      this.addChild( this.bars[ i ] = new ConcentrationGraphBarNode( graph.height - 10 ) );
-    }
-
-    this.translation = graph.position;
-
-    // Observe the strength and concentration properties for whichever solution is selected.
-    const updateValuesBound = this.updateValues.bind( this );
-    graph.solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
-
-      // show the correct number of bars
-      self.updateBars();
-
-      // unlink from previous solution
-      if ( prevSolutionType ) {
-        graph.solutions[ prevSolutionType ].strengthProperty.unlink( updateValuesBound );
-        graph.solutions[ prevSolutionType ].concentrationProperty.unlink( updateValuesBound );
+      // find maximum number of bars for all solutions
+      let maxBars = 0;
+      for ( const key in graph.solutions ) {
+        const solution = graph.solutions[ key ];
+        maxBars = Math.max( maxBars, solution.molecules.length );
       }
 
-      // link to new solution
-      graph.solutions[ newSolutionType ].strengthProperty.link( updateValuesBound );
-      graph.solutions[ newSolutionType ].concentrationProperty.link( updateValuesBound );
-    } );
-  }
+      // create enough bars for all solutions
+      for ( let i = 0; i < maxBars; i++ ) {
+        const barNode = new ConcentrationGraphBarNode( graph.height - 10 );
+        this.bars[ i ] = barNode;
+        this.addChild( barNode );
+      }
 
-  acidBaseSolutions.register( 'ConcentrationGraphNode', ConcentrationGraphNode );
+      this.translation = graph.position;
 
-  return inherit( Node, ConcentrationGraphNode, {
+      // Observe the strength and concentration properties for whichever solution is selected.
+      const updateValuesBound = this.updateValues.bind( this );
+      graph.solutionTypeProperty.link( ( newSolutionType, prevSolutionType ) => {
+
+        // show the correct number of bars
+        this.updateBars();
+
+        // unlink from previous solution
+        if ( prevSolutionType ) {
+          graph.solutions[ prevSolutionType ].strengthProperty.unlink( updateValuesBound );
+          graph.solutions[ prevSolutionType ].concentrationProperty.unlink( updateValuesBound );
+        }
+
+        // link to new solution
+        graph.solutions[ newSolutionType ].strengthProperty.link( updateValuesBound );
+        graph.solutions[ newSolutionType ].concentrationProperty.link( updateValuesBound );
+      } );
+    }
 
     /*
      * @override @public
      * Update when this node becomes visible.
      */
-    setVisible: function( visible ) {
+    setVisible( visible ) {
       const wasVisible = this.visible;
-      Node.prototype.setVisible.call( this, visible );
+      super.setVisible( visible );
       if ( !wasVisible && visible ) {
         this.updateBars();
         this.updateValues();
       }
-    },
+    }
 
     /*
      * @private
@@ -91,7 +87,7 @@ define( require => {
      * and sets the bars colors and positions to match the molecules in the solution.
      * To improve performance, updates only when this node is visible.
      */
-    updateBars: function() {
+    updateBars() {
 
       if ( this.visible ) {
 
@@ -108,21 +104,21 @@ define( require => {
             bar.setVisible( true );
             bar.setValue( solution[ molecules[ i ].concentrationFunctionName ]() );
             bar.setBarFill( ABSColors.MOLECULES[ molecules[ i ].key ] );
-            bar.setTranslation( (i + 0.75 + (4 - numberOfMolecules) / 2) * this.graph.width / 4, this.graph.height );
+            bar.setTranslation( ( i + 0.75 + ( 4 - numberOfMolecules ) / 2 ) * this.graph.width / 4, this.graph.height );
           }
           else {
             bar.setVisible( false );
           }
         }
       }
-    },
+    }
 
     /**
      * @private
      * Sets the concentration values on each bar.
      * To improve performance, updates only when this node is visible.
      */
-    updateValues: function() {
+    updateValues() {
 
       if ( this.visible ) {
 
@@ -135,14 +131,13 @@ define( require => {
         }
       }
     }
-  }, {
 
     /**
      *  Creates an icon of the graph, with 4 bars (similar to weak acid).
      *  @static
      *  @returns {Node}
      */
-    createIcon: function() {
+    static createIcon() {
       return new Node( {
         children: [
           new Rectangle( 0, 0, 22, 18, { fill: 'white' } ), // background
@@ -154,5 +149,7 @@ define( require => {
         ]
       } );
     }
-  } );
+  }
+
+  return acidBaseSolutions.register( 'ConcentrationGraphNode', ConcentrationGraphNode );
 } );

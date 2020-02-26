@@ -10,7 +10,6 @@ define( require => {
 
   // modules
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -25,31 +24,31 @@ define( require => {
   // constants
   const FONT = new PhetFont( 12 );
 
-  /**
-   * @param {number} maxHeight
-   * @constructor
-   */
-  function ConcentrationGraphBarNode( maxHeight ) {
+  class ConcentrationGraphBarNode extends Node {
 
-    this.maxBarHeight = maxHeight; // @private
+    /**
+     * @param {number} maxBarHeight
+     */
+    constructor( maxBarHeight ) {
 
-    // @private add rectangle to represent concentration
-    this.bar = new Rectangle( 0, 0, 25, 0, { fill: 'white' } );
-    this.bar.rotate( Math.PI ); // so that bar grows upward
+      // add rectangle to represent concentration
+      const bar = new Rectangle( 0, 0, 25, 0, { fill: 'white' } );
+      bar.rotate( Math.PI ); // so that bar grows upward
 
-    // @private add vertical text for concentration (normal text + exponent text)
-    this.text = new RichText( '123', { font: FONT, centerX: 2, centerY: -10, maxWidth: 0.85 * maxHeight } );
-    this.text.rotate( -Math.PI / 2 );
+      // add vertical text for concentration (normal text + exponent text)
+      const text = new RichText( '123', { font: FONT, centerX: 2, centerY: -10, maxWidth: 0.85 * maxBarHeight } );
+      text.rotate( -Math.PI / 2 );
 
-    Node.call( this, { children: [ this.bar, this.text ] } );
-  }
+      super( { children: [ bar, text ] } );
 
-  acidBaseSolutions.register( 'ConcentrationGraphBarNode', ConcentrationGraphBarNode );
-
-  return inherit( Node, ConcentrationGraphBarNode, {
+      // @private
+      this.maxBarHeight = maxBarHeight;
+      this.bar = bar;
+      this.text = text;
+    }
 
     // @public set height and text value of bar
-    setValue: function( value ) {
+    setValue( value ) {
       const barHeight = Math.abs( Utils.log10( value ) + 8 ) * this.maxBarHeight / 10;
       let pow;
 
@@ -70,7 +69,7 @@ define( require => {
         pow = Math.floor( Utils.log10( value ) );
 
         // find value
-        value = (value * Math.pow( 10, -pow ));
+        value = ( value * Math.pow( 10, -pow ) );
 
         // replace 10.00 to 1.00 x 10
         if ( Math.abs( value - 10 ) < 1e-2 ) {
@@ -90,11 +89,13 @@ define( require => {
       else {
         this.text.setText( Utils.toFixed( value, 1 ) );
       }
-    },
+    }
 
     // @public set color of bar
-    setBarFill: function( color ) {
+    setBarFill( color ) {
       this.bar.setFill( color );
     }
-  } );
+  }
+
+  return acidBaseSolutions.register( 'ConcentrationGraphBarNode', ConcentrationGraphBarNode );
 } );
