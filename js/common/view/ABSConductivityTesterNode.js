@@ -11,30 +11,28 @@ define( require => {
   // modules
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   const ConductivityTesterNode = require( 'SCENERY_PHET/ConductivityTesterNode' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
 
-  /**
-   * @param {ConductivityTester} conductivityTester
-   * @constructor
-   */
-  function ABSConductivityTesterNode( conductivityTester ) {
-    ConductivityTesterNode.call( this,
-      conductivityTester.brightnessProperty,
-      new Property( conductivityTester.bulbPosition ),
-      conductivityTester.positiveProbePositionProperty,
-      conductivityTester.negativeProbePositionProperty, {
-        probeSize: conductivityTester.probeSize,
-        probeDragYRange: new Range(
-          conductivityTester.probeDragYRange.min - conductivityTester.bulbPosition.y,
-          conductivityTester.probeDragYRange.max - conductivityTester.bulbPosition.y
-        )
-      }
-    );
+  class ABSConductivityTesterNode extends ConductivityTesterNode {
+
+    /**
+     * @param {ConductivityTester} conductivityTester
+     */
+    constructor( conductivityTester ) {
+      super( conductivityTester.brightnessProperty,
+        new Property( conductivityTester.bulbPosition ),
+        conductivityTester.positiveProbePositionProperty,
+        conductivityTester.negativeProbePositionProperty, {
+          probeSize: conductivityTester.probeSize,
+          probeDragYRange: new Range(
+            conductivityTester.probeDragYRange.min - conductivityTester.bulbPosition.y,
+            conductivityTester.probeDragYRange.max - conductivityTester.bulbPosition.y
+          )
+        }
+      );
+    }
   }
 
-  acidBaseSolutions.register( 'ABSConductivityTesterNode', ABSConductivityTesterNode );
-
-  return inherit( ConductivityTesterNode, ABSConductivityTesterNode );
+  return acidBaseSolutions.register( 'ABSConductivityTesterNode', ABSConductivityTesterNode );
 } );

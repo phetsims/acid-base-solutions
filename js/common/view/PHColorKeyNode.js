@@ -12,7 +12,6 @@ define( require => {
   // modules
   const ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -27,54 +26,54 @@ define( require => {
   const CHIP_HEIGHT = 28;
   const CHIP_X_SPACING = 1;
 
-  /**
-   * @param {Dimension2} paperSize
-   * @param {Object} [options] any Node options
-   * @constructor
-   */
-  function PHColorKeyNode( paperSize, options ) {
+  class PHColorKeyNode extends Node {
 
-    Node.call( this );
+    /**
+     * @param {Dimension2} paperSize
+     * @param {Object} [options] any Node options
+     */
+    constructor( paperSize, options ) {
 
-    const numberOfChips = ABSColors.PH.length;
+      super();
 
-    // color chips, with a pH value above each one
-    const parentNode = new Node();
-    let chipNode;
-    let previousChipNode;
-    let pHNumberNode;
-    for ( let i = 0; i < numberOfChips; i++ ) {
+      const numberOfChips = ABSColors.PH.length;
 
-      chipNode = new Rectangle( 0, 0, paperSize.width, CHIP_HEIGHT, { fill: ABSColors.PH[ i ] } );
-      pHNumberNode = new Text( i.toString(), { font: FONT_SMALL } );
+      // color chips, with a pH value above each one
+      const parentNode = new Node();
+      let chipNode;
+      let previousChipNode;
+      let pHNumberNode;
+      for ( let i = 0; i < numberOfChips; i++ ) {
 
-      parentNode.addChild( chipNode );
-      parentNode.addChild( pHNumberNode );
+        chipNode = new Rectangle( 0, 0, paperSize.width, CHIP_HEIGHT, { fill: ABSColors.PH[ i ] } );
+        pHNumberNode = new Text( i.toString(), { font: FONT_SMALL } );
 
-      if ( previousChipNode ) {
-        chipNode.left = previousChipNode.right + CHIP_X_SPACING;
+        parentNode.addChild( chipNode );
+        parentNode.addChild( pHNumberNode );
+
+        if ( previousChipNode ) {
+          chipNode.left = previousChipNode.right + CHIP_X_SPACING;
+        }
+        // pH number above color chip
+        pHNumberNode.centerX = chipNode.centerX;
+        pHNumberNode.bottom = chipNode.top - 2;
+
+        previousChipNode = chipNode;
       }
-      // pH number above color chip
-      pHNumberNode.centerX = chipNode.centerX;
-      pHNumberNode.bottom = chipNode.top - 2;
+      this.addChild( parentNode );
 
-      previousChipNode = chipNode;
+      // title, below color chips
+      const titleNode = new Text( pHColorKeyString, {
+        font: FONT_BIG,
+        maxWidth: parentNode.width,
+        left: parentNode.left,
+        top: parentNode.bottom + 2
+      } );
+      this.addChild( titleNode );
+
+      this.mutate( options );
     }
-    this.addChild( parentNode );
-
-    // title, below color chips
-    const titleNode = new Text( pHColorKeyString, {
-      font: FONT_BIG,
-      maxWidth: parentNode.width,
-      left: parentNode.left,
-      top: parentNode.bottom + 2
-    } );
-    this.addChild( titleNode );
-
-    this.mutate( options );
   }
 
-  acidBaseSolutions.register( 'PHColorKeyNode', PHColorKeyNode );
-
-  return inherit( Node, PHColorKeyNode );
+  return acidBaseSolutions.register( 'PHColorKeyNode', PHColorKeyNode );
 } );

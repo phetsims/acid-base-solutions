@@ -12,7 +12,6 @@ define( require => {
   const ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   const HBox = require( 'SCENERY/nodes/HBox' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const merge = require( 'PHET_CORE/merge' );
   const Panel = require( 'SUN/Panel' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -31,80 +30,80 @@ define( require => {
   const TITLE_Y_SPACING = 1;
   const TITLE_OPTIONS = { font: new PhetFont( { size: 14, weight: 'bold' } ) };
 
-  /**
-   * @param {ABSModel} model
-   * @param {ABSViewProperties} viewProperties properties that are specific to the view
-   * @param {Node} solutionControl
-   * @param {Object} [options]
-   * @constructor
-   */
-  function ABSControlPanel( model, viewProperties, solutionControl, options ) {
+  class ABSControlPanel extends VBox {
 
-    options = merge( {
-      align: 'left',
-      spacing: 5
-    }, options );
+    /**
+     * @param {ABSModel} model
+     * @param {ABSViewProperties} viewProperties properties that are specific to the view
+     * @param {Node} solutionControl
+     * @param {Object} [options]
+     */
+    constructor( model, viewProperties, solutionControl, options ) {
 
-    // titles
-    const solutionTitle = new Text( solutionString, TITLE_OPTIONS );
-    const viewsTitle = new Text( viewsString, TITLE_OPTIONS );
-    const toolsTitle = new Text( toolsString, TITLE_OPTIONS );
-
-    // controls
-    const viewsControl = new ViewsControl( viewProperties.viewModeProperty, viewProperties.solventVisibleProperty );
-    const toolsControl = new ToolsControl( viewProperties.toolModeProperty );
-
-    // Reset All button
-    const resetAllButton = new ResetAllButton( {
-      listener: function() {
-        model.reset();
-        viewProperties.reset();
-      },
-      scale: 0.75
-    } );
-
-    // 'Solution' and 'Views' panels have same width, 'Tools' panel does not
-    const xMargin = 15;
-    const panelOptions = {
-      minWidth: Math.max( solutionControl.width, Math.max( viewsControl.width, toolsControl.width ) ) + ( 2 * xMargin ),
-      fill: ABSColors.CONTROL_PANEL_BACKGROUND,
-      xMargin: xMargin,
-      yMargin: 6,
-      align: 'left'
-    };
-    options.children = [
-      new VBox( {
-        spacing: TITLE_Y_SPACING,
+      options = merge( {
         align: 'left',
-        children: [
-          solutionTitle,
-          new Panel( solutionControl, panelOptions )
-        ]
-      } ),
-      new VBox( {
-        spacing: TITLE_Y_SPACING,
-        align: 'left',
-        children: [
-          viewsTitle,
-          new Panel( viewsControl, panelOptions )
-        ]
-      } ),
-      new VBox( {
-        spacing: TITLE_Y_SPACING,
-        align: 'left',
-        children: [
-          toolsTitle,
-          // Reset All button to right of 'Tools' panel
-          new HBox( { children: [ new Panel( toolsControl, panelOptions ), resetAllButton ], spacing: 10 } )
-        ]
-      } )
-    ];
+        spacing: 5
+      }, options );
 
-    // stack panels vertically
-    VBox.call( this, options );
+      // titles
+      const solutionTitle = new Text( solutionString, TITLE_OPTIONS );
+      const viewsTitle = new Text( viewsString, TITLE_OPTIONS );
+      const toolsTitle = new Text( toolsString, TITLE_OPTIONS );
+
+      // controls
+      const viewsControl = new ViewsControl( viewProperties.viewModeProperty, viewProperties.solventVisibleProperty );
+      const toolsControl = new ToolsControl( viewProperties.toolModeProperty );
+
+      // Reset All button
+      const resetAllButton = new ResetAllButton( {
+        listener: () => {
+          model.reset();
+          viewProperties.reset();
+        },
+        scale: 0.75
+      } );
+
+      // 'Solution' and 'Views' panels have same width, 'Tools' panel does not
+      const xMargin = 15;
+      const panelOptions = {
+        minWidth: Math.max( solutionControl.width, Math.max( viewsControl.width, toolsControl.width ) ) + ( 2 * xMargin ),
+        fill: ABSColors.CONTROL_PANEL_BACKGROUND,
+        xMargin: xMargin,
+        yMargin: 6,
+        align: 'left'
+      };
+      options.children = [
+        new VBox( {
+          spacing: TITLE_Y_SPACING,
+          align: 'left',
+          children: [
+            solutionTitle,
+            new Panel( solutionControl, panelOptions )
+          ]
+        } ),
+        new VBox( {
+          spacing: TITLE_Y_SPACING,
+          align: 'left',
+          children: [
+            viewsTitle,
+            new Panel( viewsControl, panelOptions )
+          ]
+        } ),
+        new VBox( {
+          spacing: TITLE_Y_SPACING,
+          align: 'left',
+          children: [
+            toolsTitle,
+            // Reset All button to right of 'Tools' panel
+            new HBox( { children: [ new Panel( toolsControl, panelOptions ), resetAllButton ], spacing: 10 } )
+          ]
+        } )
+      ];
+
+      // stack panels vertically
+      super( options );
+    }
   }
 
-  acidBaseSolutions.register( 'ABSControlPanel', ABSControlPanel );
-
-  return inherit( VBox, ABSControlPanel );
+  return acidBaseSolutions.register( 'ABSControlPanel', ABSControlPanel );
 } );

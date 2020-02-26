@@ -15,7 +15,6 @@ define( require => {
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   const Circle = require( 'SCENERY/nodes/Circle' );
   const Color = require( 'SCENERY/util/Color' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
@@ -26,103 +25,82 @@ define( require => {
   const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
   const PAPER_STROKE = 'rgb(100, 100, 100)';
 
-  /**
-   * @param {PHPaper} pHPaper
-   * @constructor
-   */
-  function PHPaperNode( pHPaper ) {
+  class PHPaperNode extends Node {
 
-    const self = this;
-    Node.call( this, { cursor: 'pointer' } );
+    /**
+     * @param {PHPaper} pHPaper
+     */
+    constructor( pHPaper ) {
 
-    // blank paper
-    const paperNode = new Rectangle( 0, 0, pHPaper.paperSize.width, pHPaper.paperSize.height,
-      { fill: ABSColors.PH_PAPER, stroke: PAPER_STROKE, lineWidth: 0.5 } );
+      super( { cursor: 'pointer' } );
 
-    // portion of the paper that changes color
-    const indicatorNode = new Rectangle( 0, 0, pHPaper.paperSize.width, 0, { stroke: PAPER_STROKE, lineWidth: 0.5 } );
-    indicatorNode.rotate( Math.PI ); // so that indicator rectangle expands upward
+      // blank paper
+      const paperNode = new Rectangle( 0, 0, pHPaper.paperSize.width, pHPaper.paperSize.height,
+        { fill: ABSColors.PH_PAPER, stroke: PAPER_STROKE, lineWidth: 0.5 } );
 
-    // rendering order
-    this.addChild( paperNode );
-    this.addChild( indicatorNode );
-    if ( SHOW_ORIGIN ) {
-      this.addChild( new Circle( 2, { fill: 'red' } ) );
-    }
+      // portion of the paper that changes color
+      const indicatorNode = new Rectangle( 0, 0, pHPaper.paperSize.width, 0, { stroke: PAPER_STROKE, lineWidth: 0.5 } );
+      indicatorNode.rotate( Math.PI ); // so that indicator rectangle expands upward
 
-    // origin at bottom-center of paper
-    paperNode.centerX = 0;
-    paperNode.bottom = 0;
-    indicatorNode.centerX = 0;
-    indicatorNode.top = 0;
-
-    // expand touch area
-    this.touchArea = this.localBounds.dilatedXY( 10, 10 );
-
-    // @private Constrained dragging
-    let clickOffset = null;
-    this.dragHandler = new SimpleDragHandler( {
-
-      start: function( e ) {
-        clickOffset = self.globalToParentPoint( e.pointer.point ).subtract( e.currentTarget.translation );
-      },
-
-      drag: function( e ) {
-        const v = self.globalToParentPoint( e.pointer.point ).subtract( clickOffset );
-        pHPaper.positionProperty.set( new Vector2(
-          Utils.clamp( v.x, pHPaper.dragBounds.minX, pHPaper.dragBounds.maxX ),
-          Utils.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) ) );
+      // rendering order
+      this.addChild( paperNode );
+      this.addChild( indicatorNode );
+      if ( SHOW_ORIGIN ) {
+        this.addChild( new Circle( 2, { fill: 'red' } ) );
       }
-    } );
-    this.addInputListener( this.dragHandler );
 
-    // add observers
-    pHPaper.positionProperty.link( function( position ) {
-      self.translation = position;
-    } );
+      // origin at bottom-center of paper
+      paperNode.centerX = 0;
+      paperNode.bottom = 0;
+      indicatorNode.centerX = 0;
+      indicatorNode.top = 0;
 
-    pHPaper.indicatorHeightProperty.link( function( height ) {
-      indicatorNode.setRectHeight( height );
-    } );
+      // expand touch area
+      this.touchArea = this.localBounds.dilatedXY( 10, 10 );
 
-    // @private
-    this.updateColor = function() {
-      if ( self.visible ) {
-        indicatorNode.fill = pHToColor( pHPaper.pHProperty.get() );
-      }
-    };
-    pHPaper.pHProperty.link( this.updateColor );
+      // @private Constrained dragging
+      let clickOffset = null;
+      this.dragHandler = new SimpleDragHandler( {
 
-    // @private is the paper animating?
-    this.animating = false;
+        start: event => {
+          clickOffset = this.globalToParentPoint( event.pointer.point ).subtract( event.currentTarget.translation );
+        },
 
-    // @private needed by methods
-    this.pHPaper = pHPaper;
-  }
+        drag: event => {
+          const v = this.globalToParentPoint( event.pointer.point ).subtract( clickOffset );
+          pHPaper.positionProperty.set( new Vector2(
+            Utils.clamp( v.x, pHPaper.dragBounds.minX, pHPaper.dragBounds.maxX ),
+            Utils.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) ) );
+        }
+      } );
+      this.addInputListener( this.dragHandler );
 
-  acidBaseSolutions.register( 'PHPaperNode', PHPaperNode );
+      // add observers
+      pHPaper.positionProperty.link( position => {
+        this.translation = position;
+      } );
 
-  // Creates a {Color} color for a given {number} pH.
-  var pHToColor = function( pH ) {
-    assert && assert( pH >= 0 && pH <= ABSColors.PH.length );
-    let color;
-    if ( Utils.isInteger( pH ) ) {
-      // pH value is an integer, look up color
-      color = ABSColors.PH[ pH ];
+      pHPaper.indicatorHeightProperty.link( height => {
+        indicatorNode.setRectHeight( height );
+      } );
+
+      // @private
+      this.updateColor = () => {
+        if ( this.visible ) {
+          indicatorNode.fill = pHToColor( pHPaper.pHProperty.get() );
+        }
+      };
+      pHPaper.pHProperty.link( this.updateColor );
+
+      // @private is the paper animating?
+      this.animating = false;
+
+      // @private needed by methods
+      this.pHPaper = pHPaper;
     }
-    else {
-      // pH value is not an integer, interpolate between 2 closest colors
-      const lowerPH = Math.floor( pH );
-      const upperPH = lowerPH + 1;
-      color = Color.interpolateRGBA( ABSColors.PH[ lowerPH ], ABSColors.PH[ upperPH ], ( pH - lowerPH ) );
-    }
-    return color;
-  };
-
-  return inherit( Node, PHPaperNode, {
 
     // @public
-    step: function( dt ) {
+    step( dt ) {
       if ( !this.dragHandler.dragging ) {
 
         const position = this.pHPaper.positionProperty.value;
@@ -141,7 +119,7 @@ define( require => {
       else {
         this.animating = false;
       }
-    },
+    }
 
     /**
      * Update paper color when this node becomes visible.
@@ -149,32 +127,54 @@ define( require => {
      * @public
      * @override
      */
-    setVisible: function( visible ) {
+    setVisible( visible ) {
       const wasVisible = this.visible;
-      Node.prototype.setVisible.call( this, visible );
+      super.setVisible( visible );
       if ( !wasVisible && visible ) {
         this.updateColor();
       }
     }
-  }, {
 
     /**
      * Creates an icon that represents the pH paper.
      * @public
      * @static
-     * @param width
-     * @param height
+     * @param {number} width
+     * @param {number} height
      * @returns {Node}
      */
-    createIcon: function( width, height ) {
+    static createIcon( width, height ) {
       return new Node( {
         children: [
           // full paper
           new Rectangle( 0, 0, width, height, { fill: ABSColors.PH_PAPER, stroke: PAPER_STROKE, lineWidth: 0.5 } ),
           // portion of paper that's colored
-          new Rectangle( 0, 0.6 * height, width, 0.4 * height, { fill: ABSColors.PH[ 2 ], stroke: PAPER_STROKE, lineWidth: 0.5 } )
+          new Rectangle( 0, 0.6 * height, width, 0.4 * height, {
+            fill: ABSColors.PH[ 2 ],
+            stroke: PAPER_STROKE,
+            lineWidth: 0.5
+          } )
         ]
       } );
     }
-  } );
+  }
+
+  // Creates a {Color} color for a given {number} pH.
+  function pHToColor( pH ) {
+    assert && assert( pH >= 0 && pH <= ABSColors.PH.length );
+    let color;
+    if ( Utils.isInteger( pH ) ) {
+      // pH value is an integer, look up color
+      color = ABSColors.PH[ pH ];
+    }
+    else {
+      // pH value is not an integer, interpolate between 2 closest colors
+      const lowerPH = Math.floor( pH );
+      const upperPH = lowerPH + 1;
+      color = Color.interpolateRGBA( ABSColors.PH[ lowerPH ], ABSColors.PH[ upperPH ], ( pH - lowerPH ) );
+    }
+    return color;
+  }
+
+  return acidBaseSolutions.register( 'PHPaperNode', PHPaperNode );
 } );

@@ -6,67 +6,65 @@
  *
  * @author Andrey Zelenkov (Mlearner)
  */
-
 define( require => {
   'use strict';
 
   // modules
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ReactionEquationFactory = require( 'ACID_BASE_SOLUTIONS/common/view/ReactionEquationFactory' );
   const SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
 
-  /**
-   * @param {Beaker} beaker
-   * @param {Property.<SolutionType>} solutionTypeProperty
-   * @constructor
-   */
-  function ReactionEquationNode( beaker, solutionTypeProperty ) {
+  class ReactionEquationNode extends Node {
 
-    Node.call( this );
+    /**
+     * @param {Beaker} beaker
+     * @param {Property.<SolutionType>} solutionTypeProperty
+     */
+    constructor( beaker, solutionTypeProperty ) {
 
-    const equations = {};
-    equations[ SolutionType.WATER ] = ReactionEquationFactory.createWaterEquation();
-    equations[ SolutionType.STRONG_ACID ] = ReactionEquationFactory.createStrongAcidEquation();
-    equations[ SolutionType.WEAK_ACID ] = ReactionEquationFactory.createWeakAcidEquation();
-    equations[ SolutionType.STRONG_BASE ] = ReactionEquationFactory.createStrongBaseEquation();
-    equations[ SolutionType.WEAK_BASE ] = ReactionEquationFactory.createWeakBaseEquation();
+      super();
 
-    // find max width of equations
-    const maxWidth = getMaxWidth( equations );
+      const equations = {};
+      equations[ SolutionType.WATER ] = ReactionEquationFactory.createWaterEquation();
+      equations[ SolutionType.STRONG_ACID ] = ReactionEquationFactory.createStrongAcidEquation();
+      equations[ SolutionType.WEAK_ACID ] = ReactionEquationFactory.createWeakAcidEquation();
+      equations[ SolutionType.STRONG_BASE ] = ReactionEquationFactory.createStrongBaseEquation();
+      equations[ SolutionType.WEAK_BASE ] = ReactionEquationFactory.createWeakBaseEquation();
 
-    // add equations with central alignment
-    for ( const equation in equations ) {
-      equations[ equation ].setX( (maxWidth - equations[ equation ].getWidth()) / 2 );
-      equations[ equation ].setVisible( false );
-      this.addChild( equations[ equation ] );
-    }
+      // find max width of equations
+      const maxWidth = getMaxWidth( equations );
 
-    // position below the beaker
-    this.translation = beaker.position.plusXY( -maxWidth / 2, 10 );
-
-    // add observer for equations
-    solutionTypeProperty.link( function( newSolutionType, prevSolutionType ) {
-      // hide previous equation
-      if ( prevSolutionType ) {
-        equations[ prevSolutionType ].setVisible( false );
+      // add equations with central alignment
+      for ( const equation in equations ) {
+        equations[ equation ].setX( ( maxWidth - equations[ equation ].getWidth() ) / 2 );
+        equations[ equation ].setVisible( false );
+        this.addChild( equations[ equation ] );
       }
 
-      // show new equation
-      equations[ newSolutionType ].setVisible( true );
-    } );
+      // position below the beaker
+      this.translation = beaker.position.plusXY( -maxWidth / 2, 10 );
+
+      // add observer for equations
+      solutionTypeProperty.link( ( newSolutionType, prevSolutionType ) => {
+        // hide previous equation
+        if ( prevSolutionType ) {
+          equations[ prevSolutionType ].setVisible( false );
+        }
+
+        // show new equation
+        equations[ newSolutionType ].setVisible( true );
+      } );
+    }
   }
 
-  acidBaseSolutions.register( 'ReactionEquationNode', ReactionEquationNode );
-
-  var getMaxWidth = function( equations ) {
+  function getMaxWidth( equations ) {
     let maxWidth = 0;
     for ( const equation in equations ) {
       maxWidth = Math.max( maxWidth, equations[ equation ].getWidth() );
     }
     return maxWidth;
-  };
+  }
 
-  return inherit( Node, ReactionEquationNode );
+  return acidBaseSolutions.register( 'ReactionEquationNode', ReactionEquationNode );
 } );

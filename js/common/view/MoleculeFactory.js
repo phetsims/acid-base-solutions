@@ -13,7 +13,6 @@ define( require => {
   const ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
   const Circle = require( 'SCENERY/nodes/Circle' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -115,22 +114,21 @@ define( require => {
 
   acidBaseSolutions.register( 'MoleculeFactory', MoleculeFactory );
 
-  /**
-   * @param {number} radius
-   * @param {Color|String} color
-   * @param {Object} [options]
-   * @constructor
-   * @private
-   */
-  function AtomNode( radius, color, options ) {
-    const gradient = new RadialGradient( -radius * 0.2, -radius * 0.3, 0.25, -radius * 0.2, -radius * 0.3, radius * 2 )
-      .addColorStop( 0, 'white' )
-      .addColorStop( 0.33, color )
-      .addColorStop( 1, 'black' );
-    Circle.call( this, radius, merge( { fill: gradient }, options ) );
-  }
+  class AtomNode extends Circle {
 
-  inherit( Circle, AtomNode );
+    /**
+     * @param {number} radius
+     * @param {Color|String} color
+     * @param {Object} [options]
+     */
+    constructor( radius, color, options ) {
+      const gradient = new RadialGradient( -radius * 0.2, -radius * 0.3, 0.25, -radius * 0.2, -radius * 0.3, radius * 2 )
+        .addColorStop( 0, 'white' )
+        .addColorStop( 0.33, color )
+        .addColorStop( 1, 'black' );
+      super( radius, merge( { fill: gradient }, options ) );
+    }
+  }
 
   return MoleculeFactory;
 } );
