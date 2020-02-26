@@ -27,12 +27,10 @@ define( require => {
      */
     constructor( solutions, defaultSolutionType ) {
 
-      const self = this;
-
       // @public convert to an associative array, so we can look up solutions by solutionType
       this.solutions = {};
-      solutions.forEach( function( solution ) {
-        self.solutions[ solution.type ] = solution;
+      solutions.forEach( solution => {
+        this.solutions[ solution.type ] = solution;
       } );
 
       // @public type of solution that is currently selected
