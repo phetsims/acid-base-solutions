@@ -11,18 +11,17 @@ define( require => {
   // modules
   const ABSScreenView = require( 'ACID_BASE_SOLUTIONS/common/view/ABSScreenView' );
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const SolutionsControl = require( 'ACID_BASE_SOLUTIONS/introduction/view/SolutionsControl' );
 
-  /**
-   * @param {IntroductionModel} model
-   * @constructor
-   */
-  function IntroductionScreenView( model ) {
-    ABSScreenView.call( this, model, new SolutionsControl( model.solutionTypeProperty ) );
+  class IntroductionScreenView extends ABSScreenView {
+
+    /**
+     * @param {IntroductionModel} model
+     */
+    constructor( model ) {
+      super( model, new SolutionsControl( model.solutionTypeProperty ) );
+    }
   }
 
-  acidBaseSolutions.register( 'IntroductionScreenView', IntroductionScreenView );
-
-  return inherit( ABSScreenView, IntroductionScreenView );
+  return acidBaseSolutions.register( 'IntroductionScreenView', IntroductionScreenView );
 } );

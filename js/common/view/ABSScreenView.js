@@ -17,7 +17,6 @@ define( require => {
   const BeakerNode = require( 'ACID_BASE_SOLUTIONS/common/view/BeakerNode' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const ConcentrationGraphNode = require( 'ACID_BASE_SOLUTIONS/common/view/graph/ConcentrationGraphNode' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const MagnifierNode = require( 'ACID_BASE_SOLUTIONS/common/view/MagnifierNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PHColorKeyNode = require( 'ACID_BASE_SOLUTIONS/common/view/PHColorKeyNode' );
@@ -28,82 +27,88 @@ define( require => {
   const ToolMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ToolMode' );
   const ViewMode = require( 'ACID_BASE_SOLUTIONS/common/enum/ViewMode' );
 
-  /**
-   * @param {ABSModel} model
-   * @param {Node} solutionControl
-   * @constructor
-   */
-  function ABSScreenView( model, solutionControl ) {
+  class ABSScreenView extends ScreenView {
 
-    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
+    /**
+     * @param {ABSModel} model
+     * @param {Node} solutionControl
+     */
+    constructor( model, solutionControl ) {
 
-    // @public properties that are specific to the view
-    this.viewProperties = new ABSViewProperties();
+      super( {
+        layoutBounds: new Bounds2( 0, 0, 768, 504 )
+      } );
 
-    const beakerNode = new BeakerNode( model.beaker );
-    const equationNode = new ReactionEquationNode( model.beaker, model.solutionTypeProperty );
-    const magnifierNode = new MagnifierNode( model.magnifier );
-    const graphNode = new ConcentrationGraphNode( model.graph );
-    const pHMeterNode = new PHMeterNode( model.pHMeter );
-    const pHPaperNode = new PHPaperNode( model.pHPaper );
-    const pHColorKeyNode = new PHColorKeyNode( model.pHPaper.paperSize, { left: model.beaker.left + 3, bottom: model.beaker.top - 50 } );
-    const conductivityTesterNode = new ABSConductivityTesterNode( model.conductivityTester );
-    const controlPanel = new ABSControlPanel( model, this.viewProperties, solutionControl, {
-      // vertically centered at right edge of screen
-      right: this.layoutBounds.right - 20,
-      centerY: this.layoutBounds.centerY,
-      maxWidth: 0.75 * ( this.layoutBounds.width - beakerNode.width ) // constrain width for i18n
-    } );
+      // @public properties that are specific to the view
+      this.viewProperties = new ABSViewProperties();
 
-    const rootNode = new Node( {
-      children: [
-        pHMeterNode,
-        pHColorKeyNode,
-        pHPaperNode,
-        conductivityTesterNode,
-        beakerNode,
-        equationNode,
-        magnifierNode,
-        graphNode,
-        controlPanel
-      ]
-    } );
-    this.addChild( rootNode );
+      const beakerNode = new BeakerNode( model.beaker );
+      const equationNode = new ReactionEquationNode( model.beaker, model.solutionTypeProperty );
+      const magnifierNode = new MagnifierNode( model.magnifier );
+      const graphNode = new ConcentrationGraphNode( model.graph );
+      const pHMeterNode = new PHMeterNode( model.pHMeter );
+      const pHPaperNode = new PHPaperNode( model.pHPaper );
+      const pHColorKeyNode = new PHColorKeyNode( model.pHPaper.paperSize, {
+        left: model.beaker.left + 3,
+        bottom: model.beaker.top - 50
+      } );
+      const conductivityTesterNode = new ABSConductivityTesterNode( model.conductivityTester );
+      const controlPanel = new ABSControlPanel( model, this.viewProperties, solutionControl, {
+        // vertically centered at right edge of screen
+        right: this.layoutBounds.right - 20,
+        centerY: this.layoutBounds.centerY,
+        maxWidth: 0.75 * ( this.layoutBounds.width - beakerNode.width ) // constrain width for i18n
+      } );
 
-    this.viewProperties.solventVisibleProperty.link( function( soluteVisible ) {
-      magnifierNode.setSolventVisible( soluteVisible );
-    } );
+      const rootNode = new Node( {
+        children: [
+          pHMeterNode,
+          pHColorKeyNode,
+          pHPaperNode,
+          conductivityTesterNode,
+          beakerNode,
+          equationNode,
+          magnifierNode,
+          graphNode,
+          controlPanel
+        ]
+      } );
+      this.addChild( rootNode );
 
-    this.viewProperties.viewModeProperty.link( function( viewMode ) {
-      magnifierNode.visible = ( viewMode === ViewMode.MOLECULES  );
-      graphNode.visible = ( viewMode === ViewMode.GRAPH );
-    } );
+      this.viewProperties.solventVisibleProperty.link( function( soluteVisible ) {
+        magnifierNode.setSolventVisible( soluteVisible );
+      } );
 
-    this.viewProperties.toolModeProperty.link( function( toolMode ) {
+      this.viewProperties.viewModeProperty.link( function( viewMode ) {
+        magnifierNode.visible = ( viewMode === ViewMode.MOLECULES );
+        graphNode.visible = ( viewMode === ViewMode.GRAPH );
+      } );
 
-      pHMeterNode.visible = ( toolMode === ToolMode.PH_METER );
+      this.viewProperties.toolModeProperty.link( function( toolMode ) {
 
-      const pHPaperVisible = ( toolMode === ToolMode.PH_PAPER );
-      pHPaperNode.visible = pHPaperVisible;
-      pHColorKeyNode.visible = pHPaperVisible;
+        pHMeterNode.visible = ( toolMode === ToolMode.PH_METER );
 
-      conductivityTesterNode.visible = ( toolMode === ToolMode.CONDUCTIVITY );
-    } );
+        const pHPaperVisible = ( toolMode === ToolMode.PH_PAPER );
+        pHPaperNode.visible = pHPaperVisible;
+        pHColorKeyNode.visible = pHPaperVisible;
 
-    // @private needed by methods
-    this.pHPaperNode = pHPaperNode;
-  }
+        conductivityTesterNode.visible = ( toolMode === ToolMode.CONDUCTIVITY );
+      } );
 
-  acidBaseSolutions.register( 'ABSScreenView', ABSScreenView );
-
-  return inherit( ScreenView, ABSScreenView, {
+      // @private needed by methods
+      this.pHPaperNode = pHPaperNode;
+    }
 
     // @public resets properties that are specific to the view
-    reset: function() { this.viewProperties.reset(); },
+    reset() {
+      this.viewProperties.reset();
+    }
 
     // @public
-    step: function( dt ) {
+    step( dt ) {
       this.pHPaperNode.step( dt );
     }
-  } );
+  }
+
+  return acidBaseSolutions.register( 'ABSScreenView', ABSScreenView );
 } );
