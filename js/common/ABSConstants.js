@@ -25,7 +25,5 @@ define( require => {
     STRONG_STRENGTH: WEAK_STRENGTH_MAX + 1 // arbitrary, but needs to be greater than weak max
   };
 
-  acidBaseSolutions.register( 'ABSConstants', ABSConstants );
-
-  return ABSConstants;
+  return acidBaseSolutions.register( 'ABSConstants', ABSConstants );
 } );

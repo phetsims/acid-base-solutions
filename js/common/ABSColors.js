@@ -57,7 +57,5 @@ define( require => {
     }
   };
 
-  acidBaseSolutions.register( 'ABSColors', ABSColors );
-
-  return ABSColors;
+  return acidBaseSolutions.register( 'ABSColors', ABSColors );
 } );
