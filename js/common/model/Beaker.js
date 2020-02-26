@@ -17,30 +17,30 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const Vector2 = require( 'DOT/Vector2' );
 
-  /**
-   * @param {Object} [options]
-   * @constructor
-   */
-  function Beaker( options ) {
+  class Beaker {
 
-    options = merge( {
-      size: new Dimension2( 360, 270 ),
-      position: new Vector2( 230, 410 )
-    }, options );
+    /**
+     * @param {Object} [options]
+     */
+    constructor( options ) {
 
-    this.size = options.size; // @public
-    this.position = options.position; // @public
+      options = merge( {
+        size: new Dimension2( 360, 270 ),
+        position: new Vector2( 230, 410 )
+      }, options );
 
-    // @public convenience coordinates
-    this.left = this.position.x - this.size.width / 2;
-    this.right = this.left + this.size.width;
-    this.bottom = this.position.y;
-    this.top = this.bottom - this.size.height;
+      this.size = options.size; // @public
+      this.position = options.position; // @public
 
-    this.bounds = new Bounds2( this.left, this.top, this.right, this.bottom ); // @public
+      // @public convenience coordinates
+      this.left = this.position.x - this.size.width / 2;
+      this.right = this.left + this.size.width;
+      this.bottom = this.position.y;
+      this.top = this.bottom - this.size.height;
+
+      this.bounds = new Bounds2( this.left, this.top, this.right, this.bottom ); // @public
+    }
   }
 
-  acidBaseSolutions.register( 'Beaker', Beaker );
-
-  return Beaker;
+  return acidBaseSolutions.register( 'Beaker', Beaker );
 } );

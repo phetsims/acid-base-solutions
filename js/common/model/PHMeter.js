@@ -10,41 +10,39 @@ define( require => {
 
   // modules
   const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const Range = require( 'DOT/Range' );
   const Vector2 = require( 'DOT/Vector2' );
   const Vector2Property = require( 'DOT/Vector2Property' );
 
-  /**
-   * @param {Beaker} beaker
-   * @param {Property.<number>} pHProperty
-   * @constructor
-   */
-  function PHMeter( beaker, pHProperty ) {
+  class PHMeter {
+
+    /**
+     * @param {Beaker} beaker
+     * @param {Property.<number>} pHProperty
+     */
+    constructor( beaker, pHProperty ) {
+
+      // @public
+      this.beaker = beaker;
+      this.pHProperty = pHProperty;
+
+      // @public drag range (y coordinate)
+      this.dragYRange = new Range( beaker.top - 5, beaker.top + 60 );
+
+      // @public position, at tip of probe
+      this.positionProperty = new Vector2Property( new Vector2( beaker.right - 65, beaker.top - 5 ) );
+    }
 
     // @public
-    this.beaker = beaker;
-    this.pHProperty = pHProperty;
-
-    // @public drag range (y coordinate)
-    this.dragYRange = new Range( beaker.top - 5, beaker.top + 60 );
-
-    // @public position, at tip of probe
-    this.positionProperty = new Vector2Property( new Vector2( beaker.right - 65, beaker.top - 5 ) );
-  }
-
-  acidBaseSolutions.register( 'PHMeter', PHMeter );
-
-  return inherit( Object, PHMeter, {
-
-    // @public
-    reset: function() {
+    reset() {
       this.positionProperty.reset();
-    },
+    }
 
     // @public Is the tip of the pH probe in solution?
-    inSolution: function() {
+    inSolution() {
       return this.beaker.bounds.containsPoint( this.positionProperty.get() );
     }
-  } );
+  }
+
+  return acidBaseSolutions.register( 'PHMeter', PHMeter );
 } );
