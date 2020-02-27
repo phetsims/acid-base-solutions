@@ -21,8 +21,8 @@ import acidBaseSolutionsStrings from '../../acid-base-solutions-strings.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ViewMode from '../enum/ViewMode.js';
 import BeakerNode from './BeakerNode.js';
-import MoleculeFactory from './MoleculeFactory.js';
 import ConcentrationGraphNode from './graph/ConcentrationGraphNode.js';
+import MoleculeFactory from './MoleculeFactory.js';
 
 const graphString = acidBaseSolutionsStrings.graph;
 const hideViewsString = acidBaseSolutionsStrings.hideViews;

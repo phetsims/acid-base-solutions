@@ -17,12 +17,12 @@ import ABSConductivityTesterNode from './ABSConductivityTesterNode.js';
 import ABSControlPanel from './ABSControlPanel.js';
 import ABSViewProperties from './ABSViewProperties.js';
 import BeakerNode from './BeakerNode.js';
+import ConcentrationGraphNode from './graph/ConcentrationGraphNode.js';
 import MagnifierNode from './MagnifierNode.js';
 import PHColorKeyNode from './PHColorKeyNode.js';
 import PHMeterNode from './PHMeterNode.js';
 import PHPaperNode from './PHPaperNode.js';
 import ReactionEquationNode from './ReactionEquationNode.js';
-import ConcentrationGraphNode from './graph/ConcentrationGraphNode.js';
 
 class ABSScreenView extends ScreenView {
 
