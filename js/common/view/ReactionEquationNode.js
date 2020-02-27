@@ -6,65 +6,62 @@
  *
  * @author Andrey Zelenkov (Mlearner)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const ReactionEquationFactory = require( 'ACID_BASE_SOLUTIONS/common/view/ReactionEquationFactory' );
-  const SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
+import Node from '../../../../scenery/js/nodes/Node.js';
+import acidBaseSolutions from '../../acidBaseSolutions.js';
+import SolutionType from '../enum/SolutionType.js';
+import ReactionEquationFactory from './ReactionEquationFactory.js';
 
-  class ReactionEquationNode extends Node {
+class ReactionEquationNode extends Node {
 
-    /**
-     * @param {Beaker} beaker
-     * @param {Property.<SolutionType>} solutionTypeProperty
-     */
-    constructor( beaker, solutionTypeProperty ) {
+  /**
+   * @param {Beaker} beaker
+   * @param {Property.<SolutionType>} solutionTypeProperty
+   */
+  constructor( beaker, solutionTypeProperty ) {
 
-      super();
+    super();
 
-      const equations = {};
-      equations[ SolutionType.WATER ] = ReactionEquationFactory.createWaterEquation();
-      equations[ SolutionType.STRONG_ACID ] = ReactionEquationFactory.createStrongAcidEquation();
-      equations[ SolutionType.WEAK_ACID ] = ReactionEquationFactory.createWeakAcidEquation();
-      equations[ SolutionType.STRONG_BASE ] = ReactionEquationFactory.createStrongBaseEquation();
-      equations[ SolutionType.WEAK_BASE ] = ReactionEquationFactory.createWeakBaseEquation();
+    const equations = {};
+    equations[ SolutionType.WATER ] = ReactionEquationFactory.createWaterEquation();
+    equations[ SolutionType.STRONG_ACID ] = ReactionEquationFactory.createStrongAcidEquation();
+    equations[ SolutionType.WEAK_ACID ] = ReactionEquationFactory.createWeakAcidEquation();
+    equations[ SolutionType.STRONG_BASE ] = ReactionEquationFactory.createStrongBaseEquation();
+    equations[ SolutionType.WEAK_BASE ] = ReactionEquationFactory.createWeakBaseEquation();
 
-      // find max width of equations
-      const maxWidth = getMaxWidth( equations );
+    // find max width of equations
+    const maxWidth = getMaxWidth( equations );
 
-      // add equations with central alignment
-      for ( const equation in equations ) {
-        equations[ equation ].setX( ( maxWidth - equations[ equation ].getWidth() ) / 2 );
-        equations[ equation ].setVisible( false );
-        this.addChild( equations[ equation ] );
+    // add equations with central alignment
+    for ( const equation in equations ) {
+      equations[ equation ].setX( ( maxWidth - equations[ equation ].getWidth() ) / 2 );
+      equations[ equation ].setVisible( false );
+      this.addChild( equations[ equation ] );
+    }
+
+    // position below the beaker
+    this.translation = beaker.position.plusXY( -maxWidth / 2, 10 );
+
+    // add observer for equations
+    solutionTypeProperty.link( ( newSolutionType, prevSolutionType ) => {
+      // hide previous equation
+      if ( prevSolutionType ) {
+        equations[ prevSolutionType ].setVisible( false );
       }
 
-      // position below the beaker
-      this.translation = beaker.position.plusXY( -maxWidth / 2, 10 );
-
-      // add observer for equations
-      solutionTypeProperty.link( ( newSolutionType, prevSolutionType ) => {
-        // hide previous equation
-        if ( prevSolutionType ) {
-          equations[ prevSolutionType ].setVisible( false );
-        }
-
-        // show new equation
-        equations[ newSolutionType ].setVisible( true );
-      } );
-    }
+      // show new equation
+      equations[ newSolutionType ].setVisible( true );
+    } );
   }
+}
 
-  function getMaxWidth( equations ) {
-    let maxWidth = 0;
-    for ( const equation in equations ) {
-      maxWidth = Math.max( maxWidth, equations[ equation ].getWidth() );
-    }
-    return maxWidth;
+function getMaxWidth( equations ) {
+  let maxWidth = 0;
+  for ( const equation in equations ) {
+    maxWidth = Math.max( maxWidth, equations[ equation ].getWidth() );
   }
+  return maxWidth;
+}
 
-  return acidBaseSolutions.register( 'ReactionEquationNode', ReactionEquationNode );
-} );
+acidBaseSolutions.register( 'ReactionEquationNode', ReactionEquationNode );
+export default ReactionEquationNode;

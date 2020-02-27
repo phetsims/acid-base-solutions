@@ -7,40 +7,37 @@
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  const Bounds2 = require( 'DOT/Bounds2' );
-  const Dimension2 = require( 'DOT/Dimension2' );
-  const merge = require( 'PHET_CORE/merge' );
-  const Vector2 = require( 'DOT/Vector2' );
+import Bounds2 from '../../../../dot/js/Bounds2.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import merge from '../../../../phet-core/js/merge.js';
+import acidBaseSolutions from '../../acidBaseSolutions.js';
 
-  class Beaker {
+class Beaker {
 
-    /**
-     * @param {Object} [options]
-     */
-    constructor( options ) {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
 
-      options = merge( {
-        size: new Dimension2( 360, 270 ),
-        position: new Vector2( 230, 410 )
-      }, options );
+    options = merge( {
+      size: new Dimension2( 360, 270 ),
+      position: new Vector2( 230, 410 )
+    }, options );
 
-      this.size = options.size; // @public
-      this.position = options.position; // @public
+    this.size = options.size; // @public
+    this.position = options.position; // @public
 
-      // @public convenience coordinates
-      this.left = this.position.x - this.size.width / 2;
-      this.right = this.left + this.size.width;
-      this.bottom = this.position.y;
-      this.top = this.bottom - this.size.height;
+    // @public convenience coordinates
+    this.left = this.position.x - this.size.width / 2;
+    this.right = this.left + this.size.width;
+    this.bottom = this.position.y;
+    this.top = this.bottom - this.size.height;
 
-      this.bounds = new Bounds2( this.left, this.top, this.right, this.bottom ); // @public
-    }
+    this.bounds = new Bounds2( this.left, this.top, this.right, this.bottom ); // @public
   }
+}
 
-  return acidBaseSolutions.register( 'Beaker', Beaker );
-} );
+acidBaseSolutions.register( 'Beaker', Beaker );
+export default Beaker;

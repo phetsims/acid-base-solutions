@@ -5,17 +5,14 @@
  *
  * @author Andrey Zelenkov (Mlearner)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+import acidBaseSolutions from '../../acidBaseSolutions.js';
 
-  const ViewMode = Object.freeze( {
-    MOLECULES: 'molecules',
-    GRAPH: 'graph',
-    HIDE_VIEWS: 'hideViews'
-  } );
-
-  return acidBaseSolutions.register( 'ViewMode', ViewMode );
+const ViewMode = Object.freeze( {
+  MOLECULES: 'molecules',
+  GRAPH: 'graph',
+  HIDE_VIEWS: 'hideViews'
 } );
+
+acidBaseSolutions.register( 'ViewMode', ViewMode );
+export default ViewMode;

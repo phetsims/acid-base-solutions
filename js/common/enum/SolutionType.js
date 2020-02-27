@@ -5,19 +5,16 @@
  *
  * @author Andrey Zelenkov (Mlearner)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+import acidBaseSolutions from '../../acidBaseSolutions.js';
 
-  const SolutionType = Object.freeze( {
-    WATER: 'water',
-    STRONG_ACID: 'strongAcid',
-    WEAK_ACID: 'weakAcid',
-    STRONG_BASE: 'strongBase',
-    WEAK_BASE: 'weakBase'
-  } );
-
-  return acidBaseSolutions.register( 'SolutionType', SolutionType );
+const SolutionType = Object.freeze( {
+  WATER: 'water',
+  STRONG_ACID: 'strongAcid',
+  WEAK_ACID: 'weakAcid',
+  STRONG_BASE: 'strongBase',
+  WEAK_BASE: 'weakBase'
 } );
+
+acidBaseSolutions.register( 'SolutionType', SolutionType );
+export default SolutionType;

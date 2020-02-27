@@ -5,44 +5,41 @@
  *
  * @author Andrey Zelenkov (Mlearner)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  const Range = require( 'DOT/Range' );
-  const Vector2 = require( 'DOT/Vector2' );
-  const Vector2Property = require( 'DOT/Vector2Property' );
+import Range from '../../../../dot/js/Range.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import Vector2Property from '../../../../dot/js/Vector2Property.js';
+import acidBaseSolutions from '../../acidBaseSolutions.js';
 
-  class PHMeter {
+class PHMeter {
 
-    /**
-     * @param {Beaker} beaker
-     * @param {Property.<number>} pHProperty
-     */
-    constructor( beaker, pHProperty ) {
-
-      // @public
-      this.beaker = beaker;
-      this.pHProperty = pHProperty;
-
-      // @public drag range (y coordinate)
-      this.dragYRange = new Range( beaker.top - 5, beaker.top + 60 );
-
-      // @public position, at tip of probe
-      this.positionProperty = new Vector2Property( new Vector2( beaker.right - 65, beaker.top - 5 ) );
-    }
+  /**
+   * @param {Beaker} beaker
+   * @param {Property.<number>} pHProperty
+   */
+  constructor( beaker, pHProperty ) {
 
     // @public
-    reset() {
-      this.positionProperty.reset();
-    }
+    this.beaker = beaker;
+    this.pHProperty = pHProperty;
 
-    // @public Is the tip of the pH probe in solution?
-    inSolution() {
-      return this.beaker.bounds.containsPoint( this.positionProperty.get() );
-    }
+    // @public drag range (y coordinate)
+    this.dragYRange = new Range( beaker.top - 5, beaker.top + 60 );
+
+    // @public position, at tip of probe
+    this.positionProperty = new Vector2Property( new Vector2( beaker.right - 65, beaker.top - 5 ) );
   }
 
-  return acidBaseSolutions.register( 'PHMeter', PHMeter );
-} );
+  // @public
+  reset() {
+    this.positionProperty.reset();
+  }
+
+  // @public Is the tip of the pH probe in solution?
+  inSolution() {
+    return this.beaker.bounds.containsPoint( this.positionProperty.get() );
+  }
+}
+
+acidBaseSolutions.register( 'PHMeter', PHMeter );
+export default PHMeter;

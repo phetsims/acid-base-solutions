@@ -7,97 +7,93 @@
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  const Dimension2 = require( 'DOT/Dimension2' );
-  const HSlider = require( 'SUN/HSlider' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const RangeWithValue = require( 'DOT/RangeWithValue' );
-  const SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
-  const Text = require( 'SCENERY/nodes/Text' );
-  const Utils = require( 'DOT/Utils' );
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
+import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
+import Utils from '../../../../dot/js/Utils.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import HSlider from '../../../../sun/js/HSlider.js';
+import acidBaseSolutionsStrings from '../../acid-base-solutions-strings.js';
+import acidBaseSolutions from '../../acidBaseSolutions.js';
+import SolutionType from '../../common/enum/SolutionType.js';
 
-  // strings
-  const strongerString = require( 'string!ACID_BASE_SOLUTIONS/stronger' );
-  const weakerString = require( 'string!ACID_BASE_SOLUTIONS/weaker' );
+const strongerString = acidBaseSolutionsStrings.stronger;
+const weakerString = acidBaseSolutionsStrings.weaker;
 
-  // constants
-  const TICK_LABEL_OPTIONS = {
-    font: new PhetFont( 12 ),
-    maxWidth: 100 // constrain for i18n, determined empirically
-  };
+// constants
+const TICK_LABEL_OPTIONS = {
+  font: new PhetFont( 12 ),
+  maxWidth: 100 // constrain for i18n, determined empirically
+};
 
-  class StrengthSlider extends HSlider {
-
-    /**
-     * @param {Property.<SolutionType>} solutionTypeProperty
-     * @param {Property.<number>} strengthProperty
-     * @param {Range} strengthRange
-     */
-    constructor( solutionTypeProperty, strengthProperty, strengthRange ) {
-
-      const model = new SliderModel( solutionTypeProperty, strengthProperty, strengthRange );
-
-      super( model.sliderValueProperty, model.sliderValueRange, {
-        trackSize: new Dimension2( 125, 4 ),
-        thumbSize: new Dimension2( 12, 24 ),
-        majorTickLength: 12
-      } );
-
-      // add ticks
-      this.addMajorTick( model.sliderValueRange.min, new Text( weakerString, TICK_LABEL_OPTIONS ) );
-      this.addMajorTick( model.sliderValueRange.max, new Text( strongerString, TICK_LABEL_OPTIONS ) );
-    }
-  }
-
-  acidBaseSolutions.register( 'StrengthSlider', StrengthSlider );
+class StrengthSlider extends HSlider {
 
   /**
-   * Model for the strength slider. Maps between the linear slider and the logarithmic range of strength.
-   * Implemented as an inner type because this is internal to the slider.
+   * @param {Property.<SolutionType>} solutionTypeProperty
+   * @param {Property.<number>} strengthProperty
+   * @param {Range} strengthRange
    */
-  class SliderModel {
+  constructor( solutionTypeProperty, strengthProperty, strengthRange ) {
 
-    /**
-     * @param {Property.<SolutionType>} solutionTypeProperty
-     * @param {Property.<number>} strengthProperty
-     * @param {RangeWithValue} strengthRange
-     */
-    constructor( solutionTypeProperty, strengthProperty, strengthRange ) {
+    const model = new SliderModel( solutionTypeProperty, strengthProperty, strengthRange );
 
-      // @public range of slider values
-      this.sliderValueRange = new RangeWithValue(
-        Utils.log10( strengthRange.min ),
-        Utils.log10( strengthRange.max ),
-        Utils.log10( strengthRange.defaultValue ) );
+    super( model.sliderValueProperty, model.sliderValueRange, {
+      trackSize: new Dimension2( 125, 4 ),
+      thumbSize: new Dimension2( 12, 24 ),
+      majorTickLength: 12
+    } );
 
-      // @public slider's value
-      this.sliderValueProperty = new NumberProperty( Utils.log10( strengthProperty.get() ), {
-        reentrant: true
-      } );
-
-      // map between linear and logarithmic
-      this.sliderValueProperty.link( sliderValue => {
-        if ( strengthIsMutable( solutionTypeProperty.get() ) ) {
-          strengthProperty.set( Math.pow( 10, sliderValue ) );
-        }
-      } );
-      strengthProperty.link( strength => {
-        if ( strengthIsMutable( solutionTypeProperty.get() ) ) {
-          this.sliderValueProperty.set( Utils.log10( strength ) );
-        }
-      } );
-    }
+    // add ticks
+    this.addMajorTick( model.sliderValueRange.min, new Text( weakerString, TICK_LABEL_OPTIONS ) );
+    this.addMajorTick( model.sliderValueRange.max, new Text( strongerString, TICK_LABEL_OPTIONS ) );
   }
+}
 
-  // issues #94: strength can be changed only for weak solutions, use this as a guard
-  function strengthIsMutable( solutionType ) {
-    return ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE );
+acidBaseSolutions.register( 'StrengthSlider', StrengthSlider );
+
+/**
+ * Model for the strength slider. Maps between the linear slider and the logarithmic range of strength.
+ * Implemented as an inner type because this is internal to the slider.
+ */
+class SliderModel {
+
+  /**
+   * @param {Property.<SolutionType>} solutionTypeProperty
+   * @param {Property.<number>} strengthProperty
+   * @param {RangeWithValue} strengthRange
+   */
+  constructor( solutionTypeProperty, strengthProperty, strengthRange ) {
+
+    // @public range of slider values
+    this.sliderValueRange = new RangeWithValue(
+      Utils.log10( strengthRange.min ),
+      Utils.log10( strengthRange.max ),
+      Utils.log10( strengthRange.defaultValue ) );
+
+    // @public slider's value
+    this.sliderValueProperty = new NumberProperty( Utils.log10( strengthProperty.get() ), {
+      reentrant: true
+    } );
+
+    // map between linear and logarithmic
+    this.sliderValueProperty.link( sliderValue => {
+      if ( strengthIsMutable( solutionTypeProperty.get() ) ) {
+        strengthProperty.set( Math.pow( 10, sliderValue ) );
+      }
+    } );
+    strengthProperty.link( strength => {
+      if ( strengthIsMutable( solutionTypeProperty.get() ) ) {
+        this.sliderValueProperty.set( Utils.log10( strength ) );
+      }
+    } );
   }
+}
 
-  return StrengthSlider;
-} );
+// issues #94: strength can be changed only for weak solutions, use this as a guard
+function strengthIsMutable( solutionType ) {
+  return ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE );
+}
+
+export default StrengthSlider;

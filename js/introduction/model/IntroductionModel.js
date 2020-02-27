@@ -5,34 +5,31 @@
  *
  * @author Andrey Zelenkov (Mlearner)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const ABSModel = require( 'ACID_BASE_SOLUTIONS/common/model/ABSModel' );
-  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  const SolutionType = require( 'ACID_BASE_SOLUTIONS/common/enum/SolutionType' );
-  const StrongAcidSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/StrongAcidSolution' );
-  const StrongBaseSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/StrongBaseSolution' );
-  const WaterSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/WaterSolution' );
-  const WeakAcidSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/WeakAcidSolution' );
-  const WeakBaseSolution = require( 'ACID_BASE_SOLUTIONS/common/model/solutions/WeakBaseSolution' );
+import acidBaseSolutions from '../../acidBaseSolutions.js';
+import SolutionType from '../../common/enum/SolutionType.js';
+import ABSModel from '../../common/model/ABSModel.js';
+import StrongAcidSolution from '../../common/model/solutions/StrongAcidSolution.js';
+import StrongBaseSolution from '../../common/model/solutions/StrongBaseSolution.js';
+import WaterSolution from '../../common/model/solutions/WaterSolution.js';
+import WeakAcidSolution from '../../common/model/solutions/WeakAcidSolution.js';
+import WeakBaseSolution from '../../common/model/solutions/WeakBaseSolution.js';
 
-  class IntroductionModel extends ABSModel {
+class IntroductionModel extends ABSModel {
 
-    constructor() {
+  constructor() {
 
-      const solutions = [
-        new WaterSolution(),
-        new StrongAcidSolution(),
-        new WeakAcidSolution(),
-        new StrongBaseSolution(),
-        new WeakBaseSolution()
-      ];
+    const solutions = [
+      new WaterSolution(),
+      new StrongAcidSolution(),
+      new WeakAcidSolution(),
+      new StrongBaseSolution(),
+      new WeakBaseSolution()
+    ];
 
-      super( solutions, SolutionType.WATER );
-    }
+    super( solutions, SolutionType.WATER );
   }
+}
 
-  return acidBaseSolutions.register( 'IntroductionModel', IntroductionModel );
-} );
+acidBaseSolutions.register( 'IntroductionModel', IntroductionModel );
+export default IntroductionModel;

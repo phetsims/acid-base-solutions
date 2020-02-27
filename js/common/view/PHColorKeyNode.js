@@ -6,74 +6,71 @@
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const ABSColors = require( 'ACID_BASE_SOLUTIONS/common/ABSColors' );
-  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  const Text = require( 'SCENERY/nodes/Text' );
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import acidBaseSolutionsStrings from '../../acid-base-solutions-strings.js';
+import acidBaseSolutions from '../../acidBaseSolutions.js';
+import ABSColors from '../ABSColors.js';
 
-  // strings
-  const pHColorKeyString = require( 'string!ACID_BASE_SOLUTIONS/pHColorKey' );
+const pHColorKeyString = acidBaseSolutionsStrings.pHColorKey;
 
-  // constants
-  const FONT_BIG = new PhetFont( 12 );
-  const FONT_SMALL = new PhetFont( 10 );
-  const CHIP_HEIGHT = 28;
-  const CHIP_X_SPACING = 1;
+// constants
+const FONT_BIG = new PhetFont( 12 );
+const FONT_SMALL = new PhetFont( 10 );
+const CHIP_HEIGHT = 28;
+const CHIP_X_SPACING = 1;
 
-  class PHColorKeyNode extends Node {
+class PHColorKeyNode extends Node {
 
-    /**
-     * @param {Dimension2} paperSize
-     * @param {Object} [options] any Node options
-     */
-    constructor( paperSize, options ) {
+  /**
+   * @param {Dimension2} paperSize
+   * @param {Object} [options] any Node options
+   */
+  constructor( paperSize, options ) {
 
-      super();
+    super();
 
-      const numberOfChips = ABSColors.PH.length;
+    const numberOfChips = ABSColors.PH.length;
 
-      // color chips, with a pH value above each one
-      const parentNode = new Node();
-      let chipNode;
-      let previousChipNode;
-      let pHNumberNode;
-      for ( let i = 0; i < numberOfChips; i++ ) {
+    // color chips, with a pH value above each one
+    const parentNode = new Node();
+    let chipNode;
+    let previousChipNode;
+    let pHNumberNode;
+    for ( let i = 0; i < numberOfChips; i++ ) {
 
-        chipNode = new Rectangle( 0, 0, paperSize.width, CHIP_HEIGHT, { fill: ABSColors.PH[ i ] } );
-        pHNumberNode = new Text( i.toString(), { font: FONT_SMALL } );
+      chipNode = new Rectangle( 0, 0, paperSize.width, CHIP_HEIGHT, { fill: ABSColors.PH[ i ] } );
+      pHNumberNode = new Text( i.toString(), { font: FONT_SMALL } );
 
-        parentNode.addChild( chipNode );
-        parentNode.addChild( pHNumberNode );
+      parentNode.addChild( chipNode );
+      parentNode.addChild( pHNumberNode );
 
-        if ( previousChipNode ) {
-          chipNode.left = previousChipNode.right + CHIP_X_SPACING;
-        }
-        // pH number above color chip
-        pHNumberNode.centerX = chipNode.centerX;
-        pHNumberNode.bottom = chipNode.top - 2;
-
-        previousChipNode = chipNode;
+      if ( previousChipNode ) {
+        chipNode.left = previousChipNode.right + CHIP_X_SPACING;
       }
-      this.addChild( parentNode );
+      // pH number above color chip
+      pHNumberNode.centerX = chipNode.centerX;
+      pHNumberNode.bottom = chipNode.top - 2;
 
-      // title, below color chips
-      const titleNode = new Text( pHColorKeyString, {
-        font: FONT_BIG,
-        maxWidth: parentNode.width,
-        left: parentNode.left,
-        top: parentNode.bottom + 2
-      } );
-      this.addChild( titleNode );
-
-      this.mutate( options );
+      previousChipNode = chipNode;
     }
-  }
+    this.addChild( parentNode );
 
-  return acidBaseSolutions.register( 'PHColorKeyNode', PHColorKeyNode );
-} );
+    // title, below color chips
+    const titleNode = new Text( pHColorKeyString, {
+      font: FONT_BIG,
+      maxWidth: parentNode.width,
+      left: parentNode.left,
+      top: parentNode.bottom + 2
+    } );
+    this.addChild( titleNode );
+
+    this.mutate( options );
+  }
+}
+
+acidBaseSolutions.register( 'PHColorKeyNode', PHColorKeyNode );
+export default PHColorKeyNode;

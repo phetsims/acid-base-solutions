@@ -5,17 +5,14 @@
  *
  * @author Andrey Zelenkov (Mlearner)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const acidBaseSolutions = require( 'ACID_BASE_SOLUTIONS/acidBaseSolutions' );
+import acidBaseSolutions from '../../acidBaseSolutions.js';
 
-  const ToolMode = Object.freeze( {
-    PH_METER: 'pHMeter',
-    PH_PAPER: 'pHPaper',
-    CONDUCTIVITY: 'conductivity'
-  } );
-
-  return acidBaseSolutions.register( 'ToolMode', ToolMode );
+const ToolMode = Object.freeze( {
+  PH_METER: 'pHMeter',
+  PH_PAPER: 'pHPaper',
+  CONDUCTIVITY: 'conductivity'
 } );
+
+acidBaseSolutions.register( 'ToolMode', ToolMode );
+export default ToolMode;

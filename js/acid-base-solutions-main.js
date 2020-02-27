@@ -6,38 +6,34 @@
  * @author Andrew Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const IntroductionScreen = require( 'ACID_BASE_SOLUTIONS/introduction/IntroductionScreen' );
-  const MySolutionScreen = require( 'ACID_BASE_SOLUTIONS/mysolution/MySolutionScreen' );
-  const Sim = require( 'JOIST/Sim' );
-  const SimLauncher = require( 'JOIST/SimLauncher' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import Sim from '../../joist/js/Sim.js';
+import SimLauncher from '../../joist/js/SimLauncher.js';
+import Tandem from '../../tandem/js/Tandem.js';
+import acidBaseSolutionsStrings from './acid-base-solutions-strings.js';
+import IntroductionScreen from './introduction/IntroductionScreen.js';
+import MySolutionScreen from './mysolution/MySolutionScreen.js';
 
-  // strings
-  const acidBaseSolutionsTitleString = require( 'string!ACID_BASE_SOLUTIONS/acid-base-solutions.title' );
+const acidBaseSolutionsTitleString = acidBaseSolutionsStrings[ 'acid-base-solutions' ].title;
 
-  // constants
-  const tandem = Tandem.ROOT;
+// constants
+const tandem = Tandem.ROOT;
 
-  const simOptions = {
-    credits: {
-      leadDesign: 'Kelly Lancaster',
-      softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
-      team: 'Bryce Gruneich, Patricia Loeblein, Emily B. Moore, Robert Parson, Kathy Perkins',
-      qualityAssurance: 'Steele Dalton, Bryce Griebenow, Elise Morgan, Oliver Orejola, Benjamin Roberts, Bryan Yoelin',
-      thanks: '\u2022 Conversion of this simulation to HTML5 was funded in part by the Royal Society of Chemistry.<br>' +
-              '\u2022 Thanks to Mobile Learner Labs for working with the PhET development team to convert this simulation to HTML5.'
-    }
-  };
+const simOptions = {
+  credits: {
+    leadDesign: 'Kelly Lancaster',
+    softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
+    team: 'Bryce Gruneich, Patricia Loeblein, Emily B. Moore, Robert Parson, Kathy Perkins',
+    qualityAssurance: 'Steele Dalton, Bryce Griebenow, Elise Morgan, Oliver Orejola, Benjamin Roberts, Bryan Yoelin',
+    thanks: '\u2022 Conversion of this simulation to HTML5 was funded in part by the Royal Society of Chemistry.<br>' +
+            '\u2022 Thanks to Mobile Learner Labs for working with the PhET development team to convert this simulation to HTML5.'
+  }
+};
 
-  SimLauncher.launch( () => {
-    const screens = [
-      new IntroductionScreen( tandem.createTandem( 'introductionScreen' ) ),
-      new MySolutionScreen( tandem.createTandem( 'mySolutionScreen' ) )
-    ];
-    new Sim( acidBaseSolutionsTitleString, screens, simOptions ).start();
-  } );
+SimLauncher.launch( () => {
+  const screens = [
+    new IntroductionScreen( tandem.createTandem( 'introductionScreen' ) ),
+    new MySolutionScreen( tandem.createTandem( 'mySolutionScreen' ) )
+  ];
+  new Sim( acidBaseSolutionsTitleString, screens, simOptions ).start();
 } );
