@@ -72,16 +72,16 @@ class ABSScreenView extends ScreenView {
     } );
     this.addChild( rootNode );
 
-    this.viewProperties.solventVisibleProperty.link( function( soluteVisible ) {
+    this.viewProperties.solventVisibleProperty.link( soluteVisible => {
       magnifierNode.setSolventVisible( soluteVisible );
     } );
 
-    this.viewProperties.viewModeProperty.link( function( viewMode ) {
+    this.viewProperties.viewModeProperty.link( viewMode => {
       magnifierNode.visible = ( viewMode === ViewMode.MOLECULES );
       graphNode.visible = ( viewMode === ViewMode.GRAPH );
     } );
 
-    this.viewProperties.toolModeProperty.link( function( toolMode ) {
+    this.viewProperties.toolModeProperty.link( toolMode => {
 
       pHMeterNode.visible = ( toolMode === ToolMode.PH_METER );
 

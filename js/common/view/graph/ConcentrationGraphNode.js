@@ -94,7 +94,7 @@ class ConcentrationGraphNode extends Node {
       const numberOfMolecules = molecules.length;
 
       // show one bar for each molecule in the current solution
-      for ( var i = 0, bar; i < this.bars.length; i++ ) {
+      for ( let i = 0, bar; i < this.bars.length; i++ ) {
         bar = this.bars[ i ];
         if ( i < numberOfMolecules ) {
           // set visibility, color, value and position of new bars

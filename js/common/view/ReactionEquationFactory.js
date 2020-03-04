@@ -109,7 +109,7 @@ const createANode = function() {
 };
 
 // B node
-var createBNode = function() {
+function createBNode() {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -118,10 +118,10 @@ var createBNode = function() {
       new VStrut( SUBSCRIPT_Y_OFFSET )
     ]
   } );
-};
+}
 
 // BH+ node
-var createBHNode = function() {
+function createBHNode() {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -136,10 +136,10 @@ var createBHNode = function() {
       new VStrut( SUBSCRIPT_Y_OFFSET )
     ]
   } );
-};
+}
 
 // H2O node
-var createH2ONode = function() {
+function createH2ONode() {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -147,10 +147,10 @@ var createH2ONode = function() {
       new RichText( 'H<sub>2</sub>O', SUBSUP_OPTIONS )
     ]
   } );
-};
+}
 
 // 2H2O node
-var create2H2ONode = function() {
+function create2H2ONode() {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -171,10 +171,10 @@ var create2H2ONode = function() {
       } )
     ]
   } );
-};
+}
 
 // H3O+ node
-var createH3ONode = function() {
+function createH3ONode() {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -182,10 +182,10 @@ var createH3ONode = function() {
       new RichText( 'H<sub>3</sub>O<sup>+</sup>', SUBSUP_OPTIONS )
     ]
   } );
-};
+}
 
 // HA node
-const createHANode = function() {
+function createHANode() {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -200,10 +200,10 @@ const createHANode = function() {
       new VStrut( SUBSCRIPT_Y_OFFSET )
     ]
   } );
-};
+}
 
 // M+ node
-var createMNode = function() {
+function createMNode() {
   const M = new Text( 'M', { font: FONT, fontStyle: 'italic' } );
   const plusNode = new Text( '+', { font: FONT, left: M.right, centerY: M.top + ( 0.2 * M.height ) } );
   return new VBox( {
@@ -214,10 +214,10 @@ var createMNode = function() {
       new VStrut( SUBSCRIPT_Y_OFFSET )
     ]
   } );
-};
+}
 
 // MOH node
-var createMOHNode = function() {
+function createMOHNode() {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -231,10 +231,10 @@ var createMOHNode = function() {
       new VStrut( SUBSCRIPT_Y_OFFSET )
     ]
   } );
-};
+}
 
 // OH- node
-var createOHNode = function() {
+function createOHNode() {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -243,20 +243,20 @@ var createOHNode = function() {
       new VStrut( SUBSCRIPT_Y_OFFSET )
     ]
   } );
-};
+}
 
 // plus sign node
-var plusSignNode = function() {
+function plusSignNode() {
   return new VBox( {
     children: [
       new Text( '+', { font: FONT } ),
       new VStrut( SUBSCRIPT_Y_OFFSET + VBOX_SPACING )
     ]
   } );
-};
+}
 
 // double arrow to indicate reversible reaction
-var reversibleArrowNode = function() {
+function reversibleArrowNode() {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -275,10 +275,10 @@ var reversibleArrowNode = function() {
       new VStrut( SUBSCRIPT_Y_OFFSET + FONT_SIZE / 4 - 2 )
     ]
   } );
-};
+}
 
 // single arrow to indicate irreversible reaction, points right
-var irreversibleArrowNode = function() {
+function irreversibleArrowNode() {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -293,20 +293,20 @@ var irreversibleArrowNode = function() {
       new VStrut( SUBSCRIPT_Y_OFFSET + FONT_SIZE / 4 )
     ]
   } );
-};
+}
 
 // Creates an equation by horizontally laying out a set of elements (children).
-var createEquation = function( children ) {
+function createEquation( children ) {
   return new HBox( {
     children: children,
     scale: EQUATION_SCALE,
     spacing: HBOX_SPACING,
     align: 'bottom'
   } );
-};
+}
 
 // Equations for all acids are similar: HA + H2O ? A- + H3O+
-var createAcidEquation = function( isWeak ) {
+function createAcidEquation( isWeak ) {
   return createEquation( [
     createHANode(),
     plusSignNode(),
@@ -316,6 +316,6 @@ var createAcidEquation = function( isWeak ) {
     plusSignNode(),
     createH3ONode()
   ] );
-};
+}
 
 export default ReactionEquationFactory;

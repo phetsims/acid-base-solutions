@@ -71,7 +71,7 @@ class ViewsControl extends VBox {
         MoleculeFactory.H2O()
       ]
     } );
-    solventLabel.setEnabled = function( enabled ) {
+    solventLabel.setEnabled = enabled => {
       solventLabel.opacity = ( enabled ? 1 : 0.5 ); // gray out when disabled
     };
     const solventCheckbox = new Checkbox( solventLabel, solventVisibleProperty, CHECKBOX_OPTIONS );
@@ -109,7 +109,7 @@ class ViewsControl extends VBox {
     super( options );
 
     // disable the 'Solvent' checkbox unless 'Molecules' is selected
-    viewModeProperty.link( function( viewMode ) {
+    viewModeProperty.link( viewMode => {
       solventCheckbox.enabled = ( viewMode === ViewMode.MOLECULES );
     } );
   }

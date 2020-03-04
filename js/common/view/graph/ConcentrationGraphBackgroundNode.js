@@ -38,7 +38,7 @@ class ConcentrationGraphBackgroundNode extends Node {
     const dh = ( height / 10 ) - 1;
     const tickNode = new Line( -2, 0, 2, 0, { stroke: 'black', lineWidth: 0.5 } );
     const dashedLineNode = new Line( 0, 0, width, 0, { stroke: 'gray', lineWidth: 0.5, lineDash: [ 2, 1 ] } );
-    for ( var i = 0, y; i < 11; i++ ) {
+    for ( let i = 0, y; i < 11; i++ ) {
 
       y = height - ( dh * i );
 
