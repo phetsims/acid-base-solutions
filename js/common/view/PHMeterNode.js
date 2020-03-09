@@ -37,7 +37,7 @@ const BACKGROUND_STROKE = 'rgb( 64, 64, 64 )';
 class PHMeterNode extends Node {
 
   /**
-   * @param {MacroPHMeter} pHMeter
+   * @param {PHMeter} pHMeter
    */
   constructor( pHMeter ) {
 
