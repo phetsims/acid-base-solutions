@@ -40,8 +40,9 @@ const TOUCH_AREA_X_DILATION = 10;
 const TOUCH_AREA_Y_DILATION = 3;
 
 class ViewsControl extends VBox {
+
   /**
-   * @param {Property.<ViewMode>} viewModeProperty
+   * @param {EnumerationProperty.<ViewMode>} viewModeProperty
    * @param {Property.<boolean>} solventVisibleProperty
    * @param {Object} [options]
    */

@@ -6,13 +6,10 @@
  * @author Andrey Zelenkov (Mlearner)
  */
 
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 
-const ViewMode = Object.freeze( {
-  MOLECULES: 'molecules',
-  GRAPH: 'graph',
-  HIDE_VIEWS: 'hideViews'
-} );
+const ViewMode = Enumeration.byKeys( [ 'MOLECULES', 'GRAPH', 'HIDE_VIEWS' ] );
 
 acidBaseSolutions.register( 'ViewMode', ViewMode );
 export default ViewMode;

@@ -8,7 +8,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import StringProperty from '../../../../axon/js/StringProperty.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ToolMode from '../enum/ToolMode.js';
 import ViewMode from '../enum/ViewMode.js';
@@ -19,7 +18,7 @@ class ABSViewProperties {
 
     // @public
     this.solventVisibleProperty = new BooleanProperty( false );
-    this.viewModeProperty = new StringProperty( ViewMode.MOLECULES );
+    this.viewModeProperty = new EnumerationProperty( ViewMode, ViewMode.MOLECULES );
     this.toolModeProperty = new EnumerationProperty( ToolMode, ToolMode.PH_METER );
   }
 
