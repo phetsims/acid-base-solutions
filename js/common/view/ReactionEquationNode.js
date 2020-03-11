@@ -22,6 +22,7 @@ class ReactionEquationNode extends Node {
 
     super();
 
+    // create an associative array, so we can look up equations by solutionType
     const equations = {};
     equations[ SolutionType.WATER ] = ReactionEquationFactory.createWaterEquation();
     equations[ SolutionType.STRONG_ACID ] = ReactionEquationFactory.createStrongAcidEquation();
