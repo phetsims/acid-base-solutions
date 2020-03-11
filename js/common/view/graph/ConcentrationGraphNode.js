@@ -25,7 +25,7 @@ class ConcentrationGraphNode extends Node {
     super();
 
     this.graph = graph; // @private
-    this.bars = []; // @private
+    this.bars = []; // @private {ConcentrationGraphBarNode[]}
 
     // add background
     this.addChild( new ConcentrationGraphBackgroundNode( graph.width, graph.height ) );
