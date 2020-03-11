@@ -27,7 +27,7 @@ class ABSModel {
     // @public convert to an associative array, so we can look up solutions by solutionType
     this.solutions = {};
     solutions.forEach( solution => {
-      this.solutions[ solution.type ] = solution;
+      this.solutions[ solution.solutionType ] = solution;
     } );
 
     // @public type of solution that is currently selected

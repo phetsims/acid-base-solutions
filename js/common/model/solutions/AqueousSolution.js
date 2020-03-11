@@ -27,7 +27,7 @@ class AqueousSolution {
    */
   constructor( solutionType, strength, concentration, molecules ) {
 
-    this.type = solutionType; // @public
+    this.solutionType = solutionType; // @public
 
     /*
      * Description of molecules that make up this solution.
