@@ -124,6 +124,8 @@ class ConcentrationGraphNode extends Node {
       const molecules = solution.molecules;
 
       for ( let i = 0; i < molecules.length; i++ ) {
+
+        //TODO this violates PhET coding conventions, see https://github.com/phetsims/acid-base-solutions/issues/163
         this.bars[ i ].setValue( solution[ molecules[ i ].concentrationFunctionName ]() );
       }
     }
