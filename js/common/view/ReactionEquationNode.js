@@ -24,11 +24,11 @@ class ReactionEquationNode extends Node {
 
     // create an associative array, so we can look up equations by solutionType
     const equations = {};
-    equations[ SolutionType.WATER ] = ReactionEquationFactory.createWaterEquation();
-    equations[ SolutionType.STRONG_ACID ] = ReactionEquationFactory.createStrongAcidEquation();
-    equations[ SolutionType.WEAK_ACID ] = ReactionEquationFactory.createWeakAcidEquation();
-    equations[ SolutionType.STRONG_BASE ] = ReactionEquationFactory.createStrongBaseEquation();
-    equations[ SolutionType.WEAK_BASE ] = ReactionEquationFactory.createWeakBaseEquation();
+    equations[ SolutionType.WATER.name ] = ReactionEquationFactory.createWaterEquation();
+    equations[ SolutionType.STRONG_ACID.name ] = ReactionEquationFactory.createStrongAcidEquation();
+    equations[ SolutionType.WEAK_ACID.name ] = ReactionEquationFactory.createWeakAcidEquation();
+    equations[ SolutionType.STRONG_BASE.name ] = ReactionEquationFactory.createStrongBaseEquation();
+    equations[ SolutionType.WEAK_BASE.name ] = ReactionEquationFactory.createWeakBaseEquation();
 
     // find max width of equations
     const maxWidth = getMaxWidth( equations );
@@ -45,13 +45,14 @@ class ReactionEquationNode extends Node {
 
     // add observer for equations
     solutionTypeProperty.link( ( newSolutionType, prevSolutionType ) => {
+
       // hide previous equation
       if ( prevSolutionType ) {
-        equations[ prevSolutionType ].setVisible( false );
+        equations[ prevSolutionType.name ].setVisible( false );
       }
 
       // show new equation
-      equations[ newSolutionType ].setVisible( true );
+      equations[ newSolutionType.name ].setVisible( true );
     } );
   }
 }

@@ -6,15 +6,16 @@
  * @author Andrey Zelenkov (Mlearner)
  */
 
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 
-const SolutionType = Object.freeze( {
-  WATER: 'water',
-  STRONG_ACID: 'strongAcid',
-  WEAK_ACID: 'weakAcid',
-  STRONG_BASE: 'strongBase',
-  WEAK_BASE: 'weakBase'
-} );
+const SolutionType = Enumeration.byKeys( [
+  'WATER',
+  'STRONG_ACID',
+  'WEAK_ACID',
+  'STRONG_BASE',
+  'WEAK_BASE'
+] );
 
 acidBaseSolutions.register( 'SolutionType', SolutionType );
 export default SolutionType;

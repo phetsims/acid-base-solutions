@@ -27,14 +27,14 @@ class ABSModel {
     // @public convert to an associative array, so we can look up solutions by solutionType
     this.solutions = {};
     solutions.forEach( solution => {
-      this.solutions[ solution.solutionType ] = solution;
+      this.solutions[ solution.solutionType.name ] = solution;
     } );
 
     // @public type of solution that is currently selected
     this.solutionTypeProperty = new Property( defaultSolutionType );
 
     // @public pH level of product
-    this.pHProperty = new NumberProperty( this.solutions[ defaultSolutionType ].pHProperty.get() );
+    this.pHProperty = new NumberProperty( this.solutions[ defaultSolutionType.name ].pHProperty.get() );
 
     // @public
     this.beaker = new Beaker();
@@ -47,12 +47,14 @@ class ABSModel {
     // synchronize with pH of the solution that is currently selected
     const setPH = value => this.pHProperty.set( value );
     this.solutionTypeProperty.link( ( newSolutionType, prevSolutionType ) => {
+
       // unsubscribe from previous solution pH property
       if ( prevSolutionType ) {
-        this.solutions[ prevSolutionType ].pHProperty.unlink( setPH );
+        this.solutions[ prevSolutionType.name ].pHProperty.unlink( setPH );
       }
+
       // subscribe to new solution pH property
-      this.solutions[ newSolutionType ].pHProperty.link( setPH );
+      this.solutions[ newSolutionType.name ].pHProperty.link( setPH );
     } );
   }
 
@@ -64,8 +66,8 @@ class ABSModel {
     this.pHProperty.reset();
 
     // reset solutions
-    for ( const solutionType in this.solutions ) {
-      this.solutions[ solutionType ].reset();
+    for ( const solutionTypeName in this.solutions ) {
+      this.solutions[ solutionTypeName ].reset();
     }
 
     this.pHMeter.reset();

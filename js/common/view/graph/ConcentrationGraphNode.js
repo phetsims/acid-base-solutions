@@ -55,13 +55,13 @@ class ConcentrationGraphNode extends Node {
 
       // unlink from previous solution
       if ( prevSolutionType ) {
-        graph.solutions[ prevSolutionType ].strengthProperty.unlink( updateValuesBound );
-        graph.solutions[ prevSolutionType ].concentrationProperty.unlink( updateValuesBound );
+        graph.solutions[ prevSolutionType.name ].strengthProperty.unlink( updateValuesBound );
+        graph.solutions[ prevSolutionType.name ].concentrationProperty.unlink( updateValuesBound );
       }
 
       // link to new solution
-      graph.solutions[ newSolutionType ].strengthProperty.link( updateValuesBound );
-      graph.solutions[ newSolutionType ].concentrationProperty.link( updateValuesBound );
+      graph.solutions[ newSolutionType.name ].strengthProperty.link( updateValuesBound );
+      graph.solutions[ newSolutionType.name ].concentrationProperty.link( updateValuesBound );
     } );
   }
 
@@ -89,7 +89,7 @@ class ConcentrationGraphNode extends Node {
     if ( this.visible ) {
 
       const solutionType = this.graph.solutionTypeProperty.get();
-      const solution = this.graph.solutions[ solutionType ];
+      const solution = this.graph.solutions[ solutionType.name ];
       const molecules = solution.molecules;
       const numberOfMolecules = molecules.length;
 
@@ -120,7 +120,7 @@ class ConcentrationGraphNode extends Node {
     if ( this.visible ) {
 
       const solutionType = this.graph.solutionTypeProperty.get();
-      const solution = this.graph.solutions[ solutionType ];
+      const solution = this.graph.solutions[ solutionType.name ];
       const molecules = solution.molecules;
 
       for ( let i = 0; i < molecules.length; i++ ) {

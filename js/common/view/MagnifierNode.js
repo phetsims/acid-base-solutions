@@ -84,13 +84,13 @@ class MagnifierNode extends Node {
 
       // unlink from previous solution
       if ( prevSolutionType ) {
-        magnifier.solutions[ prevSolutionType ].strengthProperty.unlink( updateMoleculesBound );
-        magnifier.solutions[ prevSolutionType ].concentrationProperty.unlink( updateMoleculesBound );
+        magnifier.solutions[ prevSolutionType.name ].strengthProperty.unlink( updateMoleculesBound );
+        magnifier.solutions[ prevSolutionType.name ].concentrationProperty.unlink( updateMoleculesBound );
       }
 
       // link to new solution
-      magnifier.solutions[ newSolutionType ].strengthProperty.link( updateMoleculesBound );
-      magnifier.solutions[ newSolutionType ].concentrationProperty.link( updateMoleculesBound );
+      magnifier.solutions[ newSolutionType.name ].strengthProperty.link( updateMoleculesBound );
+      magnifier.solutions[ newSolutionType.name ].concentrationProperty.link( updateMoleculesBound );
     } );
   }
 
