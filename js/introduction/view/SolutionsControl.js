@@ -9,33 +9,24 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
+import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
-import HStrut from '../../../../scenery/js/nodes/HStrut.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
-import Text from '../../../../scenery/js/nodes/Text.js';
-import VBox from '../../../../scenery/js/nodes/VBox.js';
-import VStrut from '../../../../scenery/js/nodes/VStrut.js';
-import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
+import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
 import acidBaseSolutionsStrings from '../../acid-base-solutions-strings.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import SolutionType from '../../common/enum/SolutionType.js';
 import MoleculeFactory from '../../common/view/MoleculeFactory.js';
 
+// strings
 const strongAcidString = acidBaseSolutionsStrings.strongAcid;
 const strongBaseString = acidBaseSolutionsStrings.strongBase;
 const waterString = acidBaseSolutionsStrings.water;
 const weakAcidString = acidBaseSolutionsStrings.weakAcid;
 const weakBaseString = acidBaseSolutionsStrings.weakBase;
 
-// constants
-const RADIO_BUTTON_OPTIONS = { radius: 7 };
-const TEXT_OPTIONS = { font: new PhetFont( 12 ) };
-const ITALIC_TEXT_OPTIONS = merge( { fontStyle: 'italic' }, TEXT_OPTIONS );
-const TEXT_ICON_SPACING = 10; // space between text and icon
-const TOUCH_AREA_X_DILATION = 10;
-const TOUCH_AREA_Y_DILATION = 3;
-
-class SolutionsControl extends VBox {
+class SolutionsControl extends AquaRadioButtonGroup {
 
   /**
    * @param {Property.<SolutionType>} solutionTypeProperty
@@ -45,84 +36,69 @@ class SolutionsControl extends VBox {
 
     options = merge( {
       spacing: 8,
-      align: 'left'
+      align: 'left',
+      radioButtonOptions: {
+        radius: 7
+      }
     }, options );
 
-    // Water (H20)
-    const waterRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WATER,
-      new HBox( {
-        spacing: TEXT_ICON_SPACING,
-        children: [
-          new RichText( waterString + ' (H<sub>2</sub>O)', TEXT_OPTIONS ),
-          new MoleculeFactory.H2O()
-        ]
-      } ), RADIO_BUTTON_OPTIONS );
+    // To make all radio button labels have the same width and height
+    const alignGroup = new AlignGroup();
 
-    // Strong Acid (HA)
-    const strongAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_ACID,
-      createStyledLabel( strongAcidString + ' (H', 'A', ')', new MoleculeFactory.HA() ),
-      RADIO_BUTTON_OPTIONS );
+    const radioButtonGroupItems = [
 
-    // Weak Acid (HA)
-    const weakAcidRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_ACID,
-      createStyledLabel( weakAcidString + ' (H', 'A', ')', new MoleculeFactory.HA() ),
-      RADIO_BUTTON_OPTIONS );
+      // Water (H20)
+      {
+        value: SolutionType.WATER,
+        node: createRadioButtonLabel( `${waterString} (H<sub>2</sub>O)`, new MoleculeFactory.H2O(), alignGroup )
+      },
 
-    // Strong Base (M)
-    const strongBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.STRONG_BASE,
-      createStyledLabel( strongBaseString + ' (', 'M', 'OH)', new MoleculeFactory.MOH() ),
-      RADIO_BUTTON_OPTIONS );
+      // Strong Acid (HA)
+      {
+        value: SolutionType.STRONG_ACID,
+        node: createRadioButtonLabel( `${strongAcidString} (H<i>A</i>)`, new MoleculeFactory.HA(), alignGroup )
+      },
 
-    // Weak Base (B)
-    const weakBaseRadioButton = new AquaRadioButton( solutionTypeProperty, SolutionType.WEAK_BASE,
-      createStyledLabel( weakBaseString + ' (', 'B', ')', new MoleculeFactory.B() ),
-      RADIO_BUTTON_OPTIONS );
+      // Weak Acid (HA)
+      {
+        value: SolutionType.WEAK_ACID,
+        node: createRadioButtonLabel( `${weakAcidString} (H<i>A</i>)`, new MoleculeFactory.HA(), alignGroup )
+      },
 
-    const buttons = [
-      waterRadioButton,
-      strongAcidRadioButton,
-      weakAcidRadioButton,
-      strongBaseRadioButton,
-      weakBaseRadioButton
+      // Strong Base (M)
+      {
+        value: SolutionType.STRONG_BASE,
+        node: createRadioButtonLabel( `${strongBaseString} (<i>M</i>OH)`, new MoleculeFactory.MOH(), alignGroup )
+      },
+
+      // Weak Base (B)
+      {
+        value: SolutionType.WEAK_BASE,
+        node: createRadioButtonLabel( `${weakBaseString} (<i>B</i>)`, new MoleculeFactory.B(), alignGroup )
+      }
     ];
 
-    // Make all buttons have the same height
-    let maxHeight = 0;
-    buttons.forEach( button => {
-      maxHeight = Math.max( button.height, maxHeight );
-    } );
-    const vStrut = new VStrut( maxHeight );
-    buttons.forEach( button => {
-      const buttonCenterY = button.centerY;
-      button.addChild( vStrut );
-      vStrut.centerY = buttonCenterY;
-    } );
-
-    // uniformly expands touch area for buttons
-    buttons.forEach( button => {
-      button.touchArea = button.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
-    } );
-
-    options.children = buttons;
-    super( options );
+    super( solutionTypeProperty, radioButtonGroupItems, options );
   }
 }
 
 /**
- * Notes about this ugly composition of the radio button labels, used throughout.
- * (1) It would be preferable to use scenery.HTMLText, but that causes out-of-memory issues, see issue #97.
- * (2) Other proposed approaches were not maintainable or required scenery changes.
- * (3) Order of solution name, formula and molecule is not internationalized.
+ * Creates a label for a radio button.
+ * @param {string} richTextString
+ * @param {Node} iconNode
+ * @param {AlignGroup} alignGroup
+ * @returns {Node}
  */
-function createStyledLabel( plainString1, italicString, plainString2, moleculeNode ) {
-  return new HBox( {
+function createRadioButtonLabel( richTextString, iconNode, alignGroup ) {
+  return new AlignBox( new HBox( {
+    spacing: 10,
     children: [
-      new Text( plainString1, TEXT_OPTIONS ),
-      new Text( italicString, ITALIC_TEXT_OPTIONS ),
-      new Text( plainString2, TEXT_OPTIONS ),
-      new HStrut( TEXT_ICON_SPACING ),
-      moleculeNode
+      new RichText( richTextString, { font: new PhetFont( 12 ) } ),
+      iconNode
     ]
+  } ), {
+    group: alignGroup,
+    xAlign: 'left'
   } );
 }
 
