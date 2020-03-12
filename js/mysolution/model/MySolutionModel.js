@@ -40,7 +40,7 @@ class MySolutionModel extends ABSModel {
      * wiring is changed. This may have been more appropriate to handle in SolutionControl.
      */
 
-    // @public convenience Property that will synchronize with the concentration the currently selected solution
+    // @public convenience Property that will synchronize with the concentration of the currently selected solution
     this.concentrationProperty = new NumberProperty( this.solutions[ DEFAULT_SOLUTION_TYPE.name ].concentrationProperty.get(), {
       reentrant: true
     } );
