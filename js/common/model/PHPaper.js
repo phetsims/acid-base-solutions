@@ -18,10 +18,10 @@ class PHPaper {
 
   /**
    * @param {Beaker} beaker
-   * @param {Property.<SolutionType>} solutionTypeProperty
    * @param {Property.<number>} pHProperty
+   * @param {Property.<SolutionType>} solutionTypeProperty
    */
-  constructor( beaker, solutionTypeProperty, pHProperty ) {
+  constructor( beaker, pHProperty, solutionTypeProperty ) {
 
     // @public
     this.beaker = beaker;

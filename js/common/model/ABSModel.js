@@ -41,7 +41,7 @@ class ABSModel {
     this.magnifier = new Magnifier( this.beaker, this.solutions, this.solutionTypeProperty );
     this.graph = new ConcentrationGraph( this.beaker, this.solutions, this.solutionTypeProperty );
     this.pHMeter = new PHMeter( this.beaker, this.pHProperty );
-    this.pHPaper = new PHPaper( this.beaker, this.solutionTypeProperty, this.pHProperty );
+    this.pHPaper = new PHPaper( this.beaker, this.pHProperty, this.solutionTypeProperty );
     this.conductivityTester = new ConductivityTester( this.beaker, this.pHProperty );
 
     // synchronize with pH of the solution that is currently selected
