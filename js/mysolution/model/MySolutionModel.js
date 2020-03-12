@@ -11,10 +11,10 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import SolutionType from '../../common/enum/SolutionType.js';
 import ABSModel from '../../common/model/ABSModel.js';
-import StrongAcidSolution from '../../common/model/solutions/StrongAcidSolution.js';
-import StrongBaseSolution from '../../common/model/solutions/StrongBaseSolution.js';
-import WeakAcidSolution from '../../common/model/solutions/WeakAcidSolution.js';
-import WeakBaseSolution from '../../common/model/solutions/WeakBaseSolution.js';
+import StrongAcid from '../../common/model/solutions/StrongAcid.js';
+import StrongBase from '../../common/model/solutions/StrongBase.js';
+import WeakAcid from '../../common/model/solutions/WeakAcid.js';
+import WeakBase from '../../common/model/solutions/WeakBase.js';
 
 // constants
 const DEFAULT_SOLUTION_TYPE = SolutionType.WEAK_ACID;
@@ -24,10 +24,10 @@ class MySolutionModel extends ABSModel {
   constructor() {
 
     const solutions = [
-      new StrongAcidSolution(),
-      new WeakAcidSolution(),
-      new StrongBaseSolution(),
-      new WeakBaseSolution()
+      new StrongAcid(),
+      new WeakAcid(),
+      new StrongBase(),
+      new WeakBase()
     ];
 
     super( solutions, DEFAULT_SOLUTION_TYPE );

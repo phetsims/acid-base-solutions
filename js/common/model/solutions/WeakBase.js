@@ -1,7 +1,7 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
 /**
- *  An aqueous solution whose solute is a weak base.
+ * WeakBase is an aqueous solution whose solute is a weak base.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -12,7 +12,7 @@ import ABSConstants from '../../ABSConstants.js';
 import SolutionType from '../../enum/SolutionType.js';
 import AqueousSolution from './AqueousSolution.js';
 
-class WeakBaseSolution extends AqueousSolution {
+class WeakBase extends AqueousSolution {
 
   constructor() {
     super( SolutionType.WEAK_BASE, ABSConstants.WEAK_STRENGTH_RANGE.defaultValue, ABSConstants.CONCENTRATION_RANGE.defaultValue,
@@ -58,5 +58,5 @@ class WeakBaseSolution extends AqueousSolution {
   }
 }
 
-acidBaseSolutions.register( 'WeakBaseSolution', WeakBaseSolution );
-export default WeakBaseSolution;
+acidBaseSolutions.register( 'WeakBaseSolution', WeakBase );
+export default WeakBase;

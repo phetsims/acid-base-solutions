@@ -1,7 +1,7 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
 /**
- *  An aqueous solution whose solute is a strong acid.
+ * StrongAcid is an aqueous solution whose solute is a strong acid.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -12,7 +12,7 @@ import ABSConstants from '../../ABSConstants.js';
 import SolutionType from '../../enum/SolutionType.js';
 import AqueousSolution from './AqueousSolution.js';
 
-class StrongAcidSolution extends AqueousSolution {
+class StrongAcid extends AqueousSolution {
 
   constructor() {
     super( SolutionType.STRONG_ACID, ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue,
@@ -57,5 +57,5 @@ class StrongAcidSolution extends AqueousSolution {
   }
 }
 
-acidBaseSolutions.register( 'StrongAcidSolution', StrongAcidSolution );
-export default StrongAcidSolution;
+acidBaseSolutions.register( 'StrongAcidSolution', StrongAcid );
+export default StrongAcid;

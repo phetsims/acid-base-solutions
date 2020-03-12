@@ -1,7 +1,7 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
 /**
- *  An aqueous solution whose solute is a weak acid.
+ * WeakAcid is an aqueous solution whose solute is a weak acid.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -12,7 +12,7 @@ import ABSConstants from '../../ABSConstants.js';
 import SolutionType from '../../enum/SolutionType.js';
 import AqueousSolution from './AqueousSolution.js';
 
-class WeakAcidSolution extends AqueousSolution {
+class WeakAcid extends AqueousSolution {
 
   constructor() {
     super( SolutionType.WEAK_ACID, ABSConstants.WEAK_STRENGTH_RANGE.defaultValue, ABSConstants.CONCENTRATION_RANGE.defaultValue,
@@ -58,5 +58,5 @@ class WeakAcidSolution extends AqueousSolution {
   }
 }
 
-acidBaseSolutions.register( 'WeakAcidSolution', WeakAcidSolution );
-export default WeakAcidSolution;
+acidBaseSolutions.register( 'WeakAcidSolution', WeakAcid );
+export default WeakAcid;

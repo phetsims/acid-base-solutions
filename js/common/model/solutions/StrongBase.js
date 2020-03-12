@@ -1,7 +1,7 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
 /**
- *  An aqueous solution whose solute is a strong base.
+ * StrongBase is an aqueous solution whose solute is a strong base.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -12,7 +12,7 @@ import ABSConstants from '../../ABSConstants.js';
 import SolutionType from '../../enum/SolutionType.js';
 import AqueousSolution from './AqueousSolution.js';
 
-class StrongBaseSolution extends AqueousSolution {
+class StrongBase extends AqueousSolution {
 
   constructor() {
     super( SolutionType.STRONG_BASE, ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue,
@@ -56,5 +56,5 @@ class StrongBaseSolution extends AqueousSolution {
   }
 }
 
-acidBaseSolutions.register( 'StrongBaseSolution', StrongBaseSolution );
-export default StrongBaseSolution;
+acidBaseSolutions.register( 'StrongBaseSolution', StrongBase );
+export default StrongBase;

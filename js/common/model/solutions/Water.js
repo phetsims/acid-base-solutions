@@ -1,7 +1,7 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
 /**
- *  A solution of pure water, contains no solute.
+ *  Water is a solution of pure water. It contains no solute.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -12,7 +12,7 @@ import ABSConstants from '../../ABSConstants.js';
 import SolutionType from '../../enum/SolutionType.js';
 import AqueousSolution from './AqueousSolution.js';
 
-class WaterSolution extends AqueousSolution {
+class Water extends AqueousSolution {
 
   constructor() {
     super( SolutionType.WATER, 0, 0,
@@ -54,5 +54,5 @@ class WaterSolution extends AqueousSolution {
   isValidStrength() { return false; }
 }
 
-acidBaseSolutions.register( 'WaterSolution', WaterSolution );
-export default WaterSolution;
+acidBaseSolutions.register( 'WaterSolution', Water );
+export default Water;

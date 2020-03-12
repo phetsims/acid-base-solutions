@@ -9,22 +9,22 @@
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import SolutionType from '../../common/enum/SolutionType.js';
 import ABSModel from '../../common/model/ABSModel.js';
-import StrongAcidSolution from '../../common/model/solutions/StrongAcidSolution.js';
-import StrongBaseSolution from '../../common/model/solutions/StrongBaseSolution.js';
-import WaterSolution from '../../common/model/solutions/WaterSolution.js';
-import WeakAcidSolution from '../../common/model/solutions/WeakAcidSolution.js';
-import WeakBaseSolution from '../../common/model/solutions/WeakBaseSolution.js';
+import StrongAcid from '../../common/model/solutions/StrongAcid.js';
+import StrongBase from '../../common/model/solutions/StrongBase.js';
+import Water from '../../common/model/solutions/Water.js';
+import WeakAcid from '../../common/model/solutions/WeakAcid.js';
+import WeakBase from '../../common/model/solutions/WeakBase.js';
 
 class IntroductionModel extends ABSModel {
 
   constructor() {
 
     const solutions = [
-      new WaterSolution(),
-      new StrongAcidSolution(),
-      new WeakAcidSolution(),
-      new StrongBaseSolution(),
-      new WeakBaseSolution()
+      new Water(),
+      new StrongAcid(),
+      new WeakAcid(),
+      new StrongBase(),
+      new WeakBase()
     ];
 
     super( solutions, SolutionType.WATER );
