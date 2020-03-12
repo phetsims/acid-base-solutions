@@ -39,7 +39,9 @@ class SolutionsControl extends AquaRadioButtonGroup {
       align: 'left',
       radioButtonOptions: {
         radius: 7
-      }
+      },
+      touchAreaXDilation: 10,
+      mouseAreaXDilation: 10
     }, options );
 
     // To make all radio button labels have the same width and height
