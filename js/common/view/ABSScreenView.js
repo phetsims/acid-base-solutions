@@ -9,6 +9,7 @@
 
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
+import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ToolMode from '../enum/ToolMode.js';
@@ -39,6 +40,19 @@ class ABSScreenView extends ScreenView {
     // @public properties that are specific to the view
     this.viewProperties = new ABSViewProperties();
 
+    // Reset All button
+    const resetAllButton = new ResetAllButton( {
+      listener: () => {
+        model.reset();
+        this.viewProperties.reset();
+      },
+
+      // to compensate for non-default layoutBounds
+      scale: this.layoutBounds.width / ScreenView.DEFAULT_LAYOUT_BOUNDS.width,
+      right: this.layoutBounds.right - 20,
+      bottom: this.layoutBounds.bottom - 20
+    } );
+
     const beakerNode = new BeakerNode( model.beaker );
     const equationNode = new ReactionEquationNode( model.beaker, model.solutionTypeProperty );
     const magnifierNode = new MagnifierNode( model.magnifier );
@@ -50,9 +64,8 @@ class ABSScreenView extends ScreenView {
       bottom: model.beaker.top - 50
     } );
     const conductivityTesterNode = new ABSConductivityTesterNode( model.conductivityTester );
-    const controlPanel = new ABSControlPanel( model, this.viewProperties, solutionControl, {
-      // vertically centered at right edge of screen
-      right: this.layoutBounds.right - 20,
+    const controlPanel = new ABSControlPanel( this.viewProperties, solutionControl, {
+      right: resetAllButton.left - 10,
       centerY: this.layoutBounds.centerY,
       maxWidth: 0.75 * ( this.layoutBounds.width - beakerNode.width ) // constrain width for i18n
     } );
@@ -67,7 +80,8 @@ class ABSScreenView extends ScreenView {
         equationNode,
         magnifierNode,
         graphNode,
-        controlPanel
+        controlPanel,
+        resetAllButton
       ]
     } );
     this.addChild( rootNode );

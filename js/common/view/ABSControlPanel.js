@@ -7,9 +7,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Panel from '../../../../sun/js/Panel.js';
@@ -30,15 +28,14 @@ const TITLE_OPTIONS = { font: new PhetFont( { size: 14, weight: 'bold' } ) };
 class ABSControlPanel extends VBox {
 
   /**
-   * @param {ABSModel} model
    * @param {ABSViewProperties} viewProperties properties that are specific to the view
    * @param {Node} solutionControl
    * @param {Object} [options]
    */
-  constructor( model, viewProperties, solutionControl, options ) {
+  constructor( viewProperties, solutionControl, options ) {
 
     options = merge( {
-      align: 'left',
+      align: 'center',
       spacing: 5
     }, options );
 
@@ -50,15 +47,6 @@ class ABSControlPanel extends VBox {
     // controls
     const viewsControl = new ViewsControl( viewProperties.viewModeProperty, viewProperties.solventVisibleProperty );
     const toolsControl = new ToolsControl( viewProperties.toolModeProperty );
-
-    // Reset All button
-    const resetAllButton = new ResetAllButton( {
-      listener: () => {
-        model.reset();
-        viewProperties.reset();
-      },
-      scale: 0.75
-    } );
 
     // 'Solution' and 'Views' panels have same width, 'Tools' panel does not
     const xMargin = 15;
@@ -91,8 +79,7 @@ class ABSControlPanel extends VBox {
         align: 'left',
         children: [
           toolsTitle,
-          // Reset All button to right of 'Tools' panel
-          new HBox( { children: [ new Panel( toolsControl, panelOptions ), resetAllButton ], spacing: 10 } )
+          new Panel( toolsControl, panelOptions )
         ]
       } )
     ];
