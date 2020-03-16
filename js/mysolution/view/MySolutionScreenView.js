@@ -8,7 +8,7 @@
 
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSScreenView from '../../common/view/ABSScreenView.js';
-import SolutionControl from './SolutionControl.js';
+import MySolutionPanel from './MySolutionPanel.js';
 
 class MySolutionScreenView extends ABSScreenView {
 
@@ -16,8 +16,10 @@ class MySolutionScreenView extends ABSScreenView {
    * @param {MySolutionModel} model
    */
   constructor( model ) {
-    super( model,
-      new SolutionControl( model.solutionTypeProperty, model.concentrationProperty, model.strengthProperty ) );
+    super(
+      model,
+      alignGroup => new MySolutionPanel( model.solutionTypeProperty, model.concentrationProperty, model.strengthProperty, alignGroup )
+    );
   }
 }
 

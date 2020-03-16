@@ -25,7 +25,7 @@ const weakerString = acidBaseSolutionsStrings.weaker;
 // constants
 const TICK_LABEL_OPTIONS = {
   font: new PhetFont( 12 ),
-  maxWidth: 100 // constrain for i18n, determined empirically
+  maxWidth: 80 // constrain for i18n, determined empirically
 };
 
 class StrengthSlider extends HSlider {
@@ -42,7 +42,9 @@ class StrengthSlider extends HSlider {
     super( model.sliderValueProperty, model.sliderValueRange, {
       trackSize: new Dimension2( 125, 4 ),
       thumbSize: new Dimension2( 12, 24 ),
-      majorTickLength: 12
+      majorTickLength: 12,
+      thumbTouchAreaXDilation: 6,
+      thumbTouchAreaYDilation: 6
     } );
 
     // add ticks

@@ -10,12 +10,13 @@
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
+import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import VBox from '../../../../scenery/js/nodes/VBox.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ToolMode from '../enum/ToolMode.js';
 import ViewMode from '../enum/ViewMode.js';
 import ABSConductivityTesterNode from './ABSConductivityTesterNode.js';
-import ABSControlPanel from './ABSControlPanel.js';
 import ABSViewProperties from './ABSViewProperties.js';
 import BeakerNode from './BeakerNode.js';
 import ConcentrationGraphNode from './graph/ConcentrationGraphNode.js';
@@ -24,14 +25,16 @@ import PHColorKeyNode from './PHColorKeyNode.js';
 import PHMeterNode from './PHMeterNode.js';
 import PHPaperNode from './PHPaperNode.js';
 import ReactionEquationNode from './ReactionEquationNode.js';
+import ToolsRadioButtonGroup from './ToolsRadioButtonGroup.js';
+import ViewsPanel from './ViewsPanel.js';
 
 class ABSScreenView extends ScreenView {
 
   /**
    * @param {ABSModel} model
-   * @param {Node} solutionControl
+   * @param {function(AlignGroup):Panel} createSolutionPanel - creates the panel titled 'Solution'
    */
-  constructor( model, solutionControl ) {
+  constructor( model, createSolutionPanel ) {
 
     super( {
       layoutBounds: new Bounds2( 0, 0, 768, 504 )
@@ -57,6 +60,8 @@ class ABSScreenView extends ScreenView {
     const equationNode = new ReactionEquationNode( model.beaker, model.solutionTypeProperty );
     const magnifierNode = new MagnifierNode( model.magnifier );
     const graphNode = new ConcentrationGraphNode( model.graph );
+
+    // Tools
     const pHMeterNode = new PHMeterNode( model.pHMeter );
     const pHPaperNode = new PHPaperNode( model.pHPaper );
     const pHColorKeyNode = new PHColorKeyNode( model.pHPaper.paperSize, {
@@ -64,10 +69,24 @@ class ABSScreenView extends ScreenView {
       bottom: model.beaker.top - 50
     } );
     const conductivityTesterNode = new ABSConductivityTesterNode( model.conductivityTester );
-    const controlPanel = new ABSControlPanel( this.viewProperties, solutionControl, {
+
+    // To make panels have the same width
+    const panelAlignGroup = new AlignGroup( {
+      matchHorizontal: true,
+      matchVertical: false
+    } );
+
+    // Controls
+    const solutionPanel = createSolutionPanel( panelAlignGroup );
+    const viewsPanel = new ViewsPanel( this.viewProperties.viewModeProperty, this.viewProperties.solventVisibleProperty, panelAlignGroup );
+    const toolsRadioButtonGroup = new ToolsRadioButtonGroup( this.viewProperties.toolModeProperty );
+
+    const controlsParent = new VBox( {
+      children: [ solutionPanel, viewsPanel, toolsRadioButtonGroup ],
+      align: 'center',
+      spacing: 10,
       right: resetAllButton.left - 10,
-      centerY: this.layoutBounds.centerY,
-      maxWidth: 0.75 * ( this.layoutBounds.width - beakerNode.width ) // constrain width for i18n
+      centerY: this.layoutBounds.centerY
     } );
 
     const rootNode = new Node( {
@@ -80,7 +99,7 @@ class ABSScreenView extends ScreenView {
         equationNode,
         magnifierNode,
         graphNode,
-        controlPanel,
+        controlsParent,
         resetAllButton
       ]
     } );

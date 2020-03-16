@@ -12,13 +12,17 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
+import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
+import VBox from '../../../../scenery/js/nodes/VBox.js';
 import ABSwitch from '../../../../sun/js/ABSwitch.js';
 import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
 import HSeparator from '../../../../sun/js/HSeparator.js';
+import Panel from '../../../../sun/js/Panel.js';
 import acidBaseSolutionsStrings from '../../acid-base-solutions-strings.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSConstants from '../../common/ABSConstants.js';
@@ -26,9 +30,11 @@ import SolutionType from '../../common/enum/SolutionType.js';
 import ConcentrationSlider from './ConcentrationSlider.js';
 import StrengthSlider from './StrengthSlider.js';
 
+// strings
 const acidString = acidBaseSolutionsStrings.acid;
 const baseString = acidBaseSolutionsStrings.base;
 const initialConcentrationString = acidBaseSolutionsStrings.initialConcentration;
+const solutionString = acidBaseSolutionsStrings.solution;
 const strengthString = acidBaseSolutionsStrings.strength;
 const strongString = acidBaseSolutionsStrings.strong;
 const weakString = acidBaseSolutionsStrings.weak;
@@ -39,39 +45,58 @@ const SUBTITLE_FONT = new PhetFont( 12 );
 const CONTROL_FONT = new PhetFont( 12 );
 const ARROW_STEP = Math.pow( 10, -CONCENTRATION_DECIMALS ); // concentration delta for arrow button
 const ARROW_HEIGHT = 15;
-const ARROW_BUTTON_OPTIONS = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
+const ARROW_BUTTON_OPTIONS = {
+  arrowHeight: ARROW_HEIGHT,
+  arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2,
+  touchAreaXDilation: 6,
+  touchAreaYDilation: 6
+};
 const CONCENTRATION_FONT = new PhetFont( 14 );
-const AB_SWITCH_SIZE = new Dimension2( 40, 20 );
+const TITLE_MAX_WIDTH = 180;
+const SWITCH_TEXT_OPTIONS = {
+  font: CONTROL_FONT,
+  maxWidth: 80
+};
+const AB_SWITCH_OPTIONS = {
+  toggleSwitchOptions: {
+    size: new Dimension2( 40, 20 ),
+    thumbTouchAreaXDilation: 6,
+    thumbTouchAreaYDilation: 6
+  }
+};
 
-class SolutionControl extends Node {
+class MySolutionPanel extends Panel {
 
   /**
    * @param {Property.<SolutionType>} solutionTypeProperty
    * @param {Property.<number>} concentrationProperty
    * @param {Property.<number>} strengthProperty
+   * @parram {AlignGroup} contentAlignGroup
    * @param {Object} [options]
    */
-  constructor( solutionTypeProperty, concentrationProperty, strengthProperty, options ) {
+  constructor( solutionTypeProperty, concentrationProperty, strengthProperty, contentAlignGroup, options ) {
+    assert && assert( contentAlignGroup instanceof AlignGroup, 'invalid contentAlignGroup' );
 
-    options = merge( {
-      spacing: 4,
-      align: 'left'
-    }, options );
+    options = merge( {}, ABSConstants.PANEL_OPTIONS, options );
 
-    const concentrationRange = ABSConstants.CONCENTRATION_RANGE;
+    // title
+    const titleNode = new Text( solutionString, {
+      font: ABSConstants.TITLE_FONT,
+      maxWidth: TITLE_MAX_WIDTH
+    } );
 
     // acid/base switch
     const isAcidProperty = new BooleanProperty( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.STRONG_ACID );
     const acidBaseSwitch = new ABSwitch( isAcidProperty,
-      true, new Text( acidString, { font: CONTROL_FONT } ),
-      false, new Text( baseString, { font: CONTROL_FONT } ), {
-        toggleSwitchOptions: {
-          size: AB_SWITCH_SIZE
-        }
-      } );
+      true, new Text( acidString, SWITCH_TEXT_OPTIONS ),
+      false, new Text( baseString, SWITCH_TEXT_OPTIONS ),
+      AB_SWITCH_OPTIONS );
 
     // concentration title
-    const concentrationTitle = new Text( initialConcentrationString, { font: SUBTITLE_FONT } );
+    const concentrationTitle = new Text( initialConcentrationString, {
+      font: SUBTITLE_FONT,
+      maxWidth: TITLE_MAX_WIDTH
+    } );
 
     // concentration readout
     const readoutText = new Text( Utils.toFixed( concentrationProperty.get(), CONCENTRATION_DECIMALS ), { font: CONCENTRATION_FONT } );
@@ -82,10 +107,10 @@ class SolutionControl extends Node {
 
     // arrow buttons
     const leftArrowButton = new ArrowButton( 'left', () => {
-      concentrationProperty.set( Math.max( concentrationProperty.get() - ARROW_STEP, concentrationRange.min ) );
+      concentrationProperty.set( Math.max( concentrationProperty.get() - ARROW_STEP, ABSConstants.CONCENTRATION_RANGE.min ) );
     }, ARROW_BUTTON_OPTIONS );
     const rightArrowButton = new ArrowButton( 'right', () => {
-      concentrationProperty.set( Math.min( concentrationProperty.get() + ARROW_STEP, concentrationRange.max ) );
+      concentrationProperty.set( Math.min( concentrationProperty.get() + ARROW_STEP, ABSConstants.CONCENTRATION_RANGE.max ) );
     }, ARROW_BUTTON_OPTIONS );
 
     // concentration value control
@@ -95,21 +120,21 @@ class SolutionControl extends Node {
     } );
 
     // concentration slider
-    const concentrationSlider = new ConcentrationSlider( concentrationProperty, concentrationRange );
+    const concentrationSlider = new ConcentrationSlider( concentrationProperty, ABSConstants.CONCENTRATION_RANGE );
 
     // strength control
-    const strengthTitle = new Text( strengthString, { font: SUBTITLE_FONT } );
+    const strengthTitle = new Text( strengthString, {
+      font: SUBTITLE_FONT,
+      maxWidth: TITLE_MAX_WIDTH
+    } );
     const isWeakProperty = new BooleanProperty( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.WEAK_ACID );
     const weakStrongSwitch = new ABSwitch( isWeakProperty,
-      true, new Text( weakString, { font: CONTROL_FONT } ),
-      false, new Text( strongString, { font: CONTROL_FONT } ), {
-        toggleSwitchOptions: {
-          size: AB_SWITCH_SIZE
-        }
-      } );
+      true, new Text( weakString, SWITCH_TEXT_OPTIONS ),
+      false, new Text( strongString, SWITCH_TEXT_OPTIONS ),
+      AB_SWITCH_OPTIONS );
     const strengthSlider = new StrengthSlider( solutionTypeProperty, strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE );
 
-    options.children = [
+    const children = [
       acidBaseSwitch,
       concentrationTitle,
       concentrationValueControl,
@@ -121,15 +146,15 @@ class SolutionControl extends Node {
 
     // compute separator width
     let separatorWidth = 0;
-    options.children.forEach( child => {
+    children.forEach( child => {
       separatorWidth = Math.max( child.width, separatorWidth );
     } );
 
     // separators for sub-panels
     const concentrationSeparator = new HSeparator( separatorWidth );
     const strengthSeparator = new HSeparator( separatorWidth );
-    options.children.splice( options.children.indexOf( concentrationTitle ), 0, concentrationSeparator );
-    options.children.splice( options.children.indexOf( strengthTitle ), 0, strengthSeparator );
+    children.splice( children.indexOf( concentrationTitle ), 0, concentrationSeparator );
+    children.splice( children.indexOf( strengthTitle ), 0, strengthSeparator );
 
     // brute-force layout
     const subtitleYSpacing = 6;
@@ -154,7 +179,18 @@ class SolutionControl extends Node {
     weakStrongSwitch.top = strengthTitle.bottom + subtitleYSpacing;
     strengthSlider.top = weakStrongSwitch.bottom + controlYSpacing;
 
-    super( options );
+    const controls = new Node( { children: children } );
+
+    const content = new AlignBox( new VBox( {
+      spacing: 8,
+      align: 'left',
+      children: [ titleNode, controls ]
+    } ), {
+      group: contentAlignGroup,
+      xAlign: 'left'
+    } );
+
+    super( content, options );
 
     // update the readout text when concentration value changes
     concentrationProperty.link( concentration => {
@@ -163,8 +199,8 @@ class SolutionControl extends Node {
 
     // disable arrow buttons
     concentrationProperty.link( concentration => {
-      leftArrowButton.enabled = ( concentration > concentrationRange.min );
-      rightArrowButton.enabled = ( concentration < concentrationRange.max );
+      leftArrowButton.enabled = ( concentration > ABSConstants.CONCENTRATION_RANGE.min );
+      rightArrowButton.enabled = ( concentration < ABSConstants.CONCENTRATION_RANGE.max );
     } );
 
     // hide strength slider for weak solutions
@@ -209,5 +245,5 @@ class SolutionControl extends Node {
   }
 }
 
-acidBaseSolutions.register( 'SolutionControl', SolutionControl );
-export default SolutionControl;
+acidBaseSolutions.register( 'MySolutionPanel', MySolutionPanel );
+export default MySolutionPanel;

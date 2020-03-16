@@ -1,7 +1,7 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
 /**
- * Control for selecting between a set of mutually-exclusive tools.
+ * Radio buttons for selecting between a set of mutually-exclusive tools.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -16,7 +16,7 @@ import ToolMode from '../enum/ToolMode.js';
 import PHMeterNode from './PHMeterNode.js';
 import PHPaperNode from './PHPaperNode.js';
 
-class ToolsControl extends RadioButtonGroup {
+class ToolsRadioButtonGroup extends RadioButtonGroup {
 
   /**
    * @param {EnumerationProperty.<ToolMode>} toolModeProperty
@@ -39,5 +39,5 @@ class ToolsControl extends RadioButtonGroup {
   }
 }
 
-acidBaseSolutions.register( 'ToolsControl', ToolsControl );
-export default ToolsControl;
+acidBaseSolutions.register( 'ToolsRadioButtonGroup', ToolsRadioButtonGroup );
+export default ToolsRadioButtonGroup;
