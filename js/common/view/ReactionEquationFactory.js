@@ -10,6 +10,8 @@
 import Shape from '../../../../kite/js/Shape.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
+import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
@@ -33,6 +35,9 @@ const ARROWS_VERTICAL_SPACE = 3; // vertical space between reversible arrows
 const ARROWS_LENGTH = 25;
 const ARROWS_HEAD_RADIUS = 0.72 * ARROWS_LENGTH;
 const ARROWS_HEAD_ANGLE_DELTA = 0.2 * Math.PI;
+
+// To make all equations have the same effective dimensions for layout
+const ALIGN_GROUP = new AlignGroup();
 
 //-------------------------------------------------------------------------------------
 // Public functions for creating reaction equations.
@@ -101,11 +106,15 @@ function createAcidEquation( isWeak ) {
 
 // Creates an equation by horizontally laying out a set of elements (children).
 function createEquation( children ) {
-  return new HBox( {
+  return new AlignBox( new HBox( {
     children: children,
     scale: EQUATION_SCALE,
     spacing: 4,
     align: 'bottom'
+  } ), {
+    group: ALIGN_GROUP,
+    xAlign: 'center',
+    yAlign: 'bottom'
   } );
 }
 
