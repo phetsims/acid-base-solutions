@@ -13,7 +13,6 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
-import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import VStrut from '../../../../scenery/js/nodes/VStrut.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
@@ -264,7 +263,7 @@ function createOH() {
 function createPlus() {
   return new VBox( {
     children: [
-      new Text( MathSymbols.PLUS, RICH_TEXT_OPTIONS ),
+      new RichText( MathSymbols.PLUS, RICH_TEXT_OPTIONS ),
       new VStrut( SUBSCRIPT_HEIGHT + VBOX_SPACING )
     ]
   } );
