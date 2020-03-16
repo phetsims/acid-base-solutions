@@ -7,12 +7,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
-import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import MinusNode from '../../../../scenery-phet/js/MinusNode.js';
+import PlusNode from '../../../../scenery-phet/js/PlusNode.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import Text from '../../../../scenery/js/nodes/Text.js';
 import RadialGradient from '../../../../scenery/js/util/RadialGradient.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
@@ -89,13 +89,23 @@ const MoleculeFactory = {
   MOH: function() {
     return new Node( {
       children: [
-        // add M ion
+
+        // M icon. Use PlusNode instead of MathSymbols.PLUS because text bounds are inaccurate.
         new AtomNode( 6, MOLECULE_COLORS.MOH, { x: 0, y: 0 } ),
-        new Text( MathSymbols.PLUS, { centerX: 0, centerY: 10, font: new PhetFont( 12 ) } ),
-        // add OH ion
+        new PlusNode( {
+          size: new Dimension2( 6, 1 ),
+          centerX: 0,
+          centerY: 10
+        } ),
+
+        // OH ion. Use MinusNode instead of MathSymbols.MINUS because text bounds are inaccurate.
         new AtomNode( 7, MOLECULE_COLORS.MOH, { x: 15, y: 0 } ),
         new AtomNode( 4, MOLECULE_COLORS.MOH, { x: 22, y: -4 } ),
-        new Text( MathSymbols.MINUS, { centerX: 15, centerY: 10, font: new PhetFont( 15 ) } )
+        new MinusNode( {
+          size: new Dimension2( 6, 1 ),
+          centerX: 15,
+          centerY: 10
+        } )
       ]
     } );
   },
