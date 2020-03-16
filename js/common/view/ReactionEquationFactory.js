@@ -13,6 +13,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
+import HStrut from '../../../../scenery/js/nodes/HStrut.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
@@ -200,7 +201,12 @@ function createH3O() {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
-      MoleculeFactory.H3O(),
+
+      // Add a strut as a bit of a hack to make the big atom in H3O appear aligned with the text.
+      new HBox( {
+        spacing: 0,
+        children: [ MoleculeFactory.H3O(), new HStrut( 7 ) ]
+      } ),
       new RichText( 'H<sub>3</sub>O<sup>+</sup>', RICH_TEXT_OPTIONS )
     ]
   } );
