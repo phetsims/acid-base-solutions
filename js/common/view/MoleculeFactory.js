@@ -8,6 +8,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -90,11 +91,11 @@ const MoleculeFactory = {
       children: [
         // add M ion
         new AtomNode( 6, MOLECULE_COLORS.MOH, { x: 0, y: 0 } ),
-        new Text( '+', { centerX: 0, centerY: 10, font: new PhetFont( 12 ) } ),
+        new Text( MathSymbols.PLUS, { centerX: 0, centerY: 10, font: new PhetFont( 12 ) } ),
         // add OH ion
         new AtomNode( 7, MOLECULE_COLORS.MOH, { x: 15, y: 0 } ),
         new AtomNode( 4, MOLECULE_COLORS.MOH, { x: 22, y: -4 } ),
-        new Text( '-', { centerX: 15, centerY: 8, font: new PhetFont( 15 ) } )
+        new Text( MathSymbols.MINUS, { centerX: 15, centerY: 10, font: new PhetFont( 15 ) } )
       ]
     } );
   },

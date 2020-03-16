@@ -8,9 +8,9 @@
  */
 
 import Shape from '../../../../kite/js/Shape.js';
+import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
@@ -21,14 +21,13 @@ import MoleculeFactory from './MoleculeFactory.js';
 
 // constants
 const EQUATION_SCALE = 1.5; // applied to all equations, see issue #88
-const HBOX_SPACING = 4;
 const VBOX_SPACING = 2;
 
 // constants related to text
 const FONT_SIZE = 13;
 const FONT = new PhetFont( FONT_SIZE );
-const SUBSCRIPT_Y_OFFSET = FONT_SIZE / 8; // vertical alignment workaround applied to any equation term that doesn't have a subscript
-const SUBSUP_OPTIONS = { font: FONT, supScale: 1 }; // options for all instances of SubSupNode
+const RICH_TEXT_OPTIONS = { font: FONT };
+const SUBSCRIPT_HEIGHT = FONT_SIZE / 12; // VStrut with this height is added to any equation term that doesn't have a subscript
 
 // constants related to arrows, issue #95
 const ARROWS_VERTICAL_SPACE = 3; // vertical space between reversible arrows
@@ -45,11 +44,11 @@ const ReactionEquationFactory = {
   // 2 H2O <-> H3O+ + OH-
   createWaterEquation: function() {
     return createEquation( [
-      create2H2ONode(),
-      reversibleArrowNode(),
-      createH3ONode(),
-      plusSignNode(),
-      createOHNode()
+      create2H2O(),
+      createReversibleArrow(),
+      createH3O(),
+      createPlus(),
+      createOH()
     ] );
   },
 
@@ -66,233 +65,39 @@ const ReactionEquationFactory = {
   // MOH -> M+ + OH-
   createStrongBaseEquation: function() {
     return createEquation( [
-      createMOHNode(),
-      irreversibleArrowNode(),
-      createMNode(),
-      plusSignNode(),
-      createOHNode()
+      createMOH(),
+      createIrreversibleArrow(),
+      createM(),
+      createPlus(),
+      createOH()
     ] );
   },
 
   // B + H2O <-> BH+ + OH-
   createWeakBaseEquation: function() {
     return createEquation( [
-      createBNode(),
-      plusSignNode(),
-      createH2ONode(),
-      reversibleArrowNode(),
-      createBHNode(),
-      plusSignNode(),
-      createOHNode()
+      createB(),
+      createPlus(),
+      createH2O(),
+      createReversibleArrow(),
+      createBH(),
+      createPlus(),
+      createOH()
     ] );
   }
 };
 
-acidBaseSolutions.register( 'ReactionEquationFactory', ReactionEquationFactory );
-
-//-------------------------------------------------------------------------------------
-// Private functions for creating components of reaction equations.
-//-------------------------------------------------------------------------------------
-
-// A- node
-const createANode = function() {
-  const A = new Text( 'A', { font: FONT, fontStyle: 'italic' } );
-  const minusNode = new Text( '-', { font: FONT, left: A.right, centerY: A.top + ( 0.2 * A.height ) } );
-  return new VBox( {
-    spacing: VBOX_SPACING,
-    children: [
-      MoleculeFactory.A(),
-      new Node( { children: [ A, minusNode ] } ),
-      new VStrut( SUBSCRIPT_Y_OFFSET )
-    ]
-  } );
-};
-
-// B node
-function createBNode() {
-  return new VBox( {
-    spacing: VBOX_SPACING,
-    children: [
-      MoleculeFactory.B(),
-      new Text( 'B', { font: FONT, fontStyle: 'italic' } ),
-      new VStrut( SUBSCRIPT_Y_OFFSET )
-    ]
-  } );
-}
-
-// BH+ node
-function createBHNode() {
-  return new VBox( {
-    spacing: VBOX_SPACING,
-    children: [
-      MoleculeFactory.BH(),
-      new HBox( {
-        spacing: 1,
-        align: 'bottom',
-        children: [
-          new Text( 'B', { font: FONT, fontStyle: 'italic' } ),
-          new RichText( 'H<sup>+</sup>', SUBSUP_OPTIONS ) ]
-      } ),
-      new VStrut( SUBSCRIPT_Y_OFFSET )
-    ]
-  } );
-}
-
-// H2O node
-function createH2ONode() {
-  return new VBox( {
-    spacing: VBOX_SPACING,
-    children: [
-      MoleculeFactory.H2O(),
-      new RichText( 'H<sub>2</sub>O', SUBSUP_OPTIONS )
-    ]
-  } );
-}
-
-// 2H2O node
-function create2H2ONode() {
-  return new VBox( {
-    spacing: VBOX_SPACING,
-    children: [
-      new HBox( {
-        spacing: HBOX_SPACING,
-        children: [
-          MoleculeFactory.H2O(),
-          MoleculeFactory.H2O()
-        ]
-      } ),
-      new HBox( {
-        spacing: 3,
-        align: 'top',
-        children: [
-          new Text( '2', { font: FONT } ),
-          new RichText( 'H<sub>2</sub>O', SUBSUP_OPTIONS )
-        ]
-      } )
-    ]
-  } );
-}
-
-// H3O+ node
-function createH3ONode() {
-  return new VBox( {
-    spacing: VBOX_SPACING,
-    children: [
-      MoleculeFactory.H3O(),
-      new RichText( 'H<sub>3</sub>O<sup>+</sup>', SUBSUP_OPTIONS )
-    ]
-  } );
-}
-
-// HA node
-function createHANode() {
-  return new VBox( {
-    spacing: VBOX_SPACING,
-    children: [
-      MoleculeFactory.HA(),
-      new HBox( {
-        spacing: 1,
-        children: [
-          new Text( 'H', { font: FONT } ),
-          new Text( 'A', { font: FONT, fontStyle: 'italic' } )
-        ]
-      } ),
-      new VStrut( SUBSCRIPT_Y_OFFSET )
-    ]
-  } );
-}
-
-// M+ node
-function createMNode() {
-  const M = new Text( 'M', { font: FONT, fontStyle: 'italic' } );
-  const plusNode = new Text( '+', { font: FONT, left: M.right, centerY: M.top + ( 0.2 * M.height ) } );
-  return new VBox( {
-    spacing: VBOX_SPACING,
-    children: [
-      MoleculeFactory.M(),
-      new Node( { children: [ M, plusNode ] } ),
-      new VStrut( SUBSCRIPT_Y_OFFSET )
-    ]
-  } );
-}
-
-// MOH node
-function createMOHNode() {
-  return new VBox( {
-    spacing: VBOX_SPACING,
-    children: [
-      MoleculeFactory.MOH(),
-      new HBox( {
-        spacing: 1,
-        children: [
-          new Text( 'M', { font: FONT, fontStyle: 'italic' } ),
-          new Text( 'OH', { font: FONT } ) ]
-      } ),
-      new VStrut( SUBSCRIPT_Y_OFFSET )
-    ]
-  } );
-}
-
-// OH- node
-function createOHNode() {
-  return new VBox( {
-    spacing: VBOX_SPACING,
-    children: [
-      MoleculeFactory.OH(),
-      new RichText( 'OH<sup>-</sup>', SUBSUP_OPTIONS ),
-      new VStrut( SUBSCRIPT_Y_OFFSET )
-    ]
-  } );
-}
-
-// plus sign node
-function plusSignNode() {
-  return new VBox( {
-    children: [
-      new Text( '+', { font: FONT } ),
-      new VStrut( SUBSCRIPT_Y_OFFSET + VBOX_SPACING )
-    ]
-  } );
-}
-
-// double arrow to indicate reversible reaction
-function reversibleArrowNode() {
-  return new VBox( {
-    spacing: VBOX_SPACING,
-    children: [
-      new Path( new Shape()
-          // top arrow, points right
-          .moveTo( 0, -ARROWS_VERTICAL_SPACE / 2 )
-          .lineTo( ARROWS_LENGTH, -ARROWS_VERTICAL_SPACE / 2 )
-          .lineTo( ARROWS_LENGTH, -ARROWS_VERTICAL_SPACE / 2 + 0.00001 ) // see issue #104
-          .arc( ARROWS_LENGTH, -ARROWS_HEAD_RADIUS - ( ARROWS_VERTICAL_SPACE / 2 ), ARROWS_HEAD_RADIUS, 0.5 * Math.PI, 0.5 * Math.PI + ARROWS_HEAD_ANGLE_DELTA )
-          // bottom arrow, points left
-          .moveTo( ARROWS_LENGTH, ARROWS_VERTICAL_SPACE / 2 )
-          .lineTo( 0, ARROWS_VERTICAL_SPACE / 2 )
-          .lineTo( 0, ARROWS_VERTICAL_SPACE / 2 + 0.00001 ) // see issue #104
-          .arc( 0, ARROWS_HEAD_RADIUS + ( ARROWS_VERTICAL_SPACE / 2 ), ARROWS_HEAD_RADIUS, -0.5 * Math.PI, -0.5 * Math.PI + ARROWS_HEAD_ANGLE_DELTA ),
-        { stroke: 'black' } ),
-      new VStrut( SUBSCRIPT_Y_OFFSET + FONT_SIZE / 4 - 2 )
-    ]
-  } );
-}
-
-// single arrow to indicate irreversible reaction, points right
-function irreversibleArrowNode() {
-  return new VBox( {
-    spacing: VBOX_SPACING,
-    children: [
-      new Path( new Shape()
-          .moveTo( 0, 0 )
-          .lineTo( ARROWS_LENGTH, 0 )
-          .lineTo( ARROWS_LENGTH, 0.00001 ) // see issue #104
-          .arc( ARROWS_LENGTH, -ARROWS_HEAD_RADIUS, ARROWS_HEAD_RADIUS, 0.5 * Math.PI, 0.5 * Math.PI + ARROWS_HEAD_ANGLE_DELTA )
-          .moveTo( 25, 0 )
-          .arc( ARROWS_LENGTH, ARROWS_HEAD_RADIUS, ARROWS_HEAD_RADIUS, -0.5 * Math.PI, -0.5 * Math.PI - ARROWS_HEAD_ANGLE_DELTA, true ),
-        { stroke: 'black' } ),
-      new VStrut( SUBSCRIPT_Y_OFFSET + FONT_SIZE / 4 )
-    ]
-  } );
+// Equations for all acids are similar: HA + H2O ? A- + H3O+
+function createAcidEquation( isWeak ) {
+  return createEquation( [
+    createHA(),
+    createPlus(),
+    createH2O(),
+    ( isWeak ? createReversibleArrow() : createIrreversibleArrow() ),
+    createA(),
+    createPlus(),
+    createH3O()
+  ] );
 }
 
 // Creates an equation by horizontally laying out a set of elements (children).
@@ -300,22 +105,213 @@ function createEquation( children ) {
   return new HBox( {
     children: children,
     scale: EQUATION_SCALE,
-    spacing: HBOX_SPACING,
+    spacing: 4,
     align: 'bottom'
   } );
 }
 
-// Equations for all acids are similar: HA + H2O ? A- + H3O+
-function createAcidEquation( isWeak ) {
-  return createEquation( [
-    createHANode(),
-    plusSignNode(),
-    createH2ONode(),
-    ( isWeak ? reversibleArrowNode() : irreversibleArrowNode() ),
-    createANode(),
-    plusSignNode(),
-    createH3ONode()
-  ] );
+// A- node
+const createA = function() {
+  return new VBox( {
+    spacing: VBOX_SPACING,
+    children: [
+      MoleculeFactory.A(),
+      new RichText( `<i>A</i><sup>${MathSymbols.MINUS}</sup>`, RICH_TEXT_OPTIONS ),
+      new VStrut( SUBSCRIPT_HEIGHT )
+    ]
+  } );
+};
+
+// B node
+function createB() {
+  return new VBox( {
+    spacing: VBOX_SPACING,
+    children: [
+      MoleculeFactory.B(),
+      new RichText( '<i>B</i>', RICH_TEXT_OPTIONS ),
+      new VStrut( SUBSCRIPT_HEIGHT )
+    ]
+  } );
 }
 
+// BH+ node
+function createBH() {
+  return new VBox( {
+    spacing: VBOX_SPACING,
+    children: [
+      MoleculeFactory.BH(),
+      new HBox( {
+        spacing: 1, // this functions like kerning
+        align: 'bottom',
+        children: [
+          new RichText( '<i>B</i>', RICH_TEXT_OPTIONS ),
+          new RichText( `H<sup>${MathSymbols.PLUS}</sup>`, RICH_TEXT_OPTIONS ) ]
+      } ),
+      new VStrut( SUBSCRIPT_HEIGHT )
+    ]
+  } );
+}
+
+// H2O node
+function createH2O() {
+  return new VBox( {
+    spacing: VBOX_SPACING,
+    children: [
+      MoleculeFactory.H2O(),
+      new RichText( 'H<sub>2</sub>O', RICH_TEXT_OPTIONS )
+    ]
+  } );
+}
+
+// 2H2O node
+function create2H2O() {
+  return new VBox( {
+    spacing: VBOX_SPACING,
+    children: [
+      new HBox( {
+        spacing: 4,
+        children: [
+          MoleculeFactory.H2O(),
+          MoleculeFactory.H2O()
+        ]
+      } ),
+      new HBox( {
+        spacing: 3, // this functions like kerning
+        align: 'top',
+        children: [
+          new RichText( '2', RICH_TEXT_OPTIONS ),
+          new RichText( 'H<sub>2</sub>O', RICH_TEXT_OPTIONS )
+        ]
+      } )
+    ]
+  } );
+}
+
+// H3O+ node
+function createH3O() {
+  return new VBox( {
+    spacing: VBOX_SPACING,
+    children: [
+      MoleculeFactory.H3O(),
+      new RichText( 'H<sub>3</sub>O<sup>+</sup>', RICH_TEXT_OPTIONS )
+    ]
+  } );
+}
+
+// HA node
+function createHA() {
+  return new VBox( {
+    spacing: VBOX_SPACING,
+    children: [
+      MoleculeFactory.HA(),
+      new RichText( 'H<i>A</i>', RICH_TEXT_OPTIONS ),
+      new VStrut( SUBSCRIPT_HEIGHT )
+    ]
+  } );
+}
+
+// M+ node
+function createM() {
+  return new VBox( {
+    spacing: VBOX_SPACING,
+    children: [
+      MoleculeFactory.M(),
+      new HBox( {
+        spacing: 1, // this functions like kerning
+        align: 'origin',
+        children: [
+          new RichText( '<i>M</i>', RICH_TEXT_OPTIONS ),
+          new RichText( `<sup>${MathSymbols.PLUS}</sup>`, RICH_TEXT_OPTIONS )
+        ]
+      } ),
+      new VStrut( SUBSCRIPT_HEIGHT )
+    ]
+  } );
+}
+
+// MOH node
+function createMOH() {
+  return new VBox( {
+    spacing: VBOX_SPACING,
+    children: [
+      MoleculeFactory.MOH(),
+      new HBox( {
+        spacing: 1, // this functions like kerning
+        align: 'origin',
+        children: [
+          new RichText( '<i>M</i>', RICH_TEXT_OPTIONS ),
+          new RichText( 'OH', RICH_TEXT_OPTIONS )
+        ]
+      } ),
+      new VStrut( SUBSCRIPT_HEIGHT )
+    ]
+  } );
+}
+
+// OH- node
+function createOH() {
+  return new VBox( {
+    spacing: VBOX_SPACING,
+    children: [
+      MoleculeFactory.OH(),
+      new RichText( `OH<sup>${MathSymbols.MINUS}</sup>`, RICH_TEXT_OPTIONS ),
+      new VStrut( SUBSCRIPT_HEIGHT )
+    ]
+  } );
+}
+
+// plus sign node
+function createPlus() {
+  return new VBox( {
+    children: [
+      new Text( MathSymbols.PLUS, RICH_TEXT_OPTIONS ),
+      new VStrut( SUBSCRIPT_HEIGHT + VBOX_SPACING )
+    ]
+  } );
+}
+
+// double arrow to indicate reversible reaction
+function createReversibleArrow() {
+  const shape = new Shape()
+    // top arrow, points right
+    .moveTo( 0, -ARROWS_VERTICAL_SPACE / 2 )
+    .lineTo( ARROWS_LENGTH, -ARROWS_VERTICAL_SPACE / 2 )
+    .lineTo( ARROWS_LENGTH, -ARROWS_VERTICAL_SPACE / 2 + 0.00001 ) // see issue #104
+    .arc( ARROWS_LENGTH, -ARROWS_HEAD_RADIUS - ( ARROWS_VERTICAL_SPACE / 2 ), ARROWS_HEAD_RADIUS, 0.5 * Math.PI, 0.5 * Math.PI + ARROWS_HEAD_ANGLE_DELTA )
+    // bottom arrow, points left
+    .moveTo( ARROWS_LENGTH, ARROWS_VERTICAL_SPACE / 2 )
+    .lineTo( 0, ARROWS_VERTICAL_SPACE / 2 )
+    .lineTo( 0, ARROWS_VERTICAL_SPACE / 2 + 0.00001 ) // see issue #104
+    .arc( 0, ARROWS_HEAD_RADIUS + ( ARROWS_VERTICAL_SPACE / 2 ), ARROWS_HEAD_RADIUS, -0.5 * Math.PI, -0.5 * Math.PI + ARROWS_HEAD_ANGLE_DELTA );
+  return new VBox( {
+    spacing: VBOX_SPACING,
+    children: [
+      new Path( shape, { stroke: 'black' } ),
+      new VStrut( SUBSCRIPT_HEIGHT + FONT_SIZE / 6 )
+    ]
+  } );
+
+}
+
+// single arrow to indicate irreversible reaction, points right
+function createIrreversibleArrow() {
+
+  const shape = new Shape()
+    .moveTo( 0, 0 )
+    .lineTo( ARROWS_LENGTH, 0 )
+    .lineTo( ARROWS_LENGTH, 0.00001 ) // see issue #104
+    .arc( ARROWS_LENGTH, -ARROWS_HEAD_RADIUS, ARROWS_HEAD_RADIUS, 0.5 * Math.PI, 0.5 * Math.PI + ARROWS_HEAD_ANGLE_DELTA )
+    .moveTo( 25, 0 )
+    .arc( ARROWS_LENGTH, ARROWS_HEAD_RADIUS, ARROWS_HEAD_RADIUS, -0.5 * Math.PI, -0.5 * Math.PI - ARROWS_HEAD_ANGLE_DELTA, true );
+
+  return new VBox( {
+    spacing: VBOX_SPACING,
+    children: [
+      new Path( shape, { stroke: 'black' } ),
+      new VStrut( SUBSCRIPT_HEIGHT + FONT_SIZE / 4 )
+    ]
+  } );
+}
+
+acidBaseSolutions.register( 'ReactionEquationFactory', ReactionEquationFactory );
 export default ReactionEquationFactory;
