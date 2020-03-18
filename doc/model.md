@@ -72,14 +72,25 @@ For the purposes of this simulation, conductivity is modeled as a number between
 This value has no units and determines the brightness of the light bulb.
 Conductivity is computed as a linear function of pH, as follows:
 
+```
+if ( open circuit ) {
+  conductivity = C_open_circuit
+}
+else ( if pH < 7 ) {
+  conductivity = C_neutral + ( ( 1 - C_neutral ) * ( 7 - pH ) / ( 7 - pH_min ) )
+}
+else ( if pH >= 7 ) {
+  conductivity = C_neutral + ( ( 1 - C_neutral ) * ( pH - 7 ) / ( pH_max - 7 ) )
+}
+```
+
+where:
+
 * pH_min = 0
 * pH_max = 14
-
 * C_open_circuit = 0
 * C_max = 1
 * C_neutral = conductivity of a neutral (pH=7) solution (a small constant > 0)
 
-* if open circuit, conductivity = C_open_circuit
-* else if pH < 7, conductivity = C_neutral + ( ( 1 - C_neutral ) * ( 7 - pH ) / ( 7 - pH_min ) )
-* else if pH >= 7, conductivity = C_neutral + ( ( 1 - C_neutral ) * ( pH - 7 ) / ( pH_max - 7 ) )
+
 
