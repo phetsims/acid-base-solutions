@@ -34,17 +34,17 @@ Pure Water:
 
 Strong Acids:
 * [HA] = 0
-* [A<sup>-</sub>] = C
+* [A<sup>-</sup>] = C
 * [H<sub>3</sub>O<sup>+</sup>] = C
 * [OH<sup>-</sup>] = Kw / [H<sub>3</sub>O<sup>+</sup>]
 * [H<sub>2</sub>O] = W - C
 
 Weak Acids:
 * [HA] = C - [H<sub>3</sub>O<sup>+</sup>]
-* [A<sup>-</sub>] = [H<sub>3</sub>O<sup>+</sup>]
+* [A<sup>-</sup>] = [H<sub>3</sub>O<sup>+</sup>]
 * [H<sub>3</sub>O<sup>+</sup>] = ( -Ka + sqrt( Ka^2 + 4*Ka*C ) ) / 2
 * [OH<sup>-</sup>] = Kw / [H<sub>3</sub>O<sup>+</sup>]
-* [H<sub>2</sub>O] = W - [A<sup>-</sub>]
+* [H<sub>2</sub>O] = W - [A<sup>-</sup>]
 
 Strong Bases:
 * [MOH] = 0
