@@ -36,13 +36,13 @@ Strong Acids:
 * [HA] = 0
 * [A<sup>-</sup>] = C
 * [H<sub>3</sub>O<sup>+</sup>] = C
-* [OH<sup>-</sup>] = Kw / [H<sub>3</sub>O<sup>+</sup>]
+* [OH<sup>-</sup>] = K<sub>w</sub> / [H<sub>3</sub>O<sup>+</sup>]
 * [H<sub>2</sub>O] = W - C
 
 Weak Acids:
 * [HA] = C - [H<sub>3</sub>O<sup>+</sup>]
 * [A<sup>-</sup>] = [H<sub>3</sub>O<sup>+</sup>]
-* [H<sub>3</sub>O<sup>+</sup>] = ( -Ka + sqrt( K<sub>a</sub><sup>2</sup> + 4 * K<sub>a</sub> * C ) ) / 2
+* [H<sub>3</sub>O<sup>+</sup>] = ( -K<sub>a</sub> + sqrt( K<sub>a</sub><sup>2</sup> + 4 * K<sub>a</sub> * C ) ) / 2
 * [OH<sup>-</sup>] = K<sub>w</sub> / [H<sub>3</sub>O<sup>+</sup>]
 * [H<sub>2</sub>O] = W - [A<sup>-</sup>]
 
