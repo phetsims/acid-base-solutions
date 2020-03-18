@@ -8,3 +8,7 @@ There is no model-view transform between the model and view portions of this sim
 The transform is implicitly 1:1, with identical coordinate frames.
 One unit of distance in the model is one unit of distance in the play area.
 Positive x is to the right, positive y is down.
+
+[AqueousSolution.js](https://github.com/phetsims/acid-base-solutions/blob/master/js/common/model/solutions/AqueousSolution.js) is the base class for all solutions.
+
+[ABSModel.js](https://github.com/phetsims/acid-base-solutions/blob/master/js/common/model/ABSModel.js) is the base class model.
