@@ -76,10 +76,10 @@ Conductivity is computed as a linear function of pH, as follows:
 if ( open circuit ) {
   conductivity = 0
 }
-else ( if pH < 7 ) {
+else if ( pH < 7 ) {
   conductivity = C_neutral + ( ( 1 - C_neutral ) * ( 7 - pH ) / ( 7 - pH_min ) )
 }
-else ( if pH >= 7 ) {
+else if ( pH >= 7 ) {
   conductivity = C_neutral + ( ( 1 - C_neutral ) * ( pH - 7 ) / ( pH_max - 7 ) )
 }
 ```
