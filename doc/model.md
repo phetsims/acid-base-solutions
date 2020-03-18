@@ -88,7 +88,7 @@ where:
 
 * pH_min = 0
 * pH_max = 14
-* C_neutral = conductivity of a neutral (pH = 7) solution (a small constant > 0)
+* C_neutral = conductivity of a neutral (pH = 7) solution (a small constant > 0, currently `0.05`)
 
 
 
