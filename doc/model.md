@@ -64,7 +64,7 @@ Weak Bases:
 
 pH ranges from 0 to 14 in this simulation, and is computed as a function of [H<sub>3</sub>O<sup>+</sup>]:
   
-* pH = -log10( [H<sub>3</sub>O<sup>+</sup>] )
+* pH = -log<sub>10</sub>( [H<sub>3</sub>O<sup>+</sup>] )
 
 ## Conductivity
 
