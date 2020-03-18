@@ -28,43 +28,43 @@ Generic symbols:
 The notation [X] indicates the concentration of molecule X.
 
 Pure Water:
-* [H3O] = sqrt(Kw)
-* [OH] = [H3O]
+* [H<sub>3</sub>O] = sqrt(Kw)
+* [OH] = [H<sub>3</sub>O]
 * [H2O] = W
 
 Strong Acids:
 * [HA] = 0
 * [A-] = C
-* [H3O+] = C
-* [OH-] = Kw / [H3O+]
+* [H<sub>3</sub>O<sup>+</sup>] = C
+* [OH-] = Kw / [H<sub>3</sub>O<sup>+</sup>]
 * [H2O] = W - C
 
 Weak Acids:
-* [HA] = C - [H3O+]
-* [A-] = [H3O+]
-* [H3O+] = ( -Ka + sqrt( Ka^2 + 4*Ka*C ) ) / 2
-* [OH-] = Kw / [H3O+]
+* [HA] = C - [H<sub>3</sub>O<sup>+</sup>]
+* [A-] = [H<sub>3</sub>O<sup>+</sup>]
+* [H<sub>3</sub>O<sup>+</sup>] = ( -Ka + sqrt( Ka^2 + 4*Ka*C ) ) / 2
+* [OH-] = Kw / [H<sub>3</sub>O<sup>+</sup>]
 * [H2O] = W - [A-]
 
 Strong Bases:
 * [MOH] = 0
 * [M+] = C
-* [H3O+] = Kw / [OH-]
+* [H<sub>3</sub>O<sup>+</sup>] = Kw / [OH-]
 * [OH-] = C
 * [H2O] = W
 
 Weak Bases:
 * [B] = C - [BH+]
 * [BH+] = ( -Kb + sqrt( Kb^2 + 4*Kb*C ) ) / 2
-* [H3O+] = Kw / [OH-]
+* [H<sub>3</sub>O<sup>+</sup>] = Kw / [OH-]
 * [OH-] = [BH+]
 * [H2O] = W - [BH+]
 
 ## pH
 
-pH ranges from 0 to 14 in this simulation, and is computed as a function of [H3O+]:
+pH ranges from 0 to 14 in this simulation, and is computed as a function of [H<sub>3</sub>O<sup>+</sup>]:
   
-* pH = -log10( [H30+] )
+* pH = -log10( [H<sub>3</sub>O<sup>+</sup>] )
 
 ## Conductivity
 
