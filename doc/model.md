@@ -30,35 +30,35 @@ The notation [X] indicates the concentration of molecule X.
 Pure Water:
 * [H<sub>3</sub>O] = sqrt(Kw)
 * [OH] = [H<sub>3</sub>O]
-* [H<sub>2<sub>O] = W
+* [H<sub>2</sub>O] = W
 
 Strong Acids:
 * [HA] = 0
 * [A<sup>-</sub>] = C
 * [H<sub>3</sub>O<sup>+</sup>] = C
 * [OH<sup>-</sup>] = Kw / [H<sub>3</sub>O<sup>+</sup>]
-* [H<sub>2<sub>O] = W - C
+* [H<sub>2</sub>O] = W - C
 
 Weak Acids:
 * [HA] = C - [H<sub>3</sub>O<sup>+</sup>]
 * [A<sup>-</sub>] = [H<sub>3</sub>O<sup>+</sup>]
 * [H<sub>3</sub>O<sup>+</sup>] = ( -Ka + sqrt( Ka^2 + 4*Ka*C ) ) / 2
 * [OH<sup>-</sup>] = Kw / [H<sub>3</sub>O<sup>+</sup>]
-* [H<sub>2<sub>O] = W - [A<sup>-</sub>]
+* [H<sub>2</sub>O] = W - [A<sup>-</sub>]
 
 Strong Bases:
 * [MOH] = 0
 * [M+] = C
 * [H<sub>3</sub>O<sup>+</sup>] = Kw / [OH-]
 * [OH<sup>-</sup>] = C
-* [H<sub>2<sub>O] = W
+* [H<sub>2</sub>O] = W
 
 Weak Bases:
 * [B] = C - [BH+]
 * [BH+] = ( -Kb + sqrt( Kb^2 + 4*Kb*C ) ) / 2
 * [H<sub>3</sub>O<sup>+</sup>] = Kw / [OH-]
 * [OH<sup>-</sup>] = [BH+]
-* [H<sub>2<sub>O] = W - [BH+]
+* [H<sub>2</sub>O] = W - [BH+]
 
 ## pH
 
