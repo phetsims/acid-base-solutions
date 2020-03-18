@@ -42,7 +42,7 @@ Strong Acids:
 Weak Acids:
 * [H<i>A</i>] = C - [H<sub>3</sub>O<sup>+</sup>]
 * [<i>A</i><sup>-</sup>] = [H<sub>3</sub>O<sup>+</sup>]
-* [H<sub>3</sub>O<sup>+</sup>] = ( -K<sub>a</sub> + sqrt( K<sub>a</sub><sup>2</sup> + 4 * K<sub>a</sub> * C ) ) / 2
+* [H<sub>3</sub>O<sup>+</sup>] = ( -K<sub>a</sub> + sqrt( K<sub>a</sub><sup>2</sup> + 4K<sub>a</sub>C ) ) / 2
 * [OH<sup>-</sup>] = K<sub>w</sub> / [H<sub>3</sub>O<sup>+</sup>]
 * [H<sub>2</sub>O] = W - [A<sup>-</sup>]
 
@@ -55,7 +55,7 @@ Strong Bases:
 
 Weak Bases:
 * [<i>B</i>] = C - [<i>B</i>H+]
-* [<i>B</i>H+] = ( -K<sub>b</sub> + sqrt( K<sub>b</sub><sup>2</sup> + 4 * K<sub>b</sub> *C ) ) / 2
+* [<i>B</i>H+] = ( -K<sub>b</sub> + sqrt( K<sub>b</sub><sup>2</sup> + 4K<sub>b</sub>C ) ) / 2
 * [H<sub>3</sub>O<sup>+</sup>] = K<sub>w</sub> / [OH<sup>-</sup>]
 * [OH<sup>-</sup>] = [<i>B</i>H<sup>+</sup>]
 * [H<sub>2</sub>O] = W - [<i>B</i>H<sup>+</sup>]
