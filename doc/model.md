@@ -19,9 +19,9 @@ Variables:
 * K<sub>b</sub> = strength of base
 
 Generic symbols:
-* A = the molecule that separates from hydrogen (H) when a weak or strong acid (HA) dissociates
-* M = the metal ion that separates from hydroxide (OH<sup>-</sup>) and remains in solution after a strong base (MOH) dissociates
-* B = a weak base molecule that can accept a hydrogen atom to form BH<sup>+</sup>
+* <i>A</i> = the molecule that separates from hydrogen (H) when a weak or strong acid (HA) dissociates
+* <i>M</i> = the metal ion that separates from hydroxide (OH<sup>-</sup>) and remains in solution after a strong base (MOH) dissociates
+* <i>B</i> = a weak base molecule that can accept a hydrogen atom to form BH<sup>+</sup>
 
 ## Concentration
 
@@ -33,32 +33,32 @@ Pure Water:
 * [H<sub>2</sub>O] = W
 
 Strong Acids:
-* [HA] = 0
-* [A<sup>-</sup>] = C
+* [H<i>A</i>] = 0
+* [<i>A</i><sup>-</sup>] = C
 * [H<sub>3</sub>O<sup>+</sup>] = C
 * [OH<sup>-</sup>] = K<sub>w</sub> / [H<sub>3</sub>O<sup>+</sup>]
 * [H<sub>2</sub>O] = W - C
 
 Weak Acids:
-* [HA] = C - [H<sub>3</sub>O<sup>+</sup>]
-* [A<sup>-</sup>] = [H<sub>3</sub>O<sup>+</sup>]
+* [H<i>A</i>] = C - [H<sub>3</sub>O<sup>+</sup>]
+* [<i>A</i><sup>-</sup>] = [H<sub>3</sub>O<sup>+</sup>]
 * [H<sub>3</sub>O<sup>+</sup>] = ( -K<sub>a</sub> + sqrt( K<sub>a</sub><sup>2</sup> + 4 * K<sub>a</sub> * C ) ) / 2
 * [OH<sup>-</sup>] = K<sub>w</sub> / [H<sub>3</sub>O<sup>+</sup>]
 * [H<sub>2</sub>O] = W - [A<sup>-</sup>]
 
 Strong Bases:
-* [MOH] = 0
-* [M+] = C
+* [<i>M</i>OH] = 0
+* [<i>M</i>+] = C
 * [H<sub>3</sub>O<sup>+</sup>] = K<sub>w</sub> / [OH<sup>-</sup>]
 * [OH<sup>-</sup>] = C
 * [H<sub>2</sub>O] = W
 
 Weak Bases:
-* [B] = C - [BH+]
-* [BH+] = ( -K<sub>b</sub> + sqrt( K<sub>b</sub><sup>2</sup> + 4 * K<sub>b</sub> *C ) ) / 2
+* [<i>B</i>] = C - [<i>B</i>H+]
+* [<i>B</i>H+] = ( -K<sub>b</sub> + sqrt( K<sub>b</sub><sup>2</sup> + 4 * K<sub>b</sub> *C ) ) / 2
 * [H<sub>3</sub>O<sup>+</sup>] = K<sub>w</sub> / [OH<sup>-</sup>]
-* [OH<sup>-</sup>] = [BH<sup>+</sup>]
-* [H<sub>2</sub>O] = W - [BH<sup>+</sup>]
+* [OH<sup>-</sup>] = [<i>B</i>H<sup>+</sup>]
+* [H<sub>2</sub>O] = W - [<i>B</i>H<sup>+</sup>]
 
 ## pH
 
