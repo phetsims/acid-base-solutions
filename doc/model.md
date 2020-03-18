@@ -28,7 +28,7 @@ Generic symbols:
 The notation [X] indicates the concentration of molecule X.
 
 Pure Water:
-* [H<sub>3</sub>O] = sqrt(Kw)
+* [H<sub>3</sub>O] = sqrt( K<sub>w</sub> )
 * [OH] = [H<sub>3</sub>O]
 * [H<sub>2</sub>O] = W
 
