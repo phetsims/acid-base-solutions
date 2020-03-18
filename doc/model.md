@@ -15,13 +15,13 @@ Constants:
 
 Variables:
 * C = concentration of the acid or base in mol/L
-* Ka = strength of acid
-* Kb = strength of base
+* K<sub>a</sub> = strength of acid
+* K<sub>b</sub> = strength of base
 
 Generic symbols:
 * A = the molecule that separates from hydrogen (H) when a weak or strong acid (HA) dissociates
-* M = the metal ion that separates from hydroxide (OH-) and remains in solution after a strong base (MOH) dissociates
-* B = a weak base molecule that can accept a hydrogen atom to form BH+
+* M = the metal ion that separates from hydroxide (OH<sup>-</sup>) and remains in solution after a strong base (MOH) dissociates
+* B = a weak base molecule that can accept a hydrogen atom to form BH<sup>+</sup>
 
 ## Concentration
 
@@ -42,23 +42,23 @@ Strong Acids:
 Weak Acids:
 * [HA] = C - [H<sub>3</sub>O<sup>+</sup>]
 * [A<sup>-</sup>] = [H<sub>3</sub>O<sup>+</sup>]
-* [H<sub>3</sub>O<sup>+</sup>] = ( -Ka + sqrt( Ka^2 + 4*Ka*C ) ) / 2
+* [H<sub>3</sub>O<sup>+</sup>] = ( -Ka + sqrt( K<sub>a</sub><sup>2</sup> + 4 * K<sub>a</sub> * C ) ) / 2
 * [OH<sup>-</sup>] = Kw / [H<sub>3</sub>O<sup>+</sup>]
 * [H<sub>2</sub>O] = W - [A<sup>-</sup>]
 
 Strong Bases:
 * [MOH] = 0
 * [M+] = C
-* [H<sub>3</sub>O<sup>+</sup>] = Kw / [OH-]
+* [H<sub>3</sub>O<sup>+</sup>] = Kw / [OH<sup>-</sup>]
 * [OH<sup>-</sup>] = C
 * [H<sub>2</sub>O] = W
 
 Weak Bases:
 * [B] = C - [BH+]
-* [BH+] = ( -Kb + sqrt( Kb^2 + 4*Kb*C ) ) / 2
-* [H<sub>3</sub>O<sup>+</sup>] = Kw / [OH-]
-* [OH<sup>-</sup>] = [BH+]
-* [H<sub>2</sub>O] = W - [BH+]
+* [BH+] = ( -K<sub>b</sub> + sqrt( K<sub>b</sub><sup>2</sup> + 4 * K<sub>b</sub> *C ) ) / 2
+* [H<sub>3</sub>O<sup>+</sup>] = K<sub>w</sub> / [OH<sup>-</sup>]
+* [OH<sup>-</sup>] = [BH<sup>+</sup>]
+* [H<sub>2</sub>O] = W - [BH<sup>+</sup>]
 
 ## pH
 
