@@ -10,5 +10,5 @@ For a description of the model, see [model.md](https://github.com/phetsims/acid-
 
 There is no model-view transform in this sim. 
 The transform is implicitly 1:1, with identical coordinate frames.
-One unit of distance in the model is one unit of distance in the play area.
+One unit of distance in the model === one unit of distance in the view.
 Positive x is to the right, positive y is down.
