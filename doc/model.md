@@ -77,18 +77,18 @@ if ( open circuit ) {
   conductivity = 0
 }
 else if ( pH < 7 ) {
-  conductivity = C_neutral + ( ( 1 - C_neutral ) * ( 7 - pH ) / ( 7 - pH_min ) )
+  conductivity = C<sub>neutral</sub> + ( ( 1 - C<sub>neutral</sub> ) * ( 7 - pH ) / ( 7 - pH<sub>min</sub> ) )
 }
 else if ( pH >= 7 ) {
-  conductivity = C_neutral + ( ( 1 - C_neutral ) * ( pH - 7 ) / ( pH_max - 7 ) )
+  conductivity = C<sub>neutral</sub> + ( ( 1 - C<sub>neutral</sub> ) * ( pH - 7 ) / ( pH<sub>max</sub> - 7 ) )
 }
 ```
 
 where:
 
-* pH_min = 0
-* pH_max = 14
-* C_neutral = conductivity of a neutral (pH=7) solution (a small constant > 0)
+* pH<sub>min</sub> = 0
+* pH<sub>max</sub> = 14
+* C<sub>neutral</sub> = conductivity of a neutral (pH=7) solution (a small constant > 0)
 
 
 
