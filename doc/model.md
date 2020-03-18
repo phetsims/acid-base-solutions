@@ -11,7 +11,7 @@ This simulation models 5 types of aqueous solutions:
 
 Constants:
 * W = concentration of water = 55.6 mol/L
-* Kw = equilibrium constant of water = 1 x 10<sup>-14</sup>
+* K<sub>w</sub> = equilibrium constant of water = 1 x 10<sup>-14</sup>
 
 Variables:
 * C = concentration of the acid or base in mol/L
