@@ -23,7 +23,7 @@ Generic symbols:
 * M = the metal ion that separates from hydroxide (OH-) and remains in solution after a strong base (MOH) dissociates
 * B = a weak base molecule that can accept a hydrogen atom to form BH+
 
-Concentration:
+## Concentration
 
 The notation [X] indicates the concentration of molecule X.
 
@@ -60,13 +60,13 @@ Weak Bases:
 * [OH-] = [BH+]
 * [H2O] = W - [BH+]
 
-pH:
+## pH
 
 pH ranges from 0 to 14 in this simulation, and is computed as a function of [H3O+]:
   
 * pH = -log10( [H30+] )
 
-Conductivity:
+## Conductivity
 
 For the purposes of this simulation, conductivity is modeled as a number between 0 and 1 inclusive.
 This value has no units and determines the brightness of the light bulb.
