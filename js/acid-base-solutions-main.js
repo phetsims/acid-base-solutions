@@ -10,7 +10,7 @@
 import Sim from '../../joist/js/Sim.js';
 import SimLauncher from '../../joist/js/SimLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
-import acidBaseSolutionsStrings from './acid-base-solutions-strings.js';
+import acidBaseSolutionsStrings from './acidBaseSolutionsStrings.js';
 import IntroductionScreen from './introduction/IntroductionScreen.js';
 import MySolutionScreen from './mysolution/MySolutionScreen.js';
 

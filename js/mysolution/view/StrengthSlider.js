@@ -15,7 +15,7 @@ import Utils from '../../../../dot/js/Utils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import HSlider from '../../../../sun/js/HSlider.js';
-import acidBaseSolutionsStrings from '../../acid-base-solutions-strings.js';
+import acidBaseSolutionsStrings from '../../acidBaseSolutionsStrings.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import SolutionType from '../../common/enum/SolutionType.js';
 

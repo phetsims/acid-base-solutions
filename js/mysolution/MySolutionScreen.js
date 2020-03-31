@@ -10,7 +10,7 @@ import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
 import Node from '../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../scenery/js/nodes/Rectangle.js';
-import acidBaseSolutionsStrings from '../acid-base-solutions-strings.js';
+import acidBaseSolutionsStrings from '../acidBaseSolutionsStrings.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
 import ABSColors from '../common/ABSColors.js';
 import MoleculeFactory from '../common/view/MoleculeFactory.js';

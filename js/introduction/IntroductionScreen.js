@@ -13,7 +13,7 @@ import Circle from '../../../scenery/js/nodes/Circle.js';
 import Node from '../../../scenery/js/nodes/Node.js';
 import Path from '../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../scenery/js/nodes/Rectangle.js';
-import acidBaseSolutionsStrings from '../acid-base-solutions-strings.js';
+import acidBaseSolutionsStrings from '../acidBaseSolutionsStrings.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
 import ABSColors from '../common/ABSColors.js';
 import IntroductionModel from './model/IntroductionModel.js';

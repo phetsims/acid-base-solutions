@@ -23,7 +23,7 @@ import ABSwitch from '../../../../sun/js/ABSwitch.js';
 import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
 import HSeparator from '../../../../sun/js/HSeparator.js';
 import Panel from '../../../../sun/js/Panel.js';
-import acidBaseSolutionsStrings from '../../acid-base-solutions-strings.js';
+import acidBaseSolutionsStrings from '../../acidBaseSolutionsStrings.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSConstants from '../../common/ABSConstants.js';
 import SolutionType from '../../common/enum/SolutionType.js';

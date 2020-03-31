@@ -18,7 +18,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
 import Panel from '../../../../sun/js/Panel.js';
-import acidBaseSolutionsStrings from '../../acid-base-solutions-strings.js';
+import acidBaseSolutionsStrings from '../../acidBaseSolutionsStrings.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSConstants from '../../common/ABSConstants.js';
 import SolutionType from '../../common/enum/SolutionType.js';
