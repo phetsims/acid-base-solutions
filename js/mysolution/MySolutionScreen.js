@@ -8,10 +8,11 @@
 
 import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
+import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import Node from '../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../scenery/js/nodes/Rectangle.js';
-import acidBaseSolutionsStrings from '../acidBaseSolutionsStrings.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
+import acidBaseSolutionsStrings from '../acidBaseSolutionsStrings.js';
 import ABSColors from '../common/ABSColors.js';
 import MoleculeFactory from '../common/view/MoleculeFactory.js';
 import MySolutionModel from './model/MySolutionModel.js';
@@ -40,7 +41,7 @@ class MySolutionScreen extends Screen {
 
 /**
  * Creates the icon for this screen.
- * @returns {Node}
+ * @returns {ScreenIcon}
  */
 function createScreenIcon() {
 
@@ -65,7 +66,9 @@ function createScreenIcon() {
 
   const background = new Rectangle( 0, 0, width, height, { fill: 'white' } );
 
-  return new Node( { children: [ background, h3oNode, ohNode ] } );
+  const iconNode = new Node( { children: [ background, h3oNode, ohNode ] } );
+
+  return new ScreenIcon( iconNode );
 }
 
 acidBaseSolutions.register( 'MySolutionScreen', MySolutionScreen );

@@ -8,13 +8,14 @@
 
 import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
+import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import Shape from '../../../kite/js/Shape.js';
 import Circle from '../../../scenery/js/nodes/Circle.js';
 import Node from '../../../scenery/js/nodes/Node.js';
 import Path from '../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../scenery/js/nodes/Rectangle.js';
-import acidBaseSolutionsStrings from '../acidBaseSolutionsStrings.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
+import acidBaseSolutionsStrings from '../acidBaseSolutionsStrings.js';
 import ABSColors from '../common/ABSColors.js';
 import IntroductionModel from './model/IntroductionModel.js';
 import IntroductionScreenView from './view/IntroductionScreenView.js';
@@ -42,7 +43,7 @@ class IntroductionScreen extends Screen {
 
 /**
  * Creates the icon for this screen.
- * @returns {Node}
+ * @returns {ScreenIcon}
  */
 function createScreenIcon() {
 
@@ -89,7 +90,11 @@ function createScreenIcon() {
   } );
   handleNode.rotate( Math.PI / 6 );
 
-  return new Node( { children: [ background, waterNode, beakerNode, handleNode, lensNode ] } );
+  const iconNode = new Node( {
+    children: [ background, waterNode, beakerNode, handleNode, lensNode ]
+  } );
+
+  return new ScreenIcon( iconNode );
 }
 
 acidBaseSolutions.register( 'IntroductionScreen', IntroductionScreen );
