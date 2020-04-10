@@ -68,7 +68,10 @@ function createScreenIcon() {
 
   const iconNode = new Node( { children: [ background, h3oNode, ohNode ] } );
 
-  return new ScreenIcon( iconNode );
+  return new ScreenIcon( iconNode, {
+    maxIconWidthProportion: 1,
+    maxIconHeightProportion: 1
+  } );
 }
 
 acidBaseSolutions.register( 'MySolutionScreen', MySolutionScreen );

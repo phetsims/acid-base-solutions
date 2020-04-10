@@ -94,7 +94,10 @@ function createScreenIcon() {
     children: [ background, waterNode, beakerNode, handleNode, lensNode ]
   } );
 
-  return new ScreenIcon( iconNode );
+  return new ScreenIcon( iconNode, {
+    maxIconWidthProportion: 1,
+    maxIconHeightProportion: 1
+  } );
 }
 
 acidBaseSolutions.register( 'IntroductionScreen', IntroductionScreen );
