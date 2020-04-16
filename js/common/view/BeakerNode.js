@@ -15,11 +15,8 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import acidBaseSolutionsStrings from '../../acidBaseSolutionsStrings.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-
-const litersString = acidBaseSolutionsStrings.liters;
-const pattern0Value1UnitsString = acidBaseSolutionsStrings.pattern[ '0value' ][ '1units' ];
+import acidBaseSolutionsStrings from '../../acidBaseSolutionsStrings.js';
 
 // constants
 const MAJOR_TICK_LENGTH = 25;
@@ -93,7 +90,8 @@ class BeakerNode extends Node {
     }
 
     // major tick label
-    const label = StringUtils.format( pattern0Value1UnitsString, '1', litersString );
+    const label = StringUtils.format( acidBaseSolutionsStrings.pattern[ '0value' ][ '1units' ],
+      '1', acidBaseSolutionsStrings.liters );
     ticksParent.addChild( new Text( label, {
       font: new PhetFont( 18 ),
       fill: 'black',

@@ -18,14 +18,12 @@ import MoleculeFactory from '../common/view/MoleculeFactory.js';
 import MySolutionModel from './model/MySolutionModel.js';
 import MySolutionScreenView from './view/MySolutionScreenView.js';
 
-const screenMySolutionString = acidBaseSolutionsStrings.screen.mySolution;
-
 class MySolutionScreen extends Screen {
 
   constructor( tandem ) {
 
     const options = {
-      name: screenMySolutionString,
+      name: acidBaseSolutionsStrings.screen.mySolution,
       backgroundColorProperty: new Property( ABSColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon(),
       tandem: tandem

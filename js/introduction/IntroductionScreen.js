@@ -20,14 +20,12 @@ import ABSColors from '../common/ABSColors.js';
 import IntroductionModel from './model/IntroductionModel.js';
 import IntroductionScreenView from './view/IntroductionScreenView.js';
 
-const screenIntroductionString = acidBaseSolutionsStrings.screen.introduction;
-
 class IntroductionScreen extends Screen {
 
   constructor( tandem ) {
 
     const options = {
-      name: screenIntroductionString,
+      name: acidBaseSolutionsStrings.screen.introduction,
       backgroundColorProperty: new Property( ABSColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon(),
       tandem: tandem

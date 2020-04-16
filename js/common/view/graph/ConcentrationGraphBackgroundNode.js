@@ -13,10 +13,8 @@ import Node from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import RichText from '../../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
-import acidBaseSolutionsStrings from '../../../acidBaseSolutionsStrings.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
-
-const concentrationGraphYAxisString = acidBaseSolutionsStrings.concentrationGraph.yAxis;
+import acidBaseSolutionsStrings from '../../../acidBaseSolutionsStrings.js';
 
 // constants
 const TICK_FONT = new PhetFont( 11 );
@@ -54,7 +52,7 @@ class ConcentrationGraphBackgroundNode extends Node {
     }
 
     // y-axis label
-    const yLabel = new Text( concentrationGraphYAxisString, {
+    const yLabel = new Text( acidBaseSolutionsStrings.concentrationGraph.yAxis, {
       font: new PhetFont( 13 ),
       maxWidth: height
     } );

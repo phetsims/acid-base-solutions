@@ -18,12 +18,9 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import acidBaseSolutionsStrings from '../../acidBaseSolutionsStrings.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
+import acidBaseSolutionsStrings from '../../acidBaseSolutionsStrings.js';
 import ABSConstants from '../ABSConstants.js';
-
-const pattern0Label1ValueString = acidBaseSolutionsStrings.pattern[ '0label' ][ '1value' ];
-const pHString = acidBaseSolutionsStrings.pH;
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
@@ -143,10 +140,12 @@ acidBaseSolutions.register( 'PHMeterNode', PHMeterNode );
 // format a pH value for display.
 function formatText( pH ) {
   if ( pH === null ) {
-    return StringUtils.format( pattern0Label1ValueString, pHString, '' );
+    return StringUtils.format( acidBaseSolutionsStrings.pattern[ '0label' ][ '1value' ],
+      acidBaseSolutionsStrings.pH, '' );
   }
   else {
-    return StringUtils.format( pattern0Label1ValueString, pHString, Utils.toFixed( pH, DECIMAL_PLACES ) );
+    return StringUtils.format( acidBaseSolutionsStrings.pattern[ '0label' ][ '1value' ],
+      acidBaseSolutionsStrings.pH, Utils.toFixed( pH, DECIMAL_PLACES ) );
   }
 }
 

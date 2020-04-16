@@ -23,21 +23,12 @@ import ABSwitch from '../../../../sun/js/ABSwitch.js';
 import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
 import HSeparator from '../../../../sun/js/HSeparator.js';
 import Panel from '../../../../sun/js/Panel.js';
-import acidBaseSolutionsStrings from '../../acidBaseSolutionsStrings.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
+import acidBaseSolutionsStrings from '../../acidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
 import SolutionType from '../../common/enum/SolutionType.js';
 import ConcentrationSlider from './ConcentrationSlider.js';
 import StrengthSlider from './StrengthSlider.js';
-
-// strings
-const acidString = acidBaseSolutionsStrings.acid;
-const baseString = acidBaseSolutionsStrings.base;
-const initialConcentrationString = acidBaseSolutionsStrings.initialConcentration;
-const solutionString = acidBaseSolutionsStrings.solution;
-const strengthString = acidBaseSolutionsStrings.strength;
-const strongString = acidBaseSolutionsStrings.strong;
-const weakString = acidBaseSolutionsStrings.weak;
 
 // constants
 const CONCENTRATION_DECIMALS = 3;
@@ -80,7 +71,7 @@ class MySolutionPanel extends Panel {
     options = merge( {}, ABSConstants.PANEL_OPTIONS, options );
 
     // title
-    const titleNode = new Text( solutionString, {
+    const titleNode = new Text( acidBaseSolutionsStrings.solution, {
       font: ABSConstants.TITLE_FONT,
       maxWidth: TITLE_MAX_WIDTH
     } );
@@ -88,12 +79,12 @@ class MySolutionPanel extends Panel {
     // acid/base switch
     const isAcidProperty = new BooleanProperty( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.STRONG_ACID );
     const acidBaseSwitch = new ABSwitch( isAcidProperty,
-      true, new Text( acidString, SWITCH_TEXT_OPTIONS ),
-      false, new Text( baseString, SWITCH_TEXT_OPTIONS ),
+      true, new Text( acidBaseSolutionsStrings.acid, SWITCH_TEXT_OPTIONS ),
+      false, new Text( acidBaseSolutionsStrings.base, SWITCH_TEXT_OPTIONS ),
       AB_SWITCH_OPTIONS );
 
     // concentration title
-    const concentrationTitle = new Text( initialConcentrationString, {
+    const concentrationTitle = new Text( acidBaseSolutionsStrings.initialConcentration, {
       font: SUBTITLE_FONT,
       maxWidth: TITLE_MAX_WIDTH
     } );
@@ -123,14 +114,14 @@ class MySolutionPanel extends Panel {
     const concentrationSlider = new ConcentrationSlider( concentrationProperty, ABSConstants.CONCENTRATION_RANGE );
 
     // strength control
-    const strengthTitle = new Text( strengthString, {
+    const strengthTitle = new Text( acidBaseSolutionsStrings.strength, {
       font: SUBTITLE_FONT,
       maxWidth: TITLE_MAX_WIDTH
     } );
     const isWeakProperty = new BooleanProperty( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.WEAK_ACID );
     const weakStrongSwitch = new ABSwitch( isWeakProperty,
-      true, new Text( weakString, SWITCH_TEXT_OPTIONS ),
-      false, new Text( strongString, SWITCH_TEXT_OPTIONS ),
+      true, new Text( acidBaseSolutionsStrings.weak, SWITCH_TEXT_OPTIONS ),
+      false, new Text( acidBaseSolutionsStrings.strong, SWITCH_TEXT_OPTIONS ),
       AB_SWITCH_OPTIONS );
     const strengthSlider = new StrengthSlider( solutionTypeProperty, strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE );
 

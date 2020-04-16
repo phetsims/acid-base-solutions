@@ -14,11 +14,6 @@ import acidBaseSolutionsStrings from './acidBaseSolutionsStrings.js';
 import IntroductionScreen from './introduction/IntroductionScreen.js';
 import MySolutionScreen from './mysolution/MySolutionScreen.js';
 
-const acidBaseSolutionsTitleString = acidBaseSolutionsStrings[ 'acid-base-solutions' ].title;
-
-// constants
-const tandem = Tandem.ROOT;
-
 const simOptions = {
   credits: {
     leadDesign: 'Kelly Lancaster',
@@ -32,8 +27,8 @@ const simOptions = {
 
 SimLauncher.launch( () => {
   const screens = [
-    new IntroductionScreen( tandem.createTandem( 'introductionScreen' ) ),
-    new MySolutionScreen( tandem.createTandem( 'mySolutionScreen' ) )
+    new IntroductionScreen( Tandem.ROOT.createTandem( 'introductionScreen' ) ),
+    new MySolutionScreen( Tandem.ROOT.createTandem( 'mySolutionScreen' ) )
   ];
-  new Sim( acidBaseSolutionsTitleString, screens, simOptions ).start();
+  new Sim( acidBaseSolutionsStrings[ 'acid-base-solutions' ].title, screens, simOptions ).start();
 } );

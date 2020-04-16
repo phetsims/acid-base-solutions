@@ -15,12 +15,9 @@ import Utils from '../../../../dot/js/Utils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import HSlider from '../../../../sun/js/HSlider.js';
-import acidBaseSolutionsStrings from '../../acidBaseSolutionsStrings.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
+import acidBaseSolutionsStrings from '../../acidBaseSolutionsStrings.js';
 import SolutionType from '../../common/enum/SolutionType.js';
-
-const strongerString = acidBaseSolutionsStrings.stronger;
-const weakerString = acidBaseSolutionsStrings.weaker;
 
 // constants
 const TICK_LABEL_OPTIONS = {
@@ -48,8 +45,8 @@ class StrengthSlider extends HSlider {
     } );
 
     // add ticks
-    this.addMajorTick( model.sliderValueRange.min, new Text( weakerString, TICK_LABEL_OPTIONS ) );
-    this.addMajorTick( model.sliderValueRange.max, new Text( strongerString, TICK_LABEL_OPTIONS ) );
+    this.addMajorTick( model.sliderValueRange.min, new Text( acidBaseSolutionsStrings.weaker, TICK_LABEL_OPTIONS ) );
+    this.addMajorTick( model.sliderValueRange.max, new Text( acidBaseSolutionsStrings.stronger, TICK_LABEL_OPTIONS ) );
   }
 }
 
