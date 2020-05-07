@@ -8,7 +8,7 @@
  */
 
 import Sim from '../../joist/js/Sim.js';
-import SimLauncher from '../../joist/js/SimLauncher.js';
+import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import acidBaseSolutionsStrings from './acidBaseSolutionsStrings.js';
 import IntroductionScreen from './introduction/IntroductionScreen.js';
@@ -25,7 +25,7 @@ const simOptions = {
   }
 };
 
-SimLauncher.launch( () => {
+simLauncher.launch( () => {
   const screens = [
     new IntroductionScreen( Tandem.ROOT.createTandem( 'introductionScreen' ) ),
     new MySolutionScreen( Tandem.ROOT.createTandem( 'mySolutionScreen' ) )
