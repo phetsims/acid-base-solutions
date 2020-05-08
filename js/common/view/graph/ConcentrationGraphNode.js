@@ -135,6 +135,7 @@ class ConcentrationGraphNode extends Node {
    *  Creates an icon of the graph, with 4 bars (similar to weak acid).
    *  @static
    *  @returns {Node}
+   *  @public
    */
   static createIcon() {
     return new Node( {

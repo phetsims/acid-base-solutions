@@ -69,15 +69,19 @@ class AqueousSolution {
     return this.strengthProperty.get();
   }
 
-  // @public @abstract These functions must be implemented by subclasses.
+  // @public @abstract
   getSoluteConcentration() { throw new Error( 'must be implemented by subtype' ); }
 
+  // @public @abstract
   getProductConcentration() { throw new Error( 'must be implemented by subtype' ); }
 
+  // @public @abstract
   getH3OConcentration() { throw new Error( 'must be implemented by subtype' ); }
 
+  // @public @abstract
   getOHConcentration() { throw new Error( 'must be implemented by subtype' ); }
 
+  // @public @abstract
   getH2OConcentration() { throw new Error( 'must be implemented by subtype' ); }
 
   // @protected @abstract
