@@ -57,5 +57,5 @@ class StrongAcid extends AqueousSolution {
   }
 }
 
-acidBaseSolutions.register( 'StrongAcidSolution', StrongAcid );
+acidBaseSolutions.register( 'StrongAcid', StrongAcid );
 export default StrongAcid;

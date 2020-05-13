@@ -58,5 +58,5 @@ class WeakAcid extends AqueousSolution {
   }
 }
 
-acidBaseSolutions.register( 'WeakAcidSolution', WeakAcid );
+acidBaseSolutions.register( 'WeakAcid', WeakAcid );
 export default WeakAcid;

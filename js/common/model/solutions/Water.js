@@ -54,5 +54,5 @@ class Water extends AqueousSolution {
   isValidStrength() { return false; }
 }
 
-acidBaseSolutions.register( 'WaterSolution', Water );
+acidBaseSolutions.register( 'Water', Water );
 export default Water;
