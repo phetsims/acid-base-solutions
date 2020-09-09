@@ -10,7 +10,7 @@
 
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import SimpleDragHandler from '../../../../scenery/js/input/SimpleDragHandler.js';
+import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
@@ -57,7 +57,7 @@ class PHPaperNode extends Node {
 
     // @private Constrained dragging
     let clickOffset = null;
-    this.dragHandler = new SimpleDragHandler( {
+    this.dragHandler = new DragListener( {
 
       start: event => {
         clickOffset = this.globalToParentPoint( event.pointer.point ).subtract( event.currentTarget.translation );

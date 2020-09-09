@@ -12,7 +12,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import SimpleDragHandler from '../../../../scenery/js/input/SimpleDragHandler.js';
+import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
@@ -76,7 +76,7 @@ class PHMeterNode extends Node {
 
     // Constrained dragging
     let clickYOffset = 0;
-    this.addInputListener( new SimpleDragHandler( {
+    this.addInputListener( new DragListener( {
 
       start: event => {
         clickYOffset = this.globalToParentPoint( event.pointer.point ).y - event.currentTarget.y;
