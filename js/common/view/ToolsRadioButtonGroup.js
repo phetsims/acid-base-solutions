@@ -9,14 +9,14 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
-import RadioButtonGroup from '../../../../sun/js/buttons/RadioButtonGroup.js';
+import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import lightBulbImage from '../../../images/light-bulb-icon_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ToolMode from '../enum/ToolMode.js';
 import PHMeterNode from './PHMeterNode.js';
 import PHPaperNode from './PHPaperNode.js';
 
-class ToolsRadioButtonGroup extends RadioButtonGroup {
+class ToolsRadioButtonGroup extends RectangularRadioButtonGroup {
 
   /**
    * @param {EnumerationProperty.<ToolMode>} toolModeProperty
