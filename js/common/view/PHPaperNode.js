@@ -160,7 +160,7 @@ class PHPaperNode extends Node {
 function pHToColor( pH ) {
   assert && assert( pH >= 0 && pH <= ABSColors.PH.length );
   let color;
-  if ( Utils.isInteger( pH ) ) {
+  if ( Number.isInteger( pH ) ) {
     // pH value is an integer, look up color
     color = ABSColors.PH[ pH ];
   }
