@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
 import CanvasNode from '../../../../scenery/js/nodes/CanvasNode.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
@@ -109,8 +110,8 @@ class MoleculesNode extends CanvasNode {
         for ( let i = currentNumberOfMolecules; i < numberOfMolecules; i++ ) {
 
           // random distance from the center of the lens
-          const distance = this.positionRadius * Math.sqrt( phet.joist.random.nextDouble() );
-          const angle = phet.joist.random.nextDouble() * 2 * Math.PI;
+          const distance = this.positionRadius * Math.sqrt( dotRandom.nextDouble() );
+          const angle = dotRandom.nextDouble() * 2 * Math.PI;
           moleculesData.xCoordinates[ i ] = distance * Math.cos( angle );
           moleculesData.yCoordinates[ i ] = distance * Math.sin( angle );
         }
