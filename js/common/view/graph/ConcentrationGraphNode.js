@@ -63,19 +63,14 @@ class ConcentrationGraphNode extends Node {
       graph.solutions[ newSolutionType.name ].strengthProperty.link( updateValuesBound );
       graph.solutions[ newSolutionType.name ].concentrationProperty.link( updateValuesBound );
     } );
-  }
 
-  /*
-   * @override @public
-   * Update when this node becomes visible.
-   */
-  setVisible( visible ) {
-    const wasVisible = this.visible;
-    super.setVisible( visible );
-    if ( !wasVisible && visible ) {
-      this.updateBars();
-      this.updateValues();
-    }
+    // Update when this Node becomes visible.
+    this.visibleProperty.link( visible => {
+      if ( visible ) {
+        this.updateBars();
+        this.updateValues();
+      }
+    } );
   }
 
   /*

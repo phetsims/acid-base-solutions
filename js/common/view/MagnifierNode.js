@@ -92,18 +92,9 @@ class MagnifierNode extends Node {
       magnifier.solutions[ newSolutionType.name ].strengthProperty.link( updateMoleculesBound );
       magnifier.solutions[ newSolutionType.name ].concentrationProperty.link( updateMoleculesBound );
     } );
-  }
 
-  /*
-   * @override @public
-   * Update when this node becomes visible.
-   */
-  setVisible( visible ) {
-    const wasVisible = this.visible;
-    super.setVisible( visible );
-    if ( !wasVisible && visible ) {
-      this.updateMolecules();
-    }
+    // Update when this Node becomes visible.
+    this.visibleProperty.link( visible => visible && this.updateMolecules() );
   }
 
   // @public

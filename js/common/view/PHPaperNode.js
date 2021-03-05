@@ -116,20 +116,9 @@ class PHPaperNode extends Node {
     else {
       this.animating = false;
     }
-  }
 
-  /**
-   * Update paper color when this node becomes visible.
-   * @param visible
-   * @public
-   * @override
-   */
-  setVisible( visible ) {
-    const wasVisible = this.visible;
-    super.setVisible( visible );
-    if ( !wasVisible && visible ) {
-      this.updateColor();
-    }
+    // Update when this Node becomes visible.
+    this.visibleProperty.link( visible => visible && this.updateColor() );
   }
 
   /**

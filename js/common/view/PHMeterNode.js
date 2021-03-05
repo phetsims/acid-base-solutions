@@ -100,20 +100,9 @@ class PHMeterNode extends Node {
     pHMeter.positionProperty.link( position => {
       this.translation = position;
     } );
-  }
 
-  /**
-   * Update value displayed when this node becomes visible.
-   * @param visible
-   * @public
-   * @override
-   */
-  setVisible( visible ) {
-    const wasVisible = this.visible;
-    super.setVisible( visible );
-    if ( !wasVisible && visible ) {
-      this.updateText();
-    }
+    // Update when this Node becomes visible.
+    this.visibleProperty.link( visible => visible && this.updateText() );
   }
 
   /**
