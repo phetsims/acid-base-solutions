@@ -44,7 +44,7 @@ class ConcentrationGraphBackgroundNode extends Node {
       this.addChild( new Node( { y: y, children: ( i > 0 ) ? [ tickNode, dashedLineNode ] : [ tickNode ] } ) );
 
       // add text
-      this.addChild( new RichText( '10<sup>' + ( i - 8 ) + '</sup>', {
+      this.addChild( new RichText( `10<sup>${i - 8}</sup>`, {
         centerY: y,
         centerX: -16,
         font: TICK_FONT
