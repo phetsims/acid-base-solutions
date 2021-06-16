@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2017-2020, University of Colorado Boulder
 
 /**
  * Base type for views in 'Acid-Base Solutions' sim.

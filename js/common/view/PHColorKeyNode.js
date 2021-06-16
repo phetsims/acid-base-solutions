@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2014-2020, University of Colorado Boulder
 
 /**
  * pH color key, a set of color 'chips' for pH values.

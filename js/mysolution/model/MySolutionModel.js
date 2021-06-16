@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2014-2020, University of Colorado Boulder
 
 /**
  * Model for the 'My Solution' screen in 'Acid-Base Solutions' sim.

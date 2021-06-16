@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2015-2020, University of Colorado Boulder
 
 /**
  * Conductivity tester, adapts the model to scenery-phet.ConductivityTesterNode.

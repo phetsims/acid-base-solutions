@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2014-2020, University of Colorado Boulder
 
 /**
  * This node displays the reaction equation that appears below the beaker.

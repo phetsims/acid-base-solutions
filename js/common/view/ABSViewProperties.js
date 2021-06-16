@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2016-2020, University of Colorado Boulder
 
 /**
  * View-specific Properties

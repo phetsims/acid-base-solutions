@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2014-2020, University of Colorado Boulder
 
 /**
  *  Water is a solution of pure water. It contains no solute.

@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2014-2020, University of Colorado Boulder
 
 /**
  * WeakAcid is an aqueous solution whose solute is a weak acid.

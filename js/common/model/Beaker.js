@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2014-2020, University of Colorado Boulder
 
 /**
  * Model for the beaker in 'Acid-Base Solutions' sim.

@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2014-2020, University of Colorado Boulder
 
 /**
  * Panel for selecting between a set of mutually-exclusive 'views'.

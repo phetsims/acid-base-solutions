@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2014-2020, University of Colorado Boulder
 
 /**
  * Model for the concentration graph in 'Acid-Base Solutions' sim.
