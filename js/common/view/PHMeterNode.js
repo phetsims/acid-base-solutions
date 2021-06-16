@@ -1,4 +1,4 @@
-// Copyright 2014-2021, University of Colorado Boulder
+[object Promise]
 
 /**
  * Visual representation for pH meter in the 'Acid-Base Solutions' sim.

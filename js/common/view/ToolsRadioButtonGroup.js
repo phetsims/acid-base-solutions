@@ -1,4 +1,4 @@
-// Copyright 2014-2020, University of Colorado Boulder
+[object Promise]
 
 /**
  * Radio buttons for selecting between a set of mutually-exclusive tools.

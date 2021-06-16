@@ -1,4 +1,4 @@
-// Copyright 2014-2020, University of Colorado Boulder
+[object Promise]
 
 /**
  * StrongAcid is an aqueous solution whose solute is a strong acid.

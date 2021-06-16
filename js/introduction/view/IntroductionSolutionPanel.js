@@ -1,4 +1,4 @@
-// Copyright 2014-2020, University of Colorado Boulder
+[object Promise]
 
 /**
  * IntroductionSolutionPanel is a panel for selecting between a set of mutually-exclusive solutions in the
