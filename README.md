@@ -22,6 +22,7 @@ the sims, as well as other important information.
 (1) Clone the simulation and its dependencies:
 ```
 git clone https://github.com/phetsims/acid-base-solutions.git
+git clone https://github.com/phetsims/perennial.git annual
 git clone https://github.com/phetsims/assert.git
 git clone https://github.com/phetsims/axon.git
 git clone https://github.com/phetsims/babel.git
