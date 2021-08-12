@@ -18,7 +18,7 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel from '../../../../sun/js/Panel.js';
-import magnifierImage from '../../../images/magnifier-icon_png.js';
+import magnifierImage from '../../../images/magnifierIcon_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import acidBaseSolutionsStrings from '../../acidBaseSolutionsStrings.js';
 import ABSConstants from '../ABSConstants.js';
