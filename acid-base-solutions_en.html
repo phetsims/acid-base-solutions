@@ -38,7 +38,8 @@
           "phet",
           "adapted-from-phet"
         ],
-        "simulation": true
+        "simulation": true,
+        "supportsOutputJS": true
       },
       "eslintConfig": {
         "extends": "../chipper/eslint/sim_eslintrc.js"
@@ -111,7 +112,6 @@
     script.type = type;
     script.src = preloadURL;
     script.async = false;
-    script.setAttribute( 'crossorigin', 'use-credentials' );
     document.head.appendChild( script );
   };
 
