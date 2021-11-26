@@ -9,8 +9,8 @@
 import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import Node from '../../../scenery/js/nodes/Node.js';
-import Rectangle from '../../../scenery/js/nodes/Rectangle.js';
+import { Node } from '../../../scenery/js/imports.js';
+import { Rectangle } from '../../../scenery/js/imports.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
 import acidBaseSolutionsStrings from '../acidBaseSolutionsStrings.js';
 import ABSColors from '../common/ABSColors.js';

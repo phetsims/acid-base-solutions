@@ -7,7 +7,7 @@
  * @author Andrey Zelenkov (Mlearner)
  */
 
-import Node from '../../../../scenery/js/nodes/Node.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import SolutionType from '../enum/SolutionType.js';
 import ReactionEquationFactory from './ReactionEquationFactory.js';
