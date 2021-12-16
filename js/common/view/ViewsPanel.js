@@ -18,7 +18,7 @@ import { VBox } from '../../../../scenery/js/imports.js';
 import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel from '../../../../sun/js/Panel.js';
-import magnifierImage from '../../../images/magnifierIcon_png.js';
+import magnifierIcon_png from '../../../images/magnifierIcon_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import acidBaseSolutionsStrings from '../../acidBaseSolutionsStrings.js';
 import ABSConstants from '../ABSConstants.js';
@@ -61,7 +61,7 @@ class ViewsPanel extends Panel {
       spacing: TEXT_ICON_X_SPACING,
       children: [
         new Text( acidBaseSolutionsStrings.molecules, TEXT_OPTIONS ),
-        new Image( magnifierImage, ICON_OPTIONS )
+        new Image( magnifierIcon_png, ICON_OPTIONS )
       ]
     } );
     const moleculesRadioButton = new AquaRadioButton( viewModeProperty, ViewMode.MOLECULES, moleculesLabel, RADIO_BUTTON_OPTIONS );

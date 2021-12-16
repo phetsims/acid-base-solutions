@@ -14,7 +14,7 @@ import { Image } from '../../../../scenery/js/imports.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import { Path } from '../../../../scenery/js/imports.js';
 import { Rectangle } from '../../../../scenery/js/imports.js';
-import solventImage from '../../../images/solvent_png.js';
+import solvent_png from '../../../images/solvent_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import MoleculesNode from './MoleculesNode.js';
 
@@ -49,7 +49,7 @@ class MagnifierNode extends Node {
     const waterNode = new Circle( RADIUS, { fill: 'rgb(210,231,235)' } );
 
     // @private solvent (H2O)
-    this.solventNode = new Image( solventImage, {
+    this.solventNode = new Image( solvent_png, {
       imageOpacity: 0.6,  // reduce opacity so that other molecules stand out more
       centerX: 0,
       centerY: 0

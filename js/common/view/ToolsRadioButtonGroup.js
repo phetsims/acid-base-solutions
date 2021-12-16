@@ -10,7 +10,7 @@
 import merge from '../../../../phet-core/js/merge.js';
 import { Image } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
-import lightBulbImage from '../../../images/lightBulbIcon_png.js';
+import lightBulbIcon_png from '../../../images/lightBulbIcon_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ToolMode from '../enum/ToolMode.js';
 import PHMeterNode from './PHMeterNode.js';
@@ -34,7 +34,7 @@ class ToolsRadioButtonGroup extends RectangularRadioButtonGroup {
     super( toolModeProperty, [
       { value: ToolMode.PH_METER, node: PHMeterNode.createIcon(), tandemName: 'phMeterRadioButton' },
       { value: ToolMode.PH_PAPER, node: PHPaperNode.createIcon( 8, 30 ), tandemName: 'phPaperRadioButton' },
-      { value: ToolMode.CONDUCTIVITY, node: new Image( lightBulbImage ), tandemName: 'conductivityRadioButton' }
+      { value: ToolMode.CONDUCTIVITY, node: new Image( lightBulbIcon_png ), tandemName: 'conductivityRadioButton' }
     ], options );
   }
 }
