@@ -6,10 +6,10 @@
  * @author Andrey Zelenkov (Mlearner)
  */
 
-import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 
-const SolutionType = Enumeration.byKeys( [
+const SolutionType = EnumerationDeprecated.byKeys( [
   'WATER',
   'STRONG_ACID',
   'WEAK_ACID',

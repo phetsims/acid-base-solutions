@@ -6,10 +6,10 @@
  * @author Andrey Zelenkov (Mlearner)
  */
 
-import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 
-const ToolMode = Enumeration.byKeys( [ 'PH_METER', 'PH_PAPER', 'CONDUCTIVITY' ] );
+const ToolMode = EnumerationDeprecated.byKeys( [ 'PH_METER', 'PH_PAPER', 'CONDUCTIVITY' ] );
 
 acidBaseSolutions.register( 'ToolMode', ToolMode );
 export default ToolMode;
