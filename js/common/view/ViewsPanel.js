@@ -42,7 +42,7 @@ const TOUCH_AREA_Y_DILATION = 3;
 class ViewsPanel extends Panel {
 
   /**
-   * @param {EnumerationProperty.<ViewMode>} viewModeProperty
+   * @param {EnumerationDeprecatedProperty.<ViewMode>} viewModeProperty
    * @param {Property.<boolean>} solventVisibleProperty
    * @param {AlignGroup} panelAlignGroup
    * @param {Object} [options]

@@ -19,7 +19,7 @@ import PHPaperNode from './PHPaperNode.js';
 class ToolsRadioButtonGroup extends RectangularRadioButtonGroup {
 
   /**
-   * @param {EnumerationProperty.<ToolMode>} toolModeProperty
+   * @param {EnumerationDeprecatedProperty.<ToolMode>} toolModeProperty
    * @param {Object} [options]
    */
   constructor( toolModeProperty, options ) {
