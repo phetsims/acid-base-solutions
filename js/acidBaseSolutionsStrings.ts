@@ -8,48 +8,48 @@ import getStringModule from '../../chipper/js/getStringModule.js';
 import acidBaseSolutions from './acidBaseSolutions.js';
 
 type StringsType = {
-  'acid': string,
+  'acid': string;
   'acid-base-solutions': {
-    'title': string
-  },
-  'base': string,
+    'title': string;
+  };
+  'base': string;
   'concentrationGraph': {
-    'yAxis': string
-  },
+    'yAxis': string;
+  };
   'screen': {
-    'mySolution': string,
-    'introduction': string
-  },
-  'graph': string,
-  'hideViews': string,
-  'initialConcentration': string,
-  'liters': string,
-  'molecules': string,
-  'negligible': string,
+    'mySolution': string;
+    'introduction': string;
+  };
+  'graph': string;
+  'hideViews': string;
+  'initialConcentration': string;
+  'liters': string;
+  'molecules': string;
+  'negligible': string;
   'pattern': {
     '0value': {
-      '1power': string,
-      '1units': string
-    },
+      '1power': string;
+      '1units': string;
+    };
     '0label': {
-      '1value': string
+      '1value': string;
     }
-  },
-  'pH': string,
-  'pHColorKey': string,
-  'solution': string,
-  'solvent': string,
-  'strength': string,
-  'strong': string,
-  'strongAcid': string,
-  'strongBase': string,
-  'stronger': string,
-  'views': string,
-  'water': string,
-  'weak': string,
-  'weakAcid': string,
-  'weakBase': string,
-  'weaker': string
+  };
+  'pH': string;
+  'pHColorKey': string;
+  'solution': string;
+  'solvent': string;
+  'strength': string;
+  'strong': string;
+  'strongAcid': string;
+  'strongBase': string;
+  'stronger': string;
+  'views': string;
+  'water': string;
+  'weak': string;
+  'weakAcid': string;
+  'weakBase': string;
+  'weaker': string;
 };
 
 const acidBaseSolutionsStrings = getStringModule( 'ACID_BASE_SOLUTIONS' ) as StringsType;
