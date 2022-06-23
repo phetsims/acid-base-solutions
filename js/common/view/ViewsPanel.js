@@ -75,7 +75,7 @@ class ViewsPanel extends Panel {
         MoleculeFactory.H2O()
       ]
     } );
-    const solventCheckbox = new Checkbox( solventLabel, solventVisibleProperty, CHECKBOX_OPTIONS );
+    const solventCheckbox = new Checkbox( solventVisibleProperty, solventLabel, CHECKBOX_OPTIONS );
     solventCheckbox.touchArea = solventCheckbox.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
     solventLabel.setEnabled = enabled => {
       solventLabel.opacity = ( enabled ? 1 : 0.5 ); // gray out when disabled
