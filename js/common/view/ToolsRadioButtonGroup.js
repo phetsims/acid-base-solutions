@@ -26,9 +26,11 @@ class ToolsRadioButtonGroup extends RectangularRadioButtonGroup {
 
     options = merge( {
       orientation: 'horizontal',
-      baseColor: 'white',
       spacing: 5,
-      buttonContentXMargin: 9
+      radioButtonOptions: {
+        baseColor: 'white',
+        xMargin: 9
+      }
     }, options );
 
     super( toolModeProperty, [
