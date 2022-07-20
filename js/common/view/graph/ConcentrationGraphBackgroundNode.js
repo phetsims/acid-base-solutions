@@ -8,11 +8,7 @@
  */
 
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
-import { Line } from '../../../../../scenery/js/imports.js';
-import { Node } from '../../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../../scenery/js/imports.js';
-import { RichText } from '../../../../../scenery/js/imports.js';
-import { Text } from '../../../../../scenery/js/imports.js';
+import { Line, Node, Rectangle, RichText, Text } from '../../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import acidBaseSolutionsStrings from '../../../acidBaseSolutionsStrings.js';
 
