@@ -10,77 +10,77 @@ import acidBaseSolutions from './acidBaseSolutions.js';
 
 type StringsType = {
   'acid': string;
-  'acidProperty': TReadOnlyProperty<string>;
+  'acidStringProperty': TReadOnlyProperty<string>;
   'acid-base-solutions': {
     'title': string;
-    'titleProperty': TReadOnlyProperty<string>;
+    'titleStringProperty': TReadOnlyProperty<string>;
   };
   'base': string;
-  'baseProperty': TReadOnlyProperty<string>;
+  'baseStringProperty': TReadOnlyProperty<string>;
   'concentrationGraph': {
     'yAxis': string;
-    'yAxisProperty': TReadOnlyProperty<string>;
+    'yAxisStringProperty': TReadOnlyProperty<string>;
   };
   'screen': {
     'mySolution': string;
-    'mySolutionProperty': TReadOnlyProperty<string>;
+    'mySolutionStringProperty': TReadOnlyProperty<string>;
     'introduction': string;
-    'introductionProperty': TReadOnlyProperty<string>;
+    'introductionStringProperty': TReadOnlyProperty<string>;
   };
   'graph': string;
-  'graphProperty': TReadOnlyProperty<string>;
+  'graphStringProperty': TReadOnlyProperty<string>;
   'hideViews': string;
-  'hideViewsProperty': TReadOnlyProperty<string>;
+  'hideViewsStringProperty': TReadOnlyProperty<string>;
   'initialConcentration': string;
-  'initialConcentrationProperty': TReadOnlyProperty<string>;
+  'initialConcentrationStringProperty': TReadOnlyProperty<string>;
   'liters': string;
-  'litersProperty': TReadOnlyProperty<string>;
+  'litersStringProperty': TReadOnlyProperty<string>;
   'molecules': string;
-  'moleculesProperty': TReadOnlyProperty<string>;
+  'moleculesStringProperty': TReadOnlyProperty<string>;
   'negligible': string;
-  'negligibleProperty': TReadOnlyProperty<string>;
+  'negligibleStringProperty': TReadOnlyProperty<string>;
   'pattern': {
     '0value': {
       '1power': string;
-      '1powerProperty': TReadOnlyProperty<string>;
+      '1powerStringProperty': TReadOnlyProperty<string>;
       '1units': string;
-      '1unitsProperty': TReadOnlyProperty<string>;
+      '1unitsStringProperty': TReadOnlyProperty<string>;
     };
     '0label': {
       '1value': string;
-      '1valueProperty': TReadOnlyProperty<string>;
+      '1valueStringProperty': TReadOnlyProperty<string>;
     }
   };
   'pH': string;
-  'pHProperty': TReadOnlyProperty<string>;
+  'pHStringProperty': TReadOnlyProperty<string>;
   'pHColorKey': string;
-  'pHColorKeyProperty': TReadOnlyProperty<string>;
+  'pHColorKeyStringProperty': TReadOnlyProperty<string>;
   'solution': string;
-  'solutionProperty': TReadOnlyProperty<string>;
+  'solutionStringProperty': TReadOnlyProperty<string>;
   'solvent': string;
-  'solventProperty': TReadOnlyProperty<string>;
+  'solventStringProperty': TReadOnlyProperty<string>;
   'strength': string;
-  'strengthProperty': TReadOnlyProperty<string>;
+  'strengthStringProperty': TReadOnlyProperty<string>;
   'strong': string;
-  'strongProperty': TReadOnlyProperty<string>;
+  'strongStringProperty': TReadOnlyProperty<string>;
   'strongAcid': string;
-  'strongAcidProperty': TReadOnlyProperty<string>;
+  'strongAcidStringProperty': TReadOnlyProperty<string>;
   'strongBase': string;
-  'strongBaseProperty': TReadOnlyProperty<string>;
+  'strongBaseStringProperty': TReadOnlyProperty<string>;
   'stronger': string;
-  'strongerProperty': TReadOnlyProperty<string>;
+  'strongerStringProperty': TReadOnlyProperty<string>;
   'views': string;
-  'viewsProperty': TReadOnlyProperty<string>;
+  'viewsStringProperty': TReadOnlyProperty<string>;
   'water': string;
-  'waterProperty': TReadOnlyProperty<string>;
+  'waterStringProperty': TReadOnlyProperty<string>;
   'weak': string;
-  'weakProperty': TReadOnlyProperty<string>;
+  'weakStringProperty': TReadOnlyProperty<string>;
   'weakAcid': string;
-  'weakAcidProperty': TReadOnlyProperty<string>;
+  'weakAcidStringProperty': TReadOnlyProperty<string>;
   'weakBase': string;
-  'weakBaseProperty': TReadOnlyProperty<string>;
+  'weakBaseStringProperty': TReadOnlyProperty<string>;
   'weaker': string;
-  'weakerProperty': TReadOnlyProperty<string>;
+  'weakerStringProperty': TReadOnlyProperty<string>;
 };
 
 const acidBaseSolutionsStrings = getStringModule( 'ACID_BASE_SOLUTIONS' ) as StringsType;
