@@ -30,5 +30,5 @@ simLauncher.launch( () => {
     new IntroductionScreen( Tandem.ROOT.createTandem( 'introductionScreen' ) ),
     new MySolutionScreen( Tandem.ROOT.createTandem( 'mySolutionScreen' ) )
   ];
-  new Sim( acidBaseSolutionsStrings[ 'acid-base-solutions' ].title, screens, simOptions ).start();
+  new Sim( acidBaseSolutionsStrings[ 'acid-base-solutions' ].titleStringProperty, screens, simOptions ).start();
 } );
