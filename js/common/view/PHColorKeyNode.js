@@ -10,7 +10,7 @@
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import acidBaseSolutionsStrings from '../../acidBaseSolutionsStrings.js';
+import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSColors from '../ABSColors.js';
 
 // constants
@@ -56,7 +56,7 @@ class PHColorKeyNode extends Node {
     this.addChild( parentNode );
 
     // title, below color chips
-    const titleNode = new Text( acidBaseSolutionsStrings.pHColorKey, {
+    const titleNode = new Text( AcidBaseSolutionsStrings.pHColorKey, {
       font: FONT_BIG,
       maxWidth: parentNode.width,
       left: parentNode.left,

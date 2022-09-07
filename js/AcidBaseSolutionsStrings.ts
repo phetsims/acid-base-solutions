@@ -83,8 +83,8 @@ type StringsType = {
   'weakerStringProperty': TReadOnlyProperty<string>;
 };
 
-const acidBaseSolutionsStrings = getStringModule( 'ACID_BASE_SOLUTIONS' ) as StringsType;
+const AcidBaseSolutionsStrings = getStringModule( 'ACID_BASE_SOLUTIONS' ) as StringsType;
 
-acidBaseSolutions.register( 'acidBaseSolutionsStrings', acidBaseSolutionsStrings );
+acidBaseSolutions.register( 'AcidBaseSolutionsStrings', AcidBaseSolutionsStrings );
 
-export default acidBaseSolutionsStrings;
+export default AcidBaseSolutionsStrings;

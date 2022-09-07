@@ -11,7 +11,7 @@ import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import { Node, Rectangle, RichText } from '../../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
-import acidBaseSolutionsStrings from '../../../acidBaseSolutionsStrings.js';
+import AcidBaseSolutionsStrings from '../../../AcidBaseSolutionsStrings.js';
 
 // constants
 const FONT = new PhetFont( 12 );
@@ -54,7 +54,7 @@ class ConcentrationGraphBarNode extends Node {
 
     // set concentration text
     if ( value < 1e-13 ) {
-      this.text.setText( acidBaseSolutionsStrings.negligible );
+      this.text.setText( AcidBaseSolutionsStrings.negligible );
     }
     else if ( value <= 1 ) {
       // find pow
@@ -75,7 +75,7 @@ class ConcentrationGraphBarNode extends Node {
         this.text.setText( Utils.toFixed( value, 2 ) );
       }
       else {
-        this.text.setText( StringUtils.format( acidBaseSolutionsStrings.pattern[ '0value' ][ '1power' ],
+        this.text.setText( StringUtils.format( AcidBaseSolutionsStrings.pattern[ '0value' ][ '1power' ],
           Utils.toFixed( value, 2 ), pow ) );
       }
     }

@@ -15,7 +15,7 @@ import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel from '../../../../sun/js/Panel.js';
 import magnifierIcon_png from '../../../images/magnifierIcon_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import acidBaseSolutionsStrings from '../../acidBaseSolutionsStrings.js';
+import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../ABSConstants.js';
 import ViewMode from '../enum/ViewMode.js';
 import BeakerNode from './BeakerNode.js';
@@ -46,7 +46,7 @@ class ViewsPanel extends Panel {
 
     options = merge( {}, ABSConstants.PANEL_OPTIONS, options );
 
-    const titleNode = new Text( acidBaseSolutionsStrings.views, {
+    const titleNode = new Text( AcidBaseSolutionsStrings.views, {
       font: ABSConstants.TITLE_FONT,
       maxWidth: 180 // determined empirically
     } );
@@ -55,7 +55,7 @@ class ViewsPanel extends Panel {
     const moleculesLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
-        new Text( acidBaseSolutionsStrings.molecules, TEXT_OPTIONS ),
+        new Text( AcidBaseSolutionsStrings.molecules, TEXT_OPTIONS ),
         new Image( magnifierIcon_png, ICON_OPTIONS )
       ]
     } );
@@ -66,7 +66,7 @@ class ViewsPanel extends Panel {
     const solventLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
-        new Text( acidBaseSolutionsStrings.solvent, TEXT_OPTIONS ),
+        new Text( AcidBaseSolutionsStrings.solvent, TEXT_OPTIONS ),
         MoleculeFactory.H2O()
       ]
     } );
@@ -80,7 +80,7 @@ class ViewsPanel extends Panel {
     const graphLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
-        new Text( acidBaseSolutionsStrings.graph, TEXT_OPTIONS ),
+        new Text( AcidBaseSolutionsStrings.graph, TEXT_OPTIONS ),
         ConcentrationGraphNode.createIcon()
       ]
     } );
@@ -91,7 +91,7 @@ class ViewsPanel extends Panel {
     const hideViewsLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
-        new Text( acidBaseSolutionsStrings.hideViews, TEXT_OPTIONS ),
+        new Text( AcidBaseSolutionsStrings.hideViews, TEXT_OPTIONS ),
         BeakerNode.createIcon( 20, 15 )
       ]
     } );

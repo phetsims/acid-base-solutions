@@ -14,7 +14,7 @@ import { AlignBox, AlignGroup, HBox, RichText, Text, VBox } from '../../../../sc
 import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
 import Panel from '../../../../sun/js/Panel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import acidBaseSolutionsStrings from '../../acidBaseSolutionsStrings.js';
+import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
 import SolutionType from '../../common/enum/SolutionType.js';
 import MoleculeFactory from '../../common/view/MoleculeFactory.js';
@@ -32,7 +32,7 @@ class IntroductionSolutionPanel extends Panel {
     options = merge( {}, ABSConstants.PANEL_OPTIONS, options );
 
     // title
-    const titleNode = new Text( acidBaseSolutionsStrings.solution, {
+    const titleNode = new Text( AcidBaseSolutionsStrings.solution, {
       font: ABSConstants.TITLE_FONT,
       maxWidth: 180 // determined empirically
     } );
@@ -45,35 +45,35 @@ class IntroductionSolutionPanel extends Panel {
       // Water (H20)
       {
         value: SolutionType.WATER,
-        node: createRadioButtonLabel( `${acidBaseSolutionsStrings.water} (H<sub>2</sub>O)`,
+        node: createRadioButtonLabel( `${AcidBaseSolutionsStrings.water} (H<sub>2</sub>O)`,
           new MoleculeFactory.H2O(), labelsAlignGroup )
       },
 
       // Strong Acid (HA)
       {
         value: SolutionType.STRONG_ACID,
-        node: createRadioButtonLabel( `${acidBaseSolutionsStrings.strongAcid} (H<i>A</i>)`,
+        node: createRadioButtonLabel( `${AcidBaseSolutionsStrings.strongAcid} (H<i>A</i>)`,
           new MoleculeFactory.HA(), labelsAlignGroup )
       },
 
       // Weak Acid (HA)
       {
         value: SolutionType.WEAK_ACID,
-        node: createRadioButtonLabel( `${acidBaseSolutionsStrings.weakAcid} (H<i>A</i>)`,
+        node: createRadioButtonLabel( `${AcidBaseSolutionsStrings.weakAcid} (H<i>A</i>)`,
           new MoleculeFactory.HA(), labelsAlignGroup )
       },
 
       // Strong Base (M)
       {
         value: SolutionType.STRONG_BASE,
-        node: createRadioButtonLabel( `${acidBaseSolutionsStrings.strongBase} (<i>M</i>OH)`,
+        node: createRadioButtonLabel( `${AcidBaseSolutionsStrings.strongBase} (<i>M</i>OH)`,
           new MoleculeFactory.MOH(), labelsAlignGroup )
       },
 
       // Weak Base (B)
       {
         value: SolutionType.WEAK_BASE,
-        node: createRadioButtonLabel( `${acidBaseSolutionsStrings.weakBase} (<i>B</i>)`,
+        node: createRadioButtonLabel( `${AcidBaseSolutionsStrings.weakBase} (<i>B</i>)`,
           new MoleculeFactory.B(), labelsAlignGroup )
       }
     ];

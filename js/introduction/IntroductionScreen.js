@@ -12,7 +12,7 @@ import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import { Shape } from '../../../kite/js/imports.js';
 import { Circle, Node, Path, Rectangle } from '../../../scenery/js/imports.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
-import acidBaseSolutionsStrings from '../acidBaseSolutionsStrings.js';
+import AcidBaseSolutionsStrings from '../AcidBaseSolutionsStrings.js';
 import ABSColors from '../common/ABSColors.js';
 import IntroductionModel from './model/IntroductionModel.js';
 import IntroductionScreenView from './view/IntroductionScreenView.js';
@@ -22,7 +22,7 @@ class IntroductionScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: acidBaseSolutionsStrings.screen.introduction,
+      name: AcidBaseSolutionsStrings.screen.introduction,
       backgroundColorProperty: new Property( ABSColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon(),
       tandem: tandem

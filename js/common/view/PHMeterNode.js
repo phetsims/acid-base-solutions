@@ -14,7 +14,7 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Circle, DragListener, Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import acidBaseSolutionsStrings from '../../acidBaseSolutionsStrings.js';
+import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../ABSConstants.js';
 
 // constants
@@ -124,12 +124,12 @@ acidBaseSolutions.register( 'PHMeterNode', PHMeterNode );
 // format a pH value for display.
 function formatText( pH ) {
   if ( pH === null ) {
-    return StringUtils.format( acidBaseSolutionsStrings.pattern[ '0label' ][ '1value' ],
-      acidBaseSolutionsStrings.pH, '' );
+    return StringUtils.format( AcidBaseSolutionsStrings.pattern[ '0label' ][ '1value' ],
+      AcidBaseSolutionsStrings.pH, '' );
   }
   else {
-    return StringUtils.format( acidBaseSolutionsStrings.pattern[ '0label' ][ '1value' ],
-      acidBaseSolutionsStrings.pH, Utils.toFixed( pH, DECIMAL_PLACES ) );
+    return StringUtils.format( AcidBaseSolutionsStrings.pattern[ '0label' ][ '1value' ],
+      AcidBaseSolutionsStrings.pH, Utils.toFixed( pH, DECIMAL_PLACES ) );
   }
 }
 

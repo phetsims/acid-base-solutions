@@ -13,7 +13,7 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import acidBaseSolutionsStrings from '../../acidBaseSolutionsStrings.js';
+import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 
 // constants
 const MAJOR_TICK_LENGTH = 25;
@@ -87,8 +87,8 @@ class BeakerNode extends Node {
     }
 
     // major tick label
-    const label = StringUtils.format( acidBaseSolutionsStrings.pattern[ '0value' ][ '1units' ],
-      '1', acidBaseSolutionsStrings.liters );
+    const label = StringUtils.format( AcidBaseSolutionsStrings.pattern[ '0value' ][ '1units' ],
+      '1', AcidBaseSolutionsStrings.liters );
     ticksParent.addChild( new Text( label, {
       font: new PhetFont( 18 ),
       fill: 'black',

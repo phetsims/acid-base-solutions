@@ -11,7 +11,7 @@ import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import { Node, Rectangle } from '../../../scenery/js/imports.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
-import acidBaseSolutionsStrings from '../acidBaseSolutionsStrings.js';
+import AcidBaseSolutionsStrings from '../AcidBaseSolutionsStrings.js';
 import ABSColors from '../common/ABSColors.js';
 import MoleculeFactory from '../common/view/MoleculeFactory.js';
 import MySolutionModel from './model/MySolutionModel.js';
@@ -22,7 +22,7 @@ class MySolutionScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: acidBaseSolutionsStrings.screen.mySolution,
+      name: AcidBaseSolutionsStrings.screen.mySolution,
       backgroundColorProperty: new Property( ABSColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon(),
       tandem: tandem

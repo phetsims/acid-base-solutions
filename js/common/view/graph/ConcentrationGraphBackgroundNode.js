@@ -10,7 +10,7 @@
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import { Line, Node, Rectangle, RichText, Text } from '../../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
-import acidBaseSolutionsStrings from '../../../acidBaseSolutionsStrings.js';
+import AcidBaseSolutionsStrings from '../../../AcidBaseSolutionsStrings.js';
 
 // constants
 const TICK_FONT = new PhetFont( 11 );
@@ -48,7 +48,7 @@ class ConcentrationGraphBackgroundNode extends Node {
     }
 
     // y-axis label
-    const yLabel = new Text( acidBaseSolutionsStrings.concentrationGraph.yAxis, {
+    const yLabel = new Text( AcidBaseSolutionsStrings.concentrationGraph.yAxis, {
       font: new PhetFont( 13 ),
       maxWidth: height
     } );
