@@ -15,7 +15,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import ABSwitch from '../../../../sun/js/ABSwitch.js';
 import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
-import HSeparator from '../../../../sun/js/HSeparator.js';
+import HSeparatorDeprecated from '../../../../sun/js/HSeparatorDeprecated.js';
 import Panel from '../../../../sun/js/Panel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
@@ -136,8 +136,8 @@ class MySolutionPanel extends Panel {
     } );
 
     // separators for sub-panels
-    const concentrationSeparator = new HSeparator( separatorWidth );
-    const strengthSeparator = new HSeparator( separatorWidth );
+    const concentrationSeparator = new HSeparatorDeprecated( separatorWidth );
+    const strengthSeparator = new HSeparatorDeprecated( separatorWidth );
     children.splice( children.indexOf( concentrationTitle ), 0, concentrationSeparator );
     children.splice( children.indexOf( strengthTitle ), 0, strengthSeparator );
 
