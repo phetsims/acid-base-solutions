@@ -22,7 +22,7 @@ class MySolutionScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: AcidBaseSolutionsStrings.screen.mySolution,
+      name: AcidBaseSolutionsStrings.screen.mySolutionStringProperty,
       backgroundColorProperty: new Property( ABSColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon(),
       tandem: tandem
