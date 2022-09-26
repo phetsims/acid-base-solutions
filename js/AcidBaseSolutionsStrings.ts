@@ -5,82 +5,82 @@
  */
 /* eslint-disable */
 import getStringModule from '../../chipper/js/getStringModule.js';
-import TReadOnlyProperty from '../../axon/js/TReadOnlyProperty.js';
+import LinkableProperty from '../../axon/js/LinkableProperty.js';
 import acidBaseSolutions from './acidBaseSolutions.js';
 
 type StringsType = {
   'acid': string;
-  'acidStringProperty': TReadOnlyProperty<string>;
+  'acidStringProperty': LinkableProperty<string>;
   'acid-base-solutions': {
     'title': string;
-    'titleStringProperty': TReadOnlyProperty<string>;
+    'titleStringProperty': LinkableProperty<string>;
   };
   'base': string;
-  'baseStringProperty': TReadOnlyProperty<string>;
+  'baseStringProperty': LinkableProperty<string>;
   'concentrationGraph': {
     'yAxis': string;
-    'yAxisStringProperty': TReadOnlyProperty<string>;
+    'yAxisStringProperty': LinkableProperty<string>;
   };
   'screen': {
     'mySolution': string;
-    'mySolutionStringProperty': TReadOnlyProperty<string>;
+    'mySolutionStringProperty': LinkableProperty<string>;
     'introduction': string;
-    'introductionStringProperty': TReadOnlyProperty<string>;
+    'introductionStringProperty': LinkableProperty<string>;
   };
   'graph': string;
-  'graphStringProperty': TReadOnlyProperty<string>;
+  'graphStringProperty': LinkableProperty<string>;
   'hideViews': string;
-  'hideViewsStringProperty': TReadOnlyProperty<string>;
+  'hideViewsStringProperty': LinkableProperty<string>;
   'initialConcentration': string;
-  'initialConcentrationStringProperty': TReadOnlyProperty<string>;
+  'initialConcentrationStringProperty': LinkableProperty<string>;
   'liters': string;
-  'litersStringProperty': TReadOnlyProperty<string>;
+  'litersStringProperty': LinkableProperty<string>;
   'molecules': string;
-  'moleculesStringProperty': TReadOnlyProperty<string>;
+  'moleculesStringProperty': LinkableProperty<string>;
   'negligible': string;
-  'negligibleStringProperty': TReadOnlyProperty<string>;
+  'negligibleStringProperty': LinkableProperty<string>;
   'pattern': {
     '0value': {
       '1power': string;
-      '1powerStringProperty': TReadOnlyProperty<string>;
+      '1powerStringProperty': LinkableProperty<string>;
       '1units': string;
-      '1unitsStringProperty': TReadOnlyProperty<string>;
+      '1unitsStringProperty': LinkableProperty<string>;
     };
     '0label': {
       '1value': string;
-      '1valueStringProperty': TReadOnlyProperty<string>;
+      '1valueStringProperty': LinkableProperty<string>;
     }
   };
   'pH': string;
-  'pHStringProperty': TReadOnlyProperty<string>;
+  'pHStringProperty': LinkableProperty<string>;
   'pHColorKey': string;
-  'pHColorKeyStringProperty': TReadOnlyProperty<string>;
+  'pHColorKeyStringProperty': LinkableProperty<string>;
   'solution': string;
-  'solutionStringProperty': TReadOnlyProperty<string>;
+  'solutionStringProperty': LinkableProperty<string>;
   'solvent': string;
-  'solventStringProperty': TReadOnlyProperty<string>;
+  'solventStringProperty': LinkableProperty<string>;
   'strength': string;
-  'strengthStringProperty': TReadOnlyProperty<string>;
+  'strengthStringProperty': LinkableProperty<string>;
   'strong': string;
-  'strongStringProperty': TReadOnlyProperty<string>;
+  'strongStringProperty': LinkableProperty<string>;
   'strongAcid': string;
-  'strongAcidStringProperty': TReadOnlyProperty<string>;
+  'strongAcidStringProperty': LinkableProperty<string>;
   'strongBase': string;
-  'strongBaseStringProperty': TReadOnlyProperty<string>;
+  'strongBaseStringProperty': LinkableProperty<string>;
   'stronger': string;
-  'strongerStringProperty': TReadOnlyProperty<string>;
+  'strongerStringProperty': LinkableProperty<string>;
   'views': string;
-  'viewsStringProperty': TReadOnlyProperty<string>;
+  'viewsStringProperty': LinkableProperty<string>;
   'water': string;
-  'waterStringProperty': TReadOnlyProperty<string>;
+  'waterStringProperty': LinkableProperty<string>;
   'weak': string;
-  'weakStringProperty': TReadOnlyProperty<string>;
+  'weakStringProperty': LinkableProperty<string>;
   'weakAcid': string;
-  'weakAcidStringProperty': TReadOnlyProperty<string>;
+  'weakAcidStringProperty': LinkableProperty<string>;
   'weakBase': string;
-  'weakBaseStringProperty': TReadOnlyProperty<string>;
+  'weakBaseStringProperty': LinkableProperty<string>;
   'weaker': string;
-  'weakerStringProperty': TReadOnlyProperty<string>;
+  'weakerStringProperty': LinkableProperty<string>;
 };
 
 const AcidBaseSolutionsStrings = getStringModule( 'ACID_BASE_SOLUTIONS' ) as StringsType;
