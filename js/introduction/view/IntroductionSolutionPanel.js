@@ -45,35 +45,35 @@ class IntroductionSolutionPanel extends Panel {
       // Water (H20)
       {
         value: SolutionType.WATER,
-        node: createRadioButtonLabel( `${AcidBaseSolutionsStrings.water} (H<sub>2</sub>O)`,
+        createNode: tandem => createRadioButtonLabel( `${AcidBaseSolutionsStrings.water} (H<sub>2</sub>O)`,
           new MoleculeFactory.H2O(), labelsAlignGroup )
       },
 
       // Strong Acid (HA)
       {
         value: SolutionType.STRONG_ACID,
-        node: createRadioButtonLabel( `${AcidBaseSolutionsStrings.strongAcid} (H<i>A</i>)`,
+        createNode: tandem => createRadioButtonLabel( `${AcidBaseSolutionsStrings.strongAcid} (H<i>A</i>)`,
           new MoleculeFactory.HA(), labelsAlignGroup )
       },
 
       // Weak Acid (HA)
       {
         value: SolutionType.WEAK_ACID,
-        node: createRadioButtonLabel( `${AcidBaseSolutionsStrings.weakAcid} (H<i>A</i>)`,
+        createNode: tandem => createRadioButtonLabel( `${AcidBaseSolutionsStrings.weakAcid} (H<i>A</i>)`,
           new MoleculeFactory.HA(), labelsAlignGroup )
       },
 
       // Strong Base (M)
       {
         value: SolutionType.STRONG_BASE,
-        node: createRadioButtonLabel( `${AcidBaseSolutionsStrings.strongBase} (<i>M</i>OH)`,
+        createNode: tandem => createRadioButtonLabel( `${AcidBaseSolutionsStrings.strongBase} (<i>M</i>OH)`,
           new MoleculeFactory.MOH(), labelsAlignGroup )
       },
 
       // Weak Base (B)
       {
         value: SolutionType.WEAK_BASE,
-        node: createRadioButtonLabel( `${AcidBaseSolutionsStrings.weakBase} (<i>B</i>)`,
+        createNode: tandem => createRadioButtonLabel( `${AcidBaseSolutionsStrings.weakBase} (<i>B</i>)`,
           new MoleculeFactory.B(), labelsAlignGroup )
       }
     ];
