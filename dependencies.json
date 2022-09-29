@@ -1,7 +1,7 @@
 {
-  "comment": "# acid-base-solutions 1.2.26 Wed Sep 22 2021 20:17:09 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# acid-base-solutions 1.2.27-rc.1 Thu Sep 29 2022 08:51:59 GMT-0600 (Mountain Daylight Time)",
   "acid-base-solutions": {
-    "sha": "7a237bd4f9f3fd0248aa06b6614f5911849ff3f6",
+    "sha": "5ef17f9a3d685080eff56dfa4b3aae42c1125b12",
     "branch": "1.2"
   },
   "assert": {
