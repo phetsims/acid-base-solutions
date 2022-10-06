@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Shape } from '../../../../kite/js/imports.js';
@@ -15,7 +16,6 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Circle, DragListener, Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
-import ABSConstants from '../ABSConstants.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
@@ -25,8 +25,9 @@ const X_MARGIN = 12;
 const Y_MARGIN = 8;
 const BACKGROUND_FILL = 'rgb( 225, 225, 225 )';
 const BACKGROUND_STROKE = 'rgb( 64, 64, 64 )';
+const PH_TEXT_MAX_WIDTH = 70;
 
-class PHMeterNode extends Node {
+export default class PHMeterNode extends Node {
 
   /**
    * @param {PHMeter} pHMeter
@@ -38,16 +39,25 @@ class PHMeterNode extends Node {
     // probe
     const probeNode = new ProbeNode( 5, 40, 14, 36 );
 
-    // text, initialized with widest value for layout
-    const textNode = new Text( formatText( ABSConstants.PH_RANGE.max ), {
+    const pHStringProperty = new DerivedProperty(
+      [
+        AcidBaseSolutionsStrings.pattern[ '0label' ][ '1valueStringProperty' ],
+        AcidBaseSolutionsStrings.pHStringProperty,
+        pHMeter.pHProperty,
+        pHMeter.positionProperty
+      ],
+      ( patternString, pHString, pH, position ) => {
+        const pHValueString = pHMeter.inSolution() ? Utils.toFixed( pH, DECIMAL_PLACES ) : '';
+        return StringUtils.format( patternString, pHString, pHValueString );
+      } );
+
+    const pHText = new Text( pHStringProperty, {
       font: FONT,
-      centerX: 34,
-      centerY: 0,
-      maxWidth: 100 // constrain width for i18n, determined empirically
+      maxWidth: PH_TEXT_MAX_WIDTH
     } );
 
     // background sized to fit text
-    const backgroundNode = new Rectangle( 0, 0, textNode.width + ( 2 * X_MARGIN ), textNode.height + ( 2 * Y_MARGIN ), {
+    const backgroundNode = new Rectangle( 0, 0, PH_TEXT_MAX_WIDTH + ( 2 * X_MARGIN ), pHText.height + ( 2 * Y_MARGIN ), {
       cornerRadius: 5,
       fill: BACKGROUND_FILL,
       stroke: BACKGROUND_STROKE,
@@ -59,12 +69,15 @@ class PHMeterNode extends Node {
     probeNode.bottom = 0;
     backgroundNode.left = probeNode.centerX - ( 0.25 * backgroundNode.width );
     backgroundNode.bottom = probeNode.top + 1; // hide seam
-    textNode.center = backgroundNode.center;
+    pHText.boundsProperty.link( bounds => {
+      pHText.left = backgroundNode.left + X_MARGIN;
+      pHText.centerY = backgroundNode.centerY;
+    } );
 
     // rendering order
     this.addChild( probeNode );
     this.addChild( backgroundNode );
-    this.addChild( textNode );
+    this.addChild( pHText );
     if ( SHOW_ORIGIN ) {
       this.addChild( new Circle( 2, { fill: 'red' } ) );
     }
@@ -83,21 +96,9 @@ class PHMeterNode extends Node {
       }
     } ) );
 
-    // @private
-    this.updateText = () => {
-      if ( this.visible ) {
-        textNode.text = pHMeter.inSolution() ? formatText( pHMeter.pHProperty.get() ) : formatText( null );
-      }
-    };
-    pHMeter.pHProperty.link( this.updateText );
-    pHMeter.positionProperty.link( this.updateText );
-
     pHMeter.positionProperty.link( position => {
       this.translation = position;
     } );
-
-    // Update when this Node becomes visible.
-    this.visibleProperty.link( visible => visible && this.updateText() );
   }
 
   /**
@@ -116,20 +117,6 @@ class PHMeterNode extends Node {
       bottom: probeNode.top + 1
     } );
     return new Node( { children: [ probeNode, backgroundNode ] } );
-  }
-}
-
-acidBaseSolutions.register( 'PHMeterNode', PHMeterNode );
-
-// format a pH value for display.
-function formatText( pH ) {
-  if ( pH === null ) {
-    return StringUtils.format( AcidBaseSolutionsStrings.pattern[ '0label' ][ '1value' ],
-      AcidBaseSolutionsStrings.pH, '' );
-  }
-  else {
-    return StringUtils.format( AcidBaseSolutionsStrings.pattern[ '0label' ][ '1value' ],
-      AcidBaseSolutionsStrings.pH, Utils.toFixed( pH, DECIMAL_PLACES ) );
   }
 }
 
@@ -175,4 +162,4 @@ class ProbeNode extends Node {
   }
 }
 
-export default PHMeterNode;
+acidBaseSolutions.register( 'PHMeterNode', PHMeterNode );
