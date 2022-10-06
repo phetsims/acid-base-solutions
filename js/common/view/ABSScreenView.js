@@ -82,9 +82,13 @@ class ABSScreenView extends ScreenView {
     const controlsParent = new VBox( {
       children: [ solutionPanel, viewsPanel, toolsRadioButtonGroup ],
       align: 'center',
-      spacing: 10,
-      right: resetAllButton.left - 10,
-      centerY: this.layoutBounds.centerY
+      spacing: 10
+    } );
+
+    // Centered in the space to the right of the magnifying glass
+    controlsParent.boundsProperty.link( bounds => {
+      controlsParent.centerX = magnifierNode.right + ( this.layoutBounds.right - magnifierNode.right ) / 2;
+      controlsParent.centerY = this.layoutBounds.centerY;
     } );
 
     const rootNode = new Node( {

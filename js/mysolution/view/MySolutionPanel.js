@@ -12,10 +12,9 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignGroup, HBox, Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignGroup, HBox, HSeparator, Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import ABSwitch from '../../../../sun/js/ABSwitch.js';
 import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
-import HSeparatorDeprecated from '../../../../sun/js/HSeparatorDeprecated.js';
 import Panel from '../../../../sun/js/Panel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
@@ -40,7 +39,7 @@ const CONCENTRATION_FONT = new PhetFont( 14 );
 const TITLE_MAX_WIDTH = 180;
 const SWITCH_TEXT_OPTIONS = {
   font: CONTROL_FONT,
-  maxWidth: 80
+  maxWidth: 50
 };
 const AB_SWITCH_OPTIONS = {
   toggleSwitchOptions: {
@@ -119,52 +118,20 @@ class MySolutionPanel extends Panel {
       AB_SWITCH_OPTIONS );
     const strengthSlider = new StrengthSlider( solutionTypeProperty, strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE );
 
-    const children = [
-      acidBaseSwitch,
-      concentrationTitle,
-      concentrationValueControl,
-      concentrationSlider,
-      strengthTitle,
-      weakStrongSwitch,
-      strengthSlider
-    ];
-
-    // compute separator width
-    let separatorWidth = 0;
-    children.forEach( child => {
-      separatorWidth = Math.max( child.width, separatorWidth );
+    const controls = new VBox( {
+      spacing: 6,
+      children: [
+        acidBaseSwitch,
+        new HSeparator(),
+        concentrationTitle,
+        concentrationValueControl,
+        concentrationSlider,
+        new HSeparator(),
+        strengthTitle,
+        weakStrongSwitch,
+        strengthSlider
+      ]
     } );
-
-    // separators for sub-panels
-    const concentrationSeparator = new HSeparatorDeprecated( separatorWidth );
-    const strengthSeparator = new HSeparatorDeprecated( separatorWidth );
-    children.splice( children.indexOf( concentrationTitle ), 0, concentrationSeparator );
-    children.splice( children.indexOf( strengthTitle ), 0, strengthSeparator );
-
-    // brute-force layout
-    const subtitleYSpacing = 6;
-    const separatorYSpacing = 6;
-    const controlYSpacing = 6;
-
-    // controls are all center justified
-    const centerX = separatorWidth / 2;
-    acidBaseSwitch.centerX = centerX;
-    concentrationValueControl.centerX = centerX;
-    concentrationSlider.centerX = centerX;
-    weakStrongSwitch.centerX = centerX;
-    strengthSlider.centerX = centerX;
-
-    // subtitles are left justified
-    concentrationSeparator.top = acidBaseSwitch.bottom + separatorYSpacing;
-    concentrationTitle.top = concentrationSeparator.bottom + separatorYSpacing;
-    concentrationValueControl.top = concentrationTitle.bottom + subtitleYSpacing;
-    concentrationSlider.top = concentrationValueControl.bottom + controlYSpacing;
-    strengthSeparator.top = concentrationSlider.bottom + separatorYSpacing;
-    strengthTitle.top = strengthSeparator.bottom + separatorYSpacing;
-    weakStrongSwitch.top = strengthTitle.bottom + subtitleYSpacing;
-    strengthSlider.top = weakStrongSwitch.bottom + controlYSpacing;
-
-    const controls = new Node( { children: children } );
 
     const content = new AlignBox( new VBox( {
       spacing: 8,
