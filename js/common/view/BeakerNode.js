@@ -7,6 +7,7 @@
  * @author Andrey Zelenkov (Mlearner)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
@@ -86,16 +87,22 @@ class BeakerNode extends Node {
       ticksParent.addChild( tickPath );
     }
 
-    // major tick label
-    const label = StringUtils.format( AcidBaseSolutionsStrings.pattern[ '0value' ][ '1units' ],
-      '1', AcidBaseSolutionsStrings.liters );
-    ticksParent.addChild( new Text( label, {
+    // major tick label at '1L'
+    const majorTickStringProperty = new DerivedProperty(
+      [ AcidBaseSolutionsStrings.pattern[ '0value' ][ '1unitsStringProperty' ], AcidBaseSolutionsStrings.litersStringProperty ],
+      ( patternString, unitsString ) => StringUtils.format( patternString, '1', unitsString )
+    );
+    const majorTickText = new Text( majorTickStringProperty, {
       font: new PhetFont( 18 ),
       fill: 'black',
-      right: BEAKER_WIDTH / 2 - MAJOR_TICK_LENGTH - TICK_LABEL_X_SPACING,
-      centerY: -deltaY * NUMBER_OF_TICKS,
-      maxWidth: 65 // constrain width for i18n
-    } ) );
+      maxWidth: 65
+    } );
+    ticksParent.addChild( majorTickText );
+
+    majorTickText.boundsProperty.link( bounds => {
+      majorTickText.right = BEAKER_WIDTH / 2 - MAJOR_TICK_LENGTH - TICK_LABEL_X_SPACING;
+      majorTickText.centerY = -deltaY * NUMBER_OF_TICKS;
+    } );
 
     this.translation = beaker.position;
   }
