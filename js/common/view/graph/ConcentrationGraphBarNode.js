@@ -7,7 +7,6 @@
  */
 
 import Utils from '../../../../../dot/js/Utils.js';
-import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import { Node, Rectangle, RichText } from '../../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
@@ -28,6 +27,7 @@ class ConcentrationGraphBarNode extends Node {
     bar.rotate( Math.PI ); // so that bar grows upward
 
     // add vertical text for concentration (normal text + exponent text)
+    // This is a numeric value (typically in scientific notation) so does not require a StringProperty.
     const text = new RichText( '123', { font: FONT, centerX: 2, centerY: -10, maxWidth: 0.85 * maxBarHeight } );
     text.rotate( -Math.PI / 2 );
 
@@ -75,8 +75,8 @@ class ConcentrationGraphBarNode extends Node {
         this.text.setText( Utils.toFixed( value, 2 ) );
       }
       else {
-        this.text.setText( StringUtils.format( AcidBaseSolutionsStrings.pattern[ '0value' ][ '1power' ],
-          Utils.toFixed( value, 2 ), pow ) );
+        const mantissaString = Utils.toFixed( value, 2 );
+        this.text.setText( `${mantissaString} x 10<sup>${pow}</sup>` );
       }
     }
     else {

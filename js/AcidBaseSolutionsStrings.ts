@@ -41,8 +41,6 @@ type StringsType = {
   'negligibleStringProperty': LinkableProperty<string>;
   'pattern': {
     '0value': {
-      '1power': string;
-      '1powerStringProperty': LinkableProperty<string>;
       '1units': string;
       '1unitsStringProperty': LinkableProperty<string>;
     };
