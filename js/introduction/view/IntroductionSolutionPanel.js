@@ -32,7 +32,7 @@ class IntroductionSolutionPanel extends Panel {
     options = merge( {}, ABSConstants.PANEL_OPTIONS, options );
 
     // title
-    const titleNode = new Text( AcidBaseSolutionsStrings.solution, {
+    const titleNode = new Text( AcidBaseSolutionsStrings.solutionStringProperty, {
       font: ABSConstants.TITLE_FONT,
       maxWidth: 180 // determined empirically
     } );

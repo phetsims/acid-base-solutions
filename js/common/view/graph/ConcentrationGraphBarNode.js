@@ -54,7 +54,7 @@ class ConcentrationGraphBarNode extends Node {
 
     // set concentration text
     if ( value < 1e-13 ) {
-      this.text.setText( AcidBaseSolutionsStrings.negligible );
+      this.text.setText( AcidBaseSolutionsStrings.negligibleStringProperty );
     }
     else if ( value <= 1 ) {
       // find pow

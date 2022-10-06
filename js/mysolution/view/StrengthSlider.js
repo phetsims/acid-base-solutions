@@ -45,8 +45,8 @@ class StrengthSlider extends HSlider {
     } );
 
     // add ticks
-    this.addMajorTick( model.sliderValueRange.min, new Text( AcidBaseSolutionsStrings.weaker, TICK_LABEL_OPTIONS ) );
-    this.addMajorTick( model.sliderValueRange.max, new Text( AcidBaseSolutionsStrings.stronger, TICK_LABEL_OPTIONS ) );
+    this.addMajorTick( model.sliderValueRange.min, new Text( AcidBaseSolutionsStrings.weakerStringProperty, TICK_LABEL_OPTIONS ) );
+    this.addMajorTick( model.sliderValueRange.max, new Text( AcidBaseSolutionsStrings.strongerStringProperty, TICK_LABEL_OPTIONS ) );
   }
 }
 

@@ -65,7 +65,7 @@ class MySolutionPanel extends Panel {
     options = merge( {}, ABSConstants.PANEL_OPTIONS, options );
 
     // title
-    const titleNode = new Text( AcidBaseSolutionsStrings.solution, {
+    const titleNode = new Text( AcidBaseSolutionsStrings.solutionStringProperty, {
       font: ABSConstants.TITLE_FONT,
       maxWidth: TITLE_MAX_WIDTH
     } );
@@ -73,12 +73,12 @@ class MySolutionPanel extends Panel {
     // acid/base switch
     const isAcidProperty = new BooleanProperty( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.STRONG_ACID );
     const acidBaseSwitch = new ABSwitch( isAcidProperty,
-      true, new Text( AcidBaseSolutionsStrings.acid, SWITCH_TEXT_OPTIONS ),
-      false, new Text( AcidBaseSolutionsStrings.base, SWITCH_TEXT_OPTIONS ),
+      true, new Text( AcidBaseSolutionsStrings.acidStringProperty, SWITCH_TEXT_OPTIONS ),
+      false, new Text( AcidBaseSolutionsStrings.baseStringProperty, SWITCH_TEXT_OPTIONS ),
       AB_SWITCH_OPTIONS );
 
     // concentration title
-    const concentrationTitle = new Text( AcidBaseSolutionsStrings.initialConcentration, {
+    const concentrationTitle = new Text( AcidBaseSolutionsStrings.initialConcentrationStringProperty, {
       font: SUBTITLE_FONT,
       maxWidth: TITLE_MAX_WIDTH
     } );
@@ -108,14 +108,14 @@ class MySolutionPanel extends Panel {
     const concentrationSlider = new ConcentrationSlider( concentrationProperty, ABSConstants.CONCENTRATION_RANGE );
 
     // strength control
-    const strengthTitle = new Text( AcidBaseSolutionsStrings.strength, {
+    const strengthTitle = new Text( AcidBaseSolutionsStrings.strengthStringProperty, {
       font: SUBTITLE_FONT,
       maxWidth: TITLE_MAX_WIDTH
     } );
     const isWeakProperty = new BooleanProperty( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.WEAK_ACID );
     const weakStrongSwitch = new ABSwitch( isWeakProperty,
-      true, new Text( AcidBaseSolutionsStrings.weak, SWITCH_TEXT_OPTIONS ),
-      false, new Text( AcidBaseSolutionsStrings.strong, SWITCH_TEXT_OPTIONS ),
+      true, new Text( AcidBaseSolutionsStrings.weakStringProperty, SWITCH_TEXT_OPTIONS ),
+      false, new Text( AcidBaseSolutionsStrings.strongStringProperty, SWITCH_TEXT_OPTIONS ),
       AB_SWITCH_OPTIONS );
     const strengthSlider = new StrengthSlider( solutionTypeProperty, strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE );
 

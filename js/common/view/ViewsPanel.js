@@ -46,7 +46,7 @@ class ViewsPanel extends Panel {
 
     options = merge( {}, ABSConstants.PANEL_OPTIONS, options );
 
-    const titleNode = new Text( AcidBaseSolutionsStrings.views, {
+    const titleNode = new Text( AcidBaseSolutionsStrings.viewsStringProperty, {
       font: ABSConstants.TITLE_FONT,
       maxWidth: 180 // determined empirically
     } );
@@ -55,7 +55,7 @@ class ViewsPanel extends Panel {
     const moleculesLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
-        new Text( AcidBaseSolutionsStrings.molecules, TEXT_OPTIONS ),
+        new Text( AcidBaseSolutionsStrings.moleculesStringProperty, TEXT_OPTIONS ),
         new Image( magnifierIcon_png, ICON_OPTIONS )
       ]
     } );
@@ -66,7 +66,7 @@ class ViewsPanel extends Panel {
     const solventLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
-        new Text( AcidBaseSolutionsStrings.solvent, TEXT_OPTIONS ),
+        new Text( AcidBaseSolutionsStrings.solventStringProperty, TEXT_OPTIONS ),
         MoleculeFactory.H2O()
       ]
     } );
@@ -80,7 +80,7 @@ class ViewsPanel extends Panel {
     const graphLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
-        new Text( AcidBaseSolutionsStrings.graph, TEXT_OPTIONS ),
+        new Text( AcidBaseSolutionsStrings.graphStringProperty, TEXT_OPTIONS ),
         ConcentrationGraphNode.createIcon()
       ]
     } );
@@ -91,7 +91,7 @@ class ViewsPanel extends Panel {
     const hideViewsLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
-        new Text( AcidBaseSolutionsStrings.hideViews, TEXT_OPTIONS ),
+        new Text( AcidBaseSolutionsStrings.hideViewsStringProperty, TEXT_OPTIONS ),
         BeakerNode.createIcon( 20, 15 )
       ]
     } );

@@ -48,7 +48,7 @@ class ConcentrationGraphBackgroundNode extends Node {
     }
 
     // y-axis label
-    const yLabel = new Text( AcidBaseSolutionsStrings.concentrationGraph.yAxis, {
+    const yLabel = new Text( AcidBaseSolutionsStrings.concentrationGraph.yAxisStringProperty, {
       font: new PhetFont( 13 ),
       maxWidth: height
     } );

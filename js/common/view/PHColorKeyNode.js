@@ -56,7 +56,7 @@ class PHColorKeyNode extends Node {
     this.addChild( parentNode );
 
     // title, below color chips
-    const titleNode = new Text( AcidBaseSolutionsStrings.pHColorKey, {
+    const titleNode = new Text( AcidBaseSolutionsStrings.pHColorKeyStringProperty, {
       font: FONT_BIG,
       maxWidth: parentNode.width,
       left: parentNode.left,
