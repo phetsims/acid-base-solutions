@@ -34,9 +34,9 @@ class ToolsRadioButtonGroup extends RectangularRadioButtonGroup {
     }, options );
 
     super( toolModeProperty, [
-      { value: ToolMode.PH_METER, node: PHMeterNode.createIcon(), tandemName: 'phMeterRadioButton' },
-      { value: ToolMode.PH_PAPER, node: PHPaperNode.createIcon( 8, 30 ), tandemName: 'phPaperRadioButton' },
-      { value: ToolMode.CONDUCTIVITY, node: new Image( lightBulbIcon_png ), tandemName: 'conductivityRadioButton' }
+      { value: ToolMode.PH_METER, createNode: tandem => PHMeterNode.createIcon(), tandemName: 'phMeterRadioButton' },
+      { value: ToolMode.PH_PAPER, createNode: tandem => PHPaperNode.createIcon( 8, 30 ), tandemName: 'phPaperRadioButton' },
+      { value: ToolMode.CONDUCTIVITY, createNode: tandem => new Image( lightBulbIcon_png ), tandemName: 'conductivityRadioButton' }
     ], options );
   }
 }
