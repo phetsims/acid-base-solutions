@@ -79,7 +79,8 @@ class MySolutionPanel extends Panel {
     // concentration title
     const concentrationTitle = new Text( AcidBaseSolutionsStrings.initialConcentrationStringProperty, {
       font: SUBTITLE_FONT,
-      maxWidth: TITLE_MAX_WIDTH
+      maxWidth: TITLE_MAX_WIDTH,
+      layoutOptions: { align: 'left' }
     } );
 
     // concentration readout
@@ -109,7 +110,8 @@ class MySolutionPanel extends Panel {
     // strength control
     const strengthTitle = new Text( AcidBaseSolutionsStrings.strengthStringProperty, {
       font: SUBTITLE_FONT,
-      maxWidth: TITLE_MAX_WIDTH
+      maxWidth: TITLE_MAX_WIDTH,
+      layoutOptions: { align: 'left' }
     } );
     const isWeakProperty = new BooleanProperty( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.WEAK_ACID );
     const weakStrongSwitch = new ABSwitch( isWeakProperty,
