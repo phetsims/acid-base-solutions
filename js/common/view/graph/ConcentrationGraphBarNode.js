@@ -54,7 +54,7 @@ class ConcentrationGraphBarNode extends Node {
 
     // set concentration text
     if ( value < 1e-13 ) {
-      this.text.setText( AcidBaseSolutionsStrings.negligibleStringProperty.value );
+      this.text.setString( AcidBaseSolutionsStrings.negligibleStringProperty.value );
     }
     else if ( value <= 1 ) {
       // find pow
@@ -72,15 +72,15 @@ class ConcentrationGraphBarNode extends Node {
       // set text
       if ( pow === 0 ) {
         // issue #109, show 'N.NN x 10^0' as 'N.NN'
-        this.text.setText( Utils.toFixed( value, 2 ) );
+        this.text.setString( Utils.toFixed( value, 2 ) );
       }
       else {
         const mantissaString = Utils.toFixed( value, 2 );
-        this.text.setText( `${mantissaString} x 10<sup>${pow}</sup>` );
+        this.text.setString( `${mantissaString} x 10<sup>${pow}</sup>` );
       }
     }
     else {
-      this.text.setText( Utils.toFixed( value, 1 ) );
+      this.text.setString( Utils.toFixed( value, 1 ) );
     }
   }
 
