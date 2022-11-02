@@ -7,8 +7,9 @@
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Property from '../../../../axon/js/Property.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
+import { SolutionTypeValues } from '../enum/SolutionType.js';
 import Beaker from './Beaker.js';
 import ConcentrationGraph from './ConcentrationGraph.js';
 import ConductivityTester from './ConductivityTester.js';
@@ -31,7 +32,9 @@ class ABSModel {
     } );
 
     // @public type of solution that is currently selected
-    this.solutionTypeProperty = new Property( defaultSolutionType );
+    this.solutionTypeProperty = new StringEnumerationProperty( defaultSolutionType, {
+      validValues: SolutionTypeValues
+    } );
 
     // @public pH level of product
     this.pHProperty = new NumberProperty( this.solutionsMap.get( defaultSolutionType ).pHProperty.get() );
