@@ -1,5 +1,6 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * This node displays the reaction equation that appears below the beaker.
  * It displays the equation that corresponds to the selected solution type.
