@@ -120,6 +120,7 @@ export default class MySolutionPanel extends Panel {
     const strengthSlider = new StrengthSlider( solutionTypeProperty, strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE );
 
     const controls = new VBox( {
+      excludeInvisibleChildrenFromBounds: false,
       spacing: 6,
       children: [
         acidBaseSwitch,
