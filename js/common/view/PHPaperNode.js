@@ -1,5 +1,6 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Visual representation for pH paper in the 'Acid-Base Solutions' sim.
  * Origin is at the bottom-center of the paper.

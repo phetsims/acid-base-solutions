@@ -1,5 +1,6 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * MoleculesNode draws the molecules that appear in the magnifying glass.
  *
