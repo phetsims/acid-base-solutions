@@ -1,6 +1,5 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Model for the 'My Solution' screen in 'Acid-Base Solutions' sim.
  *
@@ -9,6 +8,7 @@
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSModel from '../../common/model/ABSModel.js';
 import StrongAcid from '../../common/model/solutions/StrongAcid.js';
@@ -19,9 +19,15 @@ import WeakBase from '../../common/model/solutions/WeakBase.js';
 // constants
 const DEFAULT_SOLUTION_TYPE = 'weakAcid';
 
-class MySolutionModel extends ABSModel {
+export default class MySolutionModel extends ABSModel {
 
-  constructor() {
+  // convenience Property that will synchronize with the concentration of the currently selected solution
+  public readonly concentrationProperty: Property<number>;
+
+  // convenience Property that will synchronize with the strength of the currently selected solution
+  public readonly strengthProperty: Property<number>;
+
+  public constructor() {
 
     const solutions = [
       new StrongAcid(),
@@ -40,25 +46,28 @@ class MySolutionModel extends ABSModel {
      * wiring is changed. This may have been more appropriate to handle in SolutionControl.
      */
 
-    // @public convenience Property that will synchronize with the concentration of the currently selected solution
-    this.concentrationProperty = new NumberProperty( this.solutionsMap.get( DEFAULT_SOLUTION_TYPE ).concentrationProperty.get(), {
+    const defaultSolution = this.solutionsMap.get( DEFAULT_SOLUTION_TYPE )!;
+    assert && assert( defaultSolution );
+
+    this.concentrationProperty = new NumberProperty( defaultSolution.concentrationProperty.get(), {
       reentrant: true
     } );
 
-    // @public convenience Property that will synchronize with the strength of the currently selected solution
-    this.strengthProperty = new NumberProperty( this.solutionsMap.get( DEFAULT_SOLUTION_TYPE ).strengthProperty.get(), {
+    this.strengthProperty = new NumberProperty( defaultSolution.strengthProperty.get(), {
       reentrant: true
     } );
 
-    const setStrength = value => this.strengthProperty.set( value );
-    const setConcentration = value => this.concentrationProperty.set( value );
+    const setStrength = ( value: number ) => this.strengthProperty.set( value );
+    const setConcentration = ( value: number ) => this.concentrationProperty.set( value );
     this.solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
 
-      const newSolution = this.solutionsMap.get( newSolutionType );
+      const newSolution = this.solutionsMap.get( newSolutionType )!;
+      assert && assert( newSolution );
 
       // unsubscribe from previous solution strength and concentration property
       if ( previousSolutionType ) {
-        const previousSolution = this.solutionsMap.get( previousSolutionType );
+        const previousSolution = this.solutionsMap.get( previousSolutionType )!;
+        assert && assert( previousSolution );
         previousSolution.strengthProperty.unlink( setStrength );
         previousSolution.concentrationProperty.unlink( setConcentration );
 
@@ -75,7 +84,7 @@ class MySolutionModel extends ABSModel {
     } );
 
     this.concentrationProperty.link( concentration => {
-      this.solutionsMap.get( this.solutionTypeProperty.get() ).concentrationProperty.set( concentration );
+      this.solutionsMap.get( this.solutionTypeProperty.get() )!.concentrationProperty.set( concentration );
     } );
 
     /*
@@ -87,17 +96,13 @@ class MySolutionModel extends ABSModel {
     this.strengthProperty.link( strength => {
       const solutionType = this.solutionTypeProperty.get();
       if ( solutionType === 'weakAcid' || solutionType === 'weakBase' ) {
-        this.solutionsMap.get( 'weakAcid' ).strengthProperty.set( strength );
-        this.solutionsMap.get( 'weakBase' ).strengthProperty.set( strength );
+        this.solutionsMap.get( 'weakAcid' )!.strengthProperty.set( strength );
+        this.solutionsMap.get( 'weakBase' )!.strengthProperty.set( strength );
       }
     } );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  reset() {
+  public override reset(): void {
     super.reset();
     this.concentrationProperty.reset();
     this.strengthProperty.reset();
@@ -105,4 +110,3 @@ class MySolutionModel extends ABSModel {
 }
 
 acidBaseSolutions.register( 'MySolutionModel', MySolutionModel );
-export default MySolutionModel;

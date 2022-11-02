@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * The 'My Solution' screen.
  *
@@ -8,9 +7,10 @@
  */
 
 import Property from '../../../axon/js/Property.js';
-import Screen from '../../../joist/js/Screen.js';
+import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import { Node, Rectangle } from '../../../scenery/js/imports.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../AcidBaseSolutionsStrings.js';
 import ABSColors from '../common/ABSColors.js';
@@ -18,11 +18,11 @@ import MoleculeFactory from '../common/view/MoleculeFactory.js';
 import MySolutionModel from './model/MySolutionModel.js';
 import MySolutionScreenView from './view/MySolutionScreenView.js';
 
-class MySolutionScreen extends Screen {
+export default class MySolutionScreen extends Screen {
 
-  constructor( tandem ) {
+  public constructor( tandem: Tandem ) {
 
-    const options = {
+    const options: ScreenOptions = {
       name: AcidBaseSolutionsStrings.screen.mySolutionStringProperty,
       backgroundColorProperty: new Property( ABSColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon(),
@@ -39,9 +39,8 @@ class MySolutionScreen extends Screen {
 
 /**
  * Creates the icon for this screen.
- * @returns {ScreenIcon}
  */
-function createScreenIcon() {
+function createScreenIcon(): ScreenIcon {
 
   const width = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.width;
   const height = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.height;
@@ -73,4 +72,3 @@ function createScreenIcon() {
 }
 
 acidBaseSolutions.register( 'MySolutionScreen', MySolutionScreen );
-export default MySolutionScreen;

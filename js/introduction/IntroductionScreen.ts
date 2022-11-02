@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * The 'Introduction' screen.
  *
@@ -8,21 +7,22 @@
  */
 
 import Property from '../../../axon/js/Property.js';
-import Screen from '../../../joist/js/Screen.js';
+import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import { Shape } from '../../../kite/js/imports.js';
 import { Circle, Node, Path, Rectangle } from '../../../scenery/js/imports.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../AcidBaseSolutionsStrings.js';
 import ABSColors from '../common/ABSColors.js';
 import IntroductionModel from './model/IntroductionModel.js';
 import IntroductionScreenView from './view/IntroductionScreenView.js';
 
-class IntroductionScreen extends Screen {
+export default class IntroductionScreen extends Screen {
 
-  constructor( tandem ) {
+  public constructor( tandem: Tandem ) {
 
-    const options = {
+    const options: ScreenOptions = {
       name: AcidBaseSolutionsStrings.screen.introductionStringProperty,
       backgroundColorProperty: new Property( ABSColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon(),
@@ -39,9 +39,8 @@ class IntroductionScreen extends Screen {
 
 /**
  * Creates the icon for this screen.
- * @returns {ScreenIcon}
  */
-function createScreenIcon() {
+function createScreenIcon(): ScreenIcon {
 
   const width = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.width;
   const height = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.height;
@@ -97,4 +96,3 @@ function createScreenIcon() {
 }
 
 acidBaseSolutions.register( 'IntroductionScreen', IntroductionScreen );
-export default IntroductionScreen;

@@ -1,6 +1,5 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Model for the 'Introduction' screen in 'Acid-Base Solutions' sim.
  *
@@ -15,9 +14,9 @@ import Water from '../../common/model/solutions/Water.js';
 import WeakAcid from '../../common/model/solutions/WeakAcid.js';
 import WeakBase from '../../common/model/solutions/WeakBase.js';
 
-class IntroductionModel extends ABSModel {
+export default class IntroductionModel extends ABSModel {
 
-  constructor() {
+  public constructor() {
 
     const solutions = [
       new Water(),
@@ -32,4 +31,3 @@ class IntroductionModel extends ABSModel {
 }
 
 acidBaseSolutions.register( 'IntroductionModel', IntroductionModel );
-export default IntroductionModel;
