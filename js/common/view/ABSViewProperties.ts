@@ -1,6 +1,5 @@
 // Copyright 2016-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * View-specific Properties
  *
@@ -8,27 +7,32 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import { ToolModeValues } from '../enum/ToolMode.js';
-import { ViewModeValues } from '../enum/ViewMode.js';
+import { ToolMode, ToolModeValues } from '../enum/ToolMode.js';
+import { ViewMode, ViewModeValues } from '../enum/ViewMode.js';
 
-class ABSViewProperties {
+export default class ABSViewProperties {
 
-  constructor() {
+  public readonly solventVisibleProperty: Property<boolean>;
+  public readonly viewModeProperty: StringEnumerationProperty<ViewMode>;
+  public readonly toolModeProperty: StringEnumerationProperty<ToolMode>;
 
-    // @public
+  public constructor() {
+
     this.solventVisibleProperty = new BooleanProperty( false );
+
     this.viewModeProperty = new StringEnumerationProperty( 'molecules', {
       validValues: ViewModeValues
     } );
+
     this.toolModeProperty = new StringEnumerationProperty( 'pHMeter', {
       validValues: ToolModeValues
     } );
   }
 
-  // @public
-  reset() {
+  public reset(): void {
     this.solventVisibleProperty.reset();
     this.viewModeProperty.reset();
     this.toolModeProperty.reset();
@@ -36,4 +40,3 @@ class ABSViewProperties {
 }
 
 acidBaseSolutions.register( 'ABSViewProperties', ABSViewProperties );
-export default ABSViewProperties;
