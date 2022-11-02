@@ -1,5 +1,6 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Slider for controlling strength.
  * Adapts a linear slider to a logarithmic strength range.
