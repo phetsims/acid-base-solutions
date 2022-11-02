@@ -1,46 +1,41 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * pH meter model. Position is at the tip of the probe.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
 
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
+import Beaker from './Beaker.js';
 
-class PHMeter {
+export default class PHMeter {
 
-  /**
-   * @param {Beaker} beaker
-   * @param {Property.<number>} pHProperty
-   */
-  constructor( beaker, pHProperty ) {
+  public readonly beaker: Beaker;
+  public readonly pHProperty: TReadOnlyProperty<number>;
+  public readonly dragYRange: Range; // drag range (y coordinate)
+  public readonly positionProperty: Property<Vector2>; // position, at tip of probe
 
-    // @public
+  public constructor( beaker: Beaker, pHProperty: TReadOnlyProperty<number> ) {
     this.beaker = beaker;
     this.pHProperty = pHProperty;
-
-    // @public drag range (y coordinate)
     this.dragYRange = new Range( beaker.top - 5, beaker.top + 60 );
-
-    // @public position, at tip of probe
     this.positionProperty = new Vector2Property( new Vector2( beaker.right - 65, beaker.top - 5 ) );
   }
 
-  // @public
-  reset() {
+  public reset(): void {
     this.positionProperty.reset();
   }
 
-  // @public Is the tip of the pH probe in solution?
-  inSolution() {
+  // Is the tip of the pH probe in solution?
+  public inSolution(): boolean {
     return this.beaker.bounds.containsPoint( this.positionProperty.get() );
   }
 }
 
 acidBaseSolutions.register( 'PHMeter', PHMeter );
-export default PHMeter;

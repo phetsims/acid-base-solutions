@@ -1,47 +1,53 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- *  Conductivity tester model.
+ * Conductivity tester model.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSConstants from '../ABSConstants.js';
+import Beaker from './Beaker.js';
 
 // constants
 const NEUTRAL_PH = 7;
 const NEUTRAL_BRIGHTNESS = 0.05;
 
-class ConductivityTester {
+export default class ConductivityTester {
 
-  /**
-   * @param {Beaker} beaker
-   * @param {Property.<number>} pHProperty
-   */
-  constructor( beaker, pHProperty ) {
+  public readonly probeDragYRange: Range;
+  public readonly probeSize: Dimension2;
+  public readonly bulbPosition: Vector2; // bottom-center of bulb's base
 
-    this.probeDragYRange = new Range( beaker.top - 20, beaker.top + 50 ); // @public
+  // probe positions
+  public readonly positiveProbePositionProperty: Property<Vector2>;
+  public readonly negativeProbePositionProperty: Property<Vector2>;
 
-    this.probeSize = new Dimension2( 20, 68 ); // @public
+  // brightness of bulb varies from 0 (off) to 1 (full on)
+  public readonly brightnessProperty: TReadOnlyProperty<number>;
 
-    // @public bottom-center of bulb's base
+  public constructor( beaker: Beaker, pHProperty: TReadOnlyProperty<number> ) {
+
+    this.probeDragYRange = new Range( beaker.top - 20, beaker.top + 50 );
+
+    this.probeSize = new Dimension2( 20, 68 );
+
     this.bulbPosition = new Vector2( beaker.position.x - 45, beaker.top - 30 );
 
-    // @public probe positions
     const probeXOffset = 0.175 * beaker.size.width; // offset from edge of beaker
     const probeY = this.probeDragYRange.min + 10;
     this.positiveProbePositionProperty = new Vector2Property( new Vector2( beaker.right - probeXOffset, probeY ) );
     this.negativeProbePositionProperty = new Vector2Property( new Vector2( beaker.left + probeXOffset, probeY ) );
 
-    // @public brightness of bulb varies from 0 (off) to 1 (full on)
     this.brightnessProperty = new DerivedProperty(
       [ pHProperty, this.positiveProbePositionProperty, this.negativeProbePositionProperty ],
       ( pH, positiveProbePosition, negativeProbePosition ) => {
@@ -59,12 +65,10 @@ class ConductivityTester {
       } );
   }
 
-  // @public
-  reset() {
+  public reset(): void {
     this.positiveProbePositionProperty.reset();
     this.negativeProbePositionProperty.reset();
   }
 }
 
 acidBaseSolutions.register( 'ConductivityTester', ConductivityTester );
-export default ConductivityTester;
