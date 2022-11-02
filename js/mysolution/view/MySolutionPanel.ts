@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Control for modifying a custom solutions.
  *
@@ -11,17 +10,19 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Utils from '../../../../dot/js/Utils.js';
-import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, HSeparator, Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import ABSwitch from '../../../../sun/js/ABSwitch.js';
 import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
-import Panel from '../../../../sun/js/Panel.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
 import ConcentrationSlider from './ConcentrationSlider.js';
 import StrengthSlider from './StrengthSlider.js';
+import { SolutionType } from '../../common/enum/SolutionType.js';
+import Property from '../../../../axon/js/Property.js';
+import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
 
 // constants
 const CONCENTRATION_DECIMALS = 3;
@@ -49,19 +50,17 @@ const AB_SWITCH_OPTIONS = {
   }
 };
 
-class MySolutionPanel extends Panel {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Property.<SolutionType>} solutionTypeProperty
-   * @param {Property.<number>} concentrationProperty
-   * @param {Property.<number>} strengthProperty
-   * @parram {AlignGroup} contentAlignGroup
-   * @param {Object} [options]
-   */
-  constructor( solutionTypeProperty, concentrationProperty, strengthProperty, contentAlignGroup, options ) {
-    assert && assert( contentAlignGroup instanceof AlignGroup, 'invalid contentAlignGroup' );
+type MySolutionPanelOptions = SelfOptions & PanelOptions;
 
-    options = merge( {}, ABSConstants.PANEL_OPTIONS, options );
+export default class MySolutionPanel extends Panel {
+
+  public constructor( solutionTypeProperty: Property<SolutionType>, concentrationProperty: Property<number>,
+                      strengthProperty: Property<number>, contentAlignGroup: AlignGroup, providedOptions?: MySolutionPanelOptions ) {
+
+    const options = optionize3<MySolutionPanelOptions, SelfOptions, PanelOptions>()(
+      {}, ABSConstants.PANEL_OPTIONS, providedOptions );
 
     // title
     const titleNode = new Text( AcidBaseSolutionsStrings.solutionStringProperty, {
@@ -200,4 +199,3 @@ class MySolutionPanel extends Panel {
 }
 
 acidBaseSolutions.register( 'MySolutionPanel', MySolutionPanel );
-export default MySolutionPanel;

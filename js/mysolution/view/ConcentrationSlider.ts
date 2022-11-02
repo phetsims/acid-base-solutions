@@ -1,6 +1,5 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Concentration slider.
  * Adapts a linear slider to a logarithmic concentration range.
@@ -10,6 +9,7 @@
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -18,13 +18,9 @@ import { Text } from '../../../../scenery/js/imports.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 
-class ConcentrationSlider extends HSlider {
+export default class ConcentrationSlider extends HSlider {
 
-  /**
-   * @param {Property.<number>} concentrationProperty
-   * @param {Range} concentrationRange
-   */
-  constructor( concentrationProperty, concentrationRange ) {
+  public constructor( concentrationProperty: Property<number>, concentrationRange: RangeWithValue ) {
 
     const model = new SliderModel( concentrationProperty, concentrationRange );
 
@@ -45,8 +41,6 @@ class ConcentrationSlider extends HSlider {
   }
 }
 
-acidBaseSolutions.register( 'ConcentrationSlider', ConcentrationSlider );
-
 /**
  * Model for the concentration slider.
  * Maps between the linear slider and the logarithmic range of concentration.
@@ -54,25 +48,24 @@ acidBaseSolutions.register( 'ConcentrationSlider', ConcentrationSlider );
  */
 class SliderModel {
 
-  /**
-   * @param {Property.<number>} concentrationProperty
-   * @param {RangeWithValue} concentrationRange
-   */
-  constructor( concentrationProperty, concentrationRange ) {
+  private readonly concentrationProperty: Property<number>;
+  public readonly sliderValueRange: RangeWithValue;
+  public readonly sliderValueProperty: Property<number>;
 
-    this.concentrationProperty = concentrationProperty; // @private
+  public constructor( concentrationProperty: Property<number>, concentrationRange: RangeWithValue ) {
 
-    // @public range of slider
+    this.concentrationProperty = concentrationProperty;
+
     this.sliderValueRange = new RangeWithValue(
       Utils.log10( concentrationRange.min ),
       Utils.log10( concentrationRange.max ),
       Utils.log10( concentrationRange.defaultValue ) );
 
-    // @public property for slider value
     this.sliderValueProperty = new NumberProperty( Utils.log10( concentrationProperty.get() ), {
       reentrant: true
     } );
 
+    // map between linear and logarithmic
     this.sliderValueProperty.link( sliderValue => {
       this.concentrationProperty.set( Utils.toFixedNumber( Math.pow( 10, sliderValue ), 10 ) ); // see issue#73
     } );
@@ -82,4 +75,4 @@ class SliderModel {
   }
 }
 
-export default ConcentrationSlider;
+acidBaseSolutions.register( 'ConcentrationSlider', ConcentrationSlider );

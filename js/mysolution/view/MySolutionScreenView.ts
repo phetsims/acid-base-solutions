@@ -1,6 +1,5 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * View for the 'My Solution' screen.
  *
@@ -9,14 +8,12 @@
 
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSScreenView from '../../common/view/ABSScreenView.js';
+import MySolutionModel from '../model/MySolutionModel.js';
 import MySolutionPanel from './MySolutionPanel.js';
 
-class MySolutionScreenView extends ABSScreenView {
+export default class MySolutionScreenView extends ABSScreenView {
 
-  /**
-   * @param {MySolutionModel} model
-   */
-  constructor( model ) {
+  public constructor( model: MySolutionModel ) {
     super(
       model,
       alignGroup => new MySolutionPanel( model.solutionTypeProperty, model.concentrationProperty, model.strengthProperty, alignGroup )
@@ -25,4 +22,3 @@ class MySolutionScreenView extends ABSScreenView {
 }
 
 acidBaseSolutions.register( 'MySolutionScreenView', MySolutionScreenView );
-export default MySolutionScreenView;

@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Slider for controlling strength.
  * Adapts a linear slider to a logarithmic strength range.
@@ -10,6 +9,7 @@
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -18,6 +18,7 @@ import { Text } from '../../../../scenery/js/imports.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
+import { SolutionType } from '../../common/enum/SolutionType.js';
 
 // constants
 const TICK_LABEL_OPTIONS = {
@@ -25,14 +26,11 @@ const TICK_LABEL_OPTIONS = {
   maxWidth: 80 // constrain for i18n, determined empirically
 };
 
-class StrengthSlider extends HSlider {
+export default class StrengthSlider extends HSlider {
 
-  /**
-   * @param {Property.<SolutionType>} solutionTypeProperty
-   * @param {Property.<number>} strengthProperty
-   * @param {Range} strengthRange
-   */
-  constructor( solutionTypeProperty, strengthProperty, strengthRange ) {
+  public constructor( solutionTypeProperty: Property<SolutionType>,
+                      strengthProperty: Property<number>,
+                      strengthRange: RangeWithValue ) {
 
     const model = new SliderModel( solutionTypeProperty, strengthProperty, strengthRange );
 
@@ -50,28 +48,24 @@ class StrengthSlider extends HSlider {
   }
 }
 
-acidBaseSolutions.register( 'StrengthSlider', StrengthSlider );
-
 /**
  * Model for the strength slider. Maps between the linear slider and the logarithmic range of strength.
  * Implemented as an inner type because this is internal to the slider.
  */
 class SliderModel {
 
-  /**
-   * @param {Property.<SolutionType>} solutionTypeProperty
-   * @param {Property.<number>} strengthProperty
-   * @param {RangeWithValue} strengthRange
-   */
-  constructor( solutionTypeProperty, strengthProperty, strengthRange ) {
+  public readonly sliderValueRange: RangeWithValue;
+  public readonly sliderValueProperty: Property<number>;
 
-    // @public range of slider values
+  public constructor( solutionTypeProperty: Property<SolutionType>,
+                      strengthProperty: Property<number>,
+                      strengthRange: RangeWithValue ) {
+
     this.sliderValueRange = new RangeWithValue(
       Utils.log10( strengthRange.min ),
       Utils.log10( strengthRange.max ),
       Utils.log10( strengthRange.defaultValue ) );
 
-    // @public slider's value
     this.sliderValueProperty = new NumberProperty( Utils.log10( strengthProperty.get() ), {
       reentrant: true
     } );
@@ -91,8 +85,8 @@ class SliderModel {
 }
 
 // issues #94: strength can be changed only for weak solutions, use this as a guard
-function strengthIsMutable( solutionType ) {
+function strengthIsMutable( solutionType: SolutionType ): boolean {
   return ( solutionType === 'weakAcid' || solutionType === 'weakBase' );
 }
 
-export default StrengthSlider;
+acidBaseSolutions.register( 'StrengthSlider', StrengthSlider );
