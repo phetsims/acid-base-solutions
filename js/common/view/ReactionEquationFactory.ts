@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Factory for creating reaction equations.
  *
@@ -11,7 +10,7 @@
 import { Shape } from '../../../../kite/js/imports.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignGroup, HBox, HStrut, Path, RichText, VBox, VStrut } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignGroup, HBox, HStrut, Node, Path, RichText, VBox, VStrut } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import MoleculeFactory from './MoleculeFactory.js';
 
@@ -41,7 +40,7 @@ const ALIGN_GROUP = new AlignGroup();
 const ReactionEquationFactory = {
 
   // 2 H2O <-> H3O+ + OH-
-  createWaterEquation: function() {
+  createWaterEquation: function(): Node {
     return createEquation( [
       create2H2O(),
       createReversibleArrow(),
@@ -52,17 +51,17 @@ const ReactionEquationFactory = {
   },
 
   // HA + H2O -> A- + H3O+
-  createStrongAcidEquation: function() {
+  createStrongAcidEquation: function(): Node {
     return createAcidEquation( false /* isWeak */ );
   },
 
   // HA + H2O <-> A- + H3O+
-  createWeakAcidEquation: function() {
+  createWeakAcidEquation: function(): Node {
     return createAcidEquation( true /* isWeak */ );
   },
 
   // MOH -> M+ + OH-
-  createStrongBaseEquation: function() {
+  createStrongBaseEquation: function(): Node {
     return createEquation( [
       createMOH(),
       createIrreversibleArrow(),
@@ -73,7 +72,7 @@ const ReactionEquationFactory = {
   },
 
   // B + H2O <-> BH+ + OH-
-  createWeakBaseEquation: function() {
+  createWeakBaseEquation: function(): Node {
     return createEquation( [
       createB(),
       createPlus(),
@@ -87,7 +86,7 @@ const ReactionEquationFactory = {
 };
 
 // Equations for all acids are similar: HA + H2O ? A- + H3O+
-function createAcidEquation( isWeak ) {
+function createAcidEquation( isWeak: boolean ): Node {
   return createEquation( [
     createHA(),
     createPlus(),
@@ -100,7 +99,7 @@ function createAcidEquation( isWeak ) {
 }
 
 // Creates an equation by horizontally laying out a set of elements (children).
-function createEquation( children ) {
+function createEquation( children: Node[] ): Node {
   return new AlignBox( new HBox( {
     children: children,
     scale: EQUATION_SCALE,
@@ -114,7 +113,7 @@ function createEquation( children ) {
 }
 
 // A- node
-const createA = function() {
+function createA(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -123,10 +122,10 @@ const createA = function() {
       new VStrut( SUBSCRIPT_HEIGHT )
     ]
   } );
-};
+}
 
 // B node
-function createB() {
+function createB(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -138,7 +137,7 @@ function createB() {
 }
 
 // BH+ node
-function createBH() {
+function createBH(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -156,7 +155,7 @@ function createBH() {
 }
 
 // H2O node
-function createH2O() {
+function createH2O(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -167,7 +166,7 @@ function createH2O() {
 }
 
 // 2H2O node
-function create2H2O() {
+function create2H2O(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -191,7 +190,7 @@ function create2H2O() {
 }
 
 // H3O+ node
-function createH3O() {
+function createH3O(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -207,7 +206,7 @@ function createH3O() {
 }
 
 // HA node
-function createHA() {
+function createHA(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -219,7 +218,7 @@ function createHA() {
 }
 
 // M+ node
-function createM() {
+function createM(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -238,7 +237,7 @@ function createM() {
 }
 
 // MOH node
-function createMOH() {
+function createMOH(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -257,7 +256,7 @@ function createMOH() {
 }
 
 // OH- node
-function createOH() {
+function createOH(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
@@ -269,7 +268,7 @@ function createOH() {
 }
 
 // plus sign node
-function createPlus() {
+function createPlus(): Node {
   return new VBox( {
     children: [
       new RichText( MathSymbols.PLUS, RICH_TEXT_OPTIONS ),
@@ -279,7 +278,7 @@ function createPlus() {
 }
 
 // double arrow to indicate reversible reaction
-function createReversibleArrow() {
+function createReversibleArrow(): Node {
   const shape = new Shape()
     // top arrow, points right
     .moveTo( 0, -ARROWS_VERTICAL_SPACE / 2 )
@@ -302,7 +301,7 @@ function createReversibleArrow() {
 }
 
 // single arrow to indicate irreversible reaction, points right
-function createIrreversibleArrow() {
+function createIrreversibleArrow(): Node {
 
   const shape = new Shape()
     .moveTo( 0, 0 )
