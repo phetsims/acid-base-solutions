@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Magnifier view.
  * For performance, draws molecules directly to Canvas using drawImage.
@@ -13,6 +12,7 @@ import { Shape } from '../../../../kite/js/imports.js';
 import { Circle, Image, Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import solvent_png from '../../../images/solvent_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
+import Magnifier from '../model/Magnifier.js';
 import MoleculesNode from './MoleculesNode.js';
 
 // constants
@@ -20,12 +20,12 @@ const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
 const CLIPPING_ENABLED = true; // set to false to debug positioning of molecules
 const LENS_LINE_WIDTH = 8;
 
-class MagnifierNode extends Node {
+export default class MagnifierNode extends Node {
 
-  /**
-   * @param {Magnifier} magnifier
-   */
-  constructor( magnifier ) {
+  private readonly solventNode: Node;
+  private readonly moleculesNode: MoleculesNode;
+
+  public constructor( magnifier: Magnifier ) {
 
     super();
 
@@ -45,14 +45,14 @@ class MagnifierNode extends Node {
     // opaque background, so we don't see things like pH paper in magnifier
     const waterNode = new Circle( RADIUS, { fill: 'rgb(210,231,235)' } );
 
-    // @private solvent (H2O)
+    // solvent (H2O)
     this.solventNode = new Image( solvent_png, {
       imageOpacity: 0.6,  // reduce opacity so that other molecules stand out more
       centerX: 0,
       centerY: 0
     } );
 
-    // @private molecules
+    // molecules
     this.moleculesNode = new MoleculesNode( magnifier, new Bounds2( -RADIUS, -RADIUS, RADIUS, RADIUS ), LENS_LINE_WIDTH );
 
     // stuff that's visible through (and therefore clipped to) the lens
@@ -81,13 +81,15 @@ class MagnifierNode extends Node {
 
       // unlink from previous solution
       if ( previousSolutionType ) {
-        const previousSolution = magnifier.solutionsMap.get( previousSolutionType );
+        const previousSolution = magnifier.solutionsMap.get( previousSolutionType )!;
+        assert && assert( previousSolution );
         previousSolution.strengthProperty.unlink( updateMoleculesBound );
         previousSolution.concentrationProperty.unlink( updateMoleculesBound );
       }
 
       // link to new solution
-      const newSolution = magnifier.solutionsMap.get( newSolutionType );
+      const newSolution = magnifier.solutionsMap.get( newSolutionType )!;
+      assert && assert( newSolution );
       newSolution.strengthProperty.link( updateMoleculesBound );
       newSolution.concentrationProperty.link( updateMoleculesBound );
     } );
@@ -96,17 +98,15 @@ class MagnifierNode extends Node {
     this.visibleProperty.link( visible => visible && this.updateMolecules() );
   }
 
-  // @public
-  setSolventVisible( visible ) {
+  public setSolventVisible( visible: boolean ): void {
     this.solventNode.visible = visible;
   }
 
   /*
-   * @private
    * Updates the number of molecules visible in the magnifier.
    * To improve performance, updates only when this node is visible.
    */
-  updateMolecules() {
+  private updateMolecules(): void {
     if ( this.visible ) {
       this.moleculesNode.update();
     }
@@ -114,4 +114,3 @@ class MagnifierNode extends Node {
 }
 
 acidBaseSolutions.register( 'MagnifierNode', MagnifierNode );
-export default MagnifierNode;
