@@ -18,10 +18,10 @@ class WeakBase extends AqueousSolution {
     super( SolutionType.WEAK_BASE, ABSConstants.WEAK_STRENGTH_RANGE.defaultValue, ABSConstants.CONCENTRATION_RANGE.defaultValue,
       [
         // molecules found in this solution
-        { key: 'B', concentrationFunctionName: 'getSoluteConcentration' },
-        { key: 'H2O', concentrationFunctionName: 'getH2OConcentration' },
-        { key: 'BH', concentrationFunctionName: 'getProductConcentration' },
-        { key: 'OH', concentrationFunctionName: 'getOHConcentration' }
+        { key: 'B', getConcentration: () => this.getSoluteConcentration() },
+        { key: 'H2O', getConcentration: () => this.getH2OConcentration() },
+        { key: 'BH', getConcentration: () => this.getProductConcentration() },
+        { key: 'OH', getConcentration: () => this.getOHConcentration() }
       ] );
   }
 

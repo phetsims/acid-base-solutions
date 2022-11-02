@@ -18,9 +18,9 @@ class StrongBase extends AqueousSolution {
     super( SolutionType.STRONG_BASE, ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue,
       [
         // molecules found in this solution
-        { key: 'MOH', concentrationFunctionName: 'getSoluteConcentration' },
-        { key: 'M', concentrationFunctionName: 'getProductConcentration' },
-        { key: 'OH', concentrationFunctionName: 'getOHConcentration' }
+        { key: 'MOH', getConcentration: () => this.getSoluteConcentration() },
+        { key: 'M', getConcentration: () => this.getProductConcentration() },
+        { key: 'OH', getConcentration: () => this.getOHConcentration() }
       ]
     );
   }

@@ -18,10 +18,10 @@ class WeakAcid extends AqueousSolution {
     super( SolutionType.WEAK_ACID, ABSConstants.WEAK_STRENGTH_RANGE.defaultValue, ABSConstants.CONCENTRATION_RANGE.defaultValue,
       [
         // molecules found in this solution
-        { key: 'HA', concentrationFunctionName: 'getSoluteConcentration' },
-        { key: 'H2O', concentrationFunctionName: 'getH2OConcentration' },
-        { key: 'A', concentrationFunctionName: 'getProductConcentration' },
-        { key: 'H3O', concentrationFunctionName: 'getH3OConcentration' }
+        { key: 'HA', getConcentration: () => this.getSoluteConcentration() },
+        { key: 'H2O', getConcentration: () => this.getH2OConcentration() },
+        { key: 'A', getConcentration: () => this.getProductConcentration() },
+        { key: 'H3O', getConcentration: () => this.getH3OConcentration() }
       ] );
   }
 

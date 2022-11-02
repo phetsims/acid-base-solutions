@@ -93,7 +93,7 @@ class ConcentrationGraphNode extends Node {
         if ( i < numberOfMolecules ) {
           // set visibility, color, value and position of new bars
           bar.setVisible( true );
-          bar.setValue( solution[ molecules[ i ].concentrationFunctionName ]() );
+          bar.setValue( solution.molecules[ i ].getConcentration() );
           bar.setBarFill( ABSColors.MOLECULES[ molecules[ i ].key ] );
           bar.setTranslation( ( i + 0.75 + ( 4 - numberOfMolecules ) / 2 ) * this.graph.width / 4, this.graph.height );
         }
@@ -118,9 +118,7 @@ class ConcentrationGraphNode extends Node {
       const molecules = solution.molecules;
 
       for ( let i = 0; i < molecules.length; i++ ) {
-
-        //TODO this violates PhET coding conventions, see https://github.com/phetsims/acid-base-solutions/issues/163
-        this.bars[ i ].setValue( solution[ molecules[ i ].concentrationFunctionName ]() );
+        this.bars[ i ].setValue( solution.molecules[ i ].getConcentration() );
       }
     }
   }

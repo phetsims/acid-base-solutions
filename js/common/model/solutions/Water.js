@@ -18,9 +18,9 @@ class Water extends AqueousSolution {
     super( SolutionType.WATER, 0, 0,
       [
         // molecules found in this solution
-        { key: 'H2O', concentrationFunctionName: 'getH2OConcentration' },
-        { key: 'H3O', concentrationFunctionName: 'getH3OConcentration' },
-        { key: 'OH', concentrationFunctionName: 'getOHConcentration' }
+        { key: 'H2O', getConcentration: () => this.getH2OConcentration() },
+        { key: 'H3O', getConcentration: () => this.getH3OConcentration() },
+        { key: 'OH', getConcentration: () => this.getOHConcentration() }
       ]
     );
   }

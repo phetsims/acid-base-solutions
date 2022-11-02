@@ -102,7 +102,7 @@ class MoleculesNode extends CanvasNode {
       if ( key !== 'H2O' ) { // skip water because it's displayed elsewhere as a static image file
 
         // map concentration to number of molecules
-        const concentration = solution[ molecule.concentrationFunctionName ]();
+        const concentration = molecule.getConcentration();
         const numberOfMolecules = getNumberOfMolecules( concentration );
 
         // add additional molecules as needed
