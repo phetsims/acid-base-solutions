@@ -1,5 +1,6 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * IntroductionSolutionPanel is a panel for selecting between a set of mutually-exclusive solutions in the
  * Introduction screen.
