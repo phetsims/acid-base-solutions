@@ -1,6 +1,5 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * StrongBase is an aqueous solution whose solute is a strong base.
  *
@@ -10,13 +9,12 @@
 
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import ABSConstants from '../../ABSConstants.js';
-import SolutionType from '../../enum/SolutionType.js';
 import AqueousSolution from './AqueousSolution.js';
 
-class StrongBase extends AqueousSolution {
+export default class StrongBase extends AqueousSolution {
 
-  constructor() {
-    super( SolutionType.STRONG_BASE, ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue,
+  public constructor() {
+    super( 'strongBase', ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue,
       [
         // molecules found in this solution
         { key: 'MOH', getConcentration: () => this.getSoluteConcentration() },
@@ -26,36 +24,35 @@ class StrongBase extends AqueousSolution {
     );
   }
 
-  // @override @public [MOH] = 0
-  getSoluteConcentration() {
+  // [MOH] = 0
+  public override getSoluteConcentration(): number {
     return 0;
   }
 
-  // @override @public [M+] = c
-  getProductConcentration() {
+  // [M+] = c
+  public override getProductConcentration(): number {
     return this.getConcentration();
   }
 
-  // @override @public [H3O+] = Kw / [OH-]
-  getH3OConcentration() {
+  // [H3O+] = Kw / [OH-]
+  public override getH3OConcentration(): number {
     return ABSConstants.WATER_EQUILIBRIUM_CONSTANT / this.getOHConcentration();
   }
 
-  // @override @public [OH-] = c
-  getOHConcentration() {
+  // [OH-] = c
+  public override getOHConcentration(): number {
     return this.getConcentration();
   }
 
-  // @override @public [H2O] = W
-  getH2OConcentration() {
+  // [H2O] = W
+  public override getH2OConcentration(): number {
     return ABSConstants.WATER_CONCENTRATION;
   }
 
-  // @override @protected Strong strength is a constant.
-  isValidStrength( strength ) {
+  // Strong strength is a constant.
+  protected override isValidStrength( strength: number ): boolean {
     return ( strength === ABSConstants.STRONG_STRENGTH );
   }
 }
 
 acidBaseSolutions.register( 'StrongBase', StrongBase );
-export default StrongBase;

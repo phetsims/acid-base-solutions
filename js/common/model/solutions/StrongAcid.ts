@@ -1,6 +1,5 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * StrongAcid is an aqueous solution whose solute is a strong acid.
  *
@@ -10,13 +9,12 @@
 
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import ABSConstants from '../../ABSConstants.js';
-import SolutionType from '../../enum/SolutionType.js';
 import AqueousSolution from './AqueousSolution.js';
 
-class StrongAcid extends AqueousSolution {
+export default class StrongAcid extends AqueousSolution {
 
-  constructor() {
-    super( SolutionType.STRONG_ACID, ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue,
+  public constructor() {
+    super( 'strongAcid', ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue,
       [
         // molecules found in this solution
         { key: 'HA', getConcentration: () => this.getSoluteConcentration() },
@@ -27,36 +25,35 @@ class StrongAcid extends AqueousSolution {
     );
   }
 
-  // @override @public [HA] = 0
-  getSoluteConcentration() {
+  // [HA] = 0
+  public override getSoluteConcentration(): number {
     return 0;
   }
 
-  // @override @public [A-] = c
-  getProductConcentration() {
+  // [A-] = c
+  public override getProductConcentration(): number {
     return this.getConcentration();
   }
 
-  // @override @public [H3O+] = c
-  getH3OConcentration() {
+  // [H3O+] = c
+  public override getH3OConcentration(): number {
     return this.getConcentration();
   }
 
-  // @override @public [OH-] = Kw / [H3O+]
-  getOHConcentration() {
+  // [OH-] = Kw / [H3O+]
+  public override getOHConcentration(): number {
     return ABSConstants.WATER_EQUILIBRIUM_CONSTANT / this.getH3OConcentration();
   }
 
-  // @override @public [H2O] = W - c
-  getH2OConcentration() {
+  // [H2O] = W - c
+  public override getH2OConcentration(): number {
     return ABSConstants.WATER_CONCENTRATION - this.getConcentration();
   }
 
-  // @override @protected Strong strength is a constant.
-  isValidStrength( strength ) {
+  // Strong strength is a constant.
+  protected override isValidStrength( strength: number ): boolean {
     return ( strength === ABSConstants.STRONG_STRENGTH );
   }
 }
 
 acidBaseSolutions.register( 'StrongAcid', StrongAcid );
-export default StrongAcid;

@@ -19,7 +19,6 @@ import Panel from '../../../../sun/js/Panel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
-import SolutionType from '../../common/enum/SolutionType.js';
 import ConcentrationSlider from './ConcentrationSlider.js';
 import StrengthSlider from './StrengthSlider.js';
 
@@ -70,7 +69,7 @@ class MySolutionPanel extends Panel {
     } );
 
     // acid/base switch
-    const isAcidProperty = new BooleanProperty( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.STRONG_ACID );
+    const isAcidProperty = new BooleanProperty( solutionTypeProperty.get() === 'weakAcid' || solutionTypeProperty.get() === 'strongAcid' );
     const acidBaseSwitch = new ABSwitch( isAcidProperty,
       true, new Text( AcidBaseSolutionsStrings.acidStringProperty, SWITCH_TEXT_OPTIONS ),
       false, new Text( AcidBaseSolutionsStrings.baseStringProperty, SWITCH_TEXT_OPTIONS ),
@@ -113,7 +112,7 @@ class MySolutionPanel extends Panel {
       maxWidth: TITLE_MAX_WIDTH,
       layoutOptions: { align: 'left' }
     } );
-    const isWeakProperty = new BooleanProperty( solutionTypeProperty.get() === SolutionType.WEAK_ACID || solutionTypeProperty.get() === SolutionType.WEAK_ACID );
+    const isWeakProperty = new BooleanProperty( solutionTypeProperty.get() === 'weakBase' || solutionTypeProperty.get() === 'weakAcid' );
     const weakStrongSwitch = new ABSwitch( isWeakProperty,
       true, new Text( AcidBaseSolutionsStrings.weakStringProperty, SWITCH_TEXT_OPTIONS ),
       false, new Text( AcidBaseSolutionsStrings.strongStringProperty, SWITCH_TEXT_OPTIONS ),
@@ -174,16 +173,16 @@ class MySolutionPanel extends Panel {
         const isWeak = isWeakProperty.get();
 
         if ( isWeak && isAcid ) {
-          solutionTypeProperty.set( SolutionType.WEAK_ACID );
+          solutionTypeProperty.set( 'weakAcid' );
         }
         else if ( isWeak && !isAcid ) {
-          solutionTypeProperty.set( SolutionType.WEAK_BASE );
+          solutionTypeProperty.set( 'weakBase' );
         }
         else if ( !isWeak && isAcid ) {
-          solutionTypeProperty.set( SolutionType.STRONG_ACID );
+          solutionTypeProperty.set( 'strongAcid' );
         }
         else if ( !isWeak && !isAcid ) {
-          solutionTypeProperty.set( SolutionType.STRONG_BASE );
+          solutionTypeProperty.set( 'strongBase' );
         }
       }
     };
@@ -192,8 +191,8 @@ class MySolutionPanel extends Panel {
 
     solutionTypeProperty.link( solutionType => {
       updateSolutionTypeEnabled = false;
-      isAcidProperty.set( ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.STRONG_ACID ) );
-      isWeakProperty.set( ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE ) );
+      isAcidProperty.set( ( solutionType === 'weakAcid' || solutionType === 'strongAcid' ) );
+      isWeakProperty.set( ( solutionType === 'weakAcid' || solutionType === 'weakBase' ) );
       updateSolutionTypeEnabled = true;
     } );
   }

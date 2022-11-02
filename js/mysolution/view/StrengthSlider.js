@@ -17,7 +17,6 @@ import { Text } from '../../../../scenery/js/imports.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
-import SolutionType from '../../common/enum/SolutionType.js';
 
 // constants
 const TICK_LABEL_OPTIONS = {
@@ -92,7 +91,7 @@ class SliderModel {
 
 // issues #94: strength can be changed only for weak solutions, use this as a guard
 function strengthIsMutable( solutionType ) {
-  return ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE );
+  return ( solutionType === 'weakAcid' || solutionType === 'weakBase' );
 }
 
 export default StrengthSlider;

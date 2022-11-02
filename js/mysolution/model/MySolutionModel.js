@@ -9,7 +9,6 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import SolutionType from '../../common/enum/SolutionType.js';
 import ABSModel from '../../common/model/ABSModel.js';
 import StrongAcid from '../../common/model/solutions/StrongAcid.js';
 import StrongBase from '../../common/model/solutions/StrongBase.js';
@@ -17,7 +16,7 @@ import WeakAcid from '../../common/model/solutions/WeakAcid.js';
 import WeakBase from '../../common/model/solutions/WeakBase.js';
 
 // constants
-const DEFAULT_SOLUTION_TYPE = SolutionType.WEAK_ACID;
+const DEFAULT_SOLUTION_TYPE = 'weakAcid';
 
 class MySolutionModel extends ABSModel {
 
@@ -41,38 +40,41 @@ class MySolutionModel extends ABSModel {
      */
 
     // @public convenience Property that will synchronize with the concentration of the currently selected solution
-    this.concentrationProperty = new NumberProperty( this.solutions[ DEFAULT_SOLUTION_TYPE.name ].concentrationProperty.get(), {
+    this.concentrationProperty = new NumberProperty( this.solutionsMap.get( DEFAULT_SOLUTION_TYPE ).concentrationProperty.get(), {
       reentrant: true
     } );
 
     // @public convenience Property that will synchronize with the strength of the currently selected solution
-    this.strengthProperty = new NumberProperty( this.solutions[ DEFAULT_SOLUTION_TYPE.name ].strengthProperty.get(), {
+    this.strengthProperty = new NumberProperty( this.solutionsMap.get( DEFAULT_SOLUTION_TYPE ).strengthProperty.get(), {
       reentrant: true
     } );
 
     const setStrength = value => this.strengthProperty.set( value );
     const setConcentration = value => this.concentrationProperty.set( value );
-    this.solutionTypeProperty.link( ( newSolutionType, prevSolutionType ) => {
+    this.solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
+
+      const newSolution = this.solutionsMap.get( newSolutionType );
 
       // unsubscribe from previous solution strength and concentration property
-      if ( prevSolutionType ) {
-        this.solutions[ prevSolutionType.name ].strengthProperty.unlink( setStrength );
-        this.solutions[ prevSolutionType.name ].concentrationProperty.unlink( setConcentration );
+      if ( previousSolutionType ) {
+        const previousSolution = this.solutionsMap.get( previousSolutionType );
+        previousSolution.strengthProperty.unlink( setStrength );
+        previousSolution.concentrationProperty.unlink( setConcentration );
 
         /*
          * Set concentration of new solution equal to previous solution.
          * Do not do this for strength, see strength observer below and issue #94.
          */
-        this.solutions[ newSolutionType.name ].concentrationProperty.set( this.solutions[ prevSolutionType.name ].concentrationProperty.get() );
+        newSolution.concentrationProperty.set( previousSolution.concentrationProperty.get() );
       }
 
       // subscribe to new solution strength and concentration property
-      this.solutions[ newSolutionType.name ].strengthProperty.link( setStrength );
-      this.solutions[ newSolutionType.name ].concentrationProperty.link( setConcentration );
+      newSolution.strengthProperty.link( setStrength );
+      newSolution.concentrationProperty.link( setConcentration );
     } );
 
     this.concentrationProperty.link( concentration => {
-      this.solutions[ this.solutionTypeProperty.get().name ].concentrationProperty.set( concentration );
+      this.solutionsMap.get( this.solutionTypeProperty.get() ).concentrationProperty.set( concentration );
     } );
 
     /*
@@ -83,9 +85,9 @@ class MySolutionModel extends ABSModel {
      */
     this.strengthProperty.link( strength => {
       const solutionType = this.solutionTypeProperty.get();
-      if ( solutionType === SolutionType.WEAK_ACID || solutionType === SolutionType.WEAK_BASE ) {
-        this.solutions[ SolutionType.WEAK_ACID.name ].strengthProperty.set( strength );
-        this.solutions[ SolutionType.WEAK_BASE.name ].strengthProperty.set( strength );
+      if ( solutionType === 'weakAcid' || solutionType === 'weakBase' ) {
+        this.solutionsMap.get( 'weakAcid' ).strengthProperty.set( strength );
+        this.solutionsMap.get( 'weakBase' ).strengthProperty.set( strength );
       }
     } );
   }

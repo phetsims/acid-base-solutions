@@ -31,10 +31,9 @@ class ConcentrationGraphNode extends Node {
 
     // find maximum number of bars for all solutions
     let maxBars = 0;
-    for ( const key in graph.solutions ) {
-      const solution = graph.solutions[ key ];
+    graph.solutionsMap.forEach( ( solution, solutionType ) => {
       maxBars = Math.max( maxBars, solution.molecules.length );
-    }
+    } );
 
     // create enough bars for all solutions
     for ( let i = 0; i < maxBars; i++ ) {
@@ -47,20 +46,22 @@ class ConcentrationGraphNode extends Node {
 
     // Observe the strength and concentration properties for whichever solution is selected.
     const updateValuesBound = this.updateValues.bind( this );
-    graph.solutionTypeProperty.link( ( newSolutionType, prevSolutionType ) => {
+    graph.solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
 
       // show the correct number of bars
       this.updateBars();
 
       // unlink from previous solution
-      if ( prevSolutionType ) {
-        graph.solutions[ prevSolutionType.name ].strengthProperty.unlink( updateValuesBound );
-        graph.solutions[ prevSolutionType.name ].concentrationProperty.unlink( updateValuesBound );
+      if ( previousSolutionType ) {
+        const previousSolution = graph.solutionsMap.get( previousSolutionType );
+        previousSolution.strengthProperty.unlink( updateValuesBound );
+        previousSolution.concentrationProperty.unlink( updateValuesBound );
       }
 
       // link to new solution
-      graph.solutions[ newSolutionType.name ].strengthProperty.link( updateValuesBound );
-      graph.solutions[ newSolutionType.name ].concentrationProperty.link( updateValuesBound );
+      const newSolution = graph.solutionsMap.get( newSolutionType );
+      newSolution.strengthProperty.link( updateValuesBound );
+      newSolution.concentrationProperty.link( updateValuesBound );
     } );
 
     // Update when this Node becomes visible.
@@ -83,7 +84,7 @@ class ConcentrationGraphNode extends Node {
     if ( this.visible ) {
 
       const solutionType = this.graph.solutionTypeProperty.get();
-      const solution = this.graph.solutions[ solutionType.name ];
+      const solution = this.graph.solutionsMap.get( solutionType );
       const molecules = solution.molecules;
       const numberOfMolecules = molecules.length;
 
@@ -114,7 +115,7 @@ class ConcentrationGraphNode extends Node {
     if ( this.visible ) {
 
       const solutionType = this.graph.solutionTypeProperty.get();
-      const solution = this.graph.solutions[ solutionType.name ];
+      const solution = this.graph.solutionsMap.get( solutionType );
       const molecules = solution.molecules;
 
       for ( let i = 0; i < molecules.length; i++ ) {

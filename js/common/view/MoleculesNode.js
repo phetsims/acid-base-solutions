@@ -65,8 +65,7 @@ class MoleculesNode extends CanvasNode {
      * We skip water because it's displayed elsewhere as a static image file.
      */
     this.moleculesData = {};
-    for ( const solutionType in magnifier.solutions ) {
-      const solution = magnifier.solutions[ solutionType ];
+    magnifier.solutionsMap.forEach( ( solution, solutionType ) => {
       solution.molecules.forEach( molecule => {
         if ( molecule.key !== 'H2O' && !this.moleculesData.hasOwnProperty( molecule.key ) ) {
           this.moleculesData[ molecule.key ] = {
@@ -79,7 +78,7 @@ class MoleculesNode extends CanvasNode {
           createImage( molecule.key ); // populate the image field asynchronously
         }
       } );
-    }
+    } );
   }
 
   // @public Resets all molecule counts to zero.
@@ -93,13 +92,16 @@ class MoleculesNode extends CanvasNode {
   update() {
 
     const solutionType = this.magnifier.solutionTypeProperty.get();
-    const solution = this.magnifier.solutions[ solutionType ];
+    const solution = this.magnifier.solutionsMap.get( solutionType );
 
     // Update the data structure for each molecule that is in the current solution.
     solution.molecules.forEach( molecule => {
+
       const key = molecule.key;
       const moleculesData = this.moleculesData[ key ];
+
       if ( key !== 'H2O' ) { // skip water because it's displayed elsewhere as a static image file
+        assert && assert( moleculesData, `no moleculeData for key=${key}` );
 
         // map concentration to number of molecules
         const concentration = molecule.getConcentration();
@@ -133,7 +135,7 @@ class MoleculesNode extends CanvasNode {
   paintCanvas( context ) {
 
     const solutionType = this.magnifier.solutionTypeProperty.get();
-    const solution = this.magnifier.solutions[ solutionType ];
+    const solution = this.magnifier.solutionsMap.get( solutionType );
 
     /*
      * Images are stored at a higher resolution to improve their quality.

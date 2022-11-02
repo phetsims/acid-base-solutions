@@ -74,19 +74,21 @@ class MagnifierNode extends Node {
 
     // Observe the strength and concentration properties for whichever solution is selected.
     const updateMoleculesBound = this.updateMolecules.bind( this );
-    magnifier.solutionTypeProperty.link( ( newSolutionType, prevSolutionType ) => {
+    magnifier.solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
 
       this.moleculesNode.reset();
 
       // unlink from previous solution
-      if ( prevSolutionType ) {
-        magnifier.solutions[ prevSolutionType.name ].strengthProperty.unlink( updateMoleculesBound );
-        magnifier.solutions[ prevSolutionType.name ].concentrationProperty.unlink( updateMoleculesBound );
+      if ( previousSolutionType ) {
+        const previousSolution = magnifier.solutionsMap.get( previousSolutionType );
+        previousSolution.strengthProperty.unlink( updateMoleculesBound );
+        previousSolution.concentrationProperty.unlink( updateMoleculesBound );
       }
 
       // link to new solution
-      magnifier.solutions[ newSolutionType.name ].strengthProperty.link( updateMoleculesBound );
-      magnifier.solutions[ newSolutionType.name ].concentrationProperty.link( updateMoleculesBound );
+      const newSolution = magnifier.solutionsMap.get( newSolutionType );
+      newSolution.strengthProperty.link( updateMoleculesBound );
+      newSolution.concentrationProperty.link( updateMoleculesBound );
     } );
 
     // Update when this Node becomes visible.

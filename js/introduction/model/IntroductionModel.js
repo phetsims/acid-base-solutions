@@ -7,7 +7,6 @@
  */
 
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import SolutionType from '../../common/enum/SolutionType.js';
 import ABSModel from '../../common/model/ABSModel.js';
 import StrongAcid from '../../common/model/solutions/StrongAcid.js';
 import StrongBase from '../../common/model/solutions/StrongBase.js';
@@ -27,7 +26,7 @@ class IntroductionModel extends ABSModel {
       new WeakBase()
     ];
 
-    super( solutions, SolutionType.WATER );
+    super( solutions, 'water' );
   }
 }
 

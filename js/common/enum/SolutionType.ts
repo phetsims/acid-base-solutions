@@ -1,22 +1,10 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Possible choices in the 'Solutions' control panel.
  *
- * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
-
-const SolutionType = EnumerationDeprecated.byKeys( [
-  'WATER',
-  'STRONG_ACID',
-  'WEAK_ACID',
-  'STRONG_BASE',
-  'WEAK_BASE'
-] );
-
-acidBaseSolutions.register( 'SolutionType', SolutionType );
-export default SolutionType;
+export const SolutionTypeValues = [ 'water', 'strongAcid', 'weakAcid', 'strongBase', 'weakBase' ] as const;
+export type SolutionType = ( typeof SolutionTypeValues )[number];

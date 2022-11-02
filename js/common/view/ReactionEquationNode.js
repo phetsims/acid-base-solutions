@@ -9,7 +9,6 @@
 
 import { Node } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import SolutionType from '../enum/SolutionType.js';
 import ReactionEquationFactory from './ReactionEquationFactory.js';
 
 class ReactionEquationNode extends Node {
@@ -22,13 +21,13 @@ class ReactionEquationNode extends Node {
 
     super();
 
-    // create an associative array, so we can look up equations by solutionType
-    const equations = {};
-    equations[ SolutionType.WATER.name ] = ReactionEquationFactory.createWaterEquation();
-    equations[ SolutionType.STRONG_ACID.name ] = ReactionEquationFactory.createStrongAcidEquation();
-    equations[ SolutionType.WEAK_ACID.name ] = ReactionEquationFactory.createWeakAcidEquation();
-    equations[ SolutionType.STRONG_BASE.name ] = ReactionEquationFactory.createStrongBaseEquation();
-    equations[ SolutionType.WEAK_BASE.name ] = ReactionEquationFactory.createWeakBaseEquation();
+    // create a Map, so we can look up equations by SolutionType
+    const equations = new Map();
+    equations.set( 'water', ReactionEquationFactory.createWaterEquation() );
+    equations.set( 'strongAcid', ReactionEquationFactory.createStrongAcidEquation() );
+    equations.set( 'weakAcid', ReactionEquationFactory.createWeakAcidEquation() );
+    equations.set( 'strongBase', ReactionEquationFactory.createStrongBaseEquation() );
+    equations.set( 'weakBase', ReactionEquationFactory.createWeakBaseEquation() );
 
     // find max width of equations
     const maxWidth = getMaxWidth( equations );
@@ -48,11 +47,11 @@ class ReactionEquationNode extends Node {
 
       // hide previous equation
       if ( prevSolutionType ) {
-        equations[ prevSolutionType.name ].setVisible( false );
+        equations.get( prevSolutionType ).setVisible( false );
       }
 
       // show new equation
-      equations[ newSolutionType.name ].setVisible( true );
+      equations.get( newSolutionType ).setVisible( true );
     } );
   }
 }

@@ -12,13 +12,13 @@ class ConcentrationGraph {
 
   /**
    * @param {Beaker} beaker
-   * @param {AqueousSolution[]} solutions
+   * @param {Map<SoluteType,AqueousSolution>} solutionsMap
    * @param {Property.<SolutionType>} solutionTypeProperty
    */
-  constructor( beaker, solutions, solutionTypeProperty ) {
+  constructor( beaker, solutionsMap, solutionTypeProperty ) {
 
     // @public
-    this.solutions = solutions;
+    this.solutionsMap = solutionsMap;
     this.solutionTypeProperty = solutionTypeProperty;
 
     // @public dimensions of the graph's background

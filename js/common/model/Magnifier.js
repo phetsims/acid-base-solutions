@@ -11,13 +11,13 @@ import acidBaseSolutions from '../../acidBaseSolutions.js';
 class Magnifier {
   /**
    * @param {Beaker} beaker
-   * @param {AqueousSolution[]} solutions
+   * @param {Map<SolutionType,AqueousSolution>} solutionsMap
    * @param {Property.<SolutionType>} solutionTypeProperty
    */
-  constructor( beaker, solutions, solutionTypeProperty ) {
+  constructor( beaker, solutionsMap, solutionTypeProperty ) {
 
     // @public
-    this.solutions = solutions;
+    this.solutionsMap = solutionsMap;
     this.solutionTypeProperty = solutionTypeProperty;
 
     // @public magnifier radius

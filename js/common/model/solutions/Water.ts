@@ -1,6 +1,5 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  *  Water is a solution of pure water. It contains no solute.
  *
@@ -10,13 +9,12 @@
 
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import ABSConstants from '../../ABSConstants.js';
-import SolutionType from '../../enum/SolutionType.js';
 import AqueousSolution from './AqueousSolution.js';
 
-class Water extends AqueousSolution {
+export default class Water extends AqueousSolution {
 
-  constructor() {
-    super( SolutionType.WATER, 0, 0,
+  public constructor() {
+    super( 'water', 0, 0,
       [
         // molecules found in this solution
         { key: 'H2O', getConcentration: () => this.getH2OConcentration() },
@@ -26,34 +24,33 @@ class Water extends AqueousSolution {
     );
   }
 
-  // @override @public
-  getSoluteConcentration() {
+  public override getSoluteConcentration(): number {
     return 0;
   }
 
-  // @override @public
-  getProductConcentration() {
+  public override getProductConcentration(): number {
     return 0;
   }
 
-  // @override @public [H3O] = sqrt(Kw)
-  getH3OConcentration() {
+  // [H3O] = sqrt(Kw)
+  public override getH3OConcentration(): number {
     return Math.sqrt( ABSConstants.WATER_EQUILIBRIUM_CONSTANT ); // Kw = [H30] * [OH-]
   }
 
-  // @override @public [OH] = [H3O]
-  getOHConcentration() {
+  // [OH] = [H3O]
+  public override getOHConcentration(): number {
     return this.getH3OConcentration();
   }
 
-  // @override @public [H2O] = W
-  getH2OConcentration() {
+  // [H2O] = W
+  public override getH2OConcentration(): number {
     return ABSConstants.WATER_CONCENTRATION;
   }
 
-  // @override @protected Should never be setting the strength of water.
-  isValidStrength() { return false; }
+  // Should never be setting the strength of water.
+  protected override isValidStrength( strength: number ): boolean {
+    return false;
+  }
 }
 
 acidBaseSolutions.register( 'Water', Water );
-export default Water;

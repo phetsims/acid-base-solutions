@@ -1,6 +1,5 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * AqueousSolution is the base class for solutions.
  *
@@ -15,79 +14,71 @@
 
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../../axon/js/NumberProperty.js';
+import Property from '../../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../../dot/js/Utils.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
+import { SolutionType } from '../../enum/SolutionType.js';
 
-class AqueousSolution {
+type Molecule = {
+  key: string; // used to identify the molecule, used to look up color or view constructor
+  getConcentration: () => number; // returns the concentration of the molecule
+};
+
+export default abstract class AqueousSolution {
+
+  public readonly solutionType: SolutionType;
+  public readonly molecules: Molecule[];
+  public readonly strengthProperty: Property<number>;
+  public readonly concentrationProperty: Property<number>;
+  public readonly pHProperty: TReadOnlyProperty<number>;
 
   /**
-   * @param {SolutionType} solutionType
-   * @param strength the strength of the solute
-   * @param concentration the initial concentration of the solute, at the start of the reaction
-   * @param {Array} molecules see this.molecules below
+   * @param solutionType
+   * @param strength - the strength of the solute
+   * @param concentration - the initial concentration of the solute, at the start of the reaction
+   * @param molecules - the molecules that make up the solution. The order of elements in this array determines the
+   *   left-to-right order of bars in the graph, and the front-to-back rendering order of molecules in the magnifier.
    */
-  constructor( solutionType, strength, concentration, molecules ) {
+  protected constructor( solutionType: SolutionType, strength: number, concentration: number, molecules: Molecule[] ) {
 
-    this.solutionType = solutionType; // @public
+    this.solutionType = solutionType;
+    this.molecules = molecules;
+    this.strengthProperty = new NumberProperty( strength );
+    this.concentrationProperty = new NumberProperty( concentration );
 
-    /*
-     * Description of molecules that make up this solution.
-     * Each element in the array has this structure:
-     *
-     * {
-     *   {string} key: string used to identify the molecule, used to look up color or view constructor
-     *   {function:number} getConcentration: get the concentration of the molecule
-     * }
-     *
-     * The order of elements in this array determines the left-to-right order of bars in the graph,
-     * and the front-to-back rendering order of molecules in the magnifier.
-     */
-    this.molecules = molecules; // @public
-
-    this.strengthProperty = new NumberProperty( strength ); // @public
-    this.concentrationProperty = new NumberProperty( concentration ); // @public
-
-    // @public
     this.pHProperty = new DerivedProperty( [ this.strengthProperty, this.concentrationProperty ],
       ( strength, concentration ) => {
         return -Utils.roundSymmetric( 100 * Utils.log10( this.getH3OConcentration() ) ) / 100;
       } );
   }
 
-  // @public
-  reset() {
+  public reset(): void {
     this.strengthProperty.reset();
     this.concentrationProperty.reset();
   }
 
-  // @protected convenience function
-  getConcentration() {
+  // convenience function
+  protected getConcentration(): number {
     return this.concentrationProperty.get();
   }
 
-  // @protected convenience function
-  getStrength() {
+  // convenience function
+  protected getStrength(): number {
     return this.strengthProperty.get();
   }
 
-  // @public @abstract
-  getSoluteConcentration() { throw new Error( 'must be implemented by subtype' ); }
+  public abstract getSoluteConcentration(): number;
 
-  // @public @abstract
-  getProductConcentration() { throw new Error( 'must be implemented by subtype' ); }
+  public abstract getProductConcentration(): number;
 
-  // @public @abstract
-  getH3OConcentration() { throw new Error( 'must be implemented by subtype' ); }
+  public abstract getH3OConcentration(): number;
 
-  // @public @abstract
-  getOHConcentration() { throw new Error( 'must be implemented by subtype' ); }
+  public abstract getOHConcentration(): number;
 
-  // @public @abstract
-  getH2OConcentration() { throw new Error( 'must be implemented by subtype' ); }
+  public abstract getH2OConcentration(): number;
 
-  // @protected @abstract
-  isValidStrength() { throw new Error( 'must be implemented by subtype' ); }
+  protected abstract isValidStrength( strength: number ): boolean;
 }
 
 acidBaseSolutions.register( 'AqueousSolution', AqueousSolution );
-export default AqueousSolution;
