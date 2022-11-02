@@ -19,7 +19,6 @@ import PHMeter from './PHMeter.js';
 import PHPaper from './PHPaper.js';
 import AqueousSolution from './solutions/AqueousSolution.js';
 
-// @ts-ignore TODO Map is not found
 export type SolutionMap = Map<SolutionType, AqueousSolution>;
 
 export default class ABSModel {
@@ -42,7 +41,6 @@ export default class ABSModel {
 
   public constructor( solutions: AqueousSolution[], defaultSolutionType: SolutionType ) {
 
-    // @ts-ignore TODO Map is not found
     this.solutionsMap = new Map<SolutionType, AqueousSolution>();
     solutions.forEach( solution => {
       this.solutionsMap.set( solution.solutionType, solution );
