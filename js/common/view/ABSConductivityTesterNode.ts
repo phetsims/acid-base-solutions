@@ -1,6 +1,5 @@
 // Copyright 2015-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Conductivity tester, adapts the model to scenery-phet.ConductivityTesterNode.
  *
@@ -11,13 +10,11 @@ import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
 import ConductivityTesterNode from '../../../../scenery-phet/js/ConductivityTesterNode.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
+import ConductivityTester from '../model/ConductivityTester.js';
 
-class ABSConductivityTesterNode extends ConductivityTesterNode {
+export default class ABSConductivityTesterNode extends ConductivityTesterNode {
 
-  /**
-   * @param {ConductivityTester} conductivityTester
-   */
-  constructor( conductivityTester ) {
+  public constructor( conductivityTester: ConductivityTester ) {
     super( conductivityTester.brightnessProperty,
       new Property( conductivityTester.bulbPosition ),
       conductivityTester.positiveProbePositionProperty,
@@ -33,4 +30,3 @@ class ABSConductivityTesterNode extends ConductivityTesterNode {
 }
 
 acidBaseSolutions.register( 'ABSConductivityTesterNode', ABSConductivityTesterNode );
-export default ABSConductivityTesterNode;
