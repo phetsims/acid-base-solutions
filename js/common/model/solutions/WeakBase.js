@@ -1,5 +1,6 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * WeakBase is an aqueous solution whose solute is a weak base.
  *
