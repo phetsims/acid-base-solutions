@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Radio buttons for selecting between a set of mutually-exclusive tools.
  *
@@ -8,30 +7,34 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import { Image } from '../../../../scenery/js/imports.js';
-import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
+import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import lightBulbIcon_png from '../../../images/lightBulbIcon_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
+import { ToolMode } from '../enum/ToolMode.js';
 import PHMeterNode from './PHMeterNode.js';
 import PHPaperNode from './PHPaperNode.js';
 
-class ToolsRadioButtonGroup extends RectangularRadioButtonGroup {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {StringEnumerationProperty.<ToolMode>} toolModeProperty
-   * @param {Object} [options]
-   */
-  constructor( toolModeProperty, options ) {
+type ToolsRadioButtonGroupOptions = SelfOptions & RectangularRadioButtonGroupOptions;
 
-    options = merge( {
+export default class ToolsRadioButtonGroup extends RectangularRadioButtonGroup<ToolMode> {
+
+  public constructor( toolModeProperty: StringEnumerationProperty<ToolMode>, providedOptions?: ToolsRadioButtonGroupOptions ) {
+
+    const options = optionize<ToolsRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>()( {
+
+      // RectangularRadioButtonGroupOptions
       orientation: 'horizontal',
       spacing: 5,
       radioButtonOptions: {
         baseColor: 'white',
         xMargin: 9
       }
-    }, options );
+    }, providedOptions );
 
     super( toolModeProperty, [
       { value: 'pHMeter', createNode: tandem => PHMeterNode.createIcon(), tandemName: 'phMeterRadioButton' },
@@ -42,4 +45,3 @@ class ToolsRadioButtonGroup extends RectangularRadioButtonGroup {
 }
 
 acidBaseSolutions.register( 'ToolsRadioButtonGroup', ToolsRadioButtonGroup );
-export default ToolsRadioButtonGroup;
