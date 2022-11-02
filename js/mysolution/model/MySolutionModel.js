@@ -1,5 +1,6 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Model for the 'My Solution' screen in 'Acid-Base Solutions' sim.
  *
