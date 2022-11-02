@@ -17,7 +17,6 @@ import magnifierIcon_png from '../../../images/magnifierIcon_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../ABSConstants.js';
-import ViewMode from '../enum/ViewMode.js';
 import BeakerNode from './BeakerNode.js';
 import ConcentrationGraphNode from './graph/ConcentrationGraphNode.js';
 import MoleculeFactory from './MoleculeFactory.js';
@@ -37,7 +36,7 @@ const TOUCH_AREA_Y_DILATION = 3;
 class ViewsPanel extends Panel {
 
   /**
-   * @param {EnumerationDeprecatedProperty.<ViewMode>} viewModeProperty
+   * @param {StringEnumerationProperty.<ViewMode>} viewModeProperty
    * @param {Property.<boolean>} solventVisibleProperty
    * @param {AlignGroup} panelAlignGroup
    * @param {Object} [options]
@@ -59,7 +58,7 @@ class ViewsPanel extends Panel {
         new Image( magnifierIcon_png, ICON_OPTIONS )
       ]
     } );
-    const moleculesRadioButton = new AquaRadioButton( viewModeProperty, ViewMode.MOLECULES, moleculesLabel, RADIO_BUTTON_OPTIONS );
+    const moleculesRadioButton = new AquaRadioButton( viewModeProperty, 'molecules', moleculesLabel, RADIO_BUTTON_OPTIONS );
     moleculesRadioButton.touchArea = moleculesRadioButton.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
 
     // Solvent
@@ -84,7 +83,7 @@ class ViewsPanel extends Panel {
         ConcentrationGraphNode.createIcon()
       ]
     } );
-    const graphRadioButton = new AquaRadioButton( viewModeProperty, ViewMode.GRAPH, graphLabel, RADIO_BUTTON_OPTIONS );
+    const graphRadioButton = new AquaRadioButton( viewModeProperty, 'graph', graphLabel, RADIO_BUTTON_OPTIONS );
     graphRadioButton.touchArea = graphRadioButton.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
 
     // Hide Views
@@ -95,7 +94,7 @@ class ViewsPanel extends Panel {
         BeakerNode.createIcon( 20, 15 )
       ]
     } );
-    const hideViewsRadioButton = new AquaRadioButton( viewModeProperty, ViewMode.HIDE_VIEWS,
+    const hideViewsRadioButton = new AquaRadioButton( viewModeProperty, 'hideViews',
       hideViewsLabel, RADIO_BUTTON_OPTIONS );
     hideViewsRadioButton.touchArea = hideViewsRadioButton.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
 
@@ -123,7 +122,7 @@ class ViewsPanel extends Panel {
 
     // disable the 'Solvent' checkbox unless 'Molecules' is selected
     viewModeProperty.link( viewMode => {
-      solventCheckbox.enabled = ( viewMode === ViewMode.MOLECULES );
+      solventCheckbox.enabled = ( viewMode === 'molecules' );
     } );
   }
 }

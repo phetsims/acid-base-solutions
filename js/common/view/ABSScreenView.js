@@ -12,7 +12,6 @@ import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { AlignGroup, Node, VBox } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import ViewMode from '../enum/ViewMode.js';
 import ABSConductivityTesterNode from './ABSConductivityTesterNode.js';
 import ABSViewProperties from './ABSViewProperties.js';
 import BeakerNode from './BeakerNode.js';
@@ -111,8 +110,8 @@ class ABSScreenView extends ScreenView {
     } );
 
     this.viewProperties.viewModeProperty.link( viewMode => {
-      magnifierNode.visible = ( viewMode === ViewMode.MOLECULES );
-      graphNode.visible = ( viewMode === ViewMode.GRAPH );
+      magnifierNode.visible = ( viewMode === 'molecules' );
+      graphNode.visible = ( viewMode === 'graph' );
     } );
 
     this.viewProperties.toolModeProperty.link( toolMode => {

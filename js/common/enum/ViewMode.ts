@@ -1,16 +1,10 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Possible choices in the 'Views' control panel.
  *
- * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
-
-const ViewMode = EnumerationDeprecated.byKeys( [ 'MOLECULES', 'GRAPH', 'HIDE_VIEWS' ] );
-
-acidBaseSolutions.register( 'ViewMode', ViewMode );
-export default ViewMode;
+export const ViewModeValues = [ 'molecules', 'graph', 'hideViews' ] as const;
+export type ViewMode = ( typeof ViewModeValues )[number];
