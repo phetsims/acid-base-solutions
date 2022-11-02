@@ -1,5 +1,6 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Magnifier view.
  * For performance, draws molecules directly to Canvas using drawImage.
