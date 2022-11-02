@@ -35,34 +35,34 @@ class PHColorKeyNode extends Node {
     const parentNode = new Node();
     let chipNode;
     let previousChipNode;
-    let pHNumberNode;
+    let pHText;
     for ( let i = 0; i < numberOfChips; i++ ) {
 
       chipNode = new Rectangle( 0, 0, paperSize.width, CHIP_HEIGHT, { fill: ABSColors.PH[ i ] } );
-      pHNumberNode = new Text( i.toString(), { font: FONT_SMALL } );
+      pHText = new Text( i.toString(), { font: FONT_SMALL } );
 
       parentNode.addChild( chipNode );
-      parentNode.addChild( pHNumberNode );
+      parentNode.addChild( pHText );
 
       if ( previousChipNode ) {
         chipNode.left = previousChipNode.right + CHIP_X_SPACING;
       }
       // pH number above color chip
-      pHNumberNode.centerX = chipNode.centerX;
-      pHNumberNode.bottom = chipNode.top - 2;
+      pHText.centerX = chipNode.centerX;
+      pHText.bottom = chipNode.top - 2;
 
       previousChipNode = chipNode;
     }
     this.addChild( parentNode );
 
     // title, below color chips
-    const titleNode = new Text( AcidBaseSolutionsStrings.pHColorKeyStringProperty, {
+    const titleText = new Text( AcidBaseSolutionsStrings.pHColorKeyStringProperty, {
       font: FONT_BIG,
       maxWidth: parentNode.width,
       left: parentNode.left,
       top: parentNode.bottom + 2
     } );
-    this.addChild( titleNode );
+    this.addChild( titleText );
 
     this.mutate( options );
   }

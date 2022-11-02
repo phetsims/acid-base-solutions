@@ -48,14 +48,14 @@ class ConcentrationGraphBackgroundNode extends Node {
     }
 
     // y-axis label
-    const yLabel = new Text( AcidBaseSolutionsStrings.concentrationGraph.yAxisStringProperty, {
+    const yText = new Text( AcidBaseSolutionsStrings.concentrationGraph.yAxisStringProperty, {
       font: new PhetFont( 13 ),
       maxWidth: height
     } );
-    yLabel.rotate( -Math.PI / 2 );
-    yLabel.centerY = height / 2;
-    yLabel.centerX = -50;
-    this.addChild( yLabel );
+    yText.rotate( -Math.PI / 2 );
+    yText.centerY = height / 2;
+    yText.centerX = -50;
+    this.addChild( yText );
   }
 }
 

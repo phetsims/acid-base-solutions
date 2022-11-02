@@ -63,7 +63,7 @@ export default class MySolutionPanel extends Panel {
       {}, ABSConstants.PANEL_OPTIONS, providedOptions );
 
     // title
-    const titleNode = new Text( AcidBaseSolutionsStrings.solutionStringProperty, {
+    const titleText = new Text( AcidBaseSolutionsStrings.solutionStringProperty, {
       font: ABSConstants.TITLE_FONT,
       maxWidth: TITLE_MAX_WIDTH
     } );
@@ -138,7 +138,7 @@ export default class MySolutionPanel extends Panel {
     const content = new AlignBox( new VBox( {
       spacing: 8,
       align: 'left',
-      children: [ titleNode, controls ]
+      children: [ titleText, controls ]
     } ), {
       group: contentAlignGroup,
       xAlign: 'left'
