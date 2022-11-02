@@ -6,6 +6,7 @@
  * @author Andrey Zelenkov (Mlearner)
  */
 
+import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSModel from '../../common/model/ABSModel.js';
 import StrongAcid from '../../common/model/solutions/StrongAcid.js';
@@ -16,7 +17,7 @@ import WeakBase from '../../common/model/solutions/WeakBase.js';
 
 export default class IntroductionModel extends ABSModel {
 
-  public constructor() {
+  public constructor( tandem: Tandem ) {
 
     const solutions = [
       new Water(),

@@ -9,6 +9,7 @@
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import TModel from '../../../../joist/js/TModel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import { SolutionType, SolutionTypeValues } from '../enum/SolutionType.js';
 import Beaker from './Beaker.js';
@@ -21,7 +22,7 @@ import AqueousSolution from './solutions/AqueousSolution.js';
 
 export type SolutionMap = Map<SolutionType, AqueousSolution>;
 
-export default class ABSModel {
+export default class ABSModel implements TModel {
 
   // for looking up solution by SolutionType
   public readonly solutionsMap: SolutionMap;

@@ -30,8 +30,8 @@ export default class IntroductionScreen extends Screen {
     };
 
     super(
-      () => new IntroductionModel(),
-      model => new IntroductionScreenView( model ),
+      () => new IntroductionModel( tandem.createTandem( 'model' ) ),
+      model => new IntroductionScreenView( model, tandem.createTandem( 'view' ) ),
       options
     );
   }

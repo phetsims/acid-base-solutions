@@ -30,8 +30,8 @@ export default class MySolutionScreen extends Screen {
     };
 
     super(
-      () => new MySolutionModel(),
-      model => new MySolutionScreenView( model ),
+      () => new MySolutionModel( tandem.createTandem( 'model' ) ),
+      model => new MySolutionScreenView( model, tandem.createTandem( 'view' ) ),
       options
     );
   }

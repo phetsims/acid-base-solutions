@@ -1,6 +1,5 @@
 // Copyright 2017-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Base type for views in 'Acid-Base Solutions' sim.
  *
@@ -12,7 +11,10 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { AlignGroup, Node, VBox } from '../../../../scenery/js/imports.js';
+import Panel from '../../../../sun/js/Panel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
+import ABSModel from '../model/ABSModel.js';
 import ABSConductivityTesterNode from './ABSConductivityTesterNode.js';
 import ABSViewProperties from './ABSViewProperties.js';
 import BeakerNode from './BeakerNode.js';
@@ -25,19 +27,25 @@ import ReactionEquationNode from './ReactionEquationNode.js';
 import ToolsRadioButtonGroup from './ToolsRadioButtonGroup.js';
 import ViewsPanel from './ViewsPanel.js';
 
-class ABSScreenView extends ScreenView {
+export default class ABSScreenView extends ScreenView {
+
+  // properties that are specific to the view
+  public readonly viewProperties: ABSViewProperties;
+
+  private readonly pHPaperNode: PHPaperNode;
 
   /**
-   * @param {ABSModel} model
-   * @param {function(AlignGroup):Panel} createSolutionPanel - creates the panel titled 'Solution'
+   * @param model
+   * @param createSolutionPanel - creates the panel titled 'Solution'
+   * @param tandem
    */
-  constructor( model, createSolutionPanel ) {
+  public constructor( model: ABSModel, createSolutionPanel: ( alignGroup: AlignGroup ) => Panel, tandem: Tandem ) {
 
     super( {
-      layoutBounds: new Bounds2( 0, 0, 768, 504 )
+      layoutBounds: new Bounds2( 0, 0, 768, 504 ),
+      tandem: tandem
     } );
 
-    // @public properties that are specific to the view
     this.viewProperties = new ABSViewProperties();
 
     // Reset All button
@@ -126,20 +134,19 @@ class ABSScreenView extends ScreenView {
       conductivityTesterNode.visible = ( toolMode === 'conductivity' );
     } );
 
-    // @private needed by methods
+    // needed by step
     this.pHPaperNode = pHPaperNode;
   }
 
-  // @public resets properties that are specific to the view
-  reset() {
+  // Resets properties that are specific to the view.
+  public reset(): void {
     this.viewProperties.reset();
   }
 
-  // @public
-  step( dt ) {
+  public override step( dt: number ): void {
+    super.step( dt );
     this.pHPaperNode.step( dt );
   }
 }
 
 acidBaseSolutions.register( 'ABSScreenView', ABSScreenView );
-export default ABSScreenView;

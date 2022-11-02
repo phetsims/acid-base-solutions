@@ -9,6 +9,7 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSModel from '../../common/model/ABSModel.js';
 import StrongAcid from '../../common/model/solutions/StrongAcid.js';
@@ -27,7 +28,7 @@ export default class MySolutionModel extends ABSModel {
   // convenience Property that will synchronize with the strength of the currently selected solution
   public readonly strengthProperty: Property<number>;
 
-  public constructor() {
+  public constructor( tandem: Tandem ) {
 
     const solutions = [
       new StrongAcid(),
