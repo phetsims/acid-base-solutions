@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Visual representation for pH paper in the 'Acid-Base Solutions' sim.
  * Origin is at the bottom-center of the paper.
@@ -14,17 +13,20 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import { Circle, Color, DragListener, Node, Rectangle } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
+import PHPaper from '../model/PHPaper.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
 const PAPER_STROKE = 'rgb(100, 100, 100)';
 
-class PHPaperNode extends Node {
+export default class PHPaperNode extends Node {
 
-  /**
-   * @param {PHPaper} pHPaper
-   */
-  constructor( pHPaper ) {
+  private readonly dragListener: DragListener;
+  private readonly updateColor: () => void;
+  private readonly pHPaper: PHPaper;
+  private animating: boolean; // is the paper animating?
+
+  public constructor( pHPaper: PHPaper ) {
 
     super( { cursor: 'pointer' } );
 
@@ -52,12 +54,12 @@ class PHPaperNode extends Node {
     // expand touch area
     this.touchArea = this.localBounds.dilatedXY( 10, 10 );
 
-    // @private Constrained dragging
-    let clickOffset = null;
-    this.dragHandler = new DragListener( {
+    // Constrained dragging
+    let clickOffset: Vector2;
+    this.dragListener = new DragListener( {
 
       start: event => {
-        clickOffset = this.globalToParentPoint( event.pointer.point ).subtract( event.currentTarget.translation );
+        clickOffset = this.globalToParentPoint( event.pointer.point ).subtract( event.currentTarget!.translation );
       },
 
       drag: event => {
@@ -67,7 +69,7 @@ class PHPaperNode extends Node {
           Utils.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) ) );
       }
     } );
-    this.addInputListener( this.dragHandler );
+    this.addInputListener( this.dragListener );
 
     // add observers
     pHPaper.positionProperty.link( position => {
@@ -78,7 +80,6 @@ class PHPaperNode extends Node {
       indicatorNode.setRectHeight( height );
     } );
 
-    // @private
     this.updateColor = () => {
       if ( this.visible ) {
         indicatorNode.fill = pHToColor( pHPaper.pHProperty.get() );
@@ -86,16 +87,12 @@ class PHPaperNode extends Node {
     };
     pHPaper.pHProperty.link( this.updateColor );
 
-    // @private is the paper animating?
-    this.animating = false;
-
-    // @private needed by methods
     this.pHPaper = pHPaper;
+    this.animating = false;
   }
 
-  // @public
-  step( dt ) {
-    if ( !this.dragHandler.dragging ) {
+  public step( dt: number ): void {
+    if ( !this.dragListener.isPressed ) {
 
       const position = this.pHPaper.positionProperty.value;
       const minY = this.pHPaper.beaker.top + ( 0.6 * this.pHPaper.paperSize.height );
@@ -120,13 +117,8 @@ class PHPaperNode extends Node {
 
   /**
    * Creates an icon that represents the pH paper.
-   * @public
-   * @static
-   * @param {number} width
-   * @param {number} height
-   * @returns {Node}
    */
-  static createIcon( width, height ) {
+  public static createIcon( width: number, height: number ): Node {
     return new Node( {
       children: [
         // full paper
@@ -143,7 +135,7 @@ class PHPaperNode extends Node {
 }
 
 // Creates a {Color} color for a given {number} pH.
-function pHToColor( pH ) {
+function pHToColor( pH: number ): Color {
   assert && assert( pH >= 0 && pH <= ABSColors.PH.length );
   let color;
   if ( Number.isInteger( pH ) ) {
@@ -160,4 +152,3 @@ function pHToColor( pH ) {
 }
 
 acidBaseSolutions.register( 'PHPaperNode', PHPaperNode );
-export default PHPaperNode;

@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Visual representation of a beaker that is filled to the top with a solution.
  * Ticks on the right edge of the beaker. Origin is at the bottom center.
@@ -16,6 +15,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
+import Beaker from '../model/Beaker.js';
 
 // constants
 const MAJOR_TICK_LENGTH = 25;
@@ -25,11 +25,9 @@ const MINOR_TICK_SPACING = 0.1; // L
 const RIM_OFFSET = 10;
 const TICK_LABEL_X_SPACING = 5;
 
-class BeakerNode extends Node {
-  /**
-   * @param {Beaker} beaker
-   */
-  constructor( beaker ) {
+export default class BeakerNode extends Node {
+
+  public constructor( beaker: Beaker ) {
 
     super( { pickable: false } );
 
@@ -110,11 +108,8 @@ class BeakerNode extends Node {
 
   /**
    * Creates an icon of the beaker.
-   * @param {number} width
-   * @param {number} height
-   * @public
    */
-  static createIcon( width, height ) {
+  public static createIcon( width: number, height: number ): Node {
     const lipOffset = 0.1 * width;
     return new Node( {
       children: [
@@ -137,4 +132,3 @@ class BeakerNode extends Node {
 }
 
 acidBaseSolutions.register( 'BeakerNode', BeakerNode );
-export default BeakerNode;

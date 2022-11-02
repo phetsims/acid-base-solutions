@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * pH color key, a set of color 'chips' for pH values.
  *
@@ -8,8 +7,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Dimension2 from '../../../../dot/js/Dimension2.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, NodeTranslationOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSColors from '../ABSColors.js';
@@ -20,15 +21,17 @@ const FONT_SMALL = new PhetFont( 10 );
 const CHIP_HEIGHT = 28;
 const CHIP_X_SPACING = 1;
 
-class PHColorKeyNode extends Node {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Dimension2} paperSize
-   * @param {Object} [options] any Node options
-   */
-  constructor( paperSize, options ) {
+type PHColorKeyNodeOptions = SelfOptions & NodeTranslationOptions;
 
-    super();
+export default class PHColorKeyNode extends Node {
+
+  public constructor( paperSize: Dimension2, providedOptions?: PHColorKeyNodeOptions ) {
+
+    const options = optionize<PHColorKeyNodeOptions, SelfOptions, NodeOptions>()( {
+      // empty optionize because we'll be setting options.children below
+    }, providedOptions );
 
     const numberOfChips = ABSColors.PH.length;
 
@@ -54,7 +57,6 @@ class PHColorKeyNode extends Node {
 
       previousChipNode = chipNode;
     }
-    this.addChild( parentNode );
 
     // title, below color chips
     const titleText = new Text( AcidBaseSolutionsStrings.pHColorKeyStringProperty, {
@@ -63,11 +65,11 @@ class PHColorKeyNode extends Node {
       left: parentNode.left,
       top: parentNode.bottom + 2
     } );
-    this.addChild( titleText );
 
-    this.mutate( options );
+    options.children = [ parentNode, titleText ];
+
+    super( options );
   }
 }
 
 acidBaseSolutions.register( 'PHColorKeyNode', PHColorKeyNode );
-export default PHColorKeyNode;

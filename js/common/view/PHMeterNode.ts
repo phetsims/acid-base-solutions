@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Visual representation for pH meter in the 'Acid-Base Solutions' sim.
  *
@@ -17,6 +16,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Circle, DragListener, Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
+import PHMeter from '../model/PHMeter.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
@@ -30,10 +30,7 @@ const PH_TEXT_MAX_WIDTH = 70;
 
 export default class PHMeterNode extends Node {
 
-  /**
-   * @param {PHMeter} pHMeter
-   */
-  constructor( pHMeter ) {
+  public constructor( pHMeter: PHMeter ) {
 
     super( { cursor: 'pointer' } );
 
@@ -88,7 +85,7 @@ export default class PHMeterNode extends Node {
     this.addInputListener( new DragListener( {
 
       start: event => {
-        clickYOffset = this.globalToParentPoint( event.pointer.point ).y - event.currentTarget.y;
+        clickYOffset = this.globalToParentPoint( event.pointer.point ).y - event.currentTarget!.y;
       },
 
       drag: event => {
@@ -104,11 +101,8 @@ export default class PHMeterNode extends Node {
 
   /**
    * Creates an icon for the pH meter.
-   * @public
-   * @static
-   * @returns {Node}
    */
-  static createIcon() {
+  public static createIcon(): Node {
     const probeNode = new ProbeNode( 2, 10, 5, 12 );
     const backgroundNode = new Rectangle( 0, 0, 30, 10, 2, 2, {
       fill: BACKGROUND_FILL,
@@ -121,16 +115,12 @@ export default class PHMeterNode extends Node {
   }
 }
 
+/**
+ * pH Probe, consists of a shaft attached to a tip.
+ */
 class ProbeNode extends Node {
 
-  /**
-   * pH Probe, consists of a shaft attached to a tip.
-   * @param {number} shaftWidth
-   * @param {number} shaftHeight
-   * @param {number} tipWidth
-   * @param {number} tipHeight
-   */
-  constructor( shaftWidth, shaftHeight, tipWidth, tipHeight ) {
+  public constructor( shaftWidth: number, shaftHeight: number, tipWidth: number, tipHeight: number ) {
 
     const overlap = 1; // overlap, to hide seam
 
