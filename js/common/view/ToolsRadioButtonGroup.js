@@ -12,14 +12,13 @@ import { Image } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import lightBulbIcon_png from '../../../images/lightBulbIcon_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import ToolMode from '../enum/ToolMode.js';
 import PHMeterNode from './PHMeterNode.js';
 import PHPaperNode from './PHPaperNode.js';
 
 class ToolsRadioButtonGroup extends RectangularRadioButtonGroup {
 
   /**
-   * @param {EnumerationDeprecatedProperty.<ToolMode>} toolModeProperty
+   * @param {StringEnumerationProperty.<ToolMode>} toolModeProperty
    * @param {Object} [options]
    */
   constructor( toolModeProperty, options ) {
@@ -34,9 +33,9 @@ class ToolsRadioButtonGroup extends RectangularRadioButtonGroup {
     }, options );
 
     super( toolModeProperty, [
-      { value: ToolMode.PH_METER, createNode: tandem => PHMeterNode.createIcon(), tandemName: 'phMeterRadioButton' },
-      { value: ToolMode.PH_PAPER, createNode: tandem => PHPaperNode.createIcon( 8, 30 ), tandemName: 'phPaperRadioButton' },
-      { value: ToolMode.CONDUCTIVITY, createNode: tandem => new Image( lightBulbIcon_png ), tandemName: 'conductivityRadioButton' }
+      { value: 'pHMeter', createNode: tandem => PHMeterNode.createIcon(), tandemName: 'phMeterRadioButton' },
+      { value: 'pHPaper', createNode: tandem => PHPaperNode.createIcon( 8, 30 ), tandemName: 'phPaperRadioButton' },
+      { value: 'conductivity', createNode: tandem => new Image( lightBulbIcon_png ), tandemName: 'conductivityRadioButton' }
     ], options );
   }
 }

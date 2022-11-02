@@ -1,16 +1,10 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Possible choices in the 'Tools' control panel.
  *
- * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc)
  */
 
-import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
-
-const ToolMode = EnumerationDeprecated.byKeys( [ 'PH_METER', 'PH_PAPER', 'CONDUCTIVITY' ] );
-
-acidBaseSolutions.register( 'ToolMode', ToolMode );
-export default ToolMode;
+export const ToolModeValues = [ 'pHMeter', 'pHPaper', 'conductivity' ] as const;
+export type ToolMode = ( typeof ToolModeValues )[number];

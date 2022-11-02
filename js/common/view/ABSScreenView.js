@@ -12,7 +12,6 @@ import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { AlignGroup, Node, VBox } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import ToolMode from '../enum/ToolMode.js';
 import ViewMode from '../enum/ViewMode.js';
 import ABSConductivityTesterNode from './ABSConductivityTesterNode.js';
 import ABSViewProperties from './ABSViewProperties.js';
@@ -118,13 +117,13 @@ class ABSScreenView extends ScreenView {
 
     this.viewProperties.toolModeProperty.link( toolMode => {
 
-      pHMeterNode.visible = ( toolMode === ToolMode.PH_METER );
+      pHMeterNode.visible = ( toolMode === 'pHMeter' );
 
-      const pHPaperVisible = ( toolMode === ToolMode.PH_PAPER );
+      const pHPaperVisible = ( toolMode === 'pHPaper' );
       pHPaperNode.visible = pHPaperVisible;
       pHColorKeyNode.visible = pHPaperVisible;
 
-      conductivityTesterNode.visible = ( toolMode === ToolMode.CONDUCTIVITY );
+      conductivityTesterNode.visible = ( toolMode === 'conductivity' );
     } );
 
     // @private needed by methods
