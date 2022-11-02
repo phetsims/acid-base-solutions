@@ -8,13 +8,12 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import MinusNode from '../../../../scenery-phet/js/MinusNode.js';
 import PlusNode from '../../../../scenery-phet/js/PlusNode.js';
-import { Circle, CircleOptions, Color, Node, RadialGradient } from '../../../../scenery/js/imports.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
+import AtomNode from './AtomNode.js';
 
 // constants
 const MOLECULE_COLORS = ABSColors.MOLECULES;
@@ -98,27 +97,6 @@ const MoleculeFactory = {
     ]
   } )
 };
-
-type AtomNodeSelfOptions = EmptySelfOptions;
-
-type AtomNodeOptions = AtomNodeSelfOptions & StrictOmit<CircleOptions, 'radius' | 'fill'>;
-
-class AtomNode extends Circle {
-
-  public constructor( radius: number, color: Color | string, providedOptions?: AtomNodeOptions ) {
-
-    const gradient = new RadialGradient( -radius * 0.2, -radius * 0.3, 0.25, -radius * 0.2, -radius * 0.3, radius * 2 )
-      .addColorStop( 0, 'white' )
-      .addColorStop( 0.33, color )
-      .addColorStop( 1, 'black' );
-
-    const options = optionize<AtomNodeOptions, AtomNodeSelfOptions, CircleOptions>()( {
-      fill: gradient
-    }, providedOptions );
-
-    super( radius, options );
-  }
-}
 
 acidBaseSolutions.register( 'MoleculeFactory', MoleculeFactory );
 export default MoleculeFactory;
