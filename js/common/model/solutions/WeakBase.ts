@@ -10,6 +10,7 @@
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import ABSConstants from '../../ABSConstants.js';
 import AqueousSolution from './AqueousSolution.js';
+import ABSColors from '../../ABSColors.js';
 
 export default class WeakBase extends AqueousSolution {
 
@@ -17,10 +18,10 @@ export default class WeakBase extends AqueousSolution {
     super( 'weakBase', ABSConstants.WEAK_STRENGTH_RANGE.defaultValue, ABSConstants.CONCENTRATION_RANGE.defaultValue,
       [
         // molecules found in this solution
-        { key: 'B', getConcentration: () => this.getSoluteConcentration() },
-        { key: 'H2O', getConcentration: () => this.getH2OConcentration() },
-        { key: 'BH', getConcentration: () => this.getProductConcentration() },
-        { key: 'OH', getConcentration: () => this.getOHConcentration() }
+        { key: 'B', color: ABSColors.B, getConcentration: () => this.getSoluteConcentration() },
+        { key: 'H2O', color: ABSColors.H2O, getConcentration: () => this.getH2OConcentration() },
+        { key: 'BH', color: ABSColors.BH, getConcentration: () => this.getProductConcentration() },
+        { key: 'OH', color: ABSColors.OH, getConcentration: () => this.getOHConcentration() }
       ] );
   }
 

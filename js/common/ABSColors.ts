@@ -40,18 +40,16 @@ const ABSColors = {
     new Color( 0, 34, 52 )
   ],
 
-  // The field names here must correspond to the 'key' fields in AqueousSolution.molecules.
-  MOLECULES: {
-    A: 'rgb(0,170,255)',
-    B: GRAY_MOLECULE,
-    BH: 'rgb(255,170,0)',
-    H2O: 'rgb(164,189,193)',
-    H3O: PhetColorScheme.RED_COLORBLIND,
-    HA: GRAY_MOLECULE,
-    M: 'rgb(255,170,0)',
-    MOH: GRAY_MOLECULE,
-    OH: 'rgb(90,90,255)'
-  }
+  // Molecule colors
+  A: 'rgb(0,170,255)',
+  B: GRAY_MOLECULE,
+  BH: 'rgb(255,170,0)',
+  H2O: 'rgb(164,189,193)',
+  H3O: PhetColorScheme.RED_COLORBLIND,
+  HA: GRAY_MOLECULE,
+  M: 'rgb(255,170,0)',
+  MOH: GRAY_MOLECULE,
+  OH: 'rgb(90,90,255)'
 };
 
 acidBaseSolutions.register( 'ABSColors', ABSColors );

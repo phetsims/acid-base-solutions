@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * A bar in the concentration graph.
  *
@@ -9,19 +8,20 @@
 
 import Utils from '../../../../../dot/js/Utils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
-import { Node, Rectangle, RichText } from '../../../../../scenery/js/imports.js';
+import { Node, Rectangle, RichText, TColor } from '../../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../../AcidBaseSolutionsStrings.js';
 
 // constants
 const FONT = new PhetFont( 12 );
 
-class ConcentrationGraphBarNode extends Node {
+export default class ConcentrationGraphBarNode extends Node {
 
-  /**
-   * @param {number} maxBarHeight
-   */
-  constructor( maxBarHeight ) {
+  private readonly maxBarHeight: number;
+  private readonly bar: Rectangle;
+  private readonly text: RichText;
+
+  public constructor( maxBarHeight: number ) {
 
     // add rectangle to represent concentration
     const bar = new Rectangle( 0, 0, 25, 0, { fill: 'white' } );
@@ -34,14 +34,15 @@ class ConcentrationGraphBarNode extends Node {
 
     super( { children: [ bar, text ] } );
 
-    // @private
     this.maxBarHeight = maxBarHeight;
     this.bar = bar;
     this.text = text;
   }
 
-  // @public set height and text value of bar
-  setValue( value ) {
+  /**
+   * Sets height and text value of bar.
+   */
+  public setValue( value: number ): void {
     const barHeight = Math.abs( Utils.log10( value ) + 8 ) * this.maxBarHeight / 10;
     let pow;
 
@@ -85,11 +86,12 @@ class ConcentrationGraphBarNode extends Node {
     }
   }
 
-  // @public set color of bar
-  setBarFill( color ) {
+  /**
+   * Sets the fill color of the bar.
+   */
+  public setBarFill( color: TColor ): void {
     this.bar.setFill( color );
   }
 }
 
 acidBaseSolutions.register( 'ConcentrationGraphBarNode', ConcentrationGraphBarNode );
-export default ConcentrationGraphBarNode;

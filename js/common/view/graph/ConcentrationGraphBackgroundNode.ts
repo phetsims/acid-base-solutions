@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Background of concentration graph.
  *
@@ -16,13 +15,9 @@ import AcidBaseSolutionsStrings from '../../../AcidBaseSolutionsStrings.js';
 // constants
 const TICK_FONT = new PhetFont( 11 );
 
-class ConcentrationGraphBackgroundNode extends Node {
+export default class ConcentrationGraphBackgroundNode extends Node {
 
-  /**
-   * @param {number} width
-   * @param {number} height
-   */
-  constructor( width, height ) {
+  public constructor( width: number, height: number ) {
 
     super();
 
@@ -61,4 +56,3 @@ class ConcentrationGraphBackgroundNode extends Node {
 }
 
 acidBaseSolutions.register( 'ConcentrationGraphBackgroundNode', ConcentrationGraphBackgroundNode );
-export default ConcentrationGraphBackgroundNode;

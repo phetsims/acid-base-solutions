@@ -10,6 +10,7 @@
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import ABSConstants from '../../ABSConstants.js';
 import AqueousSolution from './AqueousSolution.js';
+import ABSColors from '../../ABSColors.js';
 
 export default class Water extends AqueousSolution {
 
@@ -17,9 +18,9 @@ export default class Water extends AqueousSolution {
     super( 'water', 0, 0,
       [
         // molecules found in this solution
-        { key: 'H2O', getConcentration: () => this.getH2OConcentration() },
-        { key: 'H3O', getConcentration: () => this.getH3OConcentration() },
-        { key: 'OH', getConcentration: () => this.getOHConcentration() }
+        { key: 'H2O', color: ABSColors.H2O, getConcentration: () => this.getH2OConcentration() },
+        { key: 'H3O', color: ABSColors.H3O, getConcentration: () => this.getH3OConcentration() },
+        { key: 'OH', color: ABSColors.OH, getConcentration: () => this.getOHConcentration() }
       ]
     );
   }

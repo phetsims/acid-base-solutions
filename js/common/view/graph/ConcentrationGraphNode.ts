@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Concentration graph.
  * To improve performance, updates only when this node is visible.
@@ -12,20 +11,21 @@
 import { Node, Rectangle } from '../../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import ABSColors from '../../ABSColors.js';
+import ConcentrationGraph from '../../model/ConcentrationGraph.js';
 import ConcentrationGraphBackgroundNode from './ConcentrationGraphBackgroundNode.js';
 import ConcentrationGraphBarNode from './ConcentrationGraphBarNode.js';
 
-class ConcentrationGraphNode extends Node {
+export default class ConcentrationGraphNode extends Node {
 
-  /**
-   * @param {ConcentrationGraph} graph
-   */
-  constructor( graph ) {
+  private readonly graph: ConcentrationGraph;
+  private readonly bars: ConcentrationGraphBarNode[];
+
+  public constructor( graph: ConcentrationGraph ) {
 
     super();
 
-    this.graph = graph; // @private
-    this.bars = []; // @private {ConcentrationGraphBarNode[]}
+    this.graph = graph;
+    this.bars = [];
 
     // add background
     this.addChild( new ConcentrationGraphBackgroundNode( graph.width, graph.height ) );
@@ -54,13 +54,15 @@ class ConcentrationGraphNode extends Node {
 
       // unlink from previous solution
       if ( previousSolutionType ) {
-        const previousSolution = graph.solutionsMap.get( previousSolutionType );
+        const previousSolution = graph.solutionsMap.get( previousSolutionType )!;
+        assert && assert( previousSolution );
         previousSolution.strengthProperty.unlink( updateValuesBound );
         previousSolution.concentrationProperty.unlink( updateValuesBound );
       }
 
       // link to new solution
-      const newSolution = graph.solutionsMap.get( newSolutionType );
+      const newSolution = graph.solutionsMap.get( newSolutionType )!;
+      assert && assert( newSolution );
       newSolution.strengthProperty.link( updateValuesBound );
       newSolution.concentrationProperty.link( updateValuesBound );
     } );
@@ -75,17 +77,17 @@ class ConcentrationGraphNode extends Node {
   }
 
   /*
-   * @private
    * Makes the correct number of bars visible for the selected solution,
    * and sets the bars colors and positions to match the molecules in the solution.
    * To improve performance, updates only when this node is visible.
    */
-  updateBars() {
+  private updateBars(): void {
 
     if ( this.visible ) {
 
       const solutionType = this.graph.solutionTypeProperty.get();
-      const solution = this.graph.solutionsMap.get( solutionType );
+      const solution = this.graph.solutionsMap.get( solutionType )!;
+      assert && assert( solution );
       const molecules = solution.molecules;
       const numberOfMolecules = molecules.length;
 
@@ -96,7 +98,7 @@ class ConcentrationGraphNode extends Node {
           // set visibility, color, value and position of new bars
           bar.setVisible( true );
           bar.setValue( solution.molecules[ i ].getConcentration() );
-          bar.setBarFill( ABSColors.MOLECULES[ molecules[ i ].key ] );
+          bar.setBarFill( molecules[ i ].color );
           bar.setTranslation( ( i + 0.75 + ( 4 - numberOfMolecules ) / 2 ) * this.graph.width / 4, this.graph.height );
         }
         else {
@@ -107,16 +109,16 @@ class ConcentrationGraphNode extends Node {
   }
 
   /**
-   * @private
    * Sets the concentration values on each bar.
    * To improve performance, updates only when this node is visible.
    */
-  updateValues() {
+  private updateValues(): void {
 
     if ( this.visible ) {
 
       const solutionType = this.graph.solutionTypeProperty.get();
-      const solution = this.graph.solutionsMap.get( solutionType );
+      const solution = this.graph.solutionsMap.get( solutionType )!;
+      assert && assert( solution );
       const molecules = solution.molecules;
 
       for ( let i = 0; i < molecules.length; i++ ) {
@@ -127,18 +129,15 @@ class ConcentrationGraphNode extends Node {
 
   /**
    *  Creates an icon of the graph, with 4 bars (similar to weak acid).
-   *  @static
-   *  @returns {Node}
-   *  @public
    */
-  static createIcon() {
+  public static createIcon(): Node {
     return new Node( {
       children: [
         new Rectangle( 0, 0, 22, 18, { fill: 'white' } ), // background
-        new Rectangle( 2, 6, 3, 12, { fill: ABSColors.MOLECULES.B } ),
-        new Rectangle( 7, 3, 3, 15, { fill: ABSColors.MOLECULES.H2O } ),
-        new Rectangle( 12, 9, 3, 9, { fill: ABSColors.MOLECULES.A } ),
-        new Rectangle( 17, 9, 3, 9, { fill: ABSColors.MOLECULES.H3O } ),
+        new Rectangle( 2, 6, 3, 12, { fill: ABSColors.B } ),
+        new Rectangle( 7, 3, 3, 15, { fill: ABSColors.H2O } ),
+        new Rectangle( 12, 9, 3, 9, { fill: ABSColors.A } ),
+        new Rectangle( 17, 9, 3, 9, { fill: ABSColors.H3O } ),
         new Rectangle( 0, 0, 22, 18, { stroke: 'black', lineWidth: 0.5 } ) // background stroke on top
       ]
     } );
@@ -146,4 +145,3 @@ class ConcentrationGraphNode extends Node {
 }
 
 acidBaseSolutions.register( 'ConcentrationGraphNode', ConcentrationGraphNode );
-export default ConcentrationGraphNode;
