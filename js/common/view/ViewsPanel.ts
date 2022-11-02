@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Panel for selecting between a set of mutually-exclusive 'views'.
  *
@@ -8,16 +7,19 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import Property from '../../../../axon/js/Property.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, HBox, HStrut, Image, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignGroup, HBox, HStrut, Image, Text, VBox } from '../../../../scenery/js/imports.js';
 import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
-import Panel from '../../../../sun/js/Panel.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import magnifierIcon_png from '../../../images/magnifierIcon_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../ABSConstants.js';
+import { ViewMode } from '../enum/ViewMode.js';
 import BeakerNode from './BeakerNode.js';
 import ConcentrationGraphNode from './graph/ConcentrationGraphNode.js';
 import MoleculeFactory from './MoleculeFactory.js';
@@ -34,19 +36,21 @@ const ICON_OPTIONS = { scale: 0.75 };
 const TOUCH_AREA_X_DILATION = 10;
 const TOUCH_AREA_Y_DILATION = 3;
 
-class ViewsPanel extends Panel {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {StringEnumerationProperty.<ViewMode>} viewModeProperty
-   * @param {Property.<boolean>} solventVisibleProperty
-   * @param {AlignGroup} panelAlignGroup
-   * @param {Object} [options]
-   */
-  constructor( viewModeProperty, solventVisibleProperty, panelAlignGroup, options ) {
+type ViewsPanelOptions = SelfOptions & PanelOptions;
 
-    options = merge( {}, ABSConstants.PANEL_OPTIONS, options );
+export default class ViewsPanel extends Panel {
 
-    const titleNode = new Text( AcidBaseSolutionsStrings.viewsStringProperty, {
+  public constructor( viewModeProperty: StringEnumerationProperty<ViewMode>,
+                      solventVisibleProperty: Property<boolean>,
+                      panelAlignGroup: AlignGroup,
+                      providedOptions?: ViewsPanelOptions ) {
+
+    const options = optionize3<ViewsPanelOptions, SelfOptions, PanelOptions>()(
+      {}, ABSConstants.PANEL_OPTIONS, providedOptions );
+
+    const titleText = new Text( AcidBaseSolutionsStrings.viewsStringProperty, {
       font: ABSConstants.TITLE_FONT,
       maxWidth: 180 // determined empirically
     } );
@@ -72,9 +76,6 @@ class ViewsPanel extends Panel {
     } );
     const solventCheckbox = new Checkbox( solventVisibleProperty, solventLabel, CHECKBOX_OPTIONS );
     solventCheckbox.touchArea = solventCheckbox.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
-    solventLabel.setEnabled = enabled => {
-      solventLabel.opacity = ( enabled ? 1 : 0.5 ); // gray out when disabled
-    };
 
     // Graph
     const graphLabel = new HBox( {
@@ -113,7 +114,7 @@ class ViewsPanel extends Panel {
     const content = new AlignBox( new VBox( {
       spacing: 8,
       align: 'left',
-      children: [ titleNode, controls ]
+      children: [ titleText, controls ]
     } ), {
       group: panelAlignGroup,
       xAlign: 'left'
@@ -129,4 +130,3 @@ class ViewsPanel extends Panel {
 }
 
 acidBaseSolutions.register( 'ViewsPanel', ViewsPanel );
-export default ViewsPanel;
