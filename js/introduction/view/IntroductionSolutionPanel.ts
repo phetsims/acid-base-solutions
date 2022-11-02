@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * IntroductionSolutionPanel is a panel for selecting between a set of mutually-exclusive solutions in the
  * Introduction screen.
@@ -10,27 +9,31 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignGroup, HBox, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
-import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
-import Panel from '../../../../sun/js/Panel.js';
+import { AlignBox, AlignGroup, HBox, Node, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
+import AquaRadioButtonGroup, { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
 import MoleculeFactory from '../../common/view/MoleculeFactory.js';
+import { SolutionType } from '../../common/enum/SolutionType.js';
+import Property from '../../../../axon/js/Property.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
 
-class IntroductionSolutionPanel extends Panel {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Property.<SolutionType>} solutionTypeProperty
-   * @param {AlignGroup} contentAlignGroup
-   * @param {Object} [options]
-   */
-  constructor( solutionTypeProperty, contentAlignGroup, options ) {
-    assert && assert( contentAlignGroup instanceof AlignGroup, 'invalid contentAlignGroup' );
+type IntroductionSolutionPanelOptions = SelfOptions & PanelOptions;
 
-    options = merge( {}, ABSConstants.PANEL_OPTIONS, options );
+export default class IntroductionSolutionPanel extends Panel {
+
+  public constructor( solutionTypeProperty: Property<SolutionType>, contentAlignGroup: AlignGroup,
+                      providedOptions?: IntroductionSolutionPanelOptions ) {
+
+    const options = optionize3<IntroductionSolutionPanelOptions, SelfOptions, PanelOptions>()(
+      {}, ABSConstants.PANEL_OPTIONS, providedOptions );
 
     // title
     const titleNode = new Text( AcidBaseSolutionsStrings.solutionStringProperty, {
@@ -41,45 +44,46 @@ class IntroductionSolutionPanel extends Panel {
     // To make all radio button labels have the same width and height
     const labelsAlignGroup = new AlignGroup();
 
-    const radioButtonGroupItems = [
+    const radioButtonGroupItems: AquaRadioButtonGroupItem<SolutionType>[] = [
 
       // Water (H20)
       {
         value: 'water',
-        createNode: tandem => createRadioButtonLabel( AcidBaseSolutionsStrings.waterStringProperty, 'H<sub>2</sub>O',
-          new MoleculeFactory.H2O(), labelsAlignGroup )
+        createNode: ( tandem: Tandem ) =>
+          createRadioButtonLabel( AcidBaseSolutionsStrings.waterStringProperty, 'H<sub>2</sub>O',
+            MoleculeFactory.H2O(), labelsAlignGroup )
       },
 
       // Strong Acid (HA)
       {
         value: 'strongAcid',
-        createNode: tandem => createRadioButtonLabel( AcidBaseSolutionsStrings.strongAcidStringProperty, 'H<i>A</i>',
-          new MoleculeFactory.HA(), labelsAlignGroup )
+        createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.strongAcidStringProperty, 'H<i>A</i>',
+          MoleculeFactory.HA(), labelsAlignGroup )
       },
 
       // Weak Acid (HA)
       {
         value: 'weakAcid',
-        createNode: tandem => createRadioButtonLabel( AcidBaseSolutionsStrings.weakAcidStringProperty, 'H<i>A</i>',
-          new MoleculeFactory.HA(), labelsAlignGroup )
+        createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.weakAcidStringProperty, 'H<i>A</i>',
+          MoleculeFactory.HA(), labelsAlignGroup )
       },
 
       // Strong Base (M)
       {
         value: 'strongBase',
-        createNode: tandem => createRadioButtonLabel( AcidBaseSolutionsStrings.strongBaseStringProperty, '<i>M</i>OH',
-          new MoleculeFactory.MOH(), labelsAlignGroup )
+        createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.strongBaseStringProperty, '<i>M</i>OH',
+          MoleculeFactory.MOH(), labelsAlignGroup )
       },
 
       // Weak Base (B)
       {
         value: 'weakBase',
-        createNode: tandem => createRadioButtonLabel( AcidBaseSolutionsStrings.weakBaseStringProperty, '<i>B</i>',
-          new MoleculeFactory.B(), labelsAlignGroup )
+        createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.weakBaseStringProperty, '<i>B</i>',
+          MoleculeFactory.B(), labelsAlignGroup )
       }
     ];
 
-    const radioButtonGroup = new AquaRadioButtonGroup( solutionTypeProperty, radioButtonGroupItems, {
+    const radioButtonGroup = new AquaRadioButtonGroup<SolutionType>( solutionTypeProperty, radioButtonGroupItems, {
       spacing: 8,
       align: 'left',
       radioButtonOptions: {
@@ -104,31 +108,27 @@ class IntroductionSolutionPanel extends Panel {
 
 /**
  * Creates a label for a radio button.
- * @param {TReadOnlyProperty.<string>} solutionNameProperty
- * @param {string} formula
- * @param {Node} iconNode
- * @param {AlignGroup} labelsAlignGroup
- * @returns {Node}
  */
-function createRadioButtonLabel( solutionNameProperty, formula, iconNode, labelsAlignGroup ) {
+function createRadioButtonLabel( solutionNameProperty: TReadOnlyProperty<string>, formula: string,
+                                 iconNode: Node, labelsAlignGroup: AlignGroup ): Node {
 
   // Combine the solution's name and formula
   const stringProperty = new DerivedProperty( [ solutionNameProperty ], solutionName => `${solutionName} (${formula})` );
 
-  return new AlignBox( new HBox( {
+  const text = new RichText( stringProperty, {
+    font: new PhetFont( 12 ),
+    maxWidth: 145 // determined empirically
+  } );
+
+  const hBox = new HBox( {
     spacing: 10,
-    children: [
-      new RichText( stringProperty, {
-        font: new PhetFont( 12 ),
-        maxWidth: 145 // determined empirically
-      } ),
-      iconNode
-    ]
-  } ), {
+    children: [ text, iconNode ]
+  } );
+
+  return new AlignBox( hBox, {
     group: labelsAlignGroup,
     xAlign: 'left'
   } );
 }
 
 acidBaseSolutions.register( 'IntroductionSolutionPanel', IntroductionSolutionPanel );
-export default IntroductionSolutionPanel;

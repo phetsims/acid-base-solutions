@@ -1,6 +1,5 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * View for the 'Introduction' screen.
  *
@@ -9,14 +8,12 @@
 
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSScreenView from '../../common/view/ABSScreenView.js';
+import IntroductionModel from '../model/IntroductionModel.js';
 import IntroductionSolutionPanel from './IntroductionSolutionPanel.js';
 
-class IntroductionScreenView extends ABSScreenView {
+export default class IntroductionScreenView extends ABSScreenView {
 
-  /**
-   * @param {IntroductionModel} model
-   */
-  constructor( model ) {
+  public constructor( model: IntroductionModel ) {
     super(
       model,
       alignGroup => new IntroductionSolutionPanel( model.solutionTypeProperty, alignGroup )
@@ -25,4 +22,3 @@ class IntroductionScreenView extends ABSScreenView {
 }
 
 acidBaseSolutions.register( 'IntroductionScreenView', IntroductionScreenView );
-export default IntroductionScreenView;

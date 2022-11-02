@@ -9,11 +9,20 @@
 import Range from '../../../dot/js/Range.js';
 import RangeWithValue from '../../../dot/js/RangeWithValue.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
+import { PanelOptions } from '../../../sun/js/Panel.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
 import ABSColors from './ABSColors.js';
 
 // constants
 const WEAK_STRENGTH_MAX = 1E2;
+
+const PANEL_OPTIONS: PanelOptions = {
+  resize: true,
+  fill: ABSColors.CONTROL_PANEL_BACKGROUND,
+  xMargin: 15,
+  yMargin: 6,
+  align: 'left'
+};
 
 const ABSConstants = {
   CONCENTRATION_RANGE: new RangeWithValue( 1E-3, 1, 1E-2 ),
@@ -22,13 +31,7 @@ const ABSConstants = {
   WATER_CONCENTRATION: 55.6, // water concentration when it's used as a solvent, mol/L
   WEAK_STRENGTH_RANGE: new RangeWithValue( 1E-10, WEAK_STRENGTH_MAX, 1E-7 ),
   STRONG_STRENGTH: WEAK_STRENGTH_MAX + 1, // arbitrary, but needs to be greater than weak max
-  PANEL_OPTIONS: {
-    resize: true,
-    fill: ABSColors.CONTROL_PANEL_BACKGROUND,
-    xMargin: 15,
-    yMargin: 6,
-    align: 'left'
-  },
+  PANEL_OPTIONS: PANEL_OPTIONS,
   TITLE_FONT: new PhetFont( { size: 14, weight: 'bold' } )
 };
 
