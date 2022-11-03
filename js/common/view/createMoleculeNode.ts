@@ -16,7 +16,7 @@ import ABSColors from '../ABSColors.js';
 import AtomNode from './AtomNode.js';
 import { MoleculeName } from '../model/solutions/Molecule.js';
 
-//TODO what is wrong with this?
+// Maps a molecule name to a function that creates a Node for that molecule.
 // eslint-disable-next-line no-spaced-func
 const map = new Map<MoleculeName, () => Node>();
 
