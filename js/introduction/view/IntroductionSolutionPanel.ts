@@ -16,13 +16,13 @@ import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
-import { createMoleculeNode } from '../../common/view/createMoleculeNode.js';
 import { SolutionType } from '../../common/enum/SolutionType.js';
 import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
 import { MoleculeName } from '../../common/model/solutions/Molecule.js';
+import createMoleculeNode from '../../common/view/createMoleculeNode.js';
 
 type SelfOptions = EmptySelfOptions;
 

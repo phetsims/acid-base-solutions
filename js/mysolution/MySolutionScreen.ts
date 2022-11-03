@@ -14,7 +14,7 @@ import Tandem from '../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../AcidBaseSolutionsStrings.js';
 import ABSColors from '../common/ABSColors.js';
-import { createMoleculeNode } from '../common/view/createMoleculeNode.js';
+import createMoleculeNode from '../common/view/createMoleculeNode.js';
 import MySolutionModel from './model/MySolutionModel.js';
 import MySolutionScreenView from './view/MySolutionScreenView.js';
 

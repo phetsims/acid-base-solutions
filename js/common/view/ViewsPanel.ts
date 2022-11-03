@@ -22,7 +22,7 @@ import ABSConstants from '../ABSConstants.js';
 import { ViewMode } from '../enum/ViewMode.js';
 import BeakerNode from './BeakerNode.js';
 import ConcentrationGraphNode from './graph/ConcentrationGraphNode.js';
-import { createMoleculeNode } from './createMoleculeNode.js';
+import createMoleculeNode from './createMoleculeNode.js';
 
 // constants
 const TEXT_ICON_X_SPACING = 10;

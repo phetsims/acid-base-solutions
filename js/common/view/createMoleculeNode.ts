@@ -1,9 +1,7 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-//TODO rename file to createMoleculeNode.ts
-
 /**
- * Factory for creating molecule nodes.
+ * Function for creating molecule nodes.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -102,7 +100,7 @@ map.set( 'OH', () => new Node( {
 /**
  * Creates a Node for the specified molecule.
  */
-export function createMoleculeNode( key: MoleculeName ): Node {
+export default function createMoleculeNode( key: MoleculeName ): Node {
   const createNode = map.get( key )!;
   assert && assert( createNode );
   return createNode();
