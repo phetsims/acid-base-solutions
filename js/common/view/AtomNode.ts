@@ -1,7 +1,7 @@
 // Copyright 2022, University of Colorado Boulder
 
 /**
- * AtomNode renders an atom. Factored out of MoleculeFactory.ts.
+ * AtomNode renders an atom.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

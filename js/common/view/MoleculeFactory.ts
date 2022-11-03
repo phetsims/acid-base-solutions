@@ -1,6 +1,6 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-//TODO rename file to moleculeFactory.ts
+//TODO rename file to createMoleculeNode.ts
 
 /**
  * Factory for creating molecule nodes.
@@ -20,26 +20,26 @@ import { MoleculeName } from '../model/solutions/Molecule.js';
 
 //TODO what is wrong with this?
 // eslint-disable-next-line no-spaced-func
-const moleculeFactory = new Map<MoleculeName, () => Node>();
+const map = new Map<MoleculeName, () => Node>();
 
-moleculeFactory.set( 'A', () => new Node( {
+map.set( 'A', () => new Node( {
   children: [ new AtomNode( 7, ABSColors.A ) ]
 } ) );
 
-moleculeFactory.set( 'B', () => new Node( {
+map.set( 'B', () => new Node( {
   children: [
     new AtomNode( 7, ABSColors.B )
   ]
 } ) );
 
-moleculeFactory.set( 'BH', () => new Node( {
+map.set( 'BH', () => new Node( {
   children: [
     new AtomNode( 4, ABSColors.BH, { x: -6, y: -6 } ),
     new AtomNode( 7, ABSColors.BH, { x: 0, y: 0 } )
   ]
 } ) );
 
-moleculeFactory.set( 'H2O', () => new Node( {
+map.set( 'H2O', () => new Node( {
   children: [
     new AtomNode( 4, ABSColors.H2O, { x: 0, y: -9 } ),
     new AtomNode( 7, ABSColors.H2O, { x: 0, y: 0 } ),
@@ -47,7 +47,7 @@ moleculeFactory.set( 'H2O', () => new Node( {
   ]
 } ) );
 
-moleculeFactory.set( 'H3O', () => new Node( {
+map.set( 'H3O', () => new Node( {
   children: [
     new AtomNode( 4, ABSColors.H3O, { x: 3, y: -7.5 } ),
     new AtomNode( 4, ABSColors.H3O, { x: 3, y: 7.5 } ),
@@ -56,20 +56,20 @@ moleculeFactory.set( 'H3O', () => new Node( {
   ]
 } ) );
 
-moleculeFactory.set( 'HA', () => new Node( {
+map.set( 'HA', () => new Node( {
   children: [
     new AtomNode( 7, ABSColors.HA, { x: 0, y: 0 } ),
     new AtomNode( 4, ABSColors.HA, { x: -8, y: -1 } )
   ]
 } ) );
 
-moleculeFactory.set( 'M', () => new Node( {
+map.set( 'M', () => new Node( {
   children: [
     new AtomNode( 7, ABSColors.M )
   ]
 } ) );
 
-moleculeFactory.set( 'MOH', () => new Node( {
+map.set( 'MOH', () => new Node( {
   children: [
 
     // M icon. Use PlusNode instead of MathSymbols.PLUS because text bounds are inaccurate.
@@ -91,7 +91,7 @@ moleculeFactory.set( 'MOH', () => new Node( {
   ]
 } ) );
 
-moleculeFactory.set( 'OH', () => new Node( {
+map.set( 'OH', () => new Node( {
     children: [
       new AtomNode( 4, ABSColors.OH, { x: 8, y: -3 } ),
       new AtomNode( 7, ABSColors.OH, { x: 0, y: 0 } )
@@ -99,5 +99,13 @@ moleculeFactory.set( 'OH', () => new Node( {
   } )
 );
 
-acidBaseSolutions.register( 'moleculeFactory', moleculeFactory );
-export default moleculeFactory;
+/**
+ * Creates a Node for the specified molecule.
+ */
+export function createMoleculeNode( key: MoleculeName ): Node {
+  const createNode = map.get( key )!;
+  assert && assert( createNode );
+  return createNode();
+}
+
+acidBaseSolutions.register( 'createMoleculeNode', createMoleculeNode );

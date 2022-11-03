@@ -22,7 +22,7 @@ import ABSConstants from '../ABSConstants.js';
 import { ViewMode } from '../enum/ViewMode.js';
 import BeakerNode from './BeakerNode.js';
 import ConcentrationGraphNode from './graph/ConcentrationGraphNode.js';
-import MoleculeFactory from './MoleculeFactory.js';
+import { createMoleculeNode } from './MoleculeFactory.js';
 
 // constants
 const TEXT_ICON_X_SPACING = 10;
@@ -71,7 +71,7 @@ export default class ViewsPanel extends Panel {
       spacing: TEXT_ICON_X_SPACING,
       children: [
         new Text( AcidBaseSolutionsStrings.solventStringProperty, TEXT_OPTIONS ),
-        MoleculeFactory.get( 'H2O' )!()
+        createMoleculeNode( 'H2O' )
       ]
     } );
     const solventCheckbox = new Checkbox( solventVisibleProperty, solventLabel, CHECKBOX_OPTIONS );

@@ -10,7 +10,7 @@ import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
 import { CanvasNode } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import MoleculeFactory from './MoleculeFactory.js';
+import { createMoleculeNode } from './MoleculeFactory.js';
 import Magnifier from '../model/Magnifier.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import { MoleculeName } from '../model/solutions/Molecule.js';
@@ -48,10 +48,7 @@ export default class MoleculesNode extends CanvasNode {
     // Generate images, to populate MoleculesData.canvas. This happens asynchronously.
     const createCanvas = ( key: MoleculeName ) => {
 
-      const createMoleculeNode = MoleculeFactory.get( key )!;
-      assert && assert( createMoleculeNode );
-
-      const moleculeNode = createMoleculeNode();
+      const moleculeNode = createMoleculeNode( key );
 
       // Scale up to increase quality. Remember to scale down when drawing to canvas.
       moleculeNode.setScaleMagnitude( IMAGE_SCALE, IMAGE_SCALE );

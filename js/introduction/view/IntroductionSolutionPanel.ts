@@ -16,7 +16,7 @@ import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
-import MoleculeFactory from '../../common/view/MoleculeFactory.js';
+import { createMoleculeNode } from '../../common/view/MoleculeFactory.js';
 import { SolutionType } from '../../common/enum/SolutionType.js';
 import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -121,9 +121,7 @@ function createRadioButtonLabel( solutionNameProperty: TReadOnlyProperty<string>
   } );
 
   // Create the molecule's icon
-  const createMoleculeNode = MoleculeFactory.get( key )!;
-  assert && assert( createMoleculeNode );
-  const moleculeNode = createMoleculeNode();
+  const moleculeNode = createMoleculeNode( key );
 
   const hBox = new HBox( {
     spacing: 10,
