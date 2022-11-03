@@ -45,8 +45,8 @@ function createScreenIcon(): ScreenIcon {
   const width = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.width;
   const height = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.height;
 
-  const h3oNode = MoleculeFactory.H3O();
-  const ohNode = MoleculeFactory.OH();
+  const h3oNode = MoleculeFactory.get( 'H3O' )!();
+  const ohNode = MoleculeFactory.get( 'OH' )!();
 
   // Uniformly scale the molecules to make them fill the available space.
   const xSpace = 0.06 * width; // horizontal space around the molecules

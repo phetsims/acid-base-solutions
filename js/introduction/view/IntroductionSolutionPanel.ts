@@ -22,6 +22,7 @@ import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
+import { MoleculeName } from '../../common/model/solutions/Molecule.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -49,37 +50,36 @@ export default class IntroductionSolutionPanel extends Panel {
       // Water (H20)
       {
         value: 'water',
-        createNode: ( tandem: Tandem ) =>
-          createRadioButtonLabel( AcidBaseSolutionsStrings.waterStringProperty, 'H<sub>2</sub>O',
-            MoleculeFactory.H2O(), labelsAlignGroup )
+        createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.waterStringProperty,
+          'H<sub>2</sub>O', 'H2O', labelsAlignGroup )
       },
 
       // Strong Acid (HA)
       {
         value: 'strongAcid',
-        createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.strongAcidStringProperty, 'H<i>A</i>',
-          MoleculeFactory.HA(), labelsAlignGroup )
+        createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.strongAcidStringProperty,
+          'H<i>A</i>', 'HA', labelsAlignGroup )
       },
 
       // Weak Acid (HA)
       {
         value: 'weakAcid',
-        createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.weakAcidStringProperty, 'H<i>A</i>',
-          MoleculeFactory.HA(), labelsAlignGroup )
+        createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.weakAcidStringProperty,
+          'H<i>A</i>', 'HA', labelsAlignGroup )
       },
 
       // Strong Base (M)
       {
         value: 'strongBase',
-        createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.strongBaseStringProperty, '<i>M</i>OH',
-          MoleculeFactory.MOH(), labelsAlignGroup )
+        createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.strongBaseStringProperty,
+          '<i>M</i>OH', 'MOH', labelsAlignGroup )
       },
 
       // Weak Base (B)
       {
         value: 'weakBase',
-        createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.weakBaseStringProperty, '<i>B</i>',
-          MoleculeFactory.B(), labelsAlignGroup )
+        createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.weakBaseStringProperty,
+          '<i>B</i>', 'B', labelsAlignGroup )
       }
     ];
 
@@ -110,7 +110,7 @@ export default class IntroductionSolutionPanel extends Panel {
  * Creates a label for a radio button.
  */
 function createRadioButtonLabel( solutionNameProperty: TReadOnlyProperty<string>, formula: string,
-                                 iconNode: Node, labelsAlignGroup: AlignGroup ): Node {
+                                 key: MoleculeName, labelsAlignGroup: AlignGroup ): Node {
 
   // Combine the solution's name and formula
   const stringProperty = new DerivedProperty( [ solutionNameProperty ], solutionName => `${solutionName} (${formula})` );
@@ -120,9 +120,14 @@ function createRadioButtonLabel( solutionNameProperty: TReadOnlyProperty<string>
     maxWidth: 145 // determined empirically
   } );
 
+  // Create the molecule's icon
+  const createMoleculeNode = MoleculeFactory.get( key )!;
+  assert && assert( createMoleculeNode );
+  const moleculeNode = createMoleculeNode();
+
   const hBox = new HBox( {
     spacing: 10,
-    children: [ text, iconNode ]
+    children: [ text, moleculeNode ]
   } );
 
   return new AlignBox( hBox, {

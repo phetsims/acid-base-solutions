@@ -117,7 +117,7 @@ function createA(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
-      MoleculeFactory.A(),
+      MoleculeFactory.get( 'A' )!(),
       new RichText( `<i>A</i><sup>${MathSymbols.MINUS}</sup>`, RICH_TEXT_OPTIONS ),
       new VStrut( SUBSCRIPT_HEIGHT )
     ]
@@ -129,7 +129,7 @@ function createB(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
-      MoleculeFactory.B(),
+      MoleculeFactory.get( 'B' )!(),
       new RichText( '<i>B</i>', RICH_TEXT_OPTIONS ),
       new VStrut( SUBSCRIPT_HEIGHT )
     ]
@@ -141,7 +141,7 @@ function createBH(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
-      MoleculeFactory.BH(),
+      MoleculeFactory.get( 'BH' )!(),
       new HBox( {
         spacing: 1, // this functions like kerning
         align: 'bottom',
@@ -159,7 +159,7 @@ function createH2O(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
-      MoleculeFactory.H2O(),
+      MoleculeFactory.get( 'H2O' )!(),
       new RichText( 'H<sub>2</sub>O', RICH_TEXT_OPTIONS )
     ]
   } );
@@ -173,8 +173,8 @@ function create2H2O(): Node {
       new HBox( {
         spacing: 4,
         children: [
-          MoleculeFactory.H2O(),
-          MoleculeFactory.H2O()
+          MoleculeFactory.get( 'H2O' )!(),
+          MoleculeFactory.get( 'H2O' )!()
         ]
       } ),
       new HBox( {
@@ -198,7 +198,7 @@ function createH3O(): Node {
       // Add a strut as a bit of a hack to make the big atom in H3O appear aligned with the text.
       new HBox( {
         spacing: 0,
-        children: [ MoleculeFactory.H3O(), new HStrut( 7 ) ]
+        children: [ MoleculeFactory.get( 'H3O' )!(), new HStrut( 7 ) ]
       } ),
       new RichText( 'H<sub>3</sub>O<sup>+</sup>', RICH_TEXT_OPTIONS )
     ]
@@ -210,7 +210,7 @@ function createHA(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
-      MoleculeFactory.HA(),
+      MoleculeFactory.get( 'HA' )!(),
       new RichText( 'H<i>A</i>', RICH_TEXT_OPTIONS ),
       new VStrut( SUBSCRIPT_HEIGHT )
     ]
@@ -222,7 +222,7 @@ function createM(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
-      MoleculeFactory.M(),
+      MoleculeFactory.get( 'M' )!(),
       new HBox( {
         spacing: 1, // this functions like kerning
         align: 'origin',
@@ -241,7 +241,7 @@ function createMOH(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
-      MoleculeFactory.MOH(),
+      MoleculeFactory.get( 'MOH' )!(),
       new HBox( {
         spacing: 1, // this functions like kerning
         align: 'origin',
@@ -260,7 +260,7 @@ function createOH(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
-      MoleculeFactory.OH(),
+      MoleculeFactory.get( 'OH' )!(),
       new RichText( `OH<sup>${MathSymbols.MINUS}</sup>`, RICH_TEXT_OPTIONS ),
       new VStrut( SUBSCRIPT_HEIGHT )
     ]

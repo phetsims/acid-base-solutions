@@ -17,15 +17,9 @@ import NumberProperty from '../../../../../axon/js/NumberProperty.js';
 import Property from '../../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../../dot/js/Utils.js';
-import { Color } from '../../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import { SolutionType } from '../../enum/SolutionType.js';
-
-type Molecule = {
-  key: string; // used to identify the molecule, used to look up color or view constructor
-  color: Color | string;
-  getConcentration: () => number; // returns the concentration of the molecule
-};
+import { Molecule } from './Molecule.js';
 
 export default abstract class AqueousSolution {
 

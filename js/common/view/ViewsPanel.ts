@@ -71,7 +71,7 @@ export default class ViewsPanel extends Panel {
       spacing: TEXT_ICON_X_SPACING,
       children: [
         new Text( AcidBaseSolutionsStrings.solventStringProperty, TEXT_OPTIONS ),
-        MoleculeFactory.H2O()
+        MoleculeFactory.get( 'H2O' )!()
       ]
     } );
     const solventCheckbox = new Checkbox( solventVisibleProperty, solventLabel, CHECKBOX_OPTIONS );
