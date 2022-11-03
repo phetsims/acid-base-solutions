@@ -1,7 +1,7 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * Function for creating molecule nodes.
+ * createMoleculeNode is a factory function for creating molecule nodes.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -16,9 +16,11 @@ import ABSColors from '../ABSColors.js';
 import AtomNode from './AtomNode.js';
 import { MoleculeName } from '../model/solutions/Molecule.js';
 
+// Signature of all creation functions herein
+type CreationFunction = () => Node;
+
 // Maps a molecule name to a function that creates a Node for that molecule.
-// eslint-disable-next-line no-spaced-func
-const map = new Map<MoleculeName, () => Node>();
+const map = new Map<MoleculeName, CreationFunction>();
 
 map.set( 'A', () => new Node( {
   children: [ new AtomNode( 7, ABSColors.A ) ]
@@ -101,9 +103,8 @@ map.set( 'OH', () => new Node( {
  * Creates a Node for the specified molecule.
  */
 export default function createMoleculeNode( key: MoleculeName ): Node {
-  const createNode = map.get( key )!;
-  assert && assert( createNode );
-  return createNode();
+  assert && assert( map.has( key ), `no entry for key=${key}` );
+  return map.get( key )!();
 }
 
 acidBaseSolutions.register( 'createMoleculeNode', createMoleculeNode );
