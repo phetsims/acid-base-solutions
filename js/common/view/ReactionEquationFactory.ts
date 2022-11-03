@@ -12,7 +12,7 @@ import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, HStrut, Node, Path, RichText, VBox, VStrut } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import { createMoleculeNode } from './MoleculeFactory.js';
+import { createMoleculeNode } from './createMoleculeNode.js';
 
 // constants
 const EQUATION_SCALE = 1.5; // applied to all equations, see issue #88
