@@ -4,9 +4,9 @@ This is a port of the Java version of acid-base-solutions. It differs greatly fr
 
 For a description of the model, see [model.md](https://github.com/phetsims/acid-base-solutions/blob/master/doc/model.md).
 
-[AqueousSolution.js](https://github.com/phetsims/acid-base-solutions/blob/master/js/common/model/solutions/AqueousSolution.js) is the base class for all solutions.
+`AqueousSolution` is the base class for all solutions.
 
-[ABSModel.js](https://github.com/phetsims/acid-base-solutions/blob/master/js/common/model/ABSModel.js) is the base class model.
+`ABSModel` is the base class model.
 
 There is no model-view transform in this sim. 
 The transform is implicitly 1:1, with identical coordinate frames.
