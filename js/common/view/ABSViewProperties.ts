@@ -8,7 +8,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import { ToolMode, ToolModeValues } from '../enum/ToolMode.js';
 import { ViewMode, ViewModeValues } from '../enum/ViewMode.js';
@@ -16,18 +16,18 @@ import { ViewMode, ViewModeValues } from '../enum/ViewMode.js';
 export default class ABSViewProperties {
 
   public readonly solventVisibleProperty: Property<boolean>;
-  public readonly viewModeProperty: StringEnumerationProperty<ViewMode>;
-  public readonly toolModeProperty: StringEnumerationProperty<ToolMode>;
+  public readonly viewModeProperty: StringUnionProperty<ViewMode>;
+  public readonly toolModeProperty: StringUnionProperty<ToolMode>;
 
   public constructor() {
 
     this.solventVisibleProperty = new BooleanProperty( false );
 
-    this.viewModeProperty = new StringEnumerationProperty( 'molecules', {
+    this.viewModeProperty = new StringUnionProperty( 'molecules', {
       validValues: ViewModeValues
     } );
 
-    this.toolModeProperty = new StringEnumerationProperty( 'pHMeter', {
+    this.toolModeProperty = new StringUnionProperty( 'pHMeter', {
       validValues: ToolModeValues
     } );
   }

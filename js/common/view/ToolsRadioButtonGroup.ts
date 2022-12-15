@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import { Image } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
@@ -23,7 +23,7 @@ type ToolsRadioButtonGroupOptions = SelfOptions & RectangularRadioButtonGroupOpt
 
 export default class ToolsRadioButtonGroup extends RectangularRadioButtonGroup<ToolMode> {
 
-  public constructor( toolModeProperty: StringEnumerationProperty<ToolMode>, providedOptions?: ToolsRadioButtonGroupOptions ) {
+  public constructor( toolModeProperty: StringUnionProperty<ToolMode>, providedOptions?: ToolsRadioButtonGroupOptions ) {
 
     const options = optionize<ToolsRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>()( {
 

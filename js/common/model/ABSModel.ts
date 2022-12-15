@@ -8,7 +8,7 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TModel from '../../../../joist/js/TModel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import { SolutionType, SolutionTypeValues } from '../enum/SolutionType.js';
@@ -47,7 +47,7 @@ export default class ABSModel implements TModel {
       this.solutionsMap.set( solution.solutionType, solution );
     } );
 
-    this.solutionTypeProperty = new StringEnumerationProperty( defaultSolutionType, {
+    this.solutionTypeProperty = new StringUnionProperty( defaultSolutionType, {
       validValues: SolutionTypeValues
     } );
 

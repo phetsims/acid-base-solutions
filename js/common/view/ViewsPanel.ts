@@ -8,7 +8,7 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, HStrut, Image, Text, VBox } from '../../../../scenery/js/imports.js';
@@ -42,7 +42,7 @@ type ViewsPanelOptions = SelfOptions & PanelOptions;
 
 export default class ViewsPanel extends Panel {
 
-  public constructor( viewModeProperty: StringEnumerationProperty<ViewMode>,
+  public constructor( viewModeProperty: StringUnionProperty<ViewMode>,
                       solventVisibleProperty: Property<boolean>,
                       panelAlignGroup: AlignGroup,
                       providedOptions?: ViewsPanelOptions ) {
