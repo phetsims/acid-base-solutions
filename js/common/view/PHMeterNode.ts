@@ -11,9 +11,11 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Shape } from '../../../../kite/js/imports.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Circle, DragListener, Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { Circle, DragListener, Node, NodeOptions, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import PHMeter from '../model/PHMeter.js';
@@ -28,11 +30,19 @@ const BACKGROUND_FILL = 'rgb( 225, 225, 225 )';
 const BACKGROUND_STROKE = 'rgb( 64, 64, 64 )';
 const PH_TEXT_MAX_WIDTH = 70;
 
+type SelfOptions = EmptySelfOptions;
+
+type PHMeterNodeNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
+
 export default class PHMeterNode extends Node {
 
-  public constructor( pHMeter: PHMeter ) {
+  public constructor( pHMeter: PHMeter, providedOptions: PHMeterNodeNodeOptions ) {
 
-    super( { cursor: 'pointer' } );
+    const options = optionize<PHMeterNodeNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // NodeOptions
+      cursor: 'pointer'
+    }, providedOptions );
 
     // probe
     const probeNode = new ProbeNode( 5, 40, 14, 36 );
@@ -72,13 +82,12 @@ export default class PHMeterNode extends Node {
       pHText.centerY = backgroundNode.centerY;
     } );
 
-    // rendering order
-    this.addChild( probeNode );
-    this.addChild( backgroundNode );
-    this.addChild( pHText );
+    options.children = [ probeNode, backgroundNode, pHText ];
     if ( SHOW_ORIGIN ) {
-      this.addChild( new Circle( 2, { fill: 'red' } ) );
+      options.children.push( new Circle( 2, { fill: 'red' } ) );
     }
+
+    super( options );
 
     // Constrained dragging
     let clickYOffset = 0;

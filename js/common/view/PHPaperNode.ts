@@ -10,7 +10,9 @@
 
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import { Circle, Color, DragListener, Node, Rectangle } from '../../../../scenery/js/imports.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { Circle, Color, DragListener, Node, NodeOptions, Rectangle } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
 import PHPaper from '../model/PHPaper.js';
@@ -19,6 +21,10 @@ import PHPaper from '../model/PHPaper.js';
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
 const PAPER_STROKE = 'rgb(100, 100, 100)';
 
+type SelfOptions = EmptySelfOptions;
+
+type PHPaperNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
+
 export default class PHPaperNode extends Node {
 
   private readonly dragListener: DragListener;
@@ -26,30 +32,40 @@ export default class PHPaperNode extends Node {
   private readonly pHPaper: PHPaper;
   private animating: boolean; // is the paper animating?
 
-  public constructor( pHPaper: PHPaper ) {
+  public constructor( pHPaper: PHPaper, providedOptions: PHPaperNodeOptions ) {
 
-    super( { cursor: 'pointer' } );
+    const options = optionize<PHPaperNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // NodeOptions
+      cursor: 'pointer'
+    }, providedOptions );
 
     // blank paper
-    const paperNode = new Rectangle( 0, 0, pHPaper.paperSize.width, pHPaper.paperSize.height,
-      { fill: ABSColors.PH_PAPER, stroke: PAPER_STROKE, lineWidth: 0.5 } );
+    const paperNode = new Rectangle( 0, 0, pHPaper.paperSize.width, pHPaper.paperSize.height, {
+      fill: ABSColors.PH_PAPER,
+      stroke: PAPER_STROKE,
+      lineWidth: 0.5,
+
+      // origin at bottom of paper
+      centerX: 0,
+      bottom: 0
+    } );
 
     // portion of the paper that changes color
-    const indicatorNode = new Rectangle( 0, 0, pHPaper.paperSize.width, 0, { stroke: PAPER_STROKE, lineWidth: 0.5 } );
+    const indicatorNode = new Rectangle( 0, 0, pHPaper.paperSize.width, 0, {
+      stroke: PAPER_STROKE,
+      lineWidth: 0.5
+    } );
     indicatorNode.rotate( Math.PI ); // so that indicator rectangle expands upward
-
-    // rendering order
-    this.addChild( paperNode );
-    this.addChild( indicatorNode );
-    if ( SHOW_ORIGIN ) {
-      this.addChild( new Circle( 2, { fill: 'red' } ) );
-    }
-
-    // origin at bottom-center of paper
-    paperNode.centerX = 0;
-    paperNode.bottom = 0;
     indicatorNode.centerX = 0;
     indicatorNode.top = 0;
+
+    options.children = [ paperNode, indicatorNode ];
+    if ( SHOW_ORIGIN ) {
+      options.children.push( new Circle( 2, { fill: 'red' } ) );
+    }
+
+    super( options );
 
     // expand touch area
     this.touchArea = this.localBounds.dilatedXY( 10, 10 );

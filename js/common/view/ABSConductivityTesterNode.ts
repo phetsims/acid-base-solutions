@@ -8,24 +8,35 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
-import ConductivityTesterNode from '../../../../scenery-phet/js/ConductivityTesterNode.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import ConductivityTesterNode, { ConductivityTesterNodeOptions } from '../../../../scenery-phet/js/ConductivityTesterNode.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ConductivityTester from '../model/ConductivityTester.js';
 
+type SelfOptions = EmptySelfOptions;
+
+type ABSConductivityTesterNodeOptions = SelfOptions & PickRequired<ConductivityTesterNodeOptions, 'tandem' | 'visibleProperty'>;
+
 export default class ABSConductivityTesterNode extends ConductivityTesterNode {
 
-  public constructor( conductivityTester: ConductivityTester ) {
+  public constructor( conductivityTester: ConductivityTester, providedOptions: ABSConductivityTesterNodeOptions ) {
+
+    const options = optionize<ABSConductivityTesterNodeOptions, SelfOptions, ConductivityTesterNodeOptions>()( {
+
+      // ConductivityTesterNodeOptions
+      probeSize: conductivityTester.probeSize,
+      probeDragYRange: new Range(
+        conductivityTester.probeDragYRange.min - conductivityTester.bulbPosition.y,
+        conductivityTester.probeDragYRange.max - conductivityTester.bulbPosition.y
+      )
+    }, providedOptions );
+
     super( conductivityTester.brightnessProperty,
       new Property( conductivityTester.bulbPosition ),
       conductivityTester.positiveProbePositionProperty,
-      conductivityTester.negativeProbePositionProperty, {
-        probeSize: conductivityTester.probeSize,
-        probeDragYRange: new Range(
-          conductivityTester.probeDragYRange.min - conductivityTester.bulbPosition.y,
-          conductivityTester.probeDragYRange.max - conductivityTester.bulbPosition.y
-        )
-      }
-    );
+      conductivityTester.negativeProbePositionProperty,
+      options );
   }
 
   public override dispose(): void {
