@@ -9,6 +9,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import { ToolMode, ToolModeValues } from '../enum/ToolMode.js';
 import { ViewMode, ViewModeValues } from '../enum/ViewMode.js';
@@ -19,16 +20,20 @@ export default class ABSViewProperties {
   public readonly viewModeProperty: StringUnionProperty<ViewMode>;
   public readonly toolModeProperty: StringUnionProperty<ToolMode>;
 
-  public constructor() {
+  public constructor( tandem: Tandem ) {
 
-    this.solventVisibleProperty = new BooleanProperty( false );
+    this.solventVisibleProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'solventVisibleProperty' )
+    } );
 
     this.viewModeProperty = new StringUnionProperty( 'molecules', {
-      validValues: ViewModeValues
+      validValues: ViewModeValues,
+      tandem: tandem.createTandem( 'viewModeProperty' )
     } );
 
     this.toolModeProperty = new StringUnionProperty( 'pHMeter', {
-      validValues: ToolModeValues
+      validValues: ToolModeValues,
+      tandem: tandem.createTandem( 'toolModeProperty' )
     } );
   }
 

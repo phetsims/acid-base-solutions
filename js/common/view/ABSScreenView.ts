@@ -47,7 +47,7 @@ export default class ABSScreenView extends ScreenView {
       tandem: tandem
     } );
 
-    this.viewProperties = new ABSViewProperties();
+    this.viewProperties = new ABSViewProperties( tandem.createTandem( 'viewProperties' ) );
 
     // Reset All button
     const resetAllButton = new ResetAllButton( {
