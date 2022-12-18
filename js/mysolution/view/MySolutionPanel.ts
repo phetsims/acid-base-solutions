@@ -63,7 +63,8 @@ export default class MySolutionPanel extends Panel {
     // title
     const titleText = new Text( AcidBaseSolutionsStrings.solutionStringProperty, {
       font: ABSConstants.TITLE_FONT,
-      maxWidth: TITLE_MAX_WIDTH
+      maxWidth: TITLE_MAX_WIDTH,
+      tandem: tandem.createTandem( 'titleText' )
     } );
 
     // acid/base switch

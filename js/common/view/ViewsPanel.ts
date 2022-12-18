@@ -9,7 +9,7 @@
 
 import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, HStrut, Image, Text, VBox } from '../../../../scenery/js/imports.js';
 import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
@@ -23,6 +23,7 @@ import { ViewMode } from '../enum/ViewMode.js';
 import BeakerNode from './BeakerNode.js';
 import ConcentrationGraphNode from './graph/ConcentrationGraphNode.js';
 import createMoleculeNode from './createMoleculeNode.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // constants
 const TEXT_ICON_X_SPACING = 10;
@@ -36,23 +37,21 @@ const ICON_OPTIONS = { scale: 0.75 };
 const TOUCH_AREA_X_DILATION = 10;
 const TOUCH_AREA_Y_DILATION = 3;
 
-type SelfOptions = EmptySelfOptions;
-
-type ViewsPanelOptions = SelfOptions & PanelOptions;
-
 export default class ViewsPanel extends Panel {
 
   public constructor( viewModeProperty: StringUnionProperty<ViewMode>,
                       solventVisibleProperty: Property<boolean>,
                       panelAlignGroup: AlignGroup,
-                      providedOptions?: ViewsPanelOptions ) {
+                      tandem: Tandem ) {
 
-    const options = optionize3<ViewsPanelOptions, SelfOptions, PanelOptions>()(
-      {}, ABSConstants.PANEL_OPTIONS, providedOptions );
+    const options = combineOptions<PanelOptions>( {}, ABSConstants.PANEL_OPTIONS, {
+      tandem: tandem
+    } );
 
     const titleText = new Text( AcidBaseSolutionsStrings.viewsStringProperty, {
       font: ABSConstants.TITLE_FONT,
-      maxWidth: 180 // determined empirically
+      maxWidth: 180, // determined empirically
+      tandem: tandem.createTandem( 'titleText' )
     } );
 
     // Molecules

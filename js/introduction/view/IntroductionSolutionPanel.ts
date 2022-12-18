@@ -20,26 +20,25 @@ import { SolutionType } from '../../common/enum/SolutionType.js';
 import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import { MoleculeKey } from '../../common/model/solutions/Molecule.js';
 import createMoleculeNode from '../../common/view/createMoleculeNode.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type IntroductionSolutionPanelOptions = SelfOptions & PanelOptions;
+import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 
 export default class IntroductionSolutionPanel extends Panel {
 
   public constructor( solutionTypeProperty: Property<SolutionType>, contentAlignGroup: AlignGroup,
-                      providedOptions?: IntroductionSolutionPanelOptions ) {
+                      tandem: Tandem ) {
 
-    const options = optionize3<IntroductionSolutionPanelOptions, SelfOptions, PanelOptions>()(
-      {}, ABSConstants.PANEL_OPTIONS, providedOptions );
+    const options = combineOptions<PanelOptions>( {}, ABSConstants.PANEL_OPTIONS, {
+      tandem: tandem
+    } );
 
     // title
     const titleText = new Text( AcidBaseSolutionsStrings.solutionStringProperty, {
       font: ABSConstants.TITLE_FONT,
-      maxWidth: 180 // determined empirically
+      maxWidth: 180, // determined empirically
+      tandem: tandem.createTandem( 'titleText' )
     } );
 
     // To make all radio button labels have the same width and height
@@ -51,35 +50,40 @@ export default class IntroductionSolutionPanel extends Panel {
       {
         value: 'water',
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.waterStringProperty,
-          'H<sub>2</sub>O', 'H2O', labelsAlignGroup )
+          'H<sub>2</sub>O', 'H2O', labelsAlignGroup, tandem ),
+        tandemName: `water${AquaRadioButton.TANDEM_NAME_SUFFIX}`
       },
 
       // Strong Acid (HA)
       {
         value: 'strongAcid',
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.strongAcidStringProperty,
-          'H<i>A</i>', 'HA', labelsAlignGroup )
+          'H<i>A</i>', 'HA', labelsAlignGroup, tandem ),
+        tandemName: `strongAcid${AquaRadioButton.TANDEM_NAME_SUFFIX}`
       },
 
       // Weak Acid (HA)
       {
         value: 'weakAcid',
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.weakAcidStringProperty,
-          'H<i>A</i>', 'HA', labelsAlignGroup )
+          'H<i>A</i>', 'HA', labelsAlignGroup, tandem ),
+        tandemName: `weakAcid${AquaRadioButton.TANDEM_NAME_SUFFIX}`
       },
 
       // Strong Base (M)
       {
         value: 'strongBase',
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.strongBaseStringProperty,
-          '<i>M</i>OH', 'MOH', labelsAlignGroup )
+          '<i>M</i>OH', 'MOH', labelsAlignGroup, tandem ),
+        tandemName: `strongBase${AquaRadioButton.TANDEM_NAME_SUFFIX}`
       },
 
       // Weak Base (B)
       {
         value: 'weakBase',
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.weakBaseStringProperty,
-          '<i>B</i>', 'B', labelsAlignGroup )
+          '<i>B</i>', 'B', labelsAlignGroup, tandem ),
+        tandemName: `weakBase${AquaRadioButton.TANDEM_NAME_SUFFIX}`
       }
     ];
 
@@ -110,14 +114,15 @@ export default class IntroductionSolutionPanel extends Panel {
  * Creates a label for a radio button.
  */
 function createRadioButtonLabel( solutionNameProperty: TReadOnlyProperty<string>, formula: string,
-                                 key: MoleculeKey, labelsAlignGroup: AlignGroup ): Node {
+                                 key: MoleculeKey, labelsAlignGroup: AlignGroup, tandem: Tandem ): Node {
 
   // Combine the solution's name and formula
   const stringProperty = new DerivedProperty( [ solutionNameProperty ], solutionName => `${solutionName} (${formula})` );
 
   const text = new RichText( stringProperty, {
     font: new PhetFont( 12 ),
-    maxWidth: 145 // determined empirically
+    maxWidth: 145, // determined empirically
+    tandem: tandem.createTandem( 'text' )
   } );
 
   // Create the molecule's icon
