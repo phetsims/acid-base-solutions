@@ -17,6 +17,8 @@ import NumberProperty from '../../../../../axon/js/NumberProperty.js';
 import Property from '../../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../../dot/js/Utils.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
+import NumberIO from '../../../../../tandem/js/types/NumberIO.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import { SolutionType } from '../../enum/SolutionType.js';
 import { Molecule } from './Molecule.js';
@@ -35,17 +37,27 @@ export default abstract class AqueousSolution {
    * @param concentration - the initial concentration of the solute, at the start of the reaction
    * @param molecules - the molecules that make up the solution. The order of elements in this array determines the
    *   left-to-right order of bars in the graph, and the front-to-back rendering order of molecules in the magnifier.
+   * @param tandem
    */
-  protected constructor( solutionType: SolutionType, strength: number, concentration: number, molecules: Molecule[] ) {
+  protected constructor( solutionType: SolutionType, strength: number, concentration: number, molecules: Molecule[], tandem: Tandem ) {
 
     this.solutionType = solutionType;
     this.molecules = molecules;
-    this.strengthProperty = new NumberProperty( strength );
-    this.concentrationProperty = new NumberProperty( concentration );
+
+    this.strengthProperty = new NumberProperty( strength, {
+      tandem: tandem.createTandem( 'strengthProperty' )
+    } );
+
+    this.concentrationProperty = new NumberProperty( concentration, {
+      tandem: tandem.createTandem( 'concentrationProperty' )
+    } );
 
     this.pHProperty = new DerivedProperty( [ this.strengthProperty, this.concentrationProperty ],
       ( strength, concentration ) => {
         return -Utils.roundSymmetric( 100 * Utils.log10( this.getH3OConcentration() ) ) / 100;
+      }, {
+        tandem: tandem.createTandem( 'pHProperty' ),
+        phetioValueType: NumberIO
       } );
   }
 

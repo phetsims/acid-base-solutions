@@ -11,19 +11,22 @@ import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import ABSConstants from '../../ABSConstants.js';
 import AqueousSolution from './AqueousSolution.js';
 import ABSColors from '../../ABSColors.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
+import { Molecule } from './Molecule.js';
 
 export default class StrongAcid extends AqueousSolution {
 
-  public constructor() {
-    super( 'strongAcid', ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue,
-      [
-        // molecules found in this solution
-        { key: 'HA', color: ABSColors.HA, getConcentration: () => this.getSoluteConcentration() },
-        { key: 'H2O', color: ABSColors.H2O, getConcentration: () => this.getH2OConcentration() },
-        { key: 'A', color: ABSColors.A, getConcentration: () => this.getProductConcentration() },
-        { key: 'H3O', color: ABSColors.H3O, getConcentration: () => this.getH3OConcentration() }
-      ]
-    );
+  public constructor( tandem: Tandem ) {
+
+    // molecules found in this solution
+    const molecules: Molecule[] = [
+      { key: 'HA', color: ABSColors.HA, getConcentration: () => this.getSoluteConcentration() },
+      { key: 'H2O', color: ABSColors.H2O, getConcentration: () => this.getH2OConcentration() },
+      { key: 'A', color: ABSColors.A, getConcentration: () => this.getProductConcentration() },
+      { key: 'H3O', color: ABSColors.H3O, getConcentration: () => this.getH3OConcentration() }
+    ];
+
+    super( 'strongAcid', ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue, molecules, tandem );
   }
 
   // [HA] = 0

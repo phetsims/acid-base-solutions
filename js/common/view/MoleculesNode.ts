@@ -13,7 +13,7 @@ import acidBaseSolutions from '../../acidBaseSolutions.js';
 import createMoleculeNode from './createMoleculeNode.js';
 import Magnifier from '../model/Magnifier.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import { MoleculeName } from '../model/solutions/Molecule.js';
+import { MoleculeKey } from '../model/solutions/Molecule.js';
 
 // constants
 const BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules
@@ -33,7 +33,7 @@ export default class MoleculesNode extends CanvasNode {
 
   private readonly magnifier: Magnifier;
   private readonly positionRadius: number; // radius for computing random positions
-  private readonly moleculesDataMap: Map<MoleculeName, MoleculesData>;
+  private readonly moleculesDataMap: Map<MoleculeKey, MoleculesData>;
 
   public constructor( magnifier: Magnifier, lensBounds: Bounds2, lensLineWidth: number ) {
 
@@ -43,10 +43,10 @@ export default class MoleculesNode extends CanvasNode {
 
     this.positionRadius = IMAGE_SCALE * ( this.magnifier.radius - ( lensLineWidth / 2 ) );
 
-    this.moleculesDataMap = new Map<MoleculeName, MoleculesData>();
+    this.moleculesDataMap = new Map<MoleculeKey, MoleculesData>();
 
     // Generate images, to populate MoleculesData.canvas. This happens asynchronously.
-    const createCanvas = ( key: MoleculeName ) => {
+    const createCanvas = ( key: MoleculeKey ) => {
 
       const moleculeNode = createMoleculeNode( key );
 

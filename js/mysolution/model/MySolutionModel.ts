@@ -31,10 +31,10 @@ export default class MySolutionModel extends ABSModel {
   public constructor( tandem: Tandem ) {
 
     const solutions = [
-      new StrongAcid(),
-      new WeakAcid(),
-      new StrongBase(),
-      new WeakBase()
+      new StrongAcid( tandem.createTandem( 'strongAcid' ) ),
+      new WeakAcid( tandem.createTandem( 'weakAcid' ) ),
+      new StrongBase( tandem.createTandem( 'strongBase' ) ),
+      new WeakBase( tandem.createTandem( 'weakBase' ) )
     ];
 
     super( solutions, DEFAULT_SOLUTION_TYPE );
@@ -51,11 +51,13 @@ export default class MySolutionModel extends ABSModel {
     assert && assert( defaultSolution );
 
     this.concentrationProperty = new NumberProperty( defaultSolution.concentrationProperty.get(), {
-      reentrant: true
+      reentrant: true,
+      tandem: tandem.createTandem( 'concentrationProperty' )
     } );
 
     this.strengthProperty = new NumberProperty( defaultSolution.strengthProperty.get(), {
-      reentrant: true
+      reentrant: true,
+      tandem: tandem.createTandem( 'strengthProperty' )
     } );
 
     const setStrength = ( value: number ) => this.strengthProperty.set( value );

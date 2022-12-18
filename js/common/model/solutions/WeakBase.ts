@@ -11,18 +11,23 @@ import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import ABSConstants from '../../ABSConstants.js';
 import AqueousSolution from './AqueousSolution.js';
 import ABSColors from '../../ABSColors.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
+import { Molecule } from './Molecule.js';
 
 export default class WeakBase extends AqueousSolution {
 
-  public constructor() {
+  public constructor( tandem: Tandem ) {
+
+    // molecules found in this solution
+    const molecule: Molecule[] = [
+      { key: 'B', color: ABSColors.B, getConcentration: () => this.getSoluteConcentration() },
+      { key: 'H2O', color: ABSColors.H2O, getConcentration: () => this.getH2OConcentration() },
+      { key: 'BH', color: ABSColors.BH, getConcentration: () => this.getProductConcentration() },
+      { key: 'OH', color: ABSColors.OH, getConcentration: () => this.getOHConcentration() }
+    ];
+
     super( 'weakBase', ABSConstants.WEAK_STRENGTH_RANGE.defaultValue, ABSConstants.CONCENTRATION_RANGE.defaultValue,
-      [
-        // molecules found in this solution
-        { key: 'B', color: ABSColors.B, getConcentration: () => this.getSoluteConcentration() },
-        { key: 'H2O', color: ABSColors.H2O, getConcentration: () => this.getH2OConcentration() },
-        { key: 'BH', color: ABSColors.BH, getConcentration: () => this.getProductConcentration() },
-        { key: 'OH', color: ABSColors.OH, getConcentration: () => this.getOHConcentration() }
-      ] );
+      molecule, tandem );
   }
 
   // [B] = c - [BH+]

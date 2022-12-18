@@ -21,7 +21,7 @@ import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
-import { MoleculeName } from '../../common/model/solutions/Molecule.js';
+import { MoleculeKey } from '../../common/model/solutions/Molecule.js';
 import createMoleculeNode from '../../common/view/createMoleculeNode.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -110,7 +110,7 @@ export default class IntroductionSolutionPanel extends Panel {
  * Creates a label for a radio button.
  */
 function createRadioButtonLabel( solutionNameProperty: TReadOnlyProperty<string>, formula: string,
-                                 key: MoleculeName, labelsAlignGroup: AlignGroup ): Node {
+                                 key: MoleculeKey, labelsAlignGroup: AlignGroup ): Node {
 
   // Combine the solution's name and formula
   const stringProperty = new DerivedProperty( [ solutionNameProperty ], solutionName => `${solutionName} (${formula})` );
