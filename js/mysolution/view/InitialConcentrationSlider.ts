@@ -16,11 +16,12 @@ import Utils from '../../../../dot/js/Utils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text } from '../../../../scenery/js/imports.js';
 import HSlider from '../../../../sun/js/HSlider.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 
 export default class InitialConcentrationSlider extends HSlider {
 
-  public constructor( concentrationProperty: Property<number>, concentrationRange: RangeWithValue ) {
+  public constructor( concentrationProperty: Property<number>, concentrationRange: RangeWithValue, tandem: Tandem ) {
 
     const model = new SliderModel( concentrationProperty, concentrationRange );
 
@@ -30,7 +31,8 @@ export default class InitialConcentrationSlider extends HSlider {
       thumbTouchAreaXDilation: 6,
       thumbTouchAreaYDilation: 6,
       majorTickLength: 12,
-      tickLabelSpacing: 2
+      tickLabelSpacing: 2,
+      tandem: tandem
     } );
 
     // add labels tick marks

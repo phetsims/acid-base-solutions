@@ -162,6 +162,7 @@ export default class ViewsPanel extends Panel {
     super( content, options );
 
     // disable the 'Solvent' checkbox unless 'Molecules' is selected
+    //TODO https://github.com/phetsims/acid-base-solutions/issues/178 use enabledProperty
     viewModeProperty.link( viewMode => {
       solventCheckbox.enabled = ( viewMode === 'molecules' );
     } );
