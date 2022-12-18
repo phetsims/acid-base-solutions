@@ -93,7 +93,8 @@ export default class ABSScreenView extends ScreenView {
     const solutionPanel = createSolutionPanel( panelAlignGroup );
     const viewsPanel = new ViewsPanel( this.viewProperties.viewModeProperty, this.viewProperties.solventVisibleProperty,
       panelAlignGroup, tandem.createTandem( 'viewsPanel' ) );
-    const toolsRadioButtonGroup = new ToolsRadioButtonGroup( this.viewProperties.toolModeProperty );
+    const toolsRadioButtonGroup = new ToolsRadioButtonGroup( this.viewProperties.toolModeProperty,
+      tandem.createTandem( 'toolsRadioButtonGroup' ) );
 
     const controlsParent = new VBox( {
       children: [ solutionPanel, viewsPanel, toolsRadioButtonGroup ],

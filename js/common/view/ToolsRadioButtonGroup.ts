@@ -8,39 +8,47 @@
  */
 
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import { Image } from '../../../../scenery/js/imports.js';
-import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
+import RectangularRadioButton from '../../../../sun/js/buttons/RectangularRadioButton.js';
+import RectangularRadioButtonGroup, { RectangularRadioButtonGroupItem } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import lightBulbIcon_png from '../../../images/lightBulbIcon_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import { ToolMode } from '../enum/ToolMode.js';
 import PHMeterNode from './PHMeterNode.js';
 import PHPaperNode from './PHPaperNode.js';
 
-type SelfOptions = EmptySelfOptions;
-
-type ToolsRadioButtonGroupOptions = SelfOptions & RectangularRadioButtonGroupOptions;
-
 export default class ToolsRadioButtonGroup extends RectangularRadioButtonGroup<ToolMode> {
 
-  public constructor( toolModeProperty: StringUnionProperty<ToolMode>, providedOptions?: ToolsRadioButtonGroupOptions ) {
+  public constructor( toolModeProperty: StringUnionProperty<ToolMode>, tandem: Tandem ) {
 
-    const options = optionize<ToolsRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>()( {
+    const items: RectangularRadioButtonGroupItem<ToolMode>[] = [
+      {
+        value: 'pHMeter',
+        createNode: tandem => PHMeterNode.createIcon(),
+        tandemName: `phMeter${RectangularRadioButton.TANDEM_NAME_SUFFIX}`
+      },
+      {
+        value: 'pHPaper',
+        createNode: tandem => PHPaperNode.createIcon( 8, 30 ),
+        tandemName: `phPaper${RectangularRadioButton.TANDEM_NAME_SUFFIX}`
+      },
+      {
+        value: 'conductivity',
+        createNode: tandem => new Image( lightBulbIcon_png ),
+        tandemName: `conductivity${RectangularRadioButton.TANDEM_NAME_SUFFIX}`
+      }
+    ];
 
-      // RectangularRadioButtonGroupOptions
+    super( toolModeProperty, items, {
       orientation: 'horizontal',
       spacing: 5,
       radioButtonOptions: {
         baseColor: 'white',
         xMargin: 9
-      }
-    }, providedOptions );
-
-    super( toolModeProperty, [
-      { value: 'pHMeter', createNode: tandem => PHMeterNode.createIcon(), tandemName: 'phMeterRadioButton' },
-      { value: 'pHPaper', createNode: tandem => PHPaperNode.createIcon( 8, 30 ), tandemName: 'phPaperRadioButton' },
-      { value: 'conductivity', createNode: tandem => new Image( lightBulbIcon_png ), tandemName: 'conductivityRadioButton' }
-    ], options );
+      },
+      tandem: tandem
+    } );
   }
 
   public override dispose(): void {
