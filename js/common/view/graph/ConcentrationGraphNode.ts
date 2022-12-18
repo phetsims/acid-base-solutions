@@ -76,6 +76,11 @@ export default class ConcentrationGraphNode extends Node {
     } );
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   /*
    * Makes the correct number of bars visible for the selected solution,
    * and sets the bars colors and positions to match the molecules in the solution.

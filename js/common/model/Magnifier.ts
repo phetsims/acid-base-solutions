@@ -28,6 +28,10 @@ export default class Magnifier {
     this.radius = 0.465 * beaker.size.height;
     this.position = beaker.position.plusXY( 0, -beaker.size.height / 2 );
   }
+
+  public dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+  }
 }
 
 acidBaseSolutions.register( 'Magnifier', Magnifier );

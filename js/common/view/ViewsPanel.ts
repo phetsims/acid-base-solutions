@@ -127,6 +127,11 @@ export default class ViewsPanel extends Panel {
       solventCheckbox.enabled = ( viewMode === 'molecules' );
     } );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 acidBaseSolutions.register( 'ViewsPanel', ViewsPanel );

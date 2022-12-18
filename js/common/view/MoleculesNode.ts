@@ -83,6 +83,11 @@ export default class MoleculesNode extends CanvasNode {
     } );
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   public reset(): void {
 
     // Reset all molecule counts to zero.

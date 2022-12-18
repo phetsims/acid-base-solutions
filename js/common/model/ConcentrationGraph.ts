@@ -31,6 +31,10 @@ export default class ConcentrationGraph {
     this.height = 0.9 * beaker.size.height;
     this.position = beaker.position.plusXY( ( this.width - beaker.size.width ) / 2, -( beaker.size.height + this.height ) / 2 );
   }
+
+  public dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+  }
 }
 
 acidBaseSolutions.register( 'ConcentrationGraph', ConcentrationGraph );

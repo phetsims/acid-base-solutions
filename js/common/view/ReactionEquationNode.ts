@@ -54,6 +54,11 @@ export default class ReactionEquationNode extends Node {
       equationsMap.get( newSolutionType )!.setVisible( true );
     } );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 function getMaxWidth( equationsMap: Map<SolutionType, Node> ): number {

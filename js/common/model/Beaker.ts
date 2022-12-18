@@ -50,6 +50,10 @@ export default class Beaker {
 
     this.bounds = new Bounds2( this.left, this.top, this.right, this.bottom );
   }
+
+  public dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+  }
 }
 
 acidBaseSolutions.register( 'Beaker', Beaker );

@@ -39,6 +39,11 @@ export default class ConcentrationSlider extends HSlider {
       this.addMajorTick( model.sliderValueRange.min + step * i, new Text( concentrationRange.min * Math.pow( 10, i ), { font: new PhetFont( 10 ) } ) );
     }
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 /**
@@ -73,6 +78,10 @@ class SliderModel {
     concentrationProperty.link( concentration => {
       this.sliderValueProperty.value = Utils.log10( concentration );
     } );
+  }
+
+  public dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
   }
 }
 
