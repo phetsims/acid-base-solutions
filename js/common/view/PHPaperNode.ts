@@ -10,20 +10,19 @@
 
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Circle, Color, DragListener, Node, NodeOptions, Rectangle } from '../../../../scenery/js/imports.js';
+import { Circle, Color, DragListener, Node, Rectangle } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
 import PHPaper from '../model/PHPaper.js';
+import { ToolMode } from '../enum/ToolMode.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
 const PAPER_STROKE = 'rgb(100, 100, 100)';
-
-type SelfOptions = EmptySelfOptions;
-
-type PHPaperNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
 
 export default class PHPaperNode extends Node {
 
@@ -32,13 +31,7 @@ export default class PHPaperNode extends Node {
   private readonly pHPaper: PHPaper;
   private animating: boolean; // is the paper animating?
 
-  public constructor( pHPaper: PHPaper, providedOptions: PHPaperNodeOptions ) {
-
-    const options = optionize<PHPaperNodeOptions, SelfOptions, NodeOptions>()( {
-
-      // NodeOptions
-      cursor: 'pointer'
-    }, providedOptions );
+  public constructor( pHPaper: PHPaper, toolModeProperty: StringUnionProperty<ToolMode>, tandem: Tandem ) {
 
     // blank paper
     const paperNode = new Rectangle( 0, 0, pHPaper.paperSize.width, pHPaper.paperSize.height, {
@@ -60,12 +53,20 @@ export default class PHPaperNode extends Node {
     indicatorNode.centerX = 0;
     indicatorNode.top = 0;
 
-    options.children = [ paperNode, indicatorNode ];
+    const children: Node[] = [ paperNode, indicatorNode ];
     if ( SHOW_ORIGIN ) {
-      options.children.push( new Circle( 2, { fill: 'red' } ) );
+      children.push( new Circle( 2, { fill: 'red' } ) );
     }
 
-    super( options );
+    super( {
+      children: children,
+      cursor: 'pointer',
+      visibleProperty: new DerivedProperty( [ toolModeProperty ], toolMode => ( toolMode === 'pHPaper' ), {
+        tandem: tandem.createTandem( 'visibleProperty' ),
+        phetioValueType: BooleanIO
+      } ),
+      tandem: tandem
+    } );
 
     // expand touch area
     this.touchArea = this.localBounds.dilatedXY( 10, 10 );

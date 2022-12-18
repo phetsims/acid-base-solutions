@@ -11,14 +11,16 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Circle, DragListener, Node, NodeOptions, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { Circle, DragListener, Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import PHMeter from '../model/PHMeter.js';
+import { ToolMode } from '../enum/ToolMode.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
@@ -30,19 +32,9 @@ const BACKGROUND_FILL = 'rgb( 225, 225, 225 )';
 const BACKGROUND_STROKE = 'rgb( 64, 64, 64 )';
 const PH_TEXT_MAX_WIDTH = 70;
 
-type SelfOptions = EmptySelfOptions;
-
-type PHMeterNodeNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
-
 export default class PHMeterNode extends Node {
 
-  public constructor( pHMeter: PHMeter, providedOptions: PHMeterNodeNodeOptions ) {
-
-    const options = optionize<PHMeterNodeNodeOptions, SelfOptions, NodeOptions>()( {
-
-      // NodeOptions
-      cursor: 'pointer'
-    }, providedOptions );
+  public constructor( pHMeter: PHMeter, toolModeProperty: StringUnionProperty<ToolMode>, tandem: Tandem ) {
 
     // probe
     const probeNode = new ProbeNode( 5, 40, 14, 36 );
@@ -82,12 +74,20 @@ export default class PHMeterNode extends Node {
       pHText.centerY = backgroundNode.centerY;
     } );
 
-    options.children = [ probeNode, backgroundNode, pHText ];
+    const children: Node[] = [ probeNode, backgroundNode, pHText ];
     if ( SHOW_ORIGIN ) {
-      options.children.push( new Circle( 2, { fill: 'red' } ) );
+      children.push( new Circle( 2, { fill: 'red' } ) );
     }
 
-    super( options );
+    super( {
+      children: children,
+      cursor: 'pointer',
+      visibleProperty: new DerivedProperty( [ toolModeProperty ], toolMode => ( toolMode === 'pHMeter' ), {
+        tandem: tandem.createTandem( 'visibleProperty' ),
+        phetioValueType: BooleanIO
+      } ),
+      tandem: tandem
+    } );
 
     // Constrained dragging
     let clickYOffset = 0;

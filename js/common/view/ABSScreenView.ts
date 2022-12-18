@@ -78,27 +78,15 @@ export default class ABSScreenView extends ScreenView {
     } );
 
     // Tools
-    const pHMeterNode = new PHMeterNode( model.pHMeter, {
-      visibleProperty: new DerivedProperty( [ this.viewProperties.toolModeProperty ], viewMode => ( viewMode === 'pHMeter' ) ),
-      tandem: tandem.createTandem( 'pHMeterNode' )
-    } );
-
-    const pHPaperNode = new PHPaperNode( model.pHPaper, {
-      visibleProperty: new DerivedProperty( [ this.viewProperties.toolModeProperty ], viewMode => ( viewMode === 'pHPaper' ) ),
-      tandem: tandem.createTandem( 'pHPaperNode' )
-    } );
-
-    const pHColorKeyNode = new PHColorKeyNode( model.pHPaper.paperSize, {
+    const pHMeterNode = new PHMeterNode( model.pHMeter, this.viewProperties.toolModeProperty, tandem.createTandem( 'pHMeterNode' ) );
+    const pHPaperNode = new PHPaperNode( model.pHPaper, this.viewProperties.toolModeProperty, tandem.createTandem( 'pHPaperNode' ) );
+    const pHColorKeyNode = new PHColorKeyNode( model.pHPaper.paperSize, this.viewProperties.toolModeProperty, {
       left: model.beaker.left + 3,
       bottom: model.beaker.top - 50,
-      visibleProperty: new DerivedProperty( [ this.viewProperties.toolModeProperty ], viewMode => ( viewMode === 'pHPaper' ) ),
       tandem: tandem.createTandem( 'pHColorKeyNode' )
     } );
-
-    const conductivityTesterNode = new ABSConductivityTesterNode( model.conductivityTester, {
-      visibleProperty: new DerivedProperty( [ this.viewProperties.toolModeProperty ], viewMode => ( viewMode === 'conductivity' ) ),
-      tandem: tandem.createTandem( 'conductivityTesterNode' )
-    } );
+    const conductivityTesterNode = new ABSConductivityTesterNode( model.conductivityTester,
+      this.viewProperties.toolModeProperty, tandem.createTandem( 'conductivityTesterNode' ) );
 
     // To make panels have the same width
     const panelAlignGroup = new AlignGroup( {
