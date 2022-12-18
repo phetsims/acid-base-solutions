@@ -78,13 +78,8 @@ export default class ABSModel implements TModel {
   }
 
   public reset(): void {
-
-    // reset Properties
     this.solutionTypeProperty.reset();
-
-    // reset solutions
     this.solutionsMap.forEach( ( solution, solutionType ) => solution.reset() );
-
     this.pHMeter.reset();
     this.pHPaper.reset();
     this.conductivityTester.reset();
