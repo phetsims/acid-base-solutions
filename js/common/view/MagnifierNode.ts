@@ -9,7 +9,9 @@
 
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import { Circle, Image, Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { Circle, Image, Node, NodeOptions, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import solvent_png from '../../../images/solvent_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import Magnifier from '../model/Magnifier.js';
@@ -20,14 +22,22 @@ const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
 const CLIPPING_ENABLED = true; // set to false to debug positioning of molecules
 const LENS_LINE_WIDTH = 8;
 
+type SelfOptions = EmptySelfOptions;
+
+type MagnifierNodeOptions = SelfOptions & PickRequired<NodeOptions, 'visibleProperty'>;
+
 export default class MagnifierNode extends Node {
 
   private readonly solventNode: Node;
   private readonly moleculesNode: MoleculesNode;
 
-  public constructor( magnifier: Magnifier ) {
+  public constructor( magnifier: Magnifier, providedOptions: MagnifierNodeOptions ) {
 
-    super();
+    const options = optionize<MagnifierNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // NodeOptions
+      translation: magnifier.position
+    }, providedOptions );
 
     // lens
     const RADIUS = magnifier.radius;
@@ -46,32 +56,30 @@ export default class MagnifierNode extends Node {
     const waterNode = new Circle( RADIUS, { fill: 'rgb(210,231,235)' } );
 
     // solvent (H2O)
-    this.solventNode = new Image( solvent_png, {
+    const solventNode = new Image( solvent_png, {
       imageOpacity: 0.6,  // reduce opacity so that other molecules stand out more
       centerX: 0,
       centerY: 0
     } );
 
     // molecules
-    this.moleculesNode = new MoleculesNode( magnifier, new Bounds2( -RADIUS, -RADIUS, RADIUS, RADIUS ), LENS_LINE_WIDTH );
+    const moleculesNode = new MoleculesNode( magnifier, new Bounds2( -RADIUS, -RADIUS, RADIUS, RADIUS ), LENS_LINE_WIDTH );
 
     // stuff that's visible through (and therefore clipped to) the lens
-    const viewportNode = new Node( { children: [ this.solventNode, this.moleculesNode ] } );
+    const viewportNode = new Node( { children: [ solventNode, moleculesNode ] } );
     if ( CLIPPING_ENABLED ) {
       viewportNode.clipArea = lensShape;
     }
 
-    // rendering order
-    this.addChild( waterNode );
-    this.addChild( viewportNode );
-    this.addChild( handleNode );
-    this.addChild( lensNode );
+    options.children = [ waterNode, viewportNode, handleNode, lensNode ];
     if ( SHOW_ORIGIN ) {
-      this.addChild( new Circle( 10, { fill: 'red' } ) );
+      options.children.push( new Circle( 10, { fill: 'red' } ) );
     }
 
-    // move to correct position
-    this.translation = magnifier.position;
+    super( options );
+
+    this.moleculesNode = moleculesNode;
+    this.solventNode = solventNode;
 
     // Observe the strength and concentration Properties for the selected solution.
     const updateMoleculesBound = this.updateMolecules.bind( this );

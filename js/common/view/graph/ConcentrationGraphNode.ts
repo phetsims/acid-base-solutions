@@ -8,27 +8,34 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Node, Rectangle } from '../../../../../scenery/js/imports.js';
+import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
+import { Node, NodeOptions, Rectangle } from '../../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import ABSColors from '../../ABSColors.js';
 import ConcentrationGraph from '../../model/ConcentrationGraph.js';
 import ConcentrationGraphBackgroundNode from './ConcentrationGraphBackgroundNode.js';
 import ConcentrationGraphBarNode from './ConcentrationGraphBarNode.js';
 
+type SelfOptions = EmptySelfOptions;
+
+type ConcentrationGraphNodeOptions = SelfOptions & PickRequired<NodeOptions, 'visibleProperty'>;
+
 export default class ConcentrationGraphNode extends Node {
 
   private readonly graph: ConcentrationGraph;
-  private readonly bars: ConcentrationGraphBarNode[];
+  private readonly barNodes: ConcentrationGraphBarNode[];
 
-  public constructor( graph: ConcentrationGraph ) {
+  public constructor( graph: ConcentrationGraph, providedOptions: ConcentrationGraphNodeOptions ) {
 
-    super();
+    const options = optionize<ConcentrationGraphNodeOptions, SelfOptions, NodeOptions>()( {
 
-    this.graph = graph;
-    this.bars = [];
+      // NodeOptions
+      translation: graph.position
+    }, providedOptions );
 
     // add background
-    this.addChild( new ConcentrationGraphBackgroundNode( graph.width, graph.height ) );
+    const backgroundNode = new ConcentrationGraphBackgroundNode( graph.width, graph.height );
 
     // find maximum number of bars for all solutions
     let maxBars = 0;
@@ -37,13 +44,17 @@ export default class ConcentrationGraphNode extends Node {
     } );
 
     // create enough bars for all solutions
+    const barNodes: ConcentrationGraphBarNode[] = [];
     for ( let i = 0; i < maxBars; i++ ) {
-      const barNode = new ConcentrationGraphBarNode( graph.height - 10 );
-      this.bars[ i ] = barNode;
-      this.addChild( barNode );
+      barNodes[ i ] = new ConcentrationGraphBarNode( graph.height - 10 );
     }
 
-    this.translation = graph.position;
+    options.children = [ backgroundNode, ...barNodes ];
+
+    super( options );
+
+    this.graph = graph;
+    this.barNodes = barNodes;
 
     // Observe the strength and concentration Properties for the selected solution.
     const updateValuesBound = this.updateValues.bind( this );
@@ -97,8 +108,8 @@ export default class ConcentrationGraphNode extends Node {
       const numberOfMolecules = molecules.length;
 
       // show one bar for each molecule in the current solution
-      for ( let i = 0, bar; i < this.bars.length; i++ ) {
-        bar = this.bars[ i ];
+      for ( let i = 0, bar; i < this.barNodes.length; i++ ) {
+        bar = this.barNodes[ i ];
         if ( i < numberOfMolecules ) {
           // set visibility, color, value and position of new bars
           bar.setVisible( true );
@@ -127,7 +138,7 @@ export default class ConcentrationGraphNode extends Node {
       const molecules = solution.molecules;
 
       for ( let i = 0; i < molecules.length; i++ ) {
-        this.bars[ i ].setValue( solution.molecules[ i ].getConcentration() );
+        this.barNodes[ i ].setValue( solution.molecules[ i ].getConcentration() );
       }
     }
   }

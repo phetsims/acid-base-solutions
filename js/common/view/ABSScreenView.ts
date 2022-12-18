@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
@@ -63,8 +64,12 @@ export default class ABSScreenView extends ScreenView {
 
     const beakerNode = new BeakerNode( model.beaker );
     const equationNode = new ReactionEquationNode( model.beaker, model.solutionTypeProperty );
-    const magnifierNode = new MagnifierNode( model.magnifier );
-    const graphNode = new ConcentrationGraphNode( model.graph );
+    const magnifierNode = new MagnifierNode( model.magnifier, {
+      visibleProperty: new DerivedProperty( [ this.viewProperties.viewModeProperty ], viewMode => ( viewMode === 'molecules' ) )
+    } );
+    const graphNode = new ConcentrationGraphNode( model.graph, {
+      visibleProperty: new DerivedProperty( [ this.viewProperties.viewModeProperty ], viewMode => ( viewMode === 'graph' ) )
+    } );
 
     // Tools
     const pHMeterNode = new PHMeterNode( model.pHMeter );
@@ -116,11 +121,6 @@ export default class ABSScreenView extends ScreenView {
 
     this.viewProperties.solventVisibleProperty.link( soluteVisible => {
       magnifierNode.setSolventVisible( soluteVisible );
-    } );
-
-    this.viewProperties.viewModeProperty.link( viewMode => {
-      magnifierNode.visible = ( viewMode === 'molecules' );
-      graphNode.visible = ( viewMode === 'graph' );
     } );
 
     this.viewProperties.toolModeProperty.link( toolMode => {
