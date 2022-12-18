@@ -36,10 +36,6 @@ const ARROWS_HEAD_ANGLE_DELTA = 0.2 * Math.PI;
 // To make all equations have the same effective dimensions for layout
 const ALIGN_GROUP = new AlignGroup();
 
-//-------------------------------------------------------------------------------------
-// Public functions for creating reaction equations.
-//-------------------------------------------------------------------------------------
-
 const ReactionEquationFactory = {
 
   // 2 H2O <-> H3O+ + OH-
