@@ -64,9 +64,9 @@ export default class PHPaperNode extends Node {
 
       drag: event => {
         const v = this.globalToParentPoint( event.pointer.point ).subtract( clickOffset );
-        pHPaper.positionProperty.set( new Vector2(
+        pHPaper.positionProperty.value = new Vector2(
           Utils.clamp( v.x, pHPaper.dragBounds.minX, pHPaper.dragBounds.maxX ),
-          Utils.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) ) );
+          Utils.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) );
       }
     } );
     this.addInputListener( this.dragListener );
@@ -82,7 +82,7 @@ export default class PHPaperNode extends Node {
 
     this.updateColor = () => {
       if ( this.visible ) {
-        indicatorNode.fill = pHToColor( pHPaper.pHProperty.get() );
+        indicatorNode.fill = pHToColor( pHPaper.pHProperty.value );
       }
     };
     pHPaper.pHProperty.link( this.updateColor );

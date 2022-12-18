@@ -85,7 +85,7 @@ export default class ConcentrationGraphNode extends Node {
 
     if ( this.visible ) {
 
-      const solutionType = this.graph.solutionTypeProperty.get();
+      const solutionType = this.graph.solutionTypeProperty.value;
       const solution = this.graph.solutionsMap.get( solutionType )!;
       assert && assert( solution );
       const molecules = solution.molecules;
@@ -116,7 +116,7 @@ export default class ConcentrationGraphNode extends Node {
 
     if ( this.visible ) {
 
-      const solutionType = this.graph.solutionTypeProperty.get();
+      const solutionType = this.graph.solutionTypeProperty.value;
       const solution = this.graph.solutionsMap.get( solutionType )!;
       assert && assert( solution );
       const molecules = solution.molecules;

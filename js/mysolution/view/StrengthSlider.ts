@@ -66,19 +66,19 @@ class SliderModel {
       Utils.log10( strengthRange.max ),
       Utils.log10( strengthRange.defaultValue ) );
 
-    this.sliderValueProperty = new NumberProperty( Utils.log10( strengthProperty.get() ), {
+    this.sliderValueProperty = new NumberProperty( Utils.log10( strengthProperty.value ), {
       reentrant: true
     } );
 
     // map between linear and logarithmic
     this.sliderValueProperty.link( sliderValue => {
-      if ( strengthIsMutable( solutionTypeProperty.get() ) ) {
-        strengthProperty.set( Math.pow( 10, sliderValue ) );
+      if ( strengthIsMutable( solutionTypeProperty.value ) ) {
+        strengthProperty.value = Math.pow( 10, sliderValue );
       }
     } );
     strengthProperty.link( strength => {
-      if ( strengthIsMutable( solutionTypeProperty.get() ) ) {
-        this.sliderValueProperty.set( Utils.log10( strength ) );
+      if ( strengthIsMutable( solutionTypeProperty.value ) ) {
+        this.sliderValueProperty.value = Utils.log10( strength );
       }
     } );
   }

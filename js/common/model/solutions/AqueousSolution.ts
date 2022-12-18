@@ -68,12 +68,12 @@ export default abstract class AqueousSolution {
 
   // convenience function
   protected getConcentration(): number {
-    return this.concentrationProperty.get();
+    return this.concentrationProperty.value;
   }
 
   // convenience function
   protected getStrength(): number {
-    return this.strengthProperty.get();
+    return this.strengthProperty.value;
   }
 
   public abstract getSoluteConcentration(): number;

@@ -61,16 +61,17 @@ class SliderModel {
       Utils.log10( concentrationRange.max ),
       Utils.log10( concentrationRange.defaultValue ) );
 
-    this.sliderValueProperty = new NumberProperty( Utils.log10( concentrationProperty.get() ), {
+    this.sliderValueProperty = new NumberProperty( Utils.log10( concentrationProperty.value ), {
       reentrant: true
     } );
 
     // map between linear and logarithmic
     this.sliderValueProperty.link( sliderValue => {
-      this.concentrationProperty.set( Utils.toFixedNumber( Math.pow( 10, sliderValue ), 10 ) ); // see issue#73
+      // See https://github.com/phetsims/acid-base-solutions/issues/73
+      this.concentrationProperty.value = Utils.toFixedNumber( Math.pow( 10, sliderValue ), 10 );
     } );
     concentrationProperty.link( concentration => {
-      this.sliderValueProperty.set( Utils.log10( concentration ) );
+      this.sliderValueProperty.value = Utils.log10( concentration );
     } );
   }
 }

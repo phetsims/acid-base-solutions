@@ -50,18 +50,22 @@ export default class MySolutionModel extends ABSModel {
     const defaultSolution = this.solutionsMap.get( DEFAULT_SOLUTION_TYPE )!;
     assert && assert( defaultSolution );
 
-    this.concentrationProperty = new NumberProperty( defaultSolution.concentrationProperty.get(), {
+    this.concentrationProperty = new NumberProperty( defaultSolution.concentrationProperty.value, {
       reentrant: true,
       tandem: tandem.createTandem( 'concentrationProperty' )
     } );
 
-    this.strengthProperty = new NumberProperty( defaultSolution.strengthProperty.get(), {
+    this.strengthProperty = new NumberProperty( defaultSolution.strengthProperty.value, {
       reentrant: true,
       tandem: tandem.createTandem( 'strengthProperty' )
     } );
 
-    const setStrength = ( value: number ) => this.strengthProperty.set( value );
-    const setConcentration = ( value: number ) => this.concentrationProperty.set( value );
+    const setStrength = ( strength: number ) => {
+      this.strengthProperty.value = strength;
+    };
+    const setConcentration = ( concentration: number ) => {
+      this.concentrationProperty.value = concentration;
+    };
     this.solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
 
       const newSolution = this.solutionsMap.get( newSolutionType )!;
@@ -78,7 +82,7 @@ export default class MySolutionModel extends ABSModel {
          * Set concentration of new solution equal to previous solution.
          * Do not do this for strength, see strength observer below and issue #94.
          */
-        newSolution.concentrationProperty.set( previousSolution.concentrationProperty.get() );
+        newSolution.concentrationProperty.value = previousSolution.concentrationProperty.value;
       }
 
       // link to new solution strength and concentration Properties
@@ -87,7 +91,7 @@ export default class MySolutionModel extends ABSModel {
     } );
 
     this.concentrationProperty.link( concentration => {
-      this.solutionsMap.get( this.solutionTypeProperty.get() )!.concentrationProperty.set( concentration );
+      this.solutionsMap.get( this.solutionTypeProperty.value )!.concentrationProperty.value = concentration;
     } );
 
     /*
@@ -97,10 +101,10 @@ export default class MySolutionModel extends ABSModel {
      * Strong solutions have constant strength, so do not synchronize.
      */
     this.strengthProperty.link( strength => {
-      const solutionType = this.solutionTypeProperty.get();
+      const solutionType = this.solutionTypeProperty.value;
       if ( solutionType === 'weakAcid' || solutionType === 'weakBase' ) {
-        this.solutionsMap.get( 'weakAcid' )!.strengthProperty.set( strength );
-        this.solutionsMap.get( 'weakBase' )!.strengthProperty.set( strength );
+        this.solutionsMap.get( 'weakAcid' )!.strengthProperty.value = strength;
+        this.solutionsMap.get( 'weakBase' )!.strengthProperty.value = strength;
       }
     } );
   }

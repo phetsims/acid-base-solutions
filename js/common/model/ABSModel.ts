@@ -51,7 +51,7 @@ export default class ABSModel implements TModel {
       validValues: SolutionTypeValues
     } );
 
-    this.pHProperty = new NumberProperty( this.solutionsMap.get( defaultSolutionType )!.pHProperty.get() );
+    this.pHProperty = new NumberProperty( this.solutionsMap.get( defaultSolutionType )!.pHProperty.value );
 
     this.beaker = new Beaker();
     this.magnifier = new Magnifier( this.beaker, this.solutionsMap, this.solutionTypeProperty );
@@ -61,7 +61,9 @@ export default class ABSModel implements TModel {
     this.conductivityTester = new ConductivityTester( this.beaker, this.pHProperty );
 
     // synchronize with pH of the solution that is currently selected
-    const setPH = ( value: number ) => this.pHProperty.set( value );
+    const setPH = ( pH: number ) => {
+      this.pHProperty.value = pH;
+    };
     this.solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
 
       // unlink from previous solution pH property

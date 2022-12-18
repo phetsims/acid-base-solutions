@@ -90,7 +90,9 @@ export default class PHMeterNode extends Node {
 
       drag: event => {
         const y = this.globalToParentPoint( event.pointer.point ).y - clickYOffset;
-        pHMeter.positionProperty.set( new Vector2( pHMeter.positionProperty.get().x, Utils.clamp( y, pHMeter.dragYRange.min, pHMeter.dragYRange.max ) ) );
+        pHMeter.positionProperty.value = new Vector2(
+          pHMeter.positionProperty.value.x,
+          Utils.clamp( y, pHMeter.dragYRange.min, pHMeter.dragYRange.max ) );
       }
     } ) );
 

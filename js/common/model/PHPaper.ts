@@ -48,7 +48,7 @@ export default class PHPaper {
 
     // clear the indicator color from the paper and recompute its height
     const resetIndicator = () => {
-      this.indicatorHeightProperty.set( 0 );
+      this.indicatorHeightProperty.value = 0;
       this.updateIndicatorHeight();
     };
     solutionTypeProperty.link( resetIndicator );
@@ -76,9 +76,9 @@ export default class PHPaper {
    * indicator color to be shown on the paper when it is dipped into solution and pulled out.
    */
   private updateIndicatorHeight(): void {
-    if ( this.beaker.bounds.containsPoint( this.positionProperty.get() ) ) {
-      const height = Utils.clamp( this.positionProperty.get().y - this.beaker.top + 5, this.indicatorHeightProperty.get(), this.paperSize.height );
-      this.indicatorHeightProperty.set( height );
+    if ( this.beaker.bounds.containsPoint( this.positionProperty.value ) ) {
+      const height = Utils.clamp( this.positionProperty.value.y - this.beaker.top + 5, this.indicatorHeightProperty.value, this.paperSize.height );
+      this.indicatorHeightProperty.value = height;
     }
   }
 }

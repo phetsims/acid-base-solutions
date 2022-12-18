@@ -34,7 +34,7 @@ export default class PHMeter {
 
   // Is the tip of the pH probe in solution?
   public inSolution(): boolean {
-    return this.beaker.bounds.containsPoint( this.positionProperty.get() );
+    return this.beaker.bounds.containsPoint( this.positionProperty.value );
   }
 }
 

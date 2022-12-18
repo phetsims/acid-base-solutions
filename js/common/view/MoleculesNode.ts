@@ -94,7 +94,7 @@ export default class MoleculesNode extends CanvasNode {
   // Updates the molecules data structure and triggers a paintCanvas.
   public update(): void {
 
-    const solutionType = this.magnifier.solutionTypeProperty.get();
+    const solutionType = this.magnifier.solutionTypeProperty.value;
     const solution = this.magnifier.solutionsMap.get( solutionType )!;
     assert && assert( solution );
 
@@ -136,7 +136,7 @@ export default class MoleculesNode extends CanvasNode {
    */
   public override paintCanvas( context: CanvasRenderingContext2D ): void {
 
-    const solutionType = this.magnifier.solutionTypeProperty.get();
+    const solutionType = this.magnifier.solutionTypeProperty.value;
     const solution = this.magnifier.solutionsMap.get( solutionType )!;
     assert && assert( solution );
 
