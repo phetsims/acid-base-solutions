@@ -106,6 +106,10 @@ export default class PHPaperNode extends Node {
 
     this.pHPaper = pHPaper;
     this.animating = false;
+
+    this.addLinkedElement( pHPaper, {
+      tandem: tandem.createTandem( pHPaper.tandem.name )
+    } );
   }
 
   public override dispose(): void {

@@ -12,13 +12,13 @@ import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ReactionEquationFactory from './ReactionEquationFactory.js';
 import Beaker from '../model/Beaker.js';
 import { SolutionType } from '../enum/SolutionType.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 
 export default class ReactionEquationNode extends Node {
 
-  public constructor( beaker: Beaker, solutionTypeProperty: TReadOnlyProperty<SolutionType>, tandem: Tandem ) {
+  public constructor( beaker: Beaker, solutionTypeProperty: ReadOnlyProperty<SolutionType>, tandem: Tandem ) {
 
     // create a Map, so we can look up equations by SolutionType
     const equationsMap = new Map<SolutionType, Node>();
@@ -54,6 +54,10 @@ export default class ReactionEquationNode extends Node {
 
       // show new equation
       equationsMap.get( newSolutionType )!.setVisible( true );
+    } );
+
+    this.addLinkedElement( solutionTypeProperty, {
+      tandem: tandem.createTandem( solutionTypeProperty.tandem.name )
     } );
   }
 

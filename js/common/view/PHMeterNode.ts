@@ -108,6 +108,10 @@ export default class PHMeterNode extends Node {
     pHMeter.positionProperty.link( position => {
       this.translation = position;
     } );
+
+    this.addLinkedElement( pHMeter, {
+      tandem: tandem.createTandem( pHMeter.tandem.name )
+    } );
   }
 
   public override dispose(): void {
