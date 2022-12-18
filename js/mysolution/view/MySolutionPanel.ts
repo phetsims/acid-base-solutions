@@ -17,7 +17,7 @@ import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
-import ConcentrationSlider from './ConcentrationSlider.js';
+import InitialConcentrationSlider from './InitialConcentrationSlider.js';
 import StrengthSlider from './StrengthSlider.js';
 import { SolutionType } from '../../common/enum/SolutionType.js';
 import Property from '../../../../axon/js/Property.js';
@@ -123,7 +123,7 @@ export default class MySolutionPanel extends Panel {
     } );
 
     // Initial Concentration slider
-    const concentrationSlider = new ConcentrationSlider( concentrationProperty, ABSConstants.CONCENTRATION_RANGE );
+    const concentrationSlider = new InitialConcentrationSlider( concentrationProperty, ABSConstants.CONCENTRATION_RANGE );
 
     const strengthTitle = new Text( AcidBaseSolutionsStrings.strengthStringProperty, {
       font: SUBTITLE_FONT,

@@ -18,7 +18,7 @@ import { Text } from '../../../../scenery/js/imports.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 
-export default class ConcentrationSlider extends HSlider {
+export default class InitialConcentrationSlider extends HSlider {
 
   public constructor( concentrationProperty: Property<number>, concentrationRange: RangeWithValue ) {
 
@@ -85,4 +85,4 @@ class SliderModel {
   }
 }
 
-acidBaseSolutions.register( 'ConcentrationSlider', ConcentrationSlider );
+acidBaseSolutions.register( 'InitialConcentrationSlider', InitialConcentrationSlider );
