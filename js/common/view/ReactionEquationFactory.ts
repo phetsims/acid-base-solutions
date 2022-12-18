@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -40,39 +41,39 @@ const ALIGN_GROUP = new AlignGroup();
 const ReactionEquationFactory = {
 
   // 2 H2O <-> H3O+ + OH-
-  createWaterEquation: function(): Node {
+  createWaterEquation( visibleProperty: TReadOnlyProperty<boolean> ): Node {
     return createEquation( [
       create2H2O(),
       createReversibleArrow(),
       createH3O(),
       createPlus(),
       createOH()
-    ] );
+    ], visibleProperty );
   },
 
   // HA + H2O -> A- + H3O+
-  createStrongAcidEquation: function(): Node {
-    return createAcidEquation( false /* isWeak */ );
+  createStrongAcidEquation( visibleProperty: TReadOnlyProperty<boolean> ): Node {
+    return createAcidEquation( false /* isWeak */, visibleProperty );
   },
 
   // HA + H2O <-> A- + H3O+
-  createWeakAcidEquation: function(): Node {
-    return createAcidEquation( true /* isWeak */ );
+  createWeakAcidEquation( visibleProperty: TReadOnlyProperty<boolean> ): Node {
+    return createAcidEquation( true /* isWeak */, visibleProperty );
   },
 
   // MOH -> M+ + OH-
-  createStrongBaseEquation: function(): Node {
+  createStrongBaseEquation( visibleProperty: TReadOnlyProperty<boolean> ): Node {
     return createEquation( [
       createMOH(),
       createIrreversibleArrow(),
       createM(),
       createPlus(),
       createOH()
-    ] );
+    ], visibleProperty );
   },
 
   // B + H2O <-> BH+ + OH-
-  createWeakBaseEquation: function(): Node {
+  createWeakBaseEquation( visibleProperty: TReadOnlyProperty<boolean> ): Node {
     return createEquation( [
       createB(),
       createPlus(),
@@ -81,12 +82,12 @@ const ReactionEquationFactory = {
       createBH(),
       createPlus(),
       createOH()
-    ] );
+    ], visibleProperty );
   }
 };
 
 // Equations for all acids are similar: HA + H2O ? A- + H3O+
-function createAcidEquation( isWeak: boolean ): Node {
+function createAcidEquation( isWeak: boolean, visibleProperty: TReadOnlyProperty<boolean> ): Node {
   return createEquation( [
     createHA(),
     createPlus(),
@@ -95,16 +96,17 @@ function createAcidEquation( isWeak: boolean ): Node {
     createA(),
     createPlus(),
     createH3O()
-  ] );
+  ], visibleProperty );
 }
 
 // Creates an equation by horizontally laying out a set of elements (children).
-function createEquation( children: Node[] ): Node {
+function createEquation( children: Node[], visibleProperty: TReadOnlyProperty<boolean> ): Node {
   return new AlignBox( new HBox( {
     children: children,
     scale: EQUATION_SCALE,
     spacing: 4,
-    align: 'bottom'
+    align: 'bottom',
+    visibleProperty: visibleProperty
   } ), {
     group: ALIGN_GROUP,
     xAlign: 'center',

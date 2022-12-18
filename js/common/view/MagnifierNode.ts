@@ -24,7 +24,7 @@ const LENS_LINE_WIDTH = 8;
 
 type SelfOptions = EmptySelfOptions;
 
-type MagnifierNodeOptions = SelfOptions & PickRequired<NodeOptions, 'visibleProperty'>;
+type MagnifierNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
 
 export default class MagnifierNode extends Node {
 

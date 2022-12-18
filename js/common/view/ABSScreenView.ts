@@ -62,22 +62,31 @@ export default class ABSScreenView extends ScreenView {
       bottom: this.layoutBounds.bottom - 20
     } );
 
-    const beakerNode = new BeakerNode( model.beaker );
-    const equationNode = new ReactionEquationNode( model.beaker, model.solutionTypeProperty );
+    const beakerNode = new BeakerNode( model.beaker, tandem.createTandem( 'beakerNode' ) );
+
+    const reactionEquationNode = new ReactionEquationNode( model.beaker, model.solutionTypeProperty,
+      tandem.createTandem( 'reactionEquationNode' ) );
+
     const magnifierNode = new MagnifierNode( model.magnifier, {
-      visibleProperty: new DerivedProperty( [ this.viewProperties.viewModeProperty ], viewMode => ( viewMode === 'molecules' ) )
+      visibleProperty: new DerivedProperty( [ this.viewProperties.viewModeProperty ], viewMode => ( viewMode === 'molecules' ) ),
+      tandem: tandem.createTandem( 'magnifierNode' )
     } );
+
     const graphNode = new ConcentrationGraphNode( model.graph, {
-      visibleProperty: new DerivedProperty( [ this.viewProperties.viewModeProperty ], viewMode => ( viewMode === 'graph' ) )
+      visibleProperty: new DerivedProperty( [ this.viewProperties.viewModeProperty ], viewMode => ( viewMode === 'graph' ) ),
+      tandem: tandem.createTandem( 'graphNode' )
     } );
 
     // Tools
     const pHMeterNode = new PHMeterNode( model.pHMeter );
+
     const pHPaperNode = new PHPaperNode( model.pHPaper );
+
     const pHColorKeyNode = new PHColorKeyNode( model.pHPaper.paperSize, {
       left: model.beaker.left + 3,
       bottom: model.beaker.top - 50
     } );
+
     const conductivityTesterNode = new ABSConductivityTesterNode( model.conductivityTester );
 
     // To make panels have the same width
@@ -110,7 +119,7 @@ export default class ABSScreenView extends ScreenView {
         pHPaperNode,
         conductivityTesterNode,
         beakerNode,
-        equationNode,
+        reactionEquationNode,
         magnifierNode,
         graphNode,
         controlsParent,

@@ -19,7 +19,7 @@ import ConcentrationGraphBarNode from './ConcentrationGraphBarNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type ConcentrationGraphNodeOptions = SelfOptions & PickRequired<NodeOptions, 'visibleProperty'>;
+type ConcentrationGraphNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
 
 export default class ConcentrationGraphNode extends Node {
 

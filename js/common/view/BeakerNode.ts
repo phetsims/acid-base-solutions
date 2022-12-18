@@ -13,6 +13,7 @@ import { Shape } from '../../../../kite/js/imports.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import Beaker from '../model/Beaker.js';
@@ -27,9 +28,7 @@ const TICK_LABEL_X_SPACING = 5;
 
 export default class BeakerNode extends Node {
 
-  public constructor( beaker: Beaker ) {
-
-    super( { pickable: false } );
+  public constructor( beaker: Beaker, tandem: Tandem ) {
 
     const BEAKER_WIDTH = beaker.size.width;
     const BEAKER_HEIGHT = beaker.size.height;
@@ -39,9 +38,9 @@ export default class BeakerNode extends Node {
       .lineTo( -BEAKER_WIDTH / 2, 0 )
       .lineTo( BEAKER_WIDTH / 2, 0 )
       .lineTo( BEAKER_WIDTH / 2, -BEAKER_HEIGHT );
-    this.addChild( new Path( waterShape, {
+    const waterPath = new Path( waterShape, {
       fill: 'rgba( 193, 222, 227, 0.7 )'
-    } ) );
+    } );
 
     // beaker, starting from upper left
     const beakerShape = new Shape()
@@ -51,16 +50,15 @@ export default class BeakerNode extends Node {
       .lineTo( BEAKER_WIDTH / 2, 0 )
       .lineTo( BEAKER_WIDTH / 2, -BEAKER_HEIGHT )
       .lineTo( ( BEAKER_WIDTH / 2 ) + RIM_OFFSET, -BEAKER_HEIGHT - RIM_OFFSET );
-    this.addChild( new Path( beakerShape, {
+    const beakerPath = new Path( beakerShape, {
       stroke: 'black',
       lineWidth: 3,
       lineCap: 'round',
       lineJoin: 'round'
-    } ) );
+    } );
 
     // horizontal tick marks, right edge, from bottom up
     const ticksParent = new Node();
-    this.addChild( ticksParent );
 
     // tick marks
     const NUMBER_OF_TICKS = Utils.roundSymmetric( 1 / MINOR_TICK_SPACING );
@@ -103,7 +101,12 @@ export default class BeakerNode extends Node {
       majorTickText.centerY = -deltaY * NUMBER_OF_TICKS;
     } );
 
-    this.translation = beaker.position;
+    super( {
+      children: [ waterPath, beakerPath, ticksParent ],
+      translation: beaker.position,
+      pickable: false,
+      tandem: tandem
+    } );
   }
 
   public override dispose(): void {
