@@ -104,7 +104,8 @@ class SliderModel {
   }
 }
 
-// issues #94: strength can be changed only for weak solutions, use this as a guard
+// Strength can be changed only for weak solutions, use this as a guard.
+// See https://github.com/phetsims/acid-base-solutions/issues/94
 function strengthIsMutable( solutionType: SolutionType ): boolean {
   return ( solutionType === 'weakAcid' || solutionType === 'weakBase' );
 }
