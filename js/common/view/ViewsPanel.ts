@@ -11,7 +11,7 @@ import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignGroup, HBox, HStrut, Image, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignGroup, HBox, Image, Text, VBox } from '../../../../scenery/js/imports.js';
 import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
@@ -72,7 +72,7 @@ export default class ViewsPanel extends Panel {
     moleculesRadioButton.touchArea = moleculesRadioButton.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
 
     // Solvent
-    const solventCheckboxTandem = moleculesRadioButtonTandem.createTandem( 'solventCheckbox' );
+    const solventCheckboxTandem = radioButtonGroupTandem.createTandem( 'solventCheckbox' );
     const solventLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
@@ -86,6 +86,9 @@ export default class ViewsPanel extends Panel {
     } );
     const solventCheckbox = new Checkbox( solventVisibleProperty, solventLabel, {
       boxWidth: 15,
+      layoutOptions: {
+        leftMargin: 20 // indent Solvent checkbox from radio buttons
+      },
       tandem: solventCheckboxTandem
     } );
     solventCheckbox.touchArea = solventCheckbox.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
@@ -135,7 +138,7 @@ export default class ViewsPanel extends Panel {
       align: 'left',
       children: [
         moleculesRadioButton,
-        new HBox( { children: [ new HStrut( 20 ), solventCheckbox ] } ), //TODO get rid of HStrut and use layoutOptions for solventCheckbox
+        solventCheckbox,
         graphRadioButton,
         hideViewsRadioButton
       ],
