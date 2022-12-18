@@ -30,11 +30,13 @@ export default class MySolutionModel extends ABSModel {
 
   public constructor( tandem: Tandem ) {
 
+    const solutionsTandem = tandem.createTandem( 'solutions' );
+
     const solutions = [
-      new StrongAcid( tandem.createTandem( 'strongAcid' ) ),
-      new WeakAcid( tandem.createTandem( 'weakAcid' ) ),
-      new StrongBase( tandem.createTandem( 'strongBase' ) ),
-      new WeakBase( tandem.createTandem( 'weakBase' ) )
+      new StrongAcid( solutionsTandem.createTandem( 'strongAcid' ) ),
+      new WeakAcid( solutionsTandem.createTandem( 'weakAcid' ) ),
+      new StrongBase( solutionsTandem.createTandem( 'strongBase' ) ),
+      new WeakBase( solutionsTandem.createTandem( 'weakBase' ) )
     ];
 
     super( solutions, DEFAULT_SOLUTION_TYPE, tandem );

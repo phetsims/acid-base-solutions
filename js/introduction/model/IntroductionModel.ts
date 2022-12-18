@@ -19,12 +19,14 @@ export default class IntroductionModel extends ABSModel {
 
   public constructor( tandem: Tandem ) {
 
+    const solutionsTandem = tandem.createTandem( 'solutions' );
+
     const solutions = [
-      new Water( tandem.createTandem( 'water' ) ),
-      new StrongAcid( tandem.createTandem( 'strongAcid' ) ),
-      new WeakAcid( tandem.createTandem( 'weakAcid' ) ),
-      new StrongBase( tandem.createTandem( 'strongBase' ) ),
-      new WeakBase( tandem.createTandem( 'weakBase' ) )
+      new Water( solutionsTandem.createTandem( 'water' ) ),
+      new StrongAcid( solutionsTandem.createTandem( 'strongAcid' ) ),
+      new WeakAcid( solutionsTandem.createTandem( 'weakAcid' ) ),
+      new StrongBase( solutionsTandem.createTandem( 'strongBase' ) ),
+      new WeakBase( solutionsTandem.createTandem( 'weakBase' ) )
     ];
 
     super( solutions, 'water', tandem );
