@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, Node, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
 import AquaRadioButtonGroup, { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
@@ -24,7 +23,7 @@ import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import { MoleculeKey } from '../../common/model/solutions/Molecule.js';
 import createMoleculeNode from '../../common/view/createMoleculeNode.js';
 import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 
 export default class IntroductionSolutionPanel extends Panel {
 
@@ -121,14 +120,12 @@ function createRadioButtonLabel( solutionNameProperty: TReadOnlyProperty<string>
   const textTandem = tandem.createTandem( 'text' );
 
   // Combine the solution's name and formula
-  const stringProperty = new DerivedProperty(
-    [ AcidBaseSolutionsStrings.patternSolutionNameFormulaStringProperty, solutionNameProperty ],
-    ( pattern, solutionName ) => StringUtils.fillIn( pattern, {
-      solutionName: solutionName,
-      formula: formula
-    } ), {
-      tandem: textTandem.createTandem( RichText.STRING_PROPERTY_TANDEM_NAME )
-    } );
+  const stringProperty = new PatternStringProperty( AcidBaseSolutionsStrings.patternSolutionNameFormulaStringProperty, {
+    solutionName: solutionNameProperty,
+    formula: formula
+  }, {
+    tandem: textTandem.createTandem( RichText.STRING_PROPERTY_TANDEM_NAME )
+  } );
 
   const text = new RichText( stringProperty, {
     font: new PhetFont( 12 ),
