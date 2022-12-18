@@ -41,7 +41,7 @@ export default class StrengthSlider extends HSlider {
 
     super( model.sliderValueProperty, model.sliderValueRange, {
       visibleProperty: new DerivedProperty( [ solutionTypeProperty ],
-        solutionType => ( solutionType === 'strongAcid' || solutionType === 'strongBase' ), {
+        solutionType => ( solutionType === 'weakAcid' || solutionType === 'weakBase' ), {
           tandem: tandem.createTandem( 'visibleProperty' ),
           phetioValueType: BooleanIO
         } ),
@@ -56,6 +56,12 @@ export default class StrengthSlider extends HSlider {
     // add ticks
     this.addMajorTick( model.sliderValueRange.min, new Text( AcidBaseSolutionsStrings.weakerStringProperty, TICK_LABEL_OPTIONS ) );
     this.addMajorTick( model.sliderValueRange.max, new Text( AcidBaseSolutionsStrings.strongerStringProperty, TICK_LABEL_OPTIONS ) );
+
+    // Because StrengthSliderModel is adapting between linear and log scales, link strengthProperty so that
+    // this looks like a standard PhET-iO Slider.
+    this.addLinkedElement( strengthProperty, {
+      tandem: tandem.createTandem( 'valueProperty' )
+    } );
   }
 
   public override dispose(): void {
