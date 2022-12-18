@@ -13,28 +13,20 @@ import ReactionEquationFactory from './ReactionEquationFactory.js';
 import Beaker from '../model/Beaker.js';
 import { SolutionType } from '../enum/SolutionType.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 
 export default class ReactionEquationNode extends Node {
 
   public constructor( beaker: Beaker, solutionTypeProperty: ReadOnlyProperty<SolutionType>, tandem: Tandem ) {
 
-    // create a Map, so we can look up equations by SolutionType
-    const equationsMap = new Map<SolutionType, Node>();
-    equationsMap.set( 'water',
-      ReactionEquationFactory.createWaterEquation( new DerivedProperty( [ solutionTypeProperty ], solutionType => solutionType === 'water' ) ) );
-    equationsMap.set( 'strongAcid',
-      ReactionEquationFactory.createStrongAcidEquation( new DerivedProperty( [ solutionTypeProperty ], solutionType => solutionType === 'strongAcid' ) ) );
-    equationsMap.set( 'weakAcid',
-      ReactionEquationFactory.createWeakAcidEquation( new DerivedProperty( [ solutionTypeProperty ], solutionType => solutionType === 'weakAcid' ) ) );
-    equationsMap.set( 'strongBase',
-      ReactionEquationFactory.createStrongBaseEquation( new DerivedProperty( [ solutionTypeProperty ], solutionType => solutionType === 'strongBase' ) ) );
-    equationsMap.set( 'weakBase',
-      ReactionEquationFactory.createWeakBaseEquation( new DerivedProperty( [ solutionTypeProperty ], solutionType => solutionType === 'weakBase' ) ) );
-
     super( {
-      children: [ ...equationsMap.values() ],
+      children: [
+        ReactionEquationFactory.createWaterEquation( solutionTypeProperty ),
+        ReactionEquationFactory.createStrongAcidEquation( solutionTypeProperty ),
+        ReactionEquationFactory.createWeakAcidEquation( solutionTypeProperty ),
+        ReactionEquationFactory.createStrongBaseEquation( solutionTypeProperty ),
+        ReactionEquationFactory.createWeakBaseEquation( solutionTypeProperty )
+      ],
       tandem: tandem
     } );
 
@@ -42,18 +34,6 @@ export default class ReactionEquationNode extends Node {
     this.boundsProperty.link( bounds => {
       this.centerX = beaker.position.x;
       this.top = beaker.position.y + 10;
-    } );
-
-    // add observer for equations
-    solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
-
-      // hide previous equation
-      if ( previousSolutionType ) {
-        equationsMap.get( previousSolutionType )!.setVisible( false );
-      }
-
-      // show new equation
-      equationsMap.get( newSolutionType )!.setVisible( true );
     } );
 
     this.addLinkedElement( solutionTypeProperty, {
