@@ -43,11 +43,11 @@ export default class ReactionEquationNode extends Node {
     } );
 
     // add observer for equations
-    solutionTypeProperty.link( ( newSolutionType, prevSolutionType ) => {
+    solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
 
       // hide previous equation
-      if ( prevSolutionType ) {
-        equationsMap.get( prevSolutionType )!.setVisible( false );
+      if ( previousSolutionType ) {
+        equationsMap.get( previousSolutionType )!.setVisible( false );
       }
 
       // show new equation

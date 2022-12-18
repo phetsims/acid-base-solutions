@@ -62,11 +62,11 @@ export default class ABSModel implements TModel {
 
     // synchronize with pH of the solution that is currently selected
     const setPH = ( value: number ) => this.pHProperty.set( value );
-    this.solutionTypeProperty.link( ( newSolutionType, prevSolutionType ) => {
+    this.solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
 
       // unlink from previous solution pH property
-      if ( prevSolutionType ) {
-        this.solutionsMap.get( prevSolutionType )!.pHProperty.unlink( setPH );
+      if ( previousSolutionType ) {
+        this.solutionsMap.get( previousSolutionType )!.pHProperty.unlink( setPH );
       }
 
       // link to new solution pH property
