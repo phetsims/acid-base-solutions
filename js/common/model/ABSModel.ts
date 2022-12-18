@@ -43,6 +43,9 @@ export default class ABSModel implements TModel {
 
   public constructor( solutions: AqueousSolution[], defaultSolutionType: SolutionType, tandem: Tandem ) {
 
+    assert && assert( _.uniqBy( solutions, solution => solution.solutionType ).length === solutions.length,
+      'every solution must have a unique solutionType' );
+
     this.solutionsMap = new Map<SolutionType, AqueousSolution>();
     solutions.forEach( solution => {
       this.solutionsMap.set( solution.solutionType, solution );
