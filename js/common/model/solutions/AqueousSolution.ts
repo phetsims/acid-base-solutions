@@ -45,7 +45,8 @@ export default abstract class AqueousSolution {
     this.molecules = molecules;
 
     this.strengthProperty = new NumberProperty( strength, {
-      tandem: tandem.createTandem( 'strengthProperty' )
+      tandem: tandem.createTandem( 'strengthProperty' ),
+      phetioReadOnly: true // because ABSConstants.STRONG_STRENGTH must be a constant
     } );
 
     this.concentrationProperty = new NumberProperty( concentration, {
