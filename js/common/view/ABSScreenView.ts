@@ -29,7 +29,7 @@ import ViewsPanel from './ViewsPanel.js';
 
 export default class ABSScreenView extends ScreenView {
 
-  // properties that are specific to the view
+  // Properties that are specific to the view
   public readonly viewProperties: ABSViewProperties;
 
   private readonly pHPaperNode: PHPaperNode;
@@ -138,7 +138,6 @@ export default class ABSScreenView extends ScreenView {
     this.pHPaperNode = pHPaperNode;
   }
 
-  // Resets properties that are specific to the view.
   public reset(): void {
     this.viewProperties.reset();
   }

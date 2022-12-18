@@ -45,7 +45,7 @@ export default class ConcentrationGraphNode extends Node {
 
     this.translation = graph.position;
 
-    // Observe the strength and concentration properties for whichever solution is selected.
+    // Observe the strength and concentration Properties for the selected solution.
     const updateValuesBound = this.updateValues.bind( this );
     graph.solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
 

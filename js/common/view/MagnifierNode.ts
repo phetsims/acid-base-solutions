@@ -73,7 +73,7 @@ export default class MagnifierNode extends Node {
     // move to correct position
     this.translation = magnifier.position;
 
-    // Observe the strength and concentration properties for whichever solution is selected.
+    // Observe the strength and concentration Properties for the selected solution.
     const updateMoleculesBound = this.updateMolecules.bind( this );
     magnifier.solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
 

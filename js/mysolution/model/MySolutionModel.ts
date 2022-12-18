@@ -42,7 +42,7 @@ export default class MySolutionModel extends ABSModel {
     /**
      * Everything below here is for the convenience of the 'Solution' control panel, which
      * allows the user to change concentration and (for weak solutions) strength.
-     * The concentration and strength properties created here are kept synchronized with
+     * The concentration and strength Properties created here are kept synchronized with
      * whichever solution is currently selected. When the solution changes, the observer
      * wiring is changed. This may have been more appropriate to handle in SolutionControl.
      */
@@ -67,7 +67,7 @@ export default class MySolutionModel extends ABSModel {
       const newSolution = this.solutionsMap.get( newSolutionType )!;
       assert && assert( newSolution );
 
-      // unsubscribe from previous solution strength and concentration property
+      // unlink from previous solution strength and concentration Property
       if ( previousSolutionType ) {
         const previousSolution = this.solutionsMap.get( previousSolutionType )!;
         assert && assert( previousSolution );
@@ -81,7 +81,7 @@ export default class MySolutionModel extends ABSModel {
         newSolution.concentrationProperty.set( previousSolution.concentrationProperty.get() );
       }
 
-      // subscribe to new solution strength and concentration property
+      // link to new solution strength and concentration Properties
       newSolution.strengthProperty.link( setStrength );
       newSolution.concentrationProperty.link( setConcentration );
     } );
