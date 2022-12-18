@@ -18,6 +18,8 @@ import Utils from '../../../../dot/js/Utils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text } from '../../../../scenery/js/imports.js';
 import HSlider from '../../../../sun/js/HSlider.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import { SolutionType } from '../../common/enum/SolutionType.js';
@@ -33,17 +35,22 @@ export default class StrengthSlider extends HSlider {
   public constructor( solutionTypeProperty: Property<SolutionType>,
                       strengthProperty: Property<number>,
                       strengthRange: RangeWithValue,
-                      isWeakProperty: TReadOnlyProperty<boolean> ) {
+                      isWeakProperty: TReadOnlyProperty<boolean>,
+                      tandem: Tandem ) {
 
     const model = new SliderModel( solutionTypeProperty, strengthProperty, strengthRange );
 
     super( model.sliderValueProperty, model.sliderValueRange, {
-      visibleProperty: DerivedProperty.not( isWeakProperty ),
+      visibleProperty: DerivedProperty.not( isWeakProperty, {
+        tandem: tandem.createTandem( 'visibleProperty' ),
+        phetioValueType: BooleanIO
+      } ),
       trackSize: new Dimension2( 125, 4 ),
       thumbSize: new Dimension2( 12, 24 ),
       majorTickLength: 12,
       thumbTouchAreaXDilation: 6,
-      thumbTouchAreaYDilation: 6
+      thumbTouchAreaYDilation: 6,
+      tandem: tandem
     } );
 
     // add ticks

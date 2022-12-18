@@ -22,7 +22,8 @@ import ConcentrationSlider from './ConcentrationSlider.js';
 import StrengthSlider from './StrengthSlider.js';
 import { SolutionType } from '../../common/enum/SolutionType.js';
 import Property from '../../../../axon/js/Property.js';
-import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // constants
 const CONCENTRATION_DECIMALS = 3;
@@ -50,17 +51,14 @@ const AB_SWITCH_OPTIONS = {
   }
 };
 
-type SelfOptions = EmptySelfOptions;
-
-type MySolutionPanelOptions = SelfOptions & PanelOptions;
-
 export default class MySolutionPanel extends Panel {
 
   public constructor( solutionTypeProperty: Property<SolutionType>, concentrationProperty: Property<number>,
-                      strengthProperty: Property<number>, contentAlignGroup: AlignGroup, providedOptions?: MySolutionPanelOptions ) {
+                      strengthProperty: Property<number>, contentAlignGroup: AlignGroup, tandem: Tandem ) {
 
-    const options = optionize3<MySolutionPanelOptions, SelfOptions, PanelOptions>()(
-      {}, ABSConstants.PANEL_OPTIONS, providedOptions );
+    const options = combineOptions<PanelOptions>( {}, ABSConstants.PANEL_OPTIONS, {
+      tandem: tandem
+    } );
 
     // title
     const titleText = new Text( AcidBaseSolutionsStrings.solutionStringProperty, {
@@ -117,7 +115,8 @@ export default class MySolutionPanel extends Panel {
       true, new Text( AcidBaseSolutionsStrings.weakStringProperty, SWITCH_TEXT_OPTIONS ),
       false, new Text( AcidBaseSolutionsStrings.strongStringProperty, SWITCH_TEXT_OPTIONS ),
       AB_SWITCH_OPTIONS );
-    const strengthSlider = new StrengthSlider( solutionTypeProperty, strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE, isWeakProperty );
+    const strengthSlider = new StrengthSlider( solutionTypeProperty, strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE, isWeakProperty,
+      tandem.createTandem( 'strengthSlider' ) );
 
     const controls = new VBox( {
       excludeInvisibleChildrenFromBounds: false,
