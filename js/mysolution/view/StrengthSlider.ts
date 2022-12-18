@@ -8,8 +8,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -30,11 +32,13 @@ export default class StrengthSlider extends HSlider {
 
   public constructor( solutionTypeProperty: Property<SolutionType>,
                       strengthProperty: Property<number>,
-                      strengthRange: RangeWithValue ) {
+                      strengthRange: RangeWithValue,
+                      isWeakProperty: TReadOnlyProperty<boolean> ) {
 
     const model = new SliderModel( solutionTypeProperty, strengthProperty, strengthRange );
 
     super( model.sliderValueProperty, model.sliderValueRange, {
+      visibleProperty: DerivedProperty.not( isWeakProperty ),
       trackSize: new Dimension2( 125, 4 ),
       thumbSize: new Dimension2( 12, 24 ),
       majorTickLength: 12,

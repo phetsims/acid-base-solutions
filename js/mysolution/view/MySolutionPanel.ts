@@ -117,7 +117,7 @@ export default class MySolutionPanel extends Panel {
       true, new Text( AcidBaseSolutionsStrings.weakStringProperty, SWITCH_TEXT_OPTIONS ),
       false, new Text( AcidBaseSolutionsStrings.strongStringProperty, SWITCH_TEXT_OPTIONS ),
       AB_SWITCH_OPTIONS );
-    const strengthSlider = new StrengthSlider( solutionTypeProperty, strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE );
+    const strengthSlider = new StrengthSlider( solutionTypeProperty, strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE, isWeakProperty );
 
     const controls = new VBox( {
       excludeInvisibleChildrenFromBounds: false,
@@ -155,11 +155,6 @@ export default class MySolutionPanel extends Panel {
     concentrationProperty.link( concentration => {
       leftArrowButton.enabled = ( concentration > ABSConstants.CONCENTRATION_RANGE.min );
       rightArrowButton.enabled = ( concentration < ABSConstants.CONCENTRATION_RANGE.max );
-    } );
-
-    // hide strength slider for weak solutions
-    isWeakProperty.link( isWeak => {
-      strengthSlider.visible = isWeak;
     } );
 
     // flag to prevent circular update of related Properties, see #152
