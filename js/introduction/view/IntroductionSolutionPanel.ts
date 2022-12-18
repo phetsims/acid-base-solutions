@@ -24,6 +24,7 @@ import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import { MoleculeKey } from '../../common/model/solutions/Molecule.js';
 import createMoleculeNode from '../../common/view/createMoleculeNode.js';
 import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
+import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 
 export default class IntroductionSolutionPanel extends Panel {
 
@@ -94,7 +95,8 @@ export default class IntroductionSolutionPanel extends Panel {
         radius: 7
       },
       touchAreaXDilation: 10,
-      mouseAreaXDilation: 10
+      mouseAreaXDilation: 10,
+      tandem: tandem.createTandem( 'radioButtonGroup' )
     } );
 
     const content = new AlignBox( new VBox( {
@@ -116,13 +118,22 @@ export default class IntroductionSolutionPanel extends Panel {
 function createRadioButtonLabel( solutionNameProperty: TReadOnlyProperty<string>, formula: string,
                                  key: MoleculeKey, labelsAlignGroup: AlignGroup, tandem: Tandem ): Node {
 
+  const textTandem = tandem.createTandem( 'text' );
+
   // Combine the solution's name and formula
-  const stringProperty = new DerivedProperty( [ solutionNameProperty ], solutionName => `${solutionName} (${formula})` );
+  const stringProperty = new DerivedProperty(
+    [ AcidBaseSolutionsStrings.patternSolutionNameFormulaStringProperty, solutionNameProperty ],
+    ( pattern, solutionName ) => StringUtils.fillIn( pattern, {
+      solutionName: solutionName,
+      formula: formula
+    } ), {
+      tandem: textTandem.createTandem( RichText.STRING_PROPERTY_TANDEM_NAME )
+    } );
 
   const text = new RichText( stringProperty, {
     font: new PhetFont( 12 ),
     maxWidth: 145, // determined empirically
-    tandem: tandem.createTandem( 'text' )
+    tandem: textTandem
   } );
 
   // Create the molecule's icon

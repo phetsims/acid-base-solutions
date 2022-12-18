@@ -41,6 +41,9 @@
   "pattern.0label.1value": {
     "value": "{0}: {1}"
   },
+  "patternSolutionNameFormula": {
+    "value": "{{solutionName}} ({{formula}})"
+  },
   "pH": {
     "value": "pH"
   },

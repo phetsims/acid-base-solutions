@@ -35,6 +35,7 @@ type StringsType = {
       '1valueStringProperty': LinkableProperty<string>;
     }
   };
+  'patternSolutionNameFormulaStringProperty': LinkableProperty<string>;
   'pHStringProperty': LinkableProperty<string>;
   'pHColorKeyStringProperty': LinkableProperty<string>;
   'solutionStringProperty': LinkableProperty<string>;
