@@ -37,7 +37,7 @@ export default class StrengthSlider extends HSlider {
                       strengthRange: RangeWithValue,
                       tandem: Tandem ) {
 
-    const model = new SliderModel( solutionTypeProperty, strengthProperty, strengthRange );
+    const model = new StrengthSliderModel( solutionTypeProperty, strengthProperty, strengthRange );
 
     super( model.sliderValueProperty, model.sliderValueRange, {
       visibleProperty: new DerivedProperty( [ solutionTypeProperty ],
@@ -65,10 +65,10 @@ export default class StrengthSlider extends HSlider {
 }
 
 /**
- * Model for the strength slider. Maps between the linear slider and the logarithmic range of strength.
- * Implemented as an inner type because this is internal to the slider.
+ * StrengthSliderModel is the model for the strength slider.
+ * It maps between a linear Slider and the logarithmic range of strengthProperty.
  */
-class SliderModel {
+class StrengthSliderModel {
 
   public readonly sliderValueRange: RangeWithValue;
   public readonly sliderValueProperty: Property<number>;
