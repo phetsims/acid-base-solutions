@@ -7,37 +7,29 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Circle, Image, Node, NodeOptions, Path, Rectangle } from '../../../../scenery/js/imports.js';
+import { Circle, Image, Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import solvent_png from '../../../images/solvent_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import Magnifier from '../model/Magnifier.js';
 import MoleculesNode from './MoleculesNode.js';
+import { ViewMode } from '../enum/ViewMode.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
 const CLIPPING_ENABLED = true; // set to false to debug positioning of molecules
 const LENS_LINE_WIDTH = 8;
 
-type SelfOptions = EmptySelfOptions;
-
-type MagnifierNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
-
 export default class MagnifierNode extends Node {
 
   private readonly solventNode: Node;
   private readonly moleculesNode: MoleculesNode;
 
-  public constructor( magnifier: Magnifier, providedOptions: MagnifierNodeOptions ) {
-
-    const options = optionize<MagnifierNodeOptions, SelfOptions, NodeOptions>()( {
-
-      // NodeOptions
-      translation: magnifier.position
-    }, providedOptions );
+  public constructor( magnifier: Magnifier, viewModeProperty: StringUnionProperty<ViewMode>, tandem: Tandem ) {
 
     // lens
     const RADIUS = magnifier.radius;
@@ -71,12 +63,19 @@ export default class MagnifierNode extends Node {
       viewportNode.clipArea = lensShape;
     }
 
-    options.children = [ waterNode, viewportNode, handleNode, lensNode ];
+    const children: Node[] = [ waterNode, viewportNode, handleNode, lensNode ];
     if ( SHOW_ORIGIN ) {
-      options.children.push( new Circle( 10, { fill: 'red' } ) );
+      children.push( new Circle( 10, { fill: 'red' } ) );
     }
 
-    super( options );
+    super( {
+      children: children,
+      translation: magnifier.position,
+      visibleProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'molecules' ), {
+        tandem: tandem.createTandem( 'visibleProperty' )
+      } ),
+      tandem: tandem
+    } );
 
     this.moleculesNode = moleculesNode;
     this.solventNode = solventNode;

@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
@@ -67,15 +66,11 @@ export default class ABSScreenView extends ScreenView {
     const reactionEquationNode = new ReactionEquationNode( model.beaker, model.solutionTypeProperty,
       tandem.createTandem( 'reactionEquationNode' ) );
 
-    const magnifierNode = new MagnifierNode( model.magnifier, {
-      visibleProperty: new DerivedProperty( [ this.viewProperties.viewModeProperty ], viewMode => ( viewMode === 'molecules' ) ),
-      tandem: tandem.createTandem( 'magnifierNode' )
-    } );
-
-    const graphNode = new ConcentrationGraphNode( model.graph, {
-      visibleProperty: new DerivedProperty( [ this.viewProperties.viewModeProperty ], viewMode => ( viewMode === 'graph' ) ),
-      tandem: tandem.createTandem( 'graphNode' )
-    } );
+    // Views
+    const magnifierNode = new MagnifierNode( model.magnifier, this.viewProperties.viewModeProperty,
+      tandem.createTandem( 'magnifierNode' ) );
+    const graphNode = new ConcentrationGraphNode( model.graph, this.viewProperties.viewModeProperty,
+      tandem.createTandem( 'graphNode' ) );
 
     // Tools
     const pHMeterNode = new PHMeterNode( model.pHMeter, this.viewProperties.toolModeProperty, tandem.createTandem( 'pHMeterNode' ) );

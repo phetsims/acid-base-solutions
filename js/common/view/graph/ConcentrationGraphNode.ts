@@ -8,33 +8,24 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
-import { Node, NodeOptions, Rectangle } from '../../../../../scenery/js/imports.js';
+import { Node, Rectangle } from '../../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import ABSColors from '../../ABSColors.js';
 import ConcentrationGraph from '../../model/ConcentrationGraph.js';
 import ConcentrationGraphBackgroundNode from './ConcentrationGraphBackgroundNode.js';
 import ConcentrationGraphBarNode from './ConcentrationGraphBarNode.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type ConcentrationGraphNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
+import { ViewMode } from '../../enum/ViewMode.js';
+import StringUnionProperty from '../../../../../axon/js/StringUnionProperty.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
+import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 
 export default class ConcentrationGraphNode extends Node {
 
   private readonly graph: ConcentrationGraph;
   private readonly barNodes: ConcentrationGraphBarNode[];
 
-  public constructor( graph: ConcentrationGraph, providedOptions: ConcentrationGraphNodeOptions ) {
+  public constructor( graph: ConcentrationGraph, viewModeProperty: StringUnionProperty<ViewMode>, tandem: Tandem ) {
 
-    const options = optionize<ConcentrationGraphNodeOptions, SelfOptions, NodeOptions>()( {
-
-      // NodeOptions
-      translation: graph.position
-    }, providedOptions );
-
-    // add background
     const backgroundNode = new ConcentrationGraphBackgroundNode( graph.width, graph.height );
 
     // find maximum number of bars for all solutions
@@ -49,9 +40,14 @@ export default class ConcentrationGraphNode extends Node {
       barNodes[ i ] = new ConcentrationGraphBarNode( graph.height - 10 );
     }
 
-    options.children = [ backgroundNode, ...barNodes ];
-
-    super( options );
+    super( {
+      children: [ backgroundNode, ...barNodes ],
+      translation: graph.position,
+      visibleProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'graph' ), {
+        tandem: tandem.createTandem( 'visibleProperty' )
+      } ),
+      tandem: tandem
+    } );
 
     this.graph = graph;
     this.barNodes = barNodes;
