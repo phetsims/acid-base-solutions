@@ -7,37 +7,19 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Dimension2 from '../../../../dot/js/Dimension2.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignGroup, HSeparator, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignGroup, HSeparator, Text, VBox } from '../../../../scenery/js/imports.js';
 import ABSwitch, { ABSwitchOptions } from '../../../../sun/js/ABSwitch.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
-import StrengthSlider from './StrengthSlider.js';
 import { SolutionType } from '../../common/enum/SolutionType.js';
 import Property from '../../../../axon/js/Property.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import InitialConcentrationControl from './InitialConcentrationControl.js';
-
-// constants
-const SUBTITLE_FONT = new PhetFont( 12 );
-const CONTROL_FONT = new PhetFont( 12 );
-const TITLE_MAX_WIDTH = 180;
-const AB_SWITCH_TEXT_OPTIONS: TextOptions = {
-  font: CONTROL_FONT,
-  maxWidth: 50
-};
-const AB_SWITCH_OPTIONS: ABSwitchOptions = {
-  toggleSwitchOptions: {
-    size: new Dimension2( 40, 20 ),
-    thumbTouchAreaXDilation: 6,
-    thumbTouchAreaYDilation: 6
-  }
-};
+import StrengthControl from './StrengthControl.js';
 
 const AcidBaseTypeValues = [ 'acid', 'base' ] as const;
 export type AcidBaseType = ( typeof AcidBaseTypeValues )[number];
@@ -69,16 +51,16 @@ export default class MySolutionPanel extends Panel {
     // title
     const titleText = new Text( AcidBaseSolutionsStrings.solutionStringProperty, {
       font: ABSConstants.TITLE_FONT,
-      maxWidth: TITLE_MAX_WIDTH,
+      maxWidth: 180, // determined empirically
       tandem: tandem.createTandem( 'titleText' )
     } );
 
     // Acid/Base switch
     const acidBaseSwitchTandem = tandem.createTandem( 'acidBaseSwitch' );
     const acidBaseSwitch = new ABSwitch( acidBaseProperty,
-      'acid', new Text( AcidBaseSolutionsStrings.acidStringProperty, AB_SWITCH_TEXT_OPTIONS ),
-      'base', new Text( AcidBaseSolutionsStrings.baseStringProperty, AB_SWITCH_TEXT_OPTIONS ),
-      combineOptions<ABSwitchOptions>( {}, AB_SWITCH_OPTIONS, {
+      'acid', new Text( AcidBaseSolutionsStrings.acidStringProperty, ABSConstants.AB_SWITCH_TEXT_OPTIONS ),
+      'base', new Text( AcidBaseSolutionsStrings.baseStringProperty, ABSConstants.AB_SWITCH_TEXT_OPTIONS ),
+      combineOptions<ABSwitchOptions>( {}, ABSConstants.AB_SWITCH_OPTIONS, {
         tandem: acidBaseSwitchTandem
       } ) );
 
@@ -86,23 +68,9 @@ export default class MySolutionPanel extends Panel {
     const initialConcentrationControl = new InitialConcentrationControl( concentrationProperty,
       tandem.createTandem( 'initialConcentrationControl' ) );
 
-    const strengthTitle = new Text( AcidBaseSolutionsStrings.strengthStringProperty, {
-      font: SUBTITLE_FONT,
-      maxWidth: TITLE_MAX_WIDTH,
-      layoutOptions: { align: 'left' }
-    } );
-
-    // Weak/Strong switch
-    const weakStrongSwitch = new ABSwitch( weakStrongProperty,
-      'weak', new Text( AcidBaseSolutionsStrings.weakStringProperty, AB_SWITCH_TEXT_OPTIONS ),
-      'strong', new Text( AcidBaseSolutionsStrings.strongStringProperty, AB_SWITCH_TEXT_OPTIONS ),
-      combineOptions<ABSwitchOptions>( {}, AB_SWITCH_OPTIONS, {
-        tandem: tandem.createTandem( 'weakStrongSwitch' )
-      } ) );
-
-    // Strength slider
-    const strengthSlider = new StrengthSlider( strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE, weakStrongProperty,
-      tandem.createTandem( 'strengthSlider' ) );
+    // Strength control
+    const strengthControl = new StrengthControl( strengthProperty, weakStrongProperty,
+      tandem.createTandem( 'strengthControl' ) );
 
     const controls = new VBox( {
       excludeInvisibleChildrenFromBounds: false,
@@ -112,9 +80,7 @@ export default class MySolutionPanel extends Panel {
         new HSeparator(),
         initialConcentrationControl,
         new HSeparator(),
-        strengthTitle,
-        weakStrongSwitch,
-        strengthSlider
+        strengthControl
       ]
     } );
 

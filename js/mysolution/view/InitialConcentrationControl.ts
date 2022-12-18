@@ -18,10 +18,10 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import InitialConcentrationSlider from './InitialConcentrationSlider.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 
-//TODO are some of these shared with StrengthControl?
 const CONCENTRATION_DECIMALS = 3;
-const SUBTITLE_FONT = new PhetFont( 12 );
+const CONCENTRATION_FONT = new PhetFont( 14 );
 const ARROW_STEP = Math.pow( 10, -CONCENTRATION_DECIMALS ); // concentration delta for arrow button
 const ARROW_HEIGHT = 15;
 const ARROW_BUTTON_OPTIONS: ArrowButtonOptions = {
@@ -30,18 +30,16 @@ const ARROW_BUTTON_OPTIONS: ArrowButtonOptions = {
   touchAreaXDilation: 6,
   touchAreaYDilation: 6
 };
-const CONCENTRATION_FONT = new PhetFont( 14 );
-const TITLE_MAX_WIDTH = 180;
 
 export default class InitialConcentrationControl extends VBox {
 
   public constructor( concentrationProperty: Property<number>, tandem: Tandem ) {
 
-    // Initial Concentration title
     const titleText = new Text( AcidBaseSolutionsStrings.initialConcentrationStringProperty, {
-      font: SUBTITLE_FONT,
-      maxWidth: TITLE_MAX_WIDTH,
-      layoutOptions: { align: 'left' }
+      font: ABSConstants.SUBTITLE_FONT,
+      maxWidth: 180, // determined empirically,
+      layoutOptions: { align: 'left' },
+      tandem: tandem.createTandem( 'titleText' )
     } );
 
     const valueTextTandem = tandem.createTandem( 'valueText' );
@@ -65,10 +63,14 @@ export default class InitialConcentrationControl extends VBox {
     // arrow buttons
     const leftArrowButton = new ArrowButton( 'left', () => {
       concentrationProperty.value = Math.max( concentrationProperty.value - ARROW_STEP, ABSConstants.CONCENTRATION_RANGE.min );
-    }, ARROW_BUTTON_OPTIONS );
+    }, combineOptions<ArrowButtonOptions>( {}, ARROW_BUTTON_OPTIONS, {
+      tandem: tandem.createTandem( 'leftArrowButton' )
+    } ) );
     const rightArrowButton = new ArrowButton( 'right', () => {
       concentrationProperty.value = Math.min( concentrationProperty.value + ARROW_STEP, ABSConstants.CONCENTRATION_RANGE.max );
-    }, ARROW_BUTTON_OPTIONS );
+    }, combineOptions<ArrowButtonOptions>( {}, ARROW_BUTTON_OPTIONS, {
+      tandem: tandem.createTandem( 'rightArrowButton' )
+    } ) );
 
     // Initial Concentration slider
     const slider = new InitialConcentrationSlider( concentrationProperty, ABSConstants.CONCENTRATION_RANGE,
