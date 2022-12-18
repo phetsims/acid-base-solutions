@@ -6,13 +6,15 @@
  * @author Andrey Zelenkov (Mlearner)
  */
 
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TModel from '../../../../joist/js/TModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import { SolutionType, SolutionTypeValues } from '../enum/SolutionType.js';
+import { SolutionType } from '../enum/SolutionType.js';
 import Beaker from './Beaker.js';
 import ConcentrationGraph from './ConcentrationGraph.js';
 import ConductivityTester from './ConductivityTester.js';
@@ -25,14 +27,14 @@ export type SolutionMap = Map<SolutionType, AqueousSolution>;
 
 export default class ABSModel implements TModel {
 
-  // for looking up solution by SolutionType
-  public readonly solutionsMap: SolutionMap;
-
   // type of solution that is currently selected
   public readonly solutionTypeProperty: Property<SolutionType>;
 
-  // pH of product
-  public readonly pHProperty: Property<number>;
+  // for looking up solution by SolutionType
+  public readonly solutionsMap: SolutionMap;
+
+  // pH of the selected solution
+  public readonly pHProperty: ReadOnlyProperty<number>;
 
   public readonly beaker: Beaker;
   public readonly magnifier: Magnifier;
@@ -46,20 +48,22 @@ export default class ABSModel implements TModel {
     assert && assert( _.uniqBy( solutions, solution => solution.solutionType ).length === solutions.length,
       'every solution must have a unique solutionType' );
 
+    this.solutionTypeProperty = new StringUnionProperty( defaultSolutionType, {
+      validValues: solutions.map( solution => solution.solutionType ),
+      tandem: tandem.createTandem( 'solutionTypeProperty' )
+    } );
+
     this.solutionsMap = new Map<SolutionType, AqueousSolution>();
     solutions.forEach( solution => {
       this.solutionsMap.set( solution.solutionType, solution );
     } );
 
-    this.solutionTypeProperty = new StringUnionProperty( defaultSolutionType, {
-      validValues: SolutionTypeValues.filter( solutionType => this.solutionsMap.has( solutionType ) ),
-      tandem: tandem.createTandem( 'solutionTypeProperty' )
-    } );
-
-    this.pHProperty = new NumberProperty( this.solutionsMap.get( defaultSolutionType )!.pHProperty.value, {
-      tandem: tandem.createTandem( 'pHProperty' ),
-      phetioReadOnly: true
-    } );
+    this.pHProperty = DerivedProperty.deriveAny(
+      [ this.solutionTypeProperty, ...solutions.map( solution => solution.pHProperty ) ],
+      () => this.solutionsMap.get( this.solutionTypeProperty.value )!.pHProperty.value, {
+        tandem: tandem.createTandem( 'pHProperty' ),
+        phetioValueType: NumberIO
+      } );
 
     this.beaker = new Beaker();
     this.magnifier = new Magnifier( this.beaker, this.solutionsMap, this.solutionTypeProperty );
@@ -67,21 +71,6 @@ export default class ABSModel implements TModel {
     this.pHMeter = new PHMeter( this.beaker, this.pHProperty, tandem.createTandem( 'pHMeter' ) );
     this.pHPaper = new PHPaper( this.beaker, this.pHProperty, this.solutionTypeProperty, tandem.createTandem( 'pHPaper' ) );
     this.conductivityTester = new ConductivityTester( this.beaker, this.pHProperty, tandem.createTandem( 'conductivityTester' ) );
-
-    // synchronize with pH of the solution that is currently selected
-    const setPH = ( pH: number ) => {
-      this.pHProperty.value = pH;
-    };
-    this.solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
-
-      // unlink from previous solution pH property
-      if ( previousSolutionType ) {
-        this.solutionsMap.get( previousSolutionType )!.pHProperty.unlink( setPH );
-      }
-
-      // link to new solution pH property
-      this.solutionsMap.get( newSolutionType )!.pHProperty.link( setPH );
-    } );
   }
 
   public dispose(): void {
@@ -92,7 +81,6 @@ export default class ABSModel implements TModel {
 
     // reset Properties
     this.solutionTypeProperty.reset();
-    this.pHProperty.reset();
 
     // reset solutions
     this.solutionsMap.forEach( ( solution, solutionType ) => solution.reset() );
