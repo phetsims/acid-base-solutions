@@ -52,7 +52,7 @@ export default class ViewsPanel extends Panel {
 
     const radioButtonGroupTandem = tandem.createTandem( 'radioButtonGroup' );
 
-    // Molecules
+    // Molecules radio button
     const moleculesRadioButtonTandem = radioButtonGroupTandem.createTandem( `molecules${AquaRadioButton.TANDEM_NAME_SUFFIX}` );
     const moleculesLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
@@ -71,7 +71,7 @@ export default class ViewsPanel extends Panel {
     } );
     moleculesRadioButton.touchArea = moleculesRadioButton.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
 
-    // Solvent
+    // Solvent checkbox
     const solventCheckboxTandem = radioButtonGroupTandem.createTandem( 'solventCheckbox' );
     const solventLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
@@ -93,7 +93,7 @@ export default class ViewsPanel extends Panel {
     } );
     solventCheckbox.touchArea = solventCheckbox.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
 
-    // Graph
+    // Graph radio button
     const graphRadioButtonTandem = radioButtonGroupTandem.createTandem( `graph${AquaRadioButton.TANDEM_NAME_SUFFIX}` );
     const graphLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
@@ -112,7 +112,7 @@ export default class ViewsPanel extends Panel {
     } );
     graphRadioButton.touchArea = graphRadioButton.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
 
-    // Hide Views
+    // Hide Views radio button
     const hideViewsRadioButtonTandem = radioButtonGroupTandem.createTandem( `hideViews${AquaRadioButton.TANDEM_NAME_SUFFIX}` );
     const hideViewsLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
