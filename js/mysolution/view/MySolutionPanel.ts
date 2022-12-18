@@ -115,7 +115,7 @@ export default class MySolutionPanel extends Panel {
       true, new Text( AcidBaseSolutionsStrings.weakStringProperty, SWITCH_TEXT_OPTIONS ),
       false, new Text( AcidBaseSolutionsStrings.strongStringProperty, SWITCH_TEXT_OPTIONS ),
       AB_SWITCH_OPTIONS );
-    const strengthSlider = new StrengthSlider( solutionTypeProperty, strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE, isWeakProperty,
+    const strengthSlider = new StrengthSlider( solutionTypeProperty, strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE,
       tandem.createTandem( 'strengthSlider' ) );
 
     const controls = new VBox( {

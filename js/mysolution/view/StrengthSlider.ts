@@ -32,19 +32,19 @@ const TICK_LABEL_OPTIONS = {
 
 export default class StrengthSlider extends HSlider {
 
-  public constructor( solutionTypeProperty: Property<SolutionType>,
+  public constructor( solutionTypeProperty: TReadOnlyProperty<SolutionType>,
                       strengthProperty: Property<number>,
                       strengthRange: RangeWithValue,
-                      isWeakProperty: TReadOnlyProperty<boolean>,
                       tandem: Tandem ) {
 
     const model = new SliderModel( solutionTypeProperty, strengthProperty, strengthRange );
 
     super( model.sliderValueProperty, model.sliderValueRange, {
-      visibleProperty: DerivedProperty.not( isWeakProperty, {
-        tandem: tandem.createTandem( 'visibleProperty' ),
-        phetioValueType: BooleanIO
-      } ),
+      visibleProperty: new DerivedProperty( [ solutionTypeProperty ],
+        solutionType => ( solutionType === 'strongAcid' || solutionType === 'strongBase' ), {
+          tandem: tandem.createTandem( 'visibleProperty' ),
+          phetioValueType: BooleanIO
+        } ),
       trackSize: new Dimension2( 125, 4 ),
       thumbSize: new Dimension2( 12, 24 ),
       majorTickLength: 12,
@@ -73,7 +73,7 @@ class SliderModel {
   public readonly sliderValueRange: RangeWithValue;
   public readonly sliderValueProperty: Property<number>;
 
-  public constructor( solutionTypeProperty: Property<SolutionType>,
+  public constructor( solutionTypeProperty: TReadOnlyProperty<SolutionType>,
                       strengthProperty: Property<number>,
                       strengthRange: RangeWithValue ) {
 
