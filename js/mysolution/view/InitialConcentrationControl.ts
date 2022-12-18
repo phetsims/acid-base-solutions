@@ -64,11 +64,13 @@ export default class InitialConcentrationControl extends VBox {
     const leftArrowButton = new ArrowButton( 'left', () => {
       concentrationProperty.value = Math.max( concentrationProperty.value - ARROW_STEP, ABSConstants.CONCENTRATION_RANGE.min );
     }, combineOptions<ArrowButtonOptions>( {}, ARROW_BUTTON_OPTIONS, {
+      enabledProperty: new DerivedProperty( [ concentrationProperty ], concentration => ( concentration > ABSConstants.CONCENTRATION_RANGE.min ) ),
       tandem: tandem.createTandem( 'leftArrowButton' )
     } ) );
     const rightArrowButton = new ArrowButton( 'right', () => {
       concentrationProperty.value = Math.min( concentrationProperty.value + ARROW_STEP, ABSConstants.CONCENTRATION_RANGE.max );
     }, combineOptions<ArrowButtonOptions>( {}, ARROW_BUTTON_OPTIONS, {
+      enabledProperty: new DerivedProperty( [ concentrationProperty ], concentration => ( concentration < ABSConstants.CONCENTRATION_RANGE.max ) ),
       tandem: tandem.createTandem( 'rightArrowButton' )
     } ) );
 
@@ -87,13 +89,6 @@ export default class InitialConcentrationControl extends VBox {
       ],
       spacing: 6,
       tandem: tandem
-    } );
-
-    // disable arrow buttons
-    //TODO https://github.com/phetsims/acid-base-solutions/issues/178 use enabledProperty
-    concentrationProperty.link( concentration => {
-      leftArrowButton.enabled = ( concentration > ABSConstants.CONCENTRATION_RANGE.min );
-      rightArrowButton.enabled = ( concentration < ABSConstants.CONCENTRATION_RANGE.max );
     } );
   }
 

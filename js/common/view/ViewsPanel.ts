@@ -24,6 +24,7 @@ import BeakerNode from './BeakerNode.js';
 import ConcentrationGraphNode from './graph/ConcentrationGraphNode.js';
 import createMoleculeNode from './createMoleculeNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 // constants
 const TEXT_ICON_X_SPACING = 10;
@@ -89,6 +90,7 @@ export default class ViewsPanel extends Panel {
       layoutOptions: {
         leftMargin: 20 // indent Solvent checkbox from radio buttons
       },
+      enabledProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'molecules' ) ),
       tandem: solventCheckboxTandem
     } );
     solventCheckbox.touchArea = solventCheckbox.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
@@ -160,12 +162,6 @@ export default class ViewsPanel extends Panel {
     } );
 
     super( content, options );
-
-    // disable the 'Solvent' checkbox unless 'Molecules' is selected
-    //TODO https://github.com/phetsims/acid-base-solutions/issues/178 use enabledProperty
-    viewModeProperty.link( viewMode => {
-      solventCheckbox.enabled = ( viewMode === 'molecules' );
-    } );
   }
 
   public override dispose(): void {
