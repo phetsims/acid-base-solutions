@@ -7,12 +7,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, HSeparator, Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
-import ABSwitch from '../../../../sun/js/ABSwitch.js';
+import ABSwitch, { ABSwitchOptions } from '../../../../sun/js/ABSwitch.js';
 import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
@@ -24,6 +23,7 @@ import { SolutionType } from '../../common/enum/SolutionType.js';
 import Property from '../../../../axon/js/Property.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 
 // constants
 const CONCENTRATION_DECIMALS = 3;
@@ -51,6 +51,12 @@ const AB_SWITCH_OPTIONS = {
   }
 };
 
+const AcidBaseTypeValues = [ 'acid', 'base' ] as const;
+export type AcidBaseType = ( typeof AcidBaseTypeValues )[number];
+
+const WeakStrongTypeValues = [ 'weak', 'strong' ] as const;
+export type WeakStrongType = ( typeof WeakStrongTypeValues )[number];
+
 export default class MySolutionPanel extends Panel {
 
   public constructor( solutionTypeProperty: Property<SolutionType>, concentrationProperty: Property<number>,
@@ -60,6 +66,18 @@ export default class MySolutionPanel extends Panel {
       tandem: tandem
     } );
 
+    //TODO https://github.com/phetsims/acid-base-solutions/issues/178 move to model
+    const acidBaseProperty = new StringUnionProperty( solutionTypeToAcidBase( solutionTypeProperty.value ), {
+      validValues: AcidBaseTypeValues,
+      tandem: tandem.createTandem( 'acidBaseProperty' )
+    } );
+
+    //TODO https://github.com/phetsims/acid-base-solutions/issues/178 move to model
+    const weakStrongProperty = new StringUnionProperty( solutionTypeToWeakStrong( solutionTypeProperty.value ), {
+      validValues: WeakStrongTypeValues,
+      tandem: tandem.createTandem( 'weakStrongProperty' )
+    } );
+
     // title
     const titleText = new Text( AcidBaseSolutionsStrings.solutionStringProperty, {
       font: ABSConstants.TITLE_FONT,
@@ -67,21 +85,23 @@ export default class MySolutionPanel extends Panel {
       tandem: tandem.createTandem( 'titleText' )
     } );
 
-    // acid/base switch
-    const isAcidProperty = new BooleanProperty( solutionTypeProperty.value === 'weakAcid' || solutionTypeProperty.value === 'strongAcid' );
-    const acidBaseSwitch = new ABSwitch( isAcidProperty,
-      true, new Text( AcidBaseSolutionsStrings.acidStringProperty, SWITCH_TEXT_OPTIONS ),
-      false, new Text( AcidBaseSolutionsStrings.baseStringProperty, SWITCH_TEXT_OPTIONS ),
-      AB_SWITCH_OPTIONS );
+    // Acid/Base switch
+    const acidBaseSwitchTandem = tandem.createTandem( 'acidBaseSwitch' );
+    const acidBaseSwitch = new ABSwitch( acidBaseProperty,
+      'acid', new Text( AcidBaseSolutionsStrings.acidStringProperty, SWITCH_TEXT_OPTIONS ),
+      'base', new Text( AcidBaseSolutionsStrings.baseStringProperty, SWITCH_TEXT_OPTIONS ),
+      combineOptions<ABSwitchOptions>( {}, AB_SWITCH_OPTIONS, {
+        tandem: acidBaseSwitchTandem
+      } ) );
 
-    // concentration title
+    // Initial Concentration title
     const concentrationTitle = new Text( AcidBaseSolutionsStrings.initialConcentrationStringProperty, {
       font: SUBTITLE_FONT,
       maxWidth: TITLE_MAX_WIDTH,
       layoutOptions: { align: 'left' }
     } );
 
-    // concentration readout
+    // Initial Concentration display
     const readoutText = new Text( Utils.toFixed( concentrationProperty.value, CONCENTRATION_DECIMALS ), { font: CONCENTRATION_FONT } );
     const readoutBackground = new Rectangle( 0, 0, 1.5 * readoutText.width, 1.5 * readoutText.height, 4, 4,
       { fill: 'white', stroke: 'rgb(200,200,200)' } );
@@ -96,27 +116,31 @@ export default class MySolutionPanel extends Panel {
       concentrationProperty.value = Math.min( concentrationProperty.value + ARROW_STEP, ABSConstants.CONCENTRATION_RANGE.max );
     }, ARROW_BUTTON_OPTIONS );
 
-    // concentration value control
+    // Initial Concentration value control
     const concentrationValueControl = new HBox( {
       spacing: 8,
       children: [ leftArrowButton, readoutNode, rightArrowButton ]
     } );
 
-    // concentration slider
+    // Initial Concentration slider
     const concentrationSlider = new ConcentrationSlider( concentrationProperty, ABSConstants.CONCENTRATION_RANGE );
 
-    // strength control
     const strengthTitle = new Text( AcidBaseSolutionsStrings.strengthStringProperty, {
       font: SUBTITLE_FONT,
       maxWidth: TITLE_MAX_WIDTH,
       layoutOptions: { align: 'left' }
     } );
-    const isWeakProperty = new BooleanProperty( solutionTypeProperty.value === 'weakBase' || solutionTypeProperty.value === 'weakAcid' );
-    const weakStrongSwitch = new ABSwitch( isWeakProperty,
-      true, new Text( AcidBaseSolutionsStrings.weakStringProperty, SWITCH_TEXT_OPTIONS ),
-      false, new Text( AcidBaseSolutionsStrings.strongStringProperty, SWITCH_TEXT_OPTIONS ),
-      AB_SWITCH_OPTIONS );
-    const strengthSlider = new StrengthSlider( solutionTypeProperty, strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE,
+
+    // Weak/Strong switch
+    const weakStrongSwitch = new ABSwitch( weakStrongProperty,
+      'weak', new Text( AcidBaseSolutionsStrings.weakStringProperty, SWITCH_TEXT_OPTIONS ),
+      'strong', new Text( AcidBaseSolutionsStrings.strongStringProperty, SWITCH_TEXT_OPTIONS ),
+      combineOptions<ABSwitchOptions>( {}, AB_SWITCH_OPTIONS, {
+        tandem: tandem.createTandem( 'weakStrongSwitch' )
+      } ) );
+
+    // Strength slider
+    const strengthSlider = new StrengthSlider( strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE, weakStrongProperty,
       tandem.createTandem( 'strengthSlider' ) );
 
     const controls = new VBox( {
@@ -165,8 +189,8 @@ export default class MySolutionPanel extends Panel {
 
       if ( updateSolutionTypeEnabled ) {
 
-        const isAcid = isAcidProperty.value;
-        const isWeak = isWeakProperty.value;
+        const isAcid = ( acidBaseProperty.value === 'acid' );
+        const isWeak = ( weakStrongProperty.value === 'weak' );
 
         if ( isWeak && isAcid ) {
           solutionTypeProperty.value = 'weakAcid';
@@ -182,13 +206,13 @@ export default class MySolutionPanel extends Panel {
         }
       }
     };
-    isAcidProperty.link( updateSolutionType.bind( this ) );
-    isWeakProperty.link( updateSolutionType.bind( this ) );
+    acidBaseProperty.link( updateSolutionType.bind( this ) );
+    weakStrongProperty.link( updateSolutionType.bind( this ) );
 
     solutionTypeProperty.link( solutionType => {
       updateSolutionTypeEnabled = false;
-      isAcidProperty.value = ( solutionType === 'weakAcid' || solutionType === 'strongAcid' );
-      isWeakProperty.value = ( solutionType === 'weakAcid' || solutionType === 'weakBase' );
+      acidBaseProperty.value = solutionTypeToAcidBase( solutionType );
+      weakStrongProperty.value = solutionTypeToWeakStrong( solutionType );
       updateSolutionTypeEnabled = true;
     } );
   }
@@ -197,6 +221,14 @@ export default class MySolutionPanel extends Panel {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
+}
+
+function solutionTypeToAcidBase( solutionType: SolutionType ): AcidBaseType {
+  return ( solutionType === 'weakAcid' || solutionType === 'strongAcid' ) ? 'acid' : 'base';
+}
+
+function solutionTypeToWeakStrong( solutionType: SolutionType ): WeakStrongType {
+  return ( solutionType === 'weakAcid' || solutionType === 'weakBase' ) ? 'weak' : 'strong';
 }
 
 acidBaseSolutions.register( 'MySolutionPanel', MySolutionPanel );

@@ -11,7 +11,7 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -22,7 +22,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
-import { SolutionType } from '../../common/enum/SolutionType.js';
+import { WeakStrongType } from './MySolutionPanel.js';
 
 // constants
 const TICK_LABEL_OPTIONS = {
@@ -32,19 +32,18 @@ const TICK_LABEL_OPTIONS = {
 
 export default class StrengthSlider extends HSlider {
 
-  public constructor( solutionTypeProperty: TReadOnlyProperty<SolutionType>,
-                      strengthProperty: Property<number>,
+  public constructor( strengthProperty: Property<number>,
                       strengthRange: RangeWithValue,
+                      weakStrongProperty: StringUnionProperty<WeakStrongType>,
                       tandem: Tandem ) {
 
-    const model = new StrengthSliderModel( solutionTypeProperty, strengthProperty, strengthRange );
+    const model = new StrengthSliderModel( strengthProperty, strengthRange, weakStrongProperty );
 
     super( model.sliderValueProperty, model.sliderValueRange, {
-      visibleProperty: new DerivedProperty( [ solutionTypeProperty ],
-        solutionType => ( solutionType === 'weakAcid' || solutionType === 'weakBase' ), {
-          tandem: tandem.createTandem( 'visibleProperty' ),
-          phetioValueType: BooleanIO
-        } ),
+      visibleProperty: new DerivedProperty( [ weakStrongProperty ], weakStrong => ( weakStrong === 'weak' ), {
+        tandem: tandem.createTandem( 'visibleProperty' ),
+        phetioValueType: BooleanIO
+      } ),
       trackSize: new Dimension2( 125, 4 ),
       thumbSize: new Dimension2( 12, 24 ),
       majorTickLength: 12,
@@ -79,9 +78,9 @@ class StrengthSliderModel {
   public readonly sliderValueRange: RangeWithValue;
   public readonly sliderValueProperty: Property<number>;
 
-  public constructor( solutionTypeProperty: TReadOnlyProperty<SolutionType>,
-                      strengthProperty: Property<number>,
-                      strengthRange: RangeWithValue ) {
+  public constructor( strengthProperty: Property<number>,
+                      strengthRange: RangeWithValue,
+                      weakStrongProperty: StringUnionProperty<WeakStrongType> ) {
 
     this.sliderValueRange = new RangeWithValue(
       Utils.log10( strengthRange.min ),
@@ -94,12 +93,12 @@ class StrengthSliderModel {
 
     // map between linear and logarithmic
     this.sliderValueProperty.link( sliderValue => {
-      if ( strengthIsMutable( solutionTypeProperty.value ) ) {
+      if ( weakStrongProperty.value === 'weak' ) {
         strengthProperty.value = Math.pow( 10, sliderValue );
       }
     } );
     strengthProperty.link( strength => {
-      if ( strengthIsMutable( solutionTypeProperty.value ) ) {
+      if ( weakStrongProperty.value === 'weak' ) {
         this.sliderValueProperty.value = Utils.log10( strength );
       }
     } );
@@ -108,12 +107,6 @@ class StrengthSliderModel {
   public dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
   }
-}
-
-// Strength can be changed only for weak solutions, use this as a guard.
-// See https://github.com/phetsims/acid-base-solutions/issues/94
-function strengthIsMutable( solutionType: SolutionType ): boolean {
-  return ( solutionType === 'weakAcid' || solutionType === 'weakBase' );
 }
 
 acidBaseSolutions.register( 'StrengthSlider', StrengthSlider );
