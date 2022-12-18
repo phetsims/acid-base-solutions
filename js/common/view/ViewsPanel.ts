@@ -27,13 +27,9 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 
 // constants
 const TEXT_ICON_X_SPACING = 10;
-const RADIO_BUTTON_OPTIONS = { radius: 7 };
-const CHECKBOX_OPTIONS = { boxWidth: 15 };
-const TEXT_OPTIONS = {
-  font: new PhetFont( 12 ),
-  maxWidth: 130 // determined empirically
-};
-const ICON_OPTIONS = { scale: 0.75 };
+const RADIO_BUTTON_RADIUS = 7;
+const LABEL_FONT = new PhetFont( 12 );
+const TEXT_MAX_WIDTH = 130; // determined empirically
 const TOUCH_AREA_X_DILATION = 10;
 const TOUCH_AREA_Y_DILATION = 3;
 
@@ -54,66 +50,107 @@ export default class ViewsPanel extends Panel {
       tandem: tandem.createTandem( 'titleText' )
     } );
 
+    const radioButtonGroupTandem = tandem.createTandem( 'radioButtonGroup' );
+
     // Molecules
+    const moleculesRadioButtonTandem = radioButtonGroupTandem.createTandem( `molecules${AquaRadioButton.TANDEM_NAME_SUFFIX}` );
     const moleculesLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
-        new Text( AcidBaseSolutionsStrings.moleculesStringProperty, TEXT_OPTIONS ),
-        new Image( magnifierIcon_png, ICON_OPTIONS )
+        new Text( AcidBaseSolutionsStrings.moleculesStringProperty, {
+          font: LABEL_FONT,
+          maxWidth: TEXT_MAX_WIDTH,
+          tandem: moleculesRadioButtonTandem.createTandem( 'text' )
+        } ),
+        new Image( magnifierIcon_png, { scale: 0.75 } )
       ]
     } );
-    const moleculesRadioButton = new AquaRadioButton( viewModeProperty, 'molecules', moleculesLabel, RADIO_BUTTON_OPTIONS );
+    const moleculesRadioButton = new AquaRadioButton( viewModeProperty, 'molecules', moleculesLabel, {
+      radius: RADIO_BUTTON_RADIUS,
+      tandem: moleculesRadioButtonTandem
+    } );
     moleculesRadioButton.touchArea = moleculesRadioButton.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
 
     // Solvent
+    const solventCheckboxTandem = moleculesRadioButtonTandem.createTandem( 'solventCheckbox' );
     const solventLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
-        new Text( AcidBaseSolutionsStrings.solventStringProperty, TEXT_OPTIONS ),
+        new Text( AcidBaseSolutionsStrings.solventStringProperty, {
+          font: LABEL_FONT,
+          maxWidth: TEXT_MAX_WIDTH,
+          tandem: solventCheckboxTandem.createTandem( 'text' )
+        } ),
         createMoleculeNode( 'H2O' )
       ]
     } );
-    const solventCheckbox = new Checkbox( solventVisibleProperty, solventLabel, CHECKBOX_OPTIONS );
+    const solventCheckbox = new Checkbox( solventVisibleProperty, solventLabel, {
+      boxWidth: 15,
+      tandem: solventCheckboxTandem
+    } );
     solventCheckbox.touchArea = solventCheckbox.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
 
     // Graph
+    const graphRadioButtonTandem = radioButtonGroupTandem.createTandem( `graph${AquaRadioButton.TANDEM_NAME_SUFFIX}` );
     const graphLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
-        new Text( AcidBaseSolutionsStrings.graphStringProperty, TEXT_OPTIONS ),
+        new Text( AcidBaseSolutionsStrings.graphStringProperty, {
+          font: LABEL_FONT,
+          maxWidth: TEXT_MAX_WIDTH,
+          tandem: graphRadioButtonTandem.createTandem( 'text' )
+        } ),
         ConcentrationGraphNode.createIcon()
       ]
     } );
-    const graphRadioButton = new AquaRadioButton( viewModeProperty, 'graph', graphLabel, RADIO_BUTTON_OPTIONS );
+    const graphRadioButton = new AquaRadioButton( viewModeProperty, 'graph', graphLabel, {
+      radius: RADIO_BUTTON_RADIUS,
+      tandem: graphRadioButtonTandem
+    } );
     graphRadioButton.touchArea = graphRadioButton.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
 
     // Hide Views
+    const hideViewsRadioButtonTandem = radioButtonGroupTandem.createTandem( `hideViews${AquaRadioButton.TANDEM_NAME_SUFFIX}` );
     const hideViewsLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
-        new Text( AcidBaseSolutionsStrings.hideViewsStringProperty, TEXT_OPTIONS ),
+        new Text( AcidBaseSolutionsStrings.hideViewsStringProperty, {
+          font: LABEL_FONT,
+          maxWidth: TEXT_MAX_WIDTH,
+          tandem: hideViewsRadioButtonTandem.createTandem( 'text' )
+        } ),
         BeakerNode.createIcon( 20, 15 )
       ]
     } );
-    const hideViewsRadioButton = new AquaRadioButton( viewModeProperty, 'hideViews',
-      hideViewsLabel, RADIO_BUTTON_OPTIONS );
+    const hideViewsRadioButton = new AquaRadioButton( viewModeProperty, 'hideViews', hideViewsLabel, {
+      radius: RADIO_BUTTON_RADIUS,
+      tandem: hideViewsRadioButtonTandem
+    } );
     hideViewsRadioButton.touchArea = hideViewsRadioButton.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
 
-    const controls = new VBox( {
+    // Because of the interleaved 'Solvent' checkbox, we're faking things to make this look like an AquaRadioButtonGroup for PhET-iO.
+    // See https://github.com/phetsims/acid-base-solutions/issues/161
+    const radioButtonGroup = new VBox( {
       spacing: 8,
       align: 'left',
       children: [
         moleculesRadioButton,
-        new HBox( { children: [ new HStrut( 20 ), solventCheckbox ] } ),
+        new HBox( { children: [ new HStrut( 20 ), solventCheckbox ] } ), //TODO get rid of HStrut and use layoutOptions for solventCheckbox
         graphRadioButton,
         hideViewsRadioButton
-      ]
+      ],
+      tandem: radioButtonGroupTandem,
+      phetioEnabledPropertyInstrumented: true
+    } );
+
+    radioButtonGroup.addLinkedElement( viewModeProperty, {
+      tandem: radioButtonGroupTandem.createTandem( 'property' )
     } );
 
     const content = new AlignBox( new VBox( {
       spacing: 8,
       align: 'left',
-      children: [ titleText, controls ]
+      children: [ titleText, radioButtonGroup ]
     } ), {
       group: panelAlignGroup,
       xAlign: 'left'
