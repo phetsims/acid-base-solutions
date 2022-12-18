@@ -37,7 +37,7 @@ export default class MySolutionModel extends ABSModel {
       new WeakBase( tandem.createTandem( 'weakBase' ) )
     ];
 
-    super( solutions, DEFAULT_SOLUTION_TYPE );
+    super( solutions, DEFAULT_SOLUTION_TYPE, tandem );
 
     /**
      * Everything below here is for the convenience of the 'Solution' control panel, which

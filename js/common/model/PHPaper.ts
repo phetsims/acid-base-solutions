@@ -17,8 +17,11 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import Beaker from './Beaker.js';
 import { SolutionType } from '../enum/SolutionType.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 
-export default class PHPaper {
+export default class PHPaper extends PhetioObject {
 
   public readonly beaker: Beaker;
   public readonly pHProperty: TReadOnlyProperty<number>;
@@ -29,8 +32,14 @@ export default class PHPaper {
   public readonly indicatorHeightProperty: Property<number>;
 
   public constructor( beaker: Beaker,
-                      pHProperty: TReadOnlyProperty<number>,
-                      solutionTypeProperty: TReadOnlyProperty<SolutionType> ) {
+                      pHProperty: ReadOnlyProperty<number>,
+                      solutionTypeProperty: TReadOnlyProperty<SolutionType>,
+                      tandem: Tandem ) {
+
+    super( {
+      tandem: tandem,
+      phetioState: false
+    } );
 
     this.beaker = beaker;
     this.pHProperty = pHProperty;
@@ -40,7 +49,10 @@ export default class PHPaper {
       beaker.left + this.paperSize.width / 2, beaker.top - 20,
       beaker.right - this.paperSize.width / 2, beaker.bottom );
 
-    this.positionProperty = new Vector2Property( new Vector2( beaker.right - 60, beaker.top - 10 ) );
+    this.positionProperty = new Vector2Property( new Vector2( beaker.right - 60, beaker.top - 10 ), {
+      tandem: tandem.createTandem( 'positionProperty' ),
+      phetioReadOnly: true // because position is constrained to dragBounds
+    } );
 
     // NOTE: Ideally, indicatorHeight should be a DerivedProperty, but that gets quite messy.
     // height of indicator, the portion of the paper that changes color when dipped in solution
@@ -55,6 +67,10 @@ export default class PHPaper {
     pHProperty.link( resetIndicator );
 
     this.positionProperty.link( () => this.updateIndicatorHeight() );
+
+    this.addLinkedElement( pHProperty, {
+      tandem: tandem.createTandem( pHProperty.tandem.name )
+    } );
   }
 
   public reset(): void {

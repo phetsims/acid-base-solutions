@@ -10,6 +10,7 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TModel from '../../../../joist/js/TModel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import { SolutionType, SolutionTypeValues } from '../enum/SolutionType.js';
 import Beaker from './Beaker.js';
@@ -40,7 +41,7 @@ export default class ABSModel implements TModel {
   public readonly pHPaper: PHPaper;
   public readonly conductivityTester: ConductivityTester;
 
-  public constructor( solutions: AqueousSolution[], defaultSolutionType: SolutionType ) {
+  public constructor( solutions: AqueousSolution[], defaultSolutionType: SolutionType, tandem: Tandem ) {
 
     this.solutionsMap = new Map<SolutionType, AqueousSolution>();
     solutions.forEach( solution => {
@@ -48,17 +49,21 @@ export default class ABSModel implements TModel {
     } );
 
     this.solutionTypeProperty = new StringUnionProperty( defaultSolutionType, {
-      validValues: SolutionTypeValues
+      validValues: SolutionTypeValues.filter( solutionType => this.solutionsMap.has( solutionType ) ),
+      tandem: tandem.createTandem( 'solutionTypeProperty' )
     } );
 
-    this.pHProperty = new NumberProperty( this.solutionsMap.get( defaultSolutionType )!.pHProperty.value );
+    this.pHProperty = new NumberProperty( this.solutionsMap.get( defaultSolutionType )!.pHProperty.value, {
+      tandem: tandem.createTandem( 'pHProperty' ),
+      phetioReadOnly: true
+    } );
 
     this.beaker = new Beaker();
     this.magnifier = new Magnifier( this.beaker, this.solutionsMap, this.solutionTypeProperty );
     this.graph = new ConcentrationGraph( this.beaker, this.solutionsMap, this.solutionTypeProperty );
-    this.pHMeter = new PHMeter( this.beaker, this.pHProperty );
-    this.pHPaper = new PHPaper( this.beaker, this.pHProperty, this.solutionTypeProperty );
-    this.conductivityTester = new ConductivityTester( this.beaker, this.pHProperty );
+    this.pHMeter = new PHMeter( this.beaker, this.pHProperty, tandem.createTandem( 'pHMeter' ) );
+    this.pHPaper = new PHPaper( this.beaker, this.pHProperty, this.solutionTypeProperty, tandem.createTandem( 'pHPaper' ) );
+    this.conductivityTester = new ConductivityTester( this.beaker, this.pHProperty, tandem.createTandem( 'conductivityTester' ) );
 
     // synchronize with pH of the solution that is currently selected
     const setPH = ( pH: number ) => {
@@ -83,7 +88,7 @@ export default class ABSModel implements TModel {
     this.pHProperty.reset();
 
     // reset solutions
-    this.solutionsMap.forEach( ( solution, solutionType ) => solution.reset( ) );
+    this.solutionsMap.forEach( ( solution, solutionType ) => solution.reset() );
 
     this.pHMeter.reset();
     this.pHPaper.reset();

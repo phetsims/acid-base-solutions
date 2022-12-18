@@ -9,11 +9,15 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
+import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSConstants from '../ABSConstants.js';
 import Beaker from './Beaker.js';
@@ -22,7 +26,7 @@ import Beaker from './Beaker.js';
 const NEUTRAL_PH = 7;
 const NEUTRAL_BRIGHTNESS = 0.05;
 
-export default class ConductivityTester {
+export default class ConductivityTester extends PhetioObject {
 
   public readonly probeDragYRange: Range;
   public readonly probeSize: Dimension2;
@@ -35,7 +39,12 @@ export default class ConductivityTester {
   // brightness of bulb varies from 0 (off) to 1 (full on)
   public readonly brightnessProperty: TReadOnlyProperty<number>;
 
-  public constructor( beaker: Beaker, pHProperty: TReadOnlyProperty<number> ) {
+  public constructor( beaker: Beaker, pHProperty: ReadOnlyProperty<number>, tandem: Tandem ) {
+
+    super( {
+      tandem: tandem,
+      phetioState: false
+    } );
 
     this.probeDragYRange = new Range( beaker.top - 20, beaker.top + 50 );
 
@@ -45,8 +54,16 @@ export default class ConductivityTester {
 
     const probeXOffset = 0.175 * beaker.size.width; // offset from edge of beaker
     const probeY = this.probeDragYRange.min + 10;
-    this.positiveProbePositionProperty = new Vector2Property( new Vector2( beaker.right - probeXOffset, probeY ) );
-    this.negativeProbePositionProperty = new Vector2Property( new Vector2( beaker.left + probeXOffset, probeY ) );
+
+    this.positiveProbePositionProperty = new Vector2Property( new Vector2( beaker.right - probeXOffset, probeY ), {
+      tandem: tandem.createTandem( 'positiveProbePositionProperty' ),
+      phetioReadOnly: true // because position is constrained to probeDragYRange
+    } );
+
+    this.negativeProbePositionProperty = new Vector2Property( new Vector2( beaker.left + probeXOffset, probeY ), {
+      tandem: tandem.createTandem( 'negativeProbePositionProperty' ),
+      phetioReadOnly: true // because position is constrained to probeDragYRange
+    } );
 
     this.brightnessProperty = new DerivedProperty(
       [ pHProperty, this.positiveProbePositionProperty, this.negativeProbePositionProperty ],
@@ -62,7 +79,14 @@ export default class ConductivityTester {
           // open circuit
           return 0;
         }
+      }, {
+        tandem: tandem.createTandem( 'brightnessProperty' ),
+        phetioValueType: NumberIO
       } );
+
+    this.addLinkedElement( pHProperty, {
+      tandem: tandem.createTandem( pHProperty.tandem.name )
+    } );
   }
 
   public reset(): void {

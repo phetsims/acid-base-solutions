@@ -27,7 +27,7 @@ export default class IntroductionModel extends ABSModel {
       new WeakBase( tandem.createTandem( 'weakBase' ) )
     ];
 
-    super( solutions, 'water' );
+    super( solutions, 'water', tandem );
   }
 }
 
