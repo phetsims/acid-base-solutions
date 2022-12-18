@@ -68,7 +68,7 @@ export default class ABSScreenView extends ScreenView {
 
     // Views
     const magnifierNode = new MagnifierNode( model.magnifier, this.viewProperties.viewModeProperty,
-      tandem.createTandem( 'magnifierNode' ) );
+      this.viewProperties.solventVisibleProperty, tandem.createTandem( 'magnifierNode' ) );
     const graphNode = new ConcentrationGraphNode( model.graph, this.viewProperties.viewModeProperty,
       tandem.createTandem( 'graphNode' ) );
 
@@ -121,10 +121,6 @@ export default class ABSScreenView extends ScreenView {
       ]
     } );
     this.addChild( rootNode );
-
-    this.viewProperties.solventVisibleProperty.link( soluteVisible => {
-      magnifierNode.setSolventVisible( soluteVisible );
-    } );
 
     // needed by step
     this.pHPaperNode = pHPaperNode;

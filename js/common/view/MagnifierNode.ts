@@ -18,6 +18,7 @@ import MoleculesNode from './MoleculesNode.js';
 import { ViewMode } from '../enum/ViewMode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
@@ -29,7 +30,8 @@ export default class MagnifierNode extends Node {
   private readonly solventNode: Node;
   private readonly moleculesNode: MoleculesNode;
 
-  public constructor( magnifier: Magnifier, viewModeProperty: StringUnionProperty<ViewMode>, tandem: Tandem ) {
+  public constructor( magnifier: Magnifier, viewModeProperty: StringUnionProperty<ViewMode>,
+                      solventVisibleProperty: TReadOnlyProperty<boolean>, tandem: Tandem ) {
 
     // lens
     const RADIUS = magnifier.radius;
@@ -49,6 +51,7 @@ export default class MagnifierNode extends Node {
 
     // solvent (H2O)
     const solventNode = new Image( solvent_png, {
+      visibleProperty: solventVisibleProperty,
       imageOpacity: 0.6,  // reduce opacity so that other molecules stand out more
       centerX: 0,
       centerY: 0
@@ -108,10 +111,6 @@ export default class MagnifierNode extends Node {
   public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
-  }
-
-  public setSolventVisible( visible: boolean ): void {
-    this.solventNode.visible = visible;
   }
 
   /*
