@@ -25,6 +25,7 @@ import ConcentrationGraphNode from './graph/ConcentrationGraphNode.js';
 import createMoleculeNode from './createMoleculeNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 // constants
 const TEXT_ICON_X_SPACING = 10;
@@ -90,7 +91,10 @@ export default class ViewsPanel extends Panel {
       layoutOptions: {
         leftMargin: 20 // indent Solvent checkbox from radio buttons
       },
-      enabledProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'molecules' ) ),
+      enabledProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'molecules' ), {
+        tandem: solventCheckboxTandem.createTandem( 'enabledProperty' ),
+        phetioValueType: BooleanIO
+      } ),
       tandem: solventCheckboxTandem
     } );
     solventCheckbox.touchArea = solventCheckbox.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
