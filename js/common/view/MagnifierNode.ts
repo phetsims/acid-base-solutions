@@ -19,6 +19,7 @@ import { ViewMode } from '../enum/ViewMode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
@@ -75,7 +76,8 @@ export default class MagnifierNode extends Node {
       children: children,
       translation: magnifier.position,
       visibleProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'molecules' ), {
-        tandem: tandem.createTandem( 'visibleProperty' )
+        tandem: tandem.createTandem( 'visibleProperty' ),
+        phetioValueType: BooleanIO
       } ),
       tandem: tandem
     } );
