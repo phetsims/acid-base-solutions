@@ -123,10 +123,9 @@ export default class PHPaperNode extends Node {
       const position = this.pHPaper.positionProperty.value;
       const minY = this.pHPaper.beaker.top + ( 0.6 * this.pHPaper.paperSize.height );
 
-      // if the paper is fully submerged in the solution ...
+      // If the paper is fully submerged in the solution, float to the top of the beaker,
+      // with part of the paper above the surface.
       if ( ( this.animating && position.y > minY ) || ( this.pHPaper.top > this.pHPaper.beaker.top ) ) {
-
-        // float to the top of the beaker, with part of the paper above the surface
         this.animating = true;
         const dy = dt * 250; // move at a constant speed of 250 pixels per second
         const y = Math.max( minY, position.y - dy );
