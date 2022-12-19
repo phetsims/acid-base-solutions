@@ -108,6 +108,10 @@ export default class MagnifierNode extends Node {
 
     // Update when this Node becomes visible.
     this.visibleProperty.link( visible => visible && this.updateMolecules() );
+
+    this.addLinkedElement( magnifier, {
+      tandem: tandem.createTandem( magnifier.tandem.name )
+    } );
   }
 
   public override dispose(): void {

@@ -66,7 +66,8 @@ export default class ABSModel implements TModel {
       } );
 
     this.beaker = new Beaker();
-    this.magnifier = new Magnifier( this.beaker, this.solutionsMap, this.solutionTypeProperty );
+    this.magnifier = new Magnifier( this.beaker, this.solutionsMap, this.solutionTypeProperty,
+      tandem.createTandem( 'magnifier' ) );
     this.graph = new ConcentrationGraph( this.beaker, this.solutionsMap, this.solutionTypeProperty );
     this.pHMeter = new PHMeter( this.beaker, this.pHProperty, tandem.createTandem( 'pHMeter' ) );
     this.pHPaper = new PHPaper( this.beaker, this.pHProperty, this.solutionTypeProperty, tandem.createTandem( 'pHPaper' ) );
