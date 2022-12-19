@@ -15,7 +15,7 @@ import { AlignBox, AlignGroup, HBox, Image, Text, VBox } from '../../../../scene
 import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import magnifierIcon_png from '../../../images/magnifierIcon_png.js';
+import magnifyingGlassIcon_png from '../../../images/magnifyingGlassIcon_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../ABSConstants.js';
@@ -64,7 +64,7 @@ export default class ViewsPanel extends Panel {
           maxWidth: TEXT_MAX_WIDTH,
           tandem: moleculesRadioButtonTandem.createTandem( 'text' )
         } ),
-        new Image( magnifierIcon_png, { scale: 0.75 } )
+        new Image( magnifyingGlassIcon_png, { scale: 0.75 } )
       ]
     } );
     const moleculesRadioButton = new AquaRadioButton( viewModeProperty, 'molecules', moleculesLabel, {
