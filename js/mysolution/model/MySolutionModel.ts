@@ -54,6 +54,7 @@ export default class MySolutionModel extends ABSModel {
 
     this.concentrationProperty = new NumberProperty( defaultSolution.concentrationProperty.value, {
       reentrant: true,
+      units: 'mol/L',
       tandem: tandem.createTandem( 'concentrationProperty' )
     } );
 

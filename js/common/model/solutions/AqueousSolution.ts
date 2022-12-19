@@ -50,6 +50,7 @@ export default abstract class AqueousSolution {
     } );
 
     this.concentrationProperty = new NumberProperty( concentration, {
+      units: 'mol/L',
       tandem: tandem.createTandem( 'concentrationProperty' )
     } );
 
