@@ -37,7 +37,7 @@ export default class ABSModel implements TModel {
   public readonly pHProperty: ReadOnlyProperty<number>;
 
   public readonly beaker: Beaker;
-  public readonly magnifier: MagnifyingGlass;
+  public readonly magnifyingGlass: MagnifyingGlass;
   public readonly graph: ConcentrationGraph;
   public readonly pHMeter: PHMeter;
   public readonly pHPaper: PHPaper;
@@ -66,8 +66,8 @@ export default class ABSModel implements TModel {
       } );
 
     this.beaker = new Beaker();
-    this.magnifier = new MagnifyingGlass( this.beaker, this.solutionsMap, this.solutionTypeProperty,
-      tandem.createTandem( 'magnifier' ) );
+    this.magnifyingGlass = new MagnifyingGlass( this.beaker, this.solutionsMap, this.solutionTypeProperty,
+      tandem.createTandem( 'magnifyingGlass' ) );
     this.graph = new ConcentrationGraph( this.beaker, this.solutionsMap, this.solutionTypeProperty );
     this.pHMeter = new PHMeter( this.beaker, this.pHProperty, tandem.createTandem( 'pHMeter' ) );
     this.pHPaper = new PHPaper( this.beaker, this.pHProperty, this.solutionTypeProperty, tandem.createTandem( 'pHPaper' ) );

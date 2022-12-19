@@ -67,8 +67,8 @@ export default class ABSScreenView extends ScreenView {
       tandem.createTandem( 'reactionEquationNode' ) );
 
     // Views
-    const magnifierNode = new MagnifyingGlassNode( model.magnifier, this.viewProperties.viewModeProperty,
-      this.viewProperties.solventVisibleProperty, tandem.createTandem( 'magnifierNode' ) );
+    const magnifyingGlassNode = new MagnifyingGlassNode( model.magnifyingGlass, this.viewProperties.viewModeProperty,
+      this.viewProperties.solventVisibleProperty, tandem.createTandem( 'magnifyingGlassNode' ) );
     const graphNode = new ConcentrationGraphNode( model.graph, this.viewProperties.viewModeProperty,
       tandem.createTandem( 'graphNode' ) );
 
@@ -104,7 +104,7 @@ export default class ABSScreenView extends ScreenView {
 
     // Centered in the space to the right of the magnifying glass
     controlsParent.boundsProperty.link( bounds => {
-      controlsParent.centerX = magnifierNode.right + ( this.layoutBounds.right - magnifierNode.right ) / 2;
+      controlsParent.centerX = magnifyingGlassNode.right + ( this.layoutBounds.right - magnifyingGlassNode.right ) / 2;
       controlsParent.centerY = this.layoutBounds.centerY;
     } );
 
@@ -116,7 +116,7 @@ export default class ABSScreenView extends ScreenView {
         conductivityTesterNode,
         beakerNode,
         reactionEquationNode,
-        magnifierNode,
+        magnifyingGlassNode,
         graphNode,
         controlsParent,
         resetAllButton

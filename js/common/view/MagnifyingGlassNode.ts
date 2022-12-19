@@ -31,11 +31,11 @@ export default class MagnifyingGlassNode extends Node {
   private readonly solventNode: Node;
   private readonly moleculesNode: MoleculesNode;
 
-  public constructor( magnifier: MagnifyingGlass, viewModeProperty: StringUnionProperty<ViewMode>,
+  public constructor( magnifyingGlass: MagnifyingGlass, viewModeProperty: StringUnionProperty<ViewMode>,
                       solventVisibleProperty: TReadOnlyProperty<boolean>, tandem: Tandem ) {
 
     // lens
-    const RADIUS = magnifier.radius;
+    const RADIUS = magnifyingGlass.radius;
     const lensShape = Shape.circle( 0, 0, RADIUS );
     const lensNode = new Path( lensShape, { stroke: 'black', lineWidth: LENS_LINE_WIDTH } );
 
@@ -47,7 +47,7 @@ export default class MagnifyingGlassNode extends Node {
     } );
     handleNode.rotate( Math.PI / 6 );
 
-    // opaque background, so we don't see things like pH paper in magnifier
+    // opaque background, so we don't see things like pH paper in magnifyingGlass
     const waterNode = new Circle( RADIUS, { fill: 'rgb(210,231,235)' } );
 
     // solvent (H2O)
@@ -59,7 +59,7 @@ export default class MagnifyingGlassNode extends Node {
     } );
 
     // molecules
-    const moleculesNode = new MoleculesNode( magnifier, new Bounds2( -RADIUS, -RADIUS, RADIUS, RADIUS ), LENS_LINE_WIDTH );
+    const moleculesNode = new MoleculesNode( magnifyingGlass, new Bounds2( -RADIUS, -RADIUS, RADIUS, RADIUS ), LENS_LINE_WIDTH );
 
     // stuff that's visible through (and therefore clipped to) the lens
     const viewportNode = new Node( { children: [ solventNode, moleculesNode ] } );
@@ -74,7 +74,7 @@ export default class MagnifyingGlassNode extends Node {
 
     super( {
       children: children,
-      translation: magnifier.position,
+      translation: magnifyingGlass.position,
       visibleProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'molecules' ), {
         tandem: tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
@@ -87,20 +87,20 @@ export default class MagnifyingGlassNode extends Node {
 
     // Observe the strength and concentration Properties for the selected solution.
     const updateMoleculesBound = this.updateMolecules.bind( this );
-    magnifier.solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
+    magnifyingGlass.solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
 
       this.moleculesNode.reset();
 
       // unlink from previous solution
       if ( previousSolutionType ) {
-        const previousSolution = magnifier.solutionsMap.get( previousSolutionType )!;
+        const previousSolution = magnifyingGlass.solutionsMap.get( previousSolutionType )!;
         assert && assert( previousSolution );
         previousSolution.strengthProperty.unlink( updateMoleculesBound );
         previousSolution.concentrationProperty.unlink( updateMoleculesBound );
       }
 
       // link to new solution
-      const newSolution = magnifier.solutionsMap.get( newSolutionType )!;
+      const newSolution = magnifyingGlass.solutionsMap.get( newSolutionType )!;
       assert && assert( newSolution );
       newSolution.strengthProperty.link( updateMoleculesBound );
       newSolution.concentrationProperty.link( updateMoleculesBound );
@@ -109,8 +109,8 @@ export default class MagnifyingGlassNode extends Node {
     // Update when this Node becomes visible.
     this.visibleProperty.link( visible => visible && this.updateMolecules() );
 
-    this.addLinkedElement( magnifier, {
-      tandem: tandem.createTandem( magnifier.tandem.name )
+    this.addLinkedElement( magnifyingGlass, {
+      tandem: tandem.createTandem( magnifyingGlass.tandem.name )
     } );
   }
 
@@ -120,7 +120,7 @@ export default class MagnifyingGlassNode extends Node {
   }
 
   /*
-   * Updates the number of molecules visible in the magnifier.
+   * Updates the number of molecules visible.
    * To improve performance, updates only when this node is visible.
    */
   private updateMolecules(): void {

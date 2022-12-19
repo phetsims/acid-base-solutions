@@ -1,7 +1,7 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * Model for the magnifier in 'Acid-Base Solutions' sim.
+ * MagnifyingGlass is the model for the magnifying glass in 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
  */
@@ -20,7 +20,7 @@ export default class MagnifyingGlass extends PhetioObject {
   public readonly solutionsMap: SolutionMap;
   public readonly solutionTypeProperty: ReadOnlyProperty<SolutionType>;
   public readonly radius: number;
-  public readonly position: Vector2; // magnifier position, origin at center of glass
+  public readonly position: Vector2; // position, origin at center of glass
 
   public constructor( beaker: Beaker,
                       solutionsMap: SolutionMap,

@@ -36,7 +36,7 @@ export default abstract class AqueousSolution {
    * @param strength - the strength of the solute
    * @param concentration - the initial concentration of the solute, at the start of the reaction
    * @param molecules - the molecules that make up the solution. The order of elements in this array determines the
-   *   left-to-right order of bars in the graph, and the front-to-back rendering order of molecules in the magnifier.
+   *   left-to-right order of bars in the graph, and the front-to-back rendering order of molecules in the magnifying glass.
    * @param tandem
    */
   protected constructor( solutionType: SolutionType, strength: number, concentration: number, molecules: Molecule[], tandem: Tandem ) {

@@ -31,17 +31,17 @@ type MoleculesData = {
 
 export default class MoleculesNode extends CanvasNode {
 
-  private readonly magnifier: MagnifyingGlass;
+  private readonly magnifyingGlass: MagnifyingGlass;
   private readonly positionRadius: number; // radius for computing random positions
   private readonly moleculesDataMap: Map<MoleculeKey, MoleculesData>;
 
-  public constructor( magnifier: MagnifyingGlass, lensBounds: Bounds2, lensLineWidth: number ) {
+  public constructor( magnifyingGlass: MagnifyingGlass, lensBounds: Bounds2, lensLineWidth: number ) {
 
     super( { canvasBounds: lensBounds } );
 
-    this.magnifier = magnifier;
+    this.magnifyingGlass = magnifyingGlass;
 
-    this.positionRadius = IMAGE_SCALE * ( this.magnifier.radius - ( lensLineWidth / 2 ) );
+    this.positionRadius = IMAGE_SCALE * ( this.magnifyingGlass.radius - ( lensLineWidth / 2 ) );
 
     this.moleculesDataMap = new Map<MoleculeKey, MoleculesData>();
 
@@ -64,7 +64,7 @@ export default class MoleculesNode extends CanvasNode {
     const ArrayConstructor = window.Float32Array || window.Array;
 
     // Iterate over all solutions, and create a MoleculesData structure for each unique molecule.
-    magnifier.solutionsMap.forEach( ( solution, solutionType ) => {
+    magnifyingGlass.solutionsMap.forEach( ( solution, solutionType ) => {
       solution.molecules.forEach( molecule => {
         const key = molecule.key;
 
@@ -99,8 +99,8 @@ export default class MoleculesNode extends CanvasNode {
   // Updates the molecules data structure and triggers a paintCanvas.
   public update(): void {
 
-    const solutionType = this.magnifier.solutionTypeProperty.value;
-    const solution = this.magnifier.solutionsMap.get( solutionType )!;
+    const solutionType = this.magnifyingGlass.solutionTypeProperty.value;
+    const solution = this.magnifyingGlass.solutionsMap.get( solutionType )!;
     assert && assert( solution );
 
     // Update the data structure for each molecule that is in the current solution.
@@ -141,8 +141,8 @@ export default class MoleculesNode extends CanvasNode {
    */
   public override paintCanvas( context: CanvasRenderingContext2D ): void {
 
-    const solutionType = this.magnifier.solutionTypeProperty.value;
-    const solution = this.magnifier.solutionsMap.get( solutionType )!;
+    const solutionType = this.magnifyingGlass.solutionTypeProperty.value;
+    const solution = this.magnifyingGlass.solutionsMap.get( solutionType )!;
     assert && assert( solution );
 
     // createCanvas created HTMLCanvasElement at a higher resolution to improve quality.
