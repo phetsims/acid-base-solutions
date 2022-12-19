@@ -175,7 +175,8 @@ export default class MoleculesNode extends CanvasNode {
 
 /**
  * Compute the number of molecules that corresponds to some concentration.
- * This algorithm was ported from the Java implementation, and is documented in acid-base-solutions/doc/HA_A-_ratio_model.pdf.
+ * This algorithm was ported from the Java implementation, and is documented in
+ * https://github.com/phetsims/acid-base-solutions/blob/master/doc/HA_A-_ratio_model.pdf
  */
 function getNumberOfMolecules( concentration: number ): number {
   const raiseFactor = Utils.log10( concentration / BASE_CONCENTRATION );
