@@ -55,13 +55,15 @@ export default class ConductivityTester extends PhetioObject {
     const probeXOffset = 0.175 * beaker.size.width; // offset from edge of beaker
     const probeY = this.probeDragYRange.min + 10;
 
+    const probesTandem = tandem.createTandem( 'probes' );
+
     this.positiveProbePositionProperty = new Vector2Property( new Vector2( beaker.right - probeXOffset, probeY ), {
-      tandem: tandem.createTandem( 'positiveProbePositionProperty' ),
+      tandem: probesTandem.createTandem( 'positiveProbePositionProperty' ),
       phetioReadOnly: true // because position is constrained to probeDragYRange
     } );
 
     this.negativeProbePositionProperty = new Vector2Property( new Vector2( beaker.left + probeXOffset, probeY ), {
-      tandem: tandem.createTandem( 'negativeProbePositionProperty' ),
+      tandem: probesTandem.createTandem( 'negativeProbePositionProperty' ),
       phetioReadOnly: true // because position is constrained to probeDragYRange
     } );
 
