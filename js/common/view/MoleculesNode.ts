@@ -11,7 +11,7 @@ import Utils from '../../../../dot/js/Utils.js';
 import { CanvasNode } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import createMoleculeNode from './createMoleculeNode.js';
-import Magnifier from '../model/Magnifier.js';
+import MagnifyingGlass from '../model/MagnifyingGlass.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import { MoleculeKey } from '../model/solutions/Molecule.js';
 
@@ -31,11 +31,11 @@ type MoleculesData = {
 
 export default class MoleculesNode extends CanvasNode {
 
-  private readonly magnifier: Magnifier;
+  private readonly magnifier: MagnifyingGlass;
   private readonly positionRadius: number; // radius for computing random positions
   private readonly moleculesDataMap: Map<MoleculeKey, MoleculesData>;
 
-  public constructor( magnifier: Magnifier, lensBounds: Bounds2, lensLineWidth: number ) {
+  public constructor( magnifier: MagnifyingGlass, lensBounds: Bounds2, lensLineWidth: number ) {
 
     super( { canvasBounds: lensBounds } );
 

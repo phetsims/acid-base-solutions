@@ -18,7 +18,7 @@ import { SolutionType } from '../enum/SolutionType.js';
 import Beaker from './Beaker.js';
 import ConcentrationGraph from './ConcentrationGraph.js';
 import ConductivityTester from './ConductivityTester.js';
-import Magnifier from './Magnifier.js';
+import MagnifyingGlass from './MagnifyingGlass.js';
 import PHMeter from './PHMeter.js';
 import PHPaper from './PHPaper.js';
 import AqueousSolution from './solutions/AqueousSolution.js';
@@ -37,7 +37,7 @@ export default class ABSModel implements TModel {
   public readonly pHProperty: ReadOnlyProperty<number>;
 
   public readonly beaker: Beaker;
-  public readonly magnifier: Magnifier;
+  public readonly magnifier: MagnifyingGlass;
   public readonly graph: ConcentrationGraph;
   public readonly pHMeter: PHMeter;
   public readonly pHPaper: PHPaper;
@@ -66,7 +66,7 @@ export default class ABSModel implements TModel {
       } );
 
     this.beaker = new Beaker();
-    this.magnifier = new Magnifier( this.beaker, this.solutionsMap, this.solutionTypeProperty,
+    this.magnifier = new MagnifyingGlass( this.beaker, this.solutionsMap, this.solutionTypeProperty,
       tandem.createTandem( 'magnifier' ) );
     this.graph = new ConcentrationGraph( this.beaker, this.solutionsMap, this.solutionTypeProperty );
     this.pHMeter = new PHMeter( this.beaker, this.pHProperty, tandem.createTandem( 'pHMeter' ) );

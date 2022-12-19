@@ -1,7 +1,7 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * Magnifier view.
+ * MagnifyingGlass view.
  * For performance, draws molecules directly to Canvas using drawImage.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -13,7 +13,7 @@ import { Shape } from '../../../../kite/js/imports.js';
 import { Circle, Image, Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import solvent_png from '../../../images/solvent_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import Magnifier from '../model/Magnifier.js';
+import MagnifyingGlass from '../model/MagnifyingGlass.js';
 import MoleculesNode from './MoleculesNode.js';
 import { ViewMode } from '../enum/ViewMode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -31,7 +31,7 @@ export default class MagnifierNode extends Node {
   private readonly solventNode: Node;
   private readonly moleculesNode: MoleculesNode;
 
-  public constructor( magnifier: Magnifier, viewModeProperty: StringUnionProperty<ViewMode>,
+  public constructor( magnifier: MagnifyingGlass, viewModeProperty: StringUnionProperty<ViewMode>,
                       solventVisibleProperty: TReadOnlyProperty<boolean>, tandem: Tandem ) {
 
     // lens

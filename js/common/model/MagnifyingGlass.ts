@@ -15,7 +15,7 @@ import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 
-export default class Magnifier extends PhetioObject {
+export default class MagnifyingGlass extends PhetioObject {
 
   public readonly solutionsMap: SolutionMap;
   public readonly solutionTypeProperty: ReadOnlyProperty<SolutionType>;
@@ -48,4 +48,4 @@ export default class Magnifier extends PhetioObject {
   }
 }
 
-acidBaseSolutions.register( 'Magnifier', Magnifier );
+acidBaseSolutions.register( 'MagnifyingGlass', MagnifyingGlass );
