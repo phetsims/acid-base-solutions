@@ -19,7 +19,7 @@ import ABSConductivityTesterNode from './ABSConductivityTesterNode.js';
 import ABSViewProperties from './ABSViewProperties.js';
 import BeakerNode from './BeakerNode.js';
 import ConcentrationGraphNode from './graph/ConcentrationGraphNode.js';
-import MagnifierNode from './MagnifierNode.js';
+import MagnifyingGlassNode from './MagnifyingGlassNode.js';
 import PHColorKeyNode from './PHColorKeyNode.js';
 import PHMeterNode from './PHMeterNode.js';
 import PHPaperNode from './PHPaperNode.js';
@@ -67,7 +67,7 @@ export default class ABSScreenView extends ScreenView {
       tandem.createTandem( 'reactionEquationNode' ) );
 
     // Views
-    const magnifierNode = new MagnifierNode( model.magnifier, this.viewProperties.viewModeProperty,
+    const magnifierNode = new MagnifyingGlassNode( model.magnifier, this.viewProperties.viewModeProperty,
       this.viewProperties.solventVisibleProperty, tandem.createTandem( 'magnifierNode' ) );
     const graphNode = new ConcentrationGraphNode( model.graph, this.viewProperties.viewModeProperty,
       tandem.createTandem( 'graphNode' ) );

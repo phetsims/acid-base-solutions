@@ -26,7 +26,7 @@ const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
 const CLIPPING_ENABLED = true; // set to false to debug positioning of molecules
 const LENS_LINE_WIDTH = 8;
 
-export default class MagnifierNode extends Node {
+export default class MagnifyingGlassNode extends Node {
 
   private readonly solventNode: Node;
   private readonly moleculesNode: MoleculesNode;
@@ -130,4 +130,4 @@ export default class MagnifierNode extends Node {
   }
 }
 
-acidBaseSolutions.register( 'MagnifierNode', MagnifierNode );
+acidBaseSolutions.register( 'MagnifyingGlassNode', MagnifyingGlassNode );
