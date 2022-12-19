@@ -58,9 +58,6 @@ export default class BeakerNode extends Node {
     } );
 
     // horizontal tick marks, right edge, from bottom up
-    const ticksParent = new Node();
-
-    // tick marks
     const NUMBER_OF_TICKS = Utils.roundSymmetric( 1 / MINOR_TICK_SPACING );
     const deltaY = BEAKER_HEIGHT / NUMBER_OF_TICKS;
     let isMajorTick;
@@ -68,6 +65,7 @@ export default class BeakerNode extends Node {
     let leftX;
     let rightX;
     let tickPath;
+    const tickPaths = [];
     for ( let i = 1; i <= NUMBER_OF_TICKS; i++ ) {
 
       isMajorTick = ( i % MINOR_TICKS_PER_MAJOR_TICK === 0 );
@@ -81,8 +79,12 @@ export default class BeakerNode extends Node {
         lineCap: 'round',
         lineJoin: 'bevel'
       } );
-      ticksParent.addChild( tickPath );
+      tickPaths.push( tickPath );
     }
+    const tickMarkNodes = new Node( {
+      children: tickPaths,
+      tandem: tandem.createTandem( 'tickMarkNodes' )
+    } );
 
     // major tick label at '1L'
     const majorTickStringProperty = new DerivedProperty(
@@ -94,7 +96,7 @@ export default class BeakerNode extends Node {
       fill: 'black',
       maxWidth: 65
     } );
-    ticksParent.addChild( majorTickText );
+    tickMarkNodes.addChild( majorTickText );
 
     majorTickText.boundsProperty.link( bounds => {
       majorTickText.right = BEAKER_WIDTH / 2 - MAJOR_TICK_LENGTH - TICK_LABEL_X_SPACING;
@@ -102,7 +104,7 @@ export default class BeakerNode extends Node {
     } );
 
     super( {
-      children: [ waterPath, beakerPath, ticksParent ],
+      children: [ waterPath, beakerPath, tickMarkNodes ],
       translation: beaker.position,
       pickable: false,
       tandem: tandem
