@@ -6,6 +6,7 @@
  * @author Andrey Zelenkov (Mlearner)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -14,6 +15,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import Beaker from './Beaker.js';
 
@@ -23,6 +25,7 @@ export default class PHMeter extends PhetioObject {
   public readonly pHProperty: TReadOnlyProperty<number>;
   public readonly dragYRange: Range; // drag range (y coordinate)
   public readonly positionProperty: Property<Vector2>; // position, at tip of probe
+  public readonly isInSolutionProperty: TReadOnlyProperty<boolean>; // Is the tip of the pH probe in solution?
 
   public constructor( beaker: Beaker, pHProperty: ReadOnlyProperty<number>, tandem: Tandem ) {
 
@@ -40,6 +43,12 @@ export default class PHMeter extends PhetioObject {
       phetioReadOnly: true // because position is constrained to dragYRange
     } );
 
+    this.isInSolutionProperty = new DerivedProperty( [ this.positionProperty ],
+      position => this.beaker.bounds.containsPoint( this.positionProperty.value ), {
+        tandem: tandem.createTandem( 'isInSolutionProperty' ),
+        phetioValueType: BooleanIO
+      } );
+
     this.addLinkedElement( pHProperty, {
       tandem: tandem.createTandem( pHProperty.tandem.name )
     } );
@@ -52,11 +61,6 @@ export default class PHMeter extends PhetioObject {
 
   public reset(): void {
     this.positionProperty.reset();
-  }
-
-  // Is the tip of the pH probe in solution?
-  public inSolution(): boolean {
-    return this.beaker.bounds.containsPoint( this.positionProperty.value );
   }
 }
 
