@@ -22,7 +22,7 @@ import ABSConstants from '../ABSConstants.js';
 import { ViewMode } from './ViewMode.js';
 import BeakerNode from './BeakerNode.js';
 import ConcentrationGraphNode from './graph/ConcentrationGraphNode.js';
-import createMoleculeNode from './createMoleculeNode.js';
+import createParticleNode from './createParticleNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
@@ -83,7 +83,7 @@ export default class ViewsPanel extends Panel {
           maxWidth: TEXT_MAX_WIDTH,
           tandem: solventCheckboxTandem.createTandem( 'text' )
         } ),
-        createMoleculeNode( 'H2O' )
+        createParticleNode( 'H2O' )
       ]
     } );
     const solventCheckbox = new Checkbox( solventVisibleProperty, solventLabel, {

@@ -14,7 +14,7 @@ import Tandem from '../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../AcidBaseSolutionsStrings.js';
 import ABSColors from '../common/ABSColors.js';
-import createMoleculeNode from '../common/view/createMoleculeNode.js';
+import createParticleNode from '../common/view/createParticleNode.js';
 import MySolutionModel from './model/MySolutionModel.js';
 import MySolutionScreenView from './view/MySolutionScreenView.js';
 
@@ -45,8 +45,8 @@ function createScreenIcon(): ScreenIcon {
   const width = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.width;
   const height = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.height;
 
-  const h3oNode = createMoleculeNode( 'H3O' );
-  const ohNode = createMoleculeNode( 'OH' );
+  const h3oNode = createParticleNode( 'H3O' );
+  const ohNode = createParticleNode( 'OH' );
 
   // Uniformly scale the particles to make them fill the available space.
   const xSpace = 0.06 * width; // horizontal space around the particles

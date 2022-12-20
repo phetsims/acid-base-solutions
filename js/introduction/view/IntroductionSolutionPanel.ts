@@ -21,7 +21,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import { ParticleKey } from '../../common/model/solutions/Particle.js';
-import createMoleculeNode from '../../common/view/createMoleculeNode.js';
+import createParticleNode from '../../common/view/createParticleNode.js';
 import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 
@@ -134,7 +134,7 @@ function createRadioButtonLabel( solutionNameProperty: TReadOnlyProperty<string>
   } );
 
   // Create the particles's icon
-  const particleNode = createMoleculeNode( key );
+  const particleNode = createParticleNode( key );
 
   const hBox = new HBox( {
     spacing: 10,

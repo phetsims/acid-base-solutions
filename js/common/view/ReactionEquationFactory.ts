@@ -13,7 +13,7 @@ import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, HStrut, Node, Path, RichText, VBox, VStrut } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import createMoleculeNode from './createMoleculeNode.js';
+import createParticleNode from './createParticleNode.js';
 import { SolutionType } from '../model/SolutionType.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
@@ -117,7 +117,7 @@ function createA(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
-      createMoleculeNode( 'A' ),
+      createParticleNode( 'A' ),
       new RichText( `<i>A</i><sup>${MathSymbols.MINUS}</sup>`, RICH_TEXT_OPTIONS ),
       new VStrut( SUBSCRIPT_HEIGHT )
     ]
@@ -129,7 +129,7 @@ function createB(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
-      createMoleculeNode( 'B' ),
+      createParticleNode( 'B' ),
       new RichText( '<i>B</i>', RICH_TEXT_OPTIONS ),
       new VStrut( SUBSCRIPT_HEIGHT )
     ]
@@ -141,7 +141,7 @@ function createBH(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
-      createMoleculeNode( 'BH' ),
+      createParticleNode( 'BH' ),
       new HBox( {
         spacing: 1, // this functions like kerning
         align: 'bottom',
@@ -159,7 +159,7 @@ function createH2O(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
-      createMoleculeNode( 'H2O' ),
+      createParticleNode( 'H2O' ),
       new RichText( 'H<sub>2</sub>O', RICH_TEXT_OPTIONS )
     ]
   } );
@@ -173,8 +173,8 @@ function create2H2O(): Node {
       new HBox( {
         spacing: 4,
         children: [
-          createMoleculeNode( 'H2O' ),
-          createMoleculeNode( 'H2O' )
+          createParticleNode( 'H2O' ),
+          createParticleNode( 'H2O' )
         ]
       } ),
       new HBox( {
@@ -198,7 +198,7 @@ function createH3O(): Node {
       // Add a strut as a bit of a hack to make the big atom in H3O appear aligned with the text.
       new HBox( {
         spacing: 0,
-        children: [ createMoleculeNode( 'H3O' ), new HStrut( 7 ) ]
+        children: [ createParticleNode( 'H3O' ), new HStrut( 7 ) ]
       } ),
       new RichText( 'H<sub>3</sub>O<sup>+</sup>', RICH_TEXT_OPTIONS )
     ]
@@ -210,7 +210,7 @@ function createHA(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
-      createMoleculeNode( 'HA' ),
+      createParticleNode( 'HA' ),
       new RichText( 'H<i>A</i>', RICH_TEXT_OPTIONS ),
       new VStrut( SUBSCRIPT_HEIGHT )
     ]
@@ -222,7 +222,7 @@ function createM(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
-      createMoleculeNode( 'M' ),
+      createParticleNode( 'M' ),
       new HBox( {
         spacing: 1, // this functions like kerning
         align: 'origin',
@@ -241,7 +241,7 @@ function createMOH(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
-      createMoleculeNode( 'MOH' ),
+      createParticleNode( 'MOH' ),
       new HBox( {
         spacing: 1, // this functions like kerning
         align: 'origin',
@@ -260,7 +260,7 @@ function createOH(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
     children: [
-      createMoleculeNode( 'OH' ),
+      createParticleNode( 'OH' ),
       new RichText( `OH<sup>${MathSymbols.MINUS}</sup>`, RICH_TEXT_OPTIONS ),
       new VStrut( SUBSCRIPT_HEIGHT )
     ]

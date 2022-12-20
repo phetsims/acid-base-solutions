@@ -10,7 +10,7 @@ import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
 import { CanvasNode } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import createMoleculeNode from './createMoleculeNode.js';
+import createParticleNode from './createParticleNode.js';
 import MagnifyingGlass from '../model/MagnifyingGlass.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import { ParticleKey } from '../model/solutions/Particle.js';
@@ -48,7 +48,7 @@ export default class ParticlesNode extends CanvasNode {
     // Generate images, to populate ParticlesData.canvas. This happens asynchronously.
     const createCanvas = ( key: ParticleKey ) => {
 
-      const particleNode = createMoleculeNode( key );
+      const particleNode = createParticleNode( key );
 
       // Scale up to increase quality. Remember to scale down when drawing to canvas.
       particleNode.setScaleMagnitude( IMAGE_SCALE, IMAGE_SCALE );

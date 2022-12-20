@@ -1,7 +1,7 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * createMoleculeNode is a factory function for creating molecule nodes.
+ * createParticleNode is a factory function for creating molecule nodes.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -102,9 +102,9 @@ map.set( 'OH', () => new Node( {
 /**
  * Creates a Node for the specified particle.
  */
-export default function createMoleculeNode( key: ParticleKey ): Node {
+export default function createParticleNode( key: ParticleKey ): Node {
   assert && assert( map.has( key ), `no entry for key=${key}` );
   return map.get( key )!();
 }
 
-acidBaseSolutions.register( 'createMoleculeNode', createMoleculeNode );
+acidBaseSolutions.register( 'createParticleNode', createParticleNode );
