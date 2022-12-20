@@ -108,13 +108,13 @@ export default class ConcentrationGraphNode extends Node {
         bar = this.barNodes[ i ];
         if ( i < numberOfParticles ) {
           // set visibility, color, value and position of new bars
-          bar.setVisible( true );
+          bar.visible = true;
           bar.setValue( solution.particles[ i ].getConcentration() );
           bar.setBarFill( particles[ i ].color );
           bar.setTranslation( ( i + 0.75 + ( 4 - numberOfParticles ) / 2 ) * this.graph.width / 4, this.graph.height );
         }
         else {
-          bar.setVisible( false );
+          bar.visible = false;
         }
       }
     }
