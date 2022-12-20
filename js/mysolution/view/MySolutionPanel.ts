@@ -30,8 +30,11 @@ export type WeakStrongType = ( typeof WeakStrongTypeValues )[number];
 
 export default class MySolutionPanel extends Panel {
 
-  public constructor( solutionTypeProperty: Property<SolutionType>, concentrationProperty: Property<number>,
-                      strengthProperty: Property<number>, contentAlignGroup: AlignGroup, tandem: Tandem ) {
+  public constructor( solutionTypeProperty: Property<SolutionType>,
+                      concentrationProperty: Property<number>,
+                      strengthProperty: Property<number>,
+                      contentAlignGroup: AlignGroup, // so that both control panels have the same width
+                      tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, ABSConstants.PANEL_OPTIONS, {
       tandem: tandem
@@ -52,6 +55,9 @@ export default class MySolutionPanel extends Panel {
     // title
     const titleText = new Text( AcidBaseSolutionsStrings.solutionStringProperty, {
       font: ABSConstants.TITLE_FONT,
+      layoutOptions: {
+        align: 'left'
+      },
       maxWidth: 180, // determined empirically
       tandem: tandem.createTandem( 'titleText' )
     } );
@@ -73,22 +79,17 @@ export default class MySolutionPanel extends Panel {
     const strengthControl = new StrengthControl( strengthProperty, weakStrongProperty,
       tandem.createTandem( 'strengthControl' ) );
 
-    const controls = new VBox( {
-      excludeInvisibleChildrenFromBounds: false,
+    const content = new AlignBox( new VBox( {
       spacing: 6,
+      align: 'center',
       children: [
+        titleText,
         acidBaseSwitch,
         new HSeparator(),
         initialConcentrationControl,
         new HSeparator(),
         strengthControl
       ]
-    } );
-
-    const content = new AlignBox( new VBox( {
-      spacing: 8,
-      align: 'left',
-      children: [ titleText, controls ]
     } ), {
       group: contentAlignGroup,
       xAlign: 'left'

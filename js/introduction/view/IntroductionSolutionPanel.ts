@@ -27,7 +27,8 @@ import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js'
 
 export default class IntroductionSolutionPanel extends Panel {
 
-  public constructor( solutionTypeProperty: Property<SolutionType>, contentAlignGroup: AlignGroup,
+  public constructor( solutionTypeProperty: Property<SolutionType>,
+                      contentAlignGroup: AlignGroup, // so that both control panels have the same width
                       tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, ABSConstants.PANEL_OPTIONS, {

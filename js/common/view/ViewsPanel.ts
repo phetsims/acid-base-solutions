@@ -39,7 +39,7 @@ export default class ViewsPanel extends Panel {
 
   public constructor( viewModeProperty: StringUnionProperty<ViewMode>,
                       solventVisibleProperty: Property<boolean>,
-                      panelAlignGroup: AlignGroup,
+                      contentAlignGroup: AlignGroup, // so that both control panels have the same width
                       tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, ABSConstants.PANEL_OPTIONS, {
@@ -161,7 +161,7 @@ export default class ViewsPanel extends Panel {
       align: 'left',
       children: [ titleText, radioButtonGroup ]
     } ), {
-      group: panelAlignGroup,
+      group: contentAlignGroup,
       xAlign: 'left'
     } );
 

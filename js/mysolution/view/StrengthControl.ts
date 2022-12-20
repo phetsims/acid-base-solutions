@@ -50,6 +50,7 @@ export default class StrengthControl extends VBox {
         slider
       ],
       spacing: 6,
+      excludeInvisibleChildrenFromBounds: false,
       tandem: tandem
     } );
   }
