@@ -1,7 +1,7 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
 /**
- * MoleculesNode draws the molecules that appear in the magnifying glass.
+ * ParticlesNode draws the molecules that appear in the magnifying glass.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -29,7 +29,7 @@ type MoleculesData = {
   yCoordinates: Float32Array;
 };
 
-export default class MoleculesNode extends CanvasNode {
+export default class ParticlesNode extends CanvasNode {
 
   private readonly magnifyingGlass: MagnifyingGlass;
   private readonly positionRadius: number; // radius for computing random positions
@@ -184,4 +184,4 @@ function getNumberOfMolecules( concentration: number ): number {
   return Utils.roundSymmetric( BASE_DOTS * Math.pow( baseFactor, raiseFactor ) );
 }
 
-acidBaseSolutions.register( 'MoleculesNode', MoleculesNode );
+acidBaseSolutions.register( 'ParticlesNode', ParticlesNode );

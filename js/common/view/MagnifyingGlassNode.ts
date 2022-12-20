@@ -14,7 +14,7 @@ import { Circle, Image, Node, Path, Rectangle } from '../../../../scenery/js/imp
 import solvent_png from '../../../images/solvent_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import MagnifyingGlass from '../model/MagnifyingGlass.js';
-import MoleculesNode from './MoleculesNode.js';
+import ParticlesNode from './ParticlesNode.js';
 import { ViewMode } from '../enum/ViewMode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
@@ -29,7 +29,7 @@ const LENS_LINE_WIDTH = 8;
 export default class MagnifyingGlassNode extends Node {
 
   private readonly solventNode: Node;
-  private readonly moleculesNode: MoleculesNode;
+  private readonly moleculesNode: ParticlesNode;
 
   public constructor( magnifyingGlass: MagnifyingGlass, viewModeProperty: StringUnionProperty<ViewMode>,
                       solventVisibleProperty: TReadOnlyProperty<boolean>, tandem: Tandem ) {
@@ -59,7 +59,7 @@ export default class MagnifyingGlassNode extends Node {
     } );
 
     // molecules
-    const moleculesNode = new MoleculesNode( magnifyingGlass, new Bounds2( -RADIUS, -RADIUS, RADIUS, RADIUS ), LENS_LINE_WIDTH );
+    const moleculesNode = new ParticlesNode( magnifyingGlass, new Bounds2( -RADIUS, -RADIUS, RADIUS, RADIUS ), LENS_LINE_WIDTH );
 
     // stuff that's visible through (and therefore clipped to) the lens
     const viewportNode = new Node( { children: [ solventNode, moleculesNode ] } );
