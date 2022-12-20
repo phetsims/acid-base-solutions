@@ -15,7 +15,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { WeakStrongType } from './MySolutionPanel.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import StringSwitch, { StringSwitchOptions } from './StringSwitch.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 
@@ -41,8 +40,9 @@ export default class StrengthControl extends VBox {
       } ) );
 
     // Strength slider
+    const sliderWrapperTandem = tandem.createTandem( 'sliderWrapper' );
     const slider = new StrengthSlider( strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE, weakStrongProperty,
-      tandem.createTandem( 'slider' ) );
+      sliderWrapperTandem.createTandem( 'slider' ) );
 
     // Changing the strength to 'strong' typically hides the slider, but keep the space for it in the panel.
     // This wrapper makes it so that if the client hides the slider via slider.visibleProperty, it will
@@ -50,7 +50,11 @@ export default class StrengthControl extends VBox {
     // Use a VBox as the wrapper, so that it adjusts its bounds when slider is hidden.
     const sliderWrapper = new VBox( {
       children: [ slider ],
-      visibleProperty: new DerivedProperty( [ weakStrongProperty ], weakStrong => ( weakStrong === 'weak' ) )
+      excludeInvisibleChildrenFromBounds: false, // keep space in the panel when sliderWrapper.visible === false
+      tandem: sliderWrapperTandem,
+      phetioDocumentation: 'The sim controls whether slider is visible, and when it is not visible, leaves space ' +
+                           'for it in the control panel. If you would like to control whether the slider is visible, ' +
+                           'use sliderWrapper.visibleProperty.'
     } );
 
     super( {
@@ -61,7 +65,6 @@ export default class StrengthControl extends VBox {
       ],
       spacing: 6,
       layoutOptions: { stretch: true }, // so that titleText will be left-aligned in MySolutionsPanel
-      excludeInvisibleChildrenFromBounds: false, // keep space in the panel when sliderWrapper.visible === false
       tandem: tandem
     } );
   }
