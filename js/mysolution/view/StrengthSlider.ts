@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
@@ -19,7 +18,6 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text } from '../../../../scenery/js/imports.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import { WeakStrongType } from './MySolutionPanel.js';
@@ -40,10 +38,6 @@ export default class StrengthSlider extends HSlider {
     const model = new StrengthSliderModel( strengthProperty, strengthRange, weakStrongProperty );
 
     super( model.sliderValueProperty, model.sliderValueRange, {
-      visibleProperty: new DerivedProperty( [ weakStrongProperty ], weakStrong => ( weakStrong === 'weak' ), {
-        tandem: tandem.createTandem( 'visibleProperty' ),
-        phetioValueType: BooleanIO
-      } ),
       trackSize: new Dimension2( 125, 4 ),
       thumbSize: new Dimension2( 12, 24 ),
       majorTickLength: 12,
