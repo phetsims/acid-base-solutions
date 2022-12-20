@@ -8,16 +8,20 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Node, Rectangle } from '../../../../../scenery/js/imports.js';
+import { Line, Node, Rectangle, RichText, Text } from '../../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import ABSColors from '../../ABSColors.js';
 import ConcentrationGraph from '../../model/ConcentrationGraph.js';
-import ConcentrationGraphBackgroundNode from './ConcentrationGraphBackgroundNode.js';
 import ConcentrationGraphBarNode from './ConcentrationGraphBarNode.js';
 import { ViewMode } from '../ViewMode.js';
 import StringUnionProperty from '../../../../../axon/js/StringUnionProperty.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
+import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
+import AcidBaseSolutionsStrings from '../../../AcidBaseSolutionsStrings.js';
+import Multilink from '../../../../../axon/js/Multilink.js';
+
+const TICK_FONT = new PhetFont( 11 );
 
 export default class ConcentrationGraphNode extends Node {
 
@@ -26,7 +30,50 @@ export default class ConcentrationGraphNode extends Node {
 
   public constructor( graph: ConcentrationGraph, viewModeProperty: StringUnionProperty<ViewMode>, tandem: Tandem ) {
 
-    const backgroundNode = new ConcentrationGraphBackgroundNode( graph.width, graph.height );
+    const backgroundNode = new Rectangle( 0, 0, graph.width, graph.height, {
+      fill: 'white',
+      stroke: 'black',
+      lineWidth: 0.5
+    } );
+
+    // tick marks and horizontal dashed lines. This reuses one tick and one dashed line.
+    const dh = ( graph.height / 10 ) - 1;
+    const tickNode = new Line( -2, 0, 2, 0, { stroke: 'black', lineWidth: 0.5 } );
+    const dashedLineNode = new Line( 0, 0, graph.width, 0, { stroke: 'gray', lineWidth: 0.5, lineDash: [ 2, 1 ] } );
+    const nodes = [];
+    for ( let i = 0, y; i < 11; i++ ) {
+
+      y = graph.height - ( dh * i );
+
+      // tick mark and dashed line (no dash on bottom tick)
+      nodes.push( new Node( { y: y, children: ( i > 0 ) ? [ tickNode, dashedLineNode ] : [ tickNode ] } ) );
+
+      // add text
+      nodes.push( new RichText( `10<sup>${i - 8}</sup>`, {
+        centerY: y,
+        centerX: -16,
+        font: TICK_FONT
+      } ) );
+    }
+    const tickMarks = new Node( {
+      children: nodes,
+      tandem: tandem.createTandem( 'tickMarks' )
+    } );
+
+    // y-axis label
+    const yAxisText = new Text( AcidBaseSolutionsStrings.concentrationGraph.yAxisStringProperty, {
+      font: new PhetFont( 13 ),
+      maxWidth: graph.height, // graph.height because we're rotating to vertical below
+      tandem: tandem.createTandem( 'yAxisText' ),
+      phetioVisiblePropertyInstrumented: true
+    } );
+    yAxisText.rotate( -Math.PI / 2 );
+
+    Multilink.multilink( [ yAxisText.boundsProperty, tickMarks.visibleProperty ],
+      ( bounds, tickMarksVisible ) => {
+        yAxisText.right = ( tickMarksVisible ? tickMarks.left : backgroundNode.left ) - 15;
+        yAxisText.centerY = graph.height / 2;
+      } );
 
     // find maximum number of bars for all solutions
     let maxBars = 0;
@@ -41,7 +88,7 @@ export default class ConcentrationGraphNode extends Node {
     }
 
     super( {
-      children: [ backgroundNode, ...barNodes ],
+      children: [ backgroundNode, tickMarks, yAxisText, ...barNodes ],
       translation: graph.position,
       visibleProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'graph' ), {
         tandem: tandem.createTandem( 'visibleProperty' )
