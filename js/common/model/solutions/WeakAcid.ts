@@ -18,8 +18,8 @@ export default class WeakAcid extends AqueousSolution {
 
   public constructor( tandem: Tandem ) {
 
-    // molecules found in this solution
-    const molecules: Molecule[] = [
+    // particles found in this solution
+    const particles: Molecule[] = [
       { key: 'HA', color: ABSColors.HA, getConcentration: () => this.getSoluteConcentration() },
       { key: 'H2O', color: ABSColors.H2O, getConcentration: () => this.getH2OConcentration() },
       { key: 'A', color: ABSColors.A, getConcentration: () => this.getProductConcentration() },
@@ -27,7 +27,7 @@ export default class WeakAcid extends AqueousSolution {
     ];
 
     super( 'weakAcid', ABSConstants.WEAK_STRENGTH_RANGE.defaultValue, ABSConstants.CONCENTRATION_RANGE.defaultValue,
-      molecules, tandem );
+      particles, tandem );
   }
 
   // [HA] = c - [H3O+]

@@ -48,14 +48,14 @@ function createScreenIcon(): ScreenIcon {
   const h3oNode = createMoleculeNode( 'H3O' );
   const ohNode = createMoleculeNode( 'OH' );
 
-  // Uniformly scale the molecules to make them fill the available space.
-  const xSpace = 0.06 * width; // horizontal space around the molecules
+  // Uniformly scale the particles to make them fill the available space.
+  const xSpace = 0.06 * width; // horizontal space around the particles
   const maxWidth = Math.max( h3oNode.width, ohNode.width );
-  const moleculeScale = 0.5 * ( width - 3 * xSpace ) / maxWidth;
-  h3oNode.setScaleMagnitude( moleculeScale, moleculeScale );
-  ohNode.setScaleMagnitude( moleculeScale, moleculeScale );
+  const particleScale = 0.5 * ( width - 3 * xSpace ) / maxWidth;
+  h3oNode.setScaleMagnitude( particleScale, particleScale );
+  ohNode.setScaleMagnitude( particleScale, particleScale );
 
-  // position the molecules
+  // position the particles
   h3oNode.left = xSpace;
   ohNode.right = width - xSpace;
   h3oNode.centerY = height / 2;

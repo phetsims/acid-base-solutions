@@ -1,7 +1,7 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
 /**
- * ParticlesNode draws the molecules that appear in the magnifying glass.
+ * ParticlesNode draws the particles that appear in the magnifying glass.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -16,15 +16,15 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import { MoleculeKey } from '../model/solutions/Molecule.js';
 
 // constants
-const BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some molecules
+const BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some particles
 const BASE_DOTS = 2;
-const MAX_MOLECULES = 200;
+const MAX_PARTICLES = 200;
 const IMAGE_SCALE = 2; // stored images are scaled this much to improve quality
 
-// Data structure used to store information for each unique type of molecule
-type MoleculesData = {
+// Data structure used to store information for each unique type of particle
+type ParticlesData = {
   canvas: HTMLCanvasElement | null;
-  numberOfMolecules: number;
+  numberOfParticles: number;
   xCoordinates: Float32Array;
   yCoordinates: Float32Array;
 };
@@ -33,7 +33,7 @@ export default class ParticlesNode extends CanvasNode {
 
   private readonly magnifyingGlass: MagnifyingGlass;
   private readonly positionRadius: number; // radius for computing random positions
-  private readonly moleculesDataMap: Map<MoleculeKey, MoleculesData>;
+  private readonly particlesDataMap: Map<MoleculeKey, ParticlesData>;
 
   public constructor( magnifyingGlass: MagnifyingGlass, lensBounds: Bounds2, lensLineWidth: number ) {
 
@@ -43,39 +43,39 @@ export default class ParticlesNode extends CanvasNode {
 
     this.positionRadius = IMAGE_SCALE * ( this.magnifyingGlass.radius - ( lensLineWidth / 2 ) );
 
-    this.moleculesDataMap = new Map<MoleculeKey, MoleculesData>();
+    this.particlesDataMap = new Map<MoleculeKey, ParticlesData>();
 
-    // Generate images, to populate MoleculesData.canvas. This happens asynchronously.
+    // Generate images, to populate ParticlesData.canvas. This happens asynchronously.
     const createCanvas = ( key: MoleculeKey ) => {
 
-      const moleculeNode = createMoleculeNode( key );
+      const particleNode = createMoleculeNode( key );
 
       // Scale up to increase quality. Remember to scale down when drawing to canvas.
-      moleculeNode.setScaleMagnitude( IMAGE_SCALE, IMAGE_SCALE );
+      particleNode.setScaleMagnitude( IMAGE_SCALE, IMAGE_SCALE );
 
-      moleculeNode.toCanvas( ( canvas: HTMLCanvasElement, x: number, y: number, width: number, height: number ) => {
-        const moleculesData = this.moleculesDataMap.get( key )!;
-        assert && assert( moleculesData );
-        moleculesData.canvas = canvas;
+      particleNode.toCanvas( ( canvas: HTMLCanvasElement, x: number, y: number, width: number, height: number ) => {
+        const particlesData = this.particlesDataMap.get( key )!;
+        assert && assert( particlesData );
+        particlesData.canvas = canvas;
       } );
     };
 
     // use typed array if available, it will use less memory and be faster
     const ArrayConstructor = window.Float32Array || window.Array;
 
-    // Iterate over all solutions, and create a MoleculesData structure for each unique molecule.
+    // Iterate over all solutions, and create a ParticlesData structure for each unique particle.
     magnifyingGlass.solutionsMap.forEach( ( solution, solutionType ) => {
-      solution.molecules.forEach( molecule => {
-        const key = molecule.key;
+      solution.particles.forEach( particle => {
+        const key = particle.key;
 
         // Skip water because it's displayed elsewhere as a static image file.
-        // And since different solutions have the same molecules, skip creation of duplicates.
-        if ( key !== 'H2O' && !this.moleculesDataMap.get( key ) ) {
-          this.moleculesDataMap.set( key, {
+        // And since different solutions have the same particles, skip creation of duplicates.
+        if ( key !== 'H2O' && !this.particlesDataMap.get( key ) ) {
+          this.particlesDataMap.set( key, {
             canvas: null,
-            numberOfMolecules: 0,
-            xCoordinates: new ArrayConstructor( MAX_MOLECULES ), // pre-allocate to improve performance
-            yCoordinates: new ArrayConstructor( MAX_MOLECULES )  // pre-allocate to improve performance
+            numberOfParticles: 0,
+            xCoordinates: new ArrayConstructor( MAX_PARTICLES ), // pre-allocate to improve performance
+            yCoordinates: new ArrayConstructor( MAX_PARTICLES )  // pre-allocate to improve performance
           } );
           createCanvas( key ); // populate the canvas field asynchronously
         }
@@ -90,45 +90,45 @@ export default class ParticlesNode extends CanvasNode {
 
   public reset(): void {
 
-    // Reset all molecule counts to zero.
-    this.moleculesDataMap.forEach( ( moleculesData, key ) => {
-      moleculesData.numberOfMolecules = 0;
+    // Reset all particle counts to zero.
+    this.particlesDataMap.forEach( ( particlesData, key ) => {
+      particlesData.numberOfParticles = 0;
     } );
   }
 
-  // Updates the molecules data structure and triggers a paintCanvas.
+  // Updates the particles data structure and triggers a paintCanvas.
   public update(): void {
 
     const solutionType = this.magnifyingGlass.solutionTypeProperty.value;
     const solution = this.magnifyingGlass.solutionsMap.get( solutionType )!;
     assert && assert( solution );
 
-    // Update the data structure for each molecule that is in the current solution.
-    solution.molecules.forEach( molecule => {
+    // Update the data structure for each particle that is in the current solution.
+    solution.particles.forEach( particle => {
 
-      const key = molecule.key;
+      const key = particle.key;
 
       // Skip water because it's displayed elsewhere as a static image file.
       if ( key !== 'H2O' ) {
-        const moleculesData = this.moleculesDataMap.get( key )!;
-        assert && assert( moleculesData, `no moleculeData for key=${key}` );
+        const particlesData = this.particlesDataMap.get( key )!;
+        assert && assert( particlesData, `no particleData for key=${key}` );
 
-        // map concentration to number of molecules
-        const concentration = molecule.getConcentration();
-        const numberOfMolecules = getNumberOfMolecules( concentration );
+        // map concentration to number of particles
+        const concentration = particle.getConcentration();
+        const numberOfParticles = getNumberOfParticles( concentration );
 
-        // add additional molecules as needed
-        const currentNumberOfMolecules = moleculesData.numberOfMolecules;
-        for ( let i = currentNumberOfMolecules; i < numberOfMolecules; i++ ) {
+        // add additional particles as needed
+        const currentNumberOfParticles = particlesData.numberOfParticles;
+        for ( let i = currentNumberOfParticles; i < numberOfParticles; i++ ) {
 
           // random distance from the center of the lens
           const distance = this.positionRadius * Math.sqrt( dotRandom.nextDouble() );
           const angle = dotRandom.nextDouble() * 2 * Math.PI;
-          moleculesData.xCoordinates[ i ] = distance * Math.cos( angle );
-          moleculesData.yCoordinates[ i ] = distance * Math.sin( angle );
+          particlesData.xCoordinates[ i ] = distance * Math.cos( angle );
+          particlesData.yCoordinates[ i ] = distance * Math.sin( angle );
         }
 
-        moleculesData.numberOfMolecules = numberOfMolecules;
+        particlesData.numberOfParticles = numberOfParticles;
       }
     } );
 
@@ -137,7 +137,7 @@ export default class ParticlesNode extends CanvasNode {
   }
 
   /*
-   * Iterates over each of the current solution's molecules and draws the molecules directly to Canvas.
+   * Iterates over each of the current solution's particles and draws the particles directly to Canvas.
    */
   public override paintCanvas( context: CanvasRenderingContext2D ): void {
 
@@ -149,23 +149,23 @@ export default class ParticlesNode extends CanvasNode {
     // So apply the inverse scale factor, and adjust the radius.
     context.scale( 1 / IMAGE_SCALE, 1 / IMAGE_SCALE );
 
-    // Draw each type of molecule that is in the current solution.
-    solution.molecules.forEach( molecule => {
-      const key = molecule.key;
+    // Draw each type of particle that is in the current solution.
+    solution.particles.forEach( particle => {
+      const key = particle.key;
 
       // Skip water because it's displayed elsewhere as a static image file.
       if ( key !== 'H2O' ) {
-        const moleculesData = this.moleculesDataMap.get( key )!;
-        assert && assert( moleculesData );
+        const particlesData = this.particlesDataMap.get( key )!;
+        assert && assert( particlesData );
 
         // Images are generated asynchronously, so test in case they aren't available when this is first called.
-        if ( moleculesData.canvas ) {
-          for ( let i = 0; i < moleculesData.numberOfMolecules; i++ ) {
+        if ( particlesData.canvas ) {
+          for ( let i = 0; i < particlesData.numberOfParticles; i++ ) {
 
             // Use integer coordinates with drawImage to improve performance.
-            const x = Math.floor( moleculesData.xCoordinates[ i ] - moleculesData.canvas.width / 2 );
-            const y = Math.floor( moleculesData.yCoordinates[ i ] - moleculesData.canvas.height / 2 );
-            context.drawImage( moleculesData.canvas, x, y );
+            const x = Math.floor( particlesData.xCoordinates[ i ] - particlesData.canvas.width / 2 );
+            const y = Math.floor( particlesData.yCoordinates[ i ] - particlesData.canvas.height / 2 );
+            context.drawImage( particlesData.canvas, x, y );
           }
         }
       }
@@ -174,13 +174,13 @@ export default class ParticlesNode extends CanvasNode {
 }
 
 /**
- * Compute the number of molecules that corresponds to some concentration.
+ * Compute the number of particles that corresponds to some concentration.
  * This algorithm was ported from the Java implementation, and is documented in
  * https://github.com/phetsims/acid-base-solutions/blob/master/doc/HA_A-_ratio_model.pdf
  */
-function getNumberOfMolecules( concentration: number ): number {
+function getNumberOfParticles( concentration: number ): number {
   const raiseFactor = Utils.log10( concentration / BASE_CONCENTRATION );
-  const baseFactor = Math.pow( ( MAX_MOLECULES / BASE_DOTS ), ( 1 / Utils.log10( 1 / BASE_CONCENTRATION ) ) );
+  const baseFactor = Math.pow( ( MAX_PARTICLES / BASE_DOTS ), ( 1 / Utils.log10( 1 / BASE_CONCENTRATION ) ) );
   return Utils.roundSymmetric( BASE_DOTS * Math.pow( baseFactor, raiseFactor ) );
 }
 

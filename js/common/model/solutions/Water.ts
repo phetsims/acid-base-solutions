@@ -18,14 +18,14 @@ export default class Water extends AqueousSolution {
 
   public constructor( tandem: Tandem ) {
 
-    // molecules found in this solution
-    const molecules: Molecule[] = [
+    // particles found in this solution
+    const particles: Molecule[] = [
       { key: 'H2O', color: ABSColors.H2O, getConcentration: () => this.getH2OConcentration() },
       { key: 'H3O', color: ABSColors.H3O, getConcentration: () => this.getH3OConcentration() },
       { key: 'OH', color: ABSColors.OH, getConcentration: () => this.getOHConcentration() }
     ];
 
-    super( 'water', 0, 0, molecules, tandem );
+    super( 'water', 0, 0, particles, tandem );
   }
 
   public override getSoluteConcentration(): number {

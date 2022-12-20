@@ -2,7 +2,7 @@
 
 /**
  * MagnifyingGlass view.
- * For performance, draws molecules directly to Canvas using drawImage.
+ * For performance, draws particle directly to Canvas using drawImage.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -23,13 +23,13 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
-const CLIPPING_ENABLED = true; // set to false to debug positioning of molecules
+const CLIPPING_ENABLED = true; // set to false for debugging particle positions
 const LENS_LINE_WIDTH = 8;
 
 export default class MagnifyingGlassNode extends Node {
 
   private readonly solventNode: Node;
-  private readonly moleculesNode: ParticlesNode;
+  private readonly particlesNode: ParticlesNode;
 
   public constructor( magnifyingGlass: MagnifyingGlass, viewModeProperty: StringUnionProperty<ViewMode>,
                       solventVisibleProperty: TReadOnlyProperty<boolean>, tandem: Tandem ) {
@@ -53,16 +53,16 @@ export default class MagnifyingGlassNode extends Node {
     // solvent (H2O)
     const solventNode = new Image( solvent_png, {
       visibleProperty: solventVisibleProperty,
-      imageOpacity: 0.6,  // reduce opacity so that other molecules stand out more
+      imageOpacity: 0.6,  // reduce opacity so that other particles stand out more
       centerX: 0,
       centerY: 0
     } );
 
-    // molecules
-    const moleculesNode = new ParticlesNode( magnifyingGlass, new Bounds2( -RADIUS, -RADIUS, RADIUS, RADIUS ), LENS_LINE_WIDTH );
+    // particles
+    const particlesNode = new ParticlesNode( magnifyingGlass, new Bounds2( -RADIUS, -RADIUS, RADIUS, RADIUS ), LENS_LINE_WIDTH );
 
     // stuff that's visible through (and therefore clipped to) the lens
-    const viewportNode = new Node( { children: [ solventNode, moleculesNode ] } );
+    const viewportNode = new Node( { children: [ solventNode, particlesNode ] } );
     if ( CLIPPING_ENABLED ) {
       viewportNode.clipArea = lensShape;
     }
@@ -75,39 +75,39 @@ export default class MagnifyingGlassNode extends Node {
     super( {
       children: children,
       translation: magnifyingGlass.position,
-      visibleProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'molecules' ), {
+      visibleProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'particles' ), {
         tandem: tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),
       tandem: tandem
     } );
 
-    this.moleculesNode = moleculesNode;
+    this.particlesNode = particlesNode;
     this.solventNode = solventNode;
 
     // Observe the strength and concentration Properties for the selected solution.
-    const updateMoleculesBound = this.updateMolecules.bind( this );
+    const updateParticlesBound = this.updateParticles.bind( this );
     magnifyingGlass.solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
 
-      this.moleculesNode.reset();
+      this.particlesNode.reset();
 
       // unlink from previous solution
       if ( previousSolutionType ) {
         const previousSolution = magnifyingGlass.solutionsMap.get( previousSolutionType )!;
         assert && assert( previousSolution );
-        previousSolution.strengthProperty.unlink( updateMoleculesBound );
-        previousSolution.concentrationProperty.unlink( updateMoleculesBound );
+        previousSolution.strengthProperty.unlink( updateParticlesBound );
+        previousSolution.concentrationProperty.unlink( updateParticlesBound );
       }
 
       // link to new solution
       const newSolution = magnifyingGlass.solutionsMap.get( newSolutionType )!;
       assert && assert( newSolution );
-      newSolution.strengthProperty.link( updateMoleculesBound );
-      newSolution.concentrationProperty.link( updateMoleculesBound );
+      newSolution.strengthProperty.link( updateParticlesBound );
+      newSolution.concentrationProperty.link( updateParticlesBound );
     } );
 
     // Update when this Node becomes visible.
-    this.visibleProperty.link( visible => visible && this.updateMolecules() );
+    this.visibleProperty.link( visible => visible && this.updateParticles() );
 
     this.addLinkedElement( magnifyingGlass, {
       tandem: tandem.createTandem( magnifyingGlass.tandem.name )
@@ -120,12 +120,12 @@ export default class MagnifyingGlassNode extends Node {
   }
 
   /*
-   * Updates the number of molecules visible.
+   * Updates the number of particles visible.
    * To improve performance, updates only when this node is visible.
    */
-  private updateMolecules(): void {
+  private updateParticles(): void {
     if ( this.visible ) {
-      this.moleculesNode.update();
+      this.particlesNode.update();
     }
   }
 }

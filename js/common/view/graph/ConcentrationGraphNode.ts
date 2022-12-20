@@ -31,7 +31,7 @@ export default class ConcentrationGraphNode extends Node {
     // find maximum number of bars for all solutions
     let maxBars = 0;
     graph.solutionsMap.forEach( ( solution, solutionType ) => {
-      maxBars = Math.max( maxBars, solution.molecules.length );
+      maxBars = Math.max( maxBars, solution.particles.length );
     } );
 
     // create enough bars for all solutions
@@ -90,7 +90,7 @@ export default class ConcentrationGraphNode extends Node {
 
   /*
    * Makes the correct number of bars visible for the selected solution,
-   * and sets the bars colors and positions to match the molecules in the solution.
+   * and sets the bars colors and positions to match the particles in the solution.
    * To improve performance, updates only when this node is visible.
    */
   private updateBars(): void {
@@ -100,18 +100,18 @@ export default class ConcentrationGraphNode extends Node {
       const solutionType = this.graph.solutionTypeProperty.value;
       const solution = this.graph.solutionsMap.get( solutionType )!;
       assert && assert( solution );
-      const molecules = solution.molecules;
-      const numberOfMolecules = molecules.length;
+      const particles = solution.particles;
+      const numberOfParticles = particles.length;
 
-      // show one bar for each molecule in the current solution
+      // show one bar for each particle in the current solution
       for ( let i = 0, bar; i < this.barNodes.length; i++ ) {
         bar = this.barNodes[ i ];
-        if ( i < numberOfMolecules ) {
+        if ( i < numberOfParticles ) {
           // set visibility, color, value and position of new bars
           bar.setVisible( true );
-          bar.setValue( solution.molecules[ i ].getConcentration() );
-          bar.setBarFill( molecules[ i ].color );
-          bar.setTranslation( ( i + 0.75 + ( 4 - numberOfMolecules ) / 2 ) * this.graph.width / 4, this.graph.height );
+          bar.setValue( solution.particles[ i ].getConcentration() );
+          bar.setBarFill( particles[ i ].color );
+          bar.setTranslation( ( i + 0.75 + ( 4 - numberOfParticles ) / 2 ) * this.graph.width / 4, this.graph.height );
         }
         else {
           bar.setVisible( false );
@@ -131,10 +131,10 @@ export default class ConcentrationGraphNode extends Node {
       const solutionType = this.graph.solutionTypeProperty.value;
       const solution = this.graph.solutionsMap.get( solutionType )!;
       assert && assert( solution );
-      const molecules = solution.molecules;
+      const particles = solution.particles;
 
-      for ( let i = 0; i < molecules.length; i++ ) {
-        this.barNodes[ i ].setValue( solution.molecules[ i ].getConcentration() );
+      for ( let i = 0; i < particles.length; i++ ) {
+        this.barNodes[ i ].setValue( solution.particles[ i ].getConcentration() );
       }
     }
   }

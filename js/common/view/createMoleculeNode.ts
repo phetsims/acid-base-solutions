@@ -19,7 +19,7 @@ import { MoleculeKey } from '../model/solutions/Molecule.js';
 // Signature of all creation functions herein
 type CreationFunction = () => Node;
 
-// Maps a molecule name to a function that creates a Node for that molecule.
+// Maps a particle name to a function that creates a Node for that particle.
 const map = new Map<MoleculeKey, CreationFunction>();
 
 map.set( 'A', () => new Node( {
@@ -100,7 +100,7 @@ map.set( 'OH', () => new Node( {
 );
 
 /**
- * Creates a Node for the specified molecule.
+ * Creates a Node for the specified particle.
  */
 export default function createMoleculeNode( key: MoleculeKey ): Node {
   assert && assert( map.has( key ), `no entry for key=${key}` );

@@ -11,7 +11,7 @@ import { Color } from '../../../scenery/js/imports.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
 
 // constants
-const GRAY_MOLECULE = 'rgb(120,120,120)';
+const GRAY_PARTICLE = 'rgb(120,120,120)';
 
 const ABSColors = {
 
@@ -40,15 +40,15 @@ const ABSColors = {
     new Color( 0, 34, 52 )
   ],
 
-  // Molecule colors
+  // Particle colors
   A: 'rgb(0,170,255)',
-  B: GRAY_MOLECULE,
+  B: GRAY_PARTICLE,
   BH: 'rgb(255,170,0)',
   H2O: 'rgb(164,189,193)',
   H3O: PhetColorScheme.RED_COLORBLIND,
-  HA: GRAY_MOLECULE,
+  HA: GRAY_PARTICLE,
   M: 'rgb(255,170,0)',
-  MOH: GRAY_MOLECULE,
+  MOH: GRAY_PARTICLE,
   OH: 'rgb(90,90,255)'
 };
 

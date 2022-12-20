@@ -26,7 +26,7 @@ export default class ABSViewProperties {
       tandem: tandem.createTandem( 'solventVisibleProperty' )
     } );
 
-    this.viewModeProperty = new StringUnionProperty( 'molecules', {
+    this.viewModeProperty = new StringUnionProperty( 'particles', {
       validValues: ViewModeValues,
       tandem: tandem.createTandem( 'viewModeProperty' )
     } );

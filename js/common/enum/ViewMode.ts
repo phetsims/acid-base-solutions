@@ -6,5 +6,5 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-export const ViewModeValues = [ 'molecules', 'graph', 'hideViews' ] as const;
+export const ViewModeValues = [ 'particles', 'graph', 'hideViews' ] as const;
 export type ViewMode = ( typeof ViewModeValues )[number];

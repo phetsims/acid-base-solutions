@@ -18,15 +18,15 @@ export default class StrongAcid extends AqueousSolution {
 
   public constructor( tandem: Tandem ) {
 
-    // molecules found in this solution
-    const molecules: Molecule[] = [
+    // particles found in this solution
+    const particles: Molecule[] = [
       { key: 'HA', color: ABSColors.HA, getConcentration: () => this.getSoluteConcentration() },
       { key: 'H2O', color: ABSColors.H2O, getConcentration: () => this.getH2OConcentration() },
       { key: 'A', color: ABSColors.A, getConcentration: () => this.getProductConcentration() },
       { key: 'H3O', color: ABSColors.H3O, getConcentration: () => this.getH3OConcentration() }
     ];
 
-    super( 'strongAcid', ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue, molecules, tandem );
+    super( 'strongAcid', ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue, particles, tandem );
   }
 
   // [HA] = 0

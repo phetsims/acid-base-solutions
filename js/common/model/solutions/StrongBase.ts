@@ -18,14 +18,14 @@ export default class StrongBase extends AqueousSolution {
 
   public constructor( tandem: Tandem ) {
 
-    // molecules found in this solution
-    const molecules: Molecule[] = [
+    // particles found in this solution
+    const particles: Molecule[] = [
       { key: 'MOH', color: ABSColors.MOH, getConcentration: () => this.getSoluteConcentration() },
       { key: 'M', color: ABSColors.M, getConcentration: () => this.getProductConcentration() },
       { key: 'OH', color: ABSColors.OH, getConcentration: () => this.getOHConcentration() }
     ];
 
-    super( 'strongBase', ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue, molecules, tandem );
+    super( 'strongBase', ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue, particles, tandem );
   }
 
   // [MOH] = 0

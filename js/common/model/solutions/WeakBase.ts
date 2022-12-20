@@ -18,8 +18,8 @@ export default class WeakBase extends AqueousSolution {
 
   public constructor( tandem: Tandem ) {
 
-    // molecules found in this solution
-    const molecule: Molecule[] = [
+    // particless found in this solution
+    const particles: Molecule[] = [
       { key: 'B', color: ABSColors.B, getConcentration: () => this.getSoluteConcentration() },
       { key: 'H2O', color: ABSColors.H2O, getConcentration: () => this.getH2OConcentration() },
       { key: 'BH', color: ABSColors.BH, getConcentration: () => this.getProductConcentration() },
@@ -27,7 +27,7 @@ export default class WeakBase extends AqueousSolution {
     ];
 
     super( 'weakBase', ABSConstants.WEAK_STRENGTH_RANGE.defaultValue, ABSConstants.CONCENTRATION_RANGE.defaultValue,
-      molecule, tandem );
+      particles, tandem );
   }
 
   // [B] = c - [BH+]

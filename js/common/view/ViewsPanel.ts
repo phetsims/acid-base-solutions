@@ -54,24 +54,24 @@ export default class ViewsPanel extends Panel {
 
     const radioButtonGroupTandem = tandem.createTandem( 'radioButtonGroup' );
 
-    // Molecules radio button
-    const moleculesRadioButtonTandem = radioButtonGroupTandem.createTandem( `molecules${AquaRadioButton.TANDEM_NAME_SUFFIX}` );
-    const moleculesLabel = new HBox( {
+    // Particles radio button
+    const particlesRadioButtonTandem = radioButtonGroupTandem.createTandem( `particles${AquaRadioButton.TANDEM_NAME_SUFFIX}` );
+    const particlesLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
         new Text( AcidBaseSolutionsStrings.particlesStringProperty, {
           font: LABEL_FONT,
           maxWidth: TEXT_MAX_WIDTH,
-          tandem: moleculesRadioButtonTandem.createTandem( 'text' )
+          tandem: particlesRadioButtonTandem.createTandem( 'text' )
         } ),
         new Image( magnifyingGlassIcon_png, { scale: 0.75 } )
       ]
     } );
-    const moleculesRadioButton = new AquaRadioButton( viewModeProperty, 'molecules', moleculesLabel, {
+    const particlesRadioButton = new AquaRadioButton( viewModeProperty, 'particles', particlesLabel, {
       radius: RADIO_BUTTON_RADIUS,
-      tandem: moleculesRadioButtonTandem
+      tandem: particlesRadioButtonTandem
     } );
-    moleculesRadioButton.touchArea = moleculesRadioButton.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
+    particlesRadioButton.touchArea = particlesRadioButton.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
 
     // Solvent checkbox
     const solventCheckboxTandem = radioButtonGroupTandem.createTandem( 'solventCheckbox' );
@@ -91,7 +91,7 @@ export default class ViewsPanel extends Panel {
       layoutOptions: {
         leftMargin: 20 // indent Solvent checkbox from radio buttons
       },
-      enabledProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'molecules' ), {
+      enabledProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'particles' ), {
         tandem: solventCheckboxTandem.createTandem( 'enabledProperty' ),
         phetioValueType: BooleanIO
       } ),
@@ -143,7 +143,7 @@ export default class ViewsPanel extends Panel {
       spacing: 8,
       align: 'left',
       children: [
-        moleculesRadioButton,
+        particlesRadioButton,
         solventCheckbox,
         graphRadioButton,
         hideViewsRadioButton

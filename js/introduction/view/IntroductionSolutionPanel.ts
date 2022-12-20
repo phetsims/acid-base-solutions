@@ -133,12 +133,12 @@ function createRadioButtonLabel( solutionNameProperty: TReadOnlyProperty<string>
     tandem: textTandem
   } );
 
-  // Create the molecule's icon
-  const moleculeNode = createMoleculeNode( key );
+  // Create the particles's icon
+  const particleNode = createMoleculeNode( key );
 
   const hBox = new HBox( {
     spacing: 10,
-    children: [ text, moleculeNode ]
+    children: [ text, particleNode ]
   } );
 
   return new AlignBox( hBox, {
