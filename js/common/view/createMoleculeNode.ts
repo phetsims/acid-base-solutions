@@ -14,13 +14,13 @@ import { Node } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
 import AtomNode from './AtomNode.js';
-import { MoleculeKey } from '../model/solutions/Particle.js';
+import { ParticleKey } from '../model/solutions/Particle.js';
 
 // Signature of all creation functions herein
 type CreationFunction = () => Node;
 
 // Maps a particle name to a function that creates a Node for that particle.
-const map = new Map<MoleculeKey, CreationFunction>();
+const map = new Map<ParticleKey, CreationFunction>();
 
 map.set( 'A', () => new Node( {
   children: [ new AtomNode( 7, ABSColors.A ) ]
@@ -102,7 +102,7 @@ map.set( 'OH', () => new Node( {
 /**
  * Creates a Node for the specified particle.
  */
-export default function createMoleculeNode( key: MoleculeKey ): Node {
+export default function createMoleculeNode( key: ParticleKey ): Node {
   assert && assert( map.has( key ), `no entry for key=${key}` );
   return map.get( key )!();
 }
