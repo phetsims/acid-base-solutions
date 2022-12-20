@@ -13,7 +13,7 @@ import acidBaseSolutions from '../../acidBaseSolutions.js';
 import createMoleculeNode from './createMoleculeNode.js';
 import MagnifyingGlass from '../model/MagnifyingGlass.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import { MoleculeKey } from '../model/solutions/Molecule.js';
+import { MoleculeKey } from '../model/solutions/Particle.js';
 
 // constants
 const BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some particles

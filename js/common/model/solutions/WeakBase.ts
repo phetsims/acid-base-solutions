@@ -12,14 +12,14 @@ import ABSConstants from '../../ABSConstants.js';
 import AqueousSolution from './AqueousSolution.js';
 import ABSColors from '../../ABSColors.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
-import { Molecule } from './Molecule.js';
+import { Particle } from './Particle.js';
 
 export default class WeakBase extends AqueousSolution {
 
   public constructor( tandem: Tandem ) {
 
     // particless found in this solution
-    const particles: Molecule[] = [
+    const particles: Particle[] = [
       { key: 'B', color: ABSColors.B, getConcentration: () => this.getSoluteConcentration() },
       { key: 'H2O', color: ABSColors.H2O, getConcentration: () => this.getH2OConcentration() },
       { key: 'BH', color: ABSColors.BH, getConcentration: () => this.getProductConcentration() },

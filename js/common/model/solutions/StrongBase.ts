@@ -11,7 +11,7 @@ import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import ABSConstants from '../../ABSConstants.js';
 import AqueousSolution from './AqueousSolution.js';
 import ABSColors from '../../ABSColors.js';
-import { Molecule } from './Molecule.js';
+import { Particle } from './Particle.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 
 export default class StrongBase extends AqueousSolution {
@@ -19,7 +19,7 @@ export default class StrongBase extends AqueousSolution {
   public constructor( tandem: Tandem ) {
 
     // particles found in this solution
-    const particles: Molecule[] = [
+    const particles: Particle[] = [
       { key: 'MOH', color: ABSColors.MOH, getConcentration: () => this.getSoluteConcentration() },
       { key: 'M', color: ABSColors.M, getConcentration: () => this.getProductConcentration() },
       { key: 'OH', color: ABSColors.OH, getConcentration: () => this.getOHConcentration() }

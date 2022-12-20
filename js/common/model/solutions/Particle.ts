@@ -13,7 +13,7 @@ export const MoleculeKeyValues = [ 'A', 'B', 'BH', 'H2O', 'H3O', 'HA', 'M', 'MOH
 export type MoleculeKey = ( typeof MoleculeKeyValues )[number];
 
 // Data structure that describes a particle.
-export type Molecule = {
+export type Particle = {
   key: MoleculeKey; // used to look up the particle in various Maps
   color: Color | string; // color used to render the particle
   getConcentration: () => number; // returns the concentration of the particle

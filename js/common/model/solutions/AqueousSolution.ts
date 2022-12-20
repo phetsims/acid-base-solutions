@@ -21,12 +21,12 @@ import Tandem from '../../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../../tandem/js/types/NumberIO.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import { SolutionType } from '../../enum/SolutionType.js';
-import { Molecule } from './Molecule.js';
+import { Particle } from './Particle.js';
 
 export default abstract class AqueousSolution {
 
   public readonly solutionType: SolutionType;
-  public readonly particles: Molecule[];
+  public readonly particles: Particle[];
   public readonly strengthProperty: Property<number>;
   public readonly concentrationProperty: Property<number>;
   public readonly pHProperty: TReadOnlyProperty<number>;
@@ -39,7 +39,7 @@ export default abstract class AqueousSolution {
    *   left-to-right order of bars in the graph, and the front-to-back rendering order of particles in the magnifying glass.
    * @param tandem
    */
-  protected constructor( solutionType: SolutionType, strength: number, concentration: number, particles: Molecule[], tandem: Tandem ) {
+  protected constructor( solutionType: SolutionType, strength: number, concentration: number, particles: Particle[], tandem: Tandem ) {
 
     this.solutionType = solutionType;
     this.particles = particles;

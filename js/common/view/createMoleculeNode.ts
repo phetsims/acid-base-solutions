@@ -14,7 +14,7 @@ import { Node } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
 import AtomNode from './AtomNode.js';
-import { MoleculeKey } from '../model/solutions/Molecule.js';
+import { MoleculeKey } from '../model/solutions/Particle.js';
 
 // Signature of all creation functions herein
 type CreationFunction = () => Node;

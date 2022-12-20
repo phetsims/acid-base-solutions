@@ -20,7 +20,7 @@ import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import { MoleculeKey } from '../../common/model/solutions/Molecule.js';
+import { MoleculeKey } from '../../common/model/solutions/Particle.js';
 import createMoleculeNode from '../../common/view/createMoleculeNode.js';
 import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
