@@ -95,9 +95,10 @@ export default class ConcentrationGraphNode extends Node {
     } );
 
     // create enough bars for all solutions
+    const barsTandem = tandem.createTandem( 'bars' );
     const barNodes: ConcentrationGraphBarNode[] = [];
     for ( let i = 0; i < maxBars; i++ ) {
-      barNodes[ i ] = new ConcentrationGraphBarNode( graph.height - 10 );
+      barNodes[ i ] = new ConcentrationGraphBarNode( graph.height - 10, barsTandem.createTandem( `barNode${i}` ) );
     }
 
     super( {

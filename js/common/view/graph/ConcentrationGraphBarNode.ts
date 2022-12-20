@@ -6,9 +6,11 @@
  * @author Andrey Zelenkov (Mlearner)
  */
 
+import Multilink from '../../../../../axon/js/Multilink.js';
 import Utils from '../../../../../dot/js/Utils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import { Node, Rectangle, RichText, TColor } from '../../../../../scenery/js/imports.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../../AcidBaseSolutionsStrings.js';
 
@@ -21,7 +23,7 @@ export default class ConcentrationGraphBarNode extends Node {
   private readonly bar: Rectangle;
   private readonly text: RichText;
 
-  public constructor( maxBarHeight: number ) {
+  public constructor( maxBarHeight: number, tandem: Tandem ) {
 
     // add rectangle to represent concentration
     const bar = new Rectangle( 0, 0, 25, 0, { fill: 'white' } );
@@ -29,10 +31,23 @@ export default class ConcentrationGraphBarNode extends Node {
 
     // add vertical text for concentration (normal text + exponent text)
     // This is a numeric value (typically in scientific notation) so does not require a StringProperty.
-    const text = new RichText( '123', { font: FONT, centerX: 2, centerY: -10, maxWidth: 0.85 * maxBarHeight } );
+    const text = new RichText( '', {
+      font: FONT,
+      maxWidth: 0.85 * maxBarHeight,
+      tandem: tandem.createTandem( 'text' )
+    } );
     text.rotate( -Math.PI / 2 );
 
-    super( { children: [ bar, text ] } );
+    Multilink.multilink( [ bar.boundsProperty, text.boundsProperty ], () => {
+      text.centerX = bar.centerX;
+      text.bottom = bar.bottom - 10;
+    } );
+
+    super( {
+      children: [ bar, text ],
+      tandem: tandem,
+      visiblePropertyOptions: { phetioReadOnly: true }
+    } );
 
     this.maxBarHeight = maxBarHeight;
     this.bar = bar;
