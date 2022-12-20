@@ -11,17 +11,21 @@ import Dimension2 from '../../../dot/js/Dimension2.js';
 import Range from '../../../dot/js/Range.js';
 import RangeWithValue from '../../../dot/js/RangeWithValue.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
-import { ABSwitchOptions } from '../../../sun/js/ABSwitch.js';
 import { PanelOptions } from '../../../sun/js/Panel.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
 import ABSColors from './ABSColors.js';
+import { StringSwitchOptions } from '../mysolution/view/StringSwitch.js';
+import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
 
-// constants
 const WEAK_STRENGTH_MAX = 1E2;
 
 const CONTROL_FONT = new PhetFont( 12 );
 
-const AB_SWITCH_OPTIONS: ABSwitchOptions = {
+const STRING_SWITCH_OPTIONS: StrictOmit<StringSwitchOptions, 'tandem'> = {
+  textOptions: {
+    font: CONTROL_FONT,
+    maxWidth: 50
+  },
   toggleSwitchOptions: {
     size: new Dimension2( 40, 20 ),
     thumbTouchAreaXDilation: 6,
@@ -52,7 +56,7 @@ const ABSConstants = {
   CONTROL_FONT: CONTROL_FONT,
 
   // options
-  AB_SWITCH_OPTIONS: AB_SWITCH_OPTIONS,
+  STRING_SWITCH_OPTIONS: STRING_SWITCH_OPTIONS,
   PANEL_OPTIONS: PANEL_OPTIONS
 };
 

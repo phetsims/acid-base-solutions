@@ -20,7 +20,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import InitialConcentrationControl from './InitialConcentrationControl.js';
 import StrengthControl from './StrengthControl.js';
-import AcidBaseSwitch from './AcidBaseSwitch.js';
+import StringSwitch, { StringSwitchOptions } from './StringSwitch.js';
 
 const AcidBaseTypeValues = [ 'acid', 'base' ] as const;
 export type AcidBaseType = ( typeof AcidBaseTypeValues )[number];
@@ -63,7 +63,12 @@ export default class MySolutionPanel extends Panel {
     } );
 
     // Acid/Base switch
-    const acidBaseSwitch = new AcidBaseSwitch( acidBaseProperty, tandem.createTandem( 'acidBaseSwitch' ) );
+    const acidBaseSwitch = new StringSwitch( acidBaseProperty,
+      'acid', AcidBaseSolutionsStrings.acidStringProperty,
+      'base', AcidBaseSolutionsStrings.baseStringProperty,
+      combineOptions<StringSwitchOptions>( {}, ABSConstants.STRING_SWITCH_OPTIONS, {
+        tandem: tandem.createTandem( 'acidBaseSwitch' )
+      } ) );
 
     // Initial Concentration control
     const initialConcentrationControl = new InitialConcentrationControl( concentrationProperty,

@@ -16,7 +16,8 @@ import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { WeakStrongType } from './MySolutionPanel.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import WeakStrongSwitch from './WeakStrongSwitch.js';
+import StringSwitch, { StringSwitchOptions } from './StringSwitch.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 
 export default class StrengthControl extends VBox {
 
@@ -32,7 +33,12 @@ export default class StrengthControl extends VBox {
     } );
 
     // Weak/Strong switch
-    const weakStrongSwitch = new WeakStrongSwitch( weakStrongProperty, tandem.createTandem( 'weakStrongSwitch' ) );
+    const weakStrongSwitch = new StringSwitch( weakStrongProperty,
+      'weak', AcidBaseSolutionsStrings.weakStringProperty,
+      'strong', AcidBaseSolutionsStrings.strongStringProperty,
+      combineOptions<StringSwitchOptions>( {}, ABSConstants.STRING_SWITCH_OPTIONS, {
+        tandem: tandem.createTandem( 'weakStrongSwitch' )
+      } ) );
 
     // Strength slider
     const slider = new StrengthSlider( strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE, weakStrongProperty,
