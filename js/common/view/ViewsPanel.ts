@@ -149,6 +149,7 @@ export default class ViewsPanel extends Panel {
         hideViewsRadioButton
       ],
       tandem: radioButtonGroupTandem,
+      phetioVisiblePropertyInstrumented: false, // hide the entire panel if you don't want radio buttons
       phetioEnabledPropertyInstrumented: true
     } );
 

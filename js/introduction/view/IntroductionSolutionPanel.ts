@@ -96,7 +96,8 @@ export default class IntroductionSolutionPanel extends Panel {
       },
       touchAreaXDilation: 10,
       mouseAreaXDilation: 10,
-      tandem: tandem.createTandem( 'radioButtonGroup' )
+      tandem: tandem.createTandem( 'radioButtonGroup' ),
+      phetioVisiblePropertyInstrumented: false // hide the entire panel if you don't want radio buttons
     } );
 
     const content = new AlignBox( new VBox( {

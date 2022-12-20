@@ -38,7 +38,8 @@ export default class InitialConcentrationControl extends VBox {
         textOptions: {
           font: new PhetFont( 14 )
         },
-        cornerRadius: 4
+        cornerRadius: 4,
+        phetioVisiblePropertyInstrumented: false
       },
       touchAreaXDilation: 6,
       touchAreaYDilation: 6,
