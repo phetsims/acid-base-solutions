@@ -50,6 +50,7 @@ export default class StrengthControl extends VBox {
         slider
       ],
       spacing: 6,
+      layoutOptions: { stretch: true }, // so that titleText will be left-aligned in MySolutionsPanel
       excludeInvisibleChildrenFromBounds: false,
       tandem: tandem
     } );
