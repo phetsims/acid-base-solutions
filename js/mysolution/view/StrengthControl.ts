@@ -6,18 +6,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { AlignBox, AlignGroup, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import { Text, VBox } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import StrengthSlider from './StrengthSlider.js';
 import ABSConstants from '../../common/ABSConstants.js';
-import ABSwitch, { ABSwitchOptions } from '../../../../sun/js/ABSwitch.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { WeakStrongType } from './MySolutionPanel.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import WeakStrongSwitch from './WeakStrongSwitch.js';
 
 export default class StrengthControl extends VBox {
 
@@ -33,28 +32,7 @@ export default class StrengthControl extends VBox {
     } );
 
     // Weak/Strong switch
-    const textOptions = {
-      font: ABSConstants.CONTROL_FONT,
-      maxWidth: 50
-    };
-    const weakStrongSwitchTandem = tandem.createTandem( 'weakStrongSwitch' );
-    const weakStrongAlignGroup = new AlignGroup(); // to keep toggle switch centered
-    const weakStrongSwitch = new ABSwitch( weakStrongProperty,
-      'weak', new AlignBox( new Text( AcidBaseSolutionsStrings.weakStringProperty, combineOptions<TextOptions>( {}, textOptions, {
-        tandem: weakStrongSwitchTandem.createTandem( 'weak' )
-      } ) ), {
-        group: weakStrongAlignGroup,
-        xAlign: 'right'
-      } ),
-      'strong', new AlignBox( new Text( AcidBaseSolutionsStrings.strongStringProperty, combineOptions<TextOptions>( {}, textOptions, {
-        tandem: weakStrongSwitchTandem.createTandem( 'strong' )
-      } ) ), {
-        group: weakStrongAlignGroup,
-        xAlign: 'left'
-      } ),
-      combineOptions<ABSwitchOptions>( {}, ABSConstants.AB_SWITCH_OPTIONS, {
-        tandem: weakStrongSwitchTandem
-      } ) );
+    const weakStrongSwitch = new WeakStrongSwitch( weakStrongProperty, tandem.createTandem( 'weakStrongSwitch' ) );
 
     // Strength slider
     const slider = new StrengthSlider( strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE, weakStrongProperty,

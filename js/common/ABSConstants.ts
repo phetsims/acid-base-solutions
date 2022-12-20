@@ -11,7 +11,6 @@ import Dimension2 from '../../../dot/js/Dimension2.js';
 import Range from '../../../dot/js/Range.js';
 import RangeWithValue from '../../../dot/js/RangeWithValue.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
-import { TextOptions } from '../../../scenery/js/imports.js';
 import { ABSwitchOptions } from '../../../sun/js/ABSwitch.js';
 import { PanelOptions } from '../../../sun/js/Panel.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
@@ -28,11 +27,6 @@ const AB_SWITCH_OPTIONS: ABSwitchOptions = {
     thumbTouchAreaXDilation: 6,
     thumbTouchAreaYDilation: 6
   }
-};
-
-const AB_SWITCH_TEXT_OPTIONS: TextOptions = {
-  font: CONTROL_FONT,
-  maxWidth: 50
 };
 
 const PANEL_OPTIONS: PanelOptions = {
@@ -59,7 +53,6 @@ const ABSConstants = {
 
   // options
   AB_SWITCH_OPTIONS: AB_SWITCH_OPTIONS,
-  AB_SWITCH_TEXT_OPTIONS: AB_SWITCH_TEXT_OPTIONS,
   PANEL_OPTIONS: PANEL_OPTIONS
 };
 

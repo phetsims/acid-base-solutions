@@ -1,7 +1,7 @@
 // Copyright 2022, University of Colorado Boulder
 
 /**
- * AcidBaseSwitch is the toggle switch for switching between 'Acid' and 'Base'.
+ * WeakStrongSwitch is the toggle switch for switching between 'weak' and 'strong' solution strength.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -13,12 +13,12 @@ import ABSConstants from '../../common/ABSConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import { AcidBaseType } from './MySolutionPanel.js';
+import { WeakStrongType } from './MySolutionPanel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 
-export default class AcidBaseSwitch extends ABSwitch<AcidBaseType> {
+export default class WeakStrongSwitch extends ABSwitch<WeakStrongType> {
 
-  public constructor( acidBaseProperty: StringUnionProperty<AcidBaseType>, tandem: Tandem ) {
+  public constructor( weakStrongProperty: StringUnionProperty<WeakStrongType>, tandem: Tandem ) {
 
     const textOptions = {
       font: ABSConstants.CONTROL_FONT,
@@ -28,31 +28,31 @@ export default class AcidBaseSwitch extends ABSwitch<AcidBaseType> {
     // To give both labels the same effective width, and keep toggle switch centered
     const alignGroup = new AlignGroup();
 
-    // Acid
-    const acidText = new Text( AcidBaseSolutionsStrings.acidStringProperty,
+    // weak
+    const weakText = new Text( AcidBaseSolutionsStrings.weakStringProperty,
       combineOptions<TextOptions>( {}, textOptions, {
-        tandem: tandem.createTandem( 'acidText' )
+        tandem: tandem.createTandem( 'weakText' )
       } ) );
-    const acidNode = new AlignBox( acidText, {
+    const weakNode = new AlignBox( weakText, {
       group: alignGroup,
       xAlign: 'right'
     } );
 
-    // Base
-    const baseText = new Text( AcidBaseSolutionsStrings.baseStringProperty,
+    // string
+    const strongText = new Text( AcidBaseSolutionsStrings.strongStringProperty,
       combineOptions<TextOptions>( {}, textOptions, {
-        tandem: tandem.createTandem( 'baseText' )
+        tandem: tandem.createTandem( 'strongText' )
       } ) );
-    const baseNode = new AlignBox( baseText, {
+    const strongNode = new AlignBox( strongText, {
       group: alignGroup,
       xAlign: 'left'
     } );
 
-    super( acidBaseProperty, 'acid', acidNode, 'base', baseNode,
+    super( weakStrongProperty, 'weak', weakNode, 'strong', strongNode,
       combineOptions<ABSwitchOptions>( {}, ABSConstants.AB_SWITCH_OPTIONS, {
         tandem: tandem
       } ) );
   }
 }
 
-acidBaseSolutions.register( 'AcidBaseSwitch', AcidBaseSwitch );
+acidBaseSolutions.register( 'WeakStrongSwitch', WeakStrongSwitch );
