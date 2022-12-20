@@ -1,7 +1,8 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * Control for modifying a custom solutions.
+ * MySolutionPanel is the panel titled 'Solution' in the 'MySolution' screen.
+ * It has controls for modifying a custom solutions.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)

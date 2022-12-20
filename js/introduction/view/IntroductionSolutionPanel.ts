@@ -1,8 +1,8 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * IntroductionSolutionPanel is a panel for selecting between a set of mutually-exclusive solutions in the
- * Introduction screen.
+ * IntroductionSolutionPanel is the panel titled 'Solution' in the 'Introduction' screen.
+ * It allows the user to select between a set of mutually-exclusive solutions.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
