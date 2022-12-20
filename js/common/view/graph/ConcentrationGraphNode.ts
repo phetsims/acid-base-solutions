@@ -205,12 +205,18 @@ export default class ConcentrationGraphNode extends Node {
   public static createIcon(): Node {
     return new Node( {
       children: [
-        new Rectangle( 0, 0, 22, 18, { fill: 'white' } ), // background
+
+        // graph background
+        new Rectangle( 0, 0, 22, 18, { fill: 'white' } ),
+
+        // bars for weak acid: HA + H2O <=> A- + H3O+
         new Rectangle( 2, 6, 3, 12, { fill: ABSColors.HA } ),
         new Rectangle( 7, 3, 3, 15, { fill: ABSColors.H2O } ),
         new Rectangle( 12, 9, 3, 9, { fill: ABSColors.A } ),
         new Rectangle( 17, 9, 3, 9, { fill: ABSColors.H3O } ),
-        new Rectangle( 0, 0, 22, 18, { stroke: 'black', lineWidth: 0.5 } ) // background stroke on top
+
+        // background stroke on top
+        new Rectangle( 0, 0, 22, 18, { stroke: 'black', lineWidth: 0.5 } )
       ]
     } );
   }
