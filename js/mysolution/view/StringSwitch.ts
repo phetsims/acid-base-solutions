@@ -1,7 +1,7 @@
 // Copyright 2022, University of Colorado Boulder
 
 /**
- * StringSwitch is an ABSwitch that switches between string union values, and is labeled with strings.
+ * StringSwitch is an ABSwitch that switches between string values, and is labeled with strings.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -33,7 +33,7 @@ export default class StringSwitch<T extends string> extends ABSwitch<T> {
     // To give both labels the same effective width, and keep the toggle switch centered
     const alignGroup = new AlignGroup();
 
-    // Label on the left of the toggle switch
+    // A
     const textA = new Text( stringAProperty, combineOptions<TextOptions>( {}, options.textOptions, {
       tandem: options.tandem.createTandem( `${valueA}Text` )
     } ) );
@@ -42,7 +42,7 @@ export default class StringSwitch<T extends string> extends ABSwitch<T> {
       xAlign: 'right'
     } );
 
-    // Label on the right of the toggle switch
+    // B
     const textB = new Text( stringBProperty, combineOptions<TextOptions>( {}, options.textOptions, {
       tandem: options.tandem.createTandem( `${valueB}Text` )
     } ) );
