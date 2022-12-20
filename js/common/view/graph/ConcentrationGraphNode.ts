@@ -21,7 +21,7 @@ import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import AcidBaseSolutionsStrings from '../../../AcidBaseSolutionsStrings.js';
 import Multilink from '../../../../../axon/js/Multilink.js';
 
-const TICK_FONT = new PhetFont( 11 );
+const TICK_LABEL_FONT = new PhetFont( 11 );
 
 export default class ConcentrationGraphNode extends Node {
 
@@ -36,27 +36,40 @@ export default class ConcentrationGraphNode extends Node {
       lineWidth: 0.5
     } );
 
-    // tick marks and horizontal dashed lines. This reuses one tick and one dashed line.
-    const dh = ( graph.height / 10 ) - 1;
-    const tickNode = new Line( -2, 0, 2, 0, { stroke: 'black', lineWidth: 0.5 } );
-    const dashedLineNode = new Line( 0, 0, graph.width, 0, { stroke: 'gray', lineWidth: 0.5, lineDash: [ 2, 1 ] } );
-    const nodes = [];
+    // tick marks and horizontal dashed lines
+    const dy = ( graph.height / 10 ) - 1;
+    const tickLineOptions = { stroke: 'black', lineWidth: 0.5 };
+    const gridLineOptions = { stroke: 'gray', lineWidth: 0.5, lineDash: [ 2, 1 ] };
+    const tickMarksChildren = [];
+    const gridLinesChildren = [];
     for ( let i = 0, y; i < 11; i++ ) {
 
-      y = graph.height - ( dh * i );
+      y = graph.height - ( dy * i );
 
-      // tick mark and dashed line (no dash on bottom tick)
-      nodes.push( new Node( { y: y, children: ( i > 0 ) ? [ tickNode, dashedLineNode ] : [ tickNode ] } ) );
+      // dashed line (no dash on bottom tick)
+      if ( i > 0 ) {
+        gridLinesChildren.push( new Line( 0, y, graph.width, y, gridLineOptions ) );
+      }
 
-      // add text
-      nodes.push( new RichText( `10<sup>${i - 8}</sup>`, {
-        centerY: y,
-        centerX: -16,
-        font: TICK_FONT
+      // tick line
+      const tickLine = new Line( -2, y, 2, y, tickLineOptions );
+      tickMarksChildren.push( tickLine );
+
+      // tick label
+      tickMarksChildren.push( new RichText( `10<sup>${i - 8}</sup>`, {
+        font: TICK_LABEL_FONT,
+        right: tickLine.left - 4,
+        centerY: y
       } ) );
     }
+
+    const gridLines = new Node( {
+      children: gridLinesChildren,
+      tandem: tandem.createTandem( 'gridLines' )
+    } );
+
     const tickMarks = new Node( {
-      children: nodes,
+      children: tickMarksChildren,
       tandem: tandem.createTandem( 'tickMarks' )
     } );
 
@@ -88,7 +101,7 @@ export default class ConcentrationGraphNode extends Node {
     }
 
     super( {
-      children: [ backgroundNode, tickMarks, yAxisText, ...barNodes ],
+      children: [ backgroundNode, gridLines, tickMarks, yAxisText, ...barNodes ],
       translation: graph.position,
       visibleProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'graph' ), {
         tandem: tandem.createTandem( 'visibleProperty' )
