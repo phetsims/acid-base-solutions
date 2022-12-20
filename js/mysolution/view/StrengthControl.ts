@@ -44,10 +44,9 @@ export default class StrengthControl extends VBox {
     const slider = new StrengthSlider( strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE, weakStrongProperty,
       sliderWrapperTandem.createTandem( 'slider' ) );
 
-    // Changing the strength to 'strong' typically hides the slider, but keep the space for it in the panel.
-    // This wrapper makes it so that if the client hides the slider via slider.visibleProperty, it will
-    // be hidden regardless of whether strength is 'weak' or 'strong', and the panel will shrink to fit.
-    // Use a VBox as the wrapper, so that it adjusts its bounds when slider is hidden.
+    // Changing the strength to 'strong' typically hides the slider, but keeps the space for it in the panel.
+    // This wrapper makes it possible for the client to independently control whether the slider is visible,
+    // and the panel will shrink to fit.
     const sliderWrapper = new VBox( {
       children: [ slider ],
       excludeInvisibleChildrenFromBounds: false, // keep space in the panel when sliderWrapper.visible === false
