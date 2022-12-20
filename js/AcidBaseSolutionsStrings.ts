@@ -25,7 +25,7 @@ type StringsType = {
   'hideViewsStringProperty': LinkableProperty<string>;
   'initialConcentrationStringProperty': LinkableProperty<string>;
   'litersStringProperty': LinkableProperty<string>;
-  'moleculesStringProperty': LinkableProperty<string>;
+  'particlesStringProperty': LinkableProperty<string>;
   'negligibleStringProperty': LinkableProperty<string>;
   'pattern': {
     '0value': {

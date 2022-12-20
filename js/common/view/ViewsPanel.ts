@@ -59,7 +59,7 @@ export default class ViewsPanel extends Panel {
     const moleculesLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
-        new Text( AcidBaseSolutionsStrings.moleculesStringProperty, {
+        new Text( AcidBaseSolutionsStrings.particlesStringProperty, {
           font: LABEL_FONT,
           maxWidth: TEXT_MAX_WIDTH,
           tandem: moleculesRadioButtonTandem.createTandem( 'text' )
