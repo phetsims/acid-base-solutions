@@ -8,8 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { AlignBox, AlignGroup, HSeparator, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
-import ABSwitch, { ABSwitchOptions } from '../../../../sun/js/ABSwitch.js';
+import { AlignBox, AlignGroup, HSeparator, Text, VBox } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
@@ -21,6 +20,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import InitialConcentrationControl from './InitialConcentrationControl.js';
 import StrengthControl from './StrengthControl.js';
+import AcidBaseSwitch from './AcidBaseSwitch.js';
 
 const AcidBaseTypeValues = [ 'acid', 'base' ] as const;
 export type AcidBaseType = ( typeof AcidBaseTypeValues )[number];
@@ -63,28 +63,7 @@ export default class MySolutionPanel extends Panel {
     } );
 
     // Acid/Base switch
-    const textOptions = {
-      font: ABSConstants.CONTROL_FONT,
-      maxWidth: 50
-    };
-    const acidBaseSwitchTandem = tandem.createTandem( 'acidBaseSwitch' );
-    const acidBaseAlignGroup = new AlignGroup(); // to keep toggle switch centered
-    const acidBaseSwitch = new ABSwitch( acidBaseProperty,
-      'acid', new AlignBox( new Text( AcidBaseSolutionsStrings.acidStringProperty, combineOptions<TextOptions>( {}, textOptions, {
-        tandem: acidBaseSwitchTandem.createTandem( 'acidText' )
-      } ) ), {
-        group: acidBaseAlignGroup,
-        xAlign: 'right'
-      } ),
-      'base', new AlignBox( new Text( AcidBaseSolutionsStrings.baseStringProperty, combineOptions<TextOptions>( {}, textOptions, {
-        tandem: acidBaseSwitchTandem.createTandem( 'baseText' )
-      } ) ), {
-        group: acidBaseAlignGroup,
-        xAlign: 'left'
-      } ),
-      combineOptions<ABSwitchOptions>( {}, ABSConstants.AB_SWITCH_OPTIONS, {
-        tandem: acidBaseSwitchTandem
-      } ) );
+    const acidBaseSwitch = new AcidBaseSwitch( acidBaseProperty, tandem.createTandem( 'acidBaseSwitch' ) );
 
     // Initial Concentration control
     const initialConcentrationControl = new InitialConcentrationControl( concentrationProperty,
