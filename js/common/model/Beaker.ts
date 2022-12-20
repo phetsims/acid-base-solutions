@@ -1,8 +1,7 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * Model for the beaker in 'Acid-Base Solutions' sim.
- * Origin is at bottom center.
+ * Beaker is the model for the beaker. The origin is at the bottom center.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)

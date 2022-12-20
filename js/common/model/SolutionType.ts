@@ -1,7 +1,7 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * Possible choices in the 'Solutions' control panel.
+ * SolutionType is the string union of possible choices for solution.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

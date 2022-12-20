@@ -1,9 +1,10 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * pH meter model. Position is at the tip of the probe.
+ * PHMeter is the model of a movable pH meter. Position is at the tip of the probe.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';

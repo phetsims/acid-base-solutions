@@ -1,9 +1,10 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * Base type for models in the 'Acid-Base Solutions' sim.
+ * ABSModel is the base class for models in the 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';

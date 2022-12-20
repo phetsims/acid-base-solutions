@@ -1,9 +1,10 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * Model for the pH paper in 'Acid-Base Solutions' sim.
+ * PHPaper is the model for the pH paper.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';

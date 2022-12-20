@@ -1,9 +1,10 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * Model for the concentration graph in 'Acid-Base Solutions' sim.
+ * ConcentrationGraph is the model for the concentration graph.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';

@@ -4,6 +4,7 @@
  * Constants for simulation 'Acid-Base Solutions'.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import Dimension2 from '../../../dot/js/Dimension2.js';

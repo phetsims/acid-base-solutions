@@ -1,9 +1,11 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * MagnifyingGlass is the model for the magnifying glass in 'Acid-Base Solutions' sim.
+ * MagnifyingGlass is the model for the magnifying glass. It shows a qualitative view of the ratio of concentrations
+ * for particles in the solution.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
