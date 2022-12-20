@@ -206,7 +206,7 @@ export default class ConcentrationGraphNode extends Node {
     return new Node( {
       children: [
         new Rectangle( 0, 0, 22, 18, { fill: 'white' } ), // background
-        new Rectangle( 2, 6, 3, 12, { fill: ABSColors.B } ),
+        new Rectangle( 2, 6, 3, 12, { fill: ABSColors.HA } ),
         new Rectangle( 7, 3, 3, 15, { fill: ABSColors.H2O } ),
         new Rectangle( 12, 9, 3, 9, { fill: ABSColors.A } ),
         new Rectangle( 17, 9, 3, 9, { fill: ABSColors.H3O } ),
