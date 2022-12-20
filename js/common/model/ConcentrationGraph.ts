@@ -9,7 +9,7 @@
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import { SolutionType } from '../enum/SolutionType.js';
+import { SolutionType } from './SolutionType.js';
 import Beaker from './Beaker.js';
 import { SolutionMap } from './ABSModel.js';
 

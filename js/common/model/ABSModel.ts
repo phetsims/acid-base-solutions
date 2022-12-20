@@ -14,7 +14,7 @@ import TModel from '../../../../joist/js/TModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import { SolutionType } from '../enum/SolutionType.js';
+import { SolutionType } from './SolutionType.js';
 import Beaker from './Beaker.js';
 import ConcentrationGraph from './ConcentrationGraph.js';
 import ConductivityTester from './ConductivityTester.js';

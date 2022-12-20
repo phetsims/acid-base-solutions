@@ -20,7 +20,7 @@ import Utils from '../../../../../dot/js/Utils.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../../tandem/js/types/NumberIO.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
-import { SolutionType } from '../../enum/SolutionType.js';
+import { SolutionType } from '../SolutionType.js';
 import { Particle } from './Particle.js';
 
 export default abstract class AqueousSolution {

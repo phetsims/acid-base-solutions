@@ -16,7 +16,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import Beaker from './Beaker.js';
-import { SolutionType } from '../enum/SolutionType.js';
+import { SolutionType } from './SolutionType.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';

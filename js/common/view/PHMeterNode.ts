@@ -17,7 +17,7 @@ import { Circle, DragListener, Node, Path, Rectangle, Text } from '../../../../s
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import PHMeter from '../model/PHMeter.js';
-import { ToolMode } from '../enum/ToolMode.js';
+import { ToolMode } from './ToolMode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';

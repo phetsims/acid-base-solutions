@@ -15,7 +15,7 @@ import solvent_png from '../../../images/solvent_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import MagnifyingGlass from '../model/MagnifyingGlass.js';
 import ParticlesNode from './ParticlesNode.js';
-import { ViewMode } from '../enum/ViewMode.js';
+import { ViewMode } from './ViewMode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';

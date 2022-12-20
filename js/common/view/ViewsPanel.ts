@@ -19,7 +19,7 @@ import magnifyingGlassIcon_png from '../../../images/magnifyingGlassIcon_png.js'
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../ABSConstants.js';
-import { ViewMode } from '../enum/ViewMode.js';
+import { ViewMode } from './ViewMode.js';
 import BeakerNode from './BeakerNode.js';
 import ConcentrationGraphNode from './graph/ConcentrationGraphNode.js';
 import createMoleculeNode from './createMoleculeNode.js';

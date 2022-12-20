@@ -11,7 +11,7 @@ import Range from '../../../../dot/js/Range.js';
 import ConductivityTesterNode from '../../../../scenery-phet/js/ConductivityTesterNode.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ConductivityTester from '../model/ConductivityTester.js';
-import { ToolMode } from '../enum/ToolMode.js';
+import { ToolMode } from './ToolMode.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';

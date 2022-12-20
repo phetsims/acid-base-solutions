@@ -11,7 +11,7 @@ import { Node } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ReactionEquationFactory from './ReactionEquationFactory.js';
 import Beaker from '../model/Beaker.js';
-import { SolutionType } from '../enum/SolutionType.js';
+import { SolutionType } from '../model/SolutionType.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 

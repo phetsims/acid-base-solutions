@@ -14,7 +14,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, HStrut, Node, Path, RichText, VBox, VStrut } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import createMoleculeNode from './createMoleculeNode.js';
-import { SolutionType } from '../enum/SolutionType.js';
+import { SolutionType } from '../model/SolutionType.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 // constants

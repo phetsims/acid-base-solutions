@@ -14,7 +14,7 @@ import ABSColors from '../../ABSColors.js';
 import ConcentrationGraph from '../../model/ConcentrationGraph.js';
 import ConcentrationGraphBackgroundNode from './ConcentrationGraphBackgroundNode.js';
 import ConcentrationGraphBarNode from './ConcentrationGraphBarNode.js';
-import { ViewMode } from '../../enum/ViewMode.js';
+import { ViewMode } from '../ViewMode.js';
 import StringUnionProperty from '../../../../../axon/js/StringUnionProperty.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';

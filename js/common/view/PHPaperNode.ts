@@ -14,7 +14,7 @@ import { Circle, Color, DragListener, Node, Rectangle } from '../../../../scener
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
 import PHPaper from '../model/PHPaper.js';
-import { ToolMode } from '../enum/ToolMode.js';
+import { ToolMode } from './ToolMode.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';

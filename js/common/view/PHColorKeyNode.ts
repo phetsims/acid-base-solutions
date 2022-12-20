@@ -18,7 +18,7 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSColors from '../ABSColors.js';
-import { ToolMode } from '../enum/ToolMode.js';
+import { ToolMode } from './ToolMode.js';
 
 // constants
 const FONT_BIG = new PhetFont( 12 );

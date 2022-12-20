@@ -11,8 +11,8 @@ import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import { ToolMode, ToolModeValues } from '../enum/ToolMode.js';
-import { ViewMode, ViewModeValues } from '../enum/ViewMode.js';
+import { ToolMode, ToolModeValues } from './ToolMode.js';
+import { ViewMode, ViewModeValues } from './ViewMode.js';
 
 export default class ABSViewProperties {
 
