@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignGroup, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import StrengthSlider from './StrengthSlider.js';
@@ -33,11 +33,27 @@ export default class StrengthControl extends VBox {
     } );
 
     // Weak/Strong switch
+    const textOptions = {
+      font: ABSConstants.CONTROL_FONT,
+      maxWidth: 50
+    };
+    const weakStrongSwitchTandem = tandem.createTandem( 'weakStrongSwitch' );
+    const weakStrongAlignGroup = new AlignGroup(); // to keep toggle switch centered
     const weakStrongSwitch = new ABSwitch( weakStrongProperty,
-      'weak', new Text( AcidBaseSolutionsStrings.weakStringProperty, ABSConstants.AB_SWITCH_TEXT_OPTIONS ),
-      'strong', new Text( AcidBaseSolutionsStrings.strongStringProperty, ABSConstants.AB_SWITCH_TEXT_OPTIONS ),
+      'weak', new AlignBox( new Text( AcidBaseSolutionsStrings.weakStringProperty, combineOptions<TextOptions>( {}, textOptions, {
+        tandem: weakStrongSwitchTandem.createTandem( 'weak' )
+      } ) ), {
+        group: weakStrongAlignGroup,
+        xAlign: 'right'
+      } ),
+      'strong', new AlignBox( new Text( AcidBaseSolutionsStrings.strongStringProperty, combineOptions<TextOptions>( {}, textOptions, {
+        tandem: weakStrongSwitchTandem.createTandem( 'strong' )
+      } ) ), {
+        group: weakStrongAlignGroup,
+        xAlign: 'left'
+      } ),
       combineOptions<ABSwitchOptions>( {}, ABSConstants.AB_SWITCH_OPTIONS, {
-        tandem: tandem.createTandem( 'weakStrongSwitch' )
+        tandem: weakStrongSwitchTandem
       } ) );
 
     // Strength slider

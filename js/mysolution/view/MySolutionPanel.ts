@@ -8,7 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { AlignBox, AlignGroup, HSeparator, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignGroup, HSeparator, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import ABSwitch, { ABSwitchOptions } from '../../../../sun/js/ABSwitch.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
@@ -63,10 +63,25 @@ export default class MySolutionPanel extends Panel {
     } );
 
     // Acid/Base switch
+    const textOptions = {
+      font: ABSConstants.CONTROL_FONT,
+      maxWidth: 50
+    };
     const acidBaseSwitchTandem = tandem.createTandem( 'acidBaseSwitch' );
+    const acidBaseAlignGroup = new AlignGroup(); // to keep toggle switch centered
     const acidBaseSwitch = new ABSwitch( acidBaseProperty,
-      'acid', new Text( AcidBaseSolutionsStrings.acidStringProperty, ABSConstants.AB_SWITCH_TEXT_OPTIONS ),
-      'base', new Text( AcidBaseSolutionsStrings.baseStringProperty, ABSConstants.AB_SWITCH_TEXT_OPTIONS ),
+      'acid', new AlignBox( new Text( AcidBaseSolutionsStrings.acidStringProperty, combineOptions<TextOptions>( {}, textOptions, {
+        tandem: acidBaseSwitchTandem.createTandem( 'acidText' )
+      } ) ), {
+        group: acidBaseAlignGroup,
+        xAlign: 'right'
+      } ),
+      'base', new AlignBox( new Text( AcidBaseSolutionsStrings.baseStringProperty, combineOptions<TextOptions>( {}, textOptions, {
+        tandem: acidBaseSwitchTandem.createTandem( 'baseText' )
+      } ) ), {
+        group: acidBaseAlignGroup,
+        xAlign: 'left'
+      } ),
       combineOptions<ABSwitchOptions>( {}, ABSConstants.AB_SWITCH_OPTIONS, {
         tandem: acidBaseSwitchTandem
       } ) );
