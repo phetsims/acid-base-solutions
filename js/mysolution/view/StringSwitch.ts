@@ -23,6 +23,8 @@ export type StringSwitchOptions = SelfOptions & ABSwitchOptions & PickRequired<A
 
 export default class StringSwitch<T extends string> extends ABSwitch<T> {
 
+  private readonly disposeStringSwitch: () => void;
+
   public constructor( property: Property<T>,
                       valueA: T, stringAProperty: TReadOnlyProperty<string>,
                       valueB: T, stringBProperty: TReadOnlyProperty<string>,
@@ -52,6 +54,16 @@ export default class StringSwitch<T extends string> extends ABSwitch<T> {
     } );
 
     super( property, valueA, nodeA, valueB, nodeB, options );
+
+    this.disposeStringSwitch = () => {
+      textA.dispose();
+      textB.dispose();
+    };
+  }
+
+  public override dispose(): void {
+    this.disposeStringSwitch();
+    super.dispose();
   }
 }
 
