@@ -40,7 +40,7 @@ export default class ConcentrationGraphBarNode extends Node {
 
     Multilink.multilink( [ bar.boundsProperty, text.boundsProperty ], () => {
       text.centerX = bar.centerX;
-      text.bottom = bar.bottom - 10;
+      text.bottom = bar.bottom - 6;
     } );
 
     super( {

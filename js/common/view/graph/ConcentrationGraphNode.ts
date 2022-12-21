@@ -8,7 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Line, Node, Rectangle, RichText, Text } from '../../../../../scenery/js/imports.js';
+import { HBox, Line, Node, Rectangle, RichText, Text } from '../../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import ABSColors from '../../ABSColors.js';
 import ConcentrationGraph from '../../model/ConcentrationGraph.js';
@@ -30,8 +30,11 @@ export default class ConcentrationGraphNode extends Node {
 
   public constructor( graph: ConcentrationGraph, viewModeProperty: StringUnionProperty<ViewMode>, tandem: Tandem ) {
 
-    const backgroundNode = new Rectangle( 0, 0, graph.width, graph.height, {
-      fill: 'white',
+    const backgroundFillNode = new Rectangle( 0, 0, graph.width, graph.height, {
+      fill: 'white'
+    } );
+
+    const backgroundStrokeNode = new Rectangle( 0, 0, graph.width, graph.height, {
       stroke: 'black',
       lineWidth: 0.5
     } );
@@ -84,7 +87,7 @@ export default class ConcentrationGraphNode extends Node {
 
     Multilink.multilink( [ yAxisText.boundsProperty, tickMarks.visibleProperty ],
       ( bounds, tickMarksVisible ) => {
-        yAxisText.right = ( tickMarksVisible ? tickMarks.left : backgroundNode.left ) - 15;
+        yAxisText.right = ( tickMarksVisible ? tickMarks.left : backgroundFillNode.left ) - 16;
         yAxisText.centerY = graph.height / 2;
       } );
 
@@ -100,9 +103,18 @@ export default class ConcentrationGraphNode extends Node {
     for ( let i = 0; i < maxBars; i++ ) {
       barNodes[ i ] = new ConcentrationGraphBarNode( graph.height - 10, barsTandem.createTandem( `barNode${i}` ) );
     }
+    const barsParent = new HBox( {
+      children: barNodes,
+      align: 'bottom',
+      spacing: 16
+    } );
+    barsParent.boundsProperty.link( bounds => {
+      barsParent.centerX = backgroundFillNode.centerX;
+      barsParent.bottom = backgroundFillNode.bottom;
+    } );
 
     super( {
-      children: [ backgroundNode, gridLines, tickMarks, yAxisText, ...barNodes ],
+      children: [ backgroundFillNode, gridLines, tickMarks, yAxisText, barsParent, backgroundStrokeNode ],
       translation: graph.position,
       visibleProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'graph' ), {
         tandem: tandem.createTandem( 'visibleProperty' )
@@ -172,7 +184,6 @@ export default class ConcentrationGraphNode extends Node {
           bar.visible = true;
           bar.setValue( solution.particles[ i ].getConcentration() );
           bar.setBarFill( particles[ i ].color );
-          bar.setTranslation( ( i + 0.75 + ( 4 - numberOfParticles ) / 2 ) * this.graph.width / 4, this.graph.height );
         }
         else {
           bar.visible = false;
