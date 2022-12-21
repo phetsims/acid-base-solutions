@@ -63,8 +63,8 @@ export default class ConcentrationGraphBarNode extends Node {
    * Sets height and text value of bar.
    */
   public setValue( value: number ): void {
+
     const barHeight = Math.abs( Utils.log10( value ) + 8 ) * this.maxBarHeight / 10;
-    let pow;
 
     // set bar height
     if ( isFinite( barHeight ) ) {
@@ -79,13 +79,14 @@ export default class ConcentrationGraphBarNode extends Node {
       this.text.setString( AcidBaseSolutionsStrings.negligibleStringProperty.value );
     }
     else if ( value <= 1 ) {
-      // find pow
-      pow = Math.floor( Utils.log10( value ) );
+
+      // find power of 10
+      let pow = Math.floor( Utils.log10( value ) );
 
       // find value
       value = ( value * Math.pow( 10, -pow ) );
 
-      // replace 10.00 to 1.00 x 10
+      // show 10.00 as 1.00 x 10
       if ( Math.abs( value - 10 ) < 1e-2 ) {
         pow++;
         value = 1;
