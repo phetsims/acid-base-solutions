@@ -173,17 +173,15 @@ export default class ConcentrationGraphNode extends Node {
       const solutionType = this.graph.solutionTypeProperty.value;
       const solution = this.graph.solutionsMap.get( solutionType )!;
       assert && assert( solution );
-      const particles = solution.particles;
-      const numberOfParticles = particles.length;
 
-      // show one bar for each particle in the current solution
-      for ( let i = 0, bar; i < this.barNodes.length; i++ ) {
-        bar = this.barNodes[ i ];
-        if ( i < numberOfParticles ) {
-          // set visibility, color, value and position of new bars
+      // Show one bar for each particle in the current solution.
+      for ( let i = 0; i < this.barNodes.length; i++ ) {
+        const bar = this.barNodes[ i ];
+        if ( i < solution.particles.length ) {
+          const particle = solution.particles[ i ];
+          bar.setValue( particle.getConcentration() );
+          bar.setBarFill( particle.color );
           bar.visible = true;
-          bar.setValue( solution.particles[ i ].getConcentration() );
-          bar.setBarFill( particles[ i ].color );
         }
         else {
           bar.visible = false;
