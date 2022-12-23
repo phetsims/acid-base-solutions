@@ -1,4 +1,4 @@
-// Copyright 2014-2022, University of Colorado Boulder
+// Copyright 2022, University of Colorado Boulder
 
 /**
  * LogSlider takes a logarithmic model Property, and adapts it to a linear Property as required by Slider.
@@ -23,9 +23,6 @@ export type LogSliderOptions = SelfOptions & SliderOptions & PickRequired<Slider
 
 export default class LogSlider extends Slider {
 
-  // For specifying tick mark values
-  public readonly linearValueRange: Range;
-
   private readonly disposeLogSlider: () => void;
 
   /**
@@ -47,8 +44,6 @@ export default class LogSlider extends Slider {
     const linearValueRange = new Range( LogSlider.logToLinear( logValueRange.min ), LogSlider.logToLinear( logValueRange.max ) );
 
     super( linearValueProperty, linearValueRange, providedOptions );
-
-    this.linearValueRange = linearValueRange;
 
     // Because linearValueProperty is adapting between linear and log scales, link logValueProperty so that
     // this looks like a standard PhET-iO Slider.
