@@ -74,7 +74,7 @@ export default class ViewsPanel extends Panel {
     particlesRadioButton.touchArea = particlesRadioButton.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
 
     // Solvent checkbox
-    const solventCheckboxTandem = radioButtonGroupTandem.createTandem( 'solventCheckbox' );
+    const solventCheckboxTandem = particlesRadioButtonTandem.createTandem( 'solventCheckbox' );
     const solventLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
