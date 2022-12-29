@@ -20,13 +20,14 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import { ParticleKey } from '../model/solutions/Particle.js';
 
 const TICK_LABEL_FONT = new PhetFont( 11 );
 
 export default class ConcentrationGraphNode extends Node {
 
   private readonly graph: ConcentrationGraph;
-  private readonly barNodes: ConcentrationBarNode[];
+  private readonly particlesMap: Map<ParticleKey, ConcentrationBarNode>;
 
   public constructor( graph: ConcentrationGraph, viewModeProperty: StringUnionProperty<ViewMode>, tandem: Tandem ) {
 
@@ -91,18 +92,21 @@ export default class ConcentrationGraphNode extends Node {
         yAxisText.centerY = graph.height / 2;
       } );
 
-    // find maximum number of bars for all solutions
-    let maxBars = 0;
-    graph.solutionsMap.forEach( ( solution, solutionType ) => {
-      maxBars = Math.max( maxBars, solution.particles.length );
-    } );
-
-    // create enough bars for all solutions
+    // Create a bar for each particle species.
     const barsTandem = tandem.createTandem( 'bars' );
     const barNodes: ConcentrationBarNode[] = [];
-    for ( let i = 0; i < maxBars; i++ ) {
-      barNodes[ i ] = new ConcentrationBarNode( graph.height - 10, barsTandem.createTandem( `barNode${i}` ) );
-    }
+    const particlesMap = new Map<ParticleKey, ConcentrationBarNode>();
+
+    // SERIOUS HACK ALERT!! These keys are ordered such that the visible bars will be in the same left-to-right order
+    // as the reaction equation that appears under the beaker.
+    const particleKeys: ParticleKey[] = [
+      'B', 'HA', 'H2O', 'MOH', 'M', 'BH', 'A', 'H3O', 'OH'
+    ];
+    particleKeys.forEach( particleKey => {
+      const barNode = new ConcentrationBarNode( graph.height - 10, barsTandem.createTandem( `${particleKey}BarNode` ) );
+      barNodes.push( barNode );
+      particlesMap.set( particleKey, barNode );
+    } );
     const barsParent = new HBox( {
       children: barNodes,
       align: 'bottom',
@@ -123,14 +127,11 @@ export default class ConcentrationGraphNode extends Node {
     } );
 
     this.graph = graph;
-    this.barNodes = barNodes;
+    this.particlesMap = particlesMap;
 
     // Observe the strength and concentration Properties for the selected solution.
     const updateValuesBound = this.updateValues.bind( this );
     graph.solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
-
-      // show the correct number of bars
-      this.updateBars();
 
       // unlink from previous solution
       if ( previousSolutionType ) {
@@ -143,16 +144,15 @@ export default class ConcentrationGraphNode extends Node {
       // link to new solution
       const newSolution = graph.solutionsMap.get( newSolutionType )!;
       assert && assert( newSolution );
-      newSolution.strengthProperty.link( updateValuesBound );
-      newSolution.concentrationProperty.link( updateValuesBound );
+      newSolution.strengthProperty.lazyLink( updateValuesBound );
+      newSolution.concentrationProperty.lazyLink( updateValuesBound );
+
+      this.updateBars();
     } );
 
     // Update when this Node becomes visible.
     this.visibleProperty.link( visible => {
-      if ( visible ) {
-        this.updateBars();
-        this.updateValues();
-      }
+      visible && this.updateBars();
     } );
   }
 
@@ -162,7 +162,7 @@ export default class ConcentrationGraphNode extends Node {
   }
 
   /*
-   * Makes the correct number of bars visible for the selected solution,
+   * Makes the correct bars visible for the selected solution,
    * and sets the bars colors and positions to match the particles in the solution.
    * To improve performance, updates only when this node is visible.
    */
@@ -174,19 +174,17 @@ export default class ConcentrationGraphNode extends Node {
       const solution = this.graph.solutionsMap.get( solutionType )!;
       assert && assert( solution );
 
-      // Show one bar for each particle in the current solution.
-      for ( let i = 0; i < this.barNodes.length; i++ ) {
-        const bar = this.barNodes[ i ];
-        if ( i < solution.particles.length ) {
-          const particle = solution.particles[ i ];
-          bar.setValue( particle.getConcentration() );
-          bar.setBarFill( particle.color );
-          bar.visible = true;
+      this.particlesMap.forEach( ( barNode, particleKey ) => {
+        const particle = solution.getParticleWithKey( particleKey );
+        if ( particle ) {
+          barNode.setValue( particle.getConcentration() );
+          barNode.setBarFill( particle.color );
+          barNode.visible = true;
         }
         else {
-          bar.visible = false;
+          barNode.visible = false;
         }
-      }
+      } );
     }
   }
 
@@ -201,16 +199,18 @@ export default class ConcentrationGraphNode extends Node {
       const solutionType = this.graph.solutionTypeProperty.value;
       const solution = this.graph.solutionsMap.get( solutionType )!;
       assert && assert( solution );
-      const particles = solution.particles;
 
-      for ( let i = 0; i < particles.length; i++ ) {
-        this.barNodes[ i ].setValue( solution.particles[ i ].getConcentration() );
-      }
+      this.particlesMap.forEach( ( barNode, particleKey ) => {
+        const particle = solution.getParticleWithKey( particleKey );
+        if ( particle ) {
+          barNode.setValue( particle.getConcentration() );
+        }
+      } );
     }
   }
 
   /**
-   *  Creates an icon of the graph, with 4 bars (similar to weak acid).
+   * Creates an icon of the graph, with 4 bars (similar to weak acid).
    */
   public static createIcon(): Node {
     return new Node( {

@@ -21,7 +21,7 @@ import Tandem from '../../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../../tandem/js/types/NumberIO.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import { SolutionType } from '../SolutionType.js';
-import { Particle } from './Particle.js';
+import { Particle, ParticleKey } from './Particle.js';
 
 export default abstract class AqueousSolution {
 
@@ -70,6 +70,10 @@ export default abstract class AqueousSolution {
   public reset(): void {
     this.strengthProperty.reset();
     this.concentrationProperty.reset();
+  }
+
+  public getParticleWithKey( particleKey: ParticleKey ): Particle | null {
+    return _.find( this.particles, particle => particle.key === particleKey ) || null;
   }
 
   // convenience function

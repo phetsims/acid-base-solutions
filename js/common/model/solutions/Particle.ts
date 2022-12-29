@@ -10,7 +10,7 @@ import { Color } from '../../../../../scenery/js/imports.js';
 
 // Keys of all the possible particles that appear in this sim.
 // Used as the key for various Maps, and in tandem names.
-const ParticleKeyValues = [ 'A', 'B', 'BH', 'H2O', 'H3O', 'HA', 'M', 'MOH', 'OH' ] as const;
+export const ParticleKeyValues = [ 'A', 'B', 'BH', 'H2O', 'H3O', 'HA', 'M', 'MOH', 'OH' ] as const;
 export type ParticleKey = ( typeof ParticleKeyValues )[number];
 
 // Data structure that describes a particle.
