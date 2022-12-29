@@ -7,13 +7,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Multilink from '../../../../../axon/js/Multilink.js';
-import Utils from '../../../../../dot/js/Utils.js';
-import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
-import { Node, Rectangle, RichText, TColor } from '../../../../../scenery/js/imports.js';
-import Tandem from '../../../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../../../acidBaseSolutions.js';
-import AcidBaseSolutionsStrings from '../../../AcidBaseSolutionsStrings.js';
+import Multilink from '../../../../axon/js/Multilink.js';
+import Utils from '../../../../dot/js/Utils.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import { Node, Rectangle, RichText, TColor } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import acidBaseSolutions from '../../acidBaseSolutions.js';
+import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 
 // constants
 const FONT = new PhetFont( 12 );

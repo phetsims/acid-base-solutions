@@ -12,7 +12,7 @@ import { HBox, Line, Node, Rectangle, RichText, Text } from '../../../../scenery
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
 import ConcentrationGraph from '../model/ConcentrationGraph.js';
-import ConcentrationGraphBarNode from './graph/ConcentrationGraphBarNode.js';
+import ConcentrationGraphBarNode from './ConcentrationGraphBarNode.js';
 import { ViewMode } from './ViewMode.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
