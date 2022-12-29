@@ -18,7 +18,7 @@ import ABSModel from '../model/ABSModel.js';
 import ABSConductivityTesterNode from './ABSConductivityTesterNode.js';
 import ABSViewProperties from './ABSViewProperties.js';
 import BeakerNode from './BeakerNode.js';
-import ConcentrationGraphNode from './graph/ConcentrationGraphNode.js';
+import ConcentrationGraphNode from './ConcentrationGraphNode.js';
 import MagnifyingGlassNode from './MagnifyingGlassNode.js';
 import PHColorKeyNode from './PHColorKeyNode.js';
 import PHMeterNode from './PHMeterNode.js';

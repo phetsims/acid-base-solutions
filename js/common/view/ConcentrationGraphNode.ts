@@ -8,18 +8,18 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { HBox, Line, Node, Rectangle, RichText, Text } from '../../../../../scenery/js/imports.js';
-import acidBaseSolutions from '../../../acidBaseSolutions.js';
-import ABSColors from '../../ABSColors.js';
-import ConcentrationGraph from '../../model/ConcentrationGraph.js';
-import ConcentrationGraphBarNode from './ConcentrationGraphBarNode.js';
-import { ViewMode } from '../ViewMode.js';
-import StringUnionProperty from '../../../../../axon/js/StringUnionProperty.js';
-import Tandem from '../../../../../tandem/js/Tandem.js';
-import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
-import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
-import AcidBaseSolutionsStrings from '../../../AcidBaseSolutionsStrings.js';
-import Multilink from '../../../../../axon/js/Multilink.js';
+import { HBox, Line, Node, Rectangle, RichText, Text } from '../../../../scenery/js/imports.js';
+import acidBaseSolutions from '../../acidBaseSolutions.js';
+import ABSColors from '../ABSColors.js';
+import ConcentrationGraph from '../model/ConcentrationGraph.js';
+import ConcentrationGraphBarNode from './graph/ConcentrationGraphBarNode.js';
+import { ViewMode } from './ViewMode.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 
 const TICK_LABEL_FONT = new PhetFont( 11 );
 
