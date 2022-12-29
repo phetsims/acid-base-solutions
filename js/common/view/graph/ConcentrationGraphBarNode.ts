@@ -1,9 +1,10 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * A bar in the concentration graph.
+ * ConcentrationGraphBarNode is a bar in the 'Equilibrium Concentration' graph.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import Multilink from '../../../../../axon/js/Multilink.js';

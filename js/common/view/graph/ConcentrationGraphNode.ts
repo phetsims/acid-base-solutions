@@ -1,7 +1,7 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * Concentration graph.
+ * ConcentrationGraphNode is the graph of 'Equilibrium Concentration' for each particle species.
  * To improve performance, updates only when this node is visible.
  *
  * @author Andrey Zelenkov (Mlearner)
