@@ -14,6 +14,9 @@ import createParticleNode from './createParticleNode.js';
 import MagnifyingGlass from '../model/MagnifyingGlass.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import { ParticleKey } from '../model/solutions/Particle.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
 
 // constants
 const BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some particles
@@ -24,7 +27,7 @@ const IMAGE_SCALE = 2; // stored images are scaled this much to improve quality
 // Data structure used to store information for each unique type of particle
 type ParticlesData = {
   canvas: HTMLCanvasElement | null;
-  numberOfParticles: number;
+  countProperty: Property<number>; // this is a Property for PhET-iO
   xCoordinates: Float32Array;
   yCoordinates: Float32Array;
 };
@@ -35,9 +38,13 @@ export default class ParticlesNode extends CanvasNode {
   private readonly positionRadius: number; // radius for computing random positions
   private readonly particlesDataMap: Map<ParticleKey, ParticlesData>;
 
-  public constructor( magnifyingGlass: MagnifyingGlass, lensBounds: Bounds2, lensLineWidth: number ) {
+  public constructor( magnifyingGlass: MagnifyingGlass, lensBounds: Bounds2, lensLineWidth: number, tandem: Tandem ) {
 
-    super( { canvasBounds: lensBounds } );
+    super( {
+      canvasBounds: lensBounds,
+      tandem: tandem,
+      phetioVisiblePropertyInstrumented: false
+    } );
 
     this.magnifyingGlass = magnifyingGlass;
 
@@ -73,7 +80,11 @@ export default class ParticlesNode extends CanvasNode {
         if ( key !== 'H2O' && !this.particlesDataMap.get( key ) ) {
           this.particlesDataMap.set( key, {
             canvas: null,
-            numberOfParticles: 0,
+            countProperty: new NumberProperty( 0, {
+              isValidValue: value => Number.isInteger( value ) && ( value >= 0 ),
+              tandem: tandem.createTandem( `count${key}Property` ),
+              phetioReadOnly: true
+              } ),
             xCoordinates: new ArrayConstructor( MAX_PARTICLES ), // pre-allocate to improve performance
             yCoordinates: new ArrayConstructor( MAX_PARTICLES )  // pre-allocate to improve performance
           } );
@@ -92,7 +103,7 @@ export default class ParticlesNode extends CanvasNode {
 
     // Reset all particle counts to zero.
     this.particlesDataMap.forEach( ( particlesData, key ) => {
-      particlesData.numberOfParticles = 0;
+      particlesData.countProperty.value = 0;
     } );
   }
 
@@ -115,11 +126,11 @@ export default class ParticlesNode extends CanvasNode {
 
         // map concentration to number of particles
         const concentration = particle.getConcentration();
-        const numberOfParticles = getNumberOfParticles( concentration );
+        const newCount = getParticleCount( concentration );
 
         // add additional particles as needed
-        const currentNumberOfParticles = particlesData.numberOfParticles;
-        for ( let i = currentNumberOfParticles; i < numberOfParticles; i++ ) {
+        const oldCount = particlesData.countProperty.value;
+        for ( let i = oldCount; i < newCount; i++ ) {
 
           // random distance from the center of the lens
           const distance = this.positionRadius * Math.sqrt( dotRandom.nextDouble() );
@@ -128,7 +139,7 @@ export default class ParticlesNode extends CanvasNode {
           particlesData.yCoordinates[ i ] = distance * Math.sin( angle );
         }
 
-        particlesData.numberOfParticles = numberOfParticles;
+        particlesData.countProperty.value = newCount;
       }
     } );
 
@@ -160,7 +171,7 @@ export default class ParticlesNode extends CanvasNode {
 
         // Images are generated asynchronously, so test in case they aren't available when this is first called.
         if ( particlesData.canvas ) {
-          for ( let i = 0; i < particlesData.numberOfParticles; i++ ) {
+          for ( let i = 0; i < particlesData.countProperty.value; i++ ) {
 
             // Use integer coordinates with drawImage to improve performance.
             const x = Math.floor( particlesData.xCoordinates[ i ] - particlesData.canvas.width / 2 );
@@ -178,7 +189,7 @@ export default class ParticlesNode extends CanvasNode {
  * This algorithm was ported from the Java implementation, and is documented in
  * https://github.com/phetsims/acid-base-solutions/blob/master/doc/HA_A-_ratio_model.pdf
  */
-function getNumberOfParticles( concentration: number ): number {
+function getParticleCount( concentration: number ): number {
   const raiseFactor = Utils.log10( concentration / BASE_CONCENTRATION );
   const baseFactor = Math.pow( ( MAX_PARTICLES / BASE_DOTS ), ( 1 / Utils.log10( 1 / BASE_CONCENTRATION ) ) );
   return Utils.roundSymmetric( BASE_DOTS * Math.pow( baseFactor, raiseFactor ) );

@@ -59,7 +59,8 @@ export default class MagnifyingGlassNode extends Node {
     } );
 
     // particles
-    const particlesNode = new ParticlesNode( magnifyingGlass, new Bounds2( -RADIUS, -RADIUS, RADIUS, RADIUS ), LENS_LINE_WIDTH );
+    const particlesNode = new ParticlesNode( magnifyingGlass, new Bounds2( -RADIUS, -RADIUS, RADIUS, RADIUS ),
+      LENS_LINE_WIDTH, tandem.createTandem( 'particlesNode' ) );
 
     // stuff that's visible through (and therefore clipped to) the lens
     const viewportNode = new Node( { children: [ solventNode, particlesNode ] } );
