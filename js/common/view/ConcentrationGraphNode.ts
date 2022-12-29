@@ -79,11 +79,11 @@ export default class ConcentrationGraphNode extends Node {
     // y-axis label
     const yAxisText = new Text( AcidBaseSolutionsStrings.concentrationGraph.yAxisStringProperty, {
       font: new PhetFont( 13 ),
-      maxWidth: graph.height, // graph.height because we're rotating to vertical below
+      maxWidth: graph.height, // graph.height because we're rotating to vertical
+      rotation: -Math.PI / 2,
       tandem: tandem.createTandem( 'yAxisText' ),
       phetioVisiblePropertyInstrumented: true
     } );
-    yAxisText.rotate( -Math.PI / 2 );
 
     Multilink.multilink( [ yAxisText.boundsProperty, tickMarks.visibleProperty ],
       ( bounds, tickMarksVisible ) => {
