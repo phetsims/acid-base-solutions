@@ -1,7 +1,7 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * ConcentrationGraphBarNode is a bar in the 'Equilibrium Concentration' graph.
+ * ConcentrationBarNode is a bar in the 'Equilibrium Concentration' graph.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -18,7 +18,7 @@ import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 // constants
 const FONT = new PhetFont( 12 );
 
-export default class ConcentrationGraphBarNode extends Node {
+export default class ConcentrationBarNode extends Node {
 
   private readonly maxBarHeight: number;
   private readonly bar: Rectangle;
@@ -116,4 +116,4 @@ export default class ConcentrationGraphBarNode extends Node {
   }
 }
 
-acidBaseSolutions.register( 'ConcentrationGraphBarNode', ConcentrationGraphBarNode );
+acidBaseSolutions.register( 'ConcentrationBarNode', ConcentrationBarNode );

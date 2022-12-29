@@ -12,7 +12,7 @@ import { HBox, Line, Node, Rectangle, RichText, Text } from '../../../../scenery
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
 import ConcentrationGraph from '../model/ConcentrationGraph.js';
-import ConcentrationGraphBarNode from './ConcentrationGraphBarNode.js';
+import ConcentrationBarNode from './ConcentrationBarNode.js';
 import { ViewMode } from './ViewMode.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -26,7 +26,7 @@ const TICK_LABEL_FONT = new PhetFont( 11 );
 export default class ConcentrationGraphNode extends Node {
 
   private readonly graph: ConcentrationGraph;
-  private readonly barNodes: ConcentrationGraphBarNode[];
+  private readonly barNodes: ConcentrationBarNode[];
 
   public constructor( graph: ConcentrationGraph, viewModeProperty: StringUnionProperty<ViewMode>, tandem: Tandem ) {
 
@@ -99,9 +99,9 @@ export default class ConcentrationGraphNode extends Node {
 
     // create enough bars for all solutions
     const barsTandem = tandem.createTandem( 'bars' );
-    const barNodes: ConcentrationGraphBarNode[] = [];
+    const barNodes: ConcentrationBarNode[] = [];
     for ( let i = 0; i < maxBars; i++ ) {
-      barNodes[ i ] = new ConcentrationGraphBarNode( graph.height - 10, barsTandem.createTandem( `barNode${i}` ) );
+      barNodes[ i ] = new ConcentrationBarNode( graph.height - 10, barsTandem.createTandem( `barNode${i}` ) );
     }
     const barsParent = new HBox( {
       children: barNodes,
