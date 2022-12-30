@@ -162,8 +162,7 @@ export default class ConcentrationGraphNode extends Node {
   }
 
   /*
-   * Makes the correct bars visible for the selected solution,
-   * and sets the bars colors and positions to match the particles in the solution.
+   * Adjusts visibility and concentration of bars to match the particles in the current solution.
    * To improve performance, updates only when this node is visible.
    */
   private updateBars(): void {
@@ -177,11 +176,12 @@ export default class ConcentrationGraphNode extends Node {
       this.particlesMap.forEach( ( barNode, particleKey ) => {
         const particle = solution.getParticleWithKey( particleKey );
         if ( particle ) {
-          barNode.setValue( particle.getConcentration() );
+          barNode.concentrationProperty.value = particle.getConcentration();
           barNode.setBarFill( particle.color );
           barNode.visible = true;
         }
         else {
+          barNode.concentrationProperty.value = null;
           barNode.visible = false;
         }
       } );
@@ -189,7 +189,7 @@ export default class ConcentrationGraphNode extends Node {
   }
 
   /**
-   * Sets the concentration values on each bar.
+   * Adjusts concentration of bars to match the particles in the current solution.
    * To improve performance, updates only when this node is visible.
    */
   private updateValues(): void {
@@ -203,7 +203,7 @@ export default class ConcentrationGraphNode extends Node {
       this.particlesMap.forEach( ( barNode, particleKey ) => {
         const particle = solution.getParticleWithKey( particleKey );
         if ( particle ) {
-          barNode.setValue( particle.getConcentration() );
+          barNode.concentrationProperty.value = particle.getConcentration();
         }
       } );
     }

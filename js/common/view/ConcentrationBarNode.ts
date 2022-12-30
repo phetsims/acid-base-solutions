@@ -7,11 +7,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import Property from '../../../../axon/js/Property.js';
 import Utils from '../../../../dot/js/Utils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Rectangle, RichText, TColor } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import NullableIO from '../../../../tandem/js/types/NullableIO.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import StringIO from '../../../../tandem/js/types/StringIO.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 
@@ -20,24 +25,54 @@ const FONT = new PhetFont( 12 );
 
 export default class ConcentrationBarNode extends Node {
 
-  private readonly maxBarHeight: number;
+  // Concentration value associated with this bar. This is a Property for PhET-iO.
+  public readonly concentrationProperty: Property<number | null>;
+
   private readonly bar: Rectangle;
-  private readonly text: RichText;
 
   public constructor( maxBarHeight: number, tandem: Tandem ) {
+
+    const concentrationProperty = new Property<number | null>( 0, {
+      units: 'mol/L',
+      tandem: tandem.createTandem( 'concentrationProperty' ),
+      phetioValueType: NullableIO( NumberIO ),
+      phetioReadOnly: true,
+      phetioDocumentation: 'Concentration associated with this bar. null if the bar is not relevant for the selected solution.'
+    } );
 
     // add rectangle to represent concentration
     const bar = new Rectangle( 0, 0, 25, 0, { fill: 'white' } );
     bar.rotate( Math.PI ); // so that bar grows upward
 
-    // add vertical text for concentration (normal text + exponent text)
-    // This is a numeric value (typically in scientific notation) so does not require a StringProperty.
-    const text = new RichText( '', {
+    // Set the bar height
+    concentrationProperty.link( concentration => {
+      if ( concentration === null ) {
+        bar.setRectHeight( 0 );
+      }
+      else {
+        const barHeight = Math.abs( Utils.log10( concentration ) + 8 ) * maxBarHeight / 10;
+        if ( isFinite( barHeight ) ) {
+          bar.setRectHeight( barHeight );
+        }
+        else {
+          bar.setRectHeight( 0 );
+        }
+      }
+    } );
+
+    // Text for concentration value, typically in scientific notation.
+    const textTandem = tandem.createTandem( 'text' );
+    const stringProperty = new DerivedProperty( [ concentrationProperty ],
+      concentration => concentrationToString( concentration ), {
+        tandem: textTandem.createTandem( RichText.STRING_PROPERTY_TANDEM_NAME ),
+        phetioValueType: StringIO
+      } );
+    const text = new RichText( stringProperty, {
       font: FONT,
       maxWidth: 0.85 * maxBarHeight,
-      tandem: tandem.createTandem( 'text' )
+      rotation: -Math.PI / 2, // vertical
+      tandem: textTandem
     } );
-    text.rotate( -Math.PI / 2 );
 
     Multilink.multilink( [ bar.boundsProperty, text.boundsProperty ], () => {
       text.centerX = bar.centerX;
@@ -50,9 +85,8 @@ export default class ConcentrationBarNode extends Node {
       visiblePropertyOptions: { phetioReadOnly: true }
     } );
 
-    this.maxBarHeight = maxBarHeight;
+    this.concentrationProperty = concentrationProperty;
     this.bar = bar;
-    this.text = text;
   }
 
   public override dispose(): void {
@@ -61,59 +95,48 @@ export default class ConcentrationBarNode extends Node {
   }
 
   /**
-   * Sets height and text value of bar.
-   */
-  public setValue( value: number ): void {
-
-    const barHeight = Math.abs( Utils.log10( value ) + 8 ) * this.maxBarHeight / 10;
-
-    // set bar height
-    if ( isFinite( barHeight ) ) {
-      this.bar.setRectHeight( barHeight );
-    }
-    else {
-      this.bar.setRectHeight( 0 );
-    }
-
-    // set concentration text
-    if ( value < 1e-13 ) {
-      this.text.setString( AcidBaseSolutionsStrings.negligibleStringProperty.value );
-    }
-    else if ( value <= 1 ) {
-
-      // find power of 10
-      let pow = Math.floor( Utils.log10( value ) );
-
-      // find value
-      value = ( value * Math.pow( 10, -pow ) );
-
-      // show 10.00 as 1.00 x 10
-      if ( Math.abs( value - 10 ) < 1e-2 ) {
-        pow++;
-        value = 1;
-      }
-
-      // set text
-      if ( pow === 0 ) {
-        // issue #109, show 'N.NN x 10^0' as 'N.NN'
-        this.text.setString( Utils.toFixed( value, 2 ) );
-      }
-      else {
-        const mantissaString = Utils.toFixed( value, 2 );
-        this.text.setString( `${mantissaString} x 10<sup>${pow}</sup>` );
-      }
-    }
-    else {
-      this.text.setString( Utils.toFixed( value, 1 ) );
-    }
-  }
-
-  /**
    * Sets the fill color of the bar.
    */
   public setBarFill( color: TColor ): void {
     this.bar.setFill( color );
   }
+}
+
+function concentrationToString( concentration: number | null ): string {
+  let string;
+  if ( concentration === null ) {
+    string = 'null';
+  }
+  else if ( concentration < 1e-13 ) {
+    string = AcidBaseSolutionsStrings.negligibleStringProperty.value;
+  }
+  else if ( concentration <= 1 ) {
+
+    // find power of 10
+    let pow = Math.floor( Utils.log10( concentration ) );
+
+    // find value
+    concentration = ( concentration * Math.pow( 10, -pow ) );
+
+    // show 10.00 as 1.00 x 10
+    if ( Math.abs( concentration - 10 ) < 1e-2 ) {
+      pow++;
+      concentration = 1;
+    }
+
+    if ( pow === 0 ) {
+      // issue #109, show 'N.NN x 10^0' as 'N.NN'
+      string = Utils.toFixed( concentration, 2 );
+    }
+    else {
+      const mantissaString = Utils.toFixed( concentration, 2 );
+      string = `${mantissaString} x 10<sup>${pow}</sup>`;
+    }
+  }
+  else {
+    string = Utils.toFixed( concentration, 1 );
+  }
+  return string;
 }
 
 acidBaseSolutions.register( 'ConcentrationBarNode', ConcentrationBarNode );
