@@ -58,7 +58,8 @@ export default class ABSScreenView extends ScreenView {
       // to compensate for non-default layoutBounds
       scale: this.layoutBounds.width / ScreenView.DEFAULT_LAYOUT_BOUNDS.width,
       right: this.layoutBounds.right - 20,
-      bottom: this.layoutBounds.bottom - 20
+      bottom: this.layoutBounds.bottom - 20,
+      tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
     const beakerNode = new BeakerNode( model.beaker, tandem.createTandem( 'beakerNode' ) );

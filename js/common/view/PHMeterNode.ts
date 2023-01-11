@@ -102,7 +102,9 @@ export default class PHMeterNode extends Node {
         pHMeter.positionProperty.value = new Vector2(
           pHMeter.positionProperty.value.x,
           Utils.clamp( y, pHMeter.dragYRange.min, pHMeter.dragYRange.max ) );
-      }
+      },
+
+      tandem: tandem.createTandem( 'dragListener' )
     } ) );
 
     pHMeter.positionProperty.link( position => {

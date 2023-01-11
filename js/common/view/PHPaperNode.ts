@@ -84,7 +84,9 @@ export default class PHPaperNode extends Node {
         pHPaper.positionProperty.value = new Vector2(
           Utils.clamp( v.x, pHPaper.dragBounds.minX, pHPaper.dragBounds.maxX ),
           Utils.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) );
-      }
+      },
+
+      tandem: tandem.createTandem( 'dragListener' )
     } );
     this.addInputListener( this.dragListener );
 
