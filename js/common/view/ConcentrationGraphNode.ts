@@ -21,6 +21,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import { ParticleKey } from '../model/solutions/Particle.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 const TICK_LABEL_FONT = new PhetFont( 11 );
 
@@ -121,7 +122,8 @@ export default class ConcentrationGraphNode extends Node {
       children: [ backgroundFillNode, gridLines, tickMarks, yAxisText, barsParent, backgroundStrokeNode ],
       translation: graph.position,
       visibleProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'graph' ), {
-        tandem: tandem.createTandem( 'visibleProperty' )
+        tandem: tandem.createTandem( 'visibleProperty' ),
+        phetioValueType: BooleanIO
       } ),
       tandem: tandem
     } );
