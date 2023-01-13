@@ -25,17 +25,17 @@ export default class ToolsRadioButtonGroup extends RectangularRadioButtonGroup<T
     const items: RectangularRadioButtonGroupItem<ToolMode>[] = [
       {
         value: 'pHMeter',
-        createNode: tandem => PHMeterNode.createIcon(),
+        createNode: () => PHMeterNode.createIcon(),
         tandemName: `phMeter${RectangularRadioButton.TANDEM_NAME_SUFFIX}`
       },
       {
         value: 'pHPaper',
-        createNode: tandem => PHPaperNode.createIcon( 8, 30 ),
+        createNode: () => PHPaperNode.createIcon( 8, 30 ),
         tandemName: `phPaper${RectangularRadioButton.TANDEM_NAME_SUFFIX}`
       },
       {
         value: 'conductivity',
-        createNode: tandem => new Image( lightBulbIcon_png ),
+        createNode: () => new Image( lightBulbIcon_png ),
         tandemName: `conductivity${RectangularRadioButton.TANDEM_NAME_SUFFIX}`
       }
     ];
