@@ -33,13 +33,10 @@ export default class InitialConcentrationSlider extends LogSlider {
       tandem: tandem
     } );
 
-    // tick marks
-    //TODO ticks are hardcoded to a specific range, https://github.com/phetsims/acid-base-solutions/issues/167
+    // tick marks - note that these are hard-coded to a specific range and values
     assert && assert( concentrationRange.min === 0.001 && concentrationRange.max === 1 );
-    this.addMajorTick( 0.001, new Text( '0.001', TICK_LABEL_OPTIONS ) );
-    this.addMajorTick( 0.01, new Text( '0.01', TICK_LABEL_OPTIONS ) );
-    this.addMajorTick( 0.1, new Text( '0.1', TICK_LABEL_OPTIONS ) );
-    this.addMajorTick( 1, new Text( '1', TICK_LABEL_OPTIONS ) );
+    const tickValues = [ 0.001, 0.01, 0.1, 1 ];
+    tickValues.forEach( tickValue => this.addMajorTick( tickValue, new Text( tickValue, TICK_LABEL_OPTIONS ) ) );
   }
 
   public override dispose(): void {
