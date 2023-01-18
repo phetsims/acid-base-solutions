@@ -1,7 +1,7 @@
 {
-  "comment": "# acid-base-solutions 1.2.30-rc.1 Fri Jan 13 2023 00:29:55 GMT-0700 (Mountain Standard Time)",
+  "comment": "# acid-base-solutions 1.2.30 Wed Jan 18 2023 11:05:37 GMT-0700 (Mountain Standard Time)",
   "acid-base-solutions": {
-    "sha": "3fd055f9691405efb08c21eec0e662ba36a90e09",
+    "sha": "4fbb9276c04f1b34e01f4567a34977c9fc10afc3",
     "branch": "1.2"
   },
   "assert": {
