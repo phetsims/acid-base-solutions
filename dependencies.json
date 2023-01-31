@@ -1,7 +1,7 @@
 {
   "comment": "# acid-base-solutions 1.2.30 Wed Jan 18 2023 11:05:37 GMT-0700 (Mountain Standard Time)",
   "acid-base-solutions": {
-    "sha": "4fbb9276c04f1b34e01f4567a34977c9fc10afc3",
+    "sha": "def4ed42ce18045e5e1d81707898f3ba1608b067",
     "branch": "1.2"
   },
   "assert": {
@@ -37,7 +37,7 @@
     "branch": "HEAD"
   },
   "phetcommon": {
-    "sha": "42bbb669b3bd41dc510266c8bc001b5cb62e527e",
+    "sha": "1a0c0444006bce1cd451364def1ed57c64d9c689",
     "branch": "HEAD"
   },
   "phetmarks": {
