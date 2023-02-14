@@ -18,7 +18,7 @@ import ABSColors from '../common/ABSColors.js';
 import IntroductionModel from './model/IntroductionModel.js';
 import IntroductionScreenView from './view/IntroductionScreenView.js';
 
-export default class IntroductionScreen extends Screen {
+export default class IntroductionScreen extends Screen<IntroductionModel, IntroductionScreenView> {
 
   public constructor( tandem: Tandem ) {
 

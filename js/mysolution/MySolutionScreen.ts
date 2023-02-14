@@ -18,7 +18,7 @@ import createParticleNode from '../common/view/createParticleNode.js';
 import MySolutionModel from './model/MySolutionModel.js';
 import MySolutionScreenView from './view/MySolutionScreenView.js';
 
-export default class MySolutionScreen extends Screen {
+export default class MySolutionScreen extends Screen<MySolutionModel, MySolutionScreenView> {
 
   public constructor( tandem: Tandem ) {
 
