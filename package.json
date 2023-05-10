@@ -25,7 +25,11 @@
     "simFeatures": {
       "supportsDynamicLocale": true
     },
-    "published": true
+    "published": true,
+    "screenNameKeys": [
+      "ACID_BASE_SOLUTIONS/screen.introduction",
+      "ACID_BASE_SOLUTIONS/screen.mySolution"
+    ]
   },
   "eslintConfig": {
     "extends": "../chipper/eslint/sim_eslintrc.js",
