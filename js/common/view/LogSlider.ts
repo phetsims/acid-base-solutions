@@ -48,7 +48,7 @@ export default class LogSlider extends Slider {
     // Because linearValueProperty is adapting between linear and log scales, link logValueProperty so that
     // this looks like a standard PhET-iO Slider.
     this.addLinkedElement( logValueProperty, {
-      tandem: providedOptions.tandem.createTandem( 'valueProperty' )
+      tandemName: 'valueProperty'
     } );
 
     this.disposeLogSlider = () => {

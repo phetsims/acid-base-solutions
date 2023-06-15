@@ -86,9 +86,7 @@ export default class ConductivityTester extends PhetioObject {
         phetioValueType: NumberIO
       } );
 
-    this.addLinkedElement( pHProperty, {
-      tandem: tandem.createTandem( pHProperty.tandem.name )
-    } );
+    this.addLinkedElement( pHProperty );
   }
 
   public override dispose(): void {

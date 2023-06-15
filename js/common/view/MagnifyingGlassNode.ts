@@ -110,9 +110,7 @@ export default class MagnifyingGlassNode extends Node {
     // Update when this Node becomes visible.
     this.visibleProperty.link( visible => visible && this.updateParticles() );
 
-    this.addLinkedElement( magnifyingGlass, {
-      tandem: tandem.createTandem( magnifyingGlass.tandem.name )
-    } );
+    this.addLinkedElement( magnifyingGlass );
   }
 
   public override dispose(): void {

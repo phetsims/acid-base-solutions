@@ -39,9 +39,7 @@ export default class MagnifyingGlass extends PhetioObject {
     this.radius = 0.465 * beaker.size.height;
     this.position = beaker.position.plusXY( 0, -beaker.size.height / 2 );
 
-    this.addLinkedElement( solutionTypeProperty, {
-      tandem: tandem.createTandem( solutionTypeProperty.tandem.name )
-    } );
+    this.addLinkedElement( solutionTypeProperty );
   }
 
   public override dispose(): void {

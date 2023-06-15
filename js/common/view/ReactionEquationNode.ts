@@ -36,9 +36,7 @@ export default class ReactionEquationNode extends Node {
       this.top = beaker.position.y + 10;
     } );
 
-    this.addLinkedElement( solutionTypeProperty, {
-      tandem: tandem.createTandem( solutionTypeProperty.tandem.name )
-    } );
+    this.addLinkedElement( solutionTypeProperty );
   }
 
   public override dispose(): void {

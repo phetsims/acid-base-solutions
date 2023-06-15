@@ -154,7 +154,7 @@ export default class ViewsPanel extends Panel {
     } );
 
     radioButtonGroup.addLinkedElement( viewModeProperty, {
-      tandem: radioButtonGroupTandem.createTandem( 'property' )
+      tandemName: 'property'
     } );
 
     const content = new AlignBox( new VBox( {

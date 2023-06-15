@@ -50,9 +50,7 @@ export default class PHMeter extends PhetioObject {
         phetioValueType: BooleanIO
       } );
 
-    this.addLinkedElement( pHProperty, {
-      tandem: tandem.createTandem( pHProperty.tandem.name )
-    } );
+    this.addLinkedElement( pHProperty );
   }
 
   public override dispose(): void {

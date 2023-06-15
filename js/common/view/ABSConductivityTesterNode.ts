@@ -37,9 +37,7 @@ export default class ABSConductivityTesterNode extends ConductivityTesterNode {
         tandem: tandem
       } );
 
-    this.addLinkedElement( conductivityTester, {
-      tandem: tandem.createTandem( conductivityTester.tandem.name )
-    } );
+    this.addLinkedElement( conductivityTester );
   }
 
   public override dispose(): void {

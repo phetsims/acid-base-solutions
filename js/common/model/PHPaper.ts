@@ -69,9 +69,7 @@ export default class PHPaper extends PhetioObject {
 
     this.positionProperty.link( () => this.updateIndicatorHeight() );
 
-    this.addLinkedElement( pHProperty, {
-      tandem: tandem.createTandem( pHProperty.tandem.name )
-    } );
+    this.addLinkedElement( pHProperty );
   }
 
   public override dispose(): void {
