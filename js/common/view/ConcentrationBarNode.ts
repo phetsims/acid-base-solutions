@@ -64,7 +64,6 @@ export default class ConcentrationBarNode extends Node {
     const stringProperty = new DerivedStringProperty( [ concentrationProperty ],
       concentration => concentrationToString( concentration ), {
         tandem: textTandem.createTandem( RichText.STRING_PROPERTY_TANDEM_NAME )
-
       } );
     const text = new RichText( stringProperty, {
       font: FONT,
