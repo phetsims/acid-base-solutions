@@ -1,4 +1,4 @@
-// Copyright 2014-2022, University of Colorado Boulder
+// Copyright 2014-2023, University of Colorado Boulder
 
 /**
  * MagnifyingGlass is the model for the magnifying glass. It shows a qualitative view of the ratio of concentrations
