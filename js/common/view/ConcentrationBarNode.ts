@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import Property from '../../../../axon/js/Property.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -16,9 +15,9 @@ import { Node, Rectangle, RichText, TColor } from '../../../../scenery/js/import
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import StringIO from '../../../../tandem/js/types/StringIO.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 
 // constants
 const FONT = new PhetFont( 12 );
@@ -62,10 +61,10 @@ export default class ConcentrationBarNode extends Node {
 
     // Text for concentration value, typically in scientific notation.
     const textTandem = tandem.createTandem( 'text' );
-    const stringProperty = new DerivedProperty( [ concentrationProperty ],
+    const stringProperty = new DerivedStringProperty( [ concentrationProperty ],
       concentration => concentrationToString( concentration ), {
-        tandem: textTandem.createTandem( RichText.STRING_PROPERTY_TANDEM_NAME ),
-        phetioValueType: StringIO
+        tandem: textTandem.createTandem( RichText.STRING_PROPERTY_TANDEM_NAME )
+
       } );
     const text = new RichText( stringProperty, {
       font: FONT,
