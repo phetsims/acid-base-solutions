@@ -5,52 +5,52 @@
  */
 /* eslint-disable */
 import getStringModule from '../../chipper/js/getStringModule.js';
-import LinkableProperty from '../../axon/js/LinkableProperty.js';
+import type LocalizedStringProperty from '../../chipper/js/LocalizedStringProperty.js';
 import acidBaseSolutions from './acidBaseSolutions.js';
 
 type StringsType = {
-  'acidStringProperty': LinkableProperty<string>;
+  'acidStringProperty': LocalizedStringProperty;
   'acid-base-solutions': {
-    'titleStringProperty': LinkableProperty<string>;
+    'titleStringProperty': LocalizedStringProperty;
   };
-  'baseStringProperty': LinkableProperty<string>;
+  'baseStringProperty': LocalizedStringProperty;
   'concentrationGraph': {
-    'yAxisStringProperty': LinkableProperty<string>;
+    'yAxisStringProperty': LocalizedStringProperty;
   };
   'screen': {
-    'mySolutionStringProperty': LinkableProperty<string>;
-    'introductionStringProperty': LinkableProperty<string>;
+    'mySolutionStringProperty': LocalizedStringProperty;
+    'introductionStringProperty': LocalizedStringProperty;
   };
-  'graphStringProperty': LinkableProperty<string>;
-  'hideViewsStringProperty': LinkableProperty<string>;
-  'initialConcentrationStringProperty': LinkableProperty<string>;
-  'litersStringProperty': LinkableProperty<string>;
-  'particlesStringProperty': LinkableProperty<string>;
-  'negligibleStringProperty': LinkableProperty<string>;
+  'graphStringProperty': LocalizedStringProperty;
+  'hideViewsStringProperty': LocalizedStringProperty;
+  'initialConcentrationStringProperty': LocalizedStringProperty;
+  'litersStringProperty': LocalizedStringProperty;
+  'particlesStringProperty': LocalizedStringProperty;
+  'negligibleStringProperty': LocalizedStringProperty;
   'pattern': {
     '0value': {
-      '1unitsStringProperty': LinkableProperty<string>;
+      '1unitsStringProperty': LocalizedStringProperty;
     };
     '0label': {
-      '1valueStringProperty': LinkableProperty<string>;
+      '1valueStringProperty': LocalizedStringProperty;
     }
   };
-  'patternSolutionNameFormulaStringProperty': LinkableProperty<string>;
-  'pHStringProperty': LinkableProperty<string>;
-  'pHColorKeyStringProperty': LinkableProperty<string>;
-  'solutionStringProperty': LinkableProperty<string>;
-  'solventStringProperty': LinkableProperty<string>;
-  'strengthStringProperty': LinkableProperty<string>;
-  'strongStringProperty': LinkableProperty<string>;
-  'strongAcidStringProperty': LinkableProperty<string>;
-  'strongBaseStringProperty': LinkableProperty<string>;
-  'strongerStringProperty': LinkableProperty<string>;
-  'viewsStringProperty': LinkableProperty<string>;
-  'waterStringProperty': LinkableProperty<string>;
-  'weakStringProperty': LinkableProperty<string>;
-  'weakAcidStringProperty': LinkableProperty<string>;
-  'weakBaseStringProperty': LinkableProperty<string>;
-  'weakerStringProperty': LinkableProperty<string>;
+  'patternSolutionNameFormulaStringProperty': LocalizedStringProperty;
+  'pHStringProperty': LocalizedStringProperty;
+  'pHColorKeyStringProperty': LocalizedStringProperty;
+  'solutionStringProperty': LocalizedStringProperty;
+  'solventStringProperty': LocalizedStringProperty;
+  'strengthStringProperty': LocalizedStringProperty;
+  'strongStringProperty': LocalizedStringProperty;
+  'strongAcidStringProperty': LocalizedStringProperty;
+  'strongBaseStringProperty': LocalizedStringProperty;
+  'strongerStringProperty': LocalizedStringProperty;
+  'viewsStringProperty': LocalizedStringProperty;
+  'waterStringProperty': LocalizedStringProperty;
+  'weakStringProperty': LocalizedStringProperty;
+  'weakAcidStringProperty': LocalizedStringProperty;
+  'weakBaseStringProperty': LocalizedStringProperty;
+  'weakerStringProperty': LocalizedStringProperty;
 };
 
 const AcidBaseSolutionsStrings = getStringModule( 'ACID_BASE_SOLUTIONS' ) as StringsType;
