@@ -65,6 +65,7 @@ export default class PHPaperNode extends Node {
         tandem: tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),
+      isDisposable: false,
       tandem: tandem
     } );
 
@@ -110,11 +111,6 @@ export default class PHPaperNode extends Node {
     this.animating = false;
 
     this.addLinkedElement( pHPaper );
-  }
-
-  public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
-    super.dispose();
   }
 
   public step( dt: number ): void {

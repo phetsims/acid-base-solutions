@@ -37,6 +37,7 @@ export default class MySolutionPanel extends Panel {
                       tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, ABSConstants.PANEL_OPTIONS, {
+      isDisposable: false,
       tandem: tandem
     } );
 
@@ -130,11 +131,6 @@ export default class MySolutionPanel extends Panel {
       weakStrongProperty.value = solutionTypeToWeakStrong( solutionType );
       updateSolutionTypeEnabled = true;
     } );
-  }
-
-  public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
-    super.dispose();
   }
 }
 

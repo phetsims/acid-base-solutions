@@ -125,6 +125,7 @@ export default class ConcentrationGraphNode extends Node {
         tandem: tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),
+      isDisposable: false,
       tandem: tandem
     } );
 
@@ -156,11 +157,6 @@ export default class ConcentrationGraphNode extends Node {
     this.visibleProperty.link( visible => {
       visible && this.updateBars();
     } );
-  }
-
-  public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
-    super.dispose();
   }
 
   /*

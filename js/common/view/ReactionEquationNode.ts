@@ -27,6 +27,7 @@ export default class ReactionEquationNode extends Node {
         ReactionEquationFactory.createStrongBaseEquation( solutionTypeProperty ),
         ReactionEquationFactory.createWeakBaseEquation( solutionTypeProperty )
       ],
+      isDisposable: false,
       tandem: tandem
     } );
 
@@ -37,11 +38,6 @@ export default class ReactionEquationNode extends Node {
     } );
 
     this.addLinkedElement( solutionTypeProperty );
-  }
-
-  public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
-    super.dispose();
   }
 }
 

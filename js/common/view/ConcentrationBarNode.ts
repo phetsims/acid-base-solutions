@@ -79,6 +79,7 @@ export default class ConcentrationBarNode extends Node {
 
     super( {
       children: [ bar, text ],
+      isDisposable: false,
       tandem: tandem,
       visiblePropertyOptions: { phetioReadOnly: true }
     } );
@@ -87,10 +88,6 @@ export default class ConcentrationBarNode extends Node {
     this.bar = bar;
   }
 
-  public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
-    super.dispose();
-  }
 
   /**
    * Sets the fill color of the bar.

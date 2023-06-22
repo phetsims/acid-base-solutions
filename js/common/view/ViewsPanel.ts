@@ -43,6 +43,7 @@ export default class ViewsPanel extends Panel {
                       tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, ABSConstants.PANEL_OPTIONS, {
+      isDisposable: false,
       tandem: tandem
     } );
 
@@ -167,11 +168,6 @@ export default class ViewsPanel extends Panel {
     } );
 
     super( content, options );
-  }
-
-  public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
-    super.dispose();
   }
 }
 

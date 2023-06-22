@@ -57,13 +57,9 @@ export default class InitialConcentrationControl extends VBox {
       ],
       spacing: 6,
       layoutOptions: { stretch: true }, // so that titleText will be left-aligned in MySolutionsPanel
+      isDisposable: false,
       tandem: tandem
     } );
-  }
-
-  public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
-    super.dispose();
   }
 }
 

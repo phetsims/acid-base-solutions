@@ -80,6 +80,7 @@ export default class MagnifyingGlassNode extends Node {
         tandem: tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),
+      isDisposable: false,
       tandem: tandem
     } );
 
@@ -111,11 +112,6 @@ export default class MagnifyingGlassNode extends Node {
     this.visibleProperty.link( visible => visible && this.updateParticles() );
 
     this.addLinkedElement( magnifyingGlass );
-  }
-
-  public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
-    super.dispose();
   }
 
   /*

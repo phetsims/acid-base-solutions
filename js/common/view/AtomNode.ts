@@ -25,15 +25,11 @@ export default class AtomNode extends Circle {
       .addColorStop( 1, 'black' );
 
     const options = optionize<AtomNodeOptions, SelfOptions, CircleOptions>()( {
-      fill: gradient
+      fill: gradient,
+      isDisposable: false
     }, providedOptions );
 
     super( radius, options );
-  }
-
-  public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
-    super.dispose();
   }
 }
 

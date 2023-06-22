@@ -16,6 +16,7 @@ import StrongAcid from '../../common/model/solutions/StrongAcid.js';
 import StrongBase from '../../common/model/solutions/StrongBase.js';
 import WeakAcid from '../../common/model/solutions/WeakAcid.js';
 import WeakBase from '../../common/model/solutions/WeakBase.js';
+import Disposable from '../../../../axon/js/Disposable.js';
 
 // constants
 const DEFAULT_SOLUTION_TYPE = 'weakAcid';
@@ -113,7 +114,7 @@ export default class MySolutionModel extends ABSModel {
   }
 
   public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    Disposable.assertNotDisposable();
     super.dispose();
   }
 

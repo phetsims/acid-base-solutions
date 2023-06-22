@@ -40,7 +40,8 @@ export default class PHColorKeyNode extends Node {
       visibleProperty: new DerivedProperty( [ toolModeProperty ], toolMode => ( toolMode === 'pHPaper' ), {
         tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
-      } )
+      } ),
+      isDisposable: false
     }, providedOptions );
 
     const numberOfChips = ABSColors.PH.length;
@@ -79,11 +80,6 @@ export default class PHColorKeyNode extends Node {
     options.children = [ parentNode, titleText ];
 
     super( options );
-  }
-
-  public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
-    super.dispose();
   }
 }
 

@@ -43,17 +43,13 @@ export default class StrengthSlider extends LogSlider {
       majorTickLength: 12,
       thumbTouchAreaXDilation: 6,
       thumbTouchAreaYDilation: 6,
+      isDisposable: false,
       tandem: tandem
     } );
 
     // tick marks
     this.addMajorTick( strengthRange.min, new Text( AcidBaseSolutionsStrings.weakerStringProperty, TICK_LABEL_OPTIONS ) );
     this.addMajorTick( strengthRange.max, new Text( AcidBaseSolutionsStrings.strongerStringProperty, TICK_LABEL_OPTIONS ) );
-  }
-
-  public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
-    super.dispose();
   }
 }
 

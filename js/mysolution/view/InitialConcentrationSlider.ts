@@ -30,6 +30,7 @@ export default class InitialConcentrationSlider extends LogSlider {
       thumbTouchAreaYDilation: 6,
       majorTickLength: 12,
       tickLabelSpacing: 2,
+      isDisposable: false,
       tandem: tandem
     } );
 
@@ -37,11 +38,6 @@ export default class InitialConcentrationSlider extends LogSlider {
     assert && assert( concentrationRange.min === 0.001 && concentrationRange.max === 1 );
     const tickValues = [ 0.001, 0.01, 0.1, 1 ];
     tickValues.forEach( tickValue => this.addMajorTick( tickValue, new Text( tickValue, TICK_LABEL_OPTIONS ) ) );
-  }
-
-  public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
-    super.dispose();
   }
 }
 
