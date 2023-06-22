@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Disposable from '../../../../axon/js/Disposable.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
@@ -130,7 +131,7 @@ export default class ABSScreenView extends ScreenView {
   }
 
   public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    Disposable.assertNotDisposable();
     super.dispose();
   }
 

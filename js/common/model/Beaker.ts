@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Disposable from '../../../../axon/js/Disposable.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -51,7 +52,7 @@ export default class Beaker {
   }
 
   public dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    Disposable.assertNotDisposable();
   }
 }
 
