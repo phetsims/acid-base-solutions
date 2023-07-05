@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -39,6 +38,7 @@ export default class PHPaper extends PhetioObject {
                       tandem: Tandem ) {
 
     super( {
+      isDisposable: false,
       tandem: tandem,
       phetioState: false
     } );
@@ -71,11 +71,6 @@ export default class PHPaper extends PhetioObject {
     this.positionProperty.link( () => this.updateIndicatorHeight() );
 
     this.addLinkedElement( pHProperty );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public reset(): void {

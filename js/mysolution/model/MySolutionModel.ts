@@ -16,7 +16,6 @@ import StrongAcid from '../../common/model/solutions/StrongAcid.js';
 import StrongBase from '../../common/model/solutions/StrongBase.js';
 import WeakAcid from '../../common/model/solutions/WeakAcid.js';
 import WeakBase from '../../common/model/solutions/WeakBase.js';
-import Disposable from '../../../../axon/js/Disposable.js';
 
 // constants
 const DEFAULT_SOLUTION_TYPE = 'weakAcid';
@@ -111,11 +110,6 @@ export default class MySolutionModel extends ABSModel {
         this.solutionsMap.get( 'weakBase' )!.strengthProperty.value = strength;
       }
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public override reset(): void {

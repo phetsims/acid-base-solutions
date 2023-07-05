@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import { SolutionType } from './SolutionType.js';
@@ -31,6 +30,7 @@ export default class MagnifyingGlass extends PhetioObject {
                       tandem: Tandem ) {
 
     super( {
+      isDisposable: false,
       tandem: tandem,
       phetioState: false
     } );
@@ -41,11 +41,6 @@ export default class MagnifyingGlass extends PhetioObject {
     this.position = beaker.position.plusXY( 0, -beaker.size.height / 2 );
 
     this.addLinkedElement( solutionTypeProperty );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
@@ -32,6 +31,7 @@ export default class PHMeter extends PhetioObject {
   public constructor( beaker: Beaker, pHProperty: ReadOnlyProperty<number>, tandem: Tandem ) {
 
     super( {
+      isDisposable: false,
       tandem: tandem,
       phetioState: false
     } );
@@ -52,11 +52,6 @@ export default class PHMeter extends PhetioObject {
       } );
 
     this.addLinkedElement( pHProperty );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public reset(): void {

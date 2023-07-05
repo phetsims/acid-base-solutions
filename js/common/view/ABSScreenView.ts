@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
@@ -43,6 +42,7 @@ export default class ABSScreenView extends ScreenView {
   public constructor( model: ABSModel, createSolutionPanel: ( alignGroup: AlignGroup ) => Panel, tandem: Tandem ) {
 
     super( {
+      isDisposable: false,
       layoutBounds: new Bounds2( 0, 0, 768, 504 ),
       tandem: tandem
     } );
@@ -128,11 +128,6 @@ export default class ABSScreenView extends ScreenView {
 
     // needed by step
     this.pHPaperNode = pHPaperNode;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public reset(): void {
