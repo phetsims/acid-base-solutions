@@ -1,4 +1,4 @@
-// Copyright 2022, University of Colorado Boulder
+// Copyright 2022-2023, University of Colorado Boulder
 
 /**
  * StringSwitch is an ABSwitch that switches between string values, and is labeled with strings.
