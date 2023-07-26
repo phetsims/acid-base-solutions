@@ -25,8 +25,7 @@ export default class InitialConcentrationControl extends VBox {
     const titleText = new Text( AcidBaseSolutionsStrings.initialConcentrationStringProperty, {
       font: ABSConstants.SUBTITLE_FONT,
       maxWidth: 180, // determined empirically,
-      layoutOptions: { align: 'left' },
-      tandem: tandem.createTandem( 'titleText' )
+      layoutOptions: { align: 'left' }
     } );
 
     const spinner = new NumberSpinner( concentrationProperty, new Property( ABSConstants.CONCENTRATION_RANGE ), {

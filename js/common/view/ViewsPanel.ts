@@ -49,8 +49,7 @@ export default class ViewsPanel extends Panel {
 
     const titleText = new Text( AcidBaseSolutionsStrings.viewsStringProperty, {
       font: ABSConstants.TITLE_FONT,
-      maxWidth: 180, // determined empirically
-      tandem: tandem.createTandem( 'titleText' )
+      maxWidth: 180 // determined empirically
     } );
 
     const radioButtonGroupTandem = tandem.createTandem( 'radioButtonGroup' );
@@ -62,8 +61,7 @@ export default class ViewsPanel extends Panel {
       children: [
         new Text( AcidBaseSolutionsStrings.particlesStringProperty, {
           font: LABEL_FONT,
-          maxWidth: TEXT_MAX_WIDTH,
-          tandem: particlesRadioButtonTandem.createTandem( 'text' )
+          maxWidth: TEXT_MAX_WIDTH
         } ),
         new Image( magnifyingGlassIcon_png, { scale: 0.75 } )
       ]
@@ -81,8 +79,7 @@ export default class ViewsPanel extends Panel {
       children: [
         new Text( AcidBaseSolutionsStrings.solventStringProperty, {
           font: LABEL_FONT,
-          maxWidth: TEXT_MAX_WIDTH,
-          tandem: solventCheckboxTandem.createTandem( 'text' )
+          maxWidth: TEXT_MAX_WIDTH
         } ),
         createParticleNode( 'H2O' )
       ]
@@ -107,8 +104,7 @@ export default class ViewsPanel extends Panel {
       children: [
         new Text( AcidBaseSolutionsStrings.graphStringProperty, {
           font: LABEL_FONT,
-          maxWidth: TEXT_MAX_WIDTH,
-          tandem: graphRadioButtonTandem.createTandem( 'text' )
+          maxWidth: TEXT_MAX_WIDTH
         } ),
         ConcentrationGraphNode.createIcon()
       ]
@@ -126,8 +122,7 @@ export default class ViewsPanel extends Panel {
       children: [
         new Text( AcidBaseSolutionsStrings.hideViewsStringProperty, {
           font: LABEL_FONT,
-          maxWidth: TEXT_MAX_WIDTH,
-          tandem: hideViewsRadioButtonTandem.createTandem( 'text' )
+          maxWidth: TEXT_MAX_WIDTH
         } ),
         BeakerNode.createIcon( 20, 15 )
       ]

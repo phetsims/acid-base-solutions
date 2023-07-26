@@ -27,8 +27,7 @@ export default class StrengthControl extends VBox {
     const titleText = new Text( AcidBaseSolutionsStrings.strengthStringProperty, {
       font: ABSConstants.SUBTITLE_FONT,
       maxWidth: 180, // determined empirically
-      layoutOptions: { align: 'left' },
-      tandem: tandem.createTandem( 'titleText' )
+      layoutOptions: { align: 'left' }
     } );
 
     // Weak/Strong switch

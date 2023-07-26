@@ -38,8 +38,7 @@ export default class IntroductionSolutionPanel extends Panel {
     // title
     const titleText = new Text( AcidBaseSolutionsStrings.solutionStringProperty, {
       font: ABSConstants.TITLE_FONT,
-      maxWidth: 180, // determined empirically
-      tandem: tandem.createTandem( 'titleText' )
+      maxWidth: 180 // determined empirically
     } );
 
     // To make all radio button labels have the same width and height
@@ -119,23 +118,20 @@ export default class IntroductionSolutionPanel extends Panel {
 function createRadioButtonLabel( solutionNameProperty: TReadOnlyProperty<string>, formula: string,
                                  key: ParticleKey, labelsAlignGroup: AlignGroup, tandem: Tandem ): Node {
 
-  const textTandem = tandem.createTandem( 'text' );
-
   // Combine the solution's name and formula
   const stringProperty = new PatternStringProperty( AcidBaseSolutionsStrings.patternSolutionNameFormulaStringProperty, {
     solutionName: solutionNameProperty,
     formula: formula
   }, {
-    tandem: textTandem.createTandem( RichText.STRING_PROPERTY_TANDEM_NAME )
+    tandem: tandem.createTandem( RichText.STRING_PROPERTY_TANDEM_NAME )
   } );
 
   const text = new RichText( stringProperty, {
     font: new PhetFont( 12 ),
-    maxWidth: 145, // determined empirically
-    tandem: textTandem
+    maxWidth: 145 // determined empirically
   } );
 
-  // Create the particles's icon
+  // Create the particle's icon
   const particleNode = createParticleNode( key );
 
   const hBox = new HBox( {

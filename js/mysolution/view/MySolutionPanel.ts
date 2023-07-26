@@ -59,8 +59,7 @@ export default class MySolutionPanel extends Panel {
       layoutOptions: {
         align: 'left'
       },
-      maxWidth: 180, // determined empirically
-      tandem: tandem.createTandem( 'titleText' )
+      maxWidth: 180 // determined empirically
     } );
 
     // Acid/Base switch

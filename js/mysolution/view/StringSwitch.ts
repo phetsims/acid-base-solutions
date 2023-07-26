@@ -8,7 +8,6 @@
 
 import { AlignBox, AlignGroup, Text, TextOptions } from '../../../../scenery/js/imports.js';
 import ABSwitch, { ABSwitchOptions } from '../../../../sun/js/ABSwitch.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -36,18 +35,14 @@ export default class StringSwitch<T extends string> extends ABSwitch<T> {
     const alignGroup = new AlignGroup();
 
     // A
-    const textA = new Text( stringAProperty, combineOptions<TextOptions>( {}, options.textOptions, {
-      tandem: options.tandem.createTandem( `${valueA}Text` )
-    } ) );
+    const textA = new Text( stringAProperty, options.textOptions );
     const nodeA = new AlignBox( textA, {
       group: alignGroup,
       xAlign: 'right'
     } );
 
     // B
-    const textB = new Text( stringBProperty, combineOptions<TextOptions>( {}, options.textOptions, {
-      tandem: options.tandem.createTandem( `${valueB}Text` )
-    } ) );
+    const textB = new Text( stringBProperty, options.textOptions );
     const nodeB = new AlignBox( textB, {
       group: alignGroup,
       xAlign: 'left'

@@ -60,25 +60,23 @@ export default class ConcentrationBarNode extends Node {
     } );
 
     // Text for concentration value, typically in scientific notation.
-    const textTandem = tandem.createTandem( 'text' );
-    const stringProperty = new DerivedStringProperty( [ concentrationProperty ],
+    const valueStringProperty = new DerivedStringProperty( [ concentrationProperty ],
       concentration => concentrationToString( concentration ), {
-        tandem: textTandem.createTandem( RichText.STRING_PROPERTY_TANDEM_NAME )
+        tandem: tandem.createTandem( 'valueStringProperty' )
       } );
-    const text = new RichText( stringProperty, {
+    const valueText = new RichText( valueStringProperty, {
       font: FONT,
       maxWidth: 0.85 * maxBarHeight,
-      rotation: -Math.PI / 2, // vertical
-      tandem: textTandem
+      rotation: -Math.PI / 2 // vertical
     } );
 
-    Multilink.multilink( [ bar.boundsProperty, text.boundsProperty ], () => {
-      text.centerX = bar.centerX;
-      text.bottom = bar.bottom - 6;
+    Multilink.multilink( [ bar.boundsProperty, valueText.boundsProperty ], () => {
+      valueText.centerX = bar.centerX;
+      valueText.bottom = bar.bottom - 6;
     } );
 
     super( {
-      children: [ bar, text ],
+      children: [ bar, valueText ],
       isDisposable: false,
       tandem: tandem,
       visiblePropertyOptions: { phetioReadOnly: true }
