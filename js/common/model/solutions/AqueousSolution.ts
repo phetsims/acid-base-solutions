@@ -80,6 +80,7 @@ export default abstract class AqueousSolution extends PhetioObject {
       phetioReadOnly: options.phetioReadOnly || ( options.concentrationRange.getLength() === 0 )
     } );
 
+    // pH = -log10( [H3O+] )
     this.pHProperty = new DerivedProperty( [ this.strengthProperty, this.concentrationProperty ],
       ( strength, concentration ) => -Utils.roundSymmetric( 100 * Utils.log10( this.getH3OConcentration() ) ) / 100, {
         isValidValue: pH => ABSConstants.PH_RANGE.contains( pH ),
