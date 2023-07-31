@@ -132,22 +132,17 @@ export default class ConcentrationGraphNode extends Node {
 
     // Observe the strength and concentration Properties for the selected solution.
     const updateValuesBound = this.updateValues.bind( this );
-    graph.solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
+    graph.solutionProperty.link( ( newSolution, oldSolution ) => {
 
       // unlink from previous solution
-      if ( previousSolutionType ) {
-        const previousSolution = graph.solutionsMap.get( previousSolutionType )!;
-        assert && assert( previousSolution );
-        previousSolution.strengthProperty.unlink( updateValuesBound );
-        previousSolution.concentrationProperty.unlink( updateValuesBound );
+      if ( oldSolution ) {
+        oldSolution.strengthProperty.unlink( updateValuesBound );
+        oldSolution.concentrationProperty.unlink( updateValuesBound );
       }
 
       // link to new solution
-      const newSolution = graph.solutionsMap.get( newSolutionType )!;
-      assert && assert( newSolution );
       newSolution.strengthProperty.lazyLink( updateValuesBound );
       newSolution.concentrationProperty.lazyLink( updateValuesBound );
-
       this.updateBars();
     } );
 
@@ -164,11 +159,7 @@ export default class ConcentrationGraphNode extends Node {
   private updateBars(): void {
 
     if ( this.visible ) {
-
-      const solutionType = this.graph.solutionTypeProperty.value;
-      const solution = this.graph.solutionsMap.get( solutionType )!;
-      assert && assert( solution );
-
+      const solution = this.graph.solutionProperty.value;
       this.particlesMap.forEach( ( barNode, particleKey ) => {
         const particle = solution.getParticleWithKey( particleKey );
         if ( particle ) {
@@ -189,13 +180,8 @@ export default class ConcentrationGraphNode extends Node {
    * To improve performance, updates only when this node is visible.
    */
   private updateValues(): void {
-
     if ( this.visible ) {
-
-      const solutionType = this.graph.solutionTypeProperty.value;
-      const solution = this.graph.solutionsMap.get( solutionType )!;
-      assert && assert( solution );
-
+      const solution = this.graph.solutionProperty.value;
       this.particlesMap.forEach( ( barNode, particleKey ) => {
         const particle = solution.getParticleWithKey( particleKey );
         if ( particle ) {

@@ -18,7 +18,7 @@ export default class IntroductionScreenView extends ABSScreenView {
   public constructor( model: IntroductionModel, tandem: Tandem ) {
 
     const createSolutionPanel = ( alignGroup: AlignGroup ) =>
-      new IntroductionSolutionPanel( model.solutionTypeProperty, alignGroup, tandem.createTandem( 'solutionPanel' ) );
+      new IntroductionSolutionPanel( model, alignGroup, tandem.createTandem( 'solutionPanel' ) );
 
     super( model, createSolutionPanel, tandem );
   }

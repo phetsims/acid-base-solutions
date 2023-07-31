@@ -23,7 +23,6 @@ import MagnifyingGlassNode from './MagnifyingGlassNode.js';
 import PHColorKeyNode from './PHColorKeyNode.js';
 import PHMeterNode from './PHMeterNode.js';
 import PHPaperNode from './PHPaperNode.js';
-import ReactionEquationNode from './ReactionEquationNode.js';
 import ToolsRadioButtonGroup from './ToolsRadioButtonGroup.js';
 import ViewsPanel from './ViewsPanel.js';
 
@@ -65,8 +64,9 @@ export default class ABSScreenView extends ScreenView {
 
     const beakerNode = new BeakerNode( model.beaker, tandem.createTandem( 'beakerNode' ) );
 
-    const reactionEquationNode = new ReactionEquationNode( model.beaker, model.solutionTypeProperty,
-      tandem.createTandem( 'reactionEquationNode' ) );
+    //TODO https://github.com/phetsims/acid-base-solutions/issues/194 rework ReactionEquationNode so it does not need SolutionType
+    // const reactionEquationNode = new ReactionEquationNode( model.beaker, model.solutionTypeProperty,
+    //   tandem.createTandem( 'reactionEquationNode' ) );
 
     // Views
     const magnifyingGlassNode = new MagnifyingGlassNode( model.magnifyingGlass, this.viewProperties.viewModeProperty,
@@ -117,7 +117,7 @@ export default class ABSScreenView extends ScreenView {
         pHPaperNode,
         conductivityTesterNode,
         beakerNode,
-        reactionEquationNode,
+        // reactionEquationNode,
         magnifyingGlassNode,
         graphNode,
         controlsParent,

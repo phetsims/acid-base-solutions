@@ -26,7 +26,6 @@ export default class Water extends AqueousSolution {
     ];
 
     super( particles, {
-      solutionType: 'water',
       strengthRange: ABSConstants.WATER_STRENGTH_RANGE,
       concentrationRange: ABSConstants.WATER_CONCENTRATION_RANGE,
       tandem: tandem

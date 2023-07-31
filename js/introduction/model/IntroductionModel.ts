@@ -17,19 +17,31 @@ import WeakBase from '../../common/model/solutions/WeakBase.js';
 
 export default class IntroductionModel extends ABSModel {
 
+  public readonly water: Water;
+  public readonly strongAcid: StrongAcid;
+  public readonly weakAcid: WeakAcid;
+  public readonly strongBase: StrongBase;
+  public readonly weakBase: WeakBase;
+
   public constructor( tandem: Tandem ) {
 
     const solutionsTandem = tandem.createTandem( 'solutions' );
 
-    const solutions = [
-      new Water( solutionsTandem.createTandem( 'water' ) ),
-      new StrongAcid( solutionsTandem.createTandem( 'strongAcid' ) ),
-      new WeakAcid( solutionsTandem.createTandem( 'weakAcid' ) ),
-      new StrongBase( solutionsTandem.createTandem( 'strongBase' ) ),
-      new WeakBase( solutionsTandem.createTandem( 'weakBase' ) )
-    ];
+    const water = new Water( solutionsTandem.createTandem( 'water' ) );
+    const strongAcid = new StrongAcid( solutionsTandem.createTandem( 'strongAcid' ) );
+    const weakAcid = new WeakAcid( solutionsTandem.createTandem( 'weakAcid' ) );
+    const strongBase = new StrongBase( solutionsTandem.createTandem( 'strongBase' ) );
+    const weakBase = new WeakBase( solutionsTandem.createTandem( 'weakBase' ) );
 
-    super( solutions, 'water', tandem );
+    const solutions = [ water, strongAcid, weakAcid, strongBase, weakBase ];
+
+    super( solutions, water, tandem );
+
+    this.water = water;
+    this.strongAcid = strongAcid;
+    this.weakAcid = weakAcid;
+    this.strongBase = strongBase;
+    this.weakBase = weakBase;
   }
 }
 

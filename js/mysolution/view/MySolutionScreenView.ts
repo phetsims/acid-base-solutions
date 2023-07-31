@@ -18,7 +18,7 @@ export default class MySolutionScreenView extends ABSScreenView {
   public constructor( model: MySolutionModel, tandem: Tandem ) {
 
     const createSolutionPanel = ( alignGroup: AlignGroup ) =>
-      new MySolutionPanel( model.solutionTypeProperty, model.concentrationProperty, model.strengthProperty,
+      new MySolutionPanel( model, model.concentrationProperty, model.strengthProperty,
         alignGroup, tandem.createTandem( 'solutionPanel' ) );
 
     super( model, createSolutionPanel, tandem );

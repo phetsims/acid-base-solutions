@@ -72,7 +72,7 @@ export default class ParticlesNode extends CanvasNode {
     const ArrayConstructor = window.Float32Array || window.Array;
 
     // Iterate over all solutions, and create a ParticlesData structure for each unique particle.
-    magnifyingGlass.solutionsMap.forEach( ( solution, solutionType ) => {
+    magnifyingGlass.solutions.forEach( solution => {
       solution.particles.forEach( particle => {
         const key = particle.key;
 
@@ -106,9 +106,7 @@ export default class ParticlesNode extends CanvasNode {
   // Updates the particles data structure and triggers a paintCanvas.
   public update(): void {
 
-    const solutionType = this.magnifyingGlass.solutionTypeProperty.value;
-    const solution = this.magnifyingGlass.solutionsMap.get( solutionType )!;
-    assert && assert( solution );
+    const solution = this.magnifyingGlass.solutionProperty.value;
 
     // Update the data structure for each particle that is in the current solution.
     solution.particles.forEach( particle => {
@@ -148,9 +146,7 @@ export default class ParticlesNode extends CanvasNode {
    */
   public override paintCanvas( context: CanvasRenderingContext2D ): void {
 
-    const solutionType = this.magnifyingGlass.solutionTypeProperty.value;
-    const solution = this.magnifyingGlass.solutionsMap.get( solutionType )!;
-    assert && assert( solution );
+    const solution = this.magnifyingGlass.solutionProperty.value;
 
     // createCanvas created HTMLCanvasElement at a higher resolution to improve quality.
     // So apply the inverse scale factor, and adjust the radius.

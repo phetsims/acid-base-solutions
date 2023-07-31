@@ -31,8 +31,10 @@ export default class MagnifyingGlassNode extends Node {
   private readonly solventNode: Node;
   private readonly particlesNode: ParticlesNode;
 
-  public constructor( magnifyingGlass: MagnifyingGlass, viewModeProperty: StringUnionProperty<ViewMode>,
-                      solventVisibleProperty: TReadOnlyProperty<boolean>, tandem: Tandem ) {
+  public constructor( magnifyingGlass: MagnifyingGlass,
+                      viewModeProperty: StringUnionProperty<ViewMode>,
+                      solventVisibleProperty: TReadOnlyProperty<boolean>,
+                      tandem: Tandem ) {
 
     // lens
     const RADIUS = magnifyingGlass.radius;
@@ -89,21 +91,17 @@ export default class MagnifyingGlassNode extends Node {
 
     // Observe the strength and concentration Properties for the selected solution.
     const updateParticlesBound = this.updateParticles.bind( this );
-    magnifyingGlass.solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
+    magnifyingGlass.solutionProperty.link( ( newSolution, oldSolution ) => {
 
       this.particlesNode.reset();
 
       // unlink from previous solution
-      if ( previousSolutionType ) {
-        const previousSolution = magnifyingGlass.solutionsMap.get( previousSolutionType )!;
-        assert && assert( previousSolution );
-        previousSolution.strengthProperty.unlink( updateParticlesBound );
-        previousSolution.concentrationProperty.unlink( updateParticlesBound );
+      if ( oldSolution ) {
+        oldSolution.strengthProperty.unlink( updateParticlesBound );
+        oldSolution.concentrationProperty.unlink( updateParticlesBound );
       }
 
       // link to new solution
-      const newSolution = magnifyingGlass.solutionsMap.get( newSolutionType )!;
-      assert && assert( newSolution );
       newSolution.strengthProperty.link( updateParticlesBound );
       newSolution.concentrationProperty.link( updateParticlesBound );
     } );

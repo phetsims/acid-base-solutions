@@ -14,8 +14,8 @@ import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import { PanelOptions } from '../../../sun/js/Panel.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
 import ABSColors from './ABSColors.js';
-import { StringSwitchOptions } from '../mysolution/view/StringSwitch.js';
 import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
+import { ABSwitchOptions } from '../../../sun/js/ABSwitch.js';
 
 const WEAK_STRENGTH_MAX = 1E2;
 
@@ -28,11 +28,7 @@ const WATER_STRENGTH = 0;
 
 const CONTROL_FONT = new PhetFont( 12 );
 
-const STRING_SWITCH_OPTIONS: StrictOmit<StringSwitchOptions, 'tandem'> = {
-  textOptions: {
-    font: CONTROL_FONT,
-    maxWidth: 50
-  },
+const AB_SWITCH_OPTIONS: StrictOmit<ABSwitchOptions, 'tandem'> = {
   toggleSwitchOptions: {
     size: new Dimension2( 40, 20 ),
     thumbTouchAreaXDilation: 6,
@@ -68,7 +64,7 @@ const ABSConstants = {
   CONTROL_FONT: CONTROL_FONT,
 
   // options
-  STRING_SWITCH_OPTIONS: STRING_SWITCH_OPTIONS,
+  AB_SWITCH_OPTIONS: AB_SWITCH_OPTIONS,
   PANEL_OPTIONS: PANEL_OPTIONS
 };
 

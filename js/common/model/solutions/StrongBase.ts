@@ -26,7 +26,6 @@ export default class StrongBase extends AqueousSolution {
     ];
 
     super( particles, {
-      solutionType: 'strongBase',
       strengthRange: ABSConstants.STRONG_STRENGTH_RANGE,
       concentrationRange: ABSConstants.CONCENTRATION_RANGE,
       tandem: tandem

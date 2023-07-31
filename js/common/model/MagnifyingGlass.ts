@@ -10,24 +10,21 @@
 
 import Vector2 from '../../../../dot/js/Vector2.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import { SolutionType } from './SolutionType.js';
 import Beaker from './Beaker.js';
-import { SolutionMap } from './ABSModel.js';
-import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import AqueousSolution from './solutions/AqueousSolution.js';
+import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 
 export default class MagnifyingGlass extends PhetioObject {
 
-  public readonly solutionsMap: SolutionMap;
-  public readonly solutionTypeProperty: ReadOnlyProperty<SolutionType>;
+  public readonly solutions: AqueousSolution[];
+  public readonly solutionProperty: TReadOnlyProperty<AqueousSolution>;
   public readonly radius: number;
   public readonly position: Vector2; // position, origin at center of glass
 
-  public constructor( beaker: Beaker,
-                      solutionsMap: SolutionMap,
-                      solutionTypeProperty: ReadOnlyProperty<SolutionType>,
-                      tandem: Tandem ) {
+  public constructor( beaker: Beaker, solutions: AqueousSolution[], solutionProperty: ReadOnlyProperty<AqueousSolution>, tandem: Tandem ) {
 
     super( {
       isDisposable: false,
@@ -35,12 +32,12 @@ export default class MagnifyingGlass extends PhetioObject {
       phetioState: false
     } );
 
-    this.solutionsMap = solutionsMap;
-    this.solutionTypeProperty = solutionTypeProperty;
+    this.solutions = solutions;
+    this.solutionProperty = solutionProperty;
     this.radius = 0.465 * beaker.size.height;
     this.position = beaker.position.plusXY( 0, -beaker.size.height / 2 );
 
-    this.addLinkedElement( solutionTypeProperty );
+    this.addLinkedElement( solutionProperty );
   }
 }
 

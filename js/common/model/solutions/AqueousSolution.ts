@@ -12,7 +12,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../../axon/js/NumberProperty.js';
 import Property from '../../../../../axon/js/Property.js';
@@ -20,25 +19,27 @@ import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../../dot/js/Utils.js';
 import NumberIO from '../../../../../tandem/js/types/NumberIO.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
-import { SolutionType } from '../SolutionType.js';
 import { Particle, ParticleKey } from './Particle.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
-import { PhetioObjectOptions } from '../../../../../tandem/js/PhetioObject.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../../tandem/js/PhetioObject.js';
 import ABSConstants from '../../ABSConstants.js';
 import RangeWithValue from '../../../../../dot/js/RangeWithValue.js';
+import IOType from '../../../../../tandem/js/types/IOType.js';
+import ReferenceIO, { ReferenceIOState } from '../../../../../tandem/js/types/ReferenceIO.js';
+import optionize from '../../../../../phet-core/js/optionize.js';
 
 type SelfOptions = {
-  solutionType: SolutionType;
   strengthRange: RangeWithValue; // the strength of the solute, with an initial value
   concentrationRange: RangeWithValue; // the concentration of the solute, with an initial value
 };
 
 type AqueousSolutionOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default abstract class AqueousSolution {
+export type AqueousSolutionStateObject = ReferenceIOState; // because AqueousSolutionIO is a subtype of ReferenceIO
+
+export default abstract class AqueousSolution extends PhetioObject {
 
   public readonly particles: Particle[];
-  public readonly solutionType: SolutionType;
   public readonly strengthProperty: Property<number>;
   public readonly concentrationProperty: Property<number>;
   public readonly pHProperty: TReadOnlyProperty<number>;
@@ -50,10 +51,17 @@ export default abstract class AqueousSolution {
    */
   protected constructor( particles: Particle[], providedOptions: AqueousSolutionOptions ) {
 
-    const options = providedOptions;
+    const options = optionize<AqueousSolutionOptions, SelfOptions, PhetioObjectOptions>()( {
+
+      // PhetioObjectOptions
+      isDisposable: false,
+      phetioType: AqueousSolution.AqueousSolutionIO,
+      phetioState: false
+    }, providedOptions );
+
+    super( options );
 
     this.particles = particles;
-    this.solutionType = options.solutionType;
 
     this.strengthProperty = new NumberProperty( options.strengthRange.defaultValue, {
       range: options.strengthRange,
@@ -76,10 +84,6 @@ export default abstract class AqueousSolution {
       } );
   }
 
-  public dispose(): void {
-    Disposable.assertNotDisposable();
-  }
-
   public reset(): void {
     this.strengthProperty.reset();
     this.concentrationProperty.reset();
@@ -98,6 +102,17 @@ export default abstract class AqueousSolution {
   public abstract getOHConcentration(): number;
 
   public abstract getH2OConcentration(): number;
+
+  /**
+   * AqueousSolutionIO implements 'Reference type serialization', as described in the Serialization section of
+   * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
+   * Reference type serialization is appropriate because all AqueousSolution instances are created at startup.
+   * Any occurrence of AqueousSolution in PhET-iO state is a reference to one of those instances.
+   */
+  public static readonly AqueousSolutionIO = new IOType<AqueousSolution, AqueousSolutionStateObject>( 'AqueousSolutionIO', {
+    valueType: AqueousSolution,
+    supertype: ReferenceIO( IOType.ObjectIO )
+  } );
 }
 
 acidBaseSolutions.register( 'AqueousSolution', AqueousSolution );

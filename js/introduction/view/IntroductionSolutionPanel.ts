@@ -15,8 +15,6 @@ import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
-import { SolutionType } from '../../common/model/SolutionType.js';
-import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
@@ -24,10 +22,12 @@ import { ParticleKey } from '../../common/model/solutions/Particle.js';
 import createParticleNode from '../../common/view/createParticleNode.js';
 import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
+import AqueousSolution from '../../common/model/solutions/AqueousSolution.js';
+import IntroductionModel from '../model/IntroductionModel.js';
 
 export default class IntroductionSolutionPanel extends Panel {
 
-  public constructor( solutionTypeProperty: Property<SolutionType>,
+  public constructor( model: IntroductionModel,
                       contentAlignGroup: AlignGroup, // so that both control panels have the same width
                       tandem: Tandem ) {
 
@@ -44,11 +44,11 @@ export default class IntroductionSolutionPanel extends Panel {
     // To make all radio button labels have the same width and height
     const labelsAlignGroup = new AlignGroup();
 
-    const radioButtonGroupItems: AquaRadioButtonGroupItem<SolutionType>[] = [
+    const radioButtonGroupItems: AquaRadioButtonGroupItem<AqueousSolution>[] = [
 
       // Water (H20)
       {
-        value: 'water',
+        value: model.water,
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.waterStringProperty,
           'H<sub>2</sub>O', 'H2O', labelsAlignGroup, tandem ),
         tandemName: `water${AquaRadioButton.TANDEM_NAME_SUFFIX}`
@@ -56,7 +56,7 @@ export default class IntroductionSolutionPanel extends Panel {
 
       // Strong Acid (HA)
       {
-        value: 'strongAcid',
+        value: model.strongAcid,
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.strongAcidStringProperty,
           'H<i>A</i>', 'HA', labelsAlignGroup, tandem ),
         tandemName: `strongAcid${AquaRadioButton.TANDEM_NAME_SUFFIX}`
@@ -64,7 +64,7 @@ export default class IntroductionSolutionPanel extends Panel {
 
       // Weak Acid (HA)
       {
-        value: 'weakAcid',
+        value: model.weakAcid,
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.weakAcidStringProperty,
           'H<i>A</i>', 'HA', labelsAlignGroup, tandem ),
         tandemName: `weakAcid${AquaRadioButton.TANDEM_NAME_SUFFIX}`
@@ -72,7 +72,7 @@ export default class IntroductionSolutionPanel extends Panel {
 
       // Strong Base (M)
       {
-        value: 'strongBase',
+        value: model.strongBase,
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.strongBaseStringProperty,
           '<i>M</i>OH', 'MOH', labelsAlignGroup, tandem ),
         tandemName: `strongBase${AquaRadioButton.TANDEM_NAME_SUFFIX}`
@@ -80,14 +80,14 @@ export default class IntroductionSolutionPanel extends Panel {
 
       // Weak Base (B)
       {
-        value: 'weakBase',
+        value: model.weakBase,
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.weakBaseStringProperty,
           '<i>B</i>', 'B', labelsAlignGroup, tandem ),
         tandemName: `weakBase${AquaRadioButton.TANDEM_NAME_SUFFIX}`
       }
     ];
 
-    const radioButtonGroup = new AquaRadioButtonGroup<SolutionType>( solutionTypeProperty, radioButtonGroupItems, {
+    const radioButtonGroup = new AquaRadioButtonGroup<AqueousSolution>( model.solutionProperty, radioButtonGroupItems, {
       spacing: 8,
       align: 'left',
       radioButtonOptions: {

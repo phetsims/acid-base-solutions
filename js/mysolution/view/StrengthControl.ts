@@ -13,16 +13,11 @@ import StrengthSlider from './StrengthSlider.js';
 import ABSConstants from '../../common/ABSConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import Property from '../../../../axon/js/Property.js';
-import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import { WeakStrongType } from './MySolutionPanel.js';
-import StringSwitch, { StringSwitchOptions } from './StringSwitch.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import WeakStrongSwitch from './WeakStrongSwitch.js';
 
 export default class StrengthControl extends VBox {
 
-  public constructor( strengthProperty: Property<number>,
-                      weakStrongProperty: StringUnionProperty<WeakStrongType>,
-                      tandem: Tandem ) {
+  public constructor( strengthProperty: Property<number>, isWeakProperty: Property<boolean>, tandem: Tandem ) {
 
     const titleText = new Text( AcidBaseSolutionsStrings.strengthStringProperty, {
       font: ABSConstants.SUBTITLE_FONT,
@@ -31,16 +26,11 @@ export default class StrengthControl extends VBox {
     } );
 
     // Weak/Strong switch
-    const weakStrongSwitch = new StringSwitch( weakStrongProperty,
-      'weak', AcidBaseSolutionsStrings.weakStringProperty,
-      'strong', AcidBaseSolutionsStrings.strongStringProperty,
-      combineOptions<StringSwitchOptions>( {}, ABSConstants.STRING_SWITCH_OPTIONS, {
-        tandem: tandem.createTandem( 'weakStrongSwitch' )
-      } ) );
+    const weakStrongSwitch = new WeakStrongSwitch( isWeakProperty, tandem.createTandem( 'weakStrongSwitch' ) );
 
     // Strength slider
     const sliderWrapperTandem = tandem.createTandem( 'sliderWrapper' );
-    const slider = new StrengthSlider( strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE, weakStrongProperty,
+    const slider = new StrengthSlider( strengthProperty, ABSConstants.WEAK_STRENGTH_RANGE, isWeakProperty,
       sliderWrapperTandem.createTandem( 'slider' ) );
 
     // Changing the strength to 'strong' typically hides the slider, but keeps the space for it in the panel.

@@ -13,25 +13,19 @@ import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
-import { SolutionType } from '../../common/model/SolutionType.js';
 import Property from '../../../../axon/js/Property.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import InitialConcentrationControl from './InitialConcentrationControl.js';
 import StrengthControl from './StrengthControl.js';
-import StringSwitch, { StringSwitchOptions } from './StringSwitch.js';
+import StringSwitch from './StringSwitch.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-
-const AcidBaseTypeValues = [ 'acid', 'base' ] as const;
-export type AcidBaseType = ( typeof AcidBaseTypeValues )[number];
-
-const WeakStrongTypeValues = [ 'weak', 'strong' ] as const;
-export type WeakStrongType = ( typeof WeakStrongTypeValues )[number];
+import MySolutionModel from '../model/MySolutionModel.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 
 export default class MySolutionPanel extends Panel {
 
-  public constructor( solutionTypeProperty: Property<SolutionType>,
+  public constructor( model: MySolutionModel,
                       concentrationProperty: NumberProperty,
                       strengthProperty: Property<number>,
                       contentAlignGroup: AlignGroup, // so that both control panels have the same width
@@ -40,18 +34,6 @@ export default class MySolutionPanel extends Panel {
     const options = combineOptions<PanelOptions>( {}, ABSConstants.PANEL_OPTIONS, {
       isDisposable: false,
       tandem: tandem
-    } );
-
-    //TODO https://github.com/phetsims/acid-base-solutions/issues/178 move to model
-    const acidBaseProperty = new StringUnionProperty( solutionTypeToAcidBase( solutionTypeProperty.value ), {
-      validValues: AcidBaseTypeValues,
-      tandem: tandem.createTandem( 'acidBaseProperty' )
-    } );
-
-    //TODO https://github.com/phetsims/acid-base-solutions/issues/178 move to model
-    const weakStrongProperty = new StringUnionProperty( solutionTypeToWeakStrong( solutionTypeProperty.value ), {
-      validValues: WeakStrongTypeValues,
-      tandem: tandem.createTandem( 'weakStrongProperty' )
     } );
 
     // title
@@ -64,19 +46,14 @@ export default class MySolutionPanel extends Panel {
     } );
 
     // Acid/Base switch
-    const acidBaseSwitch = new StringSwitch( acidBaseProperty,
-      'acid', AcidBaseSolutionsStrings.acidStringProperty,
-      'base', AcidBaseSolutionsStrings.baseStringProperty,
-      combineOptions<StringSwitchOptions>( {}, ABSConstants.STRING_SWITCH_OPTIONS, {
-        tandem: tandem.createTandem( 'acidBaseSwitch' )
-      } ) );
+    const acidBaseSwitch = new StringSwitch( model.isAcidProperty, tandem.createTandem( 'acidBaseSwitch' ) );
 
     // Initial Concentration control
     const initialConcentrationControl = new InitialConcentrationControl( concentrationProperty,
       tandem.createTandem( 'initialConcentrationControl' ) );
 
     // Strength control
-    const strengthControl = new StrengthControl( strengthProperty, weakStrongProperty,
+    const strengthControl = new StrengthControl( strengthProperty, model.isWeakProperty,
       tandem.createTandem( 'strengthControl' ) );
 
     const content = new AlignBox( new VBox( {
@@ -97,49 +74,24 @@ export default class MySolutionPanel extends Panel {
 
     super( content, options );
 
-    // flag to prevent circular update of related Properties, see #152
-    let updateSolutionTypeEnabled = true;
-
-    // update solution type
-    const updateSolutionType = () => {
-
-      if ( updateSolutionTypeEnabled ) {
-
-        const isAcid = ( acidBaseProperty.value === 'acid' );
-        const isWeak = ( weakStrongProperty.value === 'weak' );
-
-        if ( isWeak && isAcid ) {
-          solutionTypeProperty.value = 'weakAcid';
-        }
-        else if ( isWeak && !isAcid ) {
-          solutionTypeProperty.value = 'weakBase';
-        }
-        else if ( !isWeak && isAcid ) {
-          solutionTypeProperty.value = 'strongAcid';
-        }
-        else if ( !isWeak && !isAcid ) {
-          solutionTypeProperty.value = 'strongBase';
-        }
+    Multilink.multilink( [ model.isAcidProperty, model.isWeakProperty ], ( isAcid, isWeak ) => {
+      if ( isWeak && isAcid ) {
+        model.solutionProperty.value = model.weakAcid;
       }
-    };
-    acidBaseProperty.link( updateSolutionType.bind( this ) );
-    weakStrongProperty.link( updateSolutionType.bind( this ) );
-
-    solutionTypeProperty.link( solutionType => {
-      updateSolutionTypeEnabled = false;
-      acidBaseProperty.value = solutionTypeToAcidBase( solutionType );
-      weakStrongProperty.value = solutionTypeToWeakStrong( solutionType );
-      updateSolutionTypeEnabled = true;
+      else if ( isWeak && !isAcid ) {
+        model.solutionProperty.value = model.weakBase;
+      }
+      else if ( !isWeak && isAcid ) {
+        model.solutionProperty.value = model.strongAcid;
+      }
+      else if ( !isWeak && !isAcid ) {
+        model.solutionProperty.value = model.strongBase;
+      }
+      else {
+        throw new Error( 'unsupported solution type' );
+      }
     } );
   }
-}
-
-function solutionTypeToAcidBase( solutionType: SolutionType ): AcidBaseType {
-  return ( solutionType === 'weakAcid' || solutionType === 'strongAcid' ) ? 'acid' : 'base';
-}
-
-function solutionTypeToWeakStrong( solutionType: SolutionType ): WeakStrongType {
-  return ( solutionType === 'weakAcid' || solutionType === 'weakBase' ) ? 'weak' : 'strong';
 }
 
 acidBaseSolutions.register( 'MySolutionPanel', MySolutionPanel );

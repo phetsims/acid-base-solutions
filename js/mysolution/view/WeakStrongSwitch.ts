@@ -1,8 +1,7 @@
-// Copyright 2022-2023, University of Colorado Boulder
+// Copyright 2023, University of Colorado Boulder
 
-//TODO https://github.com/phetsims/acid-base-solutions/issues/178 rename AcidBaseSwitch
 /**
- * StringSwitch is an ABSwitch that switches between string values, and is labeled with strings.
+ * WeakStrongSwitch is an ABSwitch that switches a solution between 'Weak' and 'Strong'.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -12,11 +11,11 @@ import ABSwitch, { ABSwitchOptions } from '../../../../sun/js/ABSwitch.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import Property from '../../../../axon/js/Property.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
-import ABSConstants from '../../common/ABSConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import ABSConstants from '../../common/ABSConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
-export default class StringSwitch extends ABSwitch<boolean> {
+export default class WeakStrongSwitch extends ABSwitch<boolean> {
 
   public constructor( property: Property<boolean>, tandem: Tandem ) {
 
@@ -24,28 +23,28 @@ export default class StringSwitch extends ABSwitch<boolean> {
       tandem: tandem
     }, ABSConstants.AB_SWITCH_OPTIONS );
 
+    // To give both labels the same effective width, and keep the toggle switch centered
+    const alignGroup = new AlignGroup();
+
     const textOptions: TextOptions = {
       font: ABSConstants.CONTROL_FONT,
       maxWidth: 50
     };
 
-    // To give both labels the same effective width, and keep the toggle switch centered
-    const alignGroup = new AlignGroup();
-
-    // Acid
-    const acidNode = new AlignBox( new Text( AcidBaseSolutionsStrings.acidStringProperty, textOptions ), {
+    // Weak
+    const weakNode = new AlignBox( new Text( AcidBaseSolutionsStrings.weakStringProperty, textOptions ), {
       group: alignGroup,
       xAlign: 'right'
     } );
 
-    // Base
-    const baseNode = new AlignBox( new Text( AcidBaseSolutionsStrings.baseStringProperty, textOptions ), {
+    // Strong
+    const strongNode = new AlignBox( new Text( AcidBaseSolutionsStrings.strongStringProperty, textOptions ), {
       group: alignGroup,
       xAlign: 'left'
     } );
 
-    super( property, true, acidNode, false, baseNode, options );
+    super( property, true, weakNode, false, strongNode, options );
   }
 }
 
-acidBaseSolutions.register( 'StringSwitch', StringSwitch );
+acidBaseSolutions.register( 'WeakStrongSwitch', WeakStrongSwitch );

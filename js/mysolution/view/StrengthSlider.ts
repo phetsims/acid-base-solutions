@@ -6,18 +6,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
-import { WeakStrongType } from './MySolutionPanel.js';
 import LogSlider from '../../common/view/LogSlider.js';
 
 // constants
@@ -30,14 +26,11 @@ export default class StrengthSlider extends LogSlider {
 
   public constructor( strengthProperty: Property<number>,
                       strengthRange: RangeWithValue,
-                      weakStrongProperty: StringUnionProperty<WeakStrongType>,
+                      isWeakProperty: Property<boolean>,
                       tandem: Tandem ) {
 
     super( strengthProperty, strengthRange, {
-      visibleProperty: new DerivedProperty( [ weakStrongProperty ], weakStrong => ( weakStrong === 'weak' ), {
-        tandem: tandem.createTandem( 'visibleProperty' ),
-        phetioValueType: BooleanIO
-      } ),
+      visibleProperty: isWeakProperty, // visible only for weak solutions
       trackSize: new Dimension2( 125, 4 ),
       thumbSize: new Dimension2( 12, 24 ),
       majorTickLength: 12,

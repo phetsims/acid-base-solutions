@@ -17,10 +17,10 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import Beaker from './Beaker.js';
-import { SolutionType } from './SolutionType.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
+import AqueousSolution from './solutions/AqueousSolution.js';
 
 export default class PHPaper extends PhetioObject {
 
@@ -34,7 +34,7 @@ export default class PHPaper extends PhetioObject {
 
   public constructor( beaker: Beaker,
                       pHProperty: ReadOnlyProperty<number>,
-                      solutionTypeProperty: TReadOnlyProperty<SolutionType>,
+                      solutionProperty: TReadOnlyProperty<AqueousSolution>,
                       tandem: Tandem ) {
 
     super( {
@@ -65,7 +65,7 @@ export default class PHPaper extends PhetioObject {
       this.indicatorHeightProperty.value = 0;
       this.updateIndicatorHeight();
     };
-    solutionTypeProperty.link( resetIndicator );
+    solutionProperty.link( resetIndicator );
     pHProperty.link( resetIndicator );
 
     this.positionProperty.link( () => this.updateIndicatorHeight() );

@@ -27,7 +27,6 @@ export default class WeakBase extends AqueousSolution {
     ];
 
     super( particles, {
-      solutionType: 'weakBase',
       strengthRange: ABSConstants.WEAK_STRENGTH_RANGE,
       concentrationRange: ABSConstants.CONCENTRATION_RANGE,
       tandem: tandem
