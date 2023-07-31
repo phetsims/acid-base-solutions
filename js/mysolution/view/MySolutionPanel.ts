@@ -21,7 +21,6 @@ import StrengthControl from './StrengthControl.js';
 import StringSwitch from './StringSwitch.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import MySolutionModel from '../model/MySolutionModel.js';
-import Multilink from '../../../../axon/js/Multilink.js';
 
 export default class MySolutionPanel extends Panel {
 
@@ -73,24 +72,6 @@ export default class MySolutionPanel extends Panel {
     } );
 
     super( content, options );
-
-    Multilink.multilink( [ model.isAcidProperty, model.isWeakProperty ], ( isAcid, isWeak ) => {
-      if ( isWeak && isAcid ) {
-        model.solutionProperty.value = model.weakAcid;
-      }
-      else if ( isWeak && !isAcid ) {
-        model.solutionProperty.value = model.weakBase;
-      }
-      else if ( !isWeak && isAcid ) {
-        model.solutionProperty.value = model.strongAcid;
-      }
-      else if ( !isWeak && !isAcid ) {
-        model.solutionProperty.value = model.strongBase;
-      }
-      else {
-        throw new Error( 'unsupported solution type' );
-      }
-    } );
   }
 }
 

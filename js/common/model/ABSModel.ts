@@ -9,7 +9,6 @@
 
 import Disposable from '../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import Property from '../../../../axon/js/Property.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import TModel from '../../../../joist/js/TModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -29,7 +28,7 @@ export default class ABSModel implements TModel {
   public readonly solutions: AqueousSolution[];
 
   // The solution that is selected
-  public readonly solutionProperty: Property<AqueousSolution>;
+  public readonly solutionProperty: ReadOnlyProperty<AqueousSolution>;
 
   // pH of the selected solution
   public readonly pHProperty: ReadOnlyProperty<number>;
@@ -45,29 +44,24 @@ export default class ABSModel implements TModel {
   public readonly pHPaper: PHPaper;
   public readonly conductivityTester: ConductivityTester;
 
-  protected constructor( solutions: AqueousSolution[], initialSolution: AqueousSolution, tandem: Tandem, solutionPropertyReadOnly = false ) {
+  protected constructor( solutions: AqueousSolution[], solutionProperty: ReadOnlyProperty<AqueousSolution>, tandem: Tandem ) {
 
     this.solutions = solutions;
+    this.solutionProperty = solutionProperty;
 
-    this.solutionProperty = new Property( initialSolution, {
-      validValues: solutions,
-      tandem: tandem.createTandem( 'solutionProperty' ),
-      phetioValueType: AqueousSolution.AqueousSolutionIO,
-      phetioDocumentation: 'The solution that is selected',
-      phetioReadOnly: solutionPropertyReadOnly
-    } );
-
-    this.pHProperty = new DerivedProperty( [ this.solutionProperty ], solution => solution.pHProperty.value, {
+    this.pHProperty = new DerivedProperty( [ solutionProperty ], solution => solution.pHProperty.value, {
       tandem: tandem.createTandem( 'pHProperty' ),
       phetioValueType: NumberIO
     } );
 
     this.beaker = new Beaker();
-    this.magnifyingGlass = new MagnifyingGlass( this.beaker, this.solutions, this.solutionProperty, tandem.createTandem( 'magnifyingGlass' ) );
-    this.graph = new ConcentrationGraph( this.beaker, this.solutionProperty );
-    this.pHMeter = new PHMeter( this.beaker, this.pHProperty, tandem.createTandem( 'pHMeter' ) );
-    this.pHPaper = new PHPaper( this.beaker, this.pHProperty, this.solutionProperty, tandem.createTandem( 'pHPaper' ) );
-    this.conductivityTester = new ConductivityTester( this.beaker, this.pHProperty, tandem.createTandem( 'conductivityTester' ) );
+    this.magnifyingGlass = new MagnifyingGlass( this.beaker, this.solutions, solutionProperty );
+    this.graph = new ConcentrationGraph( this.beaker, solutionProperty );
+
+    const toolsTandem = tandem.createTandem( 'tools' );
+    this.pHMeter = new PHMeter( this.beaker, this.pHProperty, toolsTandem.createTandem( 'pHMeter' ) );
+    this.pHPaper = new PHPaper( this.beaker, this.pHProperty, solutionProperty, toolsTandem.createTandem( 'pHPaper' ) );
+    this.conductivityTester = new ConductivityTester( this.beaker, this.pHProperty, toolsTandem.createTandem( 'conductivityTester' ) );
   }
 
   public dispose(): void {
@@ -75,8 +69,6 @@ export default class ABSModel implements TModel {
   }
 
   public reset(): void {
-    this.solutions.forEach( solution => solution.reset() );
-    this.solutionProperty.reset();
     this.pHMeter.reset();
     this.pHPaper.reset();
     this.conductivityTester.reset();

@@ -108,8 +108,6 @@ export default class MagnifyingGlassNode extends Node {
 
     // Update when this Node becomes visible.
     this.visibleProperty.link( visible => visible && this.updateParticles() );
-
-    this.addLinkedElement( magnifyingGlass );
   }
 
   /*

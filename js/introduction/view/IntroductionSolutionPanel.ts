@@ -87,7 +87,7 @@ export default class IntroductionSolutionPanel extends Panel {
       }
     ];
 
-    const radioButtonGroup = new AquaRadioButtonGroup<AqueousSolution>( model.solutionProperty, radioButtonGroupItems, {
+    const radioButtonGroup = new AquaRadioButtonGroup<AqueousSolution>( model.mutableSolutionProperty, radioButtonGroupItems, {
       spacing: 8,
       align: 'left',
       radioButtonOptions: {

@@ -14,6 +14,8 @@ import StrongBase from '../../common/model/solutions/StrongBase.js';
 import Water from '../../common/model/solutions/Water.js';
 import WeakAcid from '../../common/model/solutions/WeakAcid.js';
 import WeakBase from '../../common/model/solutions/WeakBase.js';
+import Property from '../../../../axon/js/Property.js';
+import AqueousSolution from '../../common/model/solutions/AqueousSolution.js';
 
 export default class IntroductionModel extends ABSModel {
 
@@ -22,6 +24,9 @@ export default class IntroductionModel extends ABSModel {
   public readonly weakAcid: WeakAcid;
   public readonly strongBase: StrongBase;
   public readonly weakBase: WeakBase;
+  public readonly mutableSolutionProperty: Property<AqueousSolution>;
+
+  private readonly resetIntroductionModel: () => void;
 
   public constructor( tandem: Tandem ) {
 
@@ -35,13 +40,31 @@ export default class IntroductionModel extends ABSModel {
 
     const solutions = [ water, strongAcid, weakAcid, strongBase, weakBase ];
 
-    super( solutions, water, tandem );
+    const solutionProperty = new Property( water, {
+      validValues: solutions,
+      tandem: tandem.createTandem( 'solutionProperty' ),
+      phetioValueType: AqueousSolution.AqueousSolutionIO,
+      phetioDocumentation: 'The solution that is selected'
+    } );
+
+    super( solutions, solutionProperty, tandem );
 
     this.water = water;
     this.strongAcid = strongAcid;
     this.weakAcid = weakAcid;
     this.strongBase = strongBase;
     this.weakBase = weakBase;
+    this.mutableSolutionProperty = solutionProperty;
+
+    this.resetIntroductionModel = () => {
+      solutions.forEach( solution => solution.reset() );
+      solutionProperty.reset();
+    };
+  }
+
+  public override reset(): void {
+    this.resetIntroductionModel();
+    super.reset();
   }
 }
 
