@@ -58,11 +58,13 @@ export default class MySolutionModel extends ABSModel {
     this.weakBase = weakBase;
 
     this.isAcidProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'acidBaseProperty' )
+      tandem: tandem.createTandem( 'acidBaseProperty' ),
+      phetioDocumentation: 'For selecting whether the solution is an Acid or Base'
     } );
 
     this.isWeakProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'weakStrongProperty' )
+      tandem: tandem.createTandem( 'weakStrongProperty' ),
+      phetioDocumentation: 'For selecting whether the solution is a weak or strong'
     } );
 
     this.concentrationProperty = new NumberProperty( this.solutionProperty.value.concentrationProperty.value, {
