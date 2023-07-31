@@ -25,6 +25,7 @@ import Beaker from './Beaker.js';
 // constants
 const NEUTRAL_PH = 7;
 const NEUTRAL_BRIGHTNESS = 0.05;
+const BRIGHTNESS_RANGE = new Range( 0, 1 );
 
 export default class ConductivityTester extends PhetioObject {
 
@@ -84,7 +85,8 @@ export default class ConductivityTester extends PhetioObject {
         }
       }, {
         tandem: tandem.createTandem( 'brightnessProperty' ),
-        phetioValueType: NumberIO
+        phetioValueType: NumberIO,
+        isValidValue: brightness => BRIGHTNESS_RANGE.contains( brightness )
       } );
 
     this.addLinkedElement( pHProperty );
