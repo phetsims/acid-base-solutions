@@ -16,7 +16,7 @@ import Tandem from '../../../../../tandem/js/Tandem.js';
 
 export default class StrongBase extends AqueousSolution {
 
-  public constructor( tandem: Tandem ) {
+  public constructor( tandem: Tandem, phetioReadOnly = false ) {
 
     // particles found in this solution
     const particles: Particle[] = [
@@ -28,7 +28,8 @@ export default class StrongBase extends AqueousSolution {
     super( particles, {
       strengthRange: ABSConstants.STRONG_STRENGTH_RANGE,
       concentrationRange: ABSConstants.CONCENTRATION_RANGE,
-      tandem: tandem
+      tandem: tandem,
+      phetioReadOnly: phetioReadOnly
     } );
   }
 

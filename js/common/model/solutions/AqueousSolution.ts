@@ -33,7 +33,7 @@ type SelfOptions = {
   concentrationRange: RangeWithValue; // the concentration of the solute, with an initial value
 };
 
-type AqueousSolutionOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+type AqueousSolutionOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem' | 'phetioReadOnly'>;
 
 export type AqueousSolutionStateObject = ReferenceIOState; // because AqueousSolutionIO is a subtype of ReferenceIO
 
@@ -66,14 +66,18 @@ export default abstract class AqueousSolution extends PhetioObject {
     this.strengthProperty = new NumberProperty( options.strengthRange.defaultValue, {
       range: options.strengthRange,
       tandem: options.tandem.createTandem( 'strengthProperty' ),
-      phetioReadOnly: ( options.strengthRange.getLength() === 0 ) // read-only if strength is a constant
+
+      // read-only if solution is read-only, or if strength is a constant
+      phetioReadOnly: options.phetioReadOnly || ( options.strengthRange.getLength() === 0 )
     } );
 
     this.concentrationProperty = new NumberProperty( options.concentrationRange.defaultValue, {
       range: options.concentrationRange,
       units: 'mol/L',
       tandem: options.tandem.createTandem( 'concentrationProperty' ),
-      phetioReadOnly: ( options.concentrationRange.getLength() === 0 ) // read-only if concentration is a constant
+
+      // read-only if solution is read-only, or if concentration is a constant
+      phetioReadOnly: options.phetioReadOnly || ( options.concentrationRange.getLength() === 0 )
     } );
 
     this.pHProperty = new DerivedProperty( [ this.strengthProperty, this.concentrationProperty ],

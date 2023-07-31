@@ -56,10 +56,11 @@ export default class MySolutionModel extends ABSModel {
 
     // The solutions for this screen
     const solutionsTandem = tandem.createTandem( 'solutions' );
-    const strongAcid = new StrongAcid( solutionsTandem.createTandem( 'strongAcid' ) );
-    const weakAcid = new WeakAcid( solutionsTandem.createTandem( 'weakAcid' ) );
-    const strongBase = new StrongBase( solutionsTandem.createTandem( 'strongBase' ) );
-    const weakBase = new WeakBase( solutionsTandem.createTandem( 'weakBase' ) );
+    const phetioReadOnly = true;
+    const strongAcid = new StrongAcid( solutionsTandem.createTandem( 'strongAcid' ), phetioReadOnly );
+    const weakAcid = new WeakAcid( solutionsTandem.createTandem( 'weakAcid' ), phetioReadOnly );
+    const strongBase = new StrongBase( solutionsTandem.createTandem( 'strongBase' ), phetioReadOnly );
+    const weakBase = new WeakBase( solutionsTandem.createTandem( 'weakBase' ), phetioReadOnly );
     const solutions = [ strongAcid, weakAcid, strongBase, weakBase ];
 
     // Selected solution is based on how the user sets the 2 AB switches in the control panel.

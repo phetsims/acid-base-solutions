@@ -28,7 +28,8 @@ export default class Water extends AqueousSolution {
     super( particles, {
       strengthRange: ABSConstants.WATER_STRENGTH_RANGE,
       concentrationRange: ABSConstants.WATER_CONCENTRATION_RANGE,
-      tandem: tandem
+      tandem: tandem,
+      phetioReadOnly: false
     } );
   }
 

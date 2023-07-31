@@ -16,7 +16,7 @@ import { Particle } from './Particle.js';
 
 export default class StrongAcid extends AqueousSolution {
 
-  public constructor( tandem: Tandem ) {
+  public constructor( tandem: Tandem, phetioReadOnly = false ) {
 
     // particles found in this solution
     const particles: Particle[] = [
@@ -29,7 +29,8 @@ export default class StrongAcid extends AqueousSolution {
     super( particles, {
       strengthRange: ABSConstants.STRONG_STRENGTH_RANGE,
       concentrationRange: ABSConstants.CONCENTRATION_RANGE,
-      tandem: tandem
+      tandem: tandem,
+      phetioReadOnly: phetioReadOnly
     } );
   }
 
