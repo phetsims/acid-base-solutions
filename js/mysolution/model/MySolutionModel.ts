@@ -54,7 +54,8 @@ export default class MySolutionModel extends ABSModel {
       phetioDocumentation: 'For selecting whether the solution is weak or strong'
     } );
 
-    // The solutions for this screen
+    // The solutions for this screen. They are read-only because their concentration (for all solutions) and
+    // strength (for weak solutions) is kept synchronized with this.concentrationProperty and this.strengthProperty.
     const solutionsTandem = tandem.createTandem( 'solutions' );
     const phetioReadOnly = true;
     const strongAcid = new StrongAcid( solutionsTandem.createTandem( 'strongAcid' ), phetioReadOnly );
