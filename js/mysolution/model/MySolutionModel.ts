@@ -42,14 +42,6 @@ export default class MySolutionModel extends ABSModel {
 
     super( solutions, DEFAULT_SOLUTION_TYPE, tandem );
 
-    /**
-     * Everything below here is for the convenience of the 'Solution' control panel, which
-     * allows the user to change concentration and (for weak solutions) strength.
-     * The concentration and strength Properties created here are kept synchronized with
-     * whichever solution is currently selected. When the solution changes, the observer
-     * wiring is changed. This may have been more appropriate to handle in SolutionControl.
-     */
-
     const defaultSolution = this.solutionsMap.get( DEFAULT_SOLUTION_TYPE )!;
     assert && assert( defaultSolution );
 
@@ -65,52 +57,22 @@ export default class MySolutionModel extends ABSModel {
       tandem: tandem.createTandem( 'strengthProperty' )
     } );
 
-    const setStrength = ( strength: number ) => {
-      this.strengthProperty.value = strength;
-    };
-    const setConcentration = ( concentration: number ) => {
-      this.concentrationProperty.value = concentration;
-    };
-    this.solutionTypeProperty.link( ( newSolutionType, previousSolutionType ) => {
-
-      const newSolution = this.solutionsMap.get( newSolutionType )!;
-      assert && assert( newSolution );
-
-      // unlink from previous solution strength and concentration Property
-      if ( previousSolutionType ) {
-        const previousSolution = this.solutionsMap.get( previousSolutionType )!;
-        assert && assert( previousSolution );
-        previousSolution.strengthProperty.unlink( setStrength );
-        previousSolution.concentrationProperty.unlink( setConcentration );
-
-        /*
-         * Set concentration of new solution equal to previous solution.
-         * Do not do this for strength, see strength observer below and issue #94.
-         */
-        newSolution.concentrationProperty.value = previousSolution.concentrationProperty.value;
-      }
-
-      // link to new solution strength and concentration Properties
-      newSolution.strengthProperty.link( setStrength );
-      newSolution.concentrationProperty.link( setConcentration );
-    } );
-
-    this.concentrationProperty.link( concentration => {
-      this.solutionsMap.get( this.solutionTypeProperty.value )!.concentrationProperty.value = concentration;
-    } );
+    // Write the concentration value to all solutions.
+    this.concentrationProperty.link( concentration => solutions.forEach( solution => {
+      solution.concentrationProperty.value = concentration;
+    } ) );
 
     /*
-     * issue #94:
-     * Keep strength of all weak solutions synchronized, so that strength slider
-     * maintains the same value when switching between weak solution types.
+     * Write the strength value to all WEAK solutions.
      * Strong solutions have constant strength, so do not synchronize.
+     * See https://github.com/phetsims/acid-base-solutions/issues/94
      */
     this.strengthProperty.link( strength => {
-      const solutionType = this.solutionTypeProperty.value;
-      if ( solutionType === 'weakAcid' || solutionType === 'weakBase' ) {
-        this.solutionsMap.get( 'weakAcid' )!.strengthProperty.value = strength;
-        this.solutionsMap.get( 'weakBase' )!.strengthProperty.value = strength;
-      }
+      solutions.forEach( solution => {
+        if ( solution.solutionType === 'weakAcid' || solution.solutionType === 'weakBase' ) {
+          solution.strengthProperty.value = strength;
+        }
+      } );
     } );
   }
 
