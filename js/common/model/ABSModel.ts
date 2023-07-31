@@ -45,7 +45,7 @@ export default class ABSModel implements TModel {
   public readonly pHPaper: PHPaper;
   public readonly conductivityTester: ConductivityTester;
 
-  public constructor( solutions: AqueousSolution[], defaultSolutionType: SolutionType, tandem: Tandem ) {
+  protected constructor( solutions: AqueousSolution[], defaultSolutionType: SolutionType, tandem: Tandem ) {
 
     assert && assert( _.uniqBy( solutions, solution => solution.solutionType ).length === solutions.length,
       'every solution must have a unique solutionType' );
