@@ -26,13 +26,17 @@ export default class WeakAcid extends AqueousSolution {
       { key: 'H3O', color: ABSColors.H3O, getConcentration: () => this.getH3OConcentration() }
     ];
 
-    super( 'weakAcid', ABSConstants.WEAK_STRENGTH_RANGE.defaultValue, ABSConstants.CONCENTRATION_RANGE.defaultValue,
-      particles, tandem );
+    super( particles, {
+      solutionType: 'weakAcid',
+      strengthRange: ABSConstants.WEAK_STRENGTH_RANGE,
+      concentrationRange: ABSConstants.CONCENTRATION_RANGE,
+      tandem: tandem
+    } );
   }
 
   // [HA] = c - [H3O+]
   public override getSoluteConcentration(): number {
-    return ( this.getConcentration() - this.getH3OConcentration() );
+    return ( this.concentrationProperty.value - this.getH3OConcentration() );
   }
 
   // [A-] = [H3O+]
@@ -42,8 +46,8 @@ export default class WeakAcid extends AqueousSolution {
 
   // [H3O+] = ( -Ka + sqrt( Ka*Ka + 4*Ka*c ) ) / 2
   public override getH3OConcentration(): number {
-    const Ka = this.getStrength();
-    const c = this.getConcentration();
+    const Ka = this.strengthProperty.value;
+    const c = this.concentrationProperty.value;
     return ( -Ka + Math.sqrt( ( Ka * Ka ) + ( 4 * Ka * c ) ) ) / 2;
   }
 
@@ -55,11 +59,6 @@ export default class WeakAcid extends AqueousSolution {
   // [H2O] = W - [A-]
   public override getH2OConcentration(): number {
     return ( ABSConstants.WATER_CONCENTRATION - this.getProductConcentration() );
-  }
-
-  // Is strength in the weak range?
-  protected override isValidStrength( strength: number ): boolean {
-    return ABSConstants.WEAK_STRENGTH_RANGE.contains( strength );
   }
 }
 

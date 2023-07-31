@@ -18,7 +18,7 @@ export default class WeakBase extends AqueousSolution {
 
   public constructor( tandem: Tandem ) {
 
-    // particless found in this solution
+    // particles found in this solution
     const particles: Particle[] = [
       { key: 'B', color: ABSColors.B, getConcentration: () => this.getSoluteConcentration() },
       { key: 'H2O', color: ABSColors.H2O, getConcentration: () => this.getH2OConcentration() },
@@ -26,19 +26,23 @@ export default class WeakBase extends AqueousSolution {
       { key: 'OH', color: ABSColors.OH, getConcentration: () => this.getOHConcentration() }
     ];
 
-    super( 'weakBase', ABSConstants.WEAK_STRENGTH_RANGE.defaultValue, ABSConstants.CONCENTRATION_RANGE.defaultValue,
-      particles, tandem );
+    super( particles, {
+      solutionType: 'weakBase',
+      strengthRange: ABSConstants.WEAK_STRENGTH_RANGE,
+      concentrationRange: ABSConstants.CONCENTRATION_RANGE,
+      tandem: tandem
+    } );
   }
 
   // [B] = c - [BH+]
   public override getSoluteConcentration(): number {
-    return ( this.getConcentration() - this.getProductConcentration() );
+    return ( this.concentrationProperty.value - this.getProductConcentration() );
   }
 
   // [BH+] = ( -Kb + sqrt( Kb*Kb + 4*Kb*c ) ) / 2
   public override getProductConcentration(): number {
-    const Kb = this.getStrength();
-    const c = this.getConcentration();
+    const Kb = this.strengthProperty.value;
+    const c = this.concentrationProperty.value;
     return ( -Kb + Math.sqrt( ( Kb * Kb ) + ( 4 * Kb * c ) ) ) / 2;
   }
 
@@ -55,11 +59,6 @@ export default class WeakBase extends AqueousSolution {
   // [H2O] = W - [BH+]
   public override getH2OConcentration(): number {
     return ( ABSConstants.WATER_CONCENTRATION - this.getProductConcentration() );
-  }
-
-  // Is strength in the weak range?
-  protected override isValidStrength( strength: number ): boolean {
-    return ABSConstants.WEAK_STRENGTH_RANGE.contains( strength );
   }
 }
 

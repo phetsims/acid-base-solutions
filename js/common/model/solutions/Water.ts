@@ -25,7 +25,12 @@ export default class Water extends AqueousSolution {
       { key: 'OH', color: ABSColors.OH, getConcentration: () => this.getOHConcentration() }
     ];
 
-    super( 'water', 0, 0, particles, tandem );
+    super( particles, {
+      solutionType: 'water',
+      strengthRange: ABSConstants.WATER_STRENGTH_RANGE,
+      concentrationRange: ABSConstants.WATER_CONCENTRATION_RANGE,
+      tandem: tandem
+    } );
   }
 
   public override getSoluteConcentration(): number {
@@ -48,12 +53,7 @@ export default class Water extends AqueousSolution {
 
   // [H2O] = W
   public override getH2OConcentration(): number {
-    return ABSConstants.WATER_CONCENTRATION;
-  }
-
-  // Should never be setting the strength of water.
-  protected override isValidStrength( strength: number ): boolean {
-    return false;
+    return this.concentrationProperty.value;
   }
 }
 

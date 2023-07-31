@@ -26,7 +26,12 @@ export default class StrongAcid extends AqueousSolution {
       { key: 'H3O', color: ABSColors.H3O, getConcentration: () => this.getH3OConcentration() }
     ];
 
-    super( 'strongAcid', ABSConstants.STRONG_STRENGTH, ABSConstants.CONCENTRATION_RANGE.defaultValue, particles, tandem );
+    super( particles, {
+      solutionType: 'strongAcid',
+      strengthRange: ABSConstants.STRONG_STRENGTH_RANGE,
+      concentrationRange: ABSConstants.CONCENTRATION_RANGE,
+      tandem: tandem
+    } );
   }
 
   // [HA] = 0
@@ -36,12 +41,12 @@ export default class StrongAcid extends AqueousSolution {
 
   // [A-] = c
   public override getProductConcentration(): number {
-    return this.getConcentration();
+    return this.concentrationProperty.value;
   }
 
   // [H3O+] = c
   public override getH3OConcentration(): number {
-    return this.getConcentration();
+    return this.concentrationProperty.value;
   }
 
   // [OH-] = Kw / [H3O+]
@@ -51,12 +56,7 @@ export default class StrongAcid extends AqueousSolution {
 
   // [H2O] = W - c
   public override getH2OConcentration(): number {
-    return ABSConstants.WATER_CONCENTRATION - this.getConcentration();
-  }
-
-  // Strong strength is a constant.
-  protected override isValidStrength( strength: number ): boolean {
-    return ( strength === ABSConstants.STRONG_STRENGTH );
+    return ABSConstants.WATER_CONCENTRATION - this.concentrationProperty.value;
   }
 }
 

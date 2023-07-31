@@ -19,6 +19,13 @@ import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
 
 const WEAK_STRENGTH_MAX = 1E2;
 
+// Strong acids and bases have constant strength. This value is arbitrary, but needs to be greater than WEAK_STRENGTH_MAX.
+const STRONG_STRENGTH = WEAK_STRENGTH_MAX + 1;
+assert && assert( STRONG_STRENGTH > WEAK_STRENGTH_MAX );
+
+const WATER_CONCENTRATION = 55.6; // concentration of pure water, mol/L
+const WATER_STRENGTH = 0;
+
 const CONTROL_FONT = new PhetFont( 12 );
 
 const STRING_SWITCH_OPTIONS: StrictOmit<StringSwitchOptions, 'tandem'> = {
@@ -42,13 +49,18 @@ const PANEL_OPTIONS: PanelOptions = {
 
 const ABSConstants = {
 
-  // Model values
-  CONCENTRATION_RANGE: new RangeWithValue( 1E-3, 1, 1E-2 ),
   PH_RANGE: new Range( 0, 14 ),
-  WATER_EQUILIBRIUM_CONSTANT: 1E-14,
-  WATER_CONCENTRATION: 55.6, // water concentration when it's used as a solvent, mol/L
+
+  // Acids and Bases
+  CONCENTRATION_RANGE: new RangeWithValue( 1E-3, 1, 1E-2 ), // mol/L
+  STRONG_STRENGTH_RANGE: new RangeWithValue( STRONG_STRENGTH, STRONG_STRENGTH, STRONG_STRENGTH ), // constant
   WEAK_STRENGTH_RANGE: new RangeWithValue( 1E-10, WEAK_STRENGTH_MAX, 1E-7 ),
-  STRONG_STRENGTH: WEAK_STRENGTH_MAX + 1, // arbitrary, but needs to be greater than weak max
+
+  // Water
+  WATER_CONCENTRATION: WATER_CONCENTRATION,
+  WATER_CONCENTRATION_RANGE: new RangeWithValue( WATER_CONCENTRATION, WATER_CONCENTRATION, WATER_CONCENTRATION ), // constant
+  WATER_STRENGTH_RANGE: new RangeWithValue( WATER_STRENGTH, WATER_STRENGTH, WATER_STRENGTH ), // constant
+  WATER_EQUILIBRIUM_CONSTANT: 1E-14,
 
   // Fonts
   TITLE_FONT: new PhetFont( { size: 14, weight: 'bold' } ),

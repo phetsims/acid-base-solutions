@@ -1,7 +1,7 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * AqueousSolution is the base class for solutions.
+ * AqueousSolution is the abstract base class for solutions.
  *
  * A solution is a homogeneous mixture composed of two or more substances.
  * In such a mixture, a solute is dissolved in another substance, known as a solvent.
@@ -18,48 +18,60 @@ import NumberProperty from '../../../../../axon/js/NumberProperty.js';
 import Property from '../../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../../dot/js/Utils.js';
-import Tandem from '../../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../../tandem/js/types/NumberIO.js';
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import { SolutionType } from '../SolutionType.js';
 import { Particle, ParticleKey } from './Particle.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
+import { PhetioObjectOptions } from '../../../../../tandem/js/PhetioObject.js';
+import ABSConstants from '../../ABSConstants.js';
+import RangeWithValue from '../../../../../dot/js/RangeWithValue.js';
+
+type SelfOptions = {
+  solutionType: SolutionType;
+  strengthRange: RangeWithValue; // the strength of the solute, with an initial value
+  concentrationRange: RangeWithValue; // the concentration of the solute, with an initial value
+};
+
+type AqueousSolutionOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default abstract class AqueousSolution {
 
-  public readonly solutionType: SolutionType;
   public readonly particles: Particle[];
+  public readonly solutionType: SolutionType;
   public readonly strengthProperty: Property<number>;
   public readonly concentrationProperty: Property<number>;
   public readonly pHProperty: TReadOnlyProperty<number>;
 
   /**
-   * @param solutionType
-   * @param strength - the strength of the solute
-   * @param concentration - the initial concentration of the solute, at the start of the reaction
    * @param particles - the particles that make up the solution. The order of elements in this array determines the
    *   left-to-right order of bars in the graph, and the front-to-back rendering order of particles in the magnifying glass.
-   * @param tandem
+   * @param providedOptions
    */
-  protected constructor( solutionType: SolutionType, strength: number, concentration: number, particles: Particle[], tandem: Tandem ) {
+  protected constructor( particles: Particle[], providedOptions: AqueousSolutionOptions ) {
 
-    this.solutionType = solutionType;
+    const options = providedOptions;
+
     this.particles = particles;
+    this.solutionType = options.solutionType;
 
-    this.strengthProperty = new NumberProperty( strength, {
-      tandem: tandem.createTandem( 'strengthProperty' ),
-      phetioReadOnly: true // because ABSConstants.STRONG_STRENGTH must be a constant
+    this.strengthProperty = new NumberProperty( options.strengthRange.defaultValue, {
+      range: options.strengthRange,
+      tandem: options.tandem.createTandem( 'strengthProperty' ),
+      phetioReadOnly: ( options.strengthRange.getLength() === 0 ) // read-only if strength is a constant
     } );
 
-    this.concentrationProperty = new NumberProperty( concentration, {
+    this.concentrationProperty = new NumberProperty( options.concentrationRange.defaultValue, {
+      range: options.concentrationRange,
       units: 'mol/L',
-      tandem: tandem.createTandem( 'concentrationProperty' )
+      tandem: options.tandem.createTandem( 'concentrationProperty' ),
+      phetioReadOnly: ( options.concentrationRange.getLength() === 0 ) // read-only if concentration is a constant
     } );
 
     this.pHProperty = new DerivedProperty( [ this.strengthProperty, this.concentrationProperty ],
-      ( strength, concentration ) => {
-        return -Utils.roundSymmetric( 100 * Utils.log10( this.getH3OConcentration() ) ) / 100;
-      }, {
-        tandem: tandem.createTandem( 'pHProperty' ),
+      ( strength, concentration ) => -Utils.roundSymmetric( 100 * Utils.log10( this.getH3OConcentration() ) ) / 100, {
+        isValidValue: pH => ABSConstants.PH_RANGE.contains( pH ),
+        tandem: options.tandem.createTandem( 'pHProperty' ),
         phetioValueType: NumberIO
       } );
   }
@@ -77,16 +89,6 @@ export default abstract class AqueousSolution {
     return _.find( this.particles, particle => particle.key === particleKey ) || null;
   }
 
-  // convenience function
-  protected getConcentration(): number {
-    return this.concentrationProperty.value;
-  }
-
-  // convenience function
-  protected getStrength(): number {
-    return this.strengthProperty.value;
-  }
-
   public abstract getSoluteConcentration(): number;
 
   public abstract getProductConcentration(): number;
@@ -96,8 +98,6 @@ export default abstract class AqueousSolution {
   public abstract getOHConcentration(): number;
 
   public abstract getH2OConcentration(): number;
-
-  protected abstract isValidStrength( strength: number ): boolean;
 }
 
 acidBaseSolutions.register( 'AqueousSolution', AqueousSolution );
