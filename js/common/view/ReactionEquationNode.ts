@@ -5,27 +5,30 @@
  * It displays the equation that corresponds to the selected solution type.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import { Node } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ReactionEquationFactory from './ReactionEquationFactory.js';
 import Beaker from '../model/Beaker.js';
-import { SolutionType } from '../model/SolutionType.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import AqueousSolution from '../model/solutions/AqueousSolution.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 
 export default class ReactionEquationNode extends Node {
 
-  public constructor( beaker: Beaker, solutionTypeProperty: ReadOnlyProperty<SolutionType>, tandem: Tandem ) {
+  public constructor( beaker: Beaker, solutionProperty: ReadOnlyProperty<AqueousSolution>, tandem: Tandem ) {
 
     super( {
+
+      // A Node for each possible equation, each of which controls its own visibility based on solutionProperty.
       children: [
-        ReactionEquationFactory.createWaterEquation( solutionTypeProperty ),
-        ReactionEquationFactory.createStrongAcidEquation( solutionTypeProperty ),
-        ReactionEquationFactory.createWeakAcidEquation( solutionTypeProperty ),
-        ReactionEquationFactory.createStrongBaseEquation( solutionTypeProperty ),
-        ReactionEquationFactory.createWeakBaseEquation( solutionTypeProperty )
+        ReactionEquationFactory.createWaterEquation( solutionProperty ),
+        ReactionEquationFactory.createStrongAcidEquation( solutionProperty ),
+        ReactionEquationFactory.createWeakAcidEquation( solutionProperty ),
+        ReactionEquationFactory.createStrongBaseEquation( solutionProperty ),
+        ReactionEquationFactory.createWeakBaseEquation( solutionProperty )
       ],
       isDisposable: false,
       tandem: tandem
@@ -37,7 +40,7 @@ export default class ReactionEquationNode extends Node {
       this.top = beaker.position.y + 10;
     } );
 
-    this.addLinkedElement( solutionTypeProperty );
+    this.addLinkedElement( solutionProperty );
   }
 }
 

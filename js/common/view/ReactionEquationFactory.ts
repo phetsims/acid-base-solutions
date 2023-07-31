@@ -14,8 +14,13 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, HStrut, Node, Path, RichText, VBox, VStrut } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import createParticleNode from './createParticleNode.js';
-import { SolutionType } from '../model/SolutionType.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import AqueousSolution from '../model/solutions/AqueousSolution.js';
+import Water from '../model/solutions/Water.js';
+import StrongAcid from '../model/solutions/StrongAcid.js';
+import WeakAcid from '../model/solutions/WeakAcid.js';
+import StrongBase from '../model/solutions/StrongBase.js';
+import WeakBase from '../model/solutions/WeakBase.js';
 
 // constants
 const EQUATION_SCALE = 1.5; // applied to all equations, see issue #88
@@ -39,40 +44,46 @@ const ALIGN_GROUP = new AlignGroup();
 const ReactionEquationFactory = {
 
   // 2 H2O <-> H3O+ + OH-
-  createWaterEquation( solutionTypeProperty: TReadOnlyProperty<SolutionType> ): Node {
-    return createEquation( solutionTypeProperty, 'water', [
+  createWaterEquation( solutionProperty: TReadOnlyProperty<AqueousSolution> ): Node {
+    const children = [
       create2H2O(),
       createReversibleArrow(),
       createH3O(),
       createPlus(),
       createOH()
-    ] );
+    ];
+    const visibleProperty = new DerivedProperty( [ solutionProperty ], solution => solution instanceof Water );
+    return createEquation( children, visibleProperty );
   },
 
   // HA + H2O -> A- + H3O+
-  createStrongAcidEquation( solutionTypeProperty: TReadOnlyProperty<SolutionType> ): Node {
-    return createAcidEquation( solutionTypeProperty, false /* isWeak */ );
+  createStrongAcidEquation( solutionProperty: TReadOnlyProperty<AqueousSolution> ): Node {
+    const visibleProperty = new DerivedProperty( [ solutionProperty ], solution => solution instanceof StrongAcid );
+    return createAcidEquation( solutionProperty, false /* isWeak */, visibleProperty );
   },
 
   // HA + H2O <-> A- + H3O+
-  createWeakAcidEquation( solutionTypeProperty: TReadOnlyProperty<SolutionType> ): Node {
-    return createAcidEquation( solutionTypeProperty, true /* isWeak */ );
+  createWeakAcidEquation( solutionProperty: TReadOnlyProperty<AqueousSolution> ): Node {
+    const visibleProperty = new DerivedProperty( [ solutionProperty ], solution => solution instanceof WeakAcid );
+    return createAcidEquation( solutionProperty, true /* isWeak */, visibleProperty );
   },
 
   // MOH -> M+ + OH-
-  createStrongBaseEquation( solutionTypeProperty: TReadOnlyProperty<SolutionType> ): Node {
-    return createEquation( solutionTypeProperty, 'strongBase', [
+  createStrongBaseEquation( solutionProperty: TReadOnlyProperty<AqueousSolution> ): Node {
+    const children = [
       createMOH(),
       createIrreversibleArrow(),
       createM(),
       createPlus(),
       createOH()
-    ] );
+    ];
+    const visibleProperty = new DerivedProperty( [ solutionProperty ], solution => solution instanceof StrongBase );
+    return createEquation( children, visibleProperty );
   },
 
   // B + H2O <-> BH+ + OH-
-  createWeakBaseEquation( solutionTypeProperty: TReadOnlyProperty<SolutionType> ): Node {
-    return createEquation( solutionTypeProperty, 'weakBase', [
+  createWeakBaseEquation( solutionProperty: TReadOnlyProperty<AqueousSolution> ): Node {
+    const children = [
       createB(),
       createPlus(),
       createH2O(),
@@ -80,31 +91,35 @@ const ReactionEquationFactory = {
       createBH(),
       createPlus(),
       createOH()
-    ] );
+    ];
+    const visibleProperty = new DerivedProperty( [ solutionProperty ], solution => solution instanceof WeakBase );
+    return createEquation( children, visibleProperty );
   }
 };
 
 // Equations for all acids are similar: HA + H2O ? A- + H3O+
-function createAcidEquation( solutionTypeProperty: TReadOnlyProperty<SolutionType>, isWeak: boolean ): Node {
-  return createEquation( solutionTypeProperty, ( isWeak ? 'weakAcid' : 'strongAcid' ), [
+function createAcidEquation( solutionProperty: TReadOnlyProperty<AqueousSolution>, isWeak: boolean, visibleProperty: TReadOnlyProperty<boolean> ): Node {
+  const arrow = ( isWeak ? createReversibleArrow() : createIrreversibleArrow() );
+  const children = [
     createHA(),
     createPlus(),
     createH2O(),
-    ( isWeak ? createReversibleArrow() : createIrreversibleArrow() ),
+    arrow,
     createA(),
     createPlus(),
     createH3O()
-  ] );
+  ];
+  return createEquation( children, visibleProperty );
 }
 
 // Creates an equation by horizontally laying out a set of elements (children).
-function createEquation( solutionTypeProperty: TReadOnlyProperty<SolutionType>, soluteType: SolutionType, children: Node[] ): Node {
+function createEquation( children: Node[], visibleProperty: TReadOnlyProperty<boolean> ): Node {
   return new AlignBox( new HBox( {
     children: children,
     scale: EQUATION_SCALE,
     spacing: 4,
     align: 'bottom',
-    visibleProperty: new DerivedProperty( [ solutionTypeProperty ], value => value === soluteType )
+    visibleProperty: visibleProperty
   } ), {
     group: ALIGN_GROUP,
     xAlign: 'center',
