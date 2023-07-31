@@ -11,16 +11,16 @@ import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import Property from '../../../../axon/js/Property.js';
 import NumberSpinner from '../../../../sun/js/NumberSpinner.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import InitialConcentrationSlider from './InitialConcentrationSlider.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 
 const CONCENTRATION_DECIMALS = 3;
 
 export default class InitialConcentrationControl extends VBox {
 
-  public constructor( concentrationProperty: Property<number>, tandem: Tandem ) {
+  public constructor( concentrationProperty: NumberProperty, tandem: Tandem ) {
 
     const titleText = new Text( AcidBaseSolutionsStrings.initialConcentrationStringProperty, {
       font: ABSConstants.SUBTITLE_FONT,
@@ -28,7 +28,7 @@ export default class InitialConcentrationControl extends VBox {
       layoutOptions: { align: 'left' }
     } );
 
-    const spinner = new NumberSpinner( concentrationProperty, new Property( ABSConstants.CONCENTRATION_RANGE ), {
+    const spinner = new NumberSpinner( concentrationProperty, concentrationProperty.rangeProperty, {
       arrowsPosition: 'leftRight',
       xSpacing: 8,
       deltaValue: Math.pow( 10, -CONCENTRATION_DECIMALS ),
@@ -45,8 +45,7 @@ export default class InitialConcentrationControl extends VBox {
       tandem: tandem.createTandem( 'spinner' )
     } );
 
-    const slider = new InitialConcentrationSlider( concentrationProperty, ABSConstants.CONCENTRATION_RANGE,
-      tandem.createTandem( 'slider' ) );
+    const slider = new InitialConcentrationSlider( concentrationProperty, tandem.createTandem( 'slider' ) );
 
     super( {
       children: [

@@ -9,7 +9,6 @@
 import DynamicProperty from '../../../../axon/js/DynamicProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
-import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import Utils from '../../../../dot/js/Utils.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -30,7 +29,7 @@ export default class LogSlider extends Slider {
    * @param logValueRange - the logarithmic range of logValueProperty
    * @param providedOptions
    */
-  public constructor( logValueProperty: Property<number>, logValueRange: RangeWithValue, providedOptions: LogSliderOptions ) {
+  public constructor( logValueProperty: Property<number>, logValueRange: Range, providedOptions: LogSliderOptions ) {
 
     // Property that maps between log and linear scales
     const linearValueProperty = new DynamicProperty( new Property( logValueProperty ), {

@@ -21,6 +21,7 @@ import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import InitialConcentrationControl from './InitialConcentrationControl.js';
 import StrengthControl from './StrengthControl.js';
 import StringSwitch, { StringSwitchOptions } from './StringSwitch.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 
 const AcidBaseTypeValues = [ 'acid', 'base' ] as const;
 export type AcidBaseType = ( typeof AcidBaseTypeValues )[number];
@@ -31,7 +32,7 @@ export type WeakStrongType = ( typeof WeakStrongTypeValues )[number];
 export default class MySolutionPanel extends Panel {
 
   public constructor( solutionTypeProperty: Property<SolutionType>,
-                      concentrationProperty: Property<number>,
+                      concentrationProperty: NumberProperty,
                       strengthProperty: Property<number>,
                       contentAlignGroup: AlignGroup, // so that both control panels have the same width
                       tandem: Tandem ) {

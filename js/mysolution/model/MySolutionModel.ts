@@ -16,6 +16,7 @@ import StrongAcid from '../../common/model/solutions/StrongAcid.js';
 import StrongBase from '../../common/model/solutions/StrongBase.js';
 import WeakAcid from '../../common/model/solutions/WeakAcid.js';
 import WeakBase from '../../common/model/solutions/WeakBase.js';
+import ABSConstants from '../../common/ABSConstants.js';
 
 // constants
 const DEFAULT_SOLUTION_TYPE = 'weakAcid';
@@ -23,7 +24,7 @@ const DEFAULT_SOLUTION_TYPE = 'weakAcid';
 export default class MySolutionModel extends ABSModel {
 
   // convenience Property that will synchronize with the concentration of the currently selected solution
-  public readonly concentrationProperty: Property<number>;
+  public readonly concentrationProperty: NumberProperty;
 
   // convenience Property that will synchronize with the strength of the currently selected solution
   public readonly strengthProperty: Property<number>;
@@ -54,6 +55,7 @@ export default class MySolutionModel extends ABSModel {
 
     this.concentrationProperty = new NumberProperty( defaultSolution.concentrationProperty.value, {
       reentrant: true,
+      range: ABSConstants.CONCENTRATION_RANGE,
       units: 'mol/L',
       tandem: tandem.createTandem( 'concentrationProperty' )
     } );
