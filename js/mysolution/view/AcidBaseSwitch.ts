@@ -1,6 +1,5 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
-//TODO https://github.com/phetsims/acid-base-solutions/issues/178 rename AcidBaseSwitch
 /**
  * StringSwitch is an ABSwitch that switches between string values, and is labeled with strings.
  *
@@ -16,7 +15,7 @@ import ABSConstants from '../../common/ABSConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
-export default class StringSwitch extends ABSwitch<boolean> {
+export default class AcidBaseSwitch extends ABSwitch<boolean> {
 
   public constructor( property: Property<boolean>, tandem: Tandem ) {
 
@@ -48,4 +47,4 @@ export default class StringSwitch extends ABSwitch<boolean> {
   }
 }
 
-acidBaseSolutions.register( 'StringSwitch', StringSwitch );
+acidBaseSolutions.register( 'StringSwitch', AcidBaseSwitch );
