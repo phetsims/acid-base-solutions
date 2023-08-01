@@ -3,6 +3,9 @@
 /**
  * Panel for selecting between a set of mutually-exclusive 'views'.
  *
+ * Note that because the 'Solvent' checkbox is interleaved with the radio button, we cannot use a radio button group
+ * here. So the structure of the PhET-iO tree is custom. See https://github.com/phetsims/acid-base-solutions/issues/186
+ *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -97,6 +100,13 @@ export default class ViewsPanel extends Panel {
     } );
     solventCheckbox.touchArea = solventCheckbox.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
 
+    const particlesControls = new VBox( {
+      children: [ particlesRadioButton, solventCheckbox ],
+      visibleProperty: particlesRadioButton.visibleProperty,
+      spacing: 8,
+      align: 'left'
+    } );
+
     // Graph radio button
     const graphRadioButtonTandem = radioButtonGroupTandem.createTandem( `graph${AquaRadioButton.TANDEM_NAME_SUFFIX}` );
     const graphLabel = new HBox( {
@@ -139,8 +149,7 @@ export default class ViewsPanel extends Panel {
       spacing: 8,
       align: 'left',
       children: [
-        particlesRadioButton,
-        solventCheckbox,
+        particlesControls,
         graphRadioButton,
         hideViewsRadioButton
       ],
