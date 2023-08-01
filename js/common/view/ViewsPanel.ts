@@ -14,7 +14,7 @@ import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignGroup, HBox, Image, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignGroup, HBox, Image, Node, Text, VBox } from '../../../../scenery/js/imports.js';
 import AquaRadioButton, { AquaRadioButtonOptions } from '../../../../sun/js/AquaRadioButton.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
@@ -23,12 +23,12 @@ import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../ABSConstants.js';
 import { ViewMode } from './ViewMode.js';
-import BeakerNode from './BeakerNode.js';
 import ConcentrationGraphNode from './ConcentrationGraphNode.js';
 import createParticleNode from './createParticleNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import BeakerNode from './BeakerNode.js';
 
 // constants
 const TEXT_ICON_X_SPACING = 10;
@@ -61,43 +61,24 @@ export default class ViewsPanel extends Panel {
       touchAreaXDilation: POINT_AREA_X_DILATION,
       touchAreaYDilation: POINT_AREA_Y_DILATION,
       mouseAreaXDilation: POINT_AREA_X_DILATION,
-      mouseAreaYDilation: POINT_AREA_Y_DILATION
+      mouseAreaYDilation: POINT_AREA_Y_DILATION,
+      layoutOptions: { stretch: true }
     };
 
     const radioButtonGroupTandem = tandem.createTandem( 'radioButtonGroup' );
 
     // Particles radio button
-    const particlesRadioButtonTandem = radioButtonGroupTandem.createTandem( `particles${AquaRadioButton.TANDEM_NAME_SUFFIX}` );
-    const particlesLabel = new HBox( {
-      spacing: TEXT_ICON_X_SPACING,
-      children: [
-        new Text( AcidBaseSolutionsStrings.particlesStringProperty, {
-          font: LABEL_FONT,
-          maxWidth: TEXT_MAX_WIDTH
-        } ),
-        new Image( magnifyingGlassIcon_png, { scale: 0.75 } )
-      ]
-    } );
-    const particlesRadioButton = new AquaRadioButton( viewModeProperty, 'particles', particlesLabel,
+    const particlesRadioButton = new AquaRadioButton( viewModeProperty, 'particles', createParticlesLabel(),
       combineOptions<AquaRadioButtonOptions>( {
-        tandem: particlesRadioButtonTandem
+        tandem: radioButtonGroupTandem.createTandem( 'particlesRadioButton' )
       }, radioButtonOptions ) );
 
     // Solvent checkbox
-    const solventCheckboxTandem = particlesRadioButtonTandem.createTandem( 'solventCheckbox' );
-    const solventLabel = new HBox( {
-      spacing: TEXT_ICON_X_SPACING,
-      children: [
-        new Text( AcidBaseSolutionsStrings.solventStringProperty, {
-          font: LABEL_FONT,
-          maxWidth: TEXT_MAX_WIDTH
-        } ),
-        createParticleNode( 'H2O' )
-      ]
-    } );
-    const solventCheckbox = new Checkbox( solventVisibleProperty, solventLabel, {
+    const solventCheckboxTandem = particlesRadioButton.tandem.createTandem( 'solventCheckbox' );
+    const solventCheckbox = new Checkbox( solventVisibleProperty, createSolventLabel(), {
       boxWidth: 15,
       layoutOptions: {
+        stretch: true,
         leftMargin: 20 // indent Solvent checkbox from radio buttons
       },
       touchAreaXDilation: POINT_AREA_X_DILATION,
@@ -115,21 +96,12 @@ export default class ViewsPanel extends Panel {
       children: [ particlesRadioButton, solventCheckbox ],
       visibleProperty: particlesRadioButton.visibleProperty,
       spacing: 8,
-      align: 'left'
+      align: 'left',
+      layoutOptions: { stretch: true }
     } );
 
     // Graph radio button
-    const graphLabel = new HBox( {
-      spacing: TEXT_ICON_X_SPACING,
-      children: [
-        new Text( AcidBaseSolutionsStrings.graphStringProperty, {
-          font: LABEL_FONT,
-          maxWidth: TEXT_MAX_WIDTH
-        } ),
-        ConcentrationGraphNode.createIcon()
-      ]
-    } );
-    const graphRadioButton = new AquaRadioButton( viewModeProperty, 'graph', graphLabel,
+    const graphRadioButton = new AquaRadioButton( viewModeProperty, 'graph', createGraphLabel(),
       combineOptions<AquaRadioButtonOptions>( {
         tandem: radioButtonGroupTandem.createTandem( 'graphRadioButton' )
       }, radioButtonOptions ) );
@@ -138,17 +110,7 @@ export default class ViewsPanel extends Panel {
     } );
 
     // Hide Views radio button
-    const hideViewsLabel = new HBox( {
-      spacing: TEXT_ICON_X_SPACING,
-      children: [
-        new Text( AcidBaseSolutionsStrings.hideViewsStringProperty, {
-          font: LABEL_FONT,
-          maxWidth: TEXT_MAX_WIDTH
-        } ),
-        BeakerNode.createIcon( 20, 15 )
-      ]
-    } );
-    const hideViewsRadioButton = new AquaRadioButton( viewModeProperty, 'hideViews', hideViewsLabel,
+    const hideViewsRadioButton = new AquaRadioButton( viewModeProperty, 'hideViews', createHideViewsLabel(),
       combineOptions<AquaRadioButtonOptions>( {
         tandem: radioButtonGroupTandem.createTandem( 'hideViewsRadioButton' )
       }, radioButtonOptions ) );
@@ -172,17 +134,81 @@ export default class ViewsPanel extends Panel {
       tandemName: 'property'
     } );
 
-    const content = new AlignBox( new VBox( {
+    const content = new VBox( {
       spacing: 8,
       align: 'left',
       children: [ titleText, radioButtonGroup ]
-    } ), {
-      group: contentAlignGroup,
-      xAlign: 'left'
     } );
 
     super( content, options );
   }
+}
+
+function createParticlesLabel(): Node {
+  const hBox = new HBox( {
+    spacing: TEXT_ICON_X_SPACING,
+    children: [
+      new Text( AcidBaseSolutionsStrings.particlesStringProperty, {
+        font: LABEL_FONT,
+        maxWidth: TEXT_MAX_WIDTH
+      } ),
+      new Image( magnifyingGlassIcon_png, { scale: 0.75 } )
+    ]
+  } );
+
+  // NOTE: All create*Label functions wrap the label in a Node, to prevent space from being introduced between
+  // the text and icon when the controls are stretched by scenery layout.
+  return new Node( {
+    children: [ hBox ]
+  } );
+}
+
+function createSolventLabel(): Node {
+  const hBox = new HBox( {
+    spacing: TEXT_ICON_X_SPACING,
+    children: [
+      new Text( AcidBaseSolutionsStrings.solventStringProperty, {
+        font: LABEL_FONT,
+        maxWidth: TEXT_MAX_WIDTH
+      } ),
+      createParticleNode( 'H2O' )
+    ]
+  } );
+  return new Node( {
+    children: [ hBox ]
+  } );
+}
+
+function createGraphLabel(): Node {
+  const hBox = new HBox( {
+    spacing: TEXT_ICON_X_SPACING,
+    children: [
+      new Text( AcidBaseSolutionsStrings.graphStringProperty, {
+        font: LABEL_FONT,
+        maxWidth: TEXT_MAX_WIDTH
+      } ),
+      ConcentrationGraphNode.createIcon()
+    ]
+  } );
+  return new Node( {
+    children: [ hBox ]
+  } );
+}
+
+function createHideViewsLabel(): Node {
+  const hBox = new HBox( {
+    spacing: TEXT_ICON_X_SPACING,
+    children: [
+      new Text( AcidBaseSolutionsStrings.hideViewsStringProperty, {
+        font: LABEL_FONT,
+        maxWidth: TEXT_MAX_WIDTH
+      } ),
+      BeakerNode.createIcon( 20, 15 )
+    ]
+  } );
+  return new Node( {
+    children: [ hBox ]
+  } );
 }
 
 acidBaseSolutions.register( 'ViewsPanel', ViewsPanel );
