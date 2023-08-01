@@ -17,8 +17,13 @@ import { ViewMode, ViewModeValues } from './ViewMode.js';
 
 export default class ABSViewProperties {
 
+  // Whether the solvent is visible in the 'Particles' view
   public readonly solventVisibleProperty: Property<boolean>;
+
+  // Which representation of the solution appears in the beaker
   public readonly viewModeProperty: StringUnionProperty<ViewMode>;
+
+  // Which tool is selected for measuring the pH of the solution
   public readonly toolModeProperty: StringUnionProperty<ToolMode>;
 
   public constructor( tandem: Tandem ) {

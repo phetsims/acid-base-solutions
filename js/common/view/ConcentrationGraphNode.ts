@@ -2,7 +2,7 @@
 
 /**
  * ConcentrationGraphNode is the graph of 'Equilibrium Concentration' for each particle species.
- * To improve performance, updates only when this node is visible.
+ * To improve performance, updates only when this Node is visible.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -154,7 +154,7 @@ export default class ConcentrationGraphNode extends Node {
 
   /*
    * Adjusts visibility and concentration of bars to match the particles in the current solution.
-   * To improve performance, updates only when this node is visible.
+   * To improve performance, updates only when this Node is visible.
    */
   private updateBars(): void {
 
@@ -177,7 +177,7 @@ export default class ConcentrationGraphNode extends Node {
 
   /**
    * Adjusts concentration of bars to match the particles in the current solution.
-   * To improve performance, updates only when this node is visible.
+   * To improve performance, updates only when this Node is visible.
    */
   private updateValues(): void {
     if ( this.visible ) {

@@ -1,7 +1,7 @@
 // Copyright 2017-2023, University of Colorado Boulder
 
 /**
- * Base type for views in 'Acid-Base Solutions' sim.
+ * ABSScreenView is the base class for views in 'Acid-Base Solutions' sim.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -36,10 +36,10 @@ export default class ABSScreenView extends ScreenView {
 
   /**
    * @param model
-   * @param createSolutionPanel - creates the panel titled 'Solution'
+   * @param createSolutionPanel - creates the control panel titled 'Solution'
    * @param tandem
    */
-  public constructor( model: ABSModel, createSolutionPanel: ( alignGroup: AlignGroup ) => Panel, tandem: Tandem ) {
+  protected constructor( model: ABSModel, createSolutionPanel: ( alignGroup: AlignGroup ) => Panel, tandem: Tandem ) {
 
     super( {
       isDisposable: false,

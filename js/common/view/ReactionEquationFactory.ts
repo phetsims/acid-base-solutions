@@ -127,7 +127,7 @@ function createEquation( children: Node[], visibleProperty: TReadOnlyProperty<bo
   } );
 }
 
-// A- node
+// A- Node
 function createA(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
@@ -139,7 +139,7 @@ function createA(): Node {
   } );
 }
 
-// B node
+// B Node
 function createB(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
@@ -151,7 +151,7 @@ function createB(): Node {
   } );
 }
 
-// BH+ node
+// BH+ Node
 function createBH(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
@@ -169,7 +169,7 @@ function createBH(): Node {
   } );
 }
 
-// H2O node
+// H2O Node
 function createH2O(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
@@ -180,7 +180,7 @@ function createH2O(): Node {
   } );
 }
 
-// 2H2O node
+// 2H2O Node
 function create2H2O(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
@@ -204,7 +204,7 @@ function create2H2O(): Node {
   } );
 }
 
-// H3O+ node
+// H3O+ Node
 function createH3O(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
@@ -220,7 +220,7 @@ function createH3O(): Node {
   } );
 }
 
-// HA node
+// HA Node
 function createHA(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
@@ -232,7 +232,7 @@ function createHA(): Node {
   } );
 }
 
-// M+ node
+// M+ Node
 function createM(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
@@ -251,7 +251,7 @@ function createM(): Node {
   } );
 }
 
-// MOH node
+// MOH Node
 function createMOH(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
@@ -270,7 +270,7 @@ function createMOH(): Node {
   } );
 }
 
-// OH- node
+// OH- Node
 function createOH(): Node {
   return new VBox( {
     spacing: VBOX_SPACING,
@@ -282,7 +282,7 @@ function createOH(): Node {
   } );
 }
 
-// plus sign node
+// plus sign Node
 function createPlus(): Node {
   return new VBox( {
     children: [

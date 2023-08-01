@@ -1,8 +1,8 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * This node displays the reaction equation that appears below the beaker.
- * It displays the equation that corresponds to the selected solution type.
+ * ReactionEquationNode displays the reaction equation that appears below the beaker.
+ * The equation corresponds to the selected solution.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)

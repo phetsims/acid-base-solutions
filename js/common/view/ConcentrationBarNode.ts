@@ -86,7 +86,6 @@ export default class ConcentrationBarNode extends Node {
     this.bar = bar;
   }
 
-
   /**
    * Sets the fill color of the bar.
    */
@@ -95,6 +94,9 @@ export default class ConcentrationBarNode extends Node {
   }
 }
 
+/**
+ * Converts a concentration value to a string that will be displayed on the bar.
+ */
 function concentrationToString( concentration: number | null ): string {
   let string;
   if ( concentration === null ) {

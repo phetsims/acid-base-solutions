@@ -1,7 +1,7 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * createParticleNode is a factory function for creating particle nodes.
+ * createParticleNode is a factory function for creating particle Nodes.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)

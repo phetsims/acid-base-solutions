@@ -112,7 +112,7 @@ export default class MagnifyingGlassNode extends Node {
 
   /*
    * Updates the number of particles visible.
-   * To improve performance, updates only when this node is visible.
+   * To improve performance, updates only when this Node is visible.
    */
   private updateParticles(): void {
     if ( this.visible ) {

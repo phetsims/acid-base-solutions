@@ -1,10 +1,11 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * Visual representation of a beaker that is filled to the top with a solution.
+ * BeakerNode is the visual representation of a beaker that is filled to the top with a solution.
  * Ticks on the right edge of the beaker. Origin is at the bottom center.
  *
  * @author Andrey Zelenkov (Mlearner)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
