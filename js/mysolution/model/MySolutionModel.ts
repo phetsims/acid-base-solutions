@@ -99,14 +99,12 @@ export default class MySolutionModel extends ABSModel {
     this.isWeakProperty = isWeakProperty;
 
     this.concentrationProperty = new NumberProperty( ABSConstants.CONCENTRATION_RANGE.defaultValue, {
-      reentrant: true,
       range: ABSConstants.CONCENTRATION_RANGE,
       units: 'mol/L',
       tandem: tandem.createTandem( 'concentrationProperty' )
     } );
 
     this.strengthProperty = new NumberProperty( ABSConstants.WEAK_STRENGTH_RANGE.defaultValue, {
-      reentrant: true,
       range: ABSConstants.WEAK_STRENGTH_RANGE,
       tandem: tandem.createTandem( 'strengthProperty' )
     } );
