@@ -33,6 +33,7 @@ export default class ABSModel implements TModel {
   // pH of the selected solution
   public readonly pHProperty: ReadOnlyProperty<number>;
 
+  // Beaker that contains the solution
   public readonly beaker: Beaker;
 
   // Views

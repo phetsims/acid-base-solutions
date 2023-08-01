@@ -93,8 +93,9 @@ export default class PHPaper extends PhetioObject {
    */
   private updateIndicatorHeight(): void {
     if ( this.beaker.bounds.containsPoint( this.positionProperty.value ) ) {
-      const height = Utils.clamp( this.positionProperty.value.y - this.beaker.top + 5, this.indicatorHeightProperty.value, this.paperSize.height );
-      this.indicatorHeightProperty.value = height;
+      const min = this.indicatorHeightProperty.value;
+      const max = this.paperSize.height;
+      this.indicatorHeightProperty.value = Utils.clamp( this.positionProperty.value.y - this.beaker.top + 5, min, max );
     }
   }
 }
