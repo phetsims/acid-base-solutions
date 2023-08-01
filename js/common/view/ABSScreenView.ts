@@ -74,14 +74,23 @@ export default class ABSScreenView extends ScreenView {
     const graphNode = new ConcentrationGraphNode( model.graph, this.viewProperties.viewModeProperty,
       tandem.createTandem( 'graphNode' ) );
 
-    // Tools
+    // pH Meter
     const pHMeterNode = new PHMeterNode( model.pHMeter, this.viewProperties.toolModeProperty, tandem.createTandem( 'pHMeterNode' ) );
-    const pHPaperNode = new PHPaperNode( model.pHPaper, this.viewProperties.toolModeProperty, tandem.createTandem( 'pHPaperNode' ) );
-    const pHColorKeyNode = new PHColorKeyNode( model.pHPaper.paperSize, this.viewProperties.toolModeProperty, {
+
+    // pH paper and color key. Some PhET-iO gymnastics here to be able to hide the color key independently.
+    const pHPaperNodeTandem = tandem.createTandem( 'pHPaperNode' );
+    const pHPaperNode = new PHPaperNode( model.pHPaper, this.viewProperties.toolModeProperty, pHPaperNodeTandem );
+    const pHColorKeyNode = new PHColorKeyNode( model.pHPaper.paperSize, {
       left: model.beaker.left + 3,
       bottom: model.beaker.top - 50,
-      tandem: tandem.createTandem( 'pHColorKeyNode' )
+      tandem: pHPaperNodeTandem.createTandem( 'pHColorKeyNode' )
     } );
+    const pHPaperAndColorKeyNode = new Node( {
+      children: [ pHColorKeyNode, pHPaperNode ],
+      visibleProperty: pHPaperNode.visibleProperty
+    } );
+
+    // Conductivity tester
     const conductivityTesterNode = new ABSConductivityTesterNode( model.conductivityTester,
       this.viewProperties.toolModeProperty, tandem.createTandem( 'conductivityTesterNode' ) );
 
@@ -113,8 +122,7 @@ export default class ABSScreenView extends ScreenView {
     const rootNode = new Node( {
       children: [
         pHMeterNode,
-        pHColorKeyNode,
-        pHPaperNode,
+        pHPaperAndColorKeyNode,
         conductivityTesterNode,
         beakerNode,
         reactionEquationNode,

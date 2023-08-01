@@ -7,18 +7,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, NodeOptions, NodeTranslationOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSColors from '../ABSColors.js';
-import { ToolMode } from './ToolMode.js';
 
 // constants
 const FONT_BIG = new PhetFont( 12 );
@@ -32,15 +28,11 @@ type PHColorKeyNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired
 
 export default class PHColorKeyNode extends Node {
 
-  public constructor( paperSize: Dimension2, toolModeProperty: StringUnionProperty<ToolMode>, providedOptions: PHColorKeyNodeOptions ) {
+  public constructor( paperSize: Dimension2, providedOptions: PHColorKeyNodeOptions ) {
 
     const options = optionize<PHColorKeyNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
-      visibleProperty: new DerivedProperty( [ toolModeProperty ], toolMode => ( toolMode === 'pHPaper' ), {
-        tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
-        phetioValueType: BooleanIO
-      } ),
       isDisposable: false
     }, providedOptions );
 
