@@ -18,6 +18,7 @@ import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
@@ -105,7 +106,14 @@ export default class PHPaperNode extends Node {
         indicatorNode.fill = pHToColor( pHPaper.pHProperty.value );
       }
     };
-    pHPaper.pHProperty.link( this.updateColor );
+
+    // Update when the pH value changes, or any of the pH colors change.
+    Multilink.multilinkAny( [ pHPaper.pHProperty, ...ABSColors.PH ], () => {
+      this.updateColor();
+    } );
+
+    // Update when this Node becomes visible.
+    this.visibleProperty.link( visible => visible && this.updateColor() );
 
     this.pHPaper = pHPaper;
     this.animating = false;
@@ -131,9 +139,6 @@ export default class PHPaperNode extends Node {
     else {
       this.animating = false;
     }
-
-    // Update when this Node becomes visible.
-    this.visibleProperty.link( visible => visible && this.updateColor() );
   }
 
   /**
