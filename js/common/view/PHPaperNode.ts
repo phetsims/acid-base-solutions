@@ -9,7 +9,7 @@
 
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import { Circle, Color, DragListener, Node, Rectangle } from '../../../../scenery/js/imports.js';
+import { Circle, DragListener, Node, Rectangle } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
 import PHPaper from '../model/PHPaper.js';
@@ -18,7 +18,6 @@ import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import Multilink from '../../../../axon/js/Multilink.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
@@ -26,9 +25,8 @@ const PAPER_STROKE = 'rgb( 100, 100, 100 )';
 
 export default class PHPaperNode extends Node {
 
-  private readonly dragListener: DragListener;
-  private readonly updateColor: () => void;
   private readonly pHPaper: PHPaper;
+  private readonly dragListener: DragListener;
   private animating: boolean; // is the paper animating?
 
   public constructor( pHPaper: PHPaper, toolModeProperty: StringUnionProperty<ToolMode>, tandem: Tandem ) {
@@ -46,6 +44,7 @@ export default class PHPaperNode extends Node {
 
     // portion of the paper that changes color
     const indicatorNode = new Rectangle( 0, 0, pHPaper.paperSize.width, 0, {
+      fill: pHPaper.colorProperty,
       stroke: PAPER_STROKE,
       lineWidth: 0.5
     } );
@@ -101,20 +100,6 @@ export default class PHPaperNode extends Node {
       indicatorNode.setRectHeight( height );
     } );
 
-    this.updateColor = () => {
-      if ( this.visible ) {
-        indicatorNode.fill = pHToColor( pHPaper.pHProperty.value );
-      }
-    };
-
-    // Update when the pH value changes, or any of the pH paper colors change.
-    Multilink.multilinkAny( [ pHPaper.pHProperty, ...ABSColors.PH_PAPER_COLORS ], () => {
-      this.updateColor();
-    } );
-
-    // Update when this Node becomes visible.
-    this.visibleProperty.link( visible => visible && this.updateColor() );
-
     this.pHPaper = pHPaper;
     this.animating = false;
 
@@ -164,27 +149,6 @@ export default class PHPaperNode extends Node {
       ]
     } );
   }
-}
-
-// Creates a color for a given pH value.
-function pHToColor( pH: number ): Color {
-  assert && assert( pH >= 0 && pH <= ABSColors.PH_PAPER_COLORS.length - 1 );
-  let color;
-  if ( Number.isInteger( pH ) ) {
-
-    // pH value is an integer, so look up the color directly.
-    color = ABSColors.PH_PAPER_COLORS[ pH ].value;
-  }
-  else {
-
-    // pH value is not an integer, so interpolate between the 2 closest colors.
-    const lowerPH = Math.floor( pH );
-    const upperPH = lowerPH + 1;
-    const lowerPHColor = ABSColors.PH_PAPER_COLORS[ lowerPH ].value;
-    const upperPHColor = ABSColors.PH_PAPER_COLORS[ upperPH ].value;
-    color = Color.interpolateRGBA( lowerPHColor, upperPHColor, ( pH - lowerPH ) );
-  }
-  return color;
 }
 
 acidBaseSolutions.register( 'PHPaperNode', PHPaperNode );

@@ -21,12 +21,16 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import AqueousSolution from './solutions/AqueousSolution.js';
+import { Color } from '../../../../scenery/js/imports.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import ABSColors from '../ABSColors.js';
 
 export default class PHPaper extends PhetioObject {
 
   public readonly beaker: Beaker;
   public readonly pHProperty: TReadOnlyProperty<number>;
   public readonly paperSize: Dimension2;
+  public readonly colorProperty: TReadOnlyProperty<Color>; // color of the pH paper
   public readonly dragBounds: Bounds2;
   public readonly positionProperty: Property<Vector2>; // position of the bottom-center of the paper
 
@@ -46,6 +50,9 @@ export default class PHPaper extends PhetioObject {
     this.beaker = beaker;
     this.pHProperty = pHProperty;
     this.paperSize = new Dimension2( 16, 110 );
+
+    this.colorProperty = DerivedProperty.deriveAny( [ pHProperty, ...ABSColors.PH_PAPER_COLORS ],
+      () => pHToColor( pHProperty.value ) );
 
     this.dragBounds = new Bounds2(
       beaker.left + this.paperSize.width / 2, beaker.top - 20,
@@ -98,6 +105,27 @@ export default class PHPaper extends PhetioObject {
       this.indicatorHeightProperty.value = Utils.clamp( this.positionProperty.value.y - this.beaker.top + 5, min, max );
     }
   }
+}
+
+// Creates a color for a given pH value.
+function pHToColor( pH: number ): Color {
+  assert && assert( pH >= 0 && pH <= ABSColors.PH_PAPER_COLORS.length - 1 );
+  let color;
+  if ( Number.isInteger( pH ) ) {
+
+    // pH value is an integer, so look up the color directly.
+    color = ABSColors.PH_PAPER_COLORS[ pH ].value;
+  }
+  else {
+
+    // pH value is not an integer, so interpolate between the 2 closest colors.
+    const lowerPH = Math.floor( pH );
+    const upperPH = lowerPH + 1;
+    const lowerPHColor = ABSColors.PH_PAPER_COLORS[ lowerPH ].value;
+    const upperPHColor = ABSColors.PH_PAPER_COLORS[ upperPH ].value;
+    color = Color.interpolateRGBA( lowerPHColor, upperPHColor, ( pH - lowerPH ) );
+  }
+  return color;
 }
 
 acidBaseSolutions.register( 'PHPaper', PHPaper );
