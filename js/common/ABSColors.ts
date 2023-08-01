@@ -20,9 +20,15 @@ const ABSColors = {
     default: 'white'
   } ),
 
-  CONTROL_PANEL_BACKGROUND: 'rgb(208,212,255)',
+  // Fill for control panels
+  controlPanelFillProperty: new ProfileColorProperty( acidBaseSolutions, 'controlPanelFill', {
+    default: 'rgb( 208, 212, 255 )'
+  } ),
 
-  PH_PAPER: 'rgb(217,215,154)', // color of blank pH paper, cream
+  // Blank pH paper, cream
+  pHPaperColorProperty: new ProfileColorProperty( acidBaseSolutions, 'pHPaperColor', {
+    default: 'rgb( 217, 215, 154 )'
+  } ),
 
   // pH colors, ordered from pH value 0-14, type Color because we'll be interpolating
   PH: [

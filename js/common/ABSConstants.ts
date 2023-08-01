@@ -37,7 +37,7 @@ const AB_SWITCH_OPTIONS: StrictOmit<ABSwitchOptions, 'tandem'> = {
 };
 
 const PANEL_OPTIONS: PanelOptions = {
-  fill: ABSColors.CONTROL_PANEL_BACKGROUND,
+  fill: ABSColors.controlPanelFillProperty,
   xMargin: 15,
   yMargin: 6,
   align: 'left'

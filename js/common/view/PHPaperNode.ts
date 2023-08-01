@@ -21,7 +21,7 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
-const PAPER_STROKE = 'rgb(100, 100, 100)';
+const PAPER_STROKE = 'rgb( 100, 100, 100 )';
 
 export default class PHPaperNode extends Node {
 
@@ -34,7 +34,7 @@ export default class PHPaperNode extends Node {
 
     // blank paper
     const paperNode = new Rectangle( 0, 0, pHPaper.paperSize.width, pHPaper.paperSize.height, {
-      fill: ABSColors.PH_PAPER,
+      fill: ABSColors.pHPaperColorProperty,
       stroke: PAPER_STROKE,
       lineWidth: 0.5,
 
@@ -143,7 +143,11 @@ export default class PHPaperNode extends Node {
     return new Node( {
       children: [
         // full paper
-        new Rectangle( 0, 0, width, height, { fill: ABSColors.PH_PAPER, stroke: PAPER_STROKE, lineWidth: 0.5 } ),
+        new Rectangle( 0, 0, width, height, {
+          fill: ABSColors.pHPaperColorProperty,
+          stroke: PAPER_STROKE,
+          lineWidth: 0.5
+        } ),
         // portion of paper that's colored
         new Rectangle( 0, 0.6 * height, width, 0.4 * height, {
           fill: ABSColors.PH[ 2 ],
