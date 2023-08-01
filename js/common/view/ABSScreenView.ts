@@ -74,11 +74,14 @@ export default class ABSScreenView extends ScreenView {
     const graphNode = new ConcentrationGraphNode( model.graph, this.viewProperties.viewModeProperty,
       tandem.createTandem( 'graphNode' ) );
 
+    // Group all tools under a tandem
+    const toolNodesTandem = tandem.createTandem( 'toolNodes' );
+
     // pH Meter
-    const pHMeterNode = new PHMeterNode( model.pHMeter, this.viewProperties.toolModeProperty, tandem.createTandem( 'pHMeterNode' ) );
+    const pHMeterNode = new PHMeterNode( model.pHMeter, this.viewProperties.toolModeProperty, toolNodesTandem.createTandem( 'pHMeterNode' ) );
 
     // pH paper and color key. Some PhET-iO gymnastics here to be able to hide the color key independently.
-    const pHPaperNodeTandem = tandem.createTandem( 'pHPaperNode' );
+    const pHPaperNodeTandem = toolNodesTandem.createTandem( 'pHPaperNode' );
     const pHPaperNode = new PHPaperNode( model.pHPaper, this.viewProperties.toolModeProperty, pHPaperNodeTandem );
     const pHColorKeyNode = new PHColorKeyNode( model.pHPaper.paperSize, {
       left: model.beaker.left + 3,
@@ -92,7 +95,7 @@ export default class ABSScreenView extends ScreenView {
 
     // Conductivity tester
     const conductivityTesterNode = new ABSConductivityTesterNode( model.conductivityTester,
-      this.viewProperties.toolModeProperty, tandem.createTandem( 'conductivityTesterNode' ) );
+      this.viewProperties.toolModeProperty, toolNodesTandem.createTandem( 'conductivityTesterNode' ) );
 
     // To make panels have the same width
     const panelAlignGroup = new AlignGroup( {
