@@ -144,6 +144,9 @@ export default class ViewsPanel extends Panel {
   }
 }
 
+/**
+ * Creates the label for the 'Particles' radio button.
+ */
 function createParticlesLabel(): Node {
   const hBox = new HBox( {
     spacing: TEXT_ICON_X_SPACING,
@@ -163,6 +166,9 @@ function createParticlesLabel(): Node {
   } );
 }
 
+/**
+ * Creates the label for the 'Solvent' checkbox.
+ */
 function createSolventLabel(): Node {
   const hBox = new HBox( {
     spacing: TEXT_ICON_X_SPACING,
@@ -179,6 +185,9 @@ function createSolventLabel(): Node {
   } );
 }
 
+/**
+ * Creates the label for the 'Graph' radio button.
+ */
 function createGraphLabel(): Node {
   const hBox = new HBox( {
     spacing: TEXT_ICON_X_SPACING,
@@ -195,6 +204,9 @@ function createGraphLabel(): Node {
   } );
 }
 
+/**
+ * Creates the label for the 'Hide Views' radio button.
+ */
 function createHideViewsLabel(): Node {
   const hBox = new HBox( {
     spacing: TEXT_ICON_X_SPACING,
