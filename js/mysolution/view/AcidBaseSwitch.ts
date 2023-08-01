@@ -47,4 +47,4 @@ export default class AcidBaseSwitch extends ABSwitch<boolean> {
   }
 }
 
-acidBaseSolutions.register( 'StringSwitch', AcidBaseSwitch );
+acidBaseSolutions.register( 'AcidBaseSwitch', AcidBaseSwitch );
