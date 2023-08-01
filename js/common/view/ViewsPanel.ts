@@ -145,21 +145,21 @@ export default class ViewsPanel extends Panel {
 
 // Creates a control label that consists of text and an icon.
 function createLabel( stringProperty: TReadOnlyProperty<string>, icon: Node ): Node {
-  const hBox = new HBox( {
-    spacing: 10,
-    children: [
-      new Text( stringProperty, {
-        font: LABEL_FONT,
-        maxWidth: 130 // determined empirically
-      } ),
-      icon
-    ]
+  const text = new Text( stringProperty, {
+    font: LABEL_FONT,
+    maxWidth: 130 // determined empirically
   } );
 
-  // Wrap the label in a Node, to prevent space from being introduced between the text and icon when the controls
-  // are stretched by scenery layout.
+  // text to the left of icon
+  const hBox = new HBox( {
+    spacing: 10,
+    children: [ text, icon ]
+  } );
+
+  // Wrap in a Node, to prevent space from being introduced between text and icon when the controls are stretched by scenery layout.
   return new Node( {
-    children: [ hBox ]
+    children: [ hBox ],
+    isDisposable: false
   } );
 }
 
