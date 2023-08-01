@@ -81,9 +81,11 @@ export default class BeakerNode extends Node {
       } );
       tickPaths.push( tickPath );
     }
+
+    const tickMarkNodesTandem = tandem.createTandem( 'tickMarkNodes' );
     const tickMarkNodes = new Node( {
       children: tickPaths,
-      tandem: tandem.createTandem( 'tickMarkNodes' )
+      tandem: tickMarkNodesTandem
     } );
 
     // major tick label at '1L'
@@ -96,7 +98,10 @@ export default class BeakerNode extends Node {
       fill: 'black',
       maxWidth: 65
     } );
-    tickMarkNodes.addChild( majorTickText );
+    tickMarkNodes.addChild( new Node( {
+      children: [ majorTickText ],
+      tandem: tickMarkNodesTandem.createTandem( 'tickLabels' )
+    } ) );
 
     majorTickText.boundsProperty.link( bounds => {
       majorTickText.right = BEAKER_WIDTH / 2 - MAJOR_TICK_LENGTH - TICK_LABEL_X_SPACING;
