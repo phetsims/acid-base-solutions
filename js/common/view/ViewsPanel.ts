@@ -98,7 +98,9 @@ export default class ViewsPanel extends Panel {
       } ),
       tandem: solventCheckboxTandem
     } );
-    solventCheckbox.touchArea = solventCheckbox.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
+    solventCheckbox.localBoundsProperty.link( localBounds => {
+      solventCheckbox.touchArea = localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
+    } );
 
     const particlesControls = new VBox( {
       children: [ particlesRadioButton, solventCheckbox ],
