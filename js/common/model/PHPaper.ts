@@ -52,7 +52,9 @@ export default class PHPaper extends PhetioObject {
     this.paperSize = new Dimension2( 16, 110 );
 
     this.colorProperty = DerivedProperty.deriveAny( [ pHProperty, ...ABSColors.PH_PAPER_COLORS ],
-      () => pHToColor( pHProperty.value ) );
+      () => pHToColor( pHProperty.value ), {
+        // Not very interesting for PhET-iO, so not instrumented.
+      } );
 
     this.dragBounds = new Bounds2(
       beaker.left + this.paperSize.width / 2, beaker.top - 20,
