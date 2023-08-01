@@ -35,8 +35,8 @@ const ABSColors = {
     default: 'white'
   } ),
 
-  // pH colors, ordered from pH value 0-14
-  PH: [
+  // pH paper colors, ordered from pH value 0-14
+  PH_PAPER_COLORS: [
     new ProfileColorProperty( acidBaseSolutions, 'pH0ColorProperty', {
       default: 'rgb( 182, 70, 72 )'
     } ),

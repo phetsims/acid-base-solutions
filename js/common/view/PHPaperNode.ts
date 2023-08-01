@@ -107,8 +107,8 @@ export default class PHPaperNode extends Node {
       }
     };
 
-    // Update when the pH value changes, or any of the pH colors change.
-    Multilink.multilinkAny( [ pHPaper.pHProperty, ...ABSColors.PH ], () => {
+    // Update when the pH value changes, or any of the pH paper colors change.
+    Multilink.multilinkAny( [ pHPaper.pHProperty, ...ABSColors.PH_PAPER_COLORS ], () => {
       this.updateColor();
     } );
 
@@ -147,15 +147,17 @@ export default class PHPaperNode extends Node {
   public static createIcon( width: number, height: number ): Node {
     return new Node( {
       children: [
+
         // full paper
         new Rectangle( 0, 0, width, height, {
           fill: ABSColors.pHPaperColorProperty,
           stroke: PAPER_STROKE,
           lineWidth: 0.5
         } ),
+
         // portion of paper that's colored
         new Rectangle( 0, 0.6 * height, width, 0.4 * height, {
-          fill: ABSColors.PH[ 2 ],
+          fill: ABSColors.PH_PAPER_COLORS[ 2 ],
           stroke: PAPER_STROKE,
           lineWidth: 0.5
         } )
@@ -164,19 +166,23 @@ export default class PHPaperNode extends Node {
   }
 }
 
-// Creates a {Color} color for a given {number} pH.
+// Creates a color for a given pH value.
 function pHToColor( pH: number ): Color {
-  assert && assert( pH >= 0 && pH <= ABSColors.PH.length );
+  assert && assert( pH >= 0 && pH <= ABSColors.PH_PAPER_COLORS.length );
   let color;
   if ( Number.isInteger( pH ) ) {
-    // pH value is an integer, look up color
-    color = ABSColors.PH[ pH ].value;
+
+    // pH value is an integer, so look up the color directly.
+    color = ABSColors.PH_PAPER_COLORS[ pH ].value;
   }
   else {
-    // pH value is not an integer, interpolate between 2 closest colors
+
+    // pH value is not an integer, so interpolate between the 2 closest colors.
     const lowerPH = Math.floor( pH );
     const upperPH = lowerPH + 1;
-    color = Color.interpolateRGBA( ABSColors.PH[ lowerPH ].value, ABSColors.PH[ upperPH ].value, ( pH - lowerPH ) );
+    const lowerPHColor = ABSColors.PH_PAPER_COLORS[ lowerPH ].value;
+    const upperPHColor = ABSColors.PH_PAPER_COLORS[ upperPH ].value;
+    color = Color.interpolateRGBA( lowerPHColor, upperPHColor, ( pH - lowerPH ) );
   }
   return color;
 }
