@@ -39,16 +39,14 @@ export type AqueousSolutionStateObject = ReferenceIOState; // because AqueousSol
 
 export default abstract class AqueousSolution extends PhetioObject {
 
+  // The particles that make up the solution. The order of elements in this array determines the left-to-right order
+  // of bars in the graph, and the front-to-back rendering order of particles in the magnifying glass.
   public readonly particles: Particle[];
+
   public readonly strengthProperty: Property<number>;
   public readonly concentrationProperty: Property<number>;
   public readonly pHProperty: TReadOnlyProperty<number>;
 
-  /**
-   * @param particles - the particles that make up the solution. The order of elements in this array determines the
-   *   left-to-right order of bars in the graph, and the front-to-back rendering order of particles in the magnifying glass.
-   * @param providedOptions
-   */
   protected constructor( particles: Particle[], providedOptions: AqueousSolutionOptions ) {
 
     const options = optionize<AqueousSolutionOptions, SelfOptions, PhetioObjectOptions>()( {
