@@ -50,6 +50,7 @@ export default class ABSModel implements TModel {
     this.solutions = solutions;
     this.solutionProperty = solutionProperty;
 
+    // Synchronize with the pH of the selected solution.
     this.pHProperty = DerivedProperty.deriveAny( [ solutionProperty, ...solutions.map( solution => solution.pHProperty ) ],
       () => solutionProperty.value.pHProperty.value, {
         tandem: tandem.createTandem( 'pHProperty' ),
