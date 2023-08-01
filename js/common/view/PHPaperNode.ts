@@ -168,7 +168,7 @@ export default class PHPaperNode extends Node {
 
 // Creates a color for a given pH value.
 function pHToColor( pH: number ): Color {
-  assert && assert( pH >= 0 && pH <= ABSColors.PH_PAPER_COLORS.length );
+  assert && assert( pH >= 0 && pH <= ABSColors.PH_PAPER_COLORS.length - 1 );
   let color;
   if ( Number.isInteger( pH ) ) {
 
