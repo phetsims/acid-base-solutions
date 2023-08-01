@@ -34,7 +34,6 @@ export default class LogSlider extends Slider {
     // Property that maps between log and linear scales
     const linearValueProperty = new DynamicProperty( new Property( logValueProperty ), {
       bidirectional: true,
-      reentrant: true, // necessary because bidirectional:true
       map: ( concentration: number ) => LogSlider.logToLinear( concentration ),
       inverseMap: ( sliderValue: number ) => LogSlider.linearToLog( sliderValue )
     } );
