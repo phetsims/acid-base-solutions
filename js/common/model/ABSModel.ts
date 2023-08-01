@@ -50,10 +50,11 @@ export default class ABSModel implements TModel {
     this.solutions = solutions;
     this.solutionProperty = solutionProperty;
 
-    this.pHProperty = new DerivedProperty( [ solutionProperty ], solution => solution.pHProperty.value, {
-      tandem: tandem.createTandem( 'pHProperty' ),
-      phetioValueType: NumberIO
-    } );
+    this.pHProperty = DerivedProperty.deriveAny( [ solutionProperty, ...solutions.map( solution => solution.pHProperty ) ],
+      () => solutionProperty.value.pHProperty.value, {
+        tandem: tandem.createTandem( 'pHProperty' ),
+        phetioValueType: NumberIO
+      } );
 
     this.beaker = new Beaker();
     this.magnifyingGlass = new MagnifyingGlass( this.beaker, this.solutions, solutionProperty );
