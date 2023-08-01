@@ -9,7 +9,6 @@
 
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { Image } from '../../../../scenery/js/imports.js';
-import RectangularRadioButton from '../../../../sun/js/buttons/RectangularRadioButton.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupItem } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import lightBulbIcon_png from '../../../images/lightBulbIcon_png.js';
@@ -26,17 +25,17 @@ export default class ToolsRadioButtonGroup extends RectangularRadioButtonGroup<T
       {
         value: 'pHMeter',
         createNode: () => PHMeterNode.createIcon(),
-        tandemName: `phMeter${RectangularRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'phMeterRadioButton'
       },
       {
         value: 'pHPaper',
         createNode: () => PHPaperNode.createIcon( 8, 30 ),
-        tandemName: `phPaper${RectangularRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'phPaperRadioButton'
       },
       {
-        value: 'conductivity',
+        value: 'conductivityTester',
         createNode: () => new Image( lightBulbIcon_png ),
-        tandemName: `conductivity${RectangularRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'conductivityTesterRadioButton'
       }
     ];
 

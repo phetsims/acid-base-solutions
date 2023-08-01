@@ -31,7 +31,7 @@ export default class ABSConductivityTesterNode extends ConductivityTesterNode {
           conductivityTester.probeDragYRange.min - conductivityTester.bulbPosition.y,
           conductivityTester.probeDragYRange.max - conductivityTester.bulbPosition.y
         ),
-        visibleProperty: new DerivedProperty( [ toolModeProperty ], toolMode => ( toolMode === 'conductivity' ), {
+        visibleProperty: new DerivedProperty( [ toolModeProperty ], toolMode => ( toolMode === 'conductivityTester' ), {
           tandem: tandem.createTandem( 'visibleProperty' ),
           phetioValueType: BooleanIO
         } ),

@@ -6,5 +6,5 @@
  * @author Chris Malley (PixelZoom, Inc)
  */
 
-export const ToolModeValues = [ 'pHMeter', 'pHPaper', 'conductivity' ] as const;
+export const ToolModeValues = [ 'pHMeter', 'pHPaper', 'conductivityTester' ] as const;
 export type ToolMode = ( typeof ToolModeValues )[number];
