@@ -65,6 +65,7 @@ export default class PHPaperNode extends Node {
         tandem: tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),
+      phetioInputEnabledPropertyInstrumented: true,
       isDisposable: false,
       tandem: tandem
     } );
