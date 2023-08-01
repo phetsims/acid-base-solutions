@@ -139,6 +139,7 @@ function createRadioButtonLabel( solutionNameProperty: TReadOnlyProperty<string>
     children: [ text, particleNode ]
   } );
 
+  // Wrap in AlignBox to prevent text and particleNode from getting spaced out by AquaRadioButtonGroup.
   return new AlignBox( hBox, {
     group: labelsAlignGroup,
     xAlign: 'left'
