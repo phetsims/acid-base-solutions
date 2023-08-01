@@ -41,16 +41,13 @@ export default class IntroductionSolutionPanel extends Panel {
       maxWidth: 180 // determined empirically
     } );
 
-    // To make all radio button labels have the same width and height
-    const labelsAlignGroup = new AlignGroup();
-
     const radioButtonGroupItems: AquaRadioButtonGroupItem<AqueousSolution>[] = [
 
       // Water (H20)
       {
         value: model.water,
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.waterStringProperty,
-          'H<sub>2</sub>O', 'H2O', labelsAlignGroup, tandem ),
+          'H<sub>2</sub>O', 'H2O', tandem ),
         tandemName: `water${AquaRadioButton.TANDEM_NAME_SUFFIX}`
       },
 
@@ -58,7 +55,7 @@ export default class IntroductionSolutionPanel extends Panel {
       {
         value: model.strongAcid,
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.strongAcidStringProperty,
-          'H<i>A</i>', 'HA', labelsAlignGroup, tandem ),
+          'H<i>A</i>', 'HA', tandem ),
         tandemName: `strongAcid${AquaRadioButton.TANDEM_NAME_SUFFIX}`
       },
 
@@ -66,7 +63,7 @@ export default class IntroductionSolutionPanel extends Panel {
       {
         value: model.weakAcid,
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.weakAcidStringProperty,
-          'H<i>A</i>', 'HA', labelsAlignGroup, tandem ),
+          'H<i>A</i>', 'HA', tandem ),
         tandemName: `weakAcid${AquaRadioButton.TANDEM_NAME_SUFFIX}`
       },
 
@@ -74,7 +71,7 @@ export default class IntroductionSolutionPanel extends Panel {
       {
         value: model.strongBase,
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.strongBaseStringProperty,
-          '<i>M</i>OH', 'MOH', labelsAlignGroup, tandem ),
+          '<i>M</i>OH', 'MOH', tandem ),
         tandemName: `strongBase${AquaRadioButton.TANDEM_NAME_SUFFIX}`
       },
 
@@ -82,7 +79,7 @@ export default class IntroductionSolutionPanel extends Panel {
       {
         value: model.weakBase,
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.weakBaseStringProperty,
-          '<i>B</i>', 'B', labelsAlignGroup, tandem ),
+          '<i>B</i>', 'B', tandem ),
         tandemName: `weakBase${AquaRadioButton.TANDEM_NAME_SUFFIX}`
       }
     ];
@@ -116,7 +113,7 @@ export default class IntroductionSolutionPanel extends Panel {
  * Creates a label for a radio button.
  */
 function createRadioButtonLabel( solutionNameProperty: TReadOnlyProperty<string>, formula: string,
-                                 key: ParticleKey, labelsAlignGroup: AlignGroup, tandem: Tandem ): Node {
+                                 key: ParticleKey, tandem: Tandem ): Node {
 
   // Combine the solution's name and formula
   const stringProperty = new PatternStringProperty( AcidBaseSolutionsStrings.patternSolutionNameFormulaStringProperty, {
@@ -139,10 +136,9 @@ function createRadioButtonLabel( solutionNameProperty: TReadOnlyProperty<string>
     children: [ text, particleNode ]
   } );
 
-  // Wrap in AlignBox to prevent text and particleNode from getting spaced out by AquaRadioButtonGroup.
-  return new AlignBox( hBox, {
-    group: labelsAlignGroup,
-    xAlign: 'left'
+  // Wrap to prevent text and particleNode from getting spaced out by AquaRadioButtonGroup.
+  return new Node( {
+    children: [ hBox ]
   } );
 }
 
