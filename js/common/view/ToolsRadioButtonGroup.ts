@@ -1,7 +1,7 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * Radio buttons for selecting between a set of mutually-exclusive tools.
+ * ToolsRadioButtonGroup is a group of radio buttons for selecting between a set of mutually-exclusive tools.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)

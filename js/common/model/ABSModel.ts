@@ -1,7 +1,7 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * ABSModel is the base class for models in the 'Acid-Base Solutions' sim.
+ * ABSModel is the base class for models in the 'Acid-Base Solutions' simulation.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)

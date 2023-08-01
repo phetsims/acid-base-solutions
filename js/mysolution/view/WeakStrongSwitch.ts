@@ -1,7 +1,7 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * WeakStrongSwitch is an ABSwitch that switches a solution between 'Weak' and 'Strong'.
+ * WeakStrongSwitch is the ABSwitch that switches the solution between 'Weak' and 'Strong'.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

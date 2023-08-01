@@ -1,7 +1,7 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * Colors for simulation 'Acid-Base Solutions' simulation.
+ * Colors used throughout this simulation.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

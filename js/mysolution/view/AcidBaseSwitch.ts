@@ -1,7 +1,7 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
 /**
- * StringSwitch is an ABSwitch that switches between string values, and is labeled with strings.
+ * AcidBaseSwitch is an ABSwitch that switches the solution between 'Acid' and 'Base'.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

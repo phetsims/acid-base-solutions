@@ -1,7 +1,7 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * pH color key, a set of color 'chips' for pH values.
+ * PHColorKeyNode is a set of color 'chips' that serves as a key for pH values.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)

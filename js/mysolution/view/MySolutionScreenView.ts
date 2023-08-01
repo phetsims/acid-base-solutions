@@ -1,7 +1,7 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * View for the 'My Solution' screen.
+ * MySolutionScreenView is the view for the 'My Solution' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

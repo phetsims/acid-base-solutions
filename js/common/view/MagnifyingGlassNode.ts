@@ -1,8 +1,7 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * MagnifyingGlass view.
- * For performance, draws particle directly to Canvas using drawImage.
+ * MagnifyingGlassNode is the view of the magnifying glass, in which are shown different representations of the solution.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

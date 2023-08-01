@@ -1,7 +1,7 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * Model for the 'My Solution' screen in 'Acid-Base Solutions' sim.
+ * MySolutionModel is the model for the 'My Solution' screen.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)

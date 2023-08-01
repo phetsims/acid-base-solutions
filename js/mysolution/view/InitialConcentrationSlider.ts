@@ -1,7 +1,7 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * InitialConcentrationSlider is a logarithmic slider for controlling concentration.
+ * InitialConcentrationSlider is a logarithmic slider for controlling concentration of the solution.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,8 +1,7 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * Visual representation for pH paper in the 'Acid-Base Solutions' sim.
- * Origin is at the bottom-center of the paper.
+ * PHPaperNode is the view of pH paper. Origin is at the bottom-center of the paper.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)

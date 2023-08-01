@@ -1,7 +1,7 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * StrengthSlider is a logarithmic slider for controlling strength.
+ * StrengthSlider is a logarithmic slider for controlling strength of the solution.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

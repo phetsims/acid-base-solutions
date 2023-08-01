@@ -1,7 +1,8 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * Panel for selecting between a set of mutually-exclusive 'views'.
+ * ViewsPanel is the panel titled 'Views', for selecting between a set of mutually-exclusive representations of the
+ * solutions, shown in the beaker.
  *
  * Note that because the 'Solvent' checkbox is interleaved with the radio button, we cannot use a radio button group
  * here. So the structure of the PhET-iO tree is custom, and we're faking things to make it look like an

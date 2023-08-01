@@ -1,7 +1,7 @@
 // Copyright 2017-2023, University of Colorado Boulder
 
 /**
- * ABSScreenView is the base class for views in 'Acid-Base Solutions' sim.
+ * ABSScreenView is the base class for views in 'Acid-Base Solutions' simulation.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)

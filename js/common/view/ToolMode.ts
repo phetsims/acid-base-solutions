@@ -1,7 +1,7 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * Possible choices in the 'Tools' control panel.
+ * Possible choices for the Tools radio buttons.
  *
  * @author Chris Malley (PixelZoom, Inc)
  */

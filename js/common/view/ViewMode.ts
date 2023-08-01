@@ -1,7 +1,7 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * Possible choices in the 'Views' control panel.
+ * Possible radio-button choices in the 'Views' control panel.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
