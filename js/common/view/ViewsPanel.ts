@@ -15,7 +15,7 @@ import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, Image, Text, VBox } from '../../../../scenery/js/imports.js';
-import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
+import AquaRadioButton, { AquaRadioButtonOptions } from '../../../../sun/js/AquaRadioButton.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import magnifyingGlassIcon_png from '../../../images/magnifyingGlassIcon_png.js';
@@ -35,8 +35,9 @@ const TEXT_ICON_X_SPACING = 10;
 const RADIO_BUTTON_RADIUS = 7;
 const LABEL_FONT = new PhetFont( 12 );
 const TEXT_MAX_WIDTH = 130; // determined empirically
-const TOUCH_AREA_X_DILATION = 10;
-const TOUCH_AREA_Y_DILATION = 3;
+const RADIO_BUTTONS_Y_SPACING = 8;
+const POINT_AREA_X_DILATION = 10;
+const POINT_AREA_Y_DILATION = RADIO_BUTTONS_Y_SPACING / 2; // to mimic AquaRadioButtonGroup
 
 export default class ViewsPanel extends Panel {
 
@@ -55,6 +56,14 @@ export default class ViewsPanel extends Panel {
       maxWidth: 180 // determined empirically
     } );
 
+    const radioButtonOptions: AquaRadioButtonOptions = {
+      radius: RADIO_BUTTON_RADIUS,
+      touchAreaXDilation: POINT_AREA_X_DILATION,
+      touchAreaYDilation: POINT_AREA_Y_DILATION,
+      mouseAreaXDilation: POINT_AREA_X_DILATION,
+      mouseAreaYDilation: POINT_AREA_Y_DILATION
+    };
+
     const radioButtonGroupTandem = tandem.createTandem( 'radioButtonGroup' );
 
     // Particles radio button
@@ -69,11 +78,10 @@ export default class ViewsPanel extends Panel {
         new Image( magnifyingGlassIcon_png, { scale: 0.75 } )
       ]
     } );
-    const particlesRadioButton = new AquaRadioButton( viewModeProperty, 'particles', particlesLabel, {
-      radius: RADIO_BUTTON_RADIUS,
-      tandem: particlesRadioButtonTandem
-    } );
-    particlesRadioButton.touchArea = particlesRadioButton.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
+    const particlesRadioButton = new AquaRadioButton( viewModeProperty, 'particles', particlesLabel,
+      combineOptions<AquaRadioButtonOptions>( {
+        tandem: particlesRadioButtonTandem
+      }, radioButtonOptions ) );
 
     // Solvent checkbox
     const solventCheckboxTandem = particlesRadioButtonTandem.createTandem( 'solventCheckbox' );
@@ -92,14 +100,15 @@ export default class ViewsPanel extends Panel {
       layoutOptions: {
         leftMargin: 20 // indent Solvent checkbox from radio buttons
       },
+      touchAreaXDilation: POINT_AREA_X_DILATION,
+      touchAreaYDilation: POINT_AREA_Y_DILATION,
+      mouseAreaXDilation: POINT_AREA_X_DILATION,
+      mouseAreaYDilation: POINT_AREA_Y_DILATION,
       enabledProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'particles' ), {
         tandem: solventCheckboxTandem.createTandem( 'enabledProperty' ),
         phetioValueType: BooleanIO
       } ),
       tandem: solventCheckboxTandem
-    } );
-    solventCheckbox.localBoundsProperty.link( localBounds => {
-      solventCheckbox.touchArea = localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
     } );
 
     const particlesControls = new VBox( {
@@ -110,7 +119,6 @@ export default class ViewsPanel extends Panel {
     } );
 
     // Graph radio button
-    const graphRadioButtonTandem = radioButtonGroupTandem.createTandem( `graph${AquaRadioButton.TANDEM_NAME_SUFFIX}` );
     const graphLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
@@ -121,14 +129,15 @@ export default class ViewsPanel extends Panel {
         ConcentrationGraphNode.createIcon()
       ]
     } );
-    const graphRadioButton = new AquaRadioButton( viewModeProperty, 'graph', graphLabel, {
-      radius: RADIO_BUTTON_RADIUS,
-      tandem: graphRadioButtonTandem
+    const graphRadioButton = new AquaRadioButton( viewModeProperty, 'graph', graphLabel,
+      combineOptions<AquaRadioButtonOptions>( {
+        tandem: radioButtonGroupTandem.createTandem( 'graphRadioButton' )
+      }, radioButtonOptions ) );
+    graphRadioButton.localBoundsProperty.link( localBounds => {
+      graphRadioButton.touchArea = localBounds.dilatedXY( POINT_AREA_X_DILATION, POINT_AREA_Y_DILATION );
     } );
-    graphRadioButton.touchArea = graphRadioButton.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
 
     // Hide Views radio button
-    const hideViewsRadioButtonTandem = radioButtonGroupTandem.createTandem( `hideViews${AquaRadioButton.TANDEM_NAME_SUFFIX}` );
     const hideViewsLabel = new HBox( {
       spacing: TEXT_ICON_X_SPACING,
       children: [
@@ -139,16 +148,15 @@ export default class ViewsPanel extends Panel {
         BeakerNode.createIcon( 20, 15 )
       ]
     } );
-    const hideViewsRadioButton = new AquaRadioButton( viewModeProperty, 'hideViews', hideViewsLabel, {
-      radius: RADIO_BUTTON_RADIUS,
-      tandem: hideViewsRadioButtonTandem
-    } );
-    hideViewsRadioButton.touchArea = hideViewsRadioButton.localBounds.dilatedXY( TOUCH_AREA_X_DILATION, TOUCH_AREA_Y_DILATION );
+    const hideViewsRadioButton = new AquaRadioButton( viewModeProperty, 'hideViews', hideViewsLabel,
+      combineOptions<AquaRadioButtonOptions>( {
+        tandem: radioButtonGroupTandem.createTandem( 'hideViewsRadioButton' )
+      }, radioButtonOptions ) );
 
     // Because of the interleaved 'Solvent' checkbox, we're faking things to make this look like an AquaRadioButtonGroup for PhET-iO.
     // See https://github.com/phetsims/acid-base-solutions/issues/161
     const radioButtonGroup = new VBox( {
-      spacing: 8,
+      spacing: RADIO_BUTTONS_Y_SPACING,
       align: 'left',
       children: [
         particlesControls,
