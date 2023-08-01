@@ -4,7 +4,8 @@
  * Panel for selecting between a set of mutually-exclusive 'views'.
  *
  * Note that because the 'Solvent' checkbox is interleaved with the radio button, we cannot use a radio button group
- * here. So the structure of the PhET-iO tree is custom. See https://github.com/phetsims/acid-base-solutions/issues/186
+ * here. So the structure of the PhET-iO tree is custom, and we're faking things to make it look like an
+ * AquaRadioButtonGroup. See https://github.com/phetsims/acid-base-solutions/issues/186
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -29,12 +30,10 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import BeakerNode from './BeakerNode.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 // constants
-const TEXT_ICON_X_SPACING = 10;
-const RADIO_BUTTON_RADIUS = 7;
 const LABEL_FONT = new PhetFont( 12 );
-const TEXT_MAX_WIDTH = 130; // determined empirically
 const RADIO_BUTTONS_Y_SPACING = 8;
 const POINT_AREA_X_DILATION = 10;
 const POINT_AREA_Y_DILATION = RADIO_BUTTONS_Y_SPACING / 2; // to mimic AquaRadioButtonGroup
@@ -57,7 +56,7 @@ export default class ViewsPanel extends Panel {
     } );
 
     const radioButtonOptions: AquaRadioButtonOptions = {
-      radius: RADIO_BUTTON_RADIUS,
+      radius: 7,
       touchAreaXDilation: POINT_AREA_X_DILATION,
       touchAreaYDilation: POINT_AREA_Y_DILATION,
       mouseAreaXDilation: POINT_AREA_X_DILATION,
@@ -105,9 +104,6 @@ export default class ViewsPanel extends Panel {
       combineOptions<AquaRadioButtonOptions>( {
         tandem: radioButtonGroupTandem.createTandem( 'graphRadioButton' )
       }, radioButtonOptions ) );
-    graphRadioButton.localBoundsProperty.link( localBounds => {
-      graphRadioButton.touchArea = localBounds.dilatedXY( POINT_AREA_X_DILATION, POINT_AREA_Y_DILATION );
-    } );
 
     // Hide Views radio button
     const hideViewsRadioButton = new AquaRadioButton( viewModeProperty, 'hideViews', createHideViewsLabel(),
@@ -115,8 +111,6 @@ export default class ViewsPanel extends Panel {
         tandem: radioButtonGroupTandem.createTandem( 'hideViewsRadioButton' )
       }, radioButtonOptions ) );
 
-    // Because of the interleaved 'Solvent' checkbox, we're faking things to make this look like an AquaRadioButtonGroup for PhET-iO.
-    // See https://github.com/phetsims/acid-base-solutions/issues/161
     const radioButtonGroup = new VBox( {
       spacing: RADIO_BUTTONS_Y_SPACING,
       align: 'left',
@@ -130,6 +124,7 @@ export default class ViewsPanel extends Panel {
       phetioEnabledPropertyInstrumented: true
     } );
 
+    // to mimic AquaRadioButtonGroup
     radioButtonGroup.addLinkedElement( viewModeProperty, {
       tandemName: 'property'
     } );
@@ -144,80 +139,41 @@ export default class ViewsPanel extends Panel {
   }
 }
 
-/**
- * Creates the label for the 'Particles' radio button.
- */
+// Creates the label for the 'Particles' radio button.
 function createParticlesLabel(): Node {
-  const hBox = new HBox( {
-    spacing: TEXT_ICON_X_SPACING,
-    children: [
-      new Text( AcidBaseSolutionsStrings.particlesStringProperty, {
-        font: LABEL_FONT,
-        maxWidth: TEXT_MAX_WIDTH
-      } ),
-      new Image( magnifyingGlassIcon_png, { scale: 0.75 } )
-    ]
-  } );
-
-  // NOTE: All create*Label functions wrap the label in a Node, to prevent space from being introduced between
-  // the text and icon when the controls are stretched by scenery layout.
-  return new Node( {
-    children: [ hBox ]
-  } );
+  return createLabel( AcidBaseSolutionsStrings.particlesStringProperty, new Image( magnifyingGlassIcon_png, { scale: 0.75 } ) );
 }
 
-/**
- * Creates the label for the 'Solvent' checkbox.
- */
+// Creates the label for the 'Solvent' checkbox.
 function createSolventLabel(): Node {
-  const hBox = new HBox( {
-    spacing: TEXT_ICON_X_SPACING,
-    children: [
-      new Text( AcidBaseSolutionsStrings.solventStringProperty, {
-        font: LABEL_FONT,
-        maxWidth: TEXT_MAX_WIDTH
-      } ),
-      createParticleNode( 'H2O' )
-    ]
-  } );
-  return new Node( {
-    children: [ hBox ]
-  } );
+  return createLabel( AcidBaseSolutionsStrings.solventStringProperty, createParticleNode( 'H2O' ) );
 }
 
-/**
- * Creates the label for the 'Graph' radio button.
- */
+// Creates the label for the 'Graph' radio button.
 function createGraphLabel(): Node {
-  const hBox = new HBox( {
-    spacing: TEXT_ICON_X_SPACING,
-    children: [
-      new Text( AcidBaseSolutionsStrings.graphStringProperty, {
-        font: LABEL_FONT,
-        maxWidth: TEXT_MAX_WIDTH
-      } ),
-      ConcentrationGraphNode.createIcon()
-    ]
-  } );
-  return new Node( {
-    children: [ hBox ]
-  } );
+  return createLabel( AcidBaseSolutionsStrings.graphStringProperty, ConcentrationGraphNode.createIcon() );
 }
 
-/**
- * Creates the label for the 'Hide Views' radio button.
- */
+// Creates the label for the 'Hide Views' radio button.
 function createHideViewsLabel(): Node {
+  return createLabel( AcidBaseSolutionsStrings.hideViewsStringProperty, BeakerNode.createIcon( 20, 15 ) );
+}
+
+// Creates a control label that consists of text and an icon.
+function createLabel( stringProperty: TReadOnlyProperty<string>, icon: Node ): Node {
   const hBox = new HBox( {
-    spacing: TEXT_ICON_X_SPACING,
+    spacing: 10,
     children: [
-      new Text( AcidBaseSolutionsStrings.hideViewsStringProperty, {
+      new Text( stringProperty, {
         font: LABEL_FONT,
-        maxWidth: TEXT_MAX_WIDTH
+        maxWidth: 130 // determined empirically
       } ),
-      BeakerNode.createIcon( 20, 15 )
+      icon
     ]
   } );
+
+  // Wrap the label in a Node, to prevent space from being introduced between the text and icon when the controls
+  // are stretched by scenery layout.
   return new Node( {
     children: [ hBox ]
   } );
