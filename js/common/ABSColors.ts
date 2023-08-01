@@ -7,11 +7,11 @@
  */
 
 import PhetColorScheme from '../../../scenery-phet/js/PhetColorScheme.js';
-import { Color, ProfileColorProperty } from '../../../scenery/js/imports.js';
+import { ProfileColorProperty } from '../../../scenery/js/imports.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
 
 // constants
-const GRAY_PARTICLE = 'rgb(120,120,120)';
+const GRAY_PARTICLE = 'rgb( 120, 120, 120 )';
 
 const ABSColors = {
 
@@ -35,23 +35,53 @@ const ABSColors = {
     default: 'white'
   } ),
 
-  // pH colors, ordered from pH value 0-14, type Color because we'll be interpolating
+  // pH colors, ordered from pH value 0-14
   PH: [
-    new Color( 182, 70, 72 ),
-    new Color( 196, 80, 86 ),
-    new Color( 213, 83, 71 ),
-    new Color( 237, 123, 83 ),
-    new Color( 246, 152, 86 ),
-    new Color( 244, 158, 79 ),
-    new Color( 243, 160, 78 ),
-    new Color( 244, 182, 67 ),
-    new Color( 231, 201, 75 ),
-    new Color( 93, 118, 88 ),
-    new Color( 30, 92, 89 ),
-    new Color( 34, 90, 105 ),
-    new Color( 39, 87, 111 ),
-    new Color( 27, 67, 90 ),
-    new Color( 0, 34, 52 )
+    new ProfileColorProperty( acidBaseSolutions, 'pH0ColorProperty', {
+      default: 'rgb( 182, 70, 72 )'
+    } ),
+    new ProfileColorProperty( acidBaseSolutions, 'pH1ColorProperty', {
+      default: 'rgb( 196, 80, 86 )'
+    } ),
+    new ProfileColorProperty( acidBaseSolutions, 'pH2ColorProperty', {
+      default: 'rgb( 213, 83, 71 )'
+    } ),
+    new ProfileColorProperty( acidBaseSolutions, 'pH3ColorProperty', {
+      default: 'rgb( 237, 123, 83 )'
+    } ),
+    new ProfileColorProperty( acidBaseSolutions, 'pH4ColorProperty', {
+      default: 'rgb( 246, 152, 86 )'
+    } ),
+    new ProfileColorProperty( acidBaseSolutions, 'pH5ColorProperty', {
+      default: 'rgb( 244, 158, 79 )'
+    } ),
+    new ProfileColorProperty( acidBaseSolutions, 'pH6ColorProperty', {
+      default: 'rgb( 243, 160, 78 )'
+    } ),
+    new ProfileColorProperty( acidBaseSolutions, 'pH7ColorProperty', {
+      default: 'rgb( 244, 182, 67 )'
+    } ),
+    new ProfileColorProperty( acidBaseSolutions, 'pH8ColorProperty', {
+      default: 'rgb( 231, 201, 75 )'
+    } ),
+    new ProfileColorProperty( acidBaseSolutions, 'pH9ColorProperty', {
+      default: 'rgb( 93, 118, 88 )'
+    } ),
+    new ProfileColorProperty( acidBaseSolutions, 'pH10ColorProperty', {
+      default: 'rgb( 30, 92, 89 )'
+    } ),
+    new ProfileColorProperty( acidBaseSolutions, 'pH11ColorProperty', {
+      default: 'rgb( 34, 90, 105 )'
+    } ),
+    new ProfileColorProperty( acidBaseSolutions, 'pH12ColorProperty', {
+      default: 'rgb( 39, 87, 111 )'
+    } ),
+    new ProfileColorProperty( acidBaseSolutions, 'pH13ColorProperty', {
+      default: 'rgb( 27, 67, 90 )'
+    } ),
+    new ProfileColorProperty( acidBaseSolutions, 'pH14ColorProperty', {
+      default: 'rgb( 0, 34, 52 )'
+    } )
   ],
 
   // Particle colors

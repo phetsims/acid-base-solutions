@@ -165,13 +165,13 @@ function pHToColor( pH: number ): Color {
   let color;
   if ( Number.isInteger( pH ) ) {
     // pH value is an integer, look up color
-    color = ABSColors.PH[ pH ];
+    color = ABSColors.PH[ pH ].value;
   }
   else {
     // pH value is not an integer, interpolate between 2 closest colors
     const lowerPH = Math.floor( pH );
     const upperPH = lowerPH + 1;
-    color = Color.interpolateRGBA( ABSColors.PH[ lowerPH ], ABSColors.PH[ upperPH ], ( pH - lowerPH ) );
+    color = Color.interpolateRGBA( ABSColors.PH[ lowerPH ].value, ABSColors.PH[ upperPH ].value, ( pH - lowerPH ) );
   }
   return color;
 }
