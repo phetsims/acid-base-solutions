@@ -90,7 +90,7 @@ export default class ConcentrationBarNode extends Node {
    * Sets the fill color of the bar.
    */
   public setBarFill( color: TColor ): void {
-    this.bar.setFill( color );
+    this.bar.fill = color;
   }
 }
 
