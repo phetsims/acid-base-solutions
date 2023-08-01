@@ -7,7 +7,7 @@
  */
 
 import PhetColorScheme from '../../../scenery-phet/js/PhetColorScheme.js';
-import { Color } from '../../../scenery/js/imports.js';
+import { Color, ProfileColorProperty } from '../../../scenery/js/imports.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
 
 // constants
@@ -15,7 +15,10 @@ const GRAY_PARTICLE = 'rgb(120,120,120)';
 
 const ABSColors = {
 
-  SCREEN_BACKGROUND: 'white',
+  // Background color used for all screens
+  screenBackgroundColorProperty: new ProfileColorProperty( acidBaseSolutions, 'screenBackgroundColor', {
+    default: 'white'
+  } ),
 
   CONTROL_PANEL_BACKGROUND: 'rgb(208,212,255)',
 

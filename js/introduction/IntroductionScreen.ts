@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../axon/js/Property.js';
 import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import { Shape } from '../../../kite/js/imports.js';
@@ -24,7 +23,7 @@ export default class IntroductionScreen extends Screen<IntroductionModel, Introd
 
     const options: ScreenOptions = {
       name: AcidBaseSolutionsStrings.screen.introductionStringProperty,
-      backgroundColorProperty: new Property( ABSColors.SCREEN_BACKGROUND ),
+      backgroundColorProperty: ABSColors.screenBackgroundColorProperty,
       homeScreenIcon: createScreenIcon(),
       tandem: tandem
     };
