@@ -8,7 +8,7 @@
 
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import { Circle, CircleOptions, Color, RadialGradient } from '../../../../scenery/js/imports.js';
+import { Circle, CircleOptions, RadialGradient, TColor } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -17,7 +17,7 @@ type AtomNodeOptions = SelfOptions & StrictOmit<CircleOptions, 'radius' | 'fill'
 
 export default class AtomNode extends Circle {
 
-  public constructor( radius: number, color: Color | string, providedOptions?: AtomNodeOptions ) {
+  public constructor( radius: number, color: TColor, providedOptions?: AtomNodeOptions ) {
 
     const gradient = new RadialGradient( -radius * 0.2, -radius * 0.3, 0.25, -radius * 0.2, -radius * 0.3, radius * 2 )
       .addColorStop( 0, 'white' )

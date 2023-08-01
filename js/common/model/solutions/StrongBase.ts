@@ -20,9 +20,9 @@ export default class StrongBase extends AqueousSolution {
 
     // particles found in this solution
     const particles: Particle[] = [
-      { key: 'MOH', color: ABSColors.MOH, getConcentration: () => this.getSoluteConcentration() },
-      { key: 'M', color: ABSColors.M, getConcentration: () => this.getProductConcentration() },
-      { key: 'OH', color: ABSColors.OH, getConcentration: () => this.getOHConcentration() }
+      { key: 'MOH', colorProperty: ABSColors.particleMOHColorProperty, getConcentration: () => this.getSoluteConcentration() },
+      { key: 'M', colorProperty: ABSColors.particleMColorProperty, getConcentration: () => this.getProductConcentration() },
+      { key: 'OH', colorProperty: ABSColors.particleOHColorProperty, getConcentration: () => this.getOHConcentration() }
     ];
 
     super( particles, {

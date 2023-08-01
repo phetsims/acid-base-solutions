@@ -20,10 +20,10 @@ export default class StrongAcid extends AqueousSolution {
 
     // particles found in this solution
     const particles: Particle[] = [
-      { key: 'HA', color: ABSColors.HA, getConcentration: () => this.getSoluteConcentration() },
-      { key: 'H2O', color: ABSColors.H2O, getConcentration: () => this.getH2OConcentration() },
-      { key: 'A', color: ABSColors.A, getConcentration: () => this.getProductConcentration() },
-      { key: 'H3O', color: ABSColors.H3O, getConcentration: () => this.getH3OConcentration() }
+      { key: 'HA', colorProperty: ABSColors.particleHAColorProperty, getConcentration: () => this.getSoluteConcentration() },
+      { key: 'H2O', colorProperty: ABSColors.particleH2OColorProperty, getConcentration: () => this.getH2OConcentration() },
+      { key: 'A', colorProperty: ABSColors.particleAColorProperty, getConcentration: () => this.getProductConcentration() },
+      { key: 'H3O', colorProperty: ABSColors.particleH3OColorProperty, getConcentration: () => this.getH3OConcentration() }
     ];
 
     super( particles, {

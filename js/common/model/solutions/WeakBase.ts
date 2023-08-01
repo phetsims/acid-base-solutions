@@ -20,10 +20,10 @@ export default class WeakBase extends AqueousSolution {
 
     // particles found in this solution
     const particles: Particle[] = [
-      { key: 'B', color: ABSColors.B, getConcentration: () => this.getSoluteConcentration() },
-      { key: 'H2O', color: ABSColors.H2O, getConcentration: () => this.getH2OConcentration() },
-      { key: 'BH', color: ABSColors.BH, getConcentration: () => this.getProductConcentration() },
-      { key: 'OH', color: ABSColors.OH, getConcentration: () => this.getOHConcentration() }
+      { key: 'B', colorProperty: ABSColors.particleBColorProperty, getConcentration: () => this.getSoluteConcentration() },
+      { key: 'H2O', colorProperty: ABSColors.particleH2OColorProperty, getConcentration: () => this.getH2OConcentration() },
+      { key: 'BH', colorProperty: ABSColors.particleBHColorProperty, getConcentration: () => this.getProductConcentration() },
+      { key: 'OH', colorProperty: ABSColors.particleOHColorProperty, getConcentration: () => this.getOHConcentration() }
     ];
 
     super( particles, {

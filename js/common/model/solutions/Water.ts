@@ -20,9 +20,9 @@ export default class Water extends AqueousSolution {
 
     // particles found in this solution
     const particles: Particle[] = [
-      { key: 'H2O', color: ABSColors.H2O, getConcentration: () => this.getH2OConcentration() },
-      { key: 'H3O', color: ABSColors.H3O, getConcentration: () => this.getH3OConcentration() },
-      { key: 'OH', color: ABSColors.OH, getConcentration: () => this.getOHConcentration() }
+      { key: 'H2O', colorProperty: ABSColors.particleH2OColorProperty, getConcentration: () => this.getH2OConcentration() },
+      { key: 'H3O', colorProperty: ABSColors.particleH3OColorProperty, getConcentration: () => this.getH3OConcentration() },
+      { key: 'OH', colorProperty: ABSColors.particleOHColorProperty, getConcentration: () => this.getOHConcentration() }
     ];
 
     super( particles, {
