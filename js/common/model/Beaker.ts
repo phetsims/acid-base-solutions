@@ -23,15 +23,14 @@ type BeakerOptions = SelfOptions;
 
 export default class Beaker {
 
-  public readonly size: Dimension2;
-  public readonly position: Vector2;
+  public readonly size: Dimension2; // dimensions, excluding the rim at the top of the beaker
+  public readonly position: Vector2; // bottom-center of the beaker
 
   // convenience fields related to size and position
   public readonly left: number;
   public readonly right: number;
   public readonly top: number;
   public readonly bottom: number;
-
   public readonly bounds: Bounds2;
 
   public constructor( providedOptions?: BeakerOptions ) {
