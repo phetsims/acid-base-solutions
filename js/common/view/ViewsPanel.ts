@@ -67,29 +67,31 @@ export default class ViewsPanel extends Panel {
     const radioButtonGroupTandem = tandem.createTandem( 'radioButtonGroup' );
 
     // Particles radio button
-    const particlesRadioButton = new AquaRadioButton( viewModeProperty, 'particles', createParticlesLabel(),
+    const particlesRadioButton = new AquaRadioButton( viewModeProperty, 'particles',
+      createLabel( AcidBaseSolutionsStrings.particlesStringProperty, new Image( magnifyingGlassIcon_png, { scale: 0.75 } ) ),
       combineOptions<AquaRadioButtonOptions>( {
         tandem: radioButtonGroupTandem.createTandem( 'particlesRadioButton' )
       }, radioButtonOptions ) );
 
     // Solvent checkbox
     const solventCheckboxTandem = particlesRadioButton.tandem.createTandem( 'solventCheckbox' );
-    const solventCheckbox = new Checkbox( solventVisibleProperty, createSolventLabel(), {
-      boxWidth: 15,
-      layoutOptions: {
-        stretch: true,
-        leftMargin: 20 // indent Solvent checkbox from radio buttons
-      },
-      touchAreaXDilation: POINT_AREA_X_DILATION,
-      touchAreaYDilation: POINT_AREA_Y_DILATION,
-      mouseAreaXDilation: POINT_AREA_X_DILATION,
-      mouseAreaYDilation: POINT_AREA_Y_DILATION,
-      enabledProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'particles' ), {
-        tandem: solventCheckboxTandem.createTandem( 'enabledProperty' ),
-        phetioValueType: BooleanIO
-      } ),
-      tandem: solventCheckboxTandem
-    } );
+    const solventCheckbox = new Checkbox( solventVisibleProperty,
+      createLabel( AcidBaseSolutionsStrings.solventStringProperty, createParticleNode( 'H2O' ) ), {
+        boxWidth: 15,
+        layoutOptions: {
+          stretch: true,
+          leftMargin: 20 // indent Solvent checkbox from radio buttons
+        },
+        touchAreaXDilation: POINT_AREA_X_DILATION,
+        touchAreaYDilation: POINT_AREA_Y_DILATION,
+        mouseAreaXDilation: POINT_AREA_X_DILATION,
+        mouseAreaYDilation: POINT_AREA_Y_DILATION,
+        enabledProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'particles' ), {
+          tandem: solventCheckboxTandem.createTandem( 'enabledProperty' ),
+          phetioValueType: BooleanIO
+        } ),
+        tandem: solventCheckboxTandem
+      } );
 
     const particlesControls = new VBox( {
       children: [ particlesRadioButton, solventCheckbox ],
@@ -100,13 +102,15 @@ export default class ViewsPanel extends Panel {
     } );
 
     // Graph radio button
-    const graphRadioButton = new AquaRadioButton( viewModeProperty, 'graph', createGraphLabel(),
+    const graphRadioButton = new AquaRadioButton( viewModeProperty, 'graph',
+      createLabel( AcidBaseSolutionsStrings.graphStringProperty, ConcentrationGraphNode.createIcon() ),
       combineOptions<AquaRadioButtonOptions>( {
         tandem: radioButtonGroupTandem.createTandem( 'graphRadioButton' )
       }, radioButtonOptions ) );
 
     // Hide Views radio button
-    const hideViewsRadioButton = new AquaRadioButton( viewModeProperty, 'hideViews', createHideViewsLabel(),
+    const hideViewsRadioButton = new AquaRadioButton( viewModeProperty, 'hideViews',
+      createLabel( AcidBaseSolutionsStrings.hideViewsStringProperty, BeakerNode.createIcon( 20, 15 ) ),
       combineOptions<AquaRadioButtonOptions>( {
         tandem: radioButtonGroupTandem.createTandem( 'hideViewsRadioButton' )
       }, radioButtonOptions ) );
@@ -137,26 +141,6 @@ export default class ViewsPanel extends Panel {
 
     super( content, options );
   }
-}
-
-// Creates the label for the 'Particles' radio button.
-function createParticlesLabel(): Node {
-  return createLabel( AcidBaseSolutionsStrings.particlesStringProperty, new Image( magnifyingGlassIcon_png, { scale: 0.75 } ) );
-}
-
-// Creates the label for the 'Solvent' checkbox.
-function createSolventLabel(): Node {
-  return createLabel( AcidBaseSolutionsStrings.solventStringProperty, createParticleNode( 'H2O' ) );
-}
-
-// Creates the label for the 'Graph' radio button.
-function createGraphLabel(): Node {
-  return createLabel( AcidBaseSolutionsStrings.graphStringProperty, ConcentrationGraphNode.createIcon() );
-}
-
-// Creates the label for the 'Hide Views' radio button.
-function createHideViewsLabel(): Node {
-  return createLabel( AcidBaseSolutionsStrings.hideViewsStringProperty, BeakerNode.createIcon( 20, 15 ) );
 }
 
 // Creates a control label that consists of text and an icon.
