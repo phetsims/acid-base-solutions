@@ -21,6 +21,7 @@ import { ToolMode } from './ToolMode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
@@ -39,7 +40,7 @@ export default class PHMeterNode extends Node {
     // probe
     const probeNode = new ProbeNode( 5, 40, 14, 36 );
 
-    const pHStringProperty = new DerivedProperty(
+    const pHStringProperty = new DerivedStringProperty(
       [
         AcidBaseSolutionsStrings.pattern[ '0label' ][ '1valueStringProperty' ],
         AcidBaseSolutionsStrings.pHStringProperty,
@@ -49,6 +50,8 @@ export default class PHMeterNode extends Node {
       ( patternString, pHString, pH, isInSolution ) => {
         const pHValueString = isInSolution ? Utils.toFixed( pH, DECIMAL_PLACES ) : '';
         return StringUtils.format( patternString, pHString, pHValueString );
+      }, {
+        tandem: tandem.createTandem( 'pHStringProperty' )
       } );
 
     const pHText = new Text( pHStringProperty, {
