@@ -92,6 +92,9 @@ export default abstract class AqueousSolution extends PhetioObject {
     this.concentrationProperty.reset();
   }
 
+  /**
+   * Gets the Particle type with the specified key. Returns null if this solution does not have the Particle type.
+   */
   public getParticleWithKey( particleKey: ParticleKey ): Particle | null {
     return _.find( this.particles, particle => particle.key === particleKey ) || null;
   }
