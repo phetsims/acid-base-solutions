@@ -113,7 +113,7 @@ export default class ParticlesNode extends CanvasNode {
 
       const key = particle.key;
 
-      // Skip water because it's displayed elsewhere as a static image file.
+      // Skip water because it's displayed elsewhere as a static image file (the 'Solvent' view).
       if ( key !== 'H2O' ) {
         const particlesData = this.particlesDataMap.get( key )!;
         assert && assert( particlesData, `no particleData for key=${key}` );
