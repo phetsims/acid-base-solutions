@@ -1,7 +1,7 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * Beaker is the model for the beaker. The origin is at the bottom center.
+ * Beaker is the model for the beaker shape. The origin is at the bottom center.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)
