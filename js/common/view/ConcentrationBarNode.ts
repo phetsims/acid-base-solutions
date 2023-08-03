@@ -40,7 +40,9 @@ export default class ConcentrationBarNode extends Node {
     } );
 
     // add rectangle to represent concentration
-    const bar = new Rectangle( 0, 0, 25, 0, { fill: 'white' } );
+    const bar = new Rectangle( 0, 0, 25, 0, {
+      fill: 'white' // default, correct color set via setBarFill
+    } );
     bar.rotate( Math.PI ); // so that bar grows upward
 
     // Set the bar height
