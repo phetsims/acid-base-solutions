@@ -22,6 +22,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
+import ABSColors from '../ABSColors.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
@@ -146,7 +147,7 @@ class ProbeNode extends Node {
 
     // probe shaft
     const shaftNode = new Rectangle( 0, 0, shaftWidth, shaftHeight + overlap, {
-      fill: 'rgb( 192, 192, 192 )',
+      fill: ABSColors.pHProbeShaftFillProperty,
       stroke: 'rgb( 160, 160, 160 )',
       lineWidth: 0.5
     } );
@@ -164,7 +165,7 @@ class ProbeNode extends Node {
       .lineTo( tipWidth, 0.6 * tipHeight )
       .close();
     const tipNode = new Path( tipShape, {
-      fill: 'black',
+      fill: ABSColors.pHProbeTipFillProperty,
       centerX: shaftNode.centerX,
       top: shaftNode.bottom - overlap
     } );

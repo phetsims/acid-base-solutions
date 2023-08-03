@@ -18,6 +18,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import Beaker from '../model/Beaker.js';
+import ABSColors from '../ABSColors.js';
 
 // constants
 const MAJOR_TICK_LENGTH = 25;
@@ -40,7 +41,7 @@ export default class BeakerNode extends Node {
       .lineTo( BEAKER_WIDTH / 2, 0 )
       .lineTo( BEAKER_WIDTH / 2, -BEAKER_HEIGHT );
     const waterPath = new Path( waterShape, {
-      fill: 'rgba( 193, 222, 227, 0.7 )'
+      fill: ABSColors.transparentSolutionColorProperty // transparent so we can see the pH probe and pH paper
     } );
 
     // beaker, starting from upper left
@@ -127,7 +128,9 @@ export default class BeakerNode extends Node {
       children: [
 
         // water
-        new Rectangle( 0, 0, width, height, { fill: 'rgb( 213, 231, 233 )' } ),
+        new Rectangle( 0, 0, width, height, {
+          fill: ABSColors.opaqueSolutionColorProperty
+        } ),
 
         // beaker
         new Path( new Shape()

@@ -60,7 +60,9 @@ function createScreenIcon(): ScreenIcon {
   h3oNode.centerY = height / 2;
   ohNode.centerY = h3oNode.centerY;
 
-  const background = new Rectangle( 0, 0, width, height, { fill: 'white' } );
+  const background = new Rectangle( 0, 0, width, height, {
+    fill: ABSColors.screenBackgroundColorProperty
+  } );
 
   const iconNode = new Node( { children: [ background, h3oNode, ohNode ] } );
 

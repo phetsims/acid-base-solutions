@@ -44,7 +44,9 @@ function createScreenIcon(): ScreenIcon {
   const width = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.width;
   const height = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.height;
 
-  const background = new Rectangle( 0, 0, width, height, { fill: 'white' } );
+  const background = new Rectangle( 0, 0, width, height, {
+    fill: ABSColors.screenBackgroundColorProperty
+  } );
 
   const beakerWidth = 0.6 * width;
   const beakerHeight = 0.75 * height;
@@ -64,7 +66,7 @@ function createScreenIcon(): ScreenIcon {
   } );
 
   const waterNode = new Rectangle( 0, 0, beakerWidth, beakerHeight, {
-    fill: 'rgb(213,231,233)',
+    fill: ABSColors.opaqueSolutionColorProperty,
     translation: beakerNode.translation
   } );
 
@@ -77,7 +79,7 @@ function createScreenIcon(): ScreenIcon {
 
   const handleNode = new Rectangle( lensRadius + 2, -lensRadius / 7, lensRadius, lensRadius / 3, {
     cornerRadius: 8,
-    fill: 'rgb(85,55,33)',
+    fill: ABSColors.magnifyingGlassHandleFillProperty,
     stroke: 'black',
     lineWidth: 1,
     translation: lensNode.translation

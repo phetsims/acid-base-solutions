@@ -19,6 +19,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import ABSColors from '../ABSColors.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
@@ -42,14 +43,16 @@ export default class MagnifyingGlassNode extends Node {
 
     // handle
     const handleNode = new Rectangle( RADIUS + 2, -RADIUS / 7, RADIUS * 0.9, RADIUS / 4, 5, 5, {
-      fill: 'rgb( 85, 55, 33 )',
+      fill: ABSColors.magnifyingGlassHandleFillProperty,
       stroke: 'black',
       lineWidth: 1
     } );
     handleNode.rotate( Math.PI / 6 );
 
     // opaque background, so we don't see things like pH paper in magnifyingGlass
-    const waterNode = new Circle( RADIUS, { fill: 'rgb(210,231,235)' } );
+    const waterNode = new Circle( RADIUS, {
+      fill: ABSColors.opaqueSolutionColorProperty
+    } );
 
     // solvent (H2O)
     const solventNode = new Image( solvent_png, {

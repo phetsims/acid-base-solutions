@@ -45,7 +45,9 @@ export default class PHColorKeyNode extends Node {
     let pHText;
     for ( let i = 0; i < numberOfChips; i++ ) {
 
-      chipNode = new Rectangle( 0, 0, paperSize.width, CHIP_HEIGHT, { fill: ABSColors.PH_PAPER_COLORS[ i ] } );
+      chipNode = new Rectangle( 0, 0, paperSize.width, CHIP_HEIGHT, {
+        fill: ABSColors.PH_PAPER_COLORS[ i ]
+      } );
       pHText = new Text( i.toString(), { font: FONT_SMALL } );
 
       parentNode.addChild( chipNode );

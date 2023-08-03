@@ -84,6 +84,27 @@ const ABSColors = {
     } )
   ],
 
+  // pH meter
+  pHProbeShaftFillProperty: new ProfileColorProperty( acidBaseSolutions, 'pHProbeShaftFill', {
+    default: 'rgb( 192, 192, 192 )'
+  } ),
+  pHProbeTipFillProperty: new ProfileColorProperty( acidBaseSolutions, 'pHProbeTipFill', {
+    default: 'black'
+  } ),
+
+  // Magnifying glass
+  magnifyingGlassHandleFillProperty: new ProfileColorProperty( acidBaseSolutions, 'magnifyingGlassHandleFill', {
+    default: 'rgb( 85, 55, 33 )'
+  } ),
+
+  // Solution in the beaker and magnifying glass
+  opaqueSolutionColorProperty: new ProfileColorProperty( acidBaseSolutions, 'opaqueolutionColor', {
+    default: 'rgb( 211, 232, 236 )'
+  } ),
+  transparentSolutionColorProperty: new ProfileColorProperty( acidBaseSolutions, 'transparentSolutionColor', {
+    default: 'rgba( 193, 222, 227, 0.7 )' // transparent so we can see the pH probe and pH paper
+  } ),
+
   // Particle colors
   particleAColorProperty: new ProfileColorProperty( acidBaseSolutions, 'particleAColor', {
     default: 'rgb( 0, 170, 255 )'
