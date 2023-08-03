@@ -16,6 +16,7 @@ import acidBaseSolutions from '../../acidBaseSolutions.js';
 import { ToolMode } from './ToolMode.js';
 import PHMeterNode from './PHMeterNode.js';
 import PHPaperNode from './PHPaperNode.js';
+import ABSColors from '../ABSColors.js';
 
 export default class ToolsRadioButtonGroup extends RectangularRadioButtonGroup<ToolMode> {
 
@@ -43,7 +44,7 @@ export default class ToolsRadioButtonGroup extends RectangularRadioButtonGroup<T
       orientation: 'horizontal',
       spacing: 5,
       radioButtonOptions: {
-        baseColor: 'white',
+        baseColor: ABSColors.toolRadioButtonFillProperty,
         xMargin: 9
       },
       isDisposable: false,

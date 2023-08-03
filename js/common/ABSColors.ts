@@ -25,6 +25,10 @@ const ABSColors = {
     default: 'rgb( 208, 212, 255 )'
   } ),
 
+  toolRadioButtonFillProperty: new ProfileColorProperty( acidBaseSolutions, 'toolRadioButtonFill', {
+    default: 'white'
+  } ),
+
   // Blank pH paper, cream
   pHPaperColorProperty: new ProfileColorProperty( acidBaseSolutions, 'pHPaperColor', {
     default: 'rgb( 217, 215, 154 )'
