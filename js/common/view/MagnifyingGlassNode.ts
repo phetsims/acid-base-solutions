@@ -104,8 +104,9 @@ export default class MagnifyingGlassNode extends Node {
       }
 
       // link to new solution
-      newSolution.strengthProperty.link( updateParticlesBound );
-      newSolution.concentrationProperty.link( updateParticlesBound );
+      newSolution.strengthProperty.lazyLink( updateParticlesBound );
+      newSolution.concentrationProperty.lazyLink( updateParticlesBound );
+      this.updateParticles();
     } );
 
     // Update when this Node becomes visible.
