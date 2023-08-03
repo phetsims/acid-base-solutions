@@ -72,8 +72,8 @@ export default class ABSScreenView extends ScreenView {
     const magnifyingGlassNode = new MagnifyingGlassNode( model.beaker, model.solutions, model.solutionProperty,
       this.viewProperties.viewModeProperty, this.viewProperties.solventVisibleProperty,
       tandem.createTandem( 'magnifyingGlassNode' ) );
-    const graphNode = new ConcentrationGraphNode( model.graph, this.viewProperties.viewModeProperty,
-      tandem.createTandem( 'graphNode' ) );
+    const graphNode = new ConcentrationGraphNode( model.beaker, model.solutionProperty,
+      this.viewProperties.viewModeProperty, tandem.createTandem( 'graphNode' ) );
 
     // Group all tools under a tandem
     const toolNodesTandem = tandem.createTandem( 'toolNodes' );

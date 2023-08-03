@@ -15,7 +15,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import Beaker from './Beaker.js';
-import ConcentrationGraph from './ConcentrationGraph.js';
 import ConductivityTester from './ConductivityTester.js';
 import PHMeter from './PHMeter.js';
 import PHPaper from './PHPaper.js';
@@ -35,9 +34,6 @@ export default class ABSModel implements TModel {
   // Beaker that contains the solution
   public readonly beaker: Beaker;
 
-  // Views
-  public readonly graph: ConcentrationGraph;
-
   // Tools
   public readonly pHMeter: PHMeter;
   public readonly pHPaper: PHPaper;
@@ -56,7 +52,6 @@ export default class ABSModel implements TModel {
       } );
 
     this.beaker = new Beaker();
-    this.graph = new ConcentrationGraph( this.beaker, solutionProperty );
 
     const toolsTandem = tandem.createTandem( 'tools' );
     this.pHMeter = new PHMeter( this.beaker, this.pHProperty, toolsTandem.createTandem( 'pHMeter' ) );
