@@ -11,12 +11,13 @@ import Utils from '../../../../dot/js/Utils.js';
 import { CanvasNode } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import createParticleNode from './createParticleNode.js';
-import MagnifyingGlass from '../model/MagnifyingGlass.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import { ParticleKey } from '../model/solutions/Particle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import AqueousSolution from '../model/solutions/AqueousSolution.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 // constants
 const BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some particles
@@ -34,11 +35,12 @@ type ParticlesData = {
 
 export default class ParticlesNode extends CanvasNode {
 
-  private readonly magnifyingGlass: MagnifyingGlass;
+  private readonly solutionProperty: TReadOnlyProperty<AqueousSolution>;
   private readonly positionRadius: number; // radius for computing random positions
   private readonly particlesDataMap: Map<ParticleKey, ParticlesData>;
 
-  public constructor( magnifyingGlass: MagnifyingGlass, lensBounds: Bounds2, lensLineWidth: number, tandem: Tandem ) {
+  public constructor( solutions: AqueousSolution[], solutionProperty: TReadOnlyProperty<AqueousSolution>,
+                      lensBounds: Bounds2, lensRadius: number, lensLineWidth: number, tandem: Tandem ) {
 
     super( {
       canvasBounds: lensBounds,
@@ -47,9 +49,9 @@ export default class ParticlesNode extends CanvasNode {
       phetioVisiblePropertyInstrumented: false
     } );
 
-    this.magnifyingGlass = magnifyingGlass;
+    this.solutionProperty = solutionProperty;
 
-    this.positionRadius = IMAGE_SCALE * ( this.magnifyingGlass.radius - ( lensLineWidth / 2 ) );
+    this.positionRadius = IMAGE_SCALE * ( lensRadius - ( lensLineWidth / 2 ) );
 
     this.particlesDataMap = new Map<ParticleKey, ParticlesData>();
 
@@ -72,7 +74,7 @@ export default class ParticlesNode extends CanvasNode {
     const ArrayConstructor = window.Float32Array || window.Array;
 
     // Iterate over all solutions, and create a ParticlesData structure for each unique particle.
-    magnifyingGlass.solutions.forEach( solution => {
+    solutions.forEach( solution => {
       solution.particles.forEach( particle => {
         const key = particle.key;
 
@@ -106,7 +108,7 @@ export default class ParticlesNode extends CanvasNode {
   // Updates the particles data structure and triggers a paintCanvas.
   public update(): void {
 
-    const solution = this.magnifyingGlass.solutionProperty.value;
+    const solution = this.solutionProperty.value;
 
     // Update the data structure for each particle that is in the current solution.
     solution.particles.forEach( particle => {
@@ -146,7 +148,7 @@ export default class ParticlesNode extends CanvasNode {
    */
   public override paintCanvas( context: CanvasRenderingContext2D ): void {
 
-    const solution = this.magnifyingGlass.solutionProperty.value;
+    const solution = this.solutionProperty.value;
 
     // createCanvas created HTMLCanvasElement at a higher resolution to improve quality.
     // So apply the inverse scale factor, and adjust the radius.

@@ -12,7 +12,6 @@ import { Shape } from '../../../../kite/js/imports.js';
 import { Circle, Image, Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import solvent_png from '../../../images/solvent_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import MagnifyingGlass from '../model/MagnifyingGlass.js';
 import ParticlesNode from './ParticlesNode.js';
 import { ViewMode } from './ViewMode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -20,6 +19,9 @@ import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import ABSColors from '../ABSColors.js';
+import Beaker from '../model/Beaker.js';
+import AqueousSolution from '../model/solutions/AqueousSolution.js';
+import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
@@ -31,18 +33,21 @@ export default class MagnifyingGlassNode extends Node {
   private readonly solventNode: Node;
   private readonly particlesNode: ParticlesNode;
 
-  public constructor( magnifyingGlass: MagnifyingGlass,
+  public constructor( beaker: Beaker,
+                      solutions: AqueousSolution[],
+                      solutionProperty: ReadOnlyProperty<AqueousSolution>,
                       viewModeProperty: StringUnionProperty<ViewMode>,
                       solventVisibleProperty: TReadOnlyProperty<boolean>,
                       tandem: Tandem ) {
 
     // lens
-    const RADIUS = magnifyingGlass.radius;
-    const lensShape = Shape.circle( 0, 0, RADIUS );
+    const LENS_RADIUS = 0.465 * beaker.size.height;
+    const LENS_CENTER = beaker.position.plusXY( 0, -beaker.size.height / 2 );
+    const lensShape = Shape.circle( 0, 0, LENS_RADIUS );
     const lensNode = new Path( lensShape, { stroke: 'black', lineWidth: LENS_LINE_WIDTH } );
 
     // handle
-    const handleNode = new Rectangle( RADIUS + 2, -RADIUS / 7, RADIUS * 0.9, RADIUS / 4, 5, 5, {
+    const handleNode = new Rectangle( LENS_RADIUS + 2, -LENS_RADIUS / 7, LENS_RADIUS * 0.9, LENS_RADIUS / 4, 5, 5, {
       fill: ABSColors.magnifyingGlassHandleFillProperty,
       stroke: 'black',
       lineWidth: 1
@@ -50,7 +55,7 @@ export default class MagnifyingGlassNode extends Node {
     handleNode.rotate( Math.PI / 6 );
 
     // opaque background, so we don't see things like pH paper in magnifyingGlass
-    const waterNode = new Circle( RADIUS, {
+    const waterNode = new Circle( LENS_RADIUS, {
       fill: ABSColors.opaqueSolutionColorProperty
     } );
 
@@ -63,8 +68,8 @@ export default class MagnifyingGlassNode extends Node {
     } );
 
     // particles
-    const particlesNode = new ParticlesNode( magnifyingGlass, new Bounds2( -RADIUS, -RADIUS, RADIUS, RADIUS ),
-      LENS_LINE_WIDTH, tandem.createTandem( 'particlesNode' ) );
+    const particlesNode = new ParticlesNode( solutions, solutionProperty, new Bounds2( -LENS_RADIUS, -LENS_RADIUS, LENS_RADIUS, LENS_RADIUS ),
+      LENS_RADIUS, LENS_LINE_WIDTH, tandem.createTandem( 'particlesNode' ) );
 
     // stuff that's visible through (and therefore clipped to) the lens
     const viewportNode = new Node( { children: [ solventNode, particlesNode ] } );
@@ -79,7 +84,7 @@ export default class MagnifyingGlassNode extends Node {
 
     super( {
       children: children,
-      translation: magnifyingGlass.position,
+      translation: LENS_CENTER,
       visibleProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'particles' ), {
         tandem: tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
@@ -93,7 +98,7 @@ export default class MagnifyingGlassNode extends Node {
 
     // Observe the strength and concentration Properties for the selected solution.
     const updateParticlesBound = this.updateParticles.bind( this );
-    magnifyingGlass.solutionProperty.link( ( newSolution, oldSolution ) => {
+    solutionProperty.link( ( newSolution, oldSolution ) => {
 
       this.particlesNode.reset();
 

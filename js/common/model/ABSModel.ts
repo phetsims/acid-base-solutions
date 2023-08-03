@@ -17,7 +17,6 @@ import acidBaseSolutions from '../../acidBaseSolutions.js';
 import Beaker from './Beaker.js';
 import ConcentrationGraph from './ConcentrationGraph.js';
 import ConductivityTester from './ConductivityTester.js';
-import MagnifyingGlass from './MagnifyingGlass.js';
 import PHMeter from './PHMeter.js';
 import PHPaper from './PHPaper.js';
 import AqueousSolution from './solutions/AqueousSolution.js';
@@ -37,7 +36,6 @@ export default class ABSModel implements TModel {
   public readonly beaker: Beaker;
 
   // Views
-  public readonly magnifyingGlass: MagnifyingGlass;
   public readonly graph: ConcentrationGraph;
 
   // Tools
@@ -58,7 +56,6 @@ export default class ABSModel implements TModel {
       } );
 
     this.beaker = new Beaker();
-    this.magnifyingGlass = new MagnifyingGlass( this.beaker, this.solutions, solutionProperty );
     this.graph = new ConcentrationGraph( this.beaker, solutionProperty );
 
     const toolsTandem = tandem.createTandem( 'tools' );
