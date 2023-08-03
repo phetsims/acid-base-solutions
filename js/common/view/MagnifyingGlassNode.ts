@@ -41,13 +41,13 @@ export default class MagnifyingGlassNode extends Node {
                       tandem: Tandem ) {
 
     // lens
-    const LENS_RADIUS = 0.465 * beaker.size.height;
-    const LENS_CENTER = beaker.position.plusXY( 0, -beaker.size.height / 2 );
-    const lensShape = Shape.circle( 0, 0, LENS_RADIUS );
+    const lensRadius = 0.465 * beaker.size.height;
+    const lensCenter = beaker.position.plusXY( 0, -beaker.size.height / 2 );
+    const lensShape = Shape.circle( 0, 0, lensRadius );
     const lensNode = new Path( lensShape, { stroke: 'black', lineWidth: LENS_LINE_WIDTH } );
 
     // handle
-    const handleNode = new Rectangle( LENS_RADIUS + 2, -LENS_RADIUS / 7, LENS_RADIUS * 0.9, LENS_RADIUS / 4, 5, 5, {
+    const handleNode = new Rectangle( lensRadius + 2, -lensRadius / 7, lensRadius * 0.9, lensRadius / 4, 5, 5, {
       fill: ABSColors.magnifyingGlassHandleFillProperty,
       stroke: 'black',
       lineWidth: 1
@@ -55,7 +55,7 @@ export default class MagnifyingGlassNode extends Node {
     handleNode.rotate( Math.PI / 6 );
 
     // opaque background, so we don't see things like pH paper in magnifyingGlass
-    const waterNode = new Circle( LENS_RADIUS, {
+    const waterNode = new Circle( lensRadius, {
       fill: ABSColors.opaqueSolutionColorProperty
     } );
 
@@ -68,8 +68,8 @@ export default class MagnifyingGlassNode extends Node {
     } );
 
     // particles
-    const particlesNode = new ParticlesNode( solutions, solutionProperty, new Bounds2( -LENS_RADIUS, -LENS_RADIUS, LENS_RADIUS, LENS_RADIUS ),
-      LENS_RADIUS, LENS_LINE_WIDTH, tandem.createTandem( 'particlesNode' ) );
+    const particlesNode = new ParticlesNode( solutions, solutionProperty, new Bounds2( -lensRadius, -lensRadius, lensRadius, lensRadius ),
+      lensRadius, LENS_LINE_WIDTH, tandem.createTandem( 'particlesNode' ) );
 
     // stuff that's visible through (and therefore clipped to) the lens
     const viewportNode = new Node( { children: [ solventNode, particlesNode ] } );
@@ -84,7 +84,7 @@ export default class MagnifyingGlassNode extends Node {
 
     super( {
       children: children,
-      translation: LENS_CENTER,
+      translation: lensCenter,
       visibleProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'particles' ), {
         tandem: tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
