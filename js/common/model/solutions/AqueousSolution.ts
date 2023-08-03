@@ -30,7 +30,7 @@ import optionize from '../../../../../phet-core/js/optionize.js';
 
 type SelfOptions = {
   strengthRange: RangeWithValue; // the strength of the solute, with an initial value
-  concentrationRange: RangeWithValue; // the concentration of the solute, with an initial value
+  concentrationRange: RangeWithValue; // the concentration of the solute, with an initial value, in mol/L
 };
 
 type AqueousSolutionOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem' | 'phetioReadOnly'>;
