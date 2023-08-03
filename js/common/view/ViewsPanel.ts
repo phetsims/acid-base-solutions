@@ -16,7 +16,7 @@ import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignGroup, HBox, Image, Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, Image, Node, Text, VBox } from '../../../../scenery/js/imports.js';
 import AquaRadioButton, { AquaRadioButtonOptions } from '../../../../sun/js/AquaRadioButton.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
@@ -43,7 +43,6 @@ export default class ViewsPanel extends Panel {
 
   public constructor( viewModeProperty: StringUnionProperty<ViewMode>,
                       solventVisibleProperty: Property<boolean>,
-                      contentAlignGroup: AlignGroup, // so that both control panels have the same width
                       tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, ABSConstants.PANEL_OPTIONS, {

@@ -8,7 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { AlignBox, AlignGroup, HSeparator, Text, VBox } from '../../../../scenery/js/imports.js';
+import { HSeparator, Text, VBox } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
@@ -27,7 +27,6 @@ export default class MySolutionPanel extends Panel {
   public constructor( model: MySolutionModel,
                       concentrationProperty: NumberProperty,
                       strengthProperty: Property<number>,
-                      contentAlignGroup: AlignGroup, // so that both control panels have the same width
                       tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, ABSConstants.PANEL_OPTIONS, {
@@ -55,7 +54,7 @@ export default class MySolutionPanel extends Panel {
     const strengthControl = new StrengthControl( strengthProperty, model.isWeakProperty,
       tandem.createTandem( 'strengthControl' ) );
 
-    const content = new AlignBox( new VBox( {
+    const content = new VBox( {
       spacing: 6,
       align: 'center',
       children: [
@@ -66,9 +65,6 @@ export default class MySolutionPanel extends Panel {
         new HSeparator(),
         strengthControl
       ]
-    } ), {
-      group: contentAlignGroup,
-      xAlign: 'left'
     } );
 
     super( content, options );

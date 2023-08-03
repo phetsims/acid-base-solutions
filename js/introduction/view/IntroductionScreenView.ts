@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { AlignGroup } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSScreenView from '../../common/view/ABSScreenView.js';
@@ -17,8 +16,7 @@ export default class IntroductionScreenView extends ABSScreenView {
 
   public constructor( model: IntroductionModel, tandem: Tandem ) {
 
-    const createSolutionPanel = ( alignGroup: AlignGroup ) =>
-      new IntroductionSolutionPanel( model, alignGroup, tandem.createTandem( 'solutionPanel' ) );
+    const createSolutionPanel = () => new IntroductionSolutionPanel( model, tandem.createTandem( 'solutionPanel' ) );
 
     super( model, createSolutionPanel, tandem );
   }

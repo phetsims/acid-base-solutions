@@ -27,9 +27,7 @@ import IntroductionModel from '../model/IntroductionModel.js';
 
 export default class IntroductionSolutionPanel extends Panel {
 
-  public constructor( model: IntroductionModel,
-                      contentAlignGroup: AlignGroup, // so that both control panels have the same width
-                      tandem: Tandem ) {
+  public constructor( model: IntroductionModel, tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, ABSConstants.PANEL_OPTIONS, {
       tandem: tandem
@@ -99,13 +97,10 @@ export default class IntroductionSolutionPanel extends Panel {
       phetioVisiblePropertyInstrumented: false // hide the entire panel if you don't want radio buttons
     } );
 
-    const content = new AlignBox( new VBox( {
+    const content = new VBox( {
       spacing: 8,
       align: 'left',
       children: [ titleText, radioButtonGroup ]
-    } ), {
-      group: contentAlignGroup,
-      xAlign: 'left'
     } );
 
     super( content, options );

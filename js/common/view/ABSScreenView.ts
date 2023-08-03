@@ -10,7 +10,7 @@
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
-import { AlignGroup, Node, VBox } from '../../../../scenery/js/imports.js';
+import { Node, VBox } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
@@ -39,7 +39,7 @@ export default class ABSScreenView extends ScreenView {
    * @param createSolutionPanel - creates the control panel titled 'Solution'
    * @param tandem
    */
-  protected constructor( model: ABSModel, createSolutionPanel: ( alignGroup: AlignGroup ) => Panel, tandem: Tandem ) {
+  protected constructor( model: ABSModel, createSolutionPanel: () => Panel, tandem: Tandem ) {
 
     super( {
       isDisposable: false,
@@ -98,21 +98,22 @@ export default class ABSScreenView extends ScreenView {
     const conductivityTesterNode = new ABSConductivityTesterNode( model.conductivityTester,
       this.viewProperties.toolModeProperty, toolNodesTandem.createTandem( 'conductivityTesterNode' ) );
 
-    // To make panels have the same width
-    const panelAlignGroup = new AlignGroup( {
-      matchHorizontal: true,
-      matchVertical: false
-    } );
-
     // Controls
-    const solutionPanel = createSolutionPanel( panelAlignGroup );
+    const solutionPanel = createSolutionPanel();
     const viewsPanel = new ViewsPanel( this.viewProperties.viewModeProperty, this.viewProperties.solventVisibleProperty,
-      panelAlignGroup, tandem.createTandem( 'viewsPanel' ) );
+      tandem.createTandem( 'viewsPanel' ) );
     const toolsRadioButtonGroup = new ToolsRadioButtonGroup( this.viewProperties.toolModeProperty,
       tandem.createTandem( 'toolsRadioButtonGroup' ) );
 
+    const panelsParent = new VBox( {
+      children: [ solutionPanel, viewsPanel ],
+      align: 'center',
+      spacing: 10,
+      stretch: true
+    } );
+
     const controlsParent = new VBox( {
-      children: [ solutionPanel, viewsPanel, toolsRadioButtonGroup ],
+      children: [ panelsParent, toolsRadioButtonGroup ],
       align: 'center',
       spacing: 10
     } );
