@@ -6,16 +6,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { ProfileColorProperty } from '../../../../../scenery/js/imports.js';
-
 // Keys of all the possible particles that appear in this simulation.
 // Used as the key for various Maps, and in tandem names.
+import { TColor } from '../../../../../scenery/js/imports.js';
+
 export const ParticleKeyValues = [ 'A', 'B', 'BH', 'H2O', 'H3O', 'HA', 'M', 'MOH', 'OH' ] as const;
 export type ParticleKey = ( typeof ParticleKeyValues )[number];
 
 // Data structure that describes a particle.
 export type Particle = {
   key: ParticleKey; // used to look up the particle in various Maps
-  colorProperty: ProfileColorProperty; // color used to render the particle
+  color: TColor; // color used to render the particle
   getConcentration: () => number; // returns the concentration of the particle
 };

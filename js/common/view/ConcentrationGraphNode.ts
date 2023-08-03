@@ -164,7 +164,7 @@ export default class ConcentrationGraphNode extends Node {
         const particle = solution.getParticleWithKey( particleKey );
         if ( particle ) {
           barNode.concentrationProperty.value = particle.getConcentration();
-          barNode.setBarFill( particle.colorProperty );
+          barNode.setBarFill( particle.color );
           barNode.visible = true;
         }
         else {
@@ -202,10 +202,10 @@ export default class ConcentrationGraphNode extends Node {
         new Rectangle( 0, 0, 22, 18, { fill: ABSColors.graphFillProperty } ),
 
         // bars for weak acid: HA + H2O <=> A- + H3O+
-        new Rectangle( 2, 6, 3, 12, { fill: ABSColors.particleHAColorProperty } ),
-        new Rectangle( 7, 3, 3, 15, { fill: ABSColors.particleH2OColorProperty } ),
-        new Rectangle( 12, 9, 3, 9, { fill: ABSColors.particleAColorProperty } ),
-        new Rectangle( 17, 9, 3, 9, { fill: ABSColors.particleH3OColorProperty } ),
+        new Rectangle( 2, 6, 3, 12, { fill: ABSColors.HA } ),
+        new Rectangle( 7, 3, 3, 15, { fill: ABSColors.H2O } ),
+        new Rectangle( 12, 9, 3, 9, { fill: ABSColors.A } ),
+        new Rectangle( 17, 9, 3, 9, { fill: ABSColors.H3O } ),
 
         // background stroke on top
         new Rectangle( 0, 0, 22, 18, { stroke: 'black', lineWidth: 0.5 } )

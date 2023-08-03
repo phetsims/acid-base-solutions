@@ -29,14 +29,35 @@ const ABSColors = {
     default: 'white'
   } ),
 
-  // Blank pH paper, cream
-  pHPaperColorProperty: new ProfileColorProperty( acidBaseSolutions, 'pHPaperColor', {
-    default: 'rgb( 217, 215, 154 )'
-  } ),
-
   // Equilibrium Concentration graph fill
   graphFillProperty: new ProfileColorProperty( acidBaseSolutions, 'graphFill', {
     default: 'white'
+  } ),
+
+  // Blank pH paper, cream
+  pHPaperFillProperty: new ProfileColorProperty( acidBaseSolutions, 'pHPaperFill', {
+    default: 'rgb( 217, 215, 154 )'
+  } ),
+
+  // pH meter
+  pHProbeShaftFillProperty: new ProfileColorProperty( acidBaseSolutions, 'pHProbeShaftFill', {
+    default: 'rgb( 192, 192, 192 )'
+  } ),
+  pHProbeTipFillProperty: new ProfileColorProperty( acidBaseSolutions, 'pHProbeTipFill', {
+    default: 'black'
+  } ),
+
+  // Magnifying glass
+  magnifyingGlassHandleFillProperty: new ProfileColorProperty( acidBaseSolutions, 'magnifyingGlassHandleFill', {
+    default: 'rgb( 85, 55, 33 )'
+  } ),
+
+  // Solution in the beaker and magnifying glass
+  opaqueSolutionColorProperty: new ProfileColorProperty( acidBaseSolutions, 'opaqueSolutionColor', {
+    default: 'rgb( 211, 232, 236 )'
+  } ),
+  transparentSolutionColorProperty: new ProfileColorProperty( acidBaseSolutions, 'transparentSolutionColor', {
+    default: 'rgba( 193, 222, 227, 0.7 )' // transparent so we can see the pH probe and pH paper
   } ),
 
   // pH paper colors, ordered from pH value 0-14
@@ -88,55 +109,17 @@ const ABSColors = {
     } )
   ],
 
-  // pH meter
-  pHProbeShaftFillProperty: new ProfileColorProperty( acidBaseSolutions, 'pHProbeShaftFill', {
-    default: 'rgb( 192, 192, 192 )'
-  } ),
-  pHProbeTipFillProperty: new ProfileColorProperty( acidBaseSolutions, 'pHProbeTipFill', {
-    default: 'black'
-  } ),
-
-  // Magnifying glass
-  magnifyingGlassHandleFillProperty: new ProfileColorProperty( acidBaseSolutions, 'magnifyingGlassHandleFill', {
-    default: 'rgb( 85, 55, 33 )'
-  } ),
-
-  // Solution in the beaker and magnifying glass
-  opaqueSolutionColorProperty: new ProfileColorProperty( acidBaseSolutions, 'opaqueolutionColor', {
-    default: 'rgb( 211, 232, 236 )'
-  } ),
-  transparentSolutionColorProperty: new ProfileColorProperty( acidBaseSolutions, 'transparentSolutionColor', {
-    default: 'rgba( 193, 222, 227, 0.7 )' // transparent so we can see the pH probe and pH paper
-  } ),
-
-  // Particle colors
-  particleAColorProperty: new ProfileColorProperty( acidBaseSolutions, 'particleAColor', {
-    default: 'rgb( 0, 170, 255 )'
-  } ),
-  particleBColorProperty: new ProfileColorProperty( acidBaseSolutions, 'particleBColor', {
-    default: GRAY_PARTICLE
-  } ),
-  particleBHColorProperty: new ProfileColorProperty( acidBaseSolutions, 'particleBHColor', {
-    default: 'rgb( 255, 170, 0 )'
-  } ),
-  particleH2OColorProperty: new ProfileColorProperty( acidBaseSolutions, 'particleH2OColor', {
-    default: 'rgb( 164, 189, 193 )'
-  } ),
-  particleH3OColorProperty: new ProfileColorProperty( acidBaseSolutions, 'particleH3OColor', {
-    default: PhetColorScheme.RED_COLORBLIND
-  } ),
-  particleHAColorProperty: new ProfileColorProperty( acidBaseSolutions, 'particleHAColor', {
-    default: GRAY_PARTICLE
-  } ),
-  particleMColorProperty: new ProfileColorProperty( acidBaseSolutions, 'particleMColor', {
-    default: 'rgb( 255, 170, 0 )'
-  } ),
-  particleMOHColorProperty: new ProfileColorProperty( acidBaseSolutions, 'particleMOHColor', {
-    default: GRAY_PARTICLE
-  } ),
-  particleOHColorProperty: new ProfileColorProperty( acidBaseSolutions, 'particleOHColor', {
-    default: 'rgb( 90, 90, 255 )'
-  } )
+  // NOTE: Particle colors are not currently dynamic, because that would be considerably more work.
+  // Particles are precomputed when the sim starts. And the solvent is an image file, solvent.png.
+  A: 'rgb( 0, 170, 255 )',
+  B: GRAY_PARTICLE,
+  BH: 'rgb( 255, 170, 0 )',
+  H2O: 'rgb( 164, 189, 193 )',
+  H3O: PhetColorScheme.RED_COLORBLIND,
+  HA: GRAY_PARTICLE,
+  M: 'rgb( 255, 170, 0 )',
+  MOH: GRAY_PARTICLE,
+  OH: 'rgb( 90, 90, 255 )'
 };
 
 acidBaseSolutions.register( 'ABSColors', ABSColors );

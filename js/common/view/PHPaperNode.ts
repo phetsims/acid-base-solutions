@@ -33,7 +33,7 @@ export default class PHPaperNode extends Node {
 
     // blank paper
     const paperNode = new Rectangle( 0, 0, pHPaper.paperSize.width, pHPaper.paperSize.height, {
-      fill: ABSColors.pHPaperColorProperty,
+      fill: ABSColors.pHPaperFillProperty,
       stroke: PAPER_STROKE,
       lineWidth: 0.5,
 
@@ -135,7 +135,7 @@ export default class PHPaperNode extends Node {
 
         // full paper
         new Rectangle( 0, 0, width, height, {
-          fill: ABSColors.pHPaperColorProperty,
+          fill: ABSColors.pHPaperFillProperty,
           stroke: PAPER_STROKE,
           lineWidth: 0.5
         } ),
