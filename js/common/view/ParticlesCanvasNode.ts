@@ -29,12 +29,13 @@ const IMAGE_SCALE = 2; // stored images are scaled this much to improve quality
 type ParticlesData = {
   canvas: HTMLCanvasElement | null;
 
-  // This is a Property so that it can be inspected in Studio and the PhET-iO data stream.
-  countProperty: Property<number>;
-
-  // Also keep simple count, so that PhET-iO state engine does not mess things up when restoring countProperty.
-  // TODO https://github.com/phetsims/acid-base-solutions/issues/195 why?...
+  // The number of particles of this type to draw
   count: number;
+
+  // This is a Property that can be inspected in Studio and the PhET-iO data stream. We should only write to it herein,
+  // and not read from it. Reading from it results in ordering problems when restoring PhET-iO state, resulting in an
+  // incorrect number of particles. See https://github.com/phetsims/acid-base-solutions/issues/195.
+  countProperty: Property<number>;
 
   // Note that particle positions are not PhET-iO stateful. See https://github.com/phetsims/acid-base-solutions/issues/201
   xCoordinates: Float32Array;
@@ -90,12 +91,12 @@ export default class ParticlesCanvasNode extends CanvasNode {
 
           this.particlesDataMap.set( key, {
             canvas: null,
+            count: 0,
             countProperty: new NumberProperty( 0, {
               isValidValue: value => Number.isInteger( value ) && ( value >= 0 ),
               tandem: countsTandem.createTandem( `count${key}Property` ),
               phetioReadOnly: true
             } ),
-            count: 0,
             xCoordinates: new ArrayConstructor( MAX_PARTICLES ), // pre-allocate to improve performance
             yCoordinates: new ArrayConstructor( MAX_PARTICLES )  // pre-allocate to improve performance
           } );
