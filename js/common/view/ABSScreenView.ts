@@ -81,7 +81,8 @@ export default class ABSScreenView extends ScreenView {
     // pH Meter
     const pHMeterNode = new PHMeterNode( model.pHMeter, this.viewProperties.toolModeProperty, toolNodesTandem.createTandem( 'pHMeterNode' ) );
 
-    // pH paper and color key. Some PhET-iO gymnastics here to be able to hide the color key independently.
+    // pH paper and color key. Some PhET-iO gymnastics here to (1) make pHColorKeyNode look like a child element of
+    // pHPaperNode, and (2) support hiding the color key independently.
     const pHPaperNodeTandem = toolNodesTandem.createTandem( 'pHPaperNode' );
     const pHPaperNode = new PHPaperNode( model.pHPaper, this.viewProperties.toolModeProperty, pHPaperNodeTandem );
     const pHColorKeyNode = new PHColorKeyNode( model.pHPaper.paperSize, {
