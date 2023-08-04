@@ -16,6 +16,7 @@ import acidBaseSolutions from '../acidBaseSolutions.js';
 import ABSColors from './ABSColors.js';
 import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
 import { ABSwitchOptions } from '../../../sun/js/ABSwitch.js';
+import { KeyboardDragListenerOptions } from '../../../scenery/js/imports.js';
 
 const WEAK_STRENGTH_MAX = 1E2;
 
@@ -34,6 +35,11 @@ const AB_SWITCH_OPTIONS: StrictOmit<ABSwitchOptions, 'tandem'> = {
     thumbTouchAreaXDilation: 6,
     thumbTouchAreaYDilation: 6
   }
+};
+
+const KEYBOARD_DRAG_LISTENER_OPTIONS: KeyboardDragListenerOptions = {
+  dragVelocity: 300, // velocity of the Node being dragged, in view coordinates per second
+  shiftDragVelocity: 20 // velocity with the Shift key pressed, typically slower than dragVelocity
 };
 
 const PANEL_OPTIONS: PanelOptions = {
@@ -65,6 +71,7 @@ const ABSConstants = {
 
   // options
   AB_SWITCH_OPTIONS: AB_SWITCH_OPTIONS,
+  KEYBOARD_DRAG_LISTENER_OPTIONS: KEYBOARD_DRAG_LISTENER_OPTIONS,
   PANEL_OPTIONS: PANEL_OPTIONS
 };
 

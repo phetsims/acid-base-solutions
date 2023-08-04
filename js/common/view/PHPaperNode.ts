@@ -9,7 +9,7 @@
 
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import { Circle, DragListener, Node, Rectangle } from '../../../../scenery/js/imports.js';
+import { Circle, DragListener, KeyboardDragListener, KeyboardDragListenerOptions, Node, Rectangle } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
 import PHPaper from '../model/PHPaper.js';
@@ -18,6 +18,9 @@ import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import Property from '../../../../axon/js/Property.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import ABSConstants from '../ABSConstants.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
@@ -27,6 +30,7 @@ export default class PHPaperNode extends Node {
 
   private readonly pHPaper: PHPaper;
   private readonly dragListener: DragListener;
+  private readonly keyboardDragListener: KeyboardDragListener;
   private animating: boolean; // is the paper animating?
 
   public constructor( pHPaper: PHPaper, toolModeProperty: StringUnionProperty<ToolMode>, tandem: Tandem ) {
@@ -93,7 +97,13 @@ export default class PHPaperNode extends Node {
     } );
     this.addInputListener( this.dragListener );
 
-    //TODO https://github.com/phetsims/acid-base-solutions/issues/208 add KeyboardDragListener
+    this.keyboardDragListener = new KeyboardDragListener( combineOptions<KeyboardDragListenerOptions>(
+      {}, ABSConstants.KEYBOARD_DRAG_LISTENER_OPTIONS, {
+        positionProperty: pHPaper.positionProperty,
+        dragBoundsProperty: new Property( pHPaper.dragBounds ),
+        tandem: tandem.createTandem( 'keyboardDragListener' )
+      } ) );
+    this.addInputListener( this.keyboardDragListener );
 
     // add observers
     pHPaper.positionProperty.link( position => {
@@ -111,7 +121,7 @@ export default class PHPaperNode extends Node {
   }
 
   public step( dt: number ): void {
-    if ( !this.dragListener.isPressed ) {
+    if ( !this.dragListener.isPressed && !this.keyboardDragListener.isPressed ) {
 
       const position = this.pHPaper.positionProperty.value;
       const minY = this.pHPaper.beaker.top + ( 0.6 * this.pHPaper.paperSize.height );

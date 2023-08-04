@@ -56,9 +56,10 @@ export default class PHPaper extends PhetioObject {
         // Not very interesting for PhET-iO, so not instrumented.
       } );
 
+    const beakerMargin = 5;
     this.dragBounds = new Bounds2(
-      beaker.left + this.paperSize.width / 2, beaker.top - 20,
-      beaker.right - this.paperSize.width / 2, beaker.bottom );
+      beaker.left + this.paperSize.width / 2 + beakerMargin, beaker.top - 20,
+      beaker.right - this.paperSize.width / 2 - beakerMargin, beaker.bottom - beakerMargin );
 
     this.positionProperty = new Vector2Property( new Vector2( beaker.right - 60, beaker.top - 10 ), {
       tandem: tandem.createTandem( 'positionProperty' ),
