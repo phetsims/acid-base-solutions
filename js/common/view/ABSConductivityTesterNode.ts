@@ -29,7 +29,6 @@ export default class ABSConductivityTesterNode extends ConductivityTesterNode {
         tandem: tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),
-      phetioInputEnabledPropertyInstrumented: true,
       tandem: tandem
     };
 
