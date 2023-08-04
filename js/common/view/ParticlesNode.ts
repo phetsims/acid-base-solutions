@@ -40,10 +40,10 @@ export default class ParticlesNode extends CanvasNode {
   private readonly particlesDataMap: Map<ParticleKey, ParticlesData>;
 
   public constructor( solutions: AqueousSolution[], solutionProperty: TReadOnlyProperty<AqueousSolution>,
-                      lensBounds: Bounds2, lensRadius: number, lensLineWidth: number, tandem: Tandem ) {
+                      lensRadius: number, lensLineWidth: number, tandem: Tandem ) {
 
     super( {
-      canvasBounds: lensBounds,
+      canvasBounds: new Bounds2( -lensRadius, -lensRadius, lensRadius, lensRadius ), // origin at center
       isDisposable: false,
       tandem: tandem,
       phetioVisiblePropertyInstrumented: false

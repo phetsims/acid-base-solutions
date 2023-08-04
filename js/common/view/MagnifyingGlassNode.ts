@@ -7,7 +7,6 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import Bounds2 from '../../../../dot/js/Bounds2.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import { Circle, Image, Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import solvent_png from '../../../images/solvent_png.js';
@@ -68,8 +67,7 @@ export default class MagnifyingGlassNode extends Node {
     } );
 
     // particles
-    const particlesNode = new ParticlesNode( solutions, solutionProperty, new Bounds2( -lensRadius, -lensRadius, lensRadius, lensRadius ),
-      lensRadius, LENS_LINE_WIDTH, tandem.createTandem( 'particlesNode' ) );
+    const particlesNode = new ParticlesNode( solutions, solutionProperty, lensRadius, LENS_LINE_WIDTH, tandem.createTandem( 'particlesNode' ) );
 
     // stuff that's visible through (and therefore clipped to) the lens
     const viewportNode = new Node( { children: [ solventNode, particlesNode ] } );
