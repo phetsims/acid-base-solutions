@@ -9,7 +9,6 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -23,6 +22,7 @@ import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import ABSColors from '../ABSColors.js';
+import Property from '../../../../axon/js/Property.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
@@ -98,20 +98,9 @@ export default class PHMeterNode extends Node {
     } );
 
     // Constrained dragging
-    let clickYOffset = 0;
     this.addInputListener( new DragListener( {
-
-      start: event => {
-        clickYOffset = this.globalToParentPoint( event.pointer.point ).y - event.currentTarget!.y;
-      },
-
-      drag: event => {
-        const y = this.globalToParentPoint( event.pointer.point ).y - clickYOffset;
-        pHMeter.positionProperty.value = new Vector2(
-          pHMeter.positionProperty.value.x,
-          Utils.clamp( y, pHMeter.dragYRange.min, pHMeter.dragYRange.max ) );
-      },
-
+      positionProperty: pHMeter.positionProperty,
+      dragBoundsProperty: new Property( pHMeter.dragBounds ),
       tandem: tandem.createTandem( 'dragListener' )
     } ) );
 

@@ -19,6 +19,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import Beaker from './Beaker.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
 
 export default class PHMeter extends PhetioObject {
 
@@ -56,6 +57,14 @@ export default class PHMeter extends PhetioObject {
 
   public reset(): void {
     this.positionProperty.reset();
+  }
+
+  /**
+   * Gets the drag bounds, constrained to vertical dragging.
+   */
+  public get dragBounds(): Bounds2 {
+    const x = this.positionProperty.value.x;
+    return new Bounds2( x, this.dragYRange.min, x, this.dragYRange.max );
   }
 }
 
