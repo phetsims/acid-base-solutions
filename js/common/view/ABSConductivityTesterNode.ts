@@ -23,22 +23,22 @@ export default class ABSConductivityTesterNode extends ConductivityTesterNode {
 
   public constructor( conductivityTester: ConductivityTester, toolModeProperty: StringUnionProperty<ToolMode>, tandem: Tandem ) {
 
-    super( conductivityTester.brightnessProperty,
-      new Property( conductivityTester.bulbPosition ),
-      conductivityTester.positiveProbePositionProperty,
-      conductivityTester.negativeProbePositionProperty, {
-        probeSize: conductivityTester.probeSize,
-        probeDragYRange: new Range(
-          conductivityTester.probeDragYRange.min - conductivityTester.bulbPosition.y,
-          conductivityTester.probeDragYRange.max - conductivityTester.bulbPosition.y
-        ),
-        visibleProperty: new DerivedProperty( [ toolModeProperty ], toolMode => ( toolMode === 'conductivityTester' ), {
-          tandem: tandem.createTandem( 'visibleProperty' ),
-          phetioValueType: BooleanIO
-        } ),
-        phetioInputEnabledPropertyInstrumented: true,
-        tandem: tandem
-      } );
+    const options = {
+      probeSize: conductivityTester.probeSize,
+      probeDragYRange: new Range(
+        conductivityTester.probeDragYRange.min - conductivityTester.bulbPosition.y,
+        conductivityTester.probeDragYRange.max - conductivityTester.bulbPosition.y
+      ),
+      visibleProperty: new DerivedProperty( [ toolModeProperty ], toolMode => ( toolMode === 'conductivityTester' ), {
+        tandem: tandem.createTandem( 'visibleProperty' ),
+        phetioValueType: BooleanIO
+      } ),
+      phetioInputEnabledPropertyInstrumented: true,
+      tandem: tandem
+    };
+
+    super( conductivityTester.brightnessProperty, new Property( conductivityTester.bulbPosition ),
+      conductivityTester.positiveProbePositionProperty, conductivityTester.negativeProbePositionProperty, options );
 
     this.addLinkedElement( conductivityTester );
   }
