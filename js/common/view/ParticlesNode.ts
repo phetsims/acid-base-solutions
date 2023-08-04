@@ -127,4 +127,4 @@ export default class ParticlesNode extends Node {
   }
 }
 
-acidBaseSolutions.register( 'MagnifyingGlassNode', ParticlesNode );
+acidBaseSolutions.register( 'ParticlesNode', ParticlesNode );
