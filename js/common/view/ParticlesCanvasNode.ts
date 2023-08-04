@@ -1,7 +1,7 @@
 // Copyright 2020-2023, University of Colorado Boulder
 
 /**
- * ParticlesNode draws the particles that appear in the magnifying glass.
+ * ParticlesCanvasNode uses a canvas to draw the particles that appear in the magnifying glass.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
