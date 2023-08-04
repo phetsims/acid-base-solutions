@@ -1,7 +1,8 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * MagnifyingGlassNode is the view of the magnifying glass, in which are shown different representations of the solution.
+ * ParticlesNode displays the 'Particles' view. It consists of a magnifying glass, in which are shown a relative
+ * ratio of the particles that make up the solution.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -39,13 +40,13 @@ export default class ParticlesNode extends Node {
                       solventVisibleProperty: TReadOnlyProperty<boolean>,
                       tandem: Tandem ) {
 
-    // lens
+    // magnifying glass lens
     const lensRadius = 0.465 * beaker.size.height;
     const lensCenter = beaker.position.plusXY( 0, -beaker.size.height / 2 );
     const lensShape = Shape.circle( 0, 0, lensRadius );
     const lensNode = new Path( lensShape, { stroke: 'black', lineWidth: LENS_LINE_WIDTH } );
 
-    // handle
+    // magnifying glass handle
     const handleNode = new Rectangle( lensRadius + 2, -lensRadius / 7, lensRadius * 0.9, lensRadius / 4, 5, 5, {
       fill: ABSColors.magnifyingGlassHandleFillProperty,
       stroke: 'black',
@@ -67,7 +68,7 @@ export default class ParticlesNode extends Node {
     } );
 
     // particles
-    const particlesCanvasNode = new ParticlesCanvasNode( solutions, solutionProperty, lensRadius, LENS_LINE_WIDTH, tandem.createTandem( 'particlesCanvasNode' ) );
+    const particlesCanvasNode = new ParticlesCanvasNode( solutions, solutionProperty, lensRadius, LENS_LINE_WIDTH, tandem );
 
     // stuff that's visible through (and therefore clipped to) the lens
     const viewportNode = new Node( { children: [ solventNode, particlesCanvasNode ] } );

@@ -40,13 +40,11 @@ export default class ParticlesCanvasNode extends CanvasNode {
   private readonly particlesDataMap: Map<ParticleKey, ParticlesData>;
 
   public constructor( solutions: AqueousSolution[], solutionProperty: TReadOnlyProperty<AqueousSolution>,
-                      lensRadius: number, lensLineWidth: number, tandem: Tandem ) {
+                      lensRadius: number, lensLineWidth: number, countsTandem: Tandem ) {
 
     super( {
       canvasBounds: new Bounds2( -lensRadius, -lensRadius, lensRadius, lensRadius ), // origin at center
-      isDisposable: false,
-      tandem: tandem,
-      phetioVisiblePropertyInstrumented: false
+      isDisposable: false
     } );
 
     this.solutionProperty = solutionProperty;
@@ -86,7 +84,7 @@ export default class ParticlesCanvasNode extends CanvasNode {
             canvas: null,
             countProperty: new NumberProperty( 0, {
               isValidValue: value => Number.isInteger( value ) && ( value >= 0 ),
-              tandem: tandem.createTandem( `count${key}Property` ),
+              tandem: countsTandem.createTandem( `count${key}Property` ),
               phetioReadOnly: true
             } ),
             xCoordinates: new ArrayConstructor( MAX_PARTICLES ), // pre-allocate to improve performance
