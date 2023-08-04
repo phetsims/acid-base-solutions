@@ -81,6 +81,7 @@ export default class ParticlesNode extends CanvasNode {
         // Skip water because it's displayed elsewhere as a static image file.
         // And since different solutions have the same particles, skip creation of duplicates.
         if ( key !== 'H2O' && !this.particlesDataMap.get( key ) ) {
+
           this.particlesDataMap.set( key, {
             canvas: null,
             countProperty: new NumberProperty( 0, {
@@ -91,6 +92,7 @@ export default class ParticlesNode extends CanvasNode {
             xCoordinates: new ArrayConstructor( MAX_PARTICLES ), // pre-allocate to improve performance
             yCoordinates: new ArrayConstructor( MAX_PARTICLES )  // pre-allocate to improve performance
           } );
+
           createCanvas( key ); // populate the canvas field asynchronously
         }
       } );
