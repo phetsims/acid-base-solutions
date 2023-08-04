@@ -129,6 +129,7 @@ export default class ViewsPanel extends Panel {
         graphRadioButton,
         hideViewsRadioButton
       ],
+      groupFocusHighlight: true, // to mimic AquaRadioButtonGroup
       tandem: radioButtonGroupTandem,
       phetioVisiblePropertyInstrumented: false, // hide the entire panel if you don't want radio buttons
       phetioEnabledPropertyInstrumented: true
