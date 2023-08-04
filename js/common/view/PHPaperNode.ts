@@ -93,6 +93,8 @@ export default class PHPaperNode extends Node {
     } );
     this.addInputListener( this.dragListener );
 
+    //TODO https://github.com/phetsims/acid-base-solutions/issues/208 add KeyboardDragListener
+
     // add observers
     pHPaper.positionProperty.link( position => {
       this.translation = position;
