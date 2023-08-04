@@ -12,7 +12,7 @@ import Utils from '../../../../dot/js/Utils.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Circle, DragListener, Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { Circle, DragListener, KeyboardDragListener, KeyboardDragListenerOptions, Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import PHMeter from '../model/PHMeter.js';
@@ -23,6 +23,8 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import ABSColors from '../ABSColors.js';
 import Property from '../../../../axon/js/Property.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import ABSConstants from '../ABSConstants.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
@@ -97,14 +99,18 @@ export default class PHMeterNode extends Node {
       tandem: tandem
     } );
 
-    // Constrained dragging
     this.addInputListener( new DragListener( {
       positionProperty: pHMeter.positionProperty,
       dragBoundsProperty: new Property( pHMeter.dragBounds ),
       tandem: tandem.createTandem( 'dragListener' )
     } ) );
 
-    //TODO https://github.com/phetsims/acid-base-solutions/issues/208 add KeyboardDragListener
+    this.addInputListener( new KeyboardDragListener( combineOptions<KeyboardDragListenerOptions>(
+      {}, ABSConstants.KEYBOARD_DRAG_LISTENER_OPTIONS, {
+        positionProperty: pHMeter.positionProperty,
+        dragBoundsProperty: new Property( pHMeter.dragBounds ),
+        tandem: tandem.createTandem( 'keyboardDragListener' )
+      } ) ) );
 
     pHMeter.positionProperty.link( position => {
       this.translation = position;
