@@ -32,6 +32,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import BeakerNode from './BeakerNode.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import multiSelectionSoundPlayerFactory from '../../../../tambo/js/multiSelectionSoundPlayerFactory.js';
 
 // constants
 const LABEL_FONT = new PhetFont( 12 );
@@ -66,11 +67,14 @@ export default class ViewsPanel extends Panel {
 
     const radioButtonGroupTandem = tandem.createTandem( 'radioButtonGroup' );
 
+    let soundPlayerIndex = 0;
+
     // Particles radio button
     const particlesRadioButton = new AquaRadioButton( viewModeProperty, 'particles',
       createLabel( AcidBaseSolutionsStrings.particlesStringProperty, new Image( magnifyingGlassIcon_png, { scale: 0.75 } ) ),
       combineOptions<AquaRadioButtonOptions>( {
-        tandem: radioButtonGroupTandem.createTandem( 'particlesRadioButton' )
+        tandem: radioButtonGroupTandem.createTandem( 'particlesRadioButton' ),
+        soundPlayer: multiSelectionSoundPlayerFactory.getSelectionSoundPlayer( soundPlayerIndex++ )
       }, radioButtonOptions ) );
 
     // Solvent checkbox
@@ -105,14 +109,16 @@ export default class ViewsPanel extends Panel {
     const graphRadioButton = new AquaRadioButton( viewModeProperty, 'graph',
       createLabel( AcidBaseSolutionsStrings.graphStringProperty, ConcentrationGraphNode.createIcon() ),
       combineOptions<AquaRadioButtonOptions>( {
-        tandem: radioButtonGroupTandem.createTandem( 'graphRadioButton' )
+        tandem: radioButtonGroupTandem.createTandem( 'graphRadioButton' ),
+        soundPlayer: multiSelectionSoundPlayerFactory.getSelectionSoundPlayer( soundPlayerIndex++ )
       }, radioButtonOptions ) );
 
     // Hide Views radio button
     const hideViewsRadioButton = new AquaRadioButton( viewModeProperty, 'hideViews',
       createLabel( AcidBaseSolutionsStrings.hideViewsStringProperty, BeakerNode.createIcon( 20, 15 ) ),
       combineOptions<AquaRadioButtonOptions>( {
-        tandem: radioButtonGroupTandem.createTandem( 'hideViewsRadioButton' )
+        tandem: radioButtonGroupTandem.createTandem( 'hideViewsRadioButton' ),
+        soundPlayer: multiSelectionSoundPlayerFactory.getSelectionSoundPlayer( soundPlayerIndex++ )
       }, radioButtonOptions ) );
 
     const radioButtonGroup = new VBox( {
