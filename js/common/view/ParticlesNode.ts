@@ -27,7 +27,7 @@ const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
 const CLIPPING_ENABLED = true; // set to false for debugging particle positions
 const LENS_LINE_WIDTH = 8;
 
-export default class MagnifyingGlassNode extends Node {
+export default class ParticlesNode extends Node {
 
   private readonly solventNode: Node;
   private readonly particlesCanvasNode: ParticlesCanvasNode;
@@ -127,4 +127,4 @@ export default class MagnifyingGlassNode extends Node {
   }
 }
 
-acidBaseSolutions.register( 'MagnifyingGlassNode', MagnifyingGlassNode );
+acidBaseSolutions.register( 'MagnifyingGlassNode', ParticlesNode );

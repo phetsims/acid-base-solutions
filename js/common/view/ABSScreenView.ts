@@ -19,7 +19,7 @@ import ABSConductivityTesterNode from './ABSConductivityTesterNode.js';
 import ABSViewProperties from './ABSViewProperties.js';
 import BeakerNode from './BeakerNode.js';
 import ConcentrationGraphNode from './ConcentrationGraphNode.js';
-import MagnifyingGlassNode from './MagnifyingGlassNode.js';
+import ParticlesNode from './ParticlesNode.js';
 import PHColorKeyNode from './PHColorKeyNode.js';
 import PHMeterNode from './PHMeterNode.js';
 import PHPaperNode from './PHPaperNode.js';
@@ -69,9 +69,9 @@ export default class ABSScreenView extends ScreenView {
       tandem.createTandem( 'reactionEquationNode' ) );
 
     // Views
-    const magnifyingGlassNode = new MagnifyingGlassNode( model.beaker, model.solutions, model.solutionProperty,
+    const particlesNode = new ParticlesNode( model.beaker, model.solutions, model.solutionProperty,
       this.viewProperties.viewModeProperty, this.viewProperties.solventVisibleProperty,
-      tandem.createTandem( 'magnifyingGlassNode' ) );
+      tandem.createTandem( 'particlesNode' ) );
     const graphNode = new ConcentrationGraphNode( model.beaker, model.solutionProperty,
       this.viewProperties.viewModeProperty, tandem.createTandem( 'graphNode' ) );
 
@@ -118,9 +118,9 @@ export default class ABSScreenView extends ScreenView {
       spacing: 10
     } );
 
-    // Centered in the space to the right of the magnifying glass
+    // Centered in the space to the right of the magnifying glass handle
     controlsParent.boundsProperty.link( bounds => {
-      controlsParent.centerX = magnifyingGlassNode.right + ( this.layoutBounds.right - magnifyingGlassNode.right ) / 2;
+      controlsParent.centerX = particlesNode.right + ( this.layoutBounds.right - particlesNode.right ) / 2;
       controlsParent.centerY = this.layoutBounds.centerY;
     } );
 
@@ -131,7 +131,7 @@ export default class ABSScreenView extends ScreenView {
         conductivityTesterNode,
         beakerNode,
         reactionEquationNode,
-        magnifyingGlassNode,
+        particlesNode,
         graphNode,
         controlsParent,
         resetAllButton
