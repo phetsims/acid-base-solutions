@@ -16,6 +16,7 @@ import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import ABSConstants from '../ABSConstants.js';
 
 export default class ABSConductivityTesterNode extends ConductivityTesterNode {
 
@@ -29,6 +30,7 @@ export default class ABSConductivityTesterNode extends ConductivityTesterNode {
         tandem: tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),
+      keyboardDragListenerOptions: ABSConstants.KEYBOARD_DRAG_LISTENER_OPTIONS,
       tandem: tandem
     };
 
