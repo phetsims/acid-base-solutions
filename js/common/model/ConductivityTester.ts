@@ -29,11 +29,11 @@ const BRIGHTNESS_RANGE = new Range( 0, 1 );
 
 export default class ConductivityTester extends PhetioObject {
 
-  public readonly probeDragYRange: Range;
-  public readonly probeSize: Dimension2;
   public readonly bulbPosition: Vector2; // bottom-center of bulb's base
+  public readonly probeSize: Dimension2;
+  public readonly probeDragYRange: Range; // relative to bulbPosition
 
-  // probe positions
+  // probe positions, bottom-center
   public readonly positiveProbePositionProperty: Property<Vector2>;
   public readonly negativeProbePositionProperty: Property<Vector2>;
 
@@ -48,14 +48,12 @@ export default class ConductivityTester extends PhetioObject {
       phetioState: false
     } );
 
-    this.probeDragYRange = new Range( beaker.top - 20, beaker.top + 50 );
-
-    this.probeSize = new Dimension2( 20, 68 );
-
     this.bulbPosition = new Vector2( beaker.position.x - 45, beaker.top - 30 );
+    this.probeSize = new Dimension2( 20, 68 );
+    this.probeDragYRange = new Range( beaker.top - 20 - this.bulbPosition.y, beaker.top + 50 - this.bulbPosition.y );
 
     const probeXOffset = 0.175 * beaker.size.width; // offset from edge of beaker
-    const probeY = this.probeDragYRange.min + 10;
+    const probeY = this.bulbPosition.y + this.probeDragYRange.min + 10;
 
     const probesTandem = tandem.createTandem( 'probes' );
 

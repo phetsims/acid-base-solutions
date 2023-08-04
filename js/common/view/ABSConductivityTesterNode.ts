@@ -8,7 +8,6 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import Range from '../../../../dot/js/Range.js';
 import ConductivityTesterNode from '../../../../scenery-phet/js/ConductivityTesterNode.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ConductivityTester from '../model/ConductivityTester.js';
@@ -25,10 +24,7 @@ export default class ABSConductivityTesterNode extends ConductivityTesterNode {
     const options = {
       isDisposable: false,
       probeSize: conductivityTester.probeSize,
-      probeDragYRange: new Range(
-        conductivityTester.probeDragYRange.min - conductivityTester.bulbPosition.y,
-        conductivityTester.probeDragYRange.max - conductivityTester.bulbPosition.y
-      ),
+      probeDragYRange: conductivityTester.probeDragYRange,
       visibleProperty: new DerivedProperty( [ toolModeProperty ], toolMode => ( toolMode === 'conductivityTester' ), {
         tandem: tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
