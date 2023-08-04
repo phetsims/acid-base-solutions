@@ -132,7 +132,7 @@ export default class ViewsPanel extends Panel {
       groupFocusHighlight: true, // to mimic AquaRadioButtonGroup
       tandem: radioButtonGroupTandem,
       phetioVisiblePropertyInstrumented: false, // hide the entire panel if you don't want radio buttons
-      phetioEnabledPropertyInstrumented: true
+      phetioEnabledPropertyInstrumented: true // to mimic AquaRadioButtonGroup
     } );
 
     // to mimic AquaRadioButtonGroup
