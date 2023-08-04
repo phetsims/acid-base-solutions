@@ -33,7 +33,7 @@ type ParticlesData = {
   yCoordinates: Float32Array;
 };
 
-export default class ParticlesNode extends CanvasNode {
+export default class ParticlesCanvasNode extends CanvasNode {
 
   private readonly solutionProperty: TReadOnlyProperty<AqueousSolution>;
   private readonly positionRadius: number; // radius for computing random positions
@@ -191,4 +191,4 @@ function getParticleCount( concentration: number ): number {
   return Utils.roundSymmetric( BASE_DOTS * Math.pow( baseFactor, raiseFactor ) );
 }
 
-acidBaseSolutions.register( 'ParticlesNode', ParticlesNode );
+acidBaseSolutions.register( 'ParticlesNode', ParticlesCanvasNode );

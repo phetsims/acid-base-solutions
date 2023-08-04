@@ -11,7 +11,7 @@ import { Shape } from '../../../../kite/js/imports.js';
 import { Circle, Image, Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import solvent_png from '../../../images/solvent_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import ParticlesNode from './ParticlesNode.js';
+import ParticlesCanvasNode from './ParticlesCanvasNode.js';
 import { ViewMode } from './ViewMode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
@@ -30,7 +30,7 @@ const LENS_LINE_WIDTH = 8;
 export default class MagnifyingGlassNode extends Node {
 
   private readonly solventNode: Node;
-  private readonly particlesNode: ParticlesNode;
+  private readonly particlesNode: ParticlesCanvasNode;
 
   public constructor( beaker: Beaker,
                       solutions: AqueousSolution[],
@@ -67,7 +67,7 @@ export default class MagnifyingGlassNode extends Node {
     } );
 
     // particles
-    const particlesNode = new ParticlesNode( solutions, solutionProperty, lensRadius, LENS_LINE_WIDTH, tandem.createTandem( 'particlesNode' ) );
+    const particlesNode = new ParticlesCanvasNode( solutions, solutionProperty, lensRadius, LENS_LINE_WIDTH, tandem.createTandem( 'particlesNode' ) );
 
     // stuff that's visible through (and therefore clipped to) the lens
     const viewportNode = new Node( { children: [ solventNode, particlesNode ] } );
