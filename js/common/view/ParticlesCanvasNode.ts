@@ -14,10 +14,10 @@ import createParticleNode from './createParticleNode.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import { ParticleKey } from '../model/solutions/Particle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Property from '../../../../axon/js/Property.js';
 import AqueousSolution from '../model/solutions/AqueousSolution.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 
 // constants
 const BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some particles
@@ -31,6 +31,10 @@ type ParticlesData = {
 
   // This is a Property so that it can be inspected in Studio and the PhET-iO data stream.
   countProperty: Property<number>;
+
+  // Also keep simple count, so that PhET-iO state engine does not mess things up when restoring countProperty.
+  // TODO https://github.com/phetsims/acid-base-solutions/issues/195 why?...
+  count: number;
 
   // Note that particle positions are not PhET-iO stateful. See https://github.com/phetsims/acid-base-solutions/issues/201
   xCoordinates: Float32Array;
@@ -91,6 +95,7 @@ export default class ParticlesCanvasNode extends CanvasNode {
               tandem: countsTandem.createTandem( `count${key}Property` ),
               phetioReadOnly: true
             } ),
+            count: 0,
             xCoordinates: new ArrayConstructor( MAX_PARTICLES ), // pre-allocate to improve performance
             yCoordinates: new ArrayConstructor( MAX_PARTICLES )  // pre-allocate to improve performance
           } );
@@ -106,6 +111,7 @@ export default class ParticlesCanvasNode extends CanvasNode {
     // Reset all particle counts to zero.
     this.particlesDataMap.forEach( ( particlesData, key ) => {
       particlesData.countProperty.value = 0;
+      particlesData.count = 0;
     } );
   }
 
@@ -129,7 +135,7 @@ export default class ParticlesCanvasNode extends CanvasNode {
         const newCount = getParticleCount( concentration );
 
         // add additional particles as needed
-        const oldCount = particlesData.countProperty.value;
+        const oldCount = particlesData.count;
         for ( let i = oldCount; i < newCount; i++ ) {
 
           // random distance from the center of the lens
@@ -139,6 +145,7 @@ export default class ParticlesCanvasNode extends CanvasNode {
           particlesData.yCoordinates[ i ] = distance * Math.sin( angle );
         }
 
+        particlesData.count = newCount;
         particlesData.countProperty.value = newCount;
       }
     } );
@@ -169,7 +176,7 @@ export default class ParticlesCanvasNode extends CanvasNode {
 
         // Images are generated asynchronously, so test in case they aren't available when this is first called.
         if ( particlesData.canvas ) {
-          for ( let i = 0; i < particlesData.countProperty.value; i++ ) {
+          for ( let i = 0; i < particlesData.count; i++ ) {
 
             // Use integer coordinates with drawImage to improve performance.
             const x = Math.floor( particlesData.xCoordinates[ i ] - particlesData.canvas.width / 2 );
