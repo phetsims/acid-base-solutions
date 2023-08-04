@@ -97,6 +97,8 @@ export default class ViewsPanel extends Panel {
         tandem: solventCheckboxTandem
       } );
 
+    // Wrap the 'Particles' radio button and 'Solvent' checkbox with a parent Node, so that hiding the 'Particles'
+    // radio button will also hide the 'Solvent' checkbox.
     const particlesControls = new VBox( {
       children: [ particlesRadioButton, solventCheckbox ],
       visibleProperty: particlesRadioButton.visibleProperty,
