@@ -28,7 +28,11 @@ const IMAGE_SCALE = 2; // stored images are scaled this much to improve quality
 // Data structure used to store information for each unique type of particle
 type ParticlesData = {
   canvas: HTMLCanvasElement | null;
-  countProperty: Property<number>; // this is a Property for PhET-iO
+
+  // This is a Property so that it can be inspected in Studio and the PhET-iO data stream.
+  countProperty: Property<number>;
+
+  // Note that particle positions are not PhET-iO stateful. See https://github.com/phetsims/acid-base-solutions/issues/201
   xCoordinates: Float32Array;
   yCoordinates: Float32Array;
 };
