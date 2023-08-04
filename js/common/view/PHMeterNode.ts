@@ -92,6 +92,8 @@ export default class PHMeterNode extends Node {
       } ),
       phetioInputEnabledPropertyInstrumented: true,
       isDisposable: false,
+      tagName: 'div',
+      focusable: true,
       tandem: tandem
     } );
 

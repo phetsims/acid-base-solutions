@@ -66,6 +66,8 @@ export default class PHPaperNode extends Node {
       } ),
       phetioInputEnabledPropertyInstrumented: true,
       isDisposable: false,
+      tagName: 'div',
+      focusable: true,
       tandem: tandem
     } );
 
