@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
 import ConductivityTesterNode from '../../../../scenery-phet/js/ConductivityTesterNode.js';
@@ -24,6 +23,7 @@ export default class ABSConductivityTesterNode extends ConductivityTesterNode {
   public constructor( conductivityTester: ConductivityTester, toolModeProperty: StringUnionProperty<ToolMode>, tandem: Tandem ) {
 
     const options = {
+      isDisposable: false,
       probeSize: conductivityTester.probeSize,
       probeDragYRange: new Range(
         conductivityTester.probeDragYRange.min - conductivityTester.bulbPosition.y,
@@ -41,11 +41,6 @@ export default class ABSConductivityTesterNode extends ConductivityTesterNode {
       conductivityTester.positiveProbePositionProperty, conductivityTester.negativeProbePositionProperty, options );
 
     this.addLinkedElement( conductivityTester );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 
