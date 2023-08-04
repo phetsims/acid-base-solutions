@@ -191,4 +191,4 @@ function getParticleCount( concentration: number ): number {
   return Utils.roundSymmetric( BASE_DOTS * Math.pow( baseFactor, raiseFactor ) );
 }
 
-acidBaseSolutions.register( 'ParticlesNode', ParticlesCanvasNode );
+acidBaseSolutions.register( 'ParticlesCanvasNode', ParticlesCanvasNode );

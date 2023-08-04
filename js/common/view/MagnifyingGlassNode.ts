@@ -30,7 +30,7 @@ const LENS_LINE_WIDTH = 8;
 export default class MagnifyingGlassNode extends Node {
 
   private readonly solventNode: Node;
-  private readonly particlesNode: ParticlesCanvasNode;
+  private readonly particlesCanvasNode: ParticlesCanvasNode;
 
   public constructor( beaker: Beaker,
                       solutions: AqueousSolution[],
@@ -67,10 +67,10 @@ export default class MagnifyingGlassNode extends Node {
     } );
 
     // particles
-    const particlesNode = new ParticlesCanvasNode( solutions, solutionProperty, lensRadius, LENS_LINE_WIDTH, tandem.createTandem( 'particlesNode' ) );
+    const particlesCanvasNode = new ParticlesCanvasNode( solutions, solutionProperty, lensRadius, LENS_LINE_WIDTH, tandem.createTandem( 'particlesCanvasNode' ) );
 
     // stuff that's visible through (and therefore clipped to) the lens
-    const viewportNode = new Node( { children: [ solventNode, particlesNode ] } );
+    const viewportNode = new Node( { children: [ solventNode, particlesCanvasNode ] } );
     if ( CLIPPING_ENABLED ) {
       viewportNode.clipArea = lensShape;
     }
@@ -91,38 +91,38 @@ export default class MagnifyingGlassNode extends Node {
       tandem: tandem
     } );
 
-    this.particlesNode = particlesNode;
+    this.particlesCanvasNode = particlesCanvasNode;
     this.solventNode = solventNode;
 
     // Observe the strength and concentration Properties for the selected solution.
-    const updateParticlesBound = this.updateParticles.bind( this );
+    const updateParticlesCanvasNodeBound = this.updateParticlesCanvasNode.bind( this );
     solutionProperty.link( ( newSolution, oldSolution ) => {
 
-      this.particlesNode.reset();
+      this.particlesCanvasNode.reset();
 
       // unlink from previous solution
       if ( oldSolution ) {
-        oldSolution.strengthProperty.unlink( updateParticlesBound );
-        oldSolution.concentrationProperty.unlink( updateParticlesBound );
+        oldSolution.strengthProperty.unlink( updateParticlesCanvasNodeBound );
+        oldSolution.concentrationProperty.unlink( updateParticlesCanvasNodeBound );
       }
 
       // link to new solution
-      newSolution.strengthProperty.lazyLink( updateParticlesBound );
-      newSolution.concentrationProperty.lazyLink( updateParticlesBound );
-      this.updateParticles();
+      newSolution.strengthProperty.lazyLink( updateParticlesCanvasNodeBound );
+      newSolution.concentrationProperty.lazyLink( updateParticlesCanvasNodeBound );
+      this.updateParticlesCanvasNode();
     } );
 
     // Update when this Node becomes visible.
-    this.visibleProperty.link( visible => visible && this.updateParticles() );
+    this.visibleProperty.link( visible => visible && this.updateParticlesCanvasNode() );
   }
 
   /*
    * Updates the number of particles visible.
    * To improve performance, updates only when this Node is visible.
    */
-  private updateParticles(): void {
+  private updateParticlesCanvasNode(): void {
     if ( this.visible ) {
-      this.particlesNode.update();
+      this.particlesCanvasNode.update();
     }
   }
 }
