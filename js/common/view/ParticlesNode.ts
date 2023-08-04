@@ -70,7 +70,7 @@ export default class ParticlesNode extends CanvasNode {
       } );
     };
 
-    // use typed array if available, it will use less memory and be faster
+    // Use typed array if available. It will use less memory and be faster.
     const ArrayConstructor = window.Float32Array || window.Array;
 
     // Iterate over all solutions, and create a ParticlesData structure for each unique particle.
