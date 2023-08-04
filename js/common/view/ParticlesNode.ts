@@ -44,8 +44,8 @@ export default class ParticlesNode extends CanvasNode {
 
     super( {
       canvasBounds: lensBounds,
-      tandem: tandem,
       isDisposable: false,
+      tandem: tandem,
       phetioVisiblePropertyInstrumented: false
     } );
 
