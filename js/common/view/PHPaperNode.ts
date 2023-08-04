@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Circle, DragListener, KeyboardDragListener, KeyboardDragListenerOptions, Node, Rectangle } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
@@ -78,21 +77,9 @@ export default class PHPaperNode extends Node {
     // expand touch area
     this.touchArea = this.localBounds.dilatedXY( 10, 10 );
 
-    // Constrained dragging
-    let clickOffset: Vector2;
     this.dragListener = new DragListener( {
-
-      start: event => {
-        clickOffset = this.globalToParentPoint( event.pointer.point ).subtract( event.currentTarget!.translation );
-      },
-
-      drag: event => {
-        const v = this.globalToParentPoint( event.pointer.point ).subtract( clickOffset );
-        pHPaper.positionProperty.value = new Vector2(
-          Utils.clamp( v.x, pHPaper.dragBounds.minX, pHPaper.dragBounds.maxX ),
-          Utils.clamp( v.y, pHPaper.dragBounds.minY, pHPaper.dragBounds.maxY ) );
-      },
-
+      positionProperty: pHPaper.positionProperty,
+      dragBoundsProperty: new Property( pHPaper.dragBounds ),
       tandem: tandem.createTandem( 'dragListener' )
     } );
     this.addInputListener( this.dragListener );
