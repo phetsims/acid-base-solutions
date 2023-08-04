@@ -124,7 +124,7 @@ export default class ABSScreenView extends ScreenView {
       controlsParent.centerY = this.layoutBounds.centerY;
     } );
 
-    const rootNode = new Node( {
+    const screenViewRootNode = new Node( {
       children: [
         pHMeterNode,
         pHPaperAndColorKeyNode,
@@ -137,7 +137,16 @@ export default class ABSScreenView extends ScreenView {
         resetAllButton
       ]
     } );
-    this.addChild( rootNode );
+    this.addChild( screenViewRootNode );
+
+    // pdom - traversal order. Set this explicitly. Do not rely on the default order of the scenegraph.
+    screenViewRootNode.pdomOrder = [
+      pHMeterNode,
+      pHPaperAndColorKeyNode,
+      conductivityTesterNode,
+      controlsParent,
+      resetAllButton
+    ];
 
     // needed by step
     this.pHPaperNode = pHPaperNode;
