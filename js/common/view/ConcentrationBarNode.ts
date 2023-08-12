@@ -63,7 +63,8 @@ export default class ConcentrationBarNode extends Node {
 
     // Text for concentration value, typically in scientific notation.
     // Do not instrument, see https://github.com/phetsims/acid-base-solutions/issues/202#issuecomment-1675475175
-    const valueStringProperty = new DerivedStringProperty( [ concentrationProperty ],
+    const valueStringProperty = new DerivedStringProperty(
+      [ concentrationProperty, AcidBaseSolutionsStrings.negligibleStringProperty ],
       concentration => concentrationToString( concentration ) );
     const valueText = new RichText( valueStringProperty, {
       font: FONT,
