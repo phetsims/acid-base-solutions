@@ -55,8 +55,8 @@ const ABSConstants = {
 
   // Acids and Bases
   CONCENTRATION_RANGE: new RangeWithValue( 1E-3, 1, 1E-2 ), // mol/L
-  STRONG_STRENGTH_RANGE: new RangeWithValue( STRONG_STRENGTH, STRONG_STRENGTH, STRONG_STRENGTH ), // constant
-  WEAK_STRENGTH_RANGE: new RangeWithValue( 1E-10, WEAK_STRENGTH_MAX, 1E-7 ),
+  STRONG_STRENGTH_RANGE: new RangeWithValue( STRONG_STRENGTH, STRONG_STRENGTH, STRONG_STRENGTH ), // constant, unitless
+  WEAK_STRENGTH_RANGE: new RangeWithValue( 1E-10, WEAK_STRENGTH_MAX, 1E-7 ), // unitless
 
   // Water
   WATER_CONCENTRATION: WATER_CONCENTRATION,

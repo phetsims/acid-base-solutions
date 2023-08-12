@@ -63,6 +63,7 @@ export default abstract class AqueousSolution extends PhetioObject {
 
     this.strengthProperty = new NumberProperty( options.strengthRange.defaultValue, {
       range: options.strengthRange,
+      // units: unitless, see https://github.com/phetsims/acid-base-solutions/issues/182#issuecomment-1675201139
       tandem: options.tandem.createTandem( 'strengthProperty' ),
 
       // read-only if solution is read-only, or if strength is a constant
