@@ -39,7 +39,7 @@ export default class InitialConcentrationControl extends VBox {
           font: new PhetFont( 14 )
         },
         cornerRadius: 4,
-        phetioVisiblePropertyInstrumented: false
+        tandem: Tandem.OPT_OUT // see https://github.com/phetsims/acid-base-solutions/issues/197#issuecomment-1674022990
       },
       touchAreaXDilation: 6,
       touchAreaYDilation: 6,
