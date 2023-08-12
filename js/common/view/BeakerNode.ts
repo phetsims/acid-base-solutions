@@ -115,7 +115,8 @@ export default class BeakerNode extends Node {
       translation: beaker.position,
       pickable: false,
       isDisposable: false,
-      tandem: tandem
+      tandem: tandem,
+      phetioVisiblePropertyInstrumented: false // see https://github.com/phetsims/acid-base-solutions/issues/205#issuecomment-1675154811
     } );
   }
 
