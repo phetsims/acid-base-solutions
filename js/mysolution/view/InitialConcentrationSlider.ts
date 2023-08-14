@@ -18,18 +18,31 @@ const TICK_LABEL_OPTIONS = {
   font: new PhetFont( 10 )
 };
 
+// These values are regrettably hardcoded, see https://github.com/phetsims/acid-base-solutions/issues/212
+// LogSlider's linearValueRange is [-3,0] in this case, with a tick mark at each integer value, so...
+const PAGE_KEYBOARD_STEP = 3; // page up/down will jump to min and max
+const KEYBOARD_STEP = 0.5; // up/down, 2 intervals per tick mark
+const SHIFT_KEYBOARD_STEP = 0.2; // shift-up/down, 5 intervals per tick mark
+const NUMBER_OF_MIDDLE_THRESHOLDS = ( PAGE_KEYBOARD_STEP / SHIFT_KEYBOARD_STEP ) - 1;
+
 export default class InitialConcentrationSlider extends LogSlider {
 
   public constructor( concentrationProperty: NumberProperty, tandem: Tandem ) {
 
     super( concentrationProperty, concentrationProperty.range, {
+      isDisposable: false,
       trackSize: new Dimension2( 125, 4 ),
       thumbSize: new Dimension2( 12, 24 ),
       thumbTouchAreaXDilation: 6,
       thumbTouchAreaYDilation: 6,
       majorTickLength: 12,
       tickLabelSpacing: 2,
-      isDisposable: false,
+      keyboardStep: KEYBOARD_STEP,
+      shiftKeyboardStep: SHIFT_KEYBOARD_STEP,
+      pageKeyboardStep: PAGE_KEYBOARD_STEP,
+      valueChangeSoundGeneratorOptions: {
+        numberOfMiddleThresholds: NUMBER_OF_MIDDLE_THRESHOLDS
+      },
       tandem: tandem
     } );
 

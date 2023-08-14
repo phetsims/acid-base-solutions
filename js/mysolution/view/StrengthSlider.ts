@@ -22,6 +22,13 @@ const TICK_LABEL_OPTIONS = {
   maxWidth: 80 // determined empirically
 };
 
+// These values are regrettably hardcoded, see https://github.com/phetsims/acid-base-solutions/issues/212
+// LogSlider's linearValueRange is [-10,2] in this case, with tick marks only at min and max, so...
+const PAGE_KEYBOARD_STEP = 12; // page up/down will jump to min and max
+const KEYBOARD_STEP = PAGE_KEYBOARD_STEP / 12; // up/down interval
+const SHIFT_KEYBOARD_STEP = KEYBOARD_STEP / 5;  // shift up/down interval
+const NUMBER_OF_MIDDLE_THRESHOLDS = ( PAGE_KEYBOARD_STEP / KEYBOARD_STEP ) - 1;
+
 export default class StrengthSlider extends LogSlider {
 
   public constructor( strengthProperty: Property<number>,
@@ -30,13 +37,19 @@ export default class StrengthSlider extends LogSlider {
                       tandem: Tandem ) {
 
     super( strengthProperty, strengthRange, {
+      isDisposable: false,
       visibleProperty: isWeakProperty, // visible only for weak solutions
       trackSize: new Dimension2( 125, 4 ),
       thumbSize: new Dimension2( 12, 24 ),
       majorTickLength: 12,
       thumbTouchAreaXDilation: 6,
       thumbTouchAreaYDilation: 6,
-      isDisposable: false,
+      keyboardStep: KEYBOARD_STEP,
+      shiftKeyboardStep: SHIFT_KEYBOARD_STEP,
+      pageKeyboardStep: PAGE_KEYBOARD_STEP,
+      valueChangeSoundGeneratorOptions: {
+        numberOfMiddleThresholds: NUMBER_OF_MIDDLE_THRESHOLDS
+      },
       tandem: tandem
     } );
 
