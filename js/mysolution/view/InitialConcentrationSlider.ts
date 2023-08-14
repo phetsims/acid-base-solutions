@@ -23,7 +23,7 @@ const TICK_LABEL_OPTIONS = {
 const PAGE_KEYBOARD_STEP = 3; // page up/down will jump to min and max
 const KEYBOARD_STEP = 0.5; // up/down, 2 intervals per tick mark
 const SHIFT_KEYBOARD_STEP = 0.2; // shift-up/down, 5 intervals per tick mark
-const NUMBER_OF_MIDDLE_THRESHOLDS = ( PAGE_KEYBOARD_STEP / SHIFT_KEYBOARD_STEP ) - 1;
+const NUMBER_OF_MIDDLE_THRESHOLDS = 24;
 
 export default class InitialConcentrationSlider extends LogSlider {
 
