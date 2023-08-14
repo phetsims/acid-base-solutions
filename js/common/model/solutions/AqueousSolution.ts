@@ -112,7 +112,7 @@ export default abstract class AqueousSolution extends PhetioObject {
 
   /**
    * AqueousSolutionIO implements 'Reference type serialization', as described in the Serialization section of
-   * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
+   * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization
    * Reference type serialization is appropriate because all AqueousSolution instances are created at startup.
    * Any occurrence of AqueousSolution in PhET-iO state is a reference to one of those instances.
    */
