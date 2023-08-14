@@ -40,6 +40,10 @@ const RADIO_BUTTONS_Y_SPACING = 8;
 const POINT_AREA_X_DILATION = 10;
 const POINT_AREA_Y_DILATION = RADIO_BUTTONS_Y_SPACING / 2; // to mimic AquaRadioButtonGroup
 
+// pdom - Used for the 'name' attribute of the radio buttons so that the browser can uniquely identify this group of
+// UI components for traversal, see https://github.com/phetsims/acid-base-solutions/issues/213
+let instanceCount = 0;
+
 export default class ViewsPanel extends Panel {
 
   public constructor( viewModeProperty: StringUnionProperty<ViewMode>,
@@ -62,7 +66,8 @@ export default class ViewsPanel extends Panel {
       touchAreaYDilation: POINT_AREA_Y_DILATION,
       mouseAreaXDilation: POINT_AREA_X_DILATION,
       mouseAreaYDilation: POINT_AREA_Y_DILATION,
-      layoutOptions: { stretch: true }
+      layoutOptions: { stretch: true },
+      a11yNameAttribute: `viewsButtonGroup-${instanceCount++}`
     };
 
     const radioButtonGroupTandem = tandem.createTandem( 'radioButtonGroup' );
