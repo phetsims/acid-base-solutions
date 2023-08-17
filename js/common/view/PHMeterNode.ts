@@ -12,7 +12,7 @@ import Utils from '../../../../dot/js/Utils.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Circle, DragListener, KeyboardDragListener, KeyboardDragListenerOptions, Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { Circle, DragListener, InteractiveHighlighting, KeyboardDragListener, KeyboardDragListenerOptions, Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import PHMeter from '../model/PHMeter.js';
@@ -36,7 +36,7 @@ const BACKGROUND_FILL = 'rgb( 225, 225, 225 )';
 const BACKGROUND_STROKE = 'rgb( 64, 64, 64 )';
 const PH_TEXT_MAX_WIDTH = 70;
 
-export default class PHMeterNode extends Node {
+export default class PHMeterNode extends InteractiveHighlighting( Node ) {
 
   public constructor( pHMeter: PHMeter, toolModeProperty: StringUnionProperty<ToolMode>, tandem: Tandem ) {
 

@@ -8,7 +8,7 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import { Circle, DragListener, KeyboardDragListener, KeyboardDragListenerOptions, Node, Rectangle } from '../../../../scenery/js/imports.js';
+import { Circle, DragListener, InteractiveHighlighting, KeyboardDragListener, KeyboardDragListenerOptions, Node, Rectangle } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
 import PHPaper from '../model/PHPaper.js';
@@ -25,7 +25,7 @@ import ABSConstants from '../ABSConstants.js';
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
 const PAPER_STROKE = 'rgb( 100, 100, 100 )';
 
-export default class PHPaperNode extends Node {
+export default class PHPaperNode extends InteractiveHighlighting( Node ) {
 
   private readonly pHPaper: PHPaper;
   private readonly dragListener: DragListener;
