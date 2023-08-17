@@ -98,4 +98,4 @@ function createScreenIcon(): ScreenIcon {
   } );
 }
 
-acidBaseSolutions.register( 'IntroductionScreen', IntroScreen );
+acidBaseSolutions.register( 'IntroScreen', IntroScreen );
