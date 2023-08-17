@@ -1,7 +1,7 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * IntroductionModel is the model for the 'Introduction' screen.
+ * IntroModel is the model for the 'Intro' screen.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)

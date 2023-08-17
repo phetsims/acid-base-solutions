@@ -1,7 +1,7 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * The 'Introduction' screen.
+ * The 'Intro' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

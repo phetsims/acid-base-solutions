@@ -1,7 +1,7 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * IntroductionSolutionPanel is the panel titled 'Solution' in the 'Introduction' screen.
+ * IntroSolutionPanel is the panel titled 'Solution' in the 'Intro' screen.
  * It allows the user to select between a set of mutually-exclusive solutions.
  *
  * @author Andrey Zelenkov (Mlearner)
