@@ -24,6 +24,7 @@ import AqueousSolution from './solutions/AqueousSolution.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import ABSColors from '../ABSColors.js';
+import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 
 export default class PHPaper extends PhetioObject {
 
@@ -53,7 +54,9 @@ export default class PHPaper extends PhetioObject {
 
     this.colorProperty = DerivedProperty.deriveAny( [ pHProperty, ...ABSColors.PH_PAPER_COLOR_PROPERTIES ],
       () => pHToColor( pHProperty.value ), {
-        // Not very interesting for PhET-iO, so not instrumented.
+        tandem: tandem.createTandem( 'colorProperty' ),
+        phetioValueType: NullableIO( Color.ColorIO ),
+        phetioDocumentation: 'The color that the pH paper will turn when it is dipped in the solution'
       } );
 
     const beakerMargin = 5;
