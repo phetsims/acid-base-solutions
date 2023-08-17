@@ -17,7 +17,7 @@ import MySolutionScreen from './mysolution/MySolutionScreen.js';
 simLauncher.launch( () => {
 
   const screens = [
-    new IntroductionScreen( Tandem.ROOT.createTandem( 'introductionScreen' ) ),
+    new IntroductionScreen( Tandem.ROOT.createTandem( 'introScreen' ) ),
     new MySolutionScreen( Tandem.ROOT.createTandem( 'mySolutionScreen' ) )
   ];
 
