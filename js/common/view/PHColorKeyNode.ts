@@ -36,7 +36,7 @@ export default class PHColorKeyNode extends Node {
       isDisposable: false
     }, providedOptions );
 
-    const numberOfChips = ABSColors.PH_PAPER_COLORS.length;
+    const numberOfChips = ABSColors.PH_PAPER_COLOR_PROPERTIES.length;
 
     // color chips, with a pH value above each one
     const parentNode = new Node();
@@ -46,7 +46,7 @@ export default class PHColorKeyNode extends Node {
     for ( let i = 0; i < numberOfChips; i++ ) {
 
       chipNode = new Rectangle( 0, 0, paperSize.width, CHIP_HEIGHT, {
-        fill: ABSColors.PH_PAPER_COLORS[ i ]
+        fill: ABSColors.PH_PAPER_COLOR_PROPERTIES[ i ]
       } );
       pHText = new Text( i.toString(), { font: FONT_SMALL } );
 

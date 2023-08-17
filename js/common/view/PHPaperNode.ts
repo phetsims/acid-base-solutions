@@ -143,7 +143,7 @@ export default class PHPaperNode extends InteractiveHighlighting( Node ) {
 
         // portion of paper that's colored
         new Rectangle( 0, 0.6 * height, width, 0.4 * height, {
-          fill: ABSColors.PH_PAPER_COLORS[ 2 ],
+          fill: ABSColors.PH_PAPER_COLOR_PROPERTIES[ 2 ],
           stroke: PAPER_STROKE,
           lineWidth: 0.5
         } )

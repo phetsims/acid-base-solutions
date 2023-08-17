@@ -51,7 +51,7 @@ export default class PHPaper extends PhetioObject {
     this.pHProperty = pHProperty;
     this.paperSize = new Dimension2( 16, 110 );
 
-    this.colorProperty = DerivedProperty.deriveAny( [ pHProperty, ...ABSColors.PH_PAPER_COLORS ],
+    this.colorProperty = DerivedProperty.deriveAny( [ pHProperty, ...ABSColors.PH_PAPER_COLOR_PROPERTIES ],
       () => pHToColor( pHProperty.value ), {
         // Not very interesting for PhET-iO, so not instrumented.
       } );
@@ -112,20 +112,20 @@ export default class PHPaper extends PhetioObject {
 
 // Creates a color for a given pH value.
 function pHToColor( pH: number ): Color {
-  assert && assert( pH >= 0 && pH <= ABSColors.PH_PAPER_COLORS.length - 1 );
+  assert && assert( pH >= 0 && pH <= ABSColors.PH_PAPER_COLOR_PROPERTIES.length - 1 );
   let color;
   if ( Number.isInteger( pH ) ) {
 
     // pH value is an integer, so look up the color directly.
-    color = ABSColors.PH_PAPER_COLORS[ pH ].value;
+    color = ABSColors.PH_PAPER_COLOR_PROPERTIES[ pH ].value;
   }
   else {
 
     // pH value is not an integer, so interpolate between the 2 closest colors.
     const lowerPH = Math.floor( pH );
     const upperPH = lowerPH + 1;
-    const lowerPHColor = ABSColors.PH_PAPER_COLORS[ lowerPH ].value;
-    const upperPHColor = ABSColors.PH_PAPER_COLORS[ upperPH ].value;
+    const lowerPHColor = ABSColors.PH_PAPER_COLOR_PROPERTIES[ lowerPH ].value;
+    const upperPHColor = ABSColors.PH_PAPER_COLOR_PROPERTIES[ upperPH ].value;
     color = Color.interpolateRGBA( lowerPHColor, upperPHColor, ( pH - lowerPH ) );
   }
   return color;

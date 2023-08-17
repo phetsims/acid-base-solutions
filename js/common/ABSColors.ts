@@ -9,9 +9,40 @@
 import PhetColorScheme from '../../../scenery-phet/js/PhetColorScheme.js';
 import { ProfileColorProperty } from '../../../scenery/js/imports.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 
 // constants
 const GRAY_PARTICLE = 'rgb( 120, 120, 120 )';
+
+// pH paper colors, ordered from pH value 0-14
+const PH_PAPER_COLORS = [
+  'rgb( 182, 70, 72 )',
+  'rgb( 196, 80, 86 )',
+  'rgb( 213, 83, 71 )',
+  'rgb( 237, 123, 83 )',
+  'rgb( 246, 152, 86 )',
+  'rgb( 244, 158, 79 )',
+  'rgb( 243, 160, 78 )',
+  'rgb( 244, 182, 67 )',
+  'rgb( 231, 201, 75 )',
+  'rgb( 93, 118, 88 )',
+  'rgb( 30, 92, 89 )',
+  'rgb( 34, 90, 105 )',
+  'rgb( 39, 87, 111 )',
+  'rgb( 27, 67, 90 )',
+  'rgb( 0, 34, 52 )'
+];
+const PH_PAPER_COLOR_PROPERTIES: ProfileColorProperty[] = [];
+for ( let i = 0; i < PH_PAPER_COLORS.length; i++ ) {
+  const propertyName = `pH${i}PaperColorProperty`;
+  PH_PAPER_COLOR_PROPERTIES.push(
+    new ProfileColorProperty( acidBaseSolutions, propertyName, {
+      default: PH_PAPER_COLORS[ i ]
+    }, {
+      tandem: Tandem.COLORS.createTandem( propertyName )
+    } )
+  );
+}
 
 const ABSColors = {
 
@@ -60,54 +91,7 @@ const ABSColors = {
     default: 'rgba( 193, 222, 227, 0.7 )' // transparent so we can see the pH probe and pH paper
   } ),
 
-  // pH paper colors, ordered from pH value 0-14
-  PH_PAPER_COLORS: [
-    new ProfileColorProperty( acidBaseSolutions, 'pH0ColorProperty', {
-      default: 'rgb( 182, 70, 72 )'
-    } ),
-    new ProfileColorProperty( acidBaseSolutions, 'pH1ColorProperty', {
-      default: 'rgb( 196, 80, 86 )'
-    } ),
-    new ProfileColorProperty( acidBaseSolutions, 'pH2ColorProperty', {
-      default: 'rgb( 213, 83, 71 )'
-    } ),
-    new ProfileColorProperty( acidBaseSolutions, 'pH3ColorProperty', {
-      default: 'rgb( 237, 123, 83 )'
-    } ),
-    new ProfileColorProperty( acidBaseSolutions, 'pH4ColorProperty', {
-      default: 'rgb( 246, 152, 86 )'
-    } ),
-    new ProfileColorProperty( acidBaseSolutions, 'pH5ColorProperty', {
-      default: 'rgb( 244, 158, 79 )'
-    } ),
-    new ProfileColorProperty( acidBaseSolutions, 'pH6ColorProperty', {
-      default: 'rgb( 243, 160, 78 )'
-    } ),
-    new ProfileColorProperty( acidBaseSolutions, 'pH7ColorProperty', {
-      default: 'rgb( 244, 182, 67 )'
-    } ),
-    new ProfileColorProperty( acidBaseSolutions, 'pH8ColorProperty', {
-      default: 'rgb( 231, 201, 75 )'
-    } ),
-    new ProfileColorProperty( acidBaseSolutions, 'pH9ColorProperty', {
-      default: 'rgb( 93, 118, 88 )'
-    } ),
-    new ProfileColorProperty( acidBaseSolutions, 'pH10ColorProperty', {
-      default: 'rgb( 30, 92, 89 )'
-    } ),
-    new ProfileColorProperty( acidBaseSolutions, 'pH11ColorProperty', {
-      default: 'rgb( 34, 90, 105 )'
-    } ),
-    new ProfileColorProperty( acidBaseSolutions, 'pH12ColorProperty', {
-      default: 'rgb( 39, 87, 111 )'
-    } ),
-    new ProfileColorProperty( acidBaseSolutions, 'pH13ColorProperty', {
-      default: 'rgb( 27, 67, 90 )'
-    } ),
-    new ProfileColorProperty( acidBaseSolutions, 'pH14ColorProperty', {
-      default: 'rgb( 0, 34, 52 )'
-    } )
-  ],
+  PH_PAPER_COLOR_PROPERTIES: PH_PAPER_COLOR_PROPERTIES,
 
   // NOTE: Particle colors are not currently dynamic, because that would be considerably more work.
   // Particles are precomputed when the sim starts. And the solvent is an image file, solvent.png.
