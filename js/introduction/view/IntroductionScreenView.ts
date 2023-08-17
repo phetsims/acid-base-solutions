@@ -10,13 +10,13 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSScreenView from '../../common/view/ABSScreenView.js';
 import IntroModel from '../model/IntroModel.js';
-import IntroductionSolutionPanel from './IntroductionSolutionPanel.js';
+import IntroSolutionPanel from './IntroSolutionPanel.js';
 
 export default class IntroductionScreenView extends ABSScreenView {
 
   public constructor( model: IntroModel, tandem: Tandem ) {
 
-    const createSolutionPanel = () => new IntroductionSolutionPanel( model, tandem.createTandem( 'solutionPanel' ) );
+    const createSolutionPanel = () => new IntroSolutionPanel( model, tandem.createTandem( 'solutionPanel' ) );
 
     super( model, createSolutionPanel, tandem );
   }

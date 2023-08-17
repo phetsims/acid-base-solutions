@@ -25,7 +25,7 @@ import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js'
 import AqueousSolution from '../../common/model/solutions/AqueousSolution.js';
 import IntroModel from '../model/IntroModel.js';
 
-export default class IntroductionSolutionPanel extends Panel {
+export default class IntroSolutionPanel extends Panel {
 
   public constructor( model: IntroModel, tandem: Tandem ) {
 
@@ -142,4 +142,4 @@ function createRadioButtonLabel( solutionNameProperty: TReadOnlyProperty<string>
   } );
 }
 
-acidBaseSolutions.register( 'IntroductionSolutionPanel', IntroductionSolutionPanel );
+acidBaseSolutions.register( 'IntroductionSolutionPanel', IntroSolutionPanel );
