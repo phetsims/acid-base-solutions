@@ -1,6 +1,5 @@
 // Copyright 2015-2023, University of Colorado Boulder
 
-//TODO https://github.com/phetsims/acid-base-solutions/issues/208 add keyboard input to ConductivityTesterNode
 /**
  * Conductivity tester, adapts the model to scenery-phet.ConductivityTesterNode.
  *
