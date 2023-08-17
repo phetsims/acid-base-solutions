@@ -18,7 +18,7 @@ import IntroductionModel from './model/IntroductionModel.js';
 import IntroductionScreenView from './view/IntroductionScreenView.js';
 import ABSKeyboardHelpContent from '../common/view/ABSKeyboardHelpContent.js';
 
-export default class IntroductionScreen extends Screen<IntroductionModel, IntroductionScreenView> {
+export default class IntroScreen extends Screen<IntroductionModel, IntroductionScreenView> {
 
   public constructor( tandem: Tandem ) {
 
@@ -98,4 +98,4 @@ function createScreenIcon(): ScreenIcon {
   } );
 }
 
-acidBaseSolutions.register( 'IntroductionScreen', IntroductionScreen );
+acidBaseSolutions.register( 'IntroductionScreen', IntroScreen );

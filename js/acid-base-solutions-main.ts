@@ -11,13 +11,13 @@ import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import AcidBaseSolutionsStrings from './AcidBaseSolutionsStrings.js';
-import IntroductionScreen from './introduction/IntroductionScreen.js';
+import IntroScreen from './introduction/IntroScreen.js';
 import MySolutionScreen from './mysolution/MySolutionScreen.js';
 
 simLauncher.launch( () => {
 
   const screens = [
-    new IntroductionScreen( Tandem.ROOT.createTandem( 'introScreen' ) ),
+    new IntroScreen( Tandem.ROOT.createTandem( 'introScreen' ) ),
     new MySolutionScreen( Tandem.ROOT.createTandem( 'mySolutionScreen' ) )
   ];
 
