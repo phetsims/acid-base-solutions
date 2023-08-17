@@ -23,7 +23,7 @@ export default class IntroductionScreen extends Screen<IntroductionModel, Introd
   public constructor( tandem: Tandem ) {
 
     const options: ScreenOptions = {
-      name: AcidBaseSolutionsStrings.screen.introductionStringProperty,
+      name: AcidBaseSolutionsStrings.screen.introStringProperty,
       backgroundColorProperty: ABSColors.screenBackgroundColorProperty,
       homeScreenIcon: createScreenIcon(),
       createKeyboardHelpNode: () => new ABSKeyboardHelpContent(),

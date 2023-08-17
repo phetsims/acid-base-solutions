@@ -19,7 +19,7 @@ type StringsType = {
   };
   'screen': {
     'mySolutionStringProperty': LocalizedStringProperty;
-    'introductionStringProperty': LocalizedStringProperty;
+    'introStringProperty': LocalizedStringProperty;
   };
   'graphStringProperty': LocalizedStringProperty;
   'hideViewsStringProperty': LocalizedStringProperty;

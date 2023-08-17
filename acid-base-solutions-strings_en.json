@@ -23,7 +23,7 @@
   "initialConcentration": {
     "value": "Initial Concentration (mol/L):"
   },
-  "screen.introduction": {
+  "screen.intro": {
     "value": "Intro"
   },
   "liters": {
