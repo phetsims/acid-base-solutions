@@ -12,7 +12,7 @@ import ABSScreenView from '../../common/view/ABSScreenView.js';
 import IntroModel from '../model/IntroModel.js';
 import IntroSolutionPanel from './IntroSolutionPanel.js';
 
-export default class IntroductionScreenView extends ABSScreenView {
+export default class IntroScreenView extends ABSScreenView {
 
   public constructor( model: IntroModel, tandem: Tandem ) {
 
@@ -22,4 +22,4 @@ export default class IntroductionScreenView extends ABSScreenView {
   }
 }
 
-acidBaseSolutions.register( 'IntroductionScreenView', IntroductionScreenView );
+acidBaseSolutions.register( 'IntroductionScreenView', IntroScreenView );
