@@ -11,7 +11,7 @@ import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import AcidBaseSolutionsStrings from './AcidBaseSolutionsStrings.js';
-import IntroScreen from './introduction/IntroScreen.js';
+import IntroScreen from './intro/IntroScreen.js';
 import MySolutionScreen from './mysolution/MySolutionScreen.js';
 
 simLauncher.launch( () => {
