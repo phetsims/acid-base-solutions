@@ -69,4 +69,4 @@ export default class IntroModel extends ABSModel {
   }
 }
 
-acidBaseSolutions.register( 'IntroductionModel', IntroModel );
+acidBaseSolutions.register( 'IntroModel', IntroModel );
