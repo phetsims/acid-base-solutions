@@ -9,12 +9,12 @@
 import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSScreenView from '../../common/view/ABSScreenView.js';
-import IntroductionModel from '../model/IntroductionModel.js';
+import IntroModel from '../model/IntroModel.js';
 import IntroductionSolutionPanel from './IntroductionSolutionPanel.js';
 
 export default class IntroductionScreenView extends ABSScreenView {
 
-  public constructor( model: IntroductionModel, tandem: Tandem ) {
+  public constructor( model: IntroModel, tandem: Tandem ) {
 
     const createSolutionPanel = () => new IntroductionSolutionPanel( model, tandem.createTandem( 'solutionPanel' ) );
 

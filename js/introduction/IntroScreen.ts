@@ -14,11 +14,11 @@ import Tandem from '../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../AcidBaseSolutionsStrings.js';
 import ABSColors from '../common/ABSColors.js';
-import IntroductionModel from './model/IntroductionModel.js';
+import IntroModel from './model/IntroModel.js';
 import IntroductionScreenView from './view/IntroductionScreenView.js';
 import ABSKeyboardHelpContent from '../common/view/ABSKeyboardHelpContent.js';
 
-export default class IntroScreen extends Screen<IntroductionModel, IntroductionScreenView> {
+export default class IntroScreen extends Screen<IntroModel, IntroductionScreenView> {
 
   public constructor( tandem: Tandem ) {
 
@@ -31,7 +31,7 @@ export default class IntroScreen extends Screen<IntroductionModel, IntroductionS
     };
 
     super(
-      () => new IntroductionModel( tandem.createTandem( 'model' ) ),
+      () => new IntroModel( tandem.createTandem( 'model' ) ),
       model => new IntroductionScreenView( model, tandem.createTandem( 'view' ) ),
       options
     );

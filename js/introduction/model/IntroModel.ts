@@ -18,7 +18,7 @@ import WeakBase from '../../common/model/solutions/WeakBase.js';
 import Property from '../../../../axon/js/Property.js';
 import AqueousSolution from '../../common/model/solutions/AqueousSolution.js';
 
-export default class IntroductionModel extends ABSModel {
+export default class IntroModel extends ABSModel {
 
   public readonly water: Water;
   public readonly strongAcid: StrongAcid;
@@ -69,4 +69,4 @@ export default class IntroductionModel extends ABSModel {
   }
 }
 
-acidBaseSolutions.register( 'IntroductionModel', IntroductionModel );
+acidBaseSolutions.register( 'IntroductionModel', IntroModel );

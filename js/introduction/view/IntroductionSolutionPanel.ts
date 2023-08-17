@@ -23,11 +23,11 @@ import createParticleNode from '../../common/view/createParticleNode.js';
 import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import AqueousSolution from '../../common/model/solutions/AqueousSolution.js';
-import IntroductionModel from '../model/IntroductionModel.js';
+import IntroModel from '../model/IntroModel.js';
 
 export default class IntroductionSolutionPanel extends Panel {
 
-  public constructor( model: IntroductionModel, tandem: Tandem ) {
+  public constructor( model: IntroModel, tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, ABSConstants.PANEL_OPTIONS, {
       tandem: tandem
