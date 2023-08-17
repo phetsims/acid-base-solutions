@@ -142,4 +142,4 @@ function createRadioButtonLabel( solutionNameProperty: TReadOnlyProperty<string>
   } );
 }
 
-acidBaseSolutions.register( 'IntroductionSolutionPanel', IntroSolutionPanel );
+acidBaseSolutions.register( 'IntroSolutionPanel', IntroSolutionPanel );
