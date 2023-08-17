@@ -22,4 +22,4 @@ export default class IntroScreenView extends ABSScreenView {
   }
 }
 
-acidBaseSolutions.register( 'IntroductionScreenView', IntroScreenView );
+acidBaseSolutions.register( 'IntroScreenView', IntroScreenView );
