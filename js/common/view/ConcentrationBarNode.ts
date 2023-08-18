@@ -18,6 +18,7 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 // constants
 const FONT = new PhetFont( 12 );
@@ -29,7 +30,7 @@ export default class ConcentrationBarNode extends Node {
 
   private readonly bar: Rectangle;
 
-  public constructor( maxBarHeight: number, tandem: Tandem ) {
+  public constructor( maxBarHeight: number, valuesVisibleProperty: TReadOnlyProperty<boolean>, tandem: Tandem ) {
 
     const concentrationProperty = new Property<number | null>( 0, {
       units: 'mol/L',
@@ -67,6 +68,7 @@ export default class ConcentrationBarNode extends Node {
       [ concentrationProperty, AcidBaseSolutionsStrings.negligibleStringProperty ],
       concentration => concentrationToString( concentration ) );
     const valueText = new RichText( valueStringProperty, {
+      visibleProperty: valuesVisibleProperty,
       font: FONT,
       maxWidth: 0.85 * maxBarHeight,
       rotation: -Math.PI / 2 // vertical

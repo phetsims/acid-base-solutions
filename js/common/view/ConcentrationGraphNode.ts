@@ -24,6 +24,7 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import AqueousSolution from '../model/solutions/AqueousSolution.js';
 import Beaker from '../model/Beaker.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 
 const TICK_LABEL_FONT = new PhetFont( 11 );
 
@@ -103,13 +104,19 @@ export default class ConcentrationGraphNode extends Node {
     const barNodes: ConcentrationBarNode[] = [];
     const particlesMap = new Map<ParticleKey, ConcentrationBarNode>();
 
+    // This Property is not available via the UI. It is provided for PhET-iO only.
+    // See https://github.com/phetsims/acid-base-solutions/issues/221
+    const valuesVisibleProperty = new BooleanProperty( true, {
+      tandem: tandem.createTandem( 'valuesVisibleProperty' )
+    } );
+
     // SERIOUS HACK ALERT!! These keys are ordered such that the visible bars will be in the same left-to-right order
     // as the reaction equation that appears under the beaker.
     const particleKeys: ParticleKey[] = [
       'B', 'HA', 'H2O', 'MOH', 'M', 'BH', 'A', 'H3O', 'OH'
     ];
     particleKeys.forEach( particleKey => {
-      const barNode = new ConcentrationBarNode( graphHeight - 10, barsTandem.createTandem( `${particleKey}BarNode` ) );
+      const barNode = new ConcentrationBarNode( graphHeight - 10, valuesVisibleProperty, barsTandem.createTandem( `${particleKey}BarNode` ) );
       barNodes.push( barNode );
       particlesMap.set( particleKey, barNode );
     } );
