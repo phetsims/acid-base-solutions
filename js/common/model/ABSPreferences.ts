@@ -16,7 +16,8 @@ const ABSPreferences = {
 
   // Whether to show the solvent in 'Particles' view
   showSolventProperty: new BooleanProperty( ABSQueryParameters.showSolvent, {
-    tandem: Tandem.PREFERENCES.createTandem( 'showSolventProperty' )
+    tandem: Tandem.PREFERENCES.createTandem( 'showSolventProperty' ),
+    phetioDocumentation: 'Show the solvent molecules for the Particles view.'
   } )
 };
 
