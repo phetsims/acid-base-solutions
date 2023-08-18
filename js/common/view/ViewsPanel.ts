@@ -16,7 +16,6 @@ import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { HBox, Image, Node, Text, VBox } from '../../../../scenery/js/imports.js';
-import AquaRadioButton, { AquaRadioButtonOptions } from '../../../../sun/js/AquaRadioButton.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import magnifyingGlassIcon_png from '../../../images/magnifyingGlassIcon_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
@@ -27,17 +26,10 @@ import ConcentrationGraphNode from './ConcentrationGraphNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BeakerNode from './BeakerNode.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import multiSelectionSoundPlayerFactory from '../../../../tambo/js/multiSelectionSoundPlayerFactory.js';
+import AquaRadioButtonGroup, { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 
 // constants
 const LABEL_FONT = new PhetFont( 12 );
-const RADIO_BUTTONS_Y_SPACING = 8;
-const POINT_AREA_X_DILATION = 10;
-const POINT_AREA_Y_DILATION = RADIO_BUTTONS_Y_SPACING / 2; // to mimic AquaRadioButtonGroup
-
-// pdom - Used for the 'name' attribute of the radio buttons so that the browser can uniquely identify this group of
-// UI components for traversal, see https://github.com/phetsims/acid-base-solutions/issues/213
-let instanceCount = 0;
 
 export default class ViewsPanel extends Panel {
 
@@ -53,61 +45,34 @@ export default class ViewsPanel extends Panel {
       maxWidth: 180 // determined empirically
     } );
 
-    const radioButtonOptions: AquaRadioButtonOptions = {
-      radius: 7,
-      touchAreaXDilation: POINT_AREA_X_DILATION,
-      touchAreaYDilation: POINT_AREA_Y_DILATION,
-      mouseAreaXDilation: POINT_AREA_X_DILATION,
-      mouseAreaYDilation: POINT_AREA_Y_DILATION,
-      layoutOptions: { stretch: true },
-      a11yNameAttribute: `viewsButtonGroup-${instanceCount++}`
-    };
+    const radioButtonGroupItems: AquaRadioButtonGroupItem<ViewMode>[] = [
+      {
+        value: 'particles',
+        createNode: () => createLabel( AcidBaseSolutionsStrings.particlesStringProperty, new Image( magnifyingGlassIcon_png, { scale: 0.75 } ) ),
+        tandemName: 'particlesRadioButton'
+      },
+      {
+        value: 'graph',
+        createNode: () => createLabel( AcidBaseSolutionsStrings.graphStringProperty, ConcentrationGraphNode.createIcon() ),
+        tandemName: 'graphRadioButton'
+      },
+      {
+        value: 'hideViews',
+        createNode: () => createLabel( AcidBaseSolutionsStrings.hideViewsStringProperty, BeakerNode.createIcon( 20, 15 ) ),
+        tandemName: 'hideViewsRadioButton'
+      }
+    ];
 
-    const radioButtonGroupTandem = tandem.createTandem( 'radioButtonGroup' );
-
-    let soundPlayerIndex = 0;
-
-    // Particles radio button
-    const particlesRadioButton = new AquaRadioButton( viewModeProperty, 'particles',
-      createLabel( AcidBaseSolutionsStrings.particlesStringProperty, new Image( magnifyingGlassIcon_png, { scale: 0.75 } ) ),
-      combineOptions<AquaRadioButtonOptions>( {
-        tandem: radioButtonGroupTandem.createTandem( 'particlesRadioButton' ),
-        soundPlayer: multiSelectionSoundPlayerFactory.getSelectionSoundPlayer( soundPlayerIndex++ )
-      }, radioButtonOptions ) );
-
-    // Graph radio button
-    const graphRadioButton = new AquaRadioButton( viewModeProperty, 'graph',
-      createLabel( AcidBaseSolutionsStrings.graphStringProperty, ConcentrationGraphNode.createIcon() ),
-      combineOptions<AquaRadioButtonOptions>( {
-        tandem: radioButtonGroupTandem.createTandem( 'graphRadioButton' ),
-        soundPlayer: multiSelectionSoundPlayerFactory.getSelectionSoundPlayer( soundPlayerIndex++ )
-      }, radioButtonOptions ) );
-
-    // Hide Views radio button
-    const hideViewsRadioButton = new AquaRadioButton( viewModeProperty, 'hideViews',
-      createLabel( AcidBaseSolutionsStrings.hideViewsStringProperty, BeakerNode.createIcon( 20, 15 ) ),
-      combineOptions<AquaRadioButtonOptions>( {
-        tandem: radioButtonGroupTandem.createTandem( 'hideViewsRadioButton' ),
-        soundPlayer: multiSelectionSoundPlayerFactory.getSelectionSoundPlayer( soundPlayerIndex++ )
-      }, radioButtonOptions ) );
-
-    const radioButtonGroup = new VBox( {
-      spacing: RADIO_BUTTONS_Y_SPACING,
+    const radioButtonGroup = new AquaRadioButtonGroup<ViewMode>( viewModeProperty, radioButtonGroupItems, {
+      spacing: 8,
       align: 'left',
-      children: [
-        particlesRadioButton,
-        graphRadioButton,
-        hideViewsRadioButton
-      ],
-      groupFocusHighlight: true, // to mimic AquaRadioButtonGroup
-      tandem: radioButtonGroupTandem,
-      phetioVisiblePropertyInstrumented: false, // hide the entire panel if you don't want radio buttons
-      phetioEnabledPropertyInstrumented: true // to mimic AquaRadioButtonGroup
-    } );
-
-    // to mimic AquaRadioButtonGroup
-    radioButtonGroup.addLinkedElement( viewModeProperty, {
-      tandemName: 'property'
+      radioButtonOptions: {
+        radius: 7
+      },
+      touchAreaXDilation: 10,
+      mouseAreaXDilation: 10,
+      tandem: tandem.createTandem( 'radioButtonGroup' ),
+      phetioVisiblePropertyInstrumented: false // hide the entire panel if you don't want radio buttons
     } );
 
     const content = new VBox( {
