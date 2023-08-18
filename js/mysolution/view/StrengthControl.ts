@@ -1,7 +1,7 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
 /**
- * StrengthControl is the control for 'Strength' in MySolutionPanel.
+ * StrengthControl is the control for 'Strength' used in MySolutionPanel.
  * For details on why NumberControl is not used here, see https://github.com/phetsims/acid-base-solutions/issues/185
  *
  * @author Chris Malley (PixelZoom, Inc.)

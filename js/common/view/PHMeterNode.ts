@@ -1,7 +1,7 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * PHMeterNode is the view of the pH meter.
+ * PHMeterNode is the view of the pH meter. Origin is at the probe's tip.
  *
  * @author Andrey Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)

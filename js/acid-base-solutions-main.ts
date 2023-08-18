@@ -1,7 +1,7 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
 /**
- * Main entry point for the 'Acid-Base Solutions' simulation.
+ * This is the main entry point for the 'Acid-Base Solutions' simulation.
  *
  * @author Andrew Zelenkov (Mlearner)
  * @author Chris Malley (PixelZoom, Inc.)

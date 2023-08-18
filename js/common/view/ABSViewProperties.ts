@@ -1,7 +1,7 @@
 // Copyright 2016-2023, University of Colorado Boulder
 
 /**
- * View-specific Properties
+ * ABSViewProperties is the set of view-specific Properties for this simulation.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

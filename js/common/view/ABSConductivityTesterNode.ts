@@ -1,7 +1,7 @@
 // Copyright 2015-2023, University of Colorado Boulder
 
 /**
- * Conductivity tester, adapts the model to scenery-phet.ConductivityTesterNode.
+ * ABSConductivityTesterNode is the conductivity tester. It adapts the model to scenery-phet.ConductivityTesterNode.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
