@@ -70,8 +70,7 @@ export default class ABSScreenView extends ScreenView {
 
     // Views
     const particlesNode = new ParticlesNode( model.beaker, model.solutions, model.solutionProperty,
-      this.viewProperties.viewModeProperty, this.viewProperties.solventVisibleProperty,
-      tandem.createTandem( 'particlesNode' ) );
+      this.viewProperties.viewModeProperty, tandem.createTandem( 'particlesNode' ) );
     const graphNode = new ConcentrationGraphNode( model.beaker, model.solutionProperty,
       this.viewProperties.viewModeProperty, tandem.createTandem( 'graphNode' ) );
 
@@ -101,8 +100,7 @@ export default class ABSScreenView extends ScreenView {
 
     // Controls
     const solutionPanel = createSolutionPanel();
-    const viewsPanel = new ViewsPanel( this.viewProperties.viewModeProperty, this.viewProperties.solventVisibleProperty,
-      tandem.createTandem( 'viewsPanel' ) );
+    const viewsPanel = new ViewsPanel( this.viewProperties.viewModeProperty, tandem.createTandem( 'viewsPanel' ) );
     const toolsRadioButtonGroup = new ToolsRadioButtonGroup( this.viewProperties.toolModeProperty,
       tandem.createTandem( 'toolsRadioButtonGroup' ) );
 

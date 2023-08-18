@@ -7,8 +7,6 @@
  */
 
 import Disposable from '../../../../axon/js/Disposable.js';
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
@@ -17,9 +15,6 @@ import { ViewMode, ViewModeValues } from './ViewMode.js';
 
 export default class ABSViewProperties {
 
-  // Whether the solvent is visible in the 'Particles' view
-  public readonly solventVisibleProperty: Property<boolean>;
-
   // Which representation of the solution appears in the beaker
   public readonly viewModeProperty: StringUnionProperty<ViewMode>;
 
@@ -27,10 +22,6 @@ export default class ABSViewProperties {
   public readonly toolModeProperty: StringUnionProperty<ToolMode>;
 
   public constructor( tandem: Tandem ) {
-
-    this.solventVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'solventVisibleProperty' )
-    } );
 
     this.viewModeProperty = new StringUnionProperty( 'particles', {
       validValues: ViewModeValues,
@@ -48,7 +39,6 @@ export default class ABSViewProperties {
   }
 
   public reset(): void {
-    this.solventVisibleProperty.reset();
     this.viewModeProperty.reset();
     this.toolModeProperty.reset();
   }

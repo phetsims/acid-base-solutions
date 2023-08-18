@@ -12,13 +12,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { HBox, Image, Node, Text, VBox } from '../../../../scenery/js/imports.js';
 import AquaRadioButton, { AquaRadioButtonOptions } from '../../../../sun/js/AquaRadioButton.js';
-import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import magnifyingGlassIcon_png from '../../../images/magnifyingGlassIcon_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
@@ -26,10 +24,7 @@ import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../ABSConstants.js';
 import { ViewMode } from './ViewMode.js';
 import ConcentrationGraphNode from './ConcentrationGraphNode.js';
-import createParticleNode from './createParticleNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import BeakerNode from './BeakerNode.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import multiSelectionSoundPlayerFactory from '../../../../tambo/js/multiSelectionSoundPlayerFactory.js';
@@ -46,9 +41,7 @@ let instanceCount = 0;
 
 export default class ViewsPanel extends Panel {
 
-  public constructor( viewModeProperty: StringUnionProperty<ViewMode>,
-                      solventVisibleProperty: Property<boolean>,
-                      tandem: Tandem ) {
+  public constructor( viewModeProperty: StringUnionProperty<ViewMode>, tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, ABSConstants.PANEL_OPTIONS, {
       isDisposable: false,
@@ -82,36 +75,6 @@ export default class ViewsPanel extends Panel {
         soundPlayer: multiSelectionSoundPlayerFactory.getSelectionSoundPlayer( soundPlayerIndex++ )
       }, radioButtonOptions ) );
 
-    // Solvent checkbox
-    const solventCheckboxTandem = particlesRadioButton.tandem.createTandem( 'solventCheckbox' );
-    const solventCheckbox = new Checkbox( solventVisibleProperty,
-      createLabel( AcidBaseSolutionsStrings.solventStringProperty, createParticleNode( 'H2O' ) ), {
-        boxWidth: 15,
-        layoutOptions: {
-          stretch: true,
-          leftMargin: 20 // indent Solvent checkbox from radio buttons
-        },
-        touchAreaXDilation: POINT_AREA_X_DILATION,
-        touchAreaYDilation: POINT_AREA_Y_DILATION,
-        mouseAreaXDilation: POINT_AREA_X_DILATION,
-        mouseAreaYDilation: POINT_AREA_Y_DILATION,
-        enabledProperty: new DerivedProperty( [ viewModeProperty ], viewMode => ( viewMode === 'particles' ), {
-          tandem: solventCheckboxTandem.createTandem( 'enabledProperty' ),
-          phetioValueType: BooleanIO
-        } ),
-        tandem: solventCheckboxTandem
-      } );
-
-    // Wrap the 'Particles' radio button and 'Solvent' checkbox with a parent Node, so that hiding the 'Particles'
-    // radio button will also hide the 'Solvent' checkbox.
-    const particlesControls = new VBox( {
-      children: [ particlesRadioButton, solventCheckbox ],
-      visibleProperty: particlesRadioButton.visibleProperty,
-      spacing: 8,
-      align: 'left',
-      layoutOptions: { stretch: true }
-    } );
-
     // Graph radio button
     const graphRadioButton = new AquaRadioButton( viewModeProperty, 'graph',
       createLabel( AcidBaseSolutionsStrings.graphStringProperty, ConcentrationGraphNode.createIcon() ),
@@ -132,7 +95,7 @@ export default class ViewsPanel extends Panel {
       spacing: RADIO_BUTTONS_Y_SPACING,
       align: 'left',
       children: [
-        particlesControls,
+        particlesRadioButton,
         graphRadioButton,
         hideViewsRadioButton
       ],

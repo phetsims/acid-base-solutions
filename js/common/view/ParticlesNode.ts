@@ -16,12 +16,12 @@ import ParticlesCanvasNode from './ParticlesCanvasNode.js';
 import { ViewMode } from './ViewMode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import ABSColors from '../ABSColors.js';
 import Beaker from '../model/Beaker.js';
 import AqueousSolution from '../model/solutions/AqueousSolution.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
+import ABSPreferences from '../model/ABSPreferences.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging
@@ -37,7 +37,6 @@ export default class ParticlesNode extends Node {
                       solutions: AqueousSolution[],
                       solutionProperty: ReadOnlyProperty<AqueousSolution>,
                       viewModeProperty: StringUnionProperty<ViewMode>,
-                      solventVisibleProperty: TReadOnlyProperty<boolean>,
                       tandem: Tandem ) {
 
     // magnifying glass lens
@@ -61,7 +60,7 @@ export default class ParticlesNode extends Node {
 
     // solvent (H2O)
     const solventNode = new Image( solvent_png, {
-      visibleProperty: solventVisibleProperty,
+      visibleProperty: ABSPreferences.showSolventProperty,
       imageOpacity: 0.6,  // reduce opacity so that other particles stand out more
       centerX: 0,
       centerY: 0
