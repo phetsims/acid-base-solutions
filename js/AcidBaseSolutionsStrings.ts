@@ -51,6 +51,8 @@ type StringsType = {
   'weakAcidStringProperty': LocalizedStringProperty;
   'weakBaseStringProperty': LocalizedStringProperty;
   'weakerStringProperty': LocalizedStringProperty;
+  'showSolventStringProperty': LocalizedStringProperty;
+  'showTheSolventMoleculesInParticlesViewStringProperty': LocalizedStringProperty;
 };
 
 const AcidBaseSolutionsStrings = getStringModule( 'ACID_BASE_SOLUTIONS' ) as StringsType;

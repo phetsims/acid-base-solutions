@@ -68,6 +68,12 @@ const ABSConstants = {
   TITLE_FONT: new PhetFont( { size: 14, weight: 'bold' } ),
   SUBTITLE_FONT: new PhetFont( 12 ),
   CONTROL_FONT: CONTROL_FONT,
+  PREFERENCES_LABEL_FONT: new PhetFont( {
+    size: 16,
+    weight: 'bold'
+  } ),
+  PREFERENCES_LABEL_MAX_WIDTH: 200,
+  PREFERENCES_DESCRIPTION_FONT: new PhetFont( 16 ),
 
   // options
   AB_SWITCH_OPTIONS: AB_SWITCH_OPTIONS,

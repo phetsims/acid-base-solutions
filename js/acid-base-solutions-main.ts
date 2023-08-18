@@ -13,6 +13,9 @@ import Tandem from '../../tandem/js/Tandem.js';
 import AcidBaseSolutionsStrings from './AcidBaseSolutionsStrings.js';
 import IntroScreen from './intro/IntroScreen.js';
 import MySolutionScreen from './mysolution/MySolutionScreen.js';
+import PreferencesModel from '../../joist/js/preferences/PreferencesModel.js';
+import ABSPreferences from './common/model/ABSPreferences.js';
+import ABSPreferencesNode from './common/view/ABSPreferencesNode.js';
 
 simLauncher.launch( () => {
 
@@ -22,6 +25,8 @@ simLauncher.launch( () => {
   ];
 
   const sim = new Sim( AcidBaseSolutionsStrings[ 'acid-base-solutions' ].titleStringProperty, screens, {
+
+    // Credits that appear in the About dialog
     credits: {
       leadDesign: 'Kelly Lancaster',
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
@@ -29,7 +34,19 @@ simLauncher.launch( () => {
       qualityAssurance: 'Steele Dalton, Bryce Griebenow, Elise Morgan, Oliver Orejola, Benjamin Roberts, Bryan Yoelin',
       thanks: '\u2022 Conversion of this simulation to HTML5 was funded in part by the Royal Society of Chemistry.<br>' +
               '\u2022 Thanks to Mobile Learner Labs for working with the PhET development team to convert this simulation to HTML5.'
-    }
+    },
+
+    // Preferences
+    preferencesModel: new PreferencesModel( {
+      simulationOptions: {
+        customPreferences: [ {
+          createContent: tandem => new ABSPreferencesNode( tandem.createTandem( 'simPreferences' ) ),
+          modelLinkables: [
+            { property: ABSPreferences.showSolventProperty }
+          ]
+        } ]
+      }
+    } )
   } );
 
   sim.start();
