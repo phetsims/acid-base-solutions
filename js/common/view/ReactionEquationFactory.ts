@@ -23,7 +23,7 @@ import StrongBase from '../model/solutions/StrongBase.js';
 import WeakBase from '../model/solutions/WeakBase.js';
 
 // constants
-const EQUATION_SCALE = 1.5; // applied to all equations, see issue #88
+const EQUATION_SCALE = 1.5; // applied to all equations, see https://github.com/phetsims/acid-base-solutions/issues/88
 const VBOX_SPACING = 2;
 
 // constants related to text
@@ -32,7 +32,7 @@ const FONT = new PhetFont( FONT_SIZE );
 const RICH_TEXT_OPTIONS = { font: FONT };
 const SUBSCRIPT_HEIGHT = FONT_SIZE / 12; // VStrut with this height is added to any equation term that doesn't have a subscript
 
-// constants related to arrows, issue #95
+// constants related to arrows, see https://github.com/phetsims/acid-base-solutions/issues/95
 const ARROWS_VERTICAL_SPACE = 3; // vertical space between reversible arrows
 const ARROWS_LENGTH = 25;
 const ARROWS_HEAD_RADIUS = 0.72 * ARROWS_LENGTH;
@@ -298,12 +298,12 @@ function createReversibleArrow(): Node {
     // top arrow, points right
     .moveTo( 0, -ARROWS_VERTICAL_SPACE / 2 )
     .lineTo( ARROWS_LENGTH, -ARROWS_VERTICAL_SPACE / 2 )
-    .lineTo( ARROWS_LENGTH, -ARROWS_VERTICAL_SPACE / 2 + 0.00001 ) // see issue #104
+    .lineTo( ARROWS_LENGTH, -ARROWS_VERTICAL_SPACE / 2 + 0.00001 ) // see https://github.com/phetsims/acid-base-solutions/issues/104
     .arc( ARROWS_LENGTH, -ARROWS_HEAD_RADIUS - ( ARROWS_VERTICAL_SPACE / 2 ), ARROWS_HEAD_RADIUS, 0.5 * Math.PI, 0.5 * Math.PI + ARROWS_HEAD_ANGLE_DELTA )
     // bottom arrow, points left
     .moveTo( ARROWS_LENGTH, ARROWS_VERTICAL_SPACE / 2 )
     .lineTo( 0, ARROWS_VERTICAL_SPACE / 2 )
-    .lineTo( 0, ARROWS_VERTICAL_SPACE / 2 + 0.00001 ) // see issue #104
+    .lineTo( 0, ARROWS_VERTICAL_SPACE / 2 + 0.00001 ) // see https://github.com/phetsims/acid-base-solutions/issues/104
     .arc( 0, ARROWS_HEAD_RADIUS + ( ARROWS_VERTICAL_SPACE / 2 ), ARROWS_HEAD_RADIUS, -0.5 * Math.PI, -0.5 * Math.PI + ARROWS_HEAD_ANGLE_DELTA );
   return new VBox( {
     spacing: VBOX_SPACING,
@@ -321,7 +321,7 @@ function createIrreversibleArrow(): Node {
   const shape = new Shape()
     .moveTo( 0, 0 )
     .lineTo( ARROWS_LENGTH, 0 )
-    .lineTo( ARROWS_LENGTH, 0.00001 ) // see issue #104
+    .lineTo( ARROWS_LENGTH, 0.00001 ) // see https://github.com/phetsims/acid-base-solutions/issues/104
     .arc( ARROWS_LENGTH, -ARROWS_HEAD_RADIUS, ARROWS_HEAD_RADIUS, 0.5 * Math.PI, 0.5 * Math.PI + ARROWS_HEAD_ANGLE_DELTA )
     .moveTo( 25, 0 )
     .arc( ARROWS_LENGTH, ARROWS_HEAD_RADIUS, ARROWS_HEAD_RADIUS, -0.5 * Math.PI, -0.5 * Math.PI - ARROWS_HEAD_ANGLE_DELTA, true );

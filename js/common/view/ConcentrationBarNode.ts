@@ -124,7 +124,7 @@ function concentrationToString( concentration: number | null ): string {
     }
 
     if ( pow === 0 ) {
-      // issue #109, show 'N.NN x 10^0' as 'N.NN'
+      // See https://github.com/phetsims/acid-base-solutions/issues/109, show 'N.NN x 10^0' as 'N.NN'
       string = Utils.toFixed( concentration, 2 );
     }
     else {
