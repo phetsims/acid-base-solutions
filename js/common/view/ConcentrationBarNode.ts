@@ -32,7 +32,7 @@ export default class ConcentrationBarNode extends Node {
 
   private readonly bar: Rectangle;
 
-  public constructor( maxBarHeight: number, valuesVisibleProperty: TReadOnlyProperty<boolean>, tandem: Tandem ) {
+  public constructor( maxBarHeight: number, valuesVisibleProperty: TReadOnlyProperty<boolean>, tandem: Tandem, concentrationPropertyFeatured: boolean ) {
 
     const concentrationProperty = new Property<number | null>( 0, {
       units: 'mol/L',
@@ -40,7 +40,7 @@ export default class ConcentrationBarNode extends Node {
       phetioValueType: NullableIO( NumberIO ),
       phetioReadOnly: true,
       phetioDocumentation: 'Concentration associated with this bar. null if the bar is not relevant for the selected solution.',
-      phetioFeatured: true
+      phetioFeatured: concentrationPropertyFeatured
     } );
 
     // add rectangle to represent concentration

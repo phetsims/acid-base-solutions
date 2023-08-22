@@ -117,7 +117,8 @@ export default class ConcentrationGraphNode extends Node {
       'B', 'HA', 'H2O', 'MOH', 'M', 'BH', 'A', 'H3O', 'OH'
     ];
     particleKeys.forEach( particleKey => {
-      const barNode = new ConcentrationBarNode( graphHeight - 10, valuesVisibleProperty, barsTandem.createTandem( `${particleKey}BarNode` ) );
+      const concentrationPropertyFeatured = ( particleKey !== 'H2O' ); // see https://github.com/phetsims/acid-base-solutions/issues/225
+      const barNode = new ConcentrationBarNode( graphHeight - 10, valuesVisibleProperty, barsTandem.createTandem( `${particleKey}BarNode` ), concentrationPropertyFeatured );
       barNodes.push( barNode );
       particlesMap.set( particleKey, barNode );
     } );
