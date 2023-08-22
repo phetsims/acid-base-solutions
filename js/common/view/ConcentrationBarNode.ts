@@ -20,8 +20,10 @@ import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
-// constants
 const FONT = new PhetFont( 12 );
+
+// See https://github.com/phetsims/acid-base-solutions/issues/222
+const CONCENTRATION_VALUE_DECIMIAL_PLACES = 1;
 
 export default class ConcentrationBarNode extends Node {
 
@@ -117,18 +119,19 @@ function concentrationToString( concentration: number | null ): string {
     // find value
     concentration = ( concentration * Math.pow( 10, -pow ) );
 
-    // show 10.00 as 1.00 x 10
+    // show 10.0 as 1.0 x 10
     if ( Math.abs( concentration - 10 ) < 1e-2 ) {
       pow++;
       concentration = 1;
     }
 
     if ( pow === 0 ) {
-      // See https://github.com/phetsims/acid-base-solutions/issues/109, show 'N.NN x 10^0' as 'N.NN'
-      string = Utils.toFixed( concentration, 2 );
+      // Show 'N.N x 10^0' as 'N.N', see https://github.com/phetsims/acid-base-solutions/issues/109
+      string = Utils.toFixed( concentration, CONCENTRATION_VALUE_DECIMIAL_PLACES );
     }
     else {
-      const mantissaString = Utils.toFixed( concentration, 2 );
+      // Show 'N.N x 10^M'
+      const mantissaString = Utils.toFixed( concentration, CONCENTRATION_VALUE_DECIMIAL_PLACES );
       string = `${mantissaString} x 10<sup>${pow}</sup>`;
     }
   }
