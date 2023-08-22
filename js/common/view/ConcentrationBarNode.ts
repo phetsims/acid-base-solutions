@@ -136,7 +136,7 @@ function concentrationToString( concentration: number | null ): string {
     }
   }
   else {
-    string = Utils.toFixed( concentration, 1 );
+    string = Utils.toFixed( concentration, 0 ); // see https://github.com/phetsims/acid-base-solutions/issues/222
   }
   return string;
 }
