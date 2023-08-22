@@ -53,8 +53,6 @@ export default class PHMeterNode extends InteractiveHighlighting( Node ) {
       ( patternString, pHString, pH, isInSolution ) => {
         const pHValueString = isInSolution ? Utils.toFixed( pH, DECIMAL_PLACES ) : '';
         return StringUtils.format( patternString, pHString, pHValueString );
-      }, {
-        tandem: tandem.createTandem( 'pHStringProperty' )
       } );
 
     const pHText = new Text( pHStringProperty, {
