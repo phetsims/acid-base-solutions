@@ -23,7 +23,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 const FONT = new PhetFont( 12 );
 
 // See https://github.com/phetsims/acid-base-solutions/issues/222
-const CONCENTRATION_DECIMIAL_PLACES = 1;
+const CONCENTRATION_DECIMAL_PLACES = 1;
 
 export default class ConcentrationBarNode extends Node {
 
@@ -127,11 +127,11 @@ function concentrationToString( concentration: number | null ): string {
 
     if ( pow === 0 ) {
       // Show 'N.N x 10^0' as 'N.N', see https://github.com/phetsims/acid-base-solutions/issues/109
-      string = Utils.toFixed( concentration, CONCENTRATION_DECIMIAL_PLACES );
+      string = Utils.toFixed( concentration, CONCENTRATION_DECIMAL_PLACES );
     }
     else {
-      // Show 'N.N x 10^M'
-      const mantissaString = Utils.toFixed( concentration, CONCENTRATION_DECIMIAL_PLACES );
+      // Show 'N.N x 10^M' for M !== 0
+      const mantissaString = Utils.toFixed( concentration, CONCENTRATION_DECIMAL_PLACES );
       string = `${mantissaString} x 10<sup>${pow}</sup>`;
     }
   }
