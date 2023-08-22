@@ -31,6 +31,7 @@ import optionize from '../../../../../phet-core/js/optionize.js';
 type SelfOptions = {
   strengthRange: RangeWithValue; // the strength of the solute, with an initial value
   concentrationRange: RangeWithValue; // the concentration of the solute, with an initial value, in mol/L
+  strengthPropertyFeatured: boolean; // whether to PhET-iO instrument strengthProperty
 };
 
 type AqueousSolutionOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem' | 'phetioReadOnly'>;
@@ -66,6 +67,7 @@ export default abstract class AqueousSolution extends PhetioObject {
       // units: unitless, see https://github.com/phetsims/acid-base-solutions/issues/182#issuecomment-1675201139
       tandem: options.tandem.createTandem( 'strengthProperty' ),
       phetioDocumentation: 'The acid or base ionization constant, depending on the type of solution.',
+      phetioFeatured: options.strengthPropertyFeatured,
 
       // read-only if solution is read-only, or if strength is a constant
       phetioReadOnly: options.phetioReadOnly || ( options.strengthRange.getLength() === 0 )
@@ -75,6 +77,7 @@ export default abstract class AqueousSolution extends PhetioObject {
       range: options.concentrationRange,
       units: 'mol/L',
       tandem: options.tandem.createTandem( 'concentrationProperty' ),
+      phetioFeatured: true,
 
       // read-only if solution is read-only, or if concentration is a constant
       phetioReadOnly: options.phetioReadOnly || ( options.concentrationRange.getLength() === 0 )
@@ -85,7 +88,8 @@ export default abstract class AqueousSolution extends PhetioObject {
       ( strength, concentration ) => -Utils.roundSymmetric( 100 * Utils.log10( this.getH3OConcentration() ) ) / 100, {
         isValidValue: pH => ABSConstants.PH_RANGE.contains( pH ),
         tandem: options.tandem.createTandem( 'pHProperty' ),
-        phetioValueType: NumberIO
+        phetioValueType: NumberIO,
+        phetioFeatured: true
       } );
   }
 

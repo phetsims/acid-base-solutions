@@ -45,7 +45,8 @@ export default class IntroModel extends ABSModel {
       validValues: solutions,
       tandem: tandem.createTandem( 'solutionProperty' ),
       phetioValueType: AqueousSolution.AqueousSolutionIO,
-      phetioDocumentation: 'The solution that is selected'
+      phetioDocumentation: 'The solution that is selected',
+      phetioFeatured: true
     } );
 
     super( solutions, solutionProperty, tandem );

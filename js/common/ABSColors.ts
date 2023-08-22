@@ -39,7 +39,8 @@ for ( let i = 0; i < PH_PAPER_COLORS.length; i++ ) {
     new ProfileColorProperty( acidBaseSolutions, propertyName, {
       default: PH_PAPER_COLORS[ i ]
     }, {
-      tandem: Tandem.COLORS.createTandem( propertyName )
+      tandem: Tandem.COLORS.createTandem( propertyName ),
+      phetioFeatured: true
     } )
   );
 }

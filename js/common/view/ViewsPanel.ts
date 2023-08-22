@@ -36,8 +36,13 @@ export default class ViewsPanel extends Panel {
   public constructor( viewModeProperty: StringUnionProperty<ViewMode>, tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, ABSConstants.PANEL_OPTIONS, {
+
+      // PanelOptions
       isDisposable: false,
-      tandem: tandem
+      tandem: tandem,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
 
     const titleText = new Text( AcidBaseSolutionsStrings.viewsStringProperty, {

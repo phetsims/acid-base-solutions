@@ -45,7 +45,8 @@ export default class ConductivityTester extends PhetioObject {
     super( {
       isDisposable: false,
       tandem: tandem,
-      phetioState: false
+      phetioState: false,
+      phetioFeatured: true
     } );
 
     this.bulbPosition = new Vector2( beaker.position.x - 45, beaker.top - 30 );
@@ -85,6 +86,7 @@ export default class ConductivityTester extends PhetioObject {
         tandem: tandem.createTandem( 'brightnessProperty' ),
         phetioDocumentation: 'Represents the brightness of the light bulb from 0 (off) to 1 (maximum brightness).',
         phetioValueType: NumberIO,
+        phetioFeatured: true,
         isValidValue: brightness => BRIGHTNESS_RANGE.contains( brightness )
       } );
 

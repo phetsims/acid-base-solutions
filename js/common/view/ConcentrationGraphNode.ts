@@ -107,7 +107,8 @@ export default class ConcentrationGraphNode extends Node {
     // This Property is not available via the UI. It is provided for PhET-iO only.
     // See https://github.com/phetsims/acid-base-solutions/issues/221
     const valuesVisibleProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'valuesVisibleProperty' )
+      tandem: tandem.createTandem( 'valuesVisibleProperty' ),
+      phetioFeatured: true
     } );
 
     // SERIOUS HACK ALERT!! These keys are ordered such that the visible bars will be in the same left-to-right order

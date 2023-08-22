@@ -43,7 +43,10 @@ export default class StrengthControl extends VBox {
       tandem: sliderWrapperTandem,
       phetioDocumentation: 'The sim controls whether slider is visible, and when it is not visible, leaves space ' +
                            'for it in the control panel. If you would like to control whether the slider is visible, ' +
-                           'use sliderWrapper.visibleProperty.'
+                           'use sliderWrapper.visibleProperty.',
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
 
     super( {
@@ -54,7 +57,10 @@ export default class StrengthControl extends VBox {
       ],
       spacing: 6,
       layoutOptions: { stretch: true }, // so that titleText will be left-aligned in MySolutionsPanel
-      tandem: tandem
+      tandem: tandem,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
   }
 }

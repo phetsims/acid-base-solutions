@@ -25,12 +25,14 @@ export default class ABSViewProperties {
 
     this.viewModeProperty = new StringUnionProperty( 'particles', {
       validValues: ViewModeValues,
-      tandem: tandem.createTandem( 'viewModeProperty' )
+      tandem: tandem.createTandem( 'viewModeProperty' ),
+      phetioFeatured: true
     } );
 
     this.toolModeProperty = new StringUnionProperty( 'pHMeter', {
       validValues: ToolModeValues,
-      tandem: tandem.createTandem( 'toolModeProperty' )
+      tandem: tandem.createTandem( 'toolModeProperty' ),
+      phetioFeatured: true
     } );
   }
 

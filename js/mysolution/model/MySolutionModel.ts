@@ -46,12 +46,14 @@ export default class MySolutionModel extends ABSModel {
 
     const isAcidProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'isAcidProperty' ),
-      phetioDocumentation: 'For selecting whether the solution is an Acid or Base'
+      phetioDocumentation: 'For selecting whether the solution is an Acid or Base',
+      phetioFeatured: true
     } );
 
     const isWeakProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'isWeakProperty' ),
-      phetioDocumentation: 'For selecting whether the solution is weak or strong'
+      phetioDocumentation: 'For selecting whether the solution is weak or strong',
+      phetioFeatured: true
     } );
 
     // The solutions for this screen. They are read-only because their concentration (for all solutions) and
@@ -85,7 +87,8 @@ export default class MySolutionModel extends ABSModel {
       }, {
         tandem: tandem.createTandem( 'solutionProperty' ),
         phetioValueType: AqueousSolution.AqueousSolutionIO,
-        phetioDocumentation: 'The solution model that is being used'
+        phetioDocumentation: 'The solution model that is being used',
+        phetioFeatured: true
       } );
 
     super( solutions, solutionProperty, tandem );
@@ -101,13 +104,15 @@ export default class MySolutionModel extends ABSModel {
     this.concentrationProperty = new NumberProperty( ABSConstants.CONCENTRATION_RANGE.defaultValue, {
       range: ABSConstants.CONCENTRATION_RANGE,
       units: 'mol/L',
-      tandem: tandem.createTandem( 'concentrationProperty' )
+      tandem: tandem.createTandem( 'concentrationProperty' ),
+      phetioFeatured: true
     } );
 
     this.strengthProperty = new NumberProperty( ABSConstants.WEAK_STRENGTH_RANGE.defaultValue, {
       range: ABSConstants.WEAK_STRENGTH_RANGE,
       tandem: tandem.createTandem( 'strengthProperty' ),
-      phetioDocumentation: 'The acid or base ionization constant, depending on the type of solution.'
+      phetioDocumentation: 'The acid or base ionization constant, depending on the type of solution.',
+      phetioFeatured: true
     } );
 
     // Write the concentration value to all solutions.

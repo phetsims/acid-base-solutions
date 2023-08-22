@@ -31,7 +31,10 @@ export default class ReactionEquationNode extends Node {
         ReactionEquationFactory.createWeakBaseEquation( solutionProperty )
       ],
       isDisposable: false,
-      tandem: tandem
+      tandem: tandem,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
 
     // center below the beaker

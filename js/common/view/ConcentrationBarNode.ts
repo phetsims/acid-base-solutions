@@ -39,7 +39,8 @@ export default class ConcentrationBarNode extends Node {
       tandem: tandem.createTandem( 'concentrationProperty' ),
       phetioValueType: NullableIO( NumberIO ),
       phetioReadOnly: true,
-      phetioDocumentation: 'Concentration associated with this bar. null if the bar is not relevant for the selected solution.'
+      phetioDocumentation: 'Concentration associated with this bar. null if the bar is not relevant for the selected solution.',
+      phetioFeatured: true
     } );
 
     // add rectangle to represent concentration

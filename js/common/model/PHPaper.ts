@@ -44,7 +44,8 @@ export default class PHPaper extends PhetioObject {
     super( {
       isDisposable: false,
       tandem: tandem,
-      phetioState: false
+      phetioState: false,
+      phetioFeatured: true
     } );
 
     this.beaker = beaker;
@@ -55,7 +56,8 @@ export default class PHPaper extends PhetioObject {
       () => pHToColor( pHProperty.value ), {
         tandem: tandem.createTandem( 'colorProperty' ),
         phetioValueType: Color.ColorIO,
-        phetioDocumentation: 'The color that the pH paper will turn when it is dipped in the solution'
+        phetioDocumentation: 'The color that the pH paper will turn when it is dipped in the solution',
+        phetioFeatured: true
       } );
 
     const beakerMargin = 5;

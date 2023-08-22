@@ -48,7 +48,8 @@ export default class ABSModel implements TModel {
     this.pHProperty = DerivedProperty.deriveAny( [ solutionProperty, ...solutions.map( solution => solution.pHProperty ) ],
       () => solutionProperty.value.pHProperty.value, {
         tandem: tandem.createTandem( 'pHProperty' ),
-        phetioValueType: NumberIO
+        phetioValueType: NumberIO,
+        phetioFeatured: true
       } );
 
     this.beaker = new Beaker();

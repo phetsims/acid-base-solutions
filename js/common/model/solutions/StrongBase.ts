@@ -29,7 +29,8 @@ export default class StrongBase extends AqueousSolution {
       strengthRange: ABSConstants.STRONG_STRENGTH_RANGE,
       concentrationRange: ABSConstants.CONCENTRATION_RANGE,
       tandem: tandem,
-      phetioReadOnly: phetioReadOnly
+      phetioReadOnly: phetioReadOnly,
+      strengthPropertyFeatured: false
     } );
   }
 

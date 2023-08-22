@@ -34,7 +34,8 @@ export default class PHMeter extends PhetioObject {
     super( {
       isDisposable: false,
       tandem: tandem,
-      phetioState: false
+      phetioState: false,
+      phetioFeatured: true
     } );
 
     this.beaker = beaker;
@@ -49,7 +50,8 @@ export default class PHMeter extends PhetioObject {
     this.isInSolutionProperty = new DerivedProperty( [ this.positionProperty ],
       position => this.beaker.bounds.containsPoint( this.positionProperty.value ), {
         tandem: tandem.createTandem( 'isInSolutionProperty' ),
-        phetioValueType: BooleanIO
+        phetioValueType: BooleanIO,
+        phetioFeatured: true
       } );
 
     this.addLinkedElement( pHProperty );

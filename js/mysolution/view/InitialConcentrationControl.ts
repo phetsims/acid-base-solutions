@@ -43,7 +43,10 @@ export default class InitialConcentrationControl extends VBox {
       },
       touchAreaXDilation: 6,
       touchAreaYDilation: 6,
-      tandem: tandem.createTandem( 'spinner' )
+      tandem: tandem.createTandem( 'spinner' ),
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
 
     const slider = new InitialConcentrationSlider( concentrationProperty, tandem.createTandem( 'slider' ) );
