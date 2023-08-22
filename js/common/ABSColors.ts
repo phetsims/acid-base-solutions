@@ -16,21 +16,21 @@ const GRAY_PARTICLE = 'rgb( 120, 120, 120 )';
 
 // pH paper colors, ordered from pH value 0-14
 const PH_PAPER_COLORS = [
-  'rgb( 182, 70, 72 )',
-  'rgb( 196, 80, 86 )',
-  'rgb( 213, 83, 71 )',
-  'rgb( 237, 123, 83 )',
-  'rgb( 246, 152, 86 )',
-  'rgb( 244, 158, 79 )',
-  'rgb( 243, 160, 78 )',
-  'rgb( 244, 182, 67 )',
-  'rgb( 231, 201, 75 )',
-  'rgb( 93, 118, 88 )',
-  'rgb( 30, 92, 89 )',
-  'rgb( 34, 90, 105 )',
-  'rgb( 39, 87, 111 )',
-  'rgb( 27, 67, 90 )',
-  'rgb( 0, 34, 52 )'
+  'rgb( 198, 32, 97 )',
+  'rgb( 219, 66, 63 )',
+  'rgb( 222, 103, 40 )',
+  'rgb( 216, 127, 63 )',
+  'rgb( 218, 164, 68 )',
+  'rgb( 198, 178, 46 )',
+  'rgb( 177, 176, 57 )',
+  'rgb( 85, 149, 81 )',
+  'rgb( 79, 135, 72 )',
+  'rgb( 51, 108, 80 )',
+  'rgb( 48, 96, 75 )',
+  'rgb( 0, 90, 98 )',
+  'rgb( 24, 70, 111 )',
+  'rgb( 23, 51, 91 )',
+  'rgb( 0, 35, 49 )'
 ];
 const PH_PAPER_COLOR_PROPERTIES: ProfileColorProperty[] = [];
 for ( let i = 0; i < PH_PAPER_COLORS.length; i++ ) {
