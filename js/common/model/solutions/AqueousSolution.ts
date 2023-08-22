@@ -31,7 +31,6 @@ import optionize from '../../../../../phet-core/js/optionize.js';
 type SelfOptions = {
   strengthRange: RangeWithValue; // the strength of the solute, with an initial value
   concentrationRange: RangeWithValue; // the concentration of the solute, with an initial value, in mol/L
-  strengthPropertyFeatured: boolean; // whether to PhET-iO instrument strengthProperty
 };
 
 type AqueousSolutionOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem' | 'phetioReadOnly'>;
@@ -62,15 +61,18 @@ export default abstract class AqueousSolution extends PhetioObject {
 
     this.particles = particles;
 
+    const hasConstantStrength = ( options.strengthRange.getLength() === 0 );
+    const hasConstantConcentration = ( options.concentrationRange.getLength() === 0 );
+
     this.strengthProperty = new NumberProperty( options.strengthRange.defaultValue, {
       range: options.strengthRange,
       // units: unitless, see https://github.com/phetsims/acid-base-solutions/issues/182#issuecomment-1675201139
       tandem: options.tandem.createTandem( 'strengthProperty' ),
       phetioDocumentation: 'The acid or base ionization constant, depending on the type of solution.',
-      phetioFeatured: options.strengthPropertyFeatured,
+      phetioFeatured: !hasConstantStrength,
 
       // read-only if solution is read-only, or if strength is a constant
-      phetioReadOnly: options.phetioReadOnly || ( options.strengthRange.getLength() === 0 )
+      phetioReadOnly: options.phetioReadOnly || hasConstantStrength
     } );
 
     this.concentrationProperty = new NumberProperty( options.concentrationRange.defaultValue, {
@@ -80,7 +82,7 @@ export default abstract class AqueousSolution extends PhetioObject {
       phetioFeatured: true,
 
       // read-only if solution is read-only, or if concentration is a constant
-      phetioReadOnly: options.phetioReadOnly || ( options.concentrationRange.getLength() === 0 )
+      phetioReadOnly: options.phetioReadOnly || hasConstantConcentration
     } );
 
     // pH = -log10( [H3O+] )

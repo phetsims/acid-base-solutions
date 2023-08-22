@@ -30,8 +30,7 @@ export default class WeakBase extends AqueousSolution {
       strengthRange: ABSConstants.WEAK_STRENGTH_RANGE,
       concentrationRange: ABSConstants.CONCENTRATION_RANGE,
       tandem: tandem,
-      phetioReadOnly: phetioReadOnly,
-      strengthPropertyFeatured: true
+      phetioReadOnly: phetioReadOnly
     } );
   }
 

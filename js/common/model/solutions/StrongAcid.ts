@@ -30,8 +30,7 @@ export default class StrongAcid extends AqueousSolution {
       strengthRange: ABSConstants.STRONG_STRENGTH_RANGE,
       concentrationRange: ABSConstants.CONCENTRATION_RANGE,
       tandem: tandem,
-      phetioReadOnly: phetioReadOnly,
-      strengthPropertyFeatured: false
+      phetioReadOnly: phetioReadOnly
     } );
   }
 
