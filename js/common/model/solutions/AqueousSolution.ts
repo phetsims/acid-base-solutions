@@ -65,6 +65,7 @@ export default abstract class AqueousSolution extends PhetioObject {
       range: options.strengthRange,
       // units: unitless, see https://github.com/phetsims/acid-base-solutions/issues/182#issuecomment-1675201139
       tandem: options.tandem.createTandem( 'strengthProperty' ),
+      phetioDocumentation: 'The acid or base ionization constant, depending on the type of solution.',
 
       // read-only if solution is read-only, or if strength is a constant
       phetioReadOnly: options.phetioReadOnly || ( options.strengthRange.getLength() === 0 )

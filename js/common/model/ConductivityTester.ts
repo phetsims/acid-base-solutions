@@ -83,6 +83,7 @@ export default class ConductivityTester extends PhetioObject {
         }
       }, {
         tandem: tandem.createTandem( 'brightnessProperty' ),
+        phetioDocumentation: 'Represents the brightness of the light bulb from 0 (off) to 1 (maximum brightness).',
         phetioValueType: NumberIO,
         isValidValue: brightness => BRIGHTNESS_RANGE.contains( brightness )
       } );

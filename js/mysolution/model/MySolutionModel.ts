@@ -106,7 +106,8 @@ export default class MySolutionModel extends ABSModel {
 
     this.strengthProperty = new NumberProperty( ABSConstants.WEAK_STRENGTH_RANGE.defaultValue, {
       range: ABSConstants.WEAK_STRENGTH_RANGE,
-      tandem: tandem.createTandem( 'strengthProperty' )
+      tandem: tandem.createTandem( 'strengthProperty' ),
+      phetioDocumentation: 'The acid or base ionization constant, depending on the type of solution.'
     } );
 
     // Write the concentration value to all solutions.
