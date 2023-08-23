@@ -9,14 +9,24 @@
 
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import ABSConstants from '../../ABSConstants.js';
-import AqueousSolution from './AqueousSolution.js';
+import AqueousSolution, { AqueousSolutionOptions } from './AqueousSolution.js';
 import ABSColors from '../../ABSColors.js';
-import Tandem from '../../../../../tandem/js/Tandem.js';
 import { Particle } from './Particle.js';
+import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../../phet-core/js/types/StrictOmit.js';
+
+type SelfOptions = EmptySelfOptions;
+type WaterOptions = SelfOptions & StrictOmit<AqueousSolutionOptions, 'strengthRange' | 'concentrationRange' | 'phetioReadOnly'>;
 
 export default class Water extends AqueousSolution {
 
-  public constructor( tandem: Tandem ) {
+  public constructor( providedOptions: WaterOptions ) {
+
+    const options = optionize<WaterOptions, SelfOptions, AqueousSolutionOptions>()( {
+      strengthRange: ABSConstants.WATER_STRENGTH_RANGE,
+      concentrationRange: ABSConstants.WATER_CONCENTRATION_RANGE,
+      phetioReadOnly: true
+    }, providedOptions );
 
     // particles found in this solution
     const particles: Particle[] = [
@@ -25,12 +35,7 @@ export default class Water extends AqueousSolution {
       { key: 'OH', color: ABSColors.OH, getConcentration: () => this.getOHConcentration() }
     ];
 
-    super( particles, {
-      strengthRange: ABSConstants.WATER_STRENGTH_RANGE,
-      concentrationRange: ABSConstants.WATER_CONCENTRATION_RANGE,
-      tandem: tandem,
-      phetioReadOnly: true
-    } );
+    super( particles, options );
   }
 
   public override getSoluteConcentration(): number {

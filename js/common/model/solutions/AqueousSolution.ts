@@ -27,13 +27,18 @@ import RangeWithValue from '../../../../../dot/js/RangeWithValue.js';
 import IOType from '../../../../../tandem/js/types/IOType.js';
 import ReferenceIO, { ReferenceIOState } from '../../../../../tandem/js/types/ReferenceIO.js';
 import optionize from '../../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../../phet-core/js/types/PickOptional.js';
 
 type SelfOptions = {
-  strengthRange: RangeWithValue; // the strength of the solute, with an initial value
+  strengthRange: RangeWithValue; // the strength of the solute, with an initial value, unitless
   concentrationRange: RangeWithValue; // the concentration of the solute, with an initial value, in mol/L
+  strengthPropertyFeatured?: boolean; // whether to feature strengthProperty (if it's not a constant)
+  concentrationPropertyFeatured?: boolean; // whether to feature concentrationProperty (if it's not a constant)
 };
 
-type AqueousSolutionOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem' | 'phetioReadOnly'>;
+export type AqueousSolutionOptions = SelfOptions &
+  PickOptional<PhetioObjectOptions, 'phetioReadOnly'> &
+  PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export type AqueousSolutionStateObject = ReferenceIOState; // because AqueousSolutionIO is a subtype of ReferenceIO
 
@@ -51,10 +56,15 @@ export default abstract class AqueousSolution extends PhetioObject {
 
     const options = optionize<AqueousSolutionOptions, SelfOptions, PhetioObjectOptions>()( {
 
+      // SelfOptions
+      strengthPropertyFeatured: true,
+      concentrationPropertyFeatured: true,
+
       // PhetioObjectOptions
       isDisposable: false,
       phetioType: AqueousSolution.AqueousSolutionIO,
-      phetioState: false
+      phetioState: false,
+      phetioReadOnly: false
     }, providedOptions );
 
     super( options );
@@ -69,7 +79,7 @@ export default abstract class AqueousSolution extends PhetioObject {
       // units: unitless, see https://github.com/phetsims/acid-base-solutions/issues/182#issuecomment-1675201139
       tandem: options.tandem.createTandem( 'strengthProperty' ),
       phetioDocumentation: 'The acid or base ionization constant, depending on the type of solution.',
-      phetioFeatured: !hasConstantStrength,
+      phetioFeatured: options.strengthPropertyFeatured && !hasConstantStrength,
 
       // read-only if this solution is read-only, or if strength is a constant
       phetioReadOnly: options.phetioReadOnly || hasConstantStrength
@@ -79,7 +89,7 @@ export default abstract class AqueousSolution extends PhetioObject {
       range: options.concentrationRange,
       units: 'mol/L',
       tandem: options.tandem.createTandem( 'concentrationProperty' ),
-      phetioFeatured: !hasConstantConcentration,
+      phetioFeatured: options.concentrationPropertyFeatured && !hasConstantConcentration,
 
       // read-only if this solution is read-only, or if concentration is a constant
       phetioReadOnly: options.phetioReadOnly || hasConstantConcentration

@@ -9,14 +9,23 @@
 
 import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import ABSConstants from '../../ABSConstants.js';
-import AqueousSolution from './AqueousSolution.js';
+import AqueousSolution, { AqueousSolutionOptions } from './AqueousSolution.js';
 import ABSColors from '../../ABSColors.js';
-import Tandem from '../../../../../tandem/js/Tandem.js';
 import { Particle } from './Particle.js';
+import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../../phet-core/js/types/StrictOmit.js';
+
+type SelfOptions = EmptySelfOptions;
+type WeakAcidOptions = SelfOptions & StrictOmit<AqueousSolutionOptions, 'strengthRange' | 'concentrationRange'>;
 
 export default class WeakAcid extends AqueousSolution {
 
-  public constructor( tandem: Tandem, phetioReadOnly = false ) {
+  public constructor( providedOptions: WeakAcidOptions ) {
+
+    const options = optionize<WeakAcidOptions, SelfOptions, AqueousSolutionOptions>()( {
+      strengthRange: ABSConstants.WEAK_STRENGTH_RANGE,
+      concentrationRange: ABSConstants.CONCENTRATION_RANGE
+    }, providedOptions );
 
     // particles found in this solution
     const particles: Particle[] = [
@@ -26,12 +35,7 @@ export default class WeakAcid extends AqueousSolution {
       { key: 'H3O', color: ABSColors.H3O, getConcentration: () => this.getH3OConcentration() }
     ];
 
-    super( particles, {
-      strengthRange: ABSConstants.WEAK_STRENGTH_RANGE,
-      concentrationRange: ABSConstants.CONCENTRATION_RANGE,
-      tandem: tandem,
-      phetioReadOnly: phetioReadOnly
-    } );
+    super( particles, options );
   }
 
   // [HA] = c - [H3O+]

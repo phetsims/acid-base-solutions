@@ -19,7 +19,8 @@ import WeakBase from '../../common/model/solutions/WeakBase.js';
 import ABSConstants from '../../common/ABSConstants.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import AqueousSolution from '../../common/model/solutions/AqueousSolution.js';
+import AqueousSolution, { AqueousSolutionOptions } from '../../common/model/solutions/AqueousSolution.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 
 export default class MySolutionModel extends ABSModel {
 
@@ -56,14 +57,32 @@ export default class MySolutionModel extends ABSModel {
       phetioFeatured: true
     } );
 
-    // The solutions for this screen. They are read-only because their concentration (for all solutions) and
-    // strength (for weak solutions) is kept synchronized with this.concentrationProperty and this.strengthProperty.
+    // The set of solutions for this screen, synchronized with this.strengthProperty and this.concentrationProperty.
     const solutionsTandem = tandem.createTandem( 'solutions' );
-    const phetioReadOnly = true;
-    const strongAcid = new StrongAcid( solutionsTandem.createTandem( 'strongAcid' ), phetioReadOnly );
-    const weakAcid = new WeakAcid( solutionsTandem.createTandem( 'weakAcid' ), phetioReadOnly );
-    const strongBase = new StrongBase( solutionsTandem.createTandem( 'strongBase' ), phetioReadOnly );
-    const weakBase = new WeakBase( solutionsTandem.createTandem( 'weakBase' ), phetioReadOnly );
+    const solutionOptions: Partial<AqueousSolutionOptions> = {
+
+      // The solutions for this screen. They are read-only because their concentration (for all solutions) and
+      // strength (for weak solutions) is kept synchronized with this.concentrationProperty and this.strengthProperty.
+      phetioReadOnly: true,
+
+      // strengthProperty and concentrationProperty are not useful to PhET-iO clients in this screen, because they
+      // are phetioReadOnly: true, and are kept synchronized with this.strengthProperty and this.concentrationProperty.
+      // See https://github.com/phetsims/acid-base-solutions/issues/225
+      strengthPropertyFeatured: false,
+      concentrationPropertyFeatured: false
+    };
+    const strongAcid = new StrongAcid( combineOptions<AqueousSolutionOptions>( {
+      tandem: solutionsTandem.createTandem( 'strongAcid' )
+    }, solutionOptions ) );
+    const weakAcid = new WeakAcid( combineOptions<AqueousSolutionOptions>( {
+      tandem: solutionsTandem.createTandem( 'weakAcid' )
+    }, solutionOptions ) );
+    const strongBase = new StrongBase( combineOptions<AqueousSolutionOptions>( {
+      tandem: solutionsTandem.createTandem( 'strongBase' )
+    }, solutionOptions ) );
+    const weakBase = new WeakBase( combineOptions<AqueousSolutionOptions>( {
+      tandem: solutionsTandem.createTandem( 'weakBase' )
+    }, solutionOptions ) );
     const solutions = [ strongAcid, weakAcid, strongBase, weakBase ];
 
     // Selected solution is based on how the user sets the 2 AB switches in the control panel.

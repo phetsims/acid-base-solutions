@@ -33,11 +33,21 @@ export default class IntroModel extends ABSModel {
 
     const solutionsTandem = tandem.createTandem( 'solutions' );
 
-    const water = new Water( solutionsTandem.createTandem( 'water' ) );
-    const strongAcid = new StrongAcid( solutionsTandem.createTandem( 'strongAcid' ) );
-    const weakAcid = new WeakAcid( solutionsTandem.createTandem( 'weakAcid' ) );
-    const strongBase = new StrongBase( solutionsTandem.createTandem( 'strongBase' ) );
-    const weakBase = new WeakBase( solutionsTandem.createTandem( 'weakBase' ) );
+    const water = new Water( {
+      tandem: solutionsTandem.createTandem( 'water' )
+    } );
+    const strongAcid = new StrongAcid( {
+      tandem: solutionsTandem.createTandem( 'strongAcid' )
+    } );
+    const weakAcid = new WeakAcid( {
+      tandem: solutionsTandem.createTandem( 'weakAcid' )
+    } );
+    const strongBase = new StrongBase( {
+      tandem: solutionsTandem.createTandem( 'strongBase' )
+    } );
+    const weakBase = new WeakBase( {
+      tandem: solutionsTandem.createTandem( 'weakBase' )
+    } );
 
     const solutions = [ water, strongAcid, weakAcid, strongBase, weakBase ];
 
