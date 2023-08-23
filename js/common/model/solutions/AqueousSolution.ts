@@ -28,6 +28,7 @@ import IOType from '../../../../../tandem/js/types/IOType.js';
 import ReferenceIO, { ReferenceIOState } from '../../../../../tandem/js/types/ReferenceIO.js';
 import optionize from '../../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../../phet-core/js/types/PickOptional.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
 
 type SelfOptions = {
   strengthRange: RangeWithValue; // the strength of the solute, with an initial value, unitless
@@ -103,7 +104,7 @@ export default abstract class AqueousSolution extends PhetioObject {
         phetioValueType: NumberIO,
 
         // featured if either of its dependencies is featured
-        phetioFeatured: this.strengthProperty.phetioFeatured || this.concentrationProperty.phetioFeatured
+        phetioFeatured: Tandem.PHET_IO_ENABLED && ( this.strengthProperty.phetioFeatured || this.concentrationProperty.phetioFeatured )
       } );
   }
 
