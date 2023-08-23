@@ -130,7 +130,7 @@ export default class MySolutionModel extends ABSModel {
     this.strengthProperty = new NumberProperty( ABSConstants.WEAK_STRENGTH_RANGE.defaultValue, {
       range: ABSConstants.WEAK_STRENGTH_RANGE,
       tandem: tandem.createTandem( 'strengthProperty' ),
-      phetioDocumentation: 'The acid or base ionization constant, depending on the type of solution.',
+      phetioDocumentation: 'The acid or base ionization constant, depending on the type of solution. This is relevant only for weak solutions.',
       phetioFeatured: true
     } );
 
