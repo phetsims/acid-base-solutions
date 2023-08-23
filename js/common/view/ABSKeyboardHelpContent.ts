@@ -30,9 +30,7 @@ export default class ABSKeyboardHelpContent extends TwoColumnKeyboardHelpContent
     const rightSections = [
 
       // Basic Actions
-      new BasicActionsKeyboardHelpSection( {
-        withCheckboxContent: true
-      } )
+      new BasicActionsKeyboardHelpSection()
     ];
 
     super( leftSections, rightSections, {
