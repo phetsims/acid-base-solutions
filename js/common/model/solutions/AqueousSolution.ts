@@ -79,7 +79,7 @@ export default abstract class AqueousSolution extends PhetioObject {
       range: options.concentrationRange,
       units: 'mol/L',
       tandem: options.tandem.createTandem( 'concentrationProperty' ),
-      phetioFeatured: true,
+      phetioFeatured: !hasConstantConcentration,
 
       // read-only if solution is read-only, or if concentration is a constant
       phetioReadOnly: options.phetioReadOnly || hasConstantConcentration
@@ -91,7 +91,7 @@ export default abstract class AqueousSolution extends PhetioObject {
         isValidValue: pH => ABSConstants.PH_RANGE.contains( pH ),
         tandem: options.tandem.createTandem( 'pHProperty' ),
         phetioValueType: NumberIO,
-        phetioFeatured: true
+        phetioFeatured: this.strengthProperty.phetioFeatured || this.concentrationProperty.phetioFeatured
       } );
   }
 

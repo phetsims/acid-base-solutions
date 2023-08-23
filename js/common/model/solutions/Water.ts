@@ -29,7 +29,7 @@ export default class Water extends AqueousSolution {
       strengthRange: ABSConstants.WATER_STRENGTH_RANGE,
       concentrationRange: ABSConstants.WATER_CONCENTRATION_RANGE,
       tandem: tandem,
-      phetioReadOnly: false
+      phetioReadOnly: true
     } );
   }
 
