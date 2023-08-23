@@ -71,7 +71,7 @@ export default abstract class AqueousSolution extends PhetioObject {
       phetioDocumentation: 'The acid or base ionization constant, depending on the type of solution.',
       phetioFeatured: !hasConstantStrength,
 
-      // read-only if solution is read-only, or if strength is a constant
+      // read-only if this solution is read-only, or if strength is a constant
       phetioReadOnly: options.phetioReadOnly || hasConstantStrength
     } );
 
@@ -81,7 +81,7 @@ export default abstract class AqueousSolution extends PhetioObject {
       tandem: options.tandem.createTandem( 'concentrationProperty' ),
       phetioFeatured: !hasConstantConcentration,
 
-      // read-only if solution is read-only, or if concentration is a constant
+      // read-only if this solution is read-only, or if concentration is a constant
       phetioReadOnly: options.phetioReadOnly || hasConstantConcentration
     } );
 
@@ -91,6 +91,8 @@ export default abstract class AqueousSolution extends PhetioObject {
         isValidValue: pH => ABSConstants.PH_RANGE.contains( pH ),
         tandem: options.tandem.createTandem( 'pHProperty' ),
         phetioValueType: NumberIO,
+
+        // featured if either of its dependencies is featured
         phetioFeatured: this.strengthProperty.phetioFeatured || this.concentrationProperty.phetioFeatured
       } );
   }
