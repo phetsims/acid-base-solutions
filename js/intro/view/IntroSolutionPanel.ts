@@ -30,7 +30,10 @@ export default class IntroSolutionPanel extends Panel {
   public constructor( model: IntroModel, tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, ABSConstants.PANEL_OPTIONS, {
-      tandem: tandem
+      tandem: tandem,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
 
     // title
