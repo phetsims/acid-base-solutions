@@ -30,7 +30,8 @@ export default class ABSConductivityTesterNode extends ConductivityTesterNode {
         phetioValueType: BooleanIO
       } ),
       keyboardDragListenerOptions: ABSConstants.KEYBOARD_DRAG_LISTENER_OPTIONS,
-      tandem: tandem
+      tandem: tandem,
+      phetioFeatured: true
     };
 
     super( conductivityTester.brightnessProperty, new Property( conductivityTester.bulbPosition ),

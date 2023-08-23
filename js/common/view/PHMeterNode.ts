@@ -94,7 +94,8 @@ export default class PHMeterNode extends InteractiveHighlighting( Node ) {
       isDisposable: false,
       tagName: 'div',
       focusable: true,
-      tandem: tandem
+      tandem: tandem,
+      phetioFeatured: true
     } );
 
     this.addInputListener( new DragListener( {

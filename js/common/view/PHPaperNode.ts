@@ -71,7 +71,8 @@ export default class PHPaperNode extends InteractiveHighlighting( Node ) {
       isDisposable: false,
       tagName: 'div',
       focusable: true,
-      tandem: tandem
+      tandem: tandem,
+      phetioFeatured: true
     } );
 
     // expand touch area
