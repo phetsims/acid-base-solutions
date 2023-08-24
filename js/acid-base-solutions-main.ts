@@ -46,7 +46,10 @@ simLauncher.launch( () => {
           ]
         } ]
       }
-    } )
+    } ),
+
+    // See https://github.com/phetsims/acid-base-solutions/issues/179
+    phetioDesigned: true
   } );
 
   sim.start();
