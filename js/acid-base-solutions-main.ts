@@ -19,12 +19,14 @@ import ABSPreferencesNode from './common/view/ABSPreferencesNode.js';
 
 simLauncher.launch( () => {
 
+  const titleStringProperty = AcidBaseSolutionsStrings[ 'acid-base-solutions' ].titleStringProperty;
+
   const screens = [
     new IntroScreen( Tandem.ROOT.createTandem( 'introScreen' ) ),
     new MySolutionScreen( Tandem.ROOT.createTandem( 'mySolutionScreen' ) )
   ];
 
-  const sim = new Sim( AcidBaseSolutionsStrings[ 'acid-base-solutions' ].titleStringProperty, screens, {
+  const sim = new Sim( titleStringProperty, screens, {
 
     // Credits that appear in the About dialog
     credits: {
