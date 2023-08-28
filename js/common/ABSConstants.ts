@@ -17,6 +17,7 @@ import ABSColors from './ABSColors.js';
 import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
 import { ABSwitchOptions } from '../../../sun/js/ABSwitch.js';
 import { KeyboardDragListenerOptions } from '../../../scenery/js/imports.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 
 const WEAK_STRENGTH_MAX = 1E2;
 
@@ -33,7 +34,8 @@ const AB_SWITCH_OPTIONS: StrictOmit<ABSwitchOptions, 'tandem'> = {
   toggleSwitchOptions: {
     size: new Dimension2( 40, 20 ),
     thumbTouchAreaXDilation: 6,
-    thumbTouchAreaYDilation: 6
+    thumbTouchAreaYDilation: 6,
+    tandem: Tandem.OPT_OUT // see https://github.com/phetsims/acid-base-solutions/issues/228
   }
 };
 
