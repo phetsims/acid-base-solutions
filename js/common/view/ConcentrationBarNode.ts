@@ -120,8 +120,8 @@ function concentrationToString( concentration: number | null ): string {
     // find value
     concentration = ( concentration * Math.pow( 10, -pow ) );
 
-    // show 10.0 as 1.0 x 10
-    if ( Math.abs( concentration - 10 ) < 1e-2 ) {
+    // If mantissa rounds to 10, increase the power and use 1 for the mantissa.
+    if ( Math.abs( concentration - 10 ) < Math.pow( 10, -CONCENTRATION_DECIMAL_PLACES ) ) {
       pow++;
       concentration = 1;
     }
