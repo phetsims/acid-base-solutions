@@ -60,7 +60,10 @@ export default class InitialConcentrationControl extends VBox {
       spacing: 6,
       layoutOptions: { stretch: true }, // so that titleText will be left-aligned in MySolutionsPanel
       isDisposable: false,
-      tandem: tandem
+      tandem: tandem,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
   }
 }
