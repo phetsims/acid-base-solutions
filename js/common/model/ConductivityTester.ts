@@ -99,7 +99,6 @@ export default class ConductivityTester extends PhetioObject {
         phetioFeatured: true,
         isValidValue: brightness => BRIGHTNESS_RANGE.contains( brightness )
       } );
-    this.brightnessProperty.link( brightness => console.log( `brightness=${brightness}` ) );
 
     this.addLinkedElement( pHProperty );
   }
