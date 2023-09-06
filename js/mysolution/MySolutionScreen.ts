@@ -16,7 +16,7 @@ import ABSColors from '../common/ABSColors.js';
 import createParticleNode from '../common/view/createParticleNode.js';
 import MySolutionModel from './model/MySolutionModel.js';
 import MySolutionScreenView from './view/MySolutionScreenView.js';
-import ABSKeyboardHelpContent from '../common/view/ABSKeyboardHelpContent.js';
+import MySolutionKeyboardHelpContent from './view/MySolutionKeyboardHelpContent.js';
 
 export default class MySolutionScreen extends Screen<MySolutionModel, MySolutionScreenView> {
 
@@ -26,7 +26,7 @@ export default class MySolutionScreen extends Screen<MySolutionModel, MySolution
       name: AcidBaseSolutionsStrings.screen.mySolutionStringProperty,
       backgroundColorProperty: ABSColors.screenBackgroundColorProperty,
       homeScreenIcon: createScreenIcon(),
-      createKeyboardHelpNode: () => new ABSKeyboardHelpContent(),
+      createKeyboardHelpNode: () => new MySolutionKeyboardHelpContent(),
       tandem: tandem
     };
 

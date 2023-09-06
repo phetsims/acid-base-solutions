@@ -16,7 +16,7 @@ import AcidBaseSolutionsStrings from '../AcidBaseSolutionsStrings.js';
 import ABSColors from '../common/ABSColors.js';
 import IntroModel from './model/IntroModel.js';
 import IntroScreenView from './view/IntroScreenView.js';
-import ABSKeyboardHelpContent from '../common/view/ABSKeyboardHelpContent.js';
+import IntroKeyboardHelpContent from './view/IntroKeyboardHelpContent.js';
 
 export default class IntroScreen extends Screen<IntroModel, IntroScreenView> {
 
@@ -26,7 +26,7 @@ export default class IntroScreen extends Screen<IntroModel, IntroScreenView> {
       name: AcidBaseSolutionsStrings.screen.introStringProperty,
       backgroundColorProperty: ABSColors.screenBackgroundColorProperty,
       homeScreenIcon: createScreenIcon(),
-      createKeyboardHelpNode: () => new ABSKeyboardHelpContent(),
+      createKeyboardHelpNode: () => new IntroKeyboardHelpContent(),
       tandem: tandem
     };
 

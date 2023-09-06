@@ -1,7 +1,7 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * ABSKeyboardHelpContent is the content for the keyboard-help dialog in both screens.
+ * MySolutionKeyboardHelpContent is the content for the keyboard-help dialog in the 'My Solution' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -12,7 +12,7 @@ import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/h
 import MoveDraggableItemsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/MoveDraggableItemsKeyboardHelpSection.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 
-export default class ABSKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
+export default class MySolutionKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 
   public constructor() {
 
@@ -39,4 +39,4 @@ export default class ABSKeyboardHelpContent extends TwoColumnKeyboardHelpContent
   }
 }
 
-acidBaseSolutions.register( 'ABSKeyboardHelpContent', ABSKeyboardHelpContent );
+acidBaseSolutions.register( 'MySolutionKeyboardHelpContent', MySolutionKeyboardHelpContent );
