@@ -72,11 +72,21 @@ export default class ConductivityTester extends PhetioObject {
       [ pHProperty, this.positiveProbePositionProperty, this.negativeProbePositionProperty ],
       ( pH, positiveProbePosition, negativeProbePosition ) => {
         if ( beaker.bounds.containsPoint( positiveProbePosition ) && beaker.bounds.containsPoint( negativeProbePosition ) ) {
-          // closed circuit, probes are in solution
-          return NEUTRAL_BRIGHTNESS + ( 1 - NEUTRAL_BRIGHTNESS ) *
-                 ( pH < NEUTRAL_PH ?
-                   ( NEUTRAL_PH - pH ) / ( NEUTRAL_PH - ABSConstants.PH_RANGE.min ) :
-                   ( pH - NEUTRAL_PH ) / ( ABSConstants.PH_RANGE.max - NEUTRAL_PH ) );
+          if ( pH === NEUTRAL_PH ) {
+
+            // Water is the only solution in this sim that has a neutral pH. Distilled water is a form of pure water
+            // stripped of dissolved impurities and free ions. Distilled water is therefore unable to conduct electricity
+            // because it has a low conductivity range of 0.5 to 3 µS/cm.  So distilled water results in an open
+            // circuit. See https://github.com/phetsims/acid-base-solutions/issues/233
+            return 0;
+          }
+          else {
+            // closed circuit, probes are in solution
+            return NEUTRAL_BRIGHTNESS + ( 1 - NEUTRAL_BRIGHTNESS ) *
+                   ( pH < NEUTRAL_PH ?
+                     ( NEUTRAL_PH - pH ) / ( NEUTRAL_PH - ABSConstants.PH_RANGE.min ) :
+                     ( pH - NEUTRAL_PH ) / ( ABSConstants.PH_RANGE.max - NEUTRAL_PH ) );
+          }
         }
         else {
           // open circuit
@@ -89,6 +99,7 @@ export default class ConductivityTester extends PhetioObject {
         phetioFeatured: true,
         isValidValue: brightness => BRIGHTNESS_RANGE.contains( brightness )
       } );
+    this.brightnessProperty.link( brightness => console.log( `brightness=${brightness}` ) );
 
     this.addLinkedElement( pHProperty );
   }
