@@ -20,7 +20,7 @@ const TICK_LABEL_OPTIONS = {
 
 // These values are regrettably hardcoded, see https://github.com/phetsims/acid-base-solutions/issues/212
 // LogSlider's linearValueRange is [-3,0] in this case, with a tick mark at each integer value, so...
-const PAGE_KEYBOARD_STEP = 3; // page up/down will jump to min and max
+const PAGE_KEYBOARD_STEP = 1; // page up/down will provide 3 steps over the range
 const KEYBOARD_STEP = 0.5; // up/down, 2 intervals per tick mark
 const SHIFT_KEYBOARD_STEP = 0.2; // shift-up/down, 5 intervals per tick mark
 const NUMBER_OF_MIDDLE_THRESHOLDS = 23; // number of sounds when dragging between min and max
