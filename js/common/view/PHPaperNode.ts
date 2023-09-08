@@ -98,8 +98,8 @@ export default class PHPaperNode extends InteractiveHighlighting( Node ) {
       this.translation = position;
     } );
 
-    pHPaper.indicatorHeightProperty.link( height => {
-      indicatorNode.setRectHeight( height );
+    pHPaper.percentColoredProperty.link( percentColored => {
+      indicatorNode.setRectHeight( percentColored * pHPaper.paperSize.height );
     } );
 
     this.pHPaper = pHPaper;

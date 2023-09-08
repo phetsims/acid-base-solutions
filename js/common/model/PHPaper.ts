@@ -34,7 +34,7 @@ export default class PHPaper extends PhetioObject {
   public readonly dragBounds: Bounds2;
   public readonly positionProperty: Property<Vector2>; // position of the bottom-center of the paper
 
-  public readonly indicatorHeightProperty: Property<number>;
+  public readonly percentColoredProperty: Property<number>;
 
   public constructor( beaker: Beaker,
                       pHProperty: ReadOnlyProperty<number>,
@@ -70,13 +70,18 @@ export default class PHPaper extends PhetioObject {
       phetioReadOnly: true // because position is constrained to dragBounds
     } );
 
-    // NOTE: Ideally, indicatorHeight should be a DerivedProperty, but that gets quite messy.
-    // height of indicator, the portion of the paper that changes color when dipped in solution
-    this.indicatorHeightProperty = new NumberProperty( 0 );
+    // NOTE: Ideally, percentColoredProperty should be a DerivedProperty, but that gets quite messy.
+    // Percentage of the paper that is currently colored to match the pH color key.
+    this.percentColoredProperty = new NumberProperty( 0, {
+      isValidValue: value => ( value >= 0 && value <= 1 ),
+      tandem: tandem.createTandem( 'percentColoredProperty' ),
+      phetioReadOnly: true, // controlled by the sim
+      phetioDocumentation: 'The percentage of the pH paper that is currently colored to match the pH of the solution'
+    } );
 
     // clear the indicator color from the paper and recompute its height
     const resetIndicator = () => {
-      this.indicatorHeightProperty.value = 0;
+      this.percentColoredProperty.value = 0;
       this.updateIndicatorHeight();
     };
     solutionProperty.link( resetIndicator );
@@ -88,7 +93,7 @@ export default class PHPaper extends PhetioObject {
   }
 
   public reset(): void {
-    this.indicatorHeightProperty.reset();
+    this.percentColoredProperty.reset();
     this.positionProperty.reset();
   }
 
@@ -107,9 +112,11 @@ export default class PHPaper extends PhetioObject {
    */
   private updateIndicatorHeight(): void {
     if ( this.beaker.bounds.containsPoint( this.positionProperty.value ) ) {
-      const min = this.indicatorHeightProperty.value;
-      const max = this.paperSize.height;
-      this.indicatorHeightProperty.value = Utils.clamp( this.positionProperty.value.y - this.beaker.top + 5, min, max );
+
+      // So that the portion of pH paper that has been dipped in solution remains colored when it is pulled out of solution.
+      const min = this.percentColoredProperty.value;
+      const percent = ( this.positionProperty.value.y - this.beaker.top + 5 ) / this.paperSize.height;
+      this.percentColoredProperty.value = Utils.clamp( percent, min, 1 );
     }
   }
 }
