@@ -80,7 +80,7 @@ export default class PHPaperNode extends InteractiveHighlighting( Node ) {
 
     this.dragListener = new DragListener( {
       positionProperty: pHPaper.positionProperty,
-      dragBoundsProperty: new Property( pHPaper.dragBounds ),
+      dragBoundsProperty: new Property( pHPaper.dragBounds ), // fixed drag bounds
       tandem: tandem.createTandem( 'dragListener' )
     } );
     this.addInputListener( this.dragListener );
@@ -88,7 +88,7 @@ export default class PHPaperNode extends InteractiveHighlighting( Node ) {
     this.keyboardDragListener = new KeyboardDragListener( combineOptions<KeyboardDragListenerOptions>(
       {}, ABSConstants.KEYBOARD_DRAG_LISTENER_OPTIONS, {
         positionProperty: pHPaper.positionProperty,
-        dragBoundsProperty: new Property( pHPaper.dragBounds ),
+        dragBoundsProperty: new Property( pHPaper.dragBounds ), // fixed drag bounds
         tandem: tandem.createTandem( 'keyboardDragListener' )
       } ) );
     this.addInputListener( this.keyboardDragListener );

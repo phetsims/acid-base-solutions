@@ -100,14 +100,14 @@ export default class PHMeterNode extends InteractiveHighlighting( Node ) {
 
     this.addInputListener( new DragListener( {
       positionProperty: pHMeter.positionProperty,
-      dragBoundsProperty: new Property( pHMeter.dragBounds ),
+      dragBoundsProperty: new Property( pHMeter.dragBounds ), // fixed drag bounds
       tandem: tandem.createTandem( 'dragListener' )
     } ) );
 
     this.addInputListener( new KeyboardDragListener( combineOptions<KeyboardDragListenerOptions>(
       {}, ABSConstants.KEYBOARD_DRAG_LISTENER_OPTIONS, {
         positionProperty: pHMeter.positionProperty,
-        dragBoundsProperty: new Property( pHMeter.dragBounds ),
+        dragBoundsProperty: new Property( pHMeter.dragBounds ), // fixed drag bounds
         tandem: tandem.createTandem( 'keyboardDragListener' )
       } ) ) );
 

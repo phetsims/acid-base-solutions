@@ -34,7 +34,12 @@ export default class ABSConductivityTesterNode extends ConductivityTesterNode {
       phetioFeatured: true
     };
 
-    super( conductivityTester.brightnessProperty, new Property( conductivityTester.bulbPosition ),
+    // Fixed bulb position
+    const positionProperty = new Property( conductivityTester.bulbPosition, {
+      isValidValue: position => ( position === conductivityTester.bulbPosition )
+    } );
+
+    super( conductivityTester.brightnessProperty, positionProperty,
       conductivityTester.positiveProbePositionProperty, conductivityTester.negativeProbePositionProperty, options );
 
     this.addLinkedElement( conductivityTester );
