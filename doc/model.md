@@ -78,9 +78,8 @@ pH ranges from 0 to 14 in this simulation, and is computed as a function of [H<s
 
 ## Conductivity
 
-For the purposes of this simulation, conductivity is modeled as a number between 0 and 1 inclusive.
-This value has no units and determines the brightness of the light bulb.
-Conductivity is computed as a linear function of pH, as follows:
+For the purposes of this simulation, conductivity is modeled as a number between 0 and 1 inclusive. This value has no
+units and determines the brightness of the light bulb. Conductivity is computed as a linear function of pH, as follows:
 
 ```
 if ( open circuit ) {
