@@ -14,7 +14,6 @@ import AcidBaseSolutionsStrings from './AcidBaseSolutionsStrings.js';
 import IntroScreen from './intro/IntroScreen.js';
 import MySolutionScreen from './mysolution/MySolutionScreen.js';
 import PreferencesModel from '../../joist/js/preferences/PreferencesModel.js';
-import ABSPreferences from './common/model/ABSPreferences.js';
 import ABSPreferencesNode from './common/view/ABSPreferencesNode.js';
 
 simLauncher.launch( () => {
@@ -42,10 +41,7 @@ simLauncher.launch( () => {
     preferencesModel: new PreferencesModel( {
       simulationOptions: {
         customPreferences: [ {
-          createContent: tandem => new ABSPreferencesNode( tandem.createTandem( 'simPreferences' ) ),
-          modelLinkables: [
-            { property: ABSPreferences.showSolventProperty }
-          ]
+          createContent: tandem => new ABSPreferencesNode( tandem.createTandem( 'simPreferences' ) )
         } ]
       }
     } ),
