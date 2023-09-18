@@ -16,8 +16,10 @@ import NumberSpinner from '../../../../sun/js/NumberSpinner.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import InitialConcentrationSlider from './InitialConcentrationSlider.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Utils from '../../../../dot/js/Utils.js';
 
 const CONCENTRATION_DECIMALS = 3;
+const DELTA_CONCENTRATION = Math.pow( 10, -CONCENTRATION_DECIMALS );
 
 export default class InitialConcentrationControl extends VBox {
 
@@ -30,9 +32,11 @@ export default class InitialConcentrationControl extends VBox {
     } );
 
     const spinner = new NumberSpinner( concentrationProperty, concentrationProperty.rangeProperty, {
+      deltaValue: DELTA_CONCENTRATION,
+      incrementFunction: value => Math.min( Utils.toFixedNumber( value + DELTA_CONCENTRATION, CONCENTRATION_DECIMALS ), concentrationProperty.rangeProperty.value.max ),
+      decrementFunction: value => Math.max( Utils.toFixedNumber( value - DELTA_CONCENTRATION, CONCENTRATION_DECIMALS ), concentrationProperty.rangeProperty.value.min ),
       arrowsPosition: 'leftRight',
       xSpacing: 8,
-      deltaValue: Math.pow( 10, -CONCENTRATION_DECIMALS ),
       numberDisplayOptions: {
         decimalPlaces: CONCENTRATION_DECIMALS,
         textOptions: {
