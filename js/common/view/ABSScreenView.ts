@@ -99,6 +99,13 @@ export default class ABSScreenView extends ScreenView {
     const conductivityTesterNode = new ABSConductivityTesterNode( model.conductivityTester,
       this.viewProperties.toolModeProperty, toolNodesTandem.createTandem( 'conductivityTesterNode' ) );
 
+    // Changing the tool selection interrupts interaction with the tools.
+    // See https://github.com/phetsims/acid-base-solutions/issues/242
+    const toolsParent = new Node( {
+      children: [ pHMeterNode, pHPaperAndColorKeyNode, conductivityTesterNode ]
+    } );
+    this.viewProperties.toolModeProperty.link( () => toolsParent.interruptSubtreeInput() );
+
     // Controls
     const solutionPanel = createSolutionPanel();
     const viewsPanel = new ViewsPanel( this.viewProperties.viewModeProperty, tandem.createTandem( 'viewsPanel' ) );
@@ -126,9 +133,7 @@ export default class ABSScreenView extends ScreenView {
 
     const screenViewRootNode = new Node( {
       children: [
-        pHMeterNode,
-        pHPaperAndColorKeyNode,
-        conductivityTesterNode,
+        toolsParent,
         beakerNode,
         reactionEquationNode,
         particlesNode,
