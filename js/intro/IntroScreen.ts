@@ -23,7 +23,11 @@ export default class IntroScreen extends Screen<IntroModel, IntroScreenView> {
   public constructor( tandem: Tandem ) {
 
     const options: ScreenOptions = {
-      name: AcidBaseSolutionsStrings.screen.introStringProperty,
+
+      // In https://github.com/phetsims/acid-base-solutions/issues/218, we decided to rename this screen to 'Intro'
+      // for consistency with other PhET sims. We also decided to change only the English string value, and not
+      // the string key, due to the hassles involved in changing string keys.
+      name: AcidBaseSolutionsStrings.screen.introductionStringProperty,
       backgroundColorProperty: ABSColors.screenBackgroundColorProperty,
       homeScreenIcon: createScreenIcon(),
       createKeyboardHelpNode: () => new IntroKeyboardHelpContent(),

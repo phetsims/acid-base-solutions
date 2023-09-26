@@ -31,7 +31,7 @@
     },
     "published": true,
     "screenNameKeys": [
-      "ACID_BASE_SOLUTIONS/screen.intro",
+      "ACID_BASE_SOLUTIONS/screen.introduction",
       "ACID_BASE_SOLUTIONS/screen.mySolution"
     ]
   },
