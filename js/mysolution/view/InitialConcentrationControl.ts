@@ -33,8 +33,8 @@ export default class InitialConcentrationControl extends VBox {
 
     const spinner = new NumberSpinner( concentrationProperty, concentrationProperty.rangeProperty, {
       deltaValue: DELTA_CONCENTRATION,
-      incrementFunction: value => Math.min( Utils.toFixedNumber( value + DELTA_CONCENTRATION, CONCENTRATION_DECIMALS ), concentrationProperty.rangeProperty.value.max ),
-      decrementFunction: value => Math.max( Utils.toFixedNumber( value - DELTA_CONCENTRATION, CONCENTRATION_DECIMALS ), concentrationProperty.rangeProperty.value.min ),
+      incrementFunction: value => Utils.toFixedNumber( value + DELTA_CONCENTRATION, CONCENTRATION_DECIMALS ),
+      decrementFunction: value => Utils.toFixedNumber( value - DELTA_CONCENTRATION, CONCENTRATION_DECIMALS ),
       arrowsPosition: 'leftRight',
       xSpacing: 8,
       numberDisplayOptions: {
