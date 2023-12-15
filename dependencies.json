@@ -1,7 +1,7 @@
 {
   "comment": "# acid-base-solutions 1.3.1 Mon Dec 11 2023 16:25:56 GMT-0700 (Mountain Standard Time)",
   "acid-base-solutions": {
-    "sha": "386a3808fa42de3e9a87daf6b8ab50abc92e901e",
+    "sha": "bc3808a1baff225348777e75d67624424f71edb8",
     "branch": "1.3"
   },
   "assert": {
@@ -41,7 +41,7 @@
     "branch": "HEAD"
   },
   "phet-io": {
-    "sha": "85d149df73ebd608475f9b892ae9b02fc8b26af3",
+    "sha": "aced59dcdf5ffb8f7d7290942cf860db380b45ff",
     "branch": "HEAD"
   },
   "phet-io-sim-specific": {
