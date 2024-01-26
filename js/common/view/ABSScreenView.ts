@@ -148,7 +148,7 @@ export default class ABSScreenView extends ScreenView {
     } );
     this.addChild( screenViewRootNode );
 
-    // pdom - traversal order. Set this explicitly. Do not rely on the default order of the scenegraph.
+    // pdom - traversal order. Set this explicitly. Do not rely on the default order of the scene graph.
     screenViewRootNode.pdomOrder = [
       pHMeterNode,
       pHPaperAndColorKeyNode,
