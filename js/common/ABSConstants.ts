@@ -40,8 +40,8 @@ const AB_SWITCH_OPTIONS: StrictOmit<ABSwitchOptions, 'tandem'> = {
 };
 
 const KEYBOARD_DRAG_LISTENER_OPTIONS: KeyboardDragListenerOptions = {
-  dragVelocity: 300, // velocity of the Node being dragged, in view coordinates per second
-  shiftDragVelocity: 20 // velocity with the Shift key pressed, typically slower than dragVelocity
+  dragSpeed: 300, //  drag speed, in view coordinates per second
+  shiftDragSpeed: 20 // slow drag speed
 };
 
 const PANEL_OPTIONS: PanelOptions = {
