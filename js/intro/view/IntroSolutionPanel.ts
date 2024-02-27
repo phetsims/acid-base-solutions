@@ -20,7 +20,6 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import { ParticleKey } from '../../common/model/solutions/Particle.js';
 import createParticleNode from '../../common/view/createParticleNode.js';
-import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import AqueousSolution from '../../common/model/solutions/AqueousSolution.js';
 import IntroModel from '../model/IntroModel.js';
@@ -52,7 +51,7 @@ export default class IntroSolutionPanel extends Panel {
         value: model.water,
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.waterStringProperty,
           'H<sub>2</sub>O', 'H2O', labelsAlignGroup, tandem ),
-        tandemName: `water${AquaRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'waterRadioButton'
       },
 
       // Strong Acid (HA)
@@ -60,7 +59,7 @@ export default class IntroSolutionPanel extends Panel {
         value: model.strongAcid,
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.strongAcidStringProperty,
           'H<i>A</i>', 'HA', labelsAlignGroup, tandem ),
-        tandemName: `strongAcid${AquaRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'strongAcidRadioButton'
       },
 
       // Weak Acid (HA)
@@ -68,7 +67,7 @@ export default class IntroSolutionPanel extends Panel {
         value: model.weakAcid,
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.weakAcidStringProperty,
           'H<i>A</i>', 'HA', labelsAlignGroup, tandem ),
-        tandemName: `weakAcid${AquaRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'weakAcidRadioButton'
       },
 
       // Strong Base (M)
@@ -76,7 +75,7 @@ export default class IntroSolutionPanel extends Panel {
         value: model.strongBase,
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.strongBaseStringProperty,
           '<i>M</i>OH', 'MOH', labelsAlignGroup, tandem ),
-        tandemName: `strongBase${AquaRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'strongBaseRadioButton'
       },
 
       // Weak Base (B)
@@ -84,7 +83,7 @@ export default class IntroSolutionPanel extends Panel {
         value: model.weakBase,
         createNode: ( tandem: Tandem ) => createRadioButtonLabel( AcidBaseSolutionsStrings.weakBaseStringProperty,
           '<i>B</i>', 'B', labelsAlignGroup, tandem ),
-        tandemName: `weakBase${AquaRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'weakBaseRadioButton'
       }
     ];
 
