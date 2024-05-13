@@ -1,7 +1,7 @@
 {
-  "comment": "# acid-base-solutions 1.4.0-dev.5 Fri May 10 2024 18:09:39 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# acid-base-solutions 1.4.0-dev.6 Mon May 13 2024 09:06:10 GMT-0600 (Mountain Daylight Time)",
   "acid-base-solutions": {
-    "sha": "09b687cdcdb7982cc35351d1f9604800145a8b77",
+    "sha": "404a1be1332b043a516d9a03eb17eae13940b500",
     "branch": "main"
   },
   "assert": {
@@ -17,7 +17,7 @@
     "branch": "main"
   },
   "chipper": {
-    "sha": "c16eff4a12882134f58386840fc3ca7d486bfbf1",
+    "sha": "2b22e9042fe588bf3dfbbaeba39c92a8377c5aa4",
     "branch": "main"
   },
   "dot": {
@@ -25,7 +25,7 @@
     "branch": "main"
   },
   "joist": {
-    "sha": "2e20f25cdb7344a181ea56317ac10c1d4f4882c5",
+    "sha": "f2cbaf15aa8e5b3a682f5a9caecca0c13337289e",
     "branch": "main"
   },
   "kite": {
