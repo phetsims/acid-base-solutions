@@ -1,11 +1,11 @@
 {
-  "comment": "# acid-base-solutions 1.4.0-dev.6 Mon May 13 2024 09:06:10 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# acid-base-solutions 1.4.0-dev.7 Tue May 14 2024 16:09:04 GMT-0600 (Mountain Daylight Time)",
   "acid-base-solutions": {
-    "sha": "404a1be1332b043a516d9a03eb17eae13940b500",
+    "sha": "165f5fb3ead7414de5fa5e52250a7653f72b5e33",
     "branch": "main"
   },
   "assert": {
-    "sha": "9c7053e4ea4c05d1267b93aedf5f2ca1039a8853",
+    "sha": "a5da36df71b6f137331aa10897a685d88ddcbcff",
     "branch": "main"
   },
   "axon": {
@@ -17,7 +17,7 @@
     "branch": "main"
   },
   "chipper": {
-    "sha": "2b22e9042fe588bf3dfbbaeba39c92a8377c5aa4",
+    "sha": "83461d239bd723877b955297edfca208318e0ee9",
     "branch": "main"
   },
   "dot": {
@@ -33,23 +33,23 @@
     "branch": "main"
   },
   "perennial-alias": {
-    "sha": "01bd5aaa764af93570c78b563d5767eb1bf28328",
+    "sha": "d7d047d92f8788d34bf1e0f694c090fdfbfd070b",
     "branch": "main"
   },
   "phet-core": {
-    "sha": "c419719d49d127fd0f9d32d58a2b79761a6caddf",
+    "sha": "61088067db9a12024a9cd8652bf11b222b9da6a6",
     "branch": "main"
   },
   "phet-io": {
-    "sha": "f2f620fb6f958ac3e7c504355b7c7d1dd2652795",
+    "sha": "fdeff5fb66fe47e9ca7060749b7c6cfd91781804",
     "branch": "main"
   },
   "phet-io-sim-specific": {
-    "sha": "949798923497e8dc4921297572c32b968cf0fdcb",
+    "sha": "6aa0d175c98bb64718109c6b69d414333baee86e",
     "branch": "main"
   },
   "phet-io-wrappers": {
-    "sha": "8ceeda10749b1a7fd61fc9002aea90ad6cc88457",
+    "sha": "5df323761a319d12a003e77d397a9ef7d6e0c097",
     "branch": "main"
   },
   "phetcommon": {
@@ -85,11 +85,11 @@
     "branch": "main"
   },
   "tambo": {
-    "sha": "eb97b4efe7107a43857758d40489db8f3c2dd251",
+    "sha": "92b6cd6901f3ed99d89b8dff165aa8002028e31b",
     "branch": "main"
   },
   "tandem": {
-    "sha": "a444e3f516f4c52eea41f71d87e4051450fa1c1c",
+    "sha": "27c3e2c9daa7165780d04465016c2e898a96c192",
     "branch": "main"
   },
   "twixt": {
@@ -97,7 +97,7 @@
     "branch": "main"
   },
   "utterance-queue": {
-    "sha": "a2b10eeee306478c4975d8935dd502d5572d9060",
+    "sha": "74ccd579a38c283771ba595a0fb7f2edb659a8a6",
     "branch": "main"
   }
 }
