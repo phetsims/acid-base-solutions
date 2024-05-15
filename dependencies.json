@@ -1,7 +1,7 @@
 {
   "comment": "# acid-base-solutions 1.3.5 Tue Apr 02 2024 21:05:16 GMT-0600 (Mountain Daylight Time)",
   "acid-base-solutions": {
-    "sha": "bb57b745654d77edb00231f437b1acb48f1de7f5",
+    "sha": "11a1d6a0f0e8128128e06af75f7b3525dd397304",
     "branch": "1.3"
   },
   "assert": {
@@ -17,7 +17,7 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "3b92b577a3223e8714df035b717a75f6f3ff1ba0",
+    "sha": "a0c001f708423eb72f08688285c6bfe71e60c307",
     "branch": "HEAD"
   },
   "dot": {
