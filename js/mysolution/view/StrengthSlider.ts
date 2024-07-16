@@ -56,10 +56,6 @@ export default class StrengthSlider extends LogSlider {
     // tick marks
     this.addMajorTick( strengthRange.min, new Text( AcidBaseSolutionsStrings.weakerStringProperty, TICK_LABEL_OPTIONS ) );
     this.addMajorTick( strengthRange.max, new Text( AcidBaseSolutionsStrings.strongerStringProperty, TICK_LABEL_OPTIONS ) );
-
-    // If the slider's visibility changes, interrupt interaction.
-    // See https://github.com/phetsims/acid-base-solutions/issues/242
-    this.visibleProperty.link( () => this.interruptSubtreeInput() );
   }
 }
 
