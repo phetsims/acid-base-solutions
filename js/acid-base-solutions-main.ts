@@ -7,14 +7,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import PreferencesModel from '../../joist/js/preferences/PreferencesModel.js';
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import AcidBaseSolutionsStrings from './AcidBaseSolutionsStrings.js';
+import ABSPreferencesNode from './common/view/ABSPreferencesNode.js';
 import IntroScreen from './intro/IntroScreen.js';
 import MySolutionScreen from './mysolution/MySolutionScreen.js';
-import PreferencesModel from '../../joist/js/preferences/PreferencesModel.js';
-import ABSPreferencesNode from './common/view/ABSPreferencesNode.js';
 
 simLauncher.launch( () => {
 
