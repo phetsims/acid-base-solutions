@@ -8,6 +8,7 @@
   ],
   "references": [
     {
+      // TODO: Add the *.json suffix on all these paths to improve navigation, see https://github.com/phetsims/chipper/issues/1463
       "path": "../chipper/tsconfig/buildjson"
     }
   ]
