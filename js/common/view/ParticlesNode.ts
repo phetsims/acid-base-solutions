@@ -8,20 +8,20 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import { Circle, Image, Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import solvent_png from '../../../images/solvent_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import ParticlesCanvasNode from './ParticlesCanvasNode.js';
-import { ViewMode } from './ViewMode.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import ABSColors from '../ABSColors.js';
+import ABSPreferences from '../model/ABSPreferences.js';
 import Beaker from '../model/Beaker.js';
 import AqueousSolution from '../model/solutions/AqueousSolution.js';
-import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
-import ABSPreferences from '../model/ABSPreferences.js';
+import ParticlesCanvasNode from './ParticlesCanvasNode.js';
+import { ViewMode } from './ViewMode.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging

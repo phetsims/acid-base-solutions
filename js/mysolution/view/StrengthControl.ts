@@ -7,13 +7,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import { Text, VBox } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
-import StrengthSlider from './StrengthSlider.js';
 import ABSConstants from '../../common/ABSConstants.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import Property from '../../../../axon/js/Property.js';
+import StrengthSlider from './StrengthSlider.js';
 import WeakStrongSwitch from './WeakStrongSwitch.js';
 
 export default class StrengthControl extends VBox {

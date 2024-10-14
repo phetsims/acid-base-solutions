@@ -7,20 +7,20 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, HStrut, Node, Path, RichText, VBox, VStrut } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
-import createParticleNode from './createParticleNode.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import AqueousSolution from '../model/solutions/AqueousSolution.js';
-import Water from '../model/solutions/Water.js';
 import StrongAcid from '../model/solutions/StrongAcid.js';
-import WeakAcid from '../model/solutions/WeakAcid.js';
 import StrongBase from '../model/solutions/StrongBase.js';
+import Water from '../model/solutions/Water.js';
+import WeakAcid from '../model/solutions/WeakAcid.js';
 import WeakBase from '../model/solutions/WeakBase.js';
+import createParticleNode from './createParticleNode.js';
 
 // constants
 const EQUATION_SCALE = 1.5; // applied to all equations, see https://github.com/phetsims/acid-base-solutions/issues/88

@@ -6,16 +6,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import ConductivityTesterNode from '../../../../scenery-phet/js/ConductivityTesterNode.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
+import ABSConstants from '../ABSConstants.js';
 import ConductivityTester from '../model/ConductivityTester.js';
 import { ToolMode } from './ToolMode.js';
-import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import ABSConstants from '../ABSConstants.js';
 
 export default class ABSConductivityTesterNode extends ConductivityTesterNode {
 

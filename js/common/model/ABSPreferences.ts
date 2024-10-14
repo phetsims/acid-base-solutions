@@ -7,10 +7,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import ABSQueryParameters from '../ABSQueryParameters.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import acidBaseSolutions from '../../acidBaseSolutions.js';
+import ABSQueryParameters from '../ABSQueryParameters.js';
 
 const ABSPreferences = {
 

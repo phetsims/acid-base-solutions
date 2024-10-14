@@ -7,16 +7,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Utils from '../../../../dot/js/Utils.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text, VBox } from '../../../../scenery/js/imports.js';
+import NumberSpinner from '../../../../sun/js/NumberSpinner.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import NumberSpinner from '../../../../sun/js/NumberSpinner.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import InitialConcentrationSlider from './InitialConcentrationSlider.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Utils from '../../../../dot/js/Utils.js';
 
 const CONCENTRATION_DECIMALS = 3;
 const DELTA_CONCENTRATION = Math.pow( 10, -CONCENTRATION_DECIMALS );

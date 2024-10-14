@@ -6,16 +6,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import PreferencesControl from '../../../../joist/js/preferences/PreferencesControl.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import Property from '../../../../axon/js/Property.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import ABSConstants from '../ABSConstants.js';
-import ToggleSwitch, { ToggleSwitchOptions } from '../../../../sun/js/ToggleSwitch.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import PreferencesControl from '../../../../joist/js/preferences/PreferencesControl.js';
 import PreferencesDialogConstants from '../../../../joist/js/preferences/PreferencesDialogConstants.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import { Text } from '../../../../scenery/js/imports.js';
+import ToggleSwitch, { ToggleSwitchOptions } from '../../../../sun/js/ToggleSwitch.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
+import ABSConstants from '../ABSConstants.js';
 
 export default class ShowSolventControl extends PreferencesControl {
 

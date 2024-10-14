@@ -8,8 +8,8 @@
 
 import PhetColorScheme from '../../../scenery-phet/js/PhetColorScheme.js';
 import { ProfileColorProperty } from '../../../scenery/js/imports.js';
-import acidBaseSolutions from '../acidBaseSolutions.js';
 import Tandem from '../../../tandem/js/Tandem.js';
+import acidBaseSolutions from '../acidBaseSolutions.js';
 
 // constants
 const GRAY_PARTICLE = 'rgb( 120, 120, 120 )';

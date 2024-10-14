@@ -8,23 +8,23 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import { Shape } from '../../../../kite/js/imports.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Circle, DragListener, InteractiveHighlighting, KeyboardDragListener, KeyboardDragListenerOptions, Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
+import ABSColors from '../ABSColors.js';
+import ABSConstants from '../ABSConstants.js';
 import PHMeter from '../model/PHMeter.js';
 import { ToolMode } from './ToolMode.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
-import ABSColors from '../ABSColors.js';
-import Property from '../../../../axon/js/Property.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import ABSConstants from '../ABSConstants.js';
 
 // constants
 const SHOW_ORIGIN = false; // draws a red circle at the origin, for debugging

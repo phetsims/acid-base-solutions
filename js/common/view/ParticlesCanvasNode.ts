@@ -6,18 +6,18 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
 import { CanvasNode } from '../../../../scenery/js/imports.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
-import createParticleNode from './createParticleNode.js';
-import Bounds2 from '../../../../dot/js/Bounds2.js';
-import { ParticleKey } from '../model/solutions/Particle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AqueousSolution from '../model/solutions/AqueousSolution.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import Property from '../../../../axon/js/Property.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import { ParticleKey } from '../model/solutions/Particle.js';
+import createParticleNode from './createParticleNode.js';
 
 // constants
 const BASE_CONCENTRATION = 1E-7; // [H3O+] and [OH-] in pure water, value chosen so that pure water shows some particles

@@ -6,14 +6,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import { AlignBox, AlignGroup, Text, TextOptions } from '../../../../scenery/js/imports.js';
 import ABSwitch, { ABSwitchOptions } from '../../../../sun/js/ABSwitch.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
-import Property from '../../../../axon/js/Property.js';
-import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import ABSConstants from '../../common/ABSConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import acidBaseSolutions from '../../acidBaseSolutions.js';
+import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
+import ABSConstants from '../../common/ABSConstants.js';
 
 export default class WeakStrongSwitch extends ABSwitch<boolean> {
 

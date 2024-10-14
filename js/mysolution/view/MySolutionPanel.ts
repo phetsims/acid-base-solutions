@@ -8,19 +8,19 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import { HSeparator, Text, VBox } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
-import Property from '../../../../axon/js/Property.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import MySolutionModel from '../model/MySolutionModel.js';
+import AcidBaseSwitch from './AcidBaseSwitch.js';
 import InitialConcentrationControl from './InitialConcentrationControl.js';
 import StrengthControl from './StrengthControl.js';
-import AcidBaseSwitch from './AcidBaseSwitch.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import MySolutionModel from '../model/MySolutionModel.js';
 
 export default class MySolutionPanel extends Panel {
 

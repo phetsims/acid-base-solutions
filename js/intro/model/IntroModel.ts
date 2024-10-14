@@ -7,16 +7,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSModel from '../../common/model/ABSModel.js';
+import AqueousSolution from '../../common/model/solutions/AqueousSolution.js';
 import StrongAcid from '../../common/model/solutions/StrongAcid.js';
 import StrongBase from '../../common/model/solutions/StrongBase.js';
 import Water from '../../common/model/solutions/Water.js';
 import WeakAcid from '../../common/model/solutions/WeakAcid.js';
 import WeakBase from '../../common/model/solutions/WeakBase.js';
-import Property from '../../../../axon/js/Property.js';
-import AqueousSolution from '../../common/model/solutions/AqueousSolution.js';
 
 export default class IntroModel extends ABSModel {
 

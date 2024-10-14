@@ -16,19 +16,19 @@ import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../../axon/js/NumberProperty.js';
 import Property from '../../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
-import Utils from '../../../../../dot/js/Utils.js';
-import NumberIO from '../../../../../tandem/js/types/NumberIO.js';
-import acidBaseSolutions from '../../../acidBaseSolutions.js';
-import { Particle, ParticleKey } from './Particle.js';
-import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
-import PhetioObject, { PhetioObjectOptions } from '../../../../../tandem/js/PhetioObject.js';
-import ABSConstants from '../../ABSConstants.js';
 import RangeWithValue from '../../../../../dot/js/RangeWithValue.js';
-import IOType from '../../../../../tandem/js/types/IOType.js';
-import ReferenceIO, { ReferenceIOState } from '../../../../../tandem/js/types/ReferenceIO.js';
+import Utils from '../../../../../dot/js/Utils.js';
 import optionize from '../../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
+import IOType from '../../../../../tandem/js/types/IOType.js';
+import NumberIO from '../../../../../tandem/js/types/NumberIO.js';
+import ReferenceIO, { ReferenceIOState } from '../../../../../tandem/js/types/ReferenceIO.js';
+import acidBaseSolutions from '../../../acidBaseSolutions.js';
+import ABSConstants from '../../ABSConstants.js';
+import { Particle, ParticleKey } from './Particle.js';
 
 type SelfOptions = {
   strengthRange: RangeWithValue; // the strength of the solute, with an initial value, unitless

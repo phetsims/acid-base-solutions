@@ -15,8 +15,8 @@ import AcidBaseSolutionsStrings from '../AcidBaseSolutionsStrings.js';
 import ABSColors from '../common/ABSColors.js';
 import createParticleNode from '../common/view/createParticleNode.js';
 import MySolutionModel from './model/MySolutionModel.js';
-import MySolutionScreenView from './view/MySolutionScreenView.js';
 import MySolutionKeyboardHelpContent from './view/MySolutionKeyboardHelpContent.js';
+import MySolutionScreenView from './view/MySolutionScreenView.js';
 
 export default class MySolutionScreen extends Screen<MySolutionModel, MySolutionScreenView> {
 

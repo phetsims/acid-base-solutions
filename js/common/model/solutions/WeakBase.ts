@@ -7,13 +7,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import acidBaseSolutions from '../../../acidBaseSolutions.js';
-import ABSConstants from '../../ABSConstants.js';
-import AqueousSolution, { AqueousSolutionOptions } from './AqueousSolution.js';
-import ABSColors from '../../ABSColors.js';
-import { Particle } from './Particle.js';
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../../phet-core/js/types/StrictOmit.js';
+import acidBaseSolutions from '../../../acidBaseSolutions.js';
+import ABSColors from '../../ABSColors.js';
+import ABSConstants from '../../ABSConstants.js';
+import AqueousSolution, { AqueousSolutionOptions } from './AqueousSolution.js';
+import { Particle } from './Particle.js';
 
 type SelfOptions = EmptySelfOptions;
 type WeakBaseOptions = SelfOptions & StrictOmit<AqueousSolutionOptions, 'strengthRange' | 'concentrationRange'>;

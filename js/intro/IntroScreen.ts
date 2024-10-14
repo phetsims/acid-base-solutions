@@ -15,8 +15,8 @@ import acidBaseSolutions from '../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../AcidBaseSolutionsStrings.js';
 import ABSColors from '../common/ABSColors.js';
 import IntroModel from './model/IntroModel.js';
-import IntroScreenView from './view/IntroScreenView.js';
 import IntroKeyboardHelpContent from './view/IntroKeyboardHelpContent.js';
+import IntroScreenView from './view/IntroScreenView.js';
 
 export default class IntroScreen extends Screen<IntroModel, IntroScreenView> {
 

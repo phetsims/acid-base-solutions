@@ -13,8 +13,8 @@ import PlusNode from '../../../../scenery-phet/js/PlusNode.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
-import AtomNode from './AtomNode.js';
 import { ParticleKey } from '../model/solutions/Particle.js';
+import AtomNode from './AtomNode.js';
 
 // Signature of all creation functions herein
 type CreationFunction = () => Node;

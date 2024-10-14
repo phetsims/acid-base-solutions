@@ -8,23 +8,23 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Multilink from '../../../../axon/js/Multilink.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { HBox, Line, Node, Rectangle, RichText, Text } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
+import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSColors from '../ABSColors.js';
+import Beaker from '../model/Beaker.js';
+import AqueousSolution from '../model/solutions/AqueousSolution.js';
+import { ParticleKey } from '../model/solutions/Particle.js';
 import ConcentrationBarNode from './ConcentrationBarNode.js';
 import { ViewMode } from './ViewMode.js';
-import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
-import Multilink from '../../../../axon/js/Multilink.js';
-import { ParticleKey } from '../model/solutions/Particle.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import AqueousSolution from '../model/solutions/AqueousSolution.js';
-import Beaker from '../model/Beaker.js';
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 
 const TICK_LABEL_FONT = new PhetFont( 11 );
 
@@ -39,7 +39,7 @@ export default class ConcentrationGraphNode extends Node {
     const graphWidth = 0.5 * beaker.size.width;
     const graphHeight = 0.9 * beaker.size.height;
     const graphPosition = beaker.position.plusXY( ( graphWidth - beaker.size.width ) / 2, -( beaker.size.height + graphHeight ) / 2 );
-    
+
     const backgroundFillNode = new Rectangle( 0, 0, graphWidth, graphHeight, {
       fill: ABSColors.graphFillProperty
     } );

@@ -8,13 +8,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Node } from '../../../../scenery/js/imports.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
-import ReactionEquationFactory from './ReactionEquationFactory.js';
-import Beaker from '../model/Beaker.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import AqueousSolution from '../model/solutions/AqueousSolution.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
+import { Node } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import acidBaseSolutions from '../../acidBaseSolutions.js';
+import Beaker from '../model/Beaker.js';
+import AqueousSolution from '../model/solutions/AqueousSolution.js';
+import ReactionEquationFactory from './ReactionEquationFactory.js';
 
 export default class ReactionEquationNode extends Node {
 

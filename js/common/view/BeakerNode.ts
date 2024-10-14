@@ -17,8 +17,8 @@ import { Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
-import Beaker from '../model/Beaker.js';
 import ABSColors from '../ABSColors.js';
+import Beaker from '../model/Beaker.js';
 
 // constants
 const MAJOR_TICK_LENGTH = 25;

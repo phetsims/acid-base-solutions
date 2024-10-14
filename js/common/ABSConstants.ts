@@ -10,14 +10,14 @@
 import Dimension2 from '../../../dot/js/Dimension2.js';
 import Range from '../../../dot/js/Range.js';
 import RangeWithValue from '../../../dot/js/RangeWithValue.js';
+import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
+import { KeyboardDragListenerOptions } from '../../../scenery/js/imports.js';
+import { ABSwitchOptions } from '../../../sun/js/ABSwitch.js';
 import { PanelOptions } from '../../../sun/js/Panel.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
 import ABSColors from './ABSColors.js';
-import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
-import { ABSwitchOptions } from '../../../sun/js/ABSwitch.js';
-import { KeyboardDragListenerOptions } from '../../../scenery/js/imports.js';
-import Tandem from '../../../tandem/js/Tandem.js';
 
 const WEAK_STRENGTH_MAX = 1E2;
 

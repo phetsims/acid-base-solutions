@@ -7,20 +7,20 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
+import ABSConstants from '../../common/ABSConstants.js';
 import ABSModel from '../../common/model/ABSModel.js';
+import AqueousSolution, { AqueousSolutionOptions } from '../../common/model/solutions/AqueousSolution.js';
 import StrongAcid from '../../common/model/solutions/StrongAcid.js';
 import StrongBase from '../../common/model/solutions/StrongBase.js';
 import WeakAcid from '../../common/model/solutions/WeakAcid.js';
 import WeakBase from '../../common/model/solutions/WeakBase.js';
-import ABSConstants from '../../common/ABSConstants.js';
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import AqueousSolution, { AqueousSolutionOptions } from '../../common/model/solutions/AqueousSolution.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
 
 export default class MySolutionModel extends ABSModel {
 

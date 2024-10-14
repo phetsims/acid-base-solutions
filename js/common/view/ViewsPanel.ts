@@ -13,20 +13,20 @@
  */
 
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { HBox, Image, Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import AquaRadioButtonGroup, { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import magnifyingGlassIcon_png from '../../../images/magnifyingGlassIcon_png.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../ABSConstants.js';
-import { ViewMode } from './ViewMode.js';
-import ConcentrationGraphNode from './ConcentrationGraphNode.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import BeakerNode from './BeakerNode.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import AquaRadioButtonGroup, { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
+import ConcentrationGraphNode from './ConcentrationGraphNode.js';
+import { ViewMode } from './ViewMode.js';
 
 // constants
 const LABEL_FONT = new PhetFont( 12 );

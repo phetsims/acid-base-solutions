@@ -23,9 +23,9 @@ import ParticlesNode from './ParticlesNode.js';
 import PHColorKeyNode from './PHColorKeyNode.js';
 import PHMeterNode from './PHMeterNode.js';
 import PHPaperNode from './PHPaperNode.js';
+import ReactionEquationNode from './ReactionEquationNode.js';
 import ToolsRadioButtonGroup from './ToolsRadioButtonGroup.js';
 import ViewsPanel from './ViewsPanel.js';
-import ReactionEquationNode from './ReactionEquationNode.js';
 
 export default class ABSScreenView extends ScreenView {
 
