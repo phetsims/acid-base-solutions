@@ -1,4 +1,4 @@
-// Copyright 2014-2023, University of Colorado Boulder
+// Copyright 2014-2024, University of Colorado Boulder
 
 /**
  * ConcentrationBarNode is a bar in the 'Equilibrium Concentration' graph.

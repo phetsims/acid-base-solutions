@@ -1,4 +1,4 @@
-// Copyright 2014-2023, University of Colorado Boulder
+// Copyright 2014-2024, University of Colorado Boulder
 
 /**
  * ViewsPanel is the panel titled 'Views', for selecting between a set of mutually-exclusive representations of the

@@ -1,4 +1,4 @@
-// Copyright 2014-2023, University of Colorado Boulder
+// Copyright 2014-2024, University of Colorado Boulder
 
 /**
  * PHPaperNode is the view of pH paper. Origin is at the bottom-center of the paper.

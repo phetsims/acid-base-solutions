@@ -1,4 +1,4 @@
-// Copyright 2023, University of Colorado Boulder
+// Copyright 2023-2024, University of Colorado Boulder
 
 /**
  * WeakStrongSwitch is the ABSwitch that switches the solution between 'Weak' and 'Strong'.

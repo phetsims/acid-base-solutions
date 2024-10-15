@@ -1,4 +1,4 @@
-// Copyright 2014-2023, University of Colorado Boulder
+// Copyright 2014-2024, University of Colorado Boulder
 
 /**
  * ConcentrationGraphNode is the graph of 'Equilibrium Concentration' for each particle species.
