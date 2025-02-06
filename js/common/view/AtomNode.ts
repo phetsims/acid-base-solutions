@@ -8,7 +8,10 @@
 
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import { Circle, CircleOptions, RadialGradient, TColor } from '../../../../scenery/js/imports.js';
+import Circle from '../../../../scenery/js/nodes/Circle.js';
+import { CircleOptions } from '../../../../scenery/js/nodes/Circle.js';
+import RadialGradient from '../../../../scenery/js/util/RadialGradient.js';
+import TColor from '../../../../scenery/js/util/TColor.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 
 type SelfOptions = EmptySelfOptions;

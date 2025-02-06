@@ -8,7 +8,10 @@
 
 import Property from '../../../../axon/js/Property.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import { AlignBox, AlignGroup, Text, TextOptions } from '../../../../scenery/js/imports.js';
+import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
+import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import { TextOptions } from '../../../../scenery/js/nodes/Text.js';
 import ABSwitch, { ABSwitchOptions } from '../../../../sun/js/ABSwitch.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';

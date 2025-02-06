@@ -12,7 +12,7 @@ import Range from '../../../dot/js/Range.js';
 import RangeWithValue from '../../../dot/js/RangeWithValue.js';
 import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
-import { KeyboardDragListenerOptions } from '../../../scenery/js/imports.js';
+import { KeyboardDragListenerOptions } from '../../../scenery/js/listeners/KeyboardDragListener.js';
 import { ABSwitchOptions } from '../../../sun/js/ABSwitch.js';
 import { PanelOptions } from '../../../sun/js/Panel.js';
 import Tandem from '../../../tandem/js/Tandem.js';

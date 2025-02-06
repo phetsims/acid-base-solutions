@@ -8,7 +8,7 @@
  */
 
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import { Image } from '../../../../scenery/js/imports.js';
+import Image from '../../../../scenery/js/nodes/Image.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupItem } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import lightBulbIcon_png from '../../../images/lightBulbIcon_png.js';

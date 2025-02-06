@@ -9,7 +9,7 @@
  */
 
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import Beaker from '../model/Beaker.js';
