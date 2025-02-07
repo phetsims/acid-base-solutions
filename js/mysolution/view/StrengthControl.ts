@@ -8,8 +8,8 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
