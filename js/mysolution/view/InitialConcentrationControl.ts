@@ -1,4 +1,4 @@
-// Copyright 2022-2024, University of Colorado Boulder
+// Copyright 2022-2025, University of Colorado Boulder
 
 /**
  * InitialConcentrationControl is the control for 'Initial Concentration' used in MySolutionPanel.

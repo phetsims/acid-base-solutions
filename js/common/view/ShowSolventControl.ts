@@ -1,4 +1,4 @@
-// Copyright 2023-2024, University of Colorado Boulder
+// Copyright 2023-2025, University of Colorado Boulder
 
 /**
  * ShowSolventControl is the control in the Preferences dialog for showing the solvent in the Particles view.

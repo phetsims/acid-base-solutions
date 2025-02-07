@@ -1,4 +1,4 @@
-// Copyright 2020-2024, University of Colorado Boulder
+// Copyright 2020-2025, University of Colorado Boulder
 
 /**
  * ParticlesCanvasNode uses a canvas to draw the particles that appear in the magnifying glass.

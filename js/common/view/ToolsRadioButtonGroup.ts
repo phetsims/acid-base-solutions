@@ -1,4 +1,4 @@
-// Copyright 2014-2024, University of Colorado Boulder
+// Copyright 2014-2025, University of Colorado Boulder
 
 /**
  * ToolsRadioButtonGroup is a group of radio buttons for selecting between a set of mutually-exclusive tools.

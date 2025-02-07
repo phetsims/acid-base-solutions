@@ -1,4 +1,4 @@
-// Copyright 2022-2024, University of Colorado Boulder
+// Copyright 2022-2025, University of Colorado Boulder
 
 /**
  * LogSlider takes a logarithmic model Property, and adapts it to a linear Property as required by Slider.
