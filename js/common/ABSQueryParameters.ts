@@ -11,7 +11,7 @@ import logGlobal from '../../../phet-core/js/logGlobal.js';
 import { QueryStringMachine } from '../../../query-string-machine/js/QueryStringMachineModule.js';
 import acidBaseSolutions from '../acidBaseSolutions.js';
 
-const SCHEMA_MAP = {
+const ABSQueryParameters = QueryStringMachine.getAll( {
 
   // When true, the solvent is shown in the 'Particles' view
   showSolvent: {
@@ -19,10 +19,7 @@ const SCHEMA_MAP = {
     defaultValue: false,
     public: true
   }
-} as const;
-
-const ABSQueryParameters = QueryStringMachine.getAll( SCHEMA_MAP );
-ABSQueryParameters.SCHEMA_MAP = SCHEMA_MAP;
+} );
 
 acidBaseSolutions.register( 'ABSQueryParameters', ABSQueryParameters );
 
