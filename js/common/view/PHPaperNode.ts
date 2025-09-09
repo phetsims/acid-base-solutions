@@ -12,11 +12,12 @@ import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
 import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import KeyboardDragListener, { KeyboardDragListenerOptions } from '../../../../scenery/js/listeners/KeyboardDragListener.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
@@ -65,7 +66,7 @@ export default class PHPaperNode extends InteractiveHighlighting( Node ) {
       children.push( new Circle( 2, { fill: 'red' } ) );
     }
 
-    super( {
+    super( combineOptions<NodeOptions>( {
       children: children,
       cursor: 'pointer',
       visibleProperty: new DerivedProperty( [ toolModeProperty ], toolMode => ( toolMode === 'pHPaper' ), {
@@ -74,11 +75,9 @@ export default class PHPaperNode extends InteractiveHighlighting( Node ) {
       } ),
       phetioInputEnabledPropertyInstrumented: true,
       isDisposable: false,
-      tagName: 'div',
-      focusable: true,
       tandem: tandem,
       phetioFeatured: true
-    } );
+    }, AccessibleDraggableOptions ) );
 
     // expand touch area
     this.touchArea = this.localBounds.dilatedXY( 10, 10 );

@@ -15,12 +15,13 @@ import Utils from '../../../../dot/js/Utils.js';
 import Shape from '../../../../kite/js/Shape.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import KeyboardDragListener, { KeyboardDragListenerOptions } from '../../../../scenery/js/listeners/KeyboardDragListener.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
@@ -90,7 +91,7 @@ export default class PHMeterNode extends InteractiveHighlighting( Node ) {
       children.push( new Circle( 2, { fill: 'red' } ) );
     }
 
-    super( {
+    super( combineOptions<NodeOptions>( {
       children: children,
       cursor: 'pointer',
       visibleProperty: new DerivedProperty( [ toolModeProperty ], toolMode => ( toolMode === 'pHMeter' ), {
@@ -99,11 +100,9 @@ export default class PHMeterNode extends InteractiveHighlighting( Node ) {
       } ),
       phetioInputEnabledPropertyInstrumented: true,
       isDisposable: false,
-      tagName: 'div',
-      focusable: true,
       tandem: tandem,
       phetioFeatured: true
-    } );
+    }, AccessibleDraggableOptions ) );
 
     this.addInputListener( new DragListener( {
       positionProperty: pHMeter.positionProperty,
