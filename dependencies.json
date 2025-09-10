@@ -1,7 +1,7 @@
 {
   "comment": "# acid-base-solutions 1.3.11 Tue Jun 10 2025 10:21:14 GMT-0600 (Mountain Daylight Time)",
   "acid-base-solutions": {
-    "sha": "d25a276fe35a89ef1fe9f9eff26a067f9293f6cc",
+    "sha": "6a3fadc12d043bcf6fa874d6f3a3ec42403aeb3b",
     "branch": "1.3"
   },
   "assert": {
@@ -69,7 +69,7 @@
     "branch": "HEAD"
   },
   "scenery-phet": {
-    "sha": "445535ed61740303a929f1aba127fdb7a6e66326",
+    "sha": "926f99e5b9c5bb8b160d2d726781f4fe7d5e0b81",
     "branch": "HEAD"
   },
   "sherpa": {
