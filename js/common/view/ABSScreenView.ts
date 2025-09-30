@@ -56,7 +56,6 @@ export default class ABSScreenView extends ScreenView {
     // Reset All button
     const resetAllButton = new ResetAllButton( {
       listener: () => {
-        this.interruptSubtreeInput(); // interrupt any interaction that is in progress
         model.reset();
         this.viewProperties.reset();
       },
