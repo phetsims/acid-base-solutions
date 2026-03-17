@@ -1,7 +1,7 @@
 {
   "comment": "# acid-base-solutions 1.3.13 Fri Feb 06 2026 13:12:14 GMT-0500 (Eastern Standard Time)",
   "acid-base-solutions": {
-    "sha": "52c1a44e34968d7b635a41ea81442ae813604bf4",
+    "sha": "a31ea2c084fcb363fec9a858932a0ac469666e28",
     "branch": "1.3"
   },
   "assert": {
@@ -17,7 +17,7 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "69f371ac6502ab0848517a6d33180ff3183847e1",
+    "sha": "a873a7234f429c19139cd2295a019979eb0dd706",
     "branch": "HEAD"
   },
   "dot": {
@@ -33,7 +33,7 @@
     "branch": "HEAD"
   },
   "perennial-alias": {
-    "sha": "453cea5cb18e1f008f96808cb2356a592ae066d9",
+    "sha": "fc864423b4a1d5031eb9dd7d8205e63321529f7e",
     "branch": "HEAD"
   },
   "phet-core": {
