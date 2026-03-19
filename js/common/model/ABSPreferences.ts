@@ -9,7 +9,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSQueryParameters from '../ABSQueryParameters.js';
 
 const ABSPreferences = {
@@ -22,5 +21,4 @@ const ABSPreferences = {
   } )
 };
 
-acidBaseSolutions.register( 'ABSPreferences', ABSPreferences );
 export default ABSPreferences;

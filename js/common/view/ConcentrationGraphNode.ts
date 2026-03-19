@@ -22,7 +22,6 @@ import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSColors from '../ABSColors.js';
 import Beaker from '../model/Beaker.js';
@@ -234,5 +233,3 @@ export default class ConcentrationGraphNode extends Node {
     } );
   }
 }
-
-acidBaseSolutions.register( 'ConcentrationGraphNode', ConcentrationGraphNode );

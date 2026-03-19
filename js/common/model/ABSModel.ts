@@ -13,7 +13,6 @@ import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import TModel from '../../../../joist/js/TModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import Beaker from './Beaker.js';
 import ConductivityTester from './ConductivityTester.js';
 import PHMeter from './PHMeter.js';
@@ -70,5 +69,3 @@ export default class ABSModel implements TModel {
     this.conductivityTester.reset();
   }
 }
-
-acidBaseSolutions.register( 'ABSModel', ABSModel );

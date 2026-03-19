@@ -14,7 +14,6 @@ import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
 import CanvasNode from '../../../../scenery/js/nodes/CanvasNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AqueousSolution from '../model/solutions/AqueousSolution.js';
 import { ParticleKey } from '../model/solutions/Particle.js';
 import createParticleNode from './createParticleNode.js';
@@ -200,5 +199,3 @@ function getParticleCount( concentration: number ): number {
   const baseFactor = Math.pow( ( MAX_PARTICLES / BASE_DOTS ), ( 1 / Utils.log10( 1 / BASE_CONCENTRATION ) ) );
   return Utils.roundSymmetric( BASE_DOTS * Math.pow( baseFactor, raiseFactor ) );
 }
-
-acidBaseSolutions.register( 'ParticlesCanvasNode', ParticlesCanvasNode );

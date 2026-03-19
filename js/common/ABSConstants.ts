@@ -16,7 +16,6 @@ import { KeyboardDragListenerOptions } from '../../../scenery/js/listeners/Keybo
 import { ABSwitchOptions } from '../../../sun/js/ABSwitch.js';
 import { PanelOptions } from '../../../sun/js/Panel.js';
 import Tandem from '../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../acidBaseSolutions.js';
 import ABSColors from './ABSColors.js';
 
 const WEAK_STRENGTH_MAX = 1E2;
@@ -83,5 +82,4 @@ const ABSConstants = {
   PANEL_OPTIONS: PANEL_OPTIONS
 };
 
-acidBaseSolutions.register( 'ABSConstants', ABSConstants );
 export default ABSConstants;

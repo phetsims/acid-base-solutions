@@ -11,7 +11,6 @@ import Property from '../../../../axon/js/Property.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
 import StrengthSlider from './StrengthSlider.js';
@@ -65,5 +64,3 @@ export default class StrengthControl extends VBox {
     } );
   }
 }
-
-acidBaseSolutions.register( 'StrengthControl', StrengthControl );

@@ -25,7 +25,6 @@ import AquaRadioButtonGroup, { AquaRadioButtonGroupItem } from '../../../../sun/
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import magnifyingGlassIcon_png from '../../../images/magnifyingGlassIcon_png.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../ABSConstants.js';
 import BeakerNode from './BeakerNode.js';
@@ -113,5 +112,3 @@ function createLabel( stringProperty: TReadOnlyProperty<string>, icon: Node ): N
     isDisposable: false
   } );
 }
-
-acidBaseSolutions.register( 'ViewsPanel', ViewsPanel );

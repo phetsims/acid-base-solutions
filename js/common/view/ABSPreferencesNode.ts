@@ -8,7 +8,6 @@
  */
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSPreferences from '../model/ABSPreferences.js';
 import ShowSolventControl from './ShowSolventControl.js';
 
@@ -29,5 +28,3 @@ export default class ABSPreferencesNode extends VBox {
   }
 
 }
-
-acidBaseSolutions.register( 'ABSPreferencesNode', ABSPreferencesNode );

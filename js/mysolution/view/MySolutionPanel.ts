@@ -16,7 +16,6 @@ import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
 import MySolutionModel from '../model/MySolutionModel.js';
@@ -80,5 +79,3 @@ export default class MySolutionPanel extends Panel {
     super( content, options );
   }
 }
-
-acidBaseSolutions.register( 'MySolutionPanel', MySolutionPanel );

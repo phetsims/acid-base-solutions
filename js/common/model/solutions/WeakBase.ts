@@ -9,7 +9,6 @@
 
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../../phet-core/js/types/StrictOmit.js';
-import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import ABSColors from '../../ABSColors.js';
 import ABSConstants from '../../ABSConstants.js';
 import AqueousSolution, { AqueousSolutionOptions } from './AqueousSolution.js';
@@ -65,5 +64,3 @@ export default class WeakBase extends AqueousSolution {
     return ( ABSConstants.WATER_CONCENTRATION - this.getProductConcentration() );
   }
 }
-
-acidBaseSolutions.register( 'WeakBase', WeakBase );

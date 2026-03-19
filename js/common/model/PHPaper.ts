@@ -20,7 +20,6 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
 import Beaker from './Beaker.js';
 import AqueousSolution from './solutions/AqueousSolution.js';
@@ -141,5 +140,3 @@ function pHToColor( pH: number ): Color {
   }
   return color;
 }
-
-acidBaseSolutions.register( 'PHPaper', PHPaper );

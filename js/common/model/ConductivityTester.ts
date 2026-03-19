@@ -18,7 +18,6 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSConstants from '../ABSConstants.js';
 import Beaker from './Beaker.js';
 
@@ -108,5 +107,3 @@ export default class ConductivityTester extends PhetioObject {
     this.negativeProbePositionProperty.reset();
   }
 }
-
-acidBaseSolutions.register( 'ConductivityTester', ConductivityTester );

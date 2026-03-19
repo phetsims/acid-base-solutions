@@ -12,7 +12,6 @@ import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import LogSlider from '../../common/view/LogSlider.js';
 
@@ -58,5 +57,3 @@ export default class StrengthSlider extends LogSlider {
     this.addMajorTick( strengthRange.max, new Text( AcidBaseSolutionsStrings.strongerStringProperty, TICK_LABEL_OPTIONS ) );
   }
 }
-
-acidBaseSolutions.register( 'StrengthSlider', StrengthSlider );

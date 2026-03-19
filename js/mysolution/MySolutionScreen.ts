@@ -11,7 +11,6 @@ import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import Node from '../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../AcidBaseSolutionsStrings.js';
 import ABSColors from '../common/ABSColors.js';
 import createParticleNode from '../common/view/createParticleNode.js';
@@ -74,5 +73,3 @@ function createScreenIcon(): ScreenIcon {
     maxIconHeightProportion: 1
   } );
 }
-
-acidBaseSolutions.register( 'MySolutionScreen', MySolutionScreen );

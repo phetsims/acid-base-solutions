@@ -7,7 +7,6 @@
  */
 
 import Tandem from '../../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSScreenView from '../../common/view/ABSScreenView.js';
 import MySolutionModel from '../model/MySolutionModel.js';
 import MySolutionPanel from './MySolutionPanel.js';
@@ -22,5 +21,3 @@ export default class MySolutionScreenView extends ABSScreenView {
     super( model, createSolutionPanel, tandem );
   }
 }
-
-acidBaseSolutions.register( 'MySolutionScreenView', MySolutionScreenView );

@@ -12,7 +12,6 @@ import Image from '../../../../scenery/js/nodes/Image.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupItem } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import lightBulbIcon_png from '../../../images/lightBulbIcon_png.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
 import PHMeterNode from './PHMeterNode.js';
 import PHPaperNode from './PHPaperNode.js';
@@ -52,5 +51,3 @@ export default class ToolsRadioButtonGroup extends RectangularRadioButtonGroup<T
     } );
   }
 }
-
-acidBaseSolutions.register( 'ToolsRadioButtonGroup', ToolsRadioButtonGroup );

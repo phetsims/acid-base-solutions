@@ -11,7 +11,6 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Circle, { CircleOptions } from '../../../../scenery/js/nodes/Circle.js';
 import RadialGradient from '../../../../scenery/js/util/RadialGradient.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -34,5 +33,3 @@ export default class AtomNode extends Circle {
     super( radius, options );
   }
 }
-
-acidBaseSolutions.register( 'AtomNode', AtomNode );

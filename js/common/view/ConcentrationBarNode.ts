@@ -20,7 +20,6 @@ import TColor from '../../../../scenery/js/util/TColor.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 
 const FONT = new PhetFont( 12 );
@@ -144,5 +143,3 @@ function concentrationToString( concentration: number | null ): string {
   }
   return string;
 }
-
-acidBaseSolutions.register( 'ConcentrationBarNode', ConcentrationBarNode );

@@ -12,7 +12,6 @@ import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import ConductivityTesterNode from '../../../../scenery-phet/js/ConductivityTesterNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSConstants from '../ABSConstants.js';
 import ConductivityTester from '../model/ConductivityTester.js';
 import { ToolMode } from './ToolMode.js';
@@ -45,5 +44,3 @@ export default class ABSConductivityTesterNode extends ConductivityTesterNode {
     this.addLinkedElement( conductivityTester );
   }
 }
-
-acidBaseSolutions.register( 'ABSConductivityTesterNode', ABSConductivityTesterNode );

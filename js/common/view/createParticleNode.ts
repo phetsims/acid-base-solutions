@@ -11,7 +11,6 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import MinusNode from '../../../../scenery-phet/js/MinusNode.js';
 import PlusNode from '../../../../scenery-phet/js/PlusNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
 import { ParticleKey } from '../model/solutions/Particle.js';
 import AtomNode from './AtomNode.js';
@@ -106,5 +105,3 @@ export default function createParticleNode( key: ParticleKey ): Node {
   assert && assert( map.has( key ), `no entry for key=${key}` );
   return map.get( key )!();
 }
-
-acidBaseSolutions.register( 'createParticleNode', createParticleNode );

@@ -107,5 +107,4 @@ const ABSColors = {
   OH: 'rgb( 90, 90, 255 )'
 };
 
-acidBaseSolutions.register( 'ABSColors', ABSColors );
 export default ABSColors;

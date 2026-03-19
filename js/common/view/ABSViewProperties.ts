@@ -9,7 +9,6 @@
 import Disposable from '../../../../axon/js/Disposable.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import { ToolMode, ToolModeValues } from './ToolMode.js';
 import { ViewMode, ViewModeValues } from './ViewMode.js';
 
@@ -45,5 +44,3 @@ export default class ABSViewProperties {
     this.toolModeProperty.reset();
   }
 }
-
-acidBaseSolutions.register( 'ABSViewProperties', ABSViewProperties );

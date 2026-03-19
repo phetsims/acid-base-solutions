@@ -13,7 +13,6 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSConstants from '../../common/ABSConstants.js';
 import ABSModel from '../../common/model/ABSModel.js';
 import AqueousSolution, { AqueousSolutionOptions } from '../../common/model/solutions/AqueousSolution.js';
@@ -165,5 +164,3 @@ export default class MySolutionModel extends ABSModel {
     super.reset();
   }
 }
-
-acidBaseSolutions.register( 'MySolutionModel', MySolutionModel );

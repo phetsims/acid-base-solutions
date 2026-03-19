@@ -11,7 +11,6 @@
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import Beaker from '../model/Beaker.js';
 import AqueousSolution from '../model/solutions/AqueousSolution.js';
 import ReactionEquationFactory from './ReactionEquationFactory.js';
@@ -46,5 +45,3 @@ export default class ReactionEquationNode extends Node {
     this.addLinkedElement( solutionProperty );
   }
 }
-
-acidBaseSolutions.register( 'ReactionEquationNode', ReactionEquationNode );

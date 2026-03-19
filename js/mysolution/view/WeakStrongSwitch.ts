@@ -13,7 +13,6 @@ import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
 import Text, { TextOptions } from '../../../../scenery/js/nodes/Text.js';
 import ABSwitch, { ABSwitchOptions } from '../../../../sun/js/ABSwitch.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
 
@@ -48,5 +47,3 @@ export default class WeakStrongSwitch extends ABSwitch<boolean> {
     super( property, true, weakNode, false, strongNode, options );
   }
 }
-
-acidBaseSolutions.register( 'WeakStrongSwitch', WeakStrongSwitch );

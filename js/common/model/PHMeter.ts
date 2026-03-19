@@ -18,7 +18,6 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import Beaker from './Beaker.js';
 
 export default class PHMeter extends PhetioObject {
@@ -69,5 +68,3 @@ export default class PHMeter extends PhetioObject {
     return new Bounds2( x, this.dragYRange.min, x, this.dragYRange.max );
   }
 }
-
-acidBaseSolutions.register( 'PHMeter', PHMeter );

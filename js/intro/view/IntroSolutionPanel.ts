@@ -22,7 +22,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import AquaRadioButtonGroup, { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
 import AqueousSolution from '../../common/model/solutions/AqueousSolution.js';
@@ -149,5 +148,3 @@ function createRadioButtonLabel( solutionNameProperty: TReadOnlyProperty<string>
     xAlign: 'left'
   } );
 }
-
-acidBaseSolutions.register( 'IntroSolutionPanel', IntroSolutionPanel );

@@ -14,7 +14,6 @@ import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSModel from '../model/ABSModel.js';
 import ABSConductivityTesterNode from './ABSConductivityTesterNode.js';
 import ABSViewProperties from './ABSViewProperties.js';
@@ -169,5 +168,3 @@ export default class ABSScreenView extends ScreenView {
     this.pHPaperNode.step( dt );
   }
 }
-
-acidBaseSolutions.register( 'ABSScreenView', ABSScreenView );

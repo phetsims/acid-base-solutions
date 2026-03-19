@@ -12,7 +12,6 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 
 type SelfOptions = {
   size?: Dimension2;
@@ -54,5 +53,3 @@ export default class Beaker {
     Disposable.assertNotDisposable();
   }
 }
-
-acidBaseSolutions.register( 'Beaker', Beaker );

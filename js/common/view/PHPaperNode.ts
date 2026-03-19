@@ -21,7 +21,6 @@ import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
 import ABSConstants from '../ABSConstants.js';
 import PHPaper from '../model/PHPaper.js';
@@ -156,5 +155,3 @@ export default class PHPaperNode extends InteractiveHighlighting( Node ) {
     } );
   }
 }
-
-acidBaseSolutions.register( 'PHPaperNode', PHPaperNode );

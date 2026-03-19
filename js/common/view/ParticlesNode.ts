@@ -19,7 +19,6 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import solvent_png from '../../../images/solvent_png.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSColors from '../ABSColors.js';
 import ABSPreferences from '../model/ABSPreferences.js';
 import Beaker from '../model/Beaker.js';
@@ -130,5 +129,3 @@ export default class ParticlesNode extends Node {
     }
   }
 }
-
-acidBaseSolutions.register( 'ParticlesNode', ParticlesNode );

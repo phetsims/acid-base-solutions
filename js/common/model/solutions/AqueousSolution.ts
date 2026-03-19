@@ -26,7 +26,6 @@ import Tandem from '../../../../../tandem/js/Tandem.js';
 import IOType from '../../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../../tandem/js/types/NumberIO.js';
 import ReferenceIO, { ReferenceIOState } from '../../../../../tandem/js/types/ReferenceIO.js';
-import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import ABSConstants from '../../ABSConstants.js';
 import { Particle, ParticleKey } from './Particle.js';
 
@@ -141,5 +140,3 @@ export default abstract class AqueousSolution extends PhetioObject {
     supertype: ReferenceIO( IOType.ObjectIO )
   } );
 }
-
-acidBaseSolutions.register( 'AqueousSolution', AqueousSolution );

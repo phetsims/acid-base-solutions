@@ -9,7 +9,6 @@
 
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../../phet-core/js/types/StrictOmit.js';
-import acidBaseSolutions from '../../../acidBaseSolutions.js';
 import ABSColors from '../../ABSColors.js';
 import ABSConstants from '../../ABSConstants.js';
 import AqueousSolution, { AqueousSolutionOptions } from './AqueousSolution.js';
@@ -61,5 +60,3 @@ export default class Water extends AqueousSolution {
     return this.concentrationProperty.value;
   }
 }
-
-acidBaseSolutions.register( 'Water', Water );

@@ -13,7 +13,6 @@ import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import ToggleSwitch, { ToggleSwitchOptions } from '../../../../sun/js/ToggleSwitch.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../ABSConstants.js';
 
@@ -62,5 +61,3 @@ export default class ShowSolventControl extends PreferencesControl {
     super.dispose();
   }
 }
-
-acidBaseSolutions.register( 'ShowSolventControl', ShowSolventControl );

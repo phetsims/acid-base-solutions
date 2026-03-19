@@ -21,7 +21,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import VStrut from '../../../../scenery/js/nodes/VStrut.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AqueousSolution from '../model/solutions/AqueousSolution.js';
 import StrongAcid from '../model/solutions/StrongAcid.js';
 import StrongBase from '../model/solutions/StrongBase.js';
@@ -343,5 +342,4 @@ function createIrreversibleArrow(): Node {
   } );
 }
 
-acidBaseSolutions.register( 'ReactionEquationFactory', ReactionEquationFactory );
 export default ReactionEquationFactory;

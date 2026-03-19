@@ -14,7 +14,6 @@ import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Slider, { SliderOptions } from '../../../../sun/js/Slider.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -75,5 +74,3 @@ export default class LogSlider extends Slider {
     return Utils.toFixedNumber( Math.pow( 10, value ), 10 );
   }
 }
-
-acidBaseSolutions.register( 'LogSlider', LogSlider );

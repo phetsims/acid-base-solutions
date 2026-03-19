@@ -9,7 +9,6 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import ABSModel from '../../common/model/ABSModel.js';
 import AqueousSolution from '../../common/model/solutions/AqueousSolution.js';
 import StrongAcid from '../../common/model/solutions/StrongAcid.js';
@@ -79,5 +78,3 @@ export default class IntroModel extends ABSModel {
     super.reset();
   }
 }
-
-acidBaseSolutions.register( 'IntroModel', IntroModel );

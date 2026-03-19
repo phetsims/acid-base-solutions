@@ -27,7 +27,6 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSColors from '../ABSColors.js';
 import ABSConstants from '../ABSConstants.js';
@@ -177,5 +176,3 @@ class ProbeNode extends Node {
     super( { children: [ shaftNode, tipNode ] } );
   }
 }
-
-acidBaseSolutions.register( 'PHMeterNode', PHMeterNode );

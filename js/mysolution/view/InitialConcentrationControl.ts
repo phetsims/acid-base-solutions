@@ -14,7 +14,6 @@ import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import NumberSpinner from '../../../../sun/js/NumberSpinner.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import acidBaseSolutions from '../../acidBaseSolutions.js';
 import AcidBaseSolutionsStrings from '../../AcidBaseSolutionsStrings.js';
 import ABSConstants from '../../common/ABSConstants.js';
 import InitialConcentrationSlider from './InitialConcentrationSlider.js';
@@ -72,5 +71,3 @@ export default class InitialConcentrationControl extends VBox {
     } );
   }
 }
-
-acidBaseSolutions.register( 'InitialConcentrationControl', InitialConcentrationControl );

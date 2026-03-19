@@ -9,7 +9,6 @@
 
 import getStringModule from '../../chipper/js/browser/getStringModule.js';
 import type LocalizedStringProperty from '../../chipper/js/browser/LocalizedStringProperty.js';
-import acidBaseSolutions from './acidBaseSolutions.js';
 
 type StringsType = {
   'acidStringProperty': LocalizedStringProperty;
@@ -59,7 +58,5 @@ type StringsType = {
 };
 
 const AcidBaseSolutionsStrings = getStringModule( 'ACID_BASE_SOLUTIONS' ) as StringsType;
-
-acidBaseSolutions.register( 'AcidBaseSolutionsStrings', AcidBaseSolutionsStrings );
 
 export default AcidBaseSolutionsStrings;
