@@ -1,7 +1,7 @@
 {
   "comment": "# acid-base-solutions 1.3.13 Fri Feb 06 2026 13:12:14 GMT-0500 (Eastern Standard Time)",
   "acid-base-solutions": {
-    "sha": "13983626cfe54f3a7336ee92752a122d36afa87b",
+    "sha": "cdb867c41f86a0082670b58a2f3051e53d529d91",
     "branch": "1.3"
   },
   "assert": {
@@ -13,7 +13,7 @@
     "branch": "HEAD"
   },
   "brand": {
-    "sha": "21d3cb367236e56e6e06262237e3886f19162c79",
+    "sha": "5f743e550cf37bafde625e13c1e4d85c2656b43c",
     "branch": "HEAD"
   },
   "chipper": {
