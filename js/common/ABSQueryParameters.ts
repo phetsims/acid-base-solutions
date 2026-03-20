@@ -23,6 +23,6 @@ const ABSQueryParameters = QueryStringMachine.getAll( {
 // Log query parameters
 logGlobal( 'phet.chipper.queryParameters' );
 logGlobal( 'phet.preloads.phetio.queryParameters' );
-logGlobal( 'phet.geometricOptics.GOQueryParameters' );
+phet.log && phet.log( `ABSQueryParameters: ${JSON.stringify( ABSQueryParameters, null, 2 )}` );
 
 export default ABSQueryParameters;
