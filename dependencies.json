@@ -1,7 +1,7 @@
 {
   "comment": "# acid-base-solutions 1.3.14-rc.2 Fri Mar 20 2026 21:26:57 GMT-0600 (Mountain Daylight Time)",
   "acid-base-solutions": {
-    "sha": "0949c46f8f67e3d038d196f94f8fe7928bc75b00",
+    "sha": "5820ac60cddf44fdfd6f6b0313e559fc24c9882f",
     "branch": "1.3"
   },
   "assert": {
@@ -65,7 +65,7 @@
     "branch": "HEAD"
   },
   "scenery": {
-    "sha": "67dc9c4b3c871e81755f1b9f9a3bd0ed78d89ac0",
+    "sha": "0809f5c933acc009df57617a43ad145907192724",
     "branch": "HEAD"
   },
   "scenery-phet": {
