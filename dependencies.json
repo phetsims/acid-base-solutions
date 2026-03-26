@@ -1,7 +1,7 @@
 {
   "comment": "# acid-base-solutions 1.3.14-rc.3 Wed Mar 25 2026 07:12:27 GMT-0600 (Mountain Daylight Time)",
   "acid-base-solutions": {
-    "sha": "e04d00f97ad6ad05076da0fc58284fa92f4bde27",
+    "sha": "956f68ff674137fa49a6e26ffbdbafecfff67b4b",
     "branch": "1.3"
   },
   "assert": {
@@ -49,7 +49,7 @@
     "branch": "HEAD"
   },
   "phet-io-wrappers": {
-    "sha": "9f9f124f8fe19054d1404b701909fbb3e232663d",
+    "sha": "a6155de6ac9ae2f5b83bc0a8ff92286c3b6c0efd",
     "branch": "HEAD"
   },
   "phetcommon": {
